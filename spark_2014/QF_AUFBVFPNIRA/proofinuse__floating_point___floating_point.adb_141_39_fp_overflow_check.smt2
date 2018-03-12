@@ -51,28 +51,25 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const x Float32)
 
@@ -81,36 +78,40 @@
 (define-fun in_range2 ((x1 Int)) Bool (and (<= (- 2147483648) x1)
                                       (<= x1 2147483647)))
 
-(define-fun dynamic_invariant2 ((temp___expr_223 Int)
-  (temp___is_init_220 Bool) (temp___skip_constant_221 Bool)
-  (temp___do_toplevel_222 Bool)) Bool (=>
-                                      (or (= temp___is_init_220 true)
-                                      (<= (- 2147483648) 2147483647))
-                                      (in_range2 temp___expr_223)))
+(define-fun dynamic_invariant2 ((temp___expr_260 Int)
+  (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
+  (temp___do_toplevel_258 Bool)
+  (temp___do_typ_inv_259 Bool)) Bool (=>
+                                     (or (= temp___is_init_256 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range2 temp___expr_260)))
 
-(define-fun dynamic_invariant3 ((temp___expr_229 Float32)
-  (temp___is_init_226 Bool) (temp___skip_constant_227 Bool)
-  (temp___do_toplevel_228 Bool)) Bool (=>
-                                      (or (= temp___is_init_226 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_229)))
+(define-fun dynamic_invariant3 ((temp___expr_267 Float32)
+  (temp___is_init_263 Bool) (temp___skip_constant_264 Bool)
+  (temp___do_toplevel_265 Bool)
+  (temp___do_typ_inv_266 Bool)) Bool (=>
+                                     (or (= temp___is_init_263 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_267)))
 
-(define-fun dynamic_invariant4 ((temp___expr_235 Float32)
-  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
-  (temp___do_toplevel_234 Bool)) Bool (=>
-                                      (or (= temp___is_init_232 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_235)))
+(define-fun dynamic_invariant4 ((temp___expr_274 Float32)
+  (temp___is_init_270 Bool) (temp___skip_constant_271 Bool)
+  (temp___do_toplevel_272 Bool)
+  (temp___do_typ_inv_273 Bool)) Bool (=>
+                                     (or (= temp___is_init_270 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_274)))
 
 (define-fun in_range3 ((x1 Int)) Bool (and (<= (- 2147483648) x1)
                                       (<= x1 2147483647)))
 
-(define-fun dynamic_invariant5 ((temp___expr_241 Int)
-  (temp___is_init_238 Bool) (temp___skip_constant_239 Bool)
-  (temp___do_toplevel_240 Bool)) Bool (=>
-                                      (or (= temp___is_init_238 true)
-                                      (<= (- 2147483648) 2147483647))
-                                      (in_range3 temp___expr_241)))
+(define-fun dynamic_invariant5 ((temp___expr_281 Int)
+  (temp___is_init_277 Bool) (temp___skip_constant_278 Bool)
+  (temp___do_toplevel_279 Bool)
+  (temp___do_typ_inv_280 Bool)) Bool (=>
+                                     (or (= temp___is_init_277 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range3 temp___expr_281)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 

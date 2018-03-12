@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const x t)
 
@@ -1121,12 +1121,12 @@
 (define-fun t_rate__ref___projection ((a t_rate__ref)) t_rate (t_rate__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_135 t) (temp___is_init_132 Bool)
-  (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true) (le
-                                      (neg fliteral2) fliteral2)) (in_range1
-                                      temp___expr_135)))
+(define-fun dynamic_invariant1 ((temp___expr_158 t) (temp___is_init_154 Bool)
+  (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true) (le
+                                     (neg fliteral2) fliteral2)) (in_range1
+                                     temp___expr_158)))
 
 (declare-fun to_rep (t_rate) t)
 
@@ -1153,6 +1153,11 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
+
 (declare-const roll_rate_desired t)
 
 (declare-const pitch_rate_desired t)
@@ -1170,8 +1175,6 @@
 (declare-const o3 t_rate)
 
 (declare-const o4 t)
-
-(declare-const o5 t)
 
 (declare-const result t)
 
@@ -1210,11 +1213,6 @@
 
 ;; H
   (assert (= result roll_rate_desired))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 ;; H
   (assert (= roll_rate_desired1 fliteral3))

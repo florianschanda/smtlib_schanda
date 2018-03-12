@@ -1133,128 +1133,39 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic x1 : t
-
-logic x2 : t
-
-logic x3 : t
-
-logic x4 : t
-
-logic x5 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic result : t
-
-logic x11 : t
-
-logic result1 : t
-
-logic x12 : t
-
-logic result2 : t
-
-logic x21 : t
-
-logic result3 : t
-
-logic x22 : t
-
-logic result4 : t
-
-logic x31 : t
-
-logic result5 : t
-
-logic x32 : t
-
-logic result6 : t
-
-logic x41 : t
-
-logic result7 : t
-
-logic x42 : t
-
-axiom H : tqtisFinite(x)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
-
-axiom H1 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(x1))
-
-axiom H2 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(x2))
-
-axiom H3 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(x3))
-
-axiom H4 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(x4))
-
-axiom H5 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(x5))
-
-axiom H6 : (result = x1)
-
-axiom H7 : (x11 = fliteral2)
-
-axiom H8 : ((o = oadd(x11, x11)) and (tqtisFinite(o) and
-  (o = add(NearestTiesToEven, x11, x11))))
-
-axiom H9 : (result1 = x11)
-
-axiom H10 : (x12 = o)
-
-axiom H11 : (result2 = x2)
-
-axiom H12 : (x21 = fliteral2)
-
-axiom H13 : ((o1 = osubtract(neg(x21), x21)) and (tqtisFinite(o1) and
-  (o1 = sub(NearestTiesToEven, neg(x21), x21))))
-
-axiom H14 : (result3 = x21)
-
-axiom H15 : (x22 = o1)
-
-axiom H16 : (result4 = x3)
-
-axiom H17 : (x31 = fliteral2)
-
-axiom H18 : ((o2 = omultiply(x31, x31)) and (tqtisFinite(o2) and
-  (o2 = mul(NearestTiesToEven, x31, x31))))
-
-axiom H19 : (result5 = x31)
-
-axiom H20 : (x32 = o2)
-
-axiom H21 : (result6 = x4)
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 3.0))
 
-axiom H22 : (x41 = fliteral3)
-
-axiom H23 : ((o3 = osubtract(x41, x41)) and (tqtisFinite(o3) and
-  (o3 = sub(NearestTiesToEven, x41, x41))))
-
-axiom H24 : ((o4 = odivide(fliteral, o3)) and (tqtisFinite(o4) and
-  (o4 = div(NearestTiesToEven, fliteral, o3))))
-
-axiom H25 : (result7 = x41)
-
-axiom H26 : (x42 = o4)
-
  (* File "numerics-algo.ads", line 10, characters 0-0 *)
-goal WP_parameter_def : neq(x, fliteral1)
+goal WP_parameter_def :
+  (forall x1:t. forall x2:t. forall x3:t. forall x4:t. forall x5:t.
+  forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
+  forall result:t. forall x11:t. forall result1:t. forall x12:t.
+  forall result2:t. forall x21:t. forall result3:t. forall x22:t.
+  forall result4:t. forall x31:t. forall result5:t. forall x32:t.
+  forall result6:t. forall x41:t. forall result7:t. forall x42:t.
+  (tqtisFinite(x) -> ((le(neg(fliteral2), fliteral2) -> tqtisFinite(x1)) ->
+  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(x2)) -> ((le(neg(fliteral2),
+  fliteral2) -> tqtisFinite(x3)) -> ((le(neg(fliteral2), fliteral2) ->
+  tqtisFinite(x4)) -> ((le(neg(fliteral2), fliteral2) -> tqtisFinite(x5)) ->
+  (((result = x1) and (x11 = fliteral2)) -> ((((o = oadd(x11, x11)) and
+  (tqtisFinite(o) and (o = add(NearestTiesToEven, x11, x11)))) and
+  ((result1 = x11) and (x12 = o))) -> (((result2 = x2) and
+  (x21 = fliteral2)) -> ((((o1 = osubtract(neg(x21), x21)) and
+  (tqtisFinite(o1) and (o1 = sub(NearestTiesToEven, neg(x21), x21)))) and
+  ((result3 = x21) and (x22 = o1))) -> (((result4 = x3) and
+  (x31 = fliteral2)) -> ((((o2 = omultiply(x31, x31)) and
+  (tqtisFinite(o2) and (o2 = mul(NearestTiesToEven, x31, x31)))) and
+  ((result5 = x31) and (x32 = o2))) -> (((result6 = x4) and
+  (x41 = fliteral3)) -> (((((o3 = osubtract(x41, x41)) and
+  (tqtisFinite(o3) and (o3 = sub(NearestTiesToEven, x41, x41)))) and
+  ((o4 = odivide(fliteral, o3)) and (tqtisFinite(o4) and
+  (o4 = div(NearestTiesToEven, fliteral, o3))))) and ((result7 = x41) and
+  (x42 = o4))) -> neq(x, fliteral1))))))))))))))))

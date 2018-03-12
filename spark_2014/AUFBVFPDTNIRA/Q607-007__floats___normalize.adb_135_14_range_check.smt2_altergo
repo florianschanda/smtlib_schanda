@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1045,49 +1045,19 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic v1 : t
-
-logic v2 : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic v11 : t
-
-logic result1 : t
-
-logic v21 : t
-
-axiom H : in_range3(x)
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> in_range2(v1))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> in_range2(v2))
-
-axiom H3 : (result = v1)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 360.0))
 
-axiom H4 : (v11 = div(RNE, x, fliteral5))
-
-axiom H5 : (le(neg(fliteral4), v11) and le(v11, fliteral4))
-
-axiom H6 : ((o = r3(v11)) and (in_range2(o) and ((o = roundToIntegral(RTN,
-  v11)) and (le(o, v11) and le(sub(RNE, v11, fliteral), o)))))
-
-axiom H7 : (result1 = v2)
-
-axiom H8 : (v21 = o)
-
-axiom H9 : le(v21, v11)
-
-axiom H10 : le(sub(RNE, v11, fliteral), v21)
-
  (* File "normalize.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : in_range4(v21)
+goal WP_parameter_def :
+  (forall v1:t. forall v2:t. forall o:t. forall result:t. forall v11:t.
+  forall result1:t. forall v21:t. (in_range3(x) -> ((le(neg(fliteral1),
+  fliteral1) -> in_range2(v1)) -> ((le(neg(fliteral1), fliteral1) ->
+  in_range2(v2)) -> (((result = v1) and (v11 = div(RNE, x, fliteral5))) ->
+  ((le(neg(fliteral4), v11) and le(v11, fliteral4)) -> ((((o = r3(v11)) and
+  (in_range2(o) and ((o = roundToIntegral(RTN, v11)) and (le(o, v11) and
+  le(sub(RNE, v11, fliteral), o))))) and ((result1 = v2) and (v21 = o))) ->
+  (le(v21, v11) -> (le(sub(RNE, v11, fliteral), v21) ->
+  in_range4(v21))))))))))

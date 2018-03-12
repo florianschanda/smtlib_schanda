@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun oexpon (Float32 Float32) Float32)
 
@@ -116,8 +117,8 @@
   (forall ((left Float32) (right Float32))
   (! (=>
      (and
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
      (and
      (=> (fp.eq left (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) right))
@@ -136,8 +137,8 @@
      (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq left (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))))))
-     (dynamic_invariant result true false true)))) :pattern ((oexpon left
-                                                             right)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((oexpon
+                                                                  left right)) )))
 
 (declare-const left Float32)
 
@@ -146,8 +147,6 @@
 (declare-const right Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const o Float32)
 
 ;; H
   (assert (fp.isFinite32 left))

@@ -2121,12 +2121,6 @@ type t__ref1 = { t__content1 : t1
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int5 : bool -> int
 
 axiom to_int_def4 :
@@ -2138,6 +2132,12 @@ logic of_int5 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int5(i)]. (((i = 0) -> (of_int5(i) = false)) and
   ((not (i = 0)) -> (of_int5(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -2479,185 +2479,67 @@ axiom delta_speed__def_axiom : (delta_speed = add1(RNE, drag, mul1(RNE,
 
 axiom n_bv__def_axiom : (n_bv = of_int(n))
 
-logic speed : t1
-
-logic distance : t1
-
-logic average : t1
-
-logic o : t1
-
-logic o1 : t1
-
-logic o2 : t1
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : t1
-
-logic o6 : bool
-
-logic o7 : int
-
-logic o8 : int
-
-logic o9 : t1
-
-logic o10 : bool
-
-logic o11 : t1
-
-logic o12 : int
-
-logic result : t1
-
-logic speed1 : t1
-
-logic result1 : t1
-
-logic average1 : t1
-
-logic result2 : t1
-
-logic distance1 : t1
-
-logic speed2 : t1
-
-logic distance2 : t1
-
-logic average2 : t1
-
-logic speed3 : t1
-
-logic distance3 : t1
-
-logic average3 : t1
-
-axiom H : in_range2(n)
-
-axiom H1 : in_range3(factor)
-
-axiom H2 : in_range4(drag)
-
-axiom H3 : tqtisFinite(speed)
-
-axiom H4 : tqtisFinite(distance)
-
 logic fliteral7 : t1
 
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
   (tqtreal(fliteral7) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H5 : (le(neg1(fliteral7), fliteral7) -> tqtisFinite(average))
-
-axiom H6 : ((n <  25000) and (invariant__(n, speed, distance) = true))
-
-axiom H7 : (speed = old_speed)
-
-axiom H8 : tqtisFinite(old_speed)
-
-axiom H9 : (add1(RNE, drag, mul1(RNE, mul1(RNE, factor, fliteral5),
-  fliteral6)) = delta_speed)
-
-axiom H10 : tqtisFinite(delta_speed)
-
-axiom H11 : (of_int(n) = n_bv)
-
-axiom H12 : true
-
-axiom H13 : ((o = add1(RNE, speed, delta_speed)) and tqtisFinite(add1(RNE,
-  speed, delta_speed)))
-
-axiom H14 : (result = speed)
-
-axiom H15 : (speed1 = o)
-
-axiom H16 : (le(neg1(fliteral2), delta_speed) and le(delta_speed, fliteral2))
-
-axiom H17 : (in_bounds(high_bound(n)) = true)
-
-axiom H18 : (in_bounds(low_bound(n)) = true)
-
-axiom H19 : eq(add1(RNE, mul1(RNE, of_ubv16(RNE, n_bv), fliteral2),
-  fliteral2), mul1(RNE, add1(RNE, of_ubv16(RNE, n_bv), fliteral), fliteral2))
-
-axiom H20 : eq(add1(RNE, mul1(RNE, of_int1(RNE, n), fliteral2), fliteral2),
-  mul1(RNE, add1(RNE, of_int1(RNE, n), fliteral), fliteral2))
-
-axiom H21 : eq(sub1(RNE, mul1(RNE, of_int1(RNE, n), neg1(fliteral2)),
-  fliteral2), mul1(RNE, add1(RNE, of_int1(RNE, n), fliteral),
-  neg1(fliteral2)))
-
-axiom H22 : eq(t5(1), fliteral)
-
-axiom H23 : eq(add1(RNE, of_int1(RNE, n), fliteral), of_int1(RNE, (n + 1)))
-
-axiom H24 : le(sub1(RNE, mul1(RNE, of_int1(RNE, n), neg1(fliteral2)),
-  fliteral2), speed1)
-
-axiom H25 : le(mul1(RNE, of_int1(RNE, (n + 1)), neg1(fliteral2)), speed1)
-
-axiom H26 : le(speed1, add1(RNE, mul1(RNE, of_int1(RNE, n), fliteral2),
-  fliteral2))
-
-axiom H27 : le(speed1, mul1(RNE, of_int1(RNE, (n + 1)), fliteral2))
-
-axiom H28 : ((o1 = add1(RNE, old_speed, speed1)) and tqtisFinite(add1(RNE,
-  old_speed, speed1)))
 
 logic fliteral8 : t1
 
 axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
   (tqtreal(fliteral8) = 2.0))
 
-axiom H29 : (o2 = div(RNE, o1, fliteral8))
-
-axiom H30 : (result1 = average)
-
-axiom H31 : (average1 = o2)
-
-axiom H32 : (le(low_bound((n + 1)), old_speed) and le(old_speed,
-  high_bound((n + 1))))
-
-axiom H33 : (le(old_speed, speed1) -> (le(old_speed, average1) and
-  le(average1, speed1)))
-
-axiom H34 : ((not le(old_speed, speed1)) -> (le(speed1, average1) and
-  le(average1, old_speed)))
-
-axiom H35 : (le(low_bound((n + 1)), average1) and le(average1,
-  high_bound((n + 1))))
-
-axiom H36 : le(mul1(RNE, mul1(RNE, mul1(RNE, fliteral8, of_int1(RNE, n)),
-  neg1(fliteral2)), fliteral4), average1)
-
-axiom H37 : le(average1, mul1(RNE, mul1(RNE, mul1(RNE, fliteral8,
-  of_int1(RNE, n)), fliteral2), fliteral4))
-
-axiom H38 : le(mul1(RNE, mul1(RNE, mul1(RNE, fliteral8, of_int1(RNE, n)),
-  neg1(fliteral2)), fliteral4), mul1(RNE, average1, fliteral6))
-
-axiom H39 : le(mul1(RNE, average1, fliteral6), mul1(RNE, mul1(RNE, mul1(RNE,
-  fliteral8, of_int1(RNE, n)), fliteral2), fliteral4))
-
-axiom H40 : ((o11 = add1(RNE, distance, mul1(RNE, average1, fliteral6))) and
-  tqtisFinite(add1(RNE, distance, mul1(RNE, average1, fliteral6))))
-
-axiom H41 : (result2 = distance)
-
-axiom H42 : (distance1 = o11)
-
-axiom H43 : eq(add1(RNE, mul1(RNE, mul1(RNE, mul1(RNE, of_int1(RNE, n),
-  of_int1(RNE, (n + 1))), neg1(fliteral2)), fliteral4), mul1(RNE, mul1(RNE,
-  mul1(RNE, fliteral8, of_int1(RNE, n)), neg1(fliteral2)), fliteral4)),
-  mul1(RNE, mul1(RNE, mul1(RNE, of_int1(RNE, (n + 1)), of_int1(RNE,
-  (n + 2))), neg1(fliteral2)), fliteral4))
-
  (* File "complex_trajectory.ads", line 29, characters 0-0 *)
-goal WP_parameter_def : eq(add1(RNE, mul1(RNE, mul1(RNE, mul1(RNE,
-  of_int1(RNE, n), of_int1(RNE, (n + 1))), fliteral2), fliteral4), mul1(RNE,
-  mul1(RNE, mul1(RNE, fliteral8, of_int1(RNE, n)), fliteral2), fliteral4)),
-  mul1(RNE, mul1(RNE, mul1(RNE, of_int1(RNE, (n + 1)), of_int1(RNE,
-  (n + 2))), fliteral2), fliteral4))
+goal WP_parameter_def :
+  (forall speed:t1. forall distance:t1. forall average:t1. forall o:t1.
+  forall o1:t1. forall o2:t1. forall o3:t1. forall result:t1.
+  forall speed1:t1. forall result1:t1. forall average1:t1. forall result2:t1.
+  forall distance1:t1. (in_range2(n) -> (in_range3(factor) ->
+  (in_range4(drag) -> (tqtisFinite(speed) -> (tqtisFinite(distance) ->
+  ((le(neg1(fliteral7), fliteral7) -> tqtisFinite(average)) ->
+  (((n <  25000) and (invariant__(n, speed, distance) = true)) ->
+  ((speed = old_speed) -> (tqtisFinite(old_speed) -> ((add1(RNE, drag,
+  mul1(RNE, mul1(RNE, factor, fliteral5), fliteral6)) = delta_speed) ->
+  (tqtisFinite(delta_speed) -> ((of_int(n) = n_bv) -> ((((o = add1(RNE,
+  speed, delta_speed)) and tqtisFinite(add1(RNE, speed, delta_speed))) and
+  (({ t__content1 = result } = { t__content1 = speed }) and (speed1 = o))) ->
+  ((le(neg1(fliteral2), delta_speed) and le(delta_speed, fliteral2)) ->
+  ((in_bounds(high_bound(n)) = true) -> ((in_bounds(low_bound(n)) = true) ->
+  (eq(add1(RNE, mul1(RNE, of_ubv16(RNE, n_bv), fliteral2), fliteral2),
+  mul1(RNE, add1(RNE, of_ubv16(RNE, n_bv), fliteral), fliteral2)) ->
+  (eq(add1(RNE, mul1(RNE, of_int1(RNE, n), fliteral2), fliteral2), mul1(RNE,
+  add1(RNE, of_int1(RNE, n), fliteral), fliteral2)) -> (eq(sub1(RNE,
+  mul1(RNE, of_int1(RNE, n), neg1(fliteral2)), fliteral2), mul1(RNE,
+  add1(RNE, of_int1(RNE, n), fliteral), neg1(fliteral2))) -> (eq(t5(1),
+  fliteral) -> (eq(add1(RNE, of_int1(RNE, n), fliteral), of_int1(RNE,
+  (n + 1))) -> (le(sub1(RNE, mul1(RNE, of_int1(RNE, n), neg1(fliteral2)),
+  fliteral2), speed1) -> (le(mul1(RNE, of_int1(RNE, (n + 1)),
+  neg1(fliteral2)), speed1) -> (le(speed1, add1(RNE, mul1(RNE, of_int1(RNE,
+  n), fliteral2), fliteral2)) -> (le(speed1, mul1(RNE, of_int1(RNE, (n + 1)),
+  fliteral2)) -> (((((o1 = add1(RNE, old_speed, speed1)) and
+  tqtisFinite(add1(RNE, old_speed, speed1))) and (o2 = div(RNE, o1,
+  fliteral8))) and (({ t__content1 = result1 } = { t__content1 = average
+  }) and (average1 = o2))) -> ((le(low_bound((n + 1)), old_speed) and
+  le(old_speed, high_bound((n + 1)))) -> (((le(old_speed, speed1) and
+  (le(old_speed, average1) and le(average1, speed1))) or ((not le(old_speed,
+  speed1)) and (le(speed1, average1) and le(average1, old_speed)))) ->
+  ((le(low_bound((n + 1)), average1) and le(average1,
+  high_bound((n + 1)))) -> (le(mul1(RNE, mul1(RNE, mul1(RNE, fliteral8,
+  of_int1(RNE, n)), neg1(fliteral2)), fliteral4), average1) -> (le(average1,
+  mul1(RNE, mul1(RNE, mul1(RNE, fliteral8, of_int1(RNE, n)), fliteral2),
+  fliteral4)) -> (le(mul1(RNE, mul1(RNE, mul1(RNE, fliteral8, of_int1(RNE,
+  n)), neg1(fliteral2)), fliteral4), mul1(RNE, average1, fliteral6)) ->
+  (le(mul1(RNE, average1, fliteral6), mul1(RNE, mul1(RNE, mul1(RNE,
+  fliteral8, of_int1(RNE, n)), fliteral2), fliteral4)) -> ((((o3 = add1(RNE,
+  distance, mul1(RNE, average1, fliteral6))) and tqtisFinite(add1(RNE,
+  distance, mul1(RNE, average1, fliteral6)))) and (({ t__content1 = result2
+  } = { t__content1 = distance }) and (distance1 = o3))) -> (eq(add1(RNE,
+  mul1(RNE, mul1(RNE, mul1(RNE, of_int1(RNE, n), of_int1(RNE, (n + 1))),
+  neg1(fliteral2)), fliteral4), mul1(RNE, mul1(RNE, mul1(RNE, fliteral8,
+  of_int1(RNE, n)), neg1(fliteral2)), fliteral4)), mul1(RNE, mul1(RNE,
+  mul1(RNE, of_int1(RNE, (n + 1)), of_int1(RNE, (n + 2))), neg1(fliteral2)),
+  fliteral4)) -> eq(add1(RNE, mul1(RNE, mul1(RNE, mul1(RNE, of_int1(RNE, n),
+  of_int1(RNE, (n + 1))), fliteral2), fliteral4), mul1(RNE, mul1(RNE,
+  mul1(RNE, fliteral8, of_int1(RNE, n)), fliteral2), fliteral4)), mul1(RNE,
+  mul1(RNE, mul1(RNE, of_int1(RNE, (n + 1)), of_int1(RNE, (n + 2))),
+  fliteral2), fliteral4))))))))))))))))))))))))))))))))))))))

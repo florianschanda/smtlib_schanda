@@ -924,35 +924,27 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : tqtisFinite(x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.4000000059604644775390625))
-
-axiom H1 : (not eq(x, fliteral1))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.500000000000000000000000))
 
-axiom H2 : (not eq(x, fliteral2))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.600000023841857910156250))
-
-axiom H3 : (not eq(x, fliteral3))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 12.0))
 
-axiom H4 : eq(x, fliteral4)
-
  (* File "generic_float_tests.adb", line 345, characters 0-0 *)
-goal WP_parameter_def : eq(roundToIntegral(RTN, x), fliteral4)
+goal WP_parameter_def : (tqtisFinite(x) -> ((not eq(x, fliteral1)) ->
+  ((not eq(x, fliteral2)) -> ((not eq(x, fliteral3)) -> (eq(x, fliteral4) ->
+  eq(roundToIntegral(RTN, x), fliteral4))))))

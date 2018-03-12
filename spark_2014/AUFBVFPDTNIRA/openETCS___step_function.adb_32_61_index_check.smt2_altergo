@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1209,30 +1209,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:function_range. forall v1:float1.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i]) = {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } })))
-
 logic bool_eq8 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -1243,17 +1219,17 @@ axiom bool_eq_def7 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq7((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq7((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq7((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq8(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq7((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq8(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1263,9 +1239,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq7((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq7((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic dummy6 : (int,us_rep) farray
 
@@ -1472,160 +1448,17 @@ function t3b__ref___projection(a: t3b__ref) : tnum_delimiters_rangeB =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic i : int
-
-logic step_function__get_value__result : t
-
-logic temp___247 : int
-
-logic temp___248 : int
-
-logic temp___243 : int
-
-logic j : int
-
-logic temp___241 : int
-
-logic o : int
-
-logic o1 : function_range
-
-logic o2 : float1
-
-logic o3 : function_range
-
-logic o4 : float1
-
-logic o5 : function_range
-
-logic o6 : int
-
-logic o7 : bool
-
-logic i1 : int
-
-logic o8 : int
-
-logic o9 : function_range
-
-logic o10 : float1
-
-logic o11 : function_range
-
-logic o12 : float1
-
-logic o13 : function_range
-
-logic o14 : int
-
-logic o15 : bool
-
-logic o16 : int
-
-logic o17 : function_range
-
-logic o18 : float1
-
-logic o19 : function_range
-
-logic o20 : float1
-
-logic o21 : float1
-
-logic o22 : t
-
-logic o23 : bool
-
-logic step_function__get_value__result1 : t
-
-logic result : int
-
-logic i2 : int
-
-logic i3 : int
-
-logic step_function__get_value__result2 : t
-
-logic result1 : bool
-
-logic result2 : t
-
-logic step_function__get_value__result3 : t
-
-logic result3 : int
-
-logic i4 : int
-
-logic i5 : int
-
-logic step_function__get_value__result4 : t
-
-logic i6 : int
-
-logic step_function__get_value__result5 : t
-
-logic i7 : int
-
-logic step_function__get_value__result6 : t
-
-logic i8 : int
-
-logic step_function__get_value__result7 : t
-
-logic i9 : int
-
-logic step_function__get_value__result8 : t
-
-logic i10 : int
-
-logic step_function__get_value__result9 : t
-
-logic result4 : t
-
-logic step_function__get_value__result10 : t
-
-logic step_function__get_value__result11 : t
-
-logic step_function__get_value__result12 : t
-
-logic i11 : int
-
-logic step_function__get_value__result13 : t
-
-logic i12 : int
-
-logic step_function__get_value__result14 : t
-
-logic i13 : int
-
-logic step_function__get_value__result15 : t
-
-logic i14 : int
-
-logic step_function__get_value__result16 : t
-
-axiom H : in_range4(x)
-
-axiom H1 : (is_valid({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun;
-  rec__step_function__step_function_t__step = sfun1 } }) = true)
-
-axiom H2 : (result = i)
-
-axiom H3 : (i2 = 0)
-
-axiom H4 : (0 <= i2)
-
-axiom H5 : (i2 <= (to_rep1(sfun) - 1))
-
-axiom H6 :
-  (forall j1:int. (((1 <= j1) and (j1 <= i3)) ->
-  (to_rep2((((sfun1[j1])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)))
-
-axiom H7 : (((0 <= (to_rep1(sfun) - 1)) -> dynamic_property(0,
-  (to_rep1(sfun) - 1), i3)) and ((0 <= i3) and (i3 <= (to_rep1(sfun) - 1))))
-
-axiom H8 : ((temp___241 = (i3 + 1)) and in_range2((i3 + 1)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <= temp___241)
+goal WP_parameter_def :
+  (forall i:int. forall temp___268:int. forall result:int. forall i1:int.
+  forall i2:int. (in_range4(x) -> ((is_valid({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun;
+  rec__step_function__step_function_t__step = sfun1 } }) = true) -> ((({
+  int__content = result } = { int__content = i }) and (i1 = 0)) ->
+  (((0 <= i1) and (i1 <= (to_rep1(sfun) - 1))) ->
+  ((forall j:int. (((1 <= j) and (j <= i2)) ->
+   (to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x))) ->
+  ((((0 <= (to_rep1(sfun) - 1)) -> dynamic_property(0, (to_rep1(sfun) - 1),
+  i2)) and ((0 <= i2) and (i2 <= (to_rep1(sfun) - 1)))) ->
+  (((temp___268 = (i2 + 1)) and in_range2((i2 + 1))) ->
+  (0 <= temp___268)))))))))

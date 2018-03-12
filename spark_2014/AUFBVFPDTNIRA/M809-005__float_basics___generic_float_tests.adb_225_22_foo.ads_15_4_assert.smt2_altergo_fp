@@ -1039,12 +1039,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1056,6 +1050,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1100,13 +1100,6 @@ logic z : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : tqtisFinite(z)
-
-axiom H3 : (lt(x, y) and lt(y, z))
-
  (* File "generic_float_tests.adb", line 212, characters 0-0 *)
-goal WP_parameter_def : lt(x, z)
+goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (tqtisFinite(z) -> ((lt(x, y) and lt(y, z)) -> lt(x, z)))))

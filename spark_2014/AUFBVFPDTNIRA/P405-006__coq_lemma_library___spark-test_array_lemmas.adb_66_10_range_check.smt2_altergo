@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1059,24 +1059,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,float1) farray, int, int, (int,float1) farray, int,
-  int -> (int,float1) farray
-
-axiom concat_def :
-  (forall a:(int,float1) farray. forall b:(int,float1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : float1, int -> (int,float1) farray
-
-axiom singleton_def :
-  (forall v:float1.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq6 : (int,float1) farray, int, int, (int,float1) farray, int,
   int -> bool
 
@@ -1087,17 +1069,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)]))))))) ->
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1107,9 +1089,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) ->
-  (to_rep((a[temp___idx_133])) = to_rep((b[((b__first - a__first) + temp___idx_133)])))))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) ->
+  (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
 logic arr : (int,float1) farray
 
@@ -1283,24 +1265,12 @@ type a__ref = { a__content : us_t1
 
 function a__ref___2__projection(a: a__ref) : us_t1 = (a).a__content
 
-logic temp___246 : (int,float1) farray
-
-logic temp___2461 : t1
-
-logic o : (int,float1) farray
-
-logic o1 : t2
-
-axiom H :
-  (forall i:int. (((2 <= i) and (i <= 10)) -> lt(to_rep((arr[(i - 1)])),
-  to_rep((arr[i])))))
-
-axiom H1 : dynamic_property((- 2147483648), 2147483647, 1, 10)
-
-axiom H2 : (arr = temp___246)
-
-axiom H3 : (mk(1, 10) = temp___2461)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : dynamic_property1((- 2147483648), 2147483647,
-  to_rep1(first(temp___2461)), to_rep1(last(temp___2461)))
+goal WP_parameter_def :
+  (forall temp___283:(int,float1) farray. forall temp___2831:t1.
+  ((forall i:int. (((2 <= i) and (i <= 10)) -> lt(to_rep((arr[(i - 1)])),
+   to_rep((arr[i]))))) ->
+  ((dynamic_property((- 2147483648), 2147483647, 1, 10) and
+  ((arr = temp___283) and (mk(1, 10) = temp___2831))) ->
+  dynamic_property1((- 2147483648), 2147483647, to_rep1(first(temp___2831)),
+  to_rep1(last(temp___2831))))))

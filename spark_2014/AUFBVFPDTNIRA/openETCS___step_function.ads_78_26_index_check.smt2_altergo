@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1182,30 +1182,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:function_range. forall v1:float1.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i]) = {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -1216,17 +1192,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1236,9 +1212,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic dummy5 : (int,us_rep) farray
 
@@ -1478,306 +1454,76 @@ function t11b__ref___projection(a: t11b__ref) : tnum_delimiters_rangeB =
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic min1 : t
-
-logic i : int
-
-logic step_function__minimum_until_point__result : t
-
-logic temp___277 : t
-
-logic temp___276 : int
-
-logic j : int
-
-logic o : int
-
-logic o1 : function_range
-
-logic o2 : float1
-
-logic o3 : function_range
-
-logic o4 : float1
-
-logic o5 : function_range
-
-logic o6 : int
-
-logic j1 : int
-
-logic o7 : int
-
-logic o8 : function_range
-
-logic o9 : float1
-
-logic o10 : function_range
-
-logic o11 : float1
-
-logic o12 : float1
-
-logic o13 : t
-
-logic o14 : bool
-
-logic j2 : int
-
-logic o15 : int
-
-logic o16 : function_range
-
-logic o17 : float1
-
-logic o18 : function_range
-
-logic o19 : float1
-
-logic o20 : function_range
-
-logic o21 : int
-
-logic i1 : int
-
-logic o22 : int
-
-logic o23 : function_range
-
-logic o24 : float1
-
-logic o25 : function_range
-
-logic o26 : float1
-
-logic o27 : function_range
-
-logic o28 : int
-
-logic i2 : int
-
-logic o29 : int
-
-logic o30 : function_range
-
-logic o31 : float1
-
-logic o32 : function_range
-
-logic o33 : float1
-
-logic o34 : float1
-
-logic o35 : t
-
-logic o36 : bool
-
-logic o37 : bool
-
-logic result : t
-
-logic min2 : t
-
-logic result1 : int
-
-logic i3 : int
-
-logic min3 : t
-
-logic i4 : int
-
-logic result2 : bool
-
-logic result3 : t
-
-logic min4 : t
-
-logic result4 : int
-
-logic i5 : int
-
-logic min5 : t
-
-logic i6 : int
-
-logic min6 : t
-
-logic i7 : int
-
-logic min7 : t
-
-logic i8 : int
-
-logic min8 : t
-
-logic i9 : int
-
-logic result5 : t
-
-logic step_function__minimum_until_point__result1 : t
-
-logic step_function__minimum_until_point__result2 : t
-
-logic step_function__minimum_until_point__result3 : t
-
-logic min9 : t
-
-logic i10 : int
-
-logic step_function__minimum_until_point__result4 : t
-
-logic min10 : t
-
-logic i11 : int
-
-logic step_function__minimum_until_point__result5 : t
-
-logic result6 : bool
-
-axiom H : in_range3(x)
-
-axiom H1 : (is_valid({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun;
-  rec__step_function__step_function_t__step = sfun1 } }) = true)
-
-axiom H2 : (result = min1)
-
-axiom H3 :
-  (min2 = to_rep((((sfun1[0])).us_split_fields1).rec__step_function__delimiter_entry__value))
-
-axiom H4 : tqtisFinite(min2)
-
-axiom H5 : (to_rep1(sfun) = r10b)
-
-axiom H6 : in_range2(r10b)
-
-axiom H7 : (result1 = i)
-
-axiom H8 : (i3 = 0)
-
-axiom H9 : (((0 <= i3) and (i3 <= r10b)) -> (temp___277 = min2))
-
-axiom H10 : (((0 <= i3) and (i3 <= r10b)) -> (temp___276 = i3))
-
-axiom H11 : (((0 <= i3) and (i3 <= r10b)) ->
-  (forall j3:int. (((0 <= j3) and (j3 <= (i4 - 1))) ->
-  ((to_rep2((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
-  le(min3,
-  to_rep((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__value))))))
-
-axiom H12 : (((0 <= i3) and (i3 <= r10b)) ->
-  (exists j3:int. (((0 <= j3) and (j3 <= i4)) and
-  ((to_rep2((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) and
-  eq(min3,
-  to_rep((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__value))))))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H13 : (((0 <= i3) and (i3 <= r10b)) -> ((((0 <= r10b) ->
-  dynamic_property(0, r10b, i4)) and (le(neg(fliteral1), fliteral1) ->
-  tqtisFinite(min3))) and ((0 <= i4) and (i4 <= r10b))))
-
-axiom H14 : (((0 <= i3) and (i3 <= r10b)) ->
-  ((to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
-  (lt(to_rep((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__value),
-  min3) -> (min3 = result3))))
-
-axiom H15 : (((0 <= i3) and (i3 <= r10b)) ->
-  ((to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
-  (lt(to_rep((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__value),
-  min3) ->
-  (min4 = to_rep((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__value)))))
-
-axiom H16 : (((0 <= i3) and (i3 <= r10b)) ->
-  ((to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
-  ((not lt(to_rep((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__value),
-  min3)) -> (min4 = min3))))
-
-axiom H17 : (((0 <= i3) and (i3 <= r10b)) ->
-  ((not (to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) ->
-  (forall j3:int. ((((i4 + 1) <= j3) and (j3 <= to_rep1(sfun))) ->
-  (to_rep2((((sfun1[(j3 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun1[j3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))
-
-axiom H18 : (((0 <= i3) and (i3 <= r10b)) ->
-  ((not (to_rep2((((sfun1[i4])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) ->
-  (min4 = min3)))
-
-axiom H19 : (((0 <= i3) and (i3 <= r10b)) -> (i4 = r10b))
-
-axiom H20 : (((0 <= i3) and (i3 <= r10b)) -> (i6 = i4))
-
-axiom H21 : (((0 <= i3) and (i3 <= r10b)) -> (min5 = min4))
-
-axiom H22 : (((0 <= i3) and (i3 <= r10b)) -> (i7 = i4))
-
-axiom H23 : (((0 <= i3) and (i3 <= r10b)) -> (min6 = min4))
-
-axiom H24 : (((0 <= i3) and (i3 <= r10b)) -> (i8 = i6))
-
-axiom H25 : (((0 <= i3) and (i3 <= r10b)) -> (min7 = min5))
-
-axiom H26 : (((0 <= i3) and (i3 <= r10b)) -> (i9 = i7))
-
-axiom H27 : (((0 <= i3) and (i3 <= r10b)) -> (min8 = min6))
-
-axiom H28 : ((not ((0 <= i3) and (i3 <= r10b))) -> (i8 = i3))
-
-axiom H29 : ((not ((0 <= i3) and (i3 <= r10b))) -> (min7 = min2))
-
-axiom H30 : ((not ((0 <= i3) and (i3 <= r10b))) -> (i9 = i3))
-
-axiom H31 : ((not ((0 <= i3) and (i3 <= r10b))) -> (min8 = min2))
-
-axiom H32 :
-  (step_function__minimum_until_point__result2 = step_function__minimum_until_point__result1)
-
-axiom H33 :
-  (step_function__minimum_until_point__result3 = step_function__minimum_until_point__result1)
-
-axiom H34 : (result5 = step_function__minimum_until_point__result)
-
-axiom H35 : (step_function__minimum_until_point__result1 = min7)
-
-axiom H36 :
-  (step_function__minimum_until_point__result4 = step_function__minimum_until_point__result2)
-
-axiom H37 : (i10 = i8)
-
-axiom H38 : (min9 = min7)
-
-axiom H39 :
-  (step_function__minimum_until_point__result5 = step_function__minimum_until_point__result3)
-
-axiom H40 : (i11 = i9)
-
-axiom H41 : (min10 = min8)
-
-axiom H42 : (0 <= i2)
-
-axiom H43 : (i2 <= to_rep1(sfun))
-
-axiom H44 : ((0 <= i2) and (i2 <= 10))
-
-axiom H45 : (o29 = i2)
-
-axiom H46 : ({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o30;
-  rec__step_function__delimiter_entry__value = o31 } } = (sfun1[o29]))
-
-axiom H47 : (o30 = o32)
-
-axiom H48 : (o31 = o33)
-
-axiom H49 : (o34 = o33)
-
-axiom H50 : (o35 = to_rep(o34))
-
-axiom H51 : ((eq(step_function__minimum_until_point__result4, o35) ->
-  (o36 = true)) and ((not eq(step_function__minimum_until_point__result4,
-  o35)) -> (o36 = false)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (0 <= i2)
+goal WP_parameter_def :
+  (forall min1:t. forall i:int.
+  forall step_function__minimum_until_point__result:t. forall temp___304:t.
+  forall temp___303:int. forall i1:int. forall o:int.
+  forall o1:function_range. forall o2:float1. forall o3:function_range.
+  forall o4:float1. forall o5:float1. forall o6:t. forall o7:bool.
+  forall result:t. forall min2:t. forall result1:int. forall i2:int.
+  forall min3:t. forall i3:int. forall result2:t. forall min4:t.
+  forall min5:t. forall i4:int. forall min6:t. forall i5:int. forall min7:t.
+  forall i6:int. forall min8:t. forall i7:int. forall result3:t.
+  forall step_function__minimum_until_point__result1:t.
+  forall step_function__minimum_until_point__result2:t.
+  forall step_function__minimum_until_point__result3:t. forall min9:t.
+  forall i8:int. forall step_function__minimum_until_point__result4:t.
+  forall min10:t. forall i9:int.
+  forall step_function__minimum_until_point__result5:t. (in_range3(x) ->
+  ((is_valid({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun;
+  rec__step_function__step_function_t__step = sfun1 } }) = true) -> ((((({
+  t__content = result } = { t__content = min1 }) and
+  (min2 = to_rep((((sfun1[0])).us_split_fields1).rec__step_function__delimiter_entry__value))) and
+  (tqtisFinite(min2) and (((to_rep1(sfun) = r10b) and in_range2(r10b)) and
+  (((({ int__content = result1 } = { int__content = i }) and (i2 = 0)) and
+  ((((0 <= i2) and (i2 <= r10b)) and ((((temp___304 = min2) and
+  ((temp___303 = i2) and
+  (((forall j:int. (((0 <= j) and (j <= (i3 - 1))) ->
+    ((to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
+    le(min3,
+    to_rep((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__value))))) and
+  (exists j:int. (((0 <= j) and (j <= i3)) and
+  ((to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) and
+  eq(min3,
+  to_rep((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__value)))))) and
+  (((((0 <= r10b) -> dynamic_property(0, r10b, i3)) and (le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(min3))) and ((0 <= i3) and (i3 <= r10b))) and
+  ((((to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) and
+  ((lt(to_rep((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__value),
+  min3) and ((min3 = result2) and
+  (min4 = to_rep((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__value)))) or
+  ((not lt(to_rep((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__value),
+  min3)) and (min4 = min3)))) or
+  ((not (to_rep2((((sfun1[i3])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x)) and
+  ((forall j:int. ((((i3 + 1) <= j) and (j <= to_rep1(sfun))) ->
+   (to_rep2((((sfun1[(j - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))) and
+  (min4 = min3)))) and (i3 = r10b)))))) and (((i3 = i4) and
+  (min4 = min5)) and ((i5 = i3) and (min6 = min4)))) and ((({ int__content =
+  i6 } = { int__content = i4 }) and ({ t__content = min7 } = { t__content =
+  min5 })) and ((i7 = i5) and (min8 = min6))))) or ((not ((0 <= i2) and
+  (i2 <= r10b))) and (((i2 = i6) and (min2 = min7)) and ((i7 = i2) and
+  (min8 = min2)))))) and
+  (((step_function__minimum_until_point__result1 = step_function__minimum_until_point__result2) and
+  (step_function__minimum_until_point__result3 = step_function__minimum_until_point__result1)) and
+  ((result3 = step_function__minimum_until_point__result) and
+  (step_function__minimum_until_point__result1 = min7))))))) and ((({
+  t__content = step_function__minimum_until_point__result4 } = { t__content =
+  step_function__minimum_until_point__result2 }) and ((i8 = i6) and
+  (min9 = min7))) and
+  ((step_function__minimum_until_point__result5 = step_function__minimum_until_point__result3) and
+  ((i9 = i7) and (min10 = min8))))) -> (((0 <= i1) and
+  (i1 <= to_rep1(sfun))) -> (((((((((0 <= i1) and (i1 <= 10)) and
+  (o = i1)) and ({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o1;
+  rec__step_function__delimiter_entry__value = o2 } } = (sfun1[o]))) and
+  ((o1 = o3) and (o2 = o4))) and (o5 = o4)) and (o6 = to_rep(o5))) and
+  ((eq(step_function__minimum_until_point__result4, o6) and (o7 = true)) or
+  ((not eq(step_function__minimum_until_point__result4, o6)) and
+  (o7 = false)))) -> (0 <= i1)))))))

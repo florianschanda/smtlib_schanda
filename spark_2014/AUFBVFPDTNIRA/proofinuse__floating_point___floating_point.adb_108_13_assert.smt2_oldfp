@@ -2083,10 +2083,6 @@
   (and (tqtisFinite (to_float32 m x))
   (= (tqtreal (to_float32 m x)) (round m (tqtreal1 x))))))))
 
-(define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int2 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range2 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -2119,12 +2115,12 @@
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral2) fliteral2)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral2) fliteral2)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-sort long_float 0)
 
@@ -2152,18 +2148,25 @@
   (and (tqtisFinite1 fliteral3)
   (= (tqtreal1 fliteral3) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant1 ((temp___expr_57 t1) (temp___is_init_54 Bool)
-  (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true) (le1
-                                     (neg1 fliteral3) fliteral3))
-                                     (tqtisFinite1 temp___expr_57)))
+(define-fun dynamic_invariant1 ((temp___expr_67 t1) (temp___is_init_63 Bool)
+  (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true) (le1
+                                    (neg1 fliteral3) fliteral3))
+                                    (tqtisFinite1 temp___expr_67)))
 
 (declare-const x t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const fliteral4 t1)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite1 fliteral4)
+  (= (tqtreal1 fliteral4) 340282346638528859811704183484516925440.0)))
 
 (declare-const tmp t1)
 
@@ -2185,13 +2188,6 @@
 
 ;; H
   (assert (= tmp1 (to_float64 RNE1 x)))
-
-(declare-const fliteral4 t1)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite1 fliteral4)
-  (= (tqtreal1 fliteral4) 340282346638528859811704183484516925440.0)))
 
 (assert
 ;; WP_parameter_def

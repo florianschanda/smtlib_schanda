@@ -100,12 +100,13 @@
 (declare-datatypes () ((ft__ref (mk_ft__ref (ft__content ft)))))
 (define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
-(define-fun dynamic_invariant ((temp___expr_167 Float64)
-  (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_167)))
+(define-fun dynamic_invariant ((temp___expr_194 Float64)
+  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
+  (temp___do_toplevel_192 Bool)
+  (temp___do_typ_inv_193 Bool)) Bool (=>
+                                     (or (= temp___is_init_190 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_194)))
 
 (declare-fun to_rep (ft) Float64)
 
@@ -150,29 +151,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int ft) Int Int (Array Int ft) Int
-  Int) (Array Int ft))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int ft)) (b (Array Int ft)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (ft Int) (Array Int ft))
-
-;; singleton_def
-  (assert
-  (forall ((v ft))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq ((a (Array Int ft)) (a__first Int) (a__last Int)
   (b (Array Int ft)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -180,12 +158,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_133 Int))
+                           (forall ((temp___idx_155 Int))
                            (=>
-                           (and (<= a__first temp___idx_133)
-                           (<= temp___idx_133 a__last))
-                           (= (to_rep (select a temp___idx_133)) (to_rep
-                                                                 (select b (+ (- b__first a__first) temp___idx_133)))))))
+                           (and (<= a__first temp___idx_155)
+                           (<= temp___idx_155 a__last))
+                           (= (to_rep (select a temp___idx_155)) (to_rep
+                                                                 (select b (+ (- b__first a__first) temp___idx_155)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -197,10 +175,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_133 Int))
-  (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (to_rep (select a temp___idx_133)) (to_rep
-                                        (select b (+ (- b__first a__first) temp___idx_133)))))))))))
+  (forall ((temp___idx_155 Int))
+  (=> (and (<= a__first temp___idx_155) (<= temp___idx_155 a__last))
+  (= (to_rep (select a temp___idx_155)) (to_rep
+                                        (select b (+ (- b__first a__first) temp___idx_155)))))))))))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -208,10 +186,11 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___237 Float64))
-  (forall ((temp___238 Int))
-  (= (select (foo__double_tests__test_array_1__a__aggregate_def temp___237) temp___238)
-  (of_rep temp___237)))))
+  (forall ((temp___267 Float64))
+  (=> (dynamic_invariant temp___267 true true true true)
+  (forall ((temp___268 Int))
+  (= (to_rep
+     (select (foo__double_tests__test_array_1__a__aggregate_def temp___267) temp___268)) temp___267)))))
 
 (declare-const y Float64)
 
@@ -311,7 +290,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "generic_float_tests.ads", line 2, characters 0-0
+ ;; File "generic_float_tests.adb", line 426, characters 0-0
   (not (fp.eq x y2)))
 (check-sat)
 (exit)

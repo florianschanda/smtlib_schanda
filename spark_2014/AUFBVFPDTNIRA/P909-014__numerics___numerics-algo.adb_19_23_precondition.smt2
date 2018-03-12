@@ -102,12 +102,13 @@
 (define-fun t_float__ref___projection ((a t_float__ref)) t_float (t_float__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float32)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float32)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_165)))
 
 (declare-fun oadd (Float32 Float32) Float32)
 
@@ -117,17 +118,18 @@
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (oadd left right) true false true)) :pattern (
-  (oadd left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (oadd left right) true
+     false true true)) :pattern ((oadd left right)) )))
 
 ;; oadd__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (oadd left right) (fp.add RNE left right))) :pattern (
-  (oadd left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (oadd left right) (fp.add RNE left right))) :pattern ((oadd left
+                                                              right)) )))
 
 (declare-fun osubtract (Float32 Float32) Float32)
 
@@ -137,17 +139,19 @@
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (osubtract left right) true false
-     true)) :pattern ((osubtract left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (osubtract left right)
+     true false true true)) :pattern ((osubtract left right)) )))
 
 ;; osubtract__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (osubtract left right) (fp.sub RNE left right))) :pattern (
-  (osubtract left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (osubtract left right) (fp.sub RNE left right))) :pattern ((osubtract
+                                                                   left
+                                                                   right)) )))
 
 (declare-fun omultiply (Float32 Float32) Float32)
 
@@ -157,17 +161,19 @@
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (omultiply left right) true false
-     true)) :pattern ((omultiply left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (omultiply left right)
+     true false true true)) :pattern ((omultiply left right)) )))
 
 ;; omultiply__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (omultiply left right) (fp.mul RNE left right))) :pattern (
-  (omultiply left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (omultiply left right) (fp.mul RNE left right))) :pattern ((omultiply
+                                                                   left
+                                                                   right)) )))
 
 (declare-fun odivide (Float32 Float32) Float32)
 
@@ -178,19 +184,20 @@
   (forall ((left Float32) (right Float32))
   (! (=>
      (and
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
      (not (fp.eq right (fp #b0 #b00000000 #b00000000000000000000000))))
-     (dynamic_invariant (odivide left right) true false true)) :pattern (
+     (dynamic_invariant (odivide left right) true false true true)) :pattern (
   (odivide left right)) )))
 
 ;; odivide__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (odivide left right) (fp.div RNE left right))) :pattern (
-  (odivide left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (odivide left right) (fp.div RNE left right))) :pattern ((odivide
+                                                                 left right)) )))
 
 (declare-const x Float32)
 
@@ -205,150 +212,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
-
-(declare-const x1 Float32)
-
-(declare-const x2 Float32)
-
-(declare-const x3 Float32)
-
-(declare-const x4 Float32)
-
-(declare-const x5 Float32)
-
-(declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const o2 Float32)
-
-(declare-const o3 Float32)
-
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
-(declare-const result Float32)
-
-(declare-const x11 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const x12 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const x21 Float32)
-
-(declare-const result3 Float32)
-
-(declare-const x22 Float32)
-
-(declare-const result4 Float32)
-
-(declare-const x31 Float32)
-
-(declare-const result5 Float32)
-
-(declare-const x32 Float32)
-
-(declare-const result6 Float32)
-
-(declare-const x41 Float32)
-
-(declare-const result7 Float32)
-
-(declare-const x42 Float32)
-
-;; H
-  (assert (fp.isFinite32 x))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 x1)))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 x2)))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 x3)))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 x4)))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 x5)))
-
-;; H
-  (assert (= result x1))
-
-;; H
-  (assert (= x11 (fp #b0 #b11111110 #b11111111111111111111111)))
-
-;; H
-  (assert
-  (and (= o (oadd x11 x11))
-  (and (fp.isFinite32 o) (= o (fp.add RNE x11 x11)))))
-
-;; H
-  (assert (= result1 x11))
-
-;; H
-  (assert (= x12 o))
-
-;; H
-  (assert (= result2 x2))
-
-;; H
-  (assert (= x21 (fp #b0 #b11111110 #b11111111111111111111111)))
-
-;; H
-  (assert
-  (and (= o1 (osubtract (fp.neg x21) x21))
-  (and (fp.isFinite32 o1) (= o1 (fp.sub RNE (fp.neg x21) x21)))))
-
-;; H
-  (assert (= result3 x21))
-
-;; H
-  (assert (= x22 o1))
-
-;; H
-  (assert (= result4 x3))
-
-;; H
-  (assert (= x31 (fp #b0 #b11111110 #b11111111111111111111111)))
-
-;; H
-  (assert
-  (and (= o2 (omultiply x31 x31))
-  (and (fp.isFinite32 o2) (= o2 (fp.mul RNE x31 x31)))))
-
-;; H
-  (assert (= result5 x31))
-
-;; H
-  (assert (= x32 o2))
-
-;; H
-  (assert (= result6 x4))
-
-;; H
-  (assert (= x41 (fp #b0 #b10000000 #b10000000000000000000000)))
 
 (assert
 ;; WP_parameter_def

@@ -445,18 +445,13 @@
 (define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
-(define-fun dynamic_invariant ((temp___expr_177 (_ BitVec 16))
-  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_207 (_ BitVec 16))
+  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
+  (temp___do_toplevel_205 Bool) (temp___do_typ_inv_206 Bool)) Bool true)
 
 (declare-const i (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const o Float32)
-
-;; H
-  (assert true)
 
 (assert
 ;; WP_parameter_def

@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1552,532 +1552,6 @@ logic attr__ATTRIBUTE_ADDRESS82 : int
 
 logic attr__ATTRIBUTE_ADDRESS83 : int
 
-logic q0 : t
-
-logic q1 : t
-
-logic q2 : t
-
-logic q3 : t
-
-logic two_kp : t
-
-logic two_ki : t
-
-logic integral_fbx : t
-
-logic integral_fby : t
-
-logic integral_fbz : t
-
-logic beta : t
-
-logic recip_norm : t
-
-logic norm_ax : t
-
-logic norm_ay : t
-
-logic norm_az : t
-
-logic rad_gx : t
-
-logic rad_gy : t
-
-logic rad_gz : t
-
-logic half_vx : t
-
-logic half_vy : t
-
-logic half_vz : t
-
-logic half_ex : t
-
-logic half_ey : t
-
-logic half_ez : t
-
-logic q0_tmp : t
-
-logic q1_tmp : t
-
-logic q2_tmp : t
-
-logic q3_tmp : t
-
-logic qa : t
-
-logic qb : t
-
-logic qc : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic o15 : t
-
-logic o16 : t
-
-logic o17 : t
-
-logic o18 : t
-
-logic o19 : t
-
-logic o20 : t
-
-logic o21 : t
-
-logic o22 : t
-
-logic o23 : t
-
-logic o24 : t
-
-logic o25 : t
-
-logic o26 : t
-
-logic o27 : t
-
-logic o28 : t
-
-logic o29 : t
-
-logic o30 : t
-
-logic o31 : t
-
-logic o32 : t
-
-logic o33 : t
-
-logic o34 : t
-
-logic o35 : t
-
-logic o36 : t
-
-logic o37 : t
-
-logic o38 : t
-
-logic o39 : t
-
-logic o40 : t
-
-logic o41 : t
-
-logic o42 : t
-
-logic o43 : t
-
-logic o44 : t
-
-logic o45 : t
-
-logic o46 : t
-
-logic o47 : t
-
-logic o48 : t
-
-logic o49 : t
-
-logic o50 : t
-
-logic o51 : t
-
-logic o52 : t
-
-logic o53 : t
-
-logic o54 : t
-
-logic o55 : t
-
-logic o56 : t
-
-logic o57 : t
-
-logic o58 : t
-
-logic o59 : t
-
-logic o60 : t
-
-logic o61 : t
-
-logic o62 : t
-
-logic o63 : t
-
-logic o64 : t
-
-logic o65 : t
-
-logic o66 : t
-
-logic o67 : t
-
-logic o68 : t
-
-logic o69 : t
-
-logic o70 : t
-
-logic o71 : t
-
-logic o72 : t
-
-logic o73 : t
-
-logic o74 : t
-
-logic o75 : t
-
-logic o76 : t
-
-logic o77 : t
-
-logic o78 : t
-
-logic o79 : t
-
-logic o80 : t
-
-logic o81 : t
-
-logic o82 : t
-
-logic o83 : t
-
-logic o84 : t
-
-logic o85 : t
-
-logic o86 : t
-
-logic o87 : t
-
-logic o88 : t
-
-logic o89 : t
-
-logic o90 : t
-
-logic o91 : t
-
-logic o92 : t
-
-logic o93 : t
-
-logic o94 : t
-
-logic o95 : t
-
-logic o96 : t
-
-logic o97 : t
-
-logic o98 : t
-
-logic o99 : t
-
-logic o100 : t
-
-logic o101 : t
-
-logic o102 : t
-
-logic o103 : t
-
-logic o104 : t
-
-logic o105 : t
-
-logic o106 : t
-
-logic o107 : t
-
-logic o108 : t
-
-logic integral_fbx1 : t
-
-logic integral_fby1 : t
-
-logic integral_fbz1 : t
-
-logic recip_norm1 : t
-
-logic norm_ax1 : t
-
-logic norm_ay1 : t
-
-logic norm_az1 : t
-
-logic half_ex1 : t
-
-logic half_ey1 : t
-
-logic half_ez1 : t
-
-logic result : t
-
-logic rad_gx1 : t
-
-logic result1 : t
-
-logic rad_gy1 : t
-
-logic result2 : t
-
-logic rad_gz1 : t
-
-logic result3 : t
-
-logic half_vx1 : t
-
-logic result4 : t
-
-logic half_vy1 : t
-
-logic result5 : t
-
-logic half_vz1 : t
-
-logic result6 : t
-
-logic qa1 : t
-
-logic result7 : t
-
-logic qb1 : t
-
-logic result8 : t
-
-logic qc1 : t
-
-logic result9 : t
-
-logic recip_norm2 : t
-
-logic result10 : t
-
-logic norm_ax2 : t
-
-logic result11 : t
-
-logic norm_ay2 : t
-
-logic result12 : t
-
-logic norm_az2 : t
-
-logic result13 : t
-
-logic half_ex2 : t
-
-logic result14 : t
-
-logic half_ey2 : t
-
-logic result15 : t
-
-logic half_ez2 : t
-
-logic result16 : t
-
-logic integral_fbx2 : t
-
-logic result17 : t
-
-logic integral_fby2 : t
-
-logic result18 : t
-
-logic integral_fbz2 : t
-
-logic result19 : t
-
-logic rad_gx2 : t
-
-logic result20 : t
-
-logic rad_gy2 : t
-
-logic result21 : t
-
-logic rad_gz2 : t
-
-logic result22 : t
-
-logic integral_fbx3 : t
-
-logic result23 : t
-
-logic integral_fby3 : t
-
-logic result24 : t
-
-logic integral_fbz3 : t
-
-logic result25 : t
-
-logic rad_gx3 : t
-
-logic result26 : t
-
-logic rad_gy3 : t
-
-logic result27 : t
-
-logic rad_gz3 : t
-
-logic result28 : t
-
-logic rad_gx4 : t
-
-logic result29 : t
-
-logic rad_gy4 : t
-
-logic result30 : t
-
-logic rad_gz4 : t
-
-logic result31 : t
-
-logic q0_tmp1 : t
-
-logic result32 : t
-
-logic q1_tmp1 : t
-
-logic result33 : t
-
-logic q2_tmp1 : t
-
-logic result34 : t
-
-logic q3_tmp1 : t
-
-logic result35 : t
-
-logic recip_norm3 : t
-
-logic result36 : t
-
-logic q01 : t
-
-logic result37 : t
-
-logic q11 : t
-
-logic result38 : t
-
-logic q21 : t
-
-axiom H : in_range2(gx)
-
-axiom H1 : in_range2(gy)
-
-axiom H2 : in_range2(gz)
-
-axiom H3 : in_range3(ax)
-
-axiom H4 : in_range3(ay)
-
-axiom H5 : in_range3(az)
-
-axiom H6 : in_range6(dt)
-
-axiom H7 : in_range8(q0)
-
-axiom H8 : in_range8(q1)
-
-axiom H9 : in_range8(q2)
-
-axiom H10 : in_range8(q3)
-
-axiom H11 : tqtisFinite(two_kp)
-
-axiom H12 : tqtisFinite(two_ki)
-
-axiom H13 : tqtisFinite(integral_fbx)
-
-axiom H14 : tqtisFinite(integral_fby)
-
-axiom H15 : tqtisFinite(integral_fbz)
-
-axiom H16 : in_range7(beta)
-
-axiom H17 : (gx = c3b)
-
-axiom H18 : in_range2(c3b)
-
-axiom H19 : (gy = c4b)
-
-axiom H20 : in_range2(c4b)
-
-axiom H21 : (gz = c5b)
-
-axiom H22 : in_range2(c5b)
-
-axiom H23 : (ax = c6b)
-
-axiom H24 : in_range3(c6b)
-
-axiom H25 : (ay = c7b)
-
-axiom H26 : in_range3(c7b)
-
-axiom H27 : (az = c8b)
-
-axiom H28 : in_range3(c8b)
-
-axiom H29 : (dt = c9b)
-
-axiom H30 : in_range6(c9b)
-
-axiom H31 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(recip_norm))
-
-axiom H32 : (le(neg(fliteral2), fliteral2) -> in_range3(norm_ax))
-
-axiom H33 : (le(neg(fliteral2), fliteral2) -> in_range3(norm_ay))
-
-axiom H34 : (le(neg(fliteral2), fliteral2) -> in_range3(norm_az))
-
-axiom H35 : (result = rad_gx)
-
 logic fliteral8 : t
 
 axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
@@ -2088,638 +1562,266 @@ logic fliteral9 : t
 axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
   (tqtreal(fliteral9) = 180.0))
 
-axiom H36 : (rad_gx1 = div(NearestTiesToEven, mul(NearestTiesToEven, c3b,
-  fliteral8), fliteral9))
-
-axiom H37 : tqtisFinite(rad_gx1)
-
-axiom H38 : (result1 = rad_gy)
-
-axiom H39 : (rad_gy1 = div(NearestTiesToEven, mul(NearestTiesToEven, c4b,
-  fliteral8), fliteral9))
-
-axiom H40 : tqtisFinite(rad_gy1)
-
-axiom H41 : (result2 = rad_gz)
-
-axiom H42 : (rad_gz1 = div(NearestTiesToEven, mul(NearestTiesToEven, c5b,
-  fliteral8), fliteral9))
-
-axiom H43 : tqtisFinite(rad_gz1)
-
-axiom H44 : (result3 = half_vx)
-
-axiom H45 : (half_vx1 = sub(NearestTiesToEven, mul(NearestTiesToEven, q1,
-  q3), mul(NearestTiesToEven, q0, q2)))
-
-axiom H46 : tqtisFinite(half_vx1)
-
-axiom H47 : (result4 = half_vy)
-
-axiom H48 : (half_vy1 = add(NearestTiesToEven, mul(NearestTiesToEven, q0,
-  q1), mul(NearestTiesToEven, q2, q3)))
-
-axiom H49 : tqtisFinite(half_vy1)
-
-axiom H50 : (result5 = half_vz)
-
 logic fliteral10 : t
 
 axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
   (tqtreal(fliteral10) = 0.500000000000000000000000))
 
-axiom H51 : (half_vz1 = add(NearestTiesToEven, sub(NearestTiesToEven,
-  mul(NearestTiesToEven, q0, q0), fliteral10), mul(NearestTiesToEven, q3,
-  q3)))
-
-axiom H52 : tqtisFinite(half_vz1)
-
-axiom H53 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(half_ex))
-
-axiom H54 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(half_ey))
-
-axiom H55 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(half_ez))
-
-axiom H56 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(q0_tmp))
-
-axiom H57 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(q1_tmp))
-
-axiom H58 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(q2_tmp))
-
-axiom H59 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(q3_tmp))
-
-axiom H60 : (result6 = qa)
-
-axiom H61 : (qa1 = q0)
-
-axiom H62 : in_range8(qa1)
-
-axiom H63 : (result7 = qb)
-
-axiom H64 : (qb1 = q1)
-
-axiom H65 : in_range8(qb1)
-
-axiom H66 : (result8 = qc)
-
-axiom H67 : (qc1 = q2)
-
-axiom H68 : in_range8(qc1)
-
-axiom H69 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o = inv_sqrt(add(NearestTiesToEven,
-  add(NearestTiesToEven, mul(NearestTiesToEven, c6b, c6b),
-  mul(NearestTiesToEven, c7b, c7b)), mul(NearestTiesToEven, c8b, c8b)))) and
-  (tqtisFinite(o) and (lt(fliteral3, o) and lt(o, fliteral7)))))
-
-axiom H70 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result9 = recip_norm))
-
-axiom H71 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (recip_norm2 = o))
-
-axiom H72 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o1 = mul(NearestTiesToEven, c6b, recip_norm2)) and
-  tqtisFinite(mul(NearestTiesToEven, c6b, recip_norm2))))
-
-axiom H73 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o2 = saturate(o1, neg(fliteral), fliteral)) and
-  (tqtisFinite(o2) and ((lt(o1, neg(fliteral)) -> eq(o2, neg(fliteral))) and
-  ((not lt(o1, neg(fliteral))) -> ((lt(fliteral, o1) -> eq(o2, fliteral)) and
-  ((not lt(fliteral, o1)) -> eq(o2, o1))))))))
-
-axiom H74 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o3 = o2) and tqtisFinite(o2)))
-
-axiom H75 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result10 = norm_ax))
-
-axiom H76 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (norm_ax2 = o3))
-
-axiom H77 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o4 = mul(NearestTiesToEven, c7b, recip_norm2)) and
-  tqtisFinite(mul(NearestTiesToEven, c7b, recip_norm2))))
-
-axiom H78 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o5 = saturate(o4, neg(fliteral), fliteral)) and
-  (tqtisFinite(o5) and ((lt(o4, neg(fliteral)) -> eq(o5, neg(fliteral))) and
-  ((not lt(o4, neg(fliteral))) -> ((lt(fliteral, o4) -> eq(o5, fliteral)) and
-  ((not lt(fliteral, o4)) -> eq(o5, o4))))))))
-
-axiom H79 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o6 = o5) and tqtisFinite(o5)))
-
-axiom H80 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result11 = norm_ay))
-
-axiom H81 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (norm_ay2 = o6))
-
-axiom H82 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o7 = mul(NearestTiesToEven, c8b, recip_norm2)) and
-  tqtisFinite(mul(NearestTiesToEven, c8b, recip_norm2))))
-
-axiom H83 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o8 = saturate(o7, neg(fliteral), fliteral)) and
-  (tqtisFinite(o8) and ((lt(o7, neg(fliteral)) -> eq(o8, neg(fliteral))) and
-  ((not lt(o7, neg(fliteral))) -> ((lt(fliteral, o7) -> eq(o8, fliteral)) and
-  ((not lt(fliteral, o7)) -> eq(o8, o7))))))))
-
-axiom H84 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o9 = o8) and tqtisFinite(o8)))
-
-axiom H85 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result12 = norm_az))
-
-axiom H86 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (norm_az2 = o9))
-
-axiom H87 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o10 = mul(NearestTiesToEven, norm_az2, half_vy1)) and
-  tqtisFinite(mul(NearestTiesToEven, norm_az2, half_vy1))))
-
-axiom H88 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o11 = mul(NearestTiesToEven, norm_ay2, half_vz1)) and
-  tqtisFinite(mul(NearestTiesToEven, norm_ay2, half_vz1))))
-
-axiom H89 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (o12 = sub(NearestTiesToEven, o11, o10)))
-
-axiom H90 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o13 = o12) and tqtisFinite(o12)))
-
-axiom H91 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result13 = half_ex))
-
-axiom H92 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (half_ex2 = o13))
-
-axiom H93 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o14 = mul(NearestTiesToEven, norm_ax2, half_vz1)) and
-  tqtisFinite(mul(NearestTiesToEven, norm_ax2, half_vz1))))
-
-axiom H94 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o15 = mul(NearestTiesToEven, norm_az2, half_vx1)) and
-  tqtisFinite(mul(NearestTiesToEven, norm_az2, half_vx1))))
-
-axiom H95 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (o16 = sub(NearestTiesToEven, o15, o14)))
-
-axiom H96 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o17 = o16) and tqtisFinite(o16)))
-
-axiom H97 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result14 = half_ey))
-
-axiom H98 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (half_ey2 = o17))
-
-axiom H99 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o18 = mul(NearestTiesToEven, norm_ay2, half_vx1)) and
-  tqtisFinite(mul(NearestTiesToEven, norm_ay2, half_vx1))))
-
-axiom H100 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o19 = mul(NearestTiesToEven, norm_ax2, half_vy1)) and
-  tqtisFinite(mul(NearestTiesToEven, norm_ax2, half_vy1))))
-
-axiom H101 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (o20 = sub(NearestTiesToEven, o19, o18)))
-
-axiom H102 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o21 = o20) and tqtisFinite(o20)))
-
-axiom H103 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result15 = half_ez))
-
-axiom H104 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (half_ez2 = o21))
-
-axiom H105 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o22 = mul(NearestTiesToEven,
-  two_ki, half_ex2)) and tqtisFinite(mul(NearestTiesToEven, two_ki,
-  half_ex2)))))
-
-axiom H106 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (o23 = mul(NearestTiesToEven,
-  o22, c9b))))
-
-axiom H107 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o24 = o23) and
-  tqtisFinite(o23))))
-
-axiom H108 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (o25 = add(NearestTiesToEven,
-  integral_fbx, o24))))
-
-axiom H109 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o26 = o25) and
-  tqtisFinite(o25))))
-
-axiom H110 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (result16 = integral_fbx)))
-
-axiom H111 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (integral_fbx2 = o26)))
-
-axiom H112 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o27 = mul(NearestTiesToEven,
-  two_ki, half_ey2)) and tqtisFinite(mul(NearestTiesToEven, two_ki,
-  half_ey2)))))
-
-axiom H113 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (o28 = mul(NearestTiesToEven,
-  o27, c9b))))
-
-axiom H114 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o29 = o28) and
-  tqtisFinite(o28))))
-
-axiom H115 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (o30 = add(NearestTiesToEven,
-  integral_fby, o29))))
-
-axiom H116 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o31 = o30) and
-  tqtisFinite(o30))))
-
-axiom H117 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (result17 = integral_fby)))
-
-axiom H118 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (integral_fby2 = o31)))
-
-axiom H119 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o32 = mul(NearestTiesToEven,
-  two_ki, half_ez2)) and tqtisFinite(mul(NearestTiesToEven, two_ki,
-  half_ez2)))))
-
-axiom H120 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (o33 = mul(NearestTiesToEven,
-  o32, c9b))))
-
-axiom H121 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o34 = o33) and
-  tqtisFinite(o33))))
-
-axiom H122 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (o35 = add(NearestTiesToEven,
-  integral_fbz, o34))))
-
-axiom H123 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o36 = o35) and
-  tqtisFinite(o35))))
-
-axiom H124 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (result18 = integral_fbz)))
-
-axiom H125 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (integral_fbz2 = o36)))
-
-axiom H126 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o37 = add(NearestTiesToEven,
-  rad_gx1, integral_fbx2)) and tqtisFinite(add(NearestTiesToEven, rad_gx1,
-  integral_fbx2)))))
-
-axiom H127 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (result19 = rad_gx1)))
-
-axiom H128 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (rad_gx2 = o37)))
-
-axiom H129 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o38 = add(NearestTiesToEven,
-  rad_gy1, integral_fby2)) and tqtisFinite(add(NearestTiesToEven, rad_gy1,
-  integral_fby2)))))
-
-axiom H130 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (result20 = rad_gy1)))
-
-axiom H131 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (rad_gy2 = o38)))
-
-axiom H132 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> ((o39 = add(NearestTiesToEven,
-  rad_gz1, integral_fbz2)) and tqtisFinite(add(NearestTiesToEven, rad_gz1,
-  integral_fbz2)))))
-
-axiom H133 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (result21 = rad_gz1)))
-
-axiom H134 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (lt(fliteral3, two_ki) -> (rad_gz2 = o39)))
-
-axiom H135 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (result22 = integral_fbx)))
-
-axiom H136 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (integral_fbx3 = fliteral3)))
-
-axiom H137 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (result23 = integral_fby)))
-
-axiom H138 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (integral_fby3 = fliteral3)))
-
-axiom H139 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (result24 = integral_fbz)))
-
-axiom H140 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (integral_fbz3 = fliteral3)))
-
-axiom H141 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) -> (rad_gz2 = rad_gz1)))
-
-axiom H142 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) -> (rad_gy2 = rad_gy1)))
-
-axiom H143 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) -> (rad_gx2 = rad_gx1)))
-
-axiom H144 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (integral_fbz2 = integral_fbz3)))
-
-axiom H145 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (integral_fby2 = integral_fby3)))
-
-axiom H146 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((not lt(fliteral3, two_ki)) ->
-  (integral_fbx2 = integral_fbx3)))
-
-axiom H147 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o40 = mul(NearestTiesToEven, two_kp, half_ex2)) and
-  tqtisFinite(mul(NearestTiesToEven, two_kp, half_ex2))))
-
-axiom H148 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (o41 = add(NearestTiesToEven, rad_gx2, o40)))
-
-axiom H149 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o42 = o41) and tqtisFinite(o41)))
-
-axiom H150 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result25 = rad_gx2))
-
-axiom H151 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (rad_gx3 = o42))
-
-axiom H152 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o43 = mul(NearestTiesToEven, two_kp, half_ey2)) and
-  tqtisFinite(mul(NearestTiesToEven, two_kp, half_ey2))))
-
-axiom H153 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (o44 = add(NearestTiesToEven, rad_gy2, o43)))
-
-axiom H154 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o45 = o44) and tqtisFinite(o44)))
-
-axiom H155 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result26 = rad_gy2))
-
-axiom H156 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (rad_gy3 = o45))
-
-axiom H157 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o46 = mul(NearestTiesToEven, two_kp, half_ez2)) and
-  tqtisFinite(mul(NearestTiesToEven, two_kp, half_ez2))))
-
-axiom H158 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (o47 = add(NearestTiesToEven, rad_gz2, o46)))
-
-axiom H159 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> ((o48 = o47) and tqtisFinite(o47)))
-
-axiom H160 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (result27 = rad_gz2))
-
-axiom H161 : ((not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3)))) -> (rad_gz3 = o48))
-
-axiom H162 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (half_ez2 = half_ez))
-
-axiom H163 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (half_ey2 = half_ey))
-
-axiom H164 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (half_ex2 = half_ex))
-
-axiom H165 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (rad_gz3 = rad_gz1))
-
-axiom H166 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (rad_gy3 = rad_gy1))
-
-axiom H167 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (rad_gx3 = rad_gx1))
-
-axiom H168 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (norm_az2 = norm_az))
-
-axiom H169 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (norm_ay2 = norm_ay))
-
-axiom H170 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (norm_ax2 = norm_ax))
-
-axiom H171 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (recip_norm2 = recip_norm))
-
-axiom H172 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (integral_fbz2 = integral_fbz))
-
-axiom H173 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (integral_fby2 = integral_fby))
-
-axiom H174 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (integral_fbx2 = integral_fbx))
-
-axiom H175 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (half_ez2 = half_ez1))
-
-axiom H176 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (half_ey2 = half_ey1))
-
-axiom H177 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (half_ex2 = half_ex1))
-
-axiom H178 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (rad_gz3 = rad_gz1))
-
-axiom H179 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (rad_gy3 = rad_gy1))
-
-axiom H180 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (rad_gx3 = rad_gx1))
-
-axiom H181 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (norm_az2 = norm_az1))
-
-axiom H182 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (norm_ay2 = norm_ay1))
-
-axiom H183 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (norm_ax2 = norm_ax1))
-
-axiom H184 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (recip_norm2 = recip_norm1))
-
-axiom H185 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (integral_fbz2 = integral_fbz1))
-
-axiom H186 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (integral_fby2 = integral_fby1))
-
-axiom H187 : ((eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))) -> (integral_fbx2 = integral_fbx1))
-
-axiom H188 : (result28 = rad_gx3)
-
-axiom H189 : (rad_gx4 = mul(NearestTiesToEven, rad_gx3,
-  mul(NearestTiesToEven, fliteral10, c9b)))
-
-axiom H190 : (result29 = rad_gy3)
-
-axiom H191 : (rad_gy4 = mul(NearestTiesToEven, rad_gy3,
-  mul(NearestTiesToEven, fliteral10, c9b)))
-
-axiom H192 : (result30 = rad_gz3)
-
-axiom H193 : (rad_gz4 = mul(NearestTiesToEven, rad_gz3,
-  mul(NearestTiesToEven, fliteral10, c9b)))
-
-axiom H194 : ((o53 = mul(NearestTiesToEven, q3, rad_gz4)) and
-  tqtisFinite(mul(NearestTiesToEven, q3, rad_gz4)))
-
-axiom H195 : ((o50 = mul(NearestTiesToEven, qc1, rad_gy4)) and
-  tqtisFinite(mul(NearestTiesToEven, qc1, rad_gy4)))
-
-axiom H196 : ((o49 = mul(NearestTiesToEven, qb1, rad_gx4)) and
-  tqtisFinite(mul(NearestTiesToEven, qb1, rad_gx4)))
-
-axiom H197 : (o51 = neg(o49))
-
-axiom H198 : (o52 = sub(NearestTiesToEven, o51, o50))
-
-axiom H199 : ((o54 = o52) and tqtisFinite(o52))
-
-axiom H200 : (o55 = sub(NearestTiesToEven, o54, o53))
-
-axiom H201 : ((o56 = o55) and tqtisFinite(o55))
-
-axiom H202 : (o57 = add(NearestTiesToEven, q0, o56))
-
-axiom H203 : ((o58 = o57) and tqtisFinite(o57))
-
-axiom H204 : (result31 = q0_tmp)
-
-axiom H205 : (q0_tmp1 = o58)
-
-axiom H206 : ((o62 = mul(NearestTiesToEven, q3, rad_gy4)) and
-  tqtisFinite(mul(NearestTiesToEven, q3, rad_gy4)))
-
-axiom H207 : ((o59 = mul(NearestTiesToEven, qc1, rad_gz4)) and
-  tqtisFinite(mul(NearestTiesToEven, qc1, rad_gz4)))
-
-axiom H208 : ((o60 = mul(NearestTiesToEven, qa1, rad_gx4)) and
-  tqtisFinite(mul(NearestTiesToEven, qa1, rad_gx4)))
-
-axiom H209 : (o61 = add(NearestTiesToEven, o60, o59))
-
-axiom H210 : ((o63 = o61) and tqtisFinite(o61))
-
-axiom H211 : (o64 = sub(NearestTiesToEven, o63, o62))
-
-axiom H212 : ((o65 = o64) and tqtisFinite(o64))
-
-axiom H213 : (o66 = add(NearestTiesToEven, q1, o65))
-
-axiom H214 : ((o67 = o66) and tqtisFinite(o66))
-
-axiom H215 : (result32 = q1_tmp)
-
-axiom H216 : (q1_tmp1 = o67)
-
-axiom H217 : ((o71 = mul(NearestTiesToEven, q3, rad_gx4)) and
-  tqtisFinite(mul(NearestTiesToEven, q3, rad_gx4)))
-
-axiom H218 : ((o68 = mul(NearestTiesToEven, qb1, rad_gz4)) and
-  tqtisFinite(mul(NearestTiesToEven, qb1, rad_gz4)))
-
-axiom H219 : ((o69 = mul(NearestTiesToEven, qa1, rad_gy4)) and
-  tqtisFinite(mul(NearestTiesToEven, qa1, rad_gy4)))
-
-axiom H220 : (o70 = sub(NearestTiesToEven, o69, o68))
-
-axiom H221 : ((o72 = o70) and tqtisFinite(o70))
-
-axiom H222 : (o73 = add(NearestTiesToEven, o72, o71))
-
-axiom H223 : ((o74 = o73) and tqtisFinite(o73))
-
-axiom H224 : (o75 = add(NearestTiesToEven, q2, o74))
-
-axiom H225 : ((o76 = o75) and tqtisFinite(o75))
-
-axiom H226 : (result33 = q2_tmp)
-
-axiom H227 : (q2_tmp1 = o76)
-
-axiom H228 : ((o80 = mul(NearestTiesToEven, qc1, rad_gx4)) and
-  tqtisFinite(mul(NearestTiesToEven, qc1, rad_gx4)))
-
-axiom H229 : ((o77 = mul(NearestTiesToEven, qb1, rad_gy4)) and
-  tqtisFinite(mul(NearestTiesToEven, qb1, rad_gy4)))
-
-axiom H230 : ((o78 = mul(NearestTiesToEven, qa1, rad_gz4)) and
-  tqtisFinite(mul(NearestTiesToEven, qa1, rad_gz4)))
-
-axiom H231 : (o79 = add(NearestTiesToEven, o78, o77))
-
-axiom H232 : ((o81 = o79) and tqtisFinite(o79))
-
-axiom H233 : (o82 = sub(NearestTiesToEven, o81, o80))
-
-axiom H234 : ((o83 = o82) and tqtisFinite(o82))
-
-axiom H235 : (o84 = add(NearestTiesToEven, q3, o83))
-
-axiom H236 : ((o85 = o84) and tqtisFinite(o84))
-
-axiom H237 : (result34 = q3_tmp)
-
-axiom H238 : (q3_tmp1 = o85)
-
-axiom H239 : ((o92 = mul(NearestTiesToEven, q3_tmp1, q3_tmp1)) and
-  tqtisFinite(mul(NearestTiesToEven, q3_tmp1, q3_tmp1)))
-
-axiom H240 : ((o89 = mul(NearestTiesToEven, q2_tmp1, q2_tmp1)) and
-  tqtisFinite(mul(NearestTiesToEven, q2_tmp1, q2_tmp1)))
-
-axiom H241 : ((o86 = mul(NearestTiesToEven, q1_tmp1, q1_tmp1)) and
-  tqtisFinite(mul(NearestTiesToEven, q1_tmp1, q1_tmp1)))
-
-axiom H242 : ((o87 = mul(NearestTiesToEven, q0_tmp1, q0_tmp1)) and
-  tqtisFinite(mul(NearestTiesToEven, q0_tmp1, q0_tmp1)))
-
-axiom H243 : (o88 = add(NearestTiesToEven, o87, o86))
-
-axiom H244 : ((o90 = o88) and tqtisFinite(o88))
-
-axiom H245 : (o91 = add(NearestTiesToEven, o90, o89))
-
-axiom H246 : ((o93 = o91) and tqtisFinite(o91))
-
-axiom H247 : (o94 = add(NearestTiesToEven, o93, o92))
-
-axiom H248 : ((o95 = o94) and tqtisFinite(o94))
-
  (* File "i-cexten.ads", line 59, characters 0-0 *)
-goal WP_parameter_def : le(fliteral6, o95)
+goal WP_parameter_def :
+  (forall q0:t. forall q1:t. forall q2:t. forall q3:t. forall two_kp:t.
+  forall two_ki:t. forall integral_fbx:t. forall integral_fby:t.
+  forall integral_fbz:t. forall beta:t. forall recip_norm:t.
+  forall norm_ax:t. forall norm_ay:t. forall norm_az:t. forall rad_gx:t.
+  forall rad_gy:t. forall rad_gz:t. forall half_vx:t. forall half_vy:t.
+  forall half_vz:t. forall half_ex:t. forall half_ey:t. forall half_ez:t.
+  forall q0_tmp:t. forall q1_tmp:t. forall q2_tmp:t. forall q3_tmp:t.
+  forall qa:t. forall qb:t. forall qc:t. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall o6:t.
+  forall o7:t. forall o8:t. forall o9:t. forall o10:t. forall o11:t.
+  forall o12:t. forall o13:t. forall o14:t. forall o15:t. forall o16:t.
+  forall o17:t. forall o18:t. forall o19:t. forall o20:t. forall o21:t.
+  forall o22:t. forall o23:t. forall o24:t. forall o25:t. forall o26:t.
+  forall o27:t. forall o28:t. forall o29:t. forall o30:t. forall o31:t.
+  forall o32:t. forall o33:t. forall o34:t. forall o35:t. forall o36:t.
+  forall o37:t. forall o38:t. forall o39:t. forall o40:t. forall o41:t.
+  forall o42:t. forall o43:t. forall o44:t. forall o45:t. forall o46:t.
+  forall o47:t. forall o48:t. forall o49:t. forall o50:t. forall o51:t.
+  forall o52:t. forall o53:t. forall o54:t. forall o55:t. forall o56:t.
+  forall o57:t. forall o58:t. forall o59:t. forall o60:t. forall o61:t.
+  forall o62:t. forall o63:t. forall o64:t. forall o65:t. forall o66:t.
+  forall o67:t. forall o68:t. forall o69:t. forall o70:t. forall o71:t.
+  forall o72:t. forall o73:t. forall o74:t. forall o75:t. forall o76:t.
+  forall o77:t. forall o78:t. forall o79:t. forall o80:t. forall o81:t.
+  forall o82:t. forall o83:t. forall o84:t. forall o85:t. forall o86:t.
+  forall o87:t. forall o88:t. forall o89:t. forall o90:t. forall o91:t.
+  forall o92:t. forall o93:t. forall o94:t. forall o95:t.
+  forall integral_fbx1:t. forall integral_fby1:t. forall integral_fbz1:t.
+  forall recip_norm1:t. forall norm_ax1:t. forall norm_ay1:t.
+  forall norm_az1:t. forall half_ex1:t. forall half_ey1:t. forall half_ez1:t.
+  forall result:t. forall rad_gx1:t. forall result1:t. forall rad_gy1:t.
+  forall result2:t. forall rad_gz1:t. forall result3:t. forall half_vx1:t.
+  forall result4:t. forall half_vy1:t. forall result5:t. forall half_vz1:t.
+  forall result6:t. forall qa1:t. forall result7:t. forall qb1:t.
+  forall result8:t. forall qc1:t. forall result9:t. forall recip_norm2:t.
+  forall result10:t. forall norm_ax2:t. forall result11:t. forall norm_ay2:t.
+  forall result12:t__ref. forall norm_az2:t. forall result13:t__ref.
+  forall half_ex2:t. forall result14:t__ref. forall half_ey2:t.
+  forall result15:t__ref. forall half_ez2:t. forall result16:t__ref.
+  forall integral_fbx2:t. forall result17:t__ref. forall integral_fby2:t.
+  forall result18:t__ref. forall integral_fbz2:t. forall result19:t__ref.
+  forall rad_gx2:t. forall result20:t__ref. forall rad_gy2:t.
+  forall result21:t__ref. forall rad_gz2:t. forall result22:t__ref.
+  forall integral_fbx3:t. forall result23:t__ref. forall integral_fby3:t.
+  forall result24:t__ref. forall integral_fbz3:t. forall result25:t__ref.
+  forall rad_gx3:t. forall result26:t__ref. forall rad_gy3:t.
+  forall result27:t__ref. forall rad_gz3:t. forall result28:t__ref.
+  forall rad_gx4:t. forall result29:t__ref. forall rad_gy4:t.
+  forall result30:t__ref. forall rad_gz4:t. forall result31:t__ref.
+  forall q0_tmp1:t. forall result32:t__ref. forall q1_tmp1:t.
+  forall result33:t__ref. forall q2_tmp1:t. forall result34:t__ref.
+  forall q3_tmp1:t. (in_range2(gx) -> (in_range2(gy) -> (in_range2(gz) ->
+  (in_range3(ax) -> (in_range3(ay) -> (in_range3(az) -> (in_range6(dt) ->
+  (in_range8(q0) -> (in_range8(q1) -> (in_range8(q2) -> (in_range8(q3) ->
+  (tqtisFinite(two_kp) -> (tqtisFinite(two_ki) ->
+  (tqtisFinite(integral_fbx) -> (tqtisFinite(integral_fby) ->
+  (tqtisFinite(integral_fbz) -> (in_range7(beta) -> (((gx = c3b) and
+  in_range2(c3b)) -> (((gy = c4b) and in_range2(c4b)) -> (((gz = c5b) and
+  in_range2(c5b)) -> (((ax = c6b) and in_range3(c6b)) -> (((ay = c7b) and
+  in_range3(c7b)) -> (((az = c8b) and in_range3(c8b)) -> (((dt = c9b) and
+  in_range6(c9b)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(recip_norm)) -> ((le(neg(fliteral2), fliteral2) ->
+  in_range3(norm_ax)) -> ((le(neg(fliteral2), fliteral2) ->
+  in_range3(norm_ay)) -> ((le(neg(fliteral2), fliteral2) ->
+  in_range3(norm_az)) -> (((result = rad_gx) and
+  (rad_gx1 = div(NearestTiesToEven, mul(NearestTiesToEven, c3b, fliteral8),
+  fliteral9))) -> (tqtisFinite(rad_gx1) -> (((result1 = rad_gy) and
+  (rad_gy1 = div(NearestTiesToEven, mul(NearestTiesToEven, c4b, fliteral8),
+  fliteral9))) -> (tqtisFinite(rad_gy1) -> (((result2 = rad_gz) and
+  (rad_gz1 = div(NearestTiesToEven, mul(NearestTiesToEven, c5b, fliteral8),
+  fliteral9))) -> (tqtisFinite(rad_gz1) -> (((result3 = half_vx) and
+  (half_vx1 = sub(NearestTiesToEven, mul(NearestTiesToEven, q1, q3),
+  mul(NearestTiesToEven, q0, q2)))) -> (tqtisFinite(half_vx1) ->
+  (((result4 = half_vy) and (half_vy1 = add(NearestTiesToEven,
+  mul(NearestTiesToEven, q0, q1), mul(NearestTiesToEven, q2, q3)))) ->
+  (tqtisFinite(half_vy1) -> (((result5 = half_vz) and
+  (half_vz1 = add(NearestTiesToEven, sub(NearestTiesToEven,
+  mul(NearestTiesToEven, q0, q0), fliteral10), mul(NearestTiesToEven, q3,
+  q3)))) -> (tqtisFinite(half_vz1) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(half_ex)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(half_ey)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(half_ez)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(q0_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(q1_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(q2_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(q3_tmp)) -> (((result6 = qa) and (qa1 = q0)) ->
+  (in_range8(qa1) -> (((result7 = qb) and (qb1 = q1)) -> (in_range8(qb1) ->
+  (((result8 = qc) and (qc1 = q2)) -> (in_range8(qc1) -> ((((not (eq(c6b,
+  fliteral3) and (eq(c7b, fliteral3) and eq(c8b, fliteral3)))) and
+  ((((o = inv_sqrt(add(NearestTiesToEven, add(NearestTiesToEven,
+  mul(NearestTiesToEven, c6b, c6b), mul(NearestTiesToEven, c7b, c7b)),
+  mul(NearestTiesToEven, c8b, c8b)))) and (tqtisFinite(o) and (lt(fliteral3,
+  o) and lt(o, fliteral7)))) and ((result9 = recip_norm) and
+  (recip_norm2 = o))) and ((((((o1 = mul(NearestTiesToEven, c6b,
+  recip_norm2)) and tqtisFinite(mul(NearestTiesToEven, c6b,
+  recip_norm2))) and ((o2 = saturate(o1, neg(fliteral), fliteral)) and
+  (tqtisFinite(o2) and ((lt(o1, neg(fliteral)) and eq(o2, neg(fliteral))) or
+  ((not lt(o1, neg(fliteral))) and ((lt(fliteral, o1) and eq(o2,
+  fliteral)) or ((not lt(fliteral, o1)) and eq(o2, o1)))))))) and
+  ((o3 = o2) and tqtisFinite(o2))) and ((result10 = norm_ax) and
+  (norm_ax2 = o3))) and ((((((o4 = mul(NearestTiesToEven, c7b,
+  recip_norm2)) and tqtisFinite(mul(NearestTiesToEven, c7b,
+  recip_norm2))) and ((o5 = saturate(o4, neg(fliteral), fliteral)) and
+  (tqtisFinite(o5) and ((lt(o4, neg(fliteral)) and eq(o5, neg(fliteral))) or
+  ((not lt(o4, neg(fliteral))) and ((lt(fliteral, o4) and eq(o5,
+  fliteral)) or ((not lt(fliteral, o4)) and eq(o5, o4)))))))) and
+  ((o6 = o5) and tqtisFinite(o5))) and ((result11 = norm_ay) and
+  (norm_ay2 = o6))) and ((((((o7 = mul(NearestTiesToEven, c8b,
+  recip_norm2)) and tqtisFinite(mul(NearestTiesToEven, c8b,
+  recip_norm2))) and ((o8 = saturate(o7, neg(fliteral), fliteral)) and
+  (tqtisFinite(o8) and ((lt(o7, neg(fliteral)) and eq(o8, neg(fliteral))) or
+  ((not lt(o7, neg(fliteral))) and ((lt(fliteral, o7) and eq(o8,
+  fliteral)) or ((not lt(fliteral, o7)) and eq(o8, o7)))))))) and
+  ((o9 = o8) and tqtisFinite(o8))) and ((result12 = { t__content = norm_az
+  }) and (norm_az2 = o9))) and ((((((o10 = mul(NearestTiesToEven, norm_az2,
+  half_vy1)) and tqtisFinite(mul(NearestTiesToEven, norm_az2, half_vy1))) and
+  (((o11 = mul(NearestTiesToEven, norm_ay2, half_vz1)) and
+  tqtisFinite(mul(NearestTiesToEven, norm_ay2, half_vz1))) and
+  (o12 = sub(NearestTiesToEven, o11, o10)))) and ((o13 = o12) and
+  tqtisFinite(o12))) and ((result13 = { t__content = half_ex }) and
+  (half_ex2 = o13))) and ((((((o14 = mul(NearestTiesToEven, norm_ax2,
+  half_vz1)) and tqtisFinite(mul(NearestTiesToEven, norm_ax2, half_vz1))) and
+  (((o15 = mul(NearestTiesToEven, norm_az2, half_vx1)) and
+  tqtisFinite(mul(NearestTiesToEven, norm_az2, half_vx1))) and
+  (o16 = sub(NearestTiesToEven, o15, o14)))) and ((o17 = o16) and
+  tqtisFinite(o16))) and ((result14 = { t__content = half_ey }) and
+  (half_ey2 = o17))) and ((((((o18 = mul(NearestTiesToEven, norm_ay2,
+  half_vx1)) and tqtisFinite(mul(NearestTiesToEven, norm_ay2, half_vx1))) and
+  (((o19 = mul(NearestTiesToEven, norm_ax2, half_vy1)) and
+  tqtisFinite(mul(NearestTiesToEven, norm_ax2, half_vy1))) and
+  (o20 = sub(NearestTiesToEven, o19, o18)))) and ((o21 = o20) and
+  tqtisFinite(o20))) and ((result15 = { t__content = half_ez }) and
+  (half_ez2 = o21))) and (((lt(fliteral3, two_ki) and
+  ((((((((o22 = mul(NearestTiesToEven, two_ki, half_ex2)) and
+  tqtisFinite(mul(NearestTiesToEven, two_ki, half_ex2))) and
+  (o23 = mul(NearestTiesToEven, o22, c9b))) and ((o24 = o23) and
+  tqtisFinite(o23))) and (o25 = add(NearestTiesToEven, integral_fbx,
+  o24))) and ((o26 = o25) and tqtisFinite(o25))) and ((result16 = {
+  t__content = integral_fbx }) and (integral_fbx2 = o26))) and
+  ((((((((o27 = mul(NearestTiesToEven, two_ki, half_ey2)) and
+  tqtisFinite(mul(NearestTiesToEven, two_ki, half_ey2))) and
+  (o28 = mul(NearestTiesToEven, o27, c9b))) and ((o29 = o28) and
+  tqtisFinite(o28))) and (o30 = add(NearestTiesToEven, integral_fby,
+  o29))) and ((o31 = o30) and tqtisFinite(o30))) and ((result17 = {
+  t__content = integral_fby }) and (integral_fby2 = o31))) and
+  ((((((((o32 = mul(NearestTiesToEven, two_ki, half_ez2)) and
+  tqtisFinite(mul(NearestTiesToEven, two_ki, half_ez2))) and
+  (o33 = mul(NearestTiesToEven, o32, c9b))) and ((o34 = o33) and
+  tqtisFinite(o33))) and (o35 = add(NearestTiesToEven, integral_fbz,
+  o34))) and ((o36 = o35) and tqtisFinite(o35))) and ((result18 = {
+  t__content = integral_fbz }) and (integral_fbz2 = o36))) and
+  ((((o37 = add(NearestTiesToEven, rad_gx1, integral_fbx2)) and
+  tqtisFinite(add(NearestTiesToEven, rad_gx1, integral_fbx2))) and
+  ((result19 = { t__content = rad_gx1 }) and (rad_gx2 = o37))) and
+  ((((o38 = add(NearestTiesToEven, rad_gy1, integral_fby2)) and
+  tqtisFinite(add(NearestTiesToEven, rad_gy1, integral_fby2))) and
+  ((result20 = { t__content = rad_gy1 }) and (rad_gy2 = o38))) and
+  (((o39 = add(NearestTiesToEven, rad_gz1, integral_fbz2)) and
+  tqtisFinite(add(NearestTiesToEven, rad_gz1, integral_fbz2))) and
+  ((result21 = { t__content = rad_gz1 }) and (rad_gz2 = o39))))))))) or
+  ((not lt(fliteral3, two_ki)) and ((((result22 = { t__content = integral_fbx
+  }) and (integral_fbx3 = fliteral3)) and (((result23 = { t__content =
+  integral_fby }) and (integral_fby3 = fliteral3)) and ((result24 = {
+  t__content = integral_fbz }) and (integral_fbz3 = fliteral3)))) and
+  ((rad_gz2 = rad_gz1) and ((rad_gy2 = rad_gy1) and ((rad_gx2 = rad_gx1) and
+  ((integral_fbz2 = integral_fbz3) and ((integral_fby2 = integral_fby3) and
+  (integral_fbx2 = integral_fbx3))))))))) and
+  ((((((o40 = mul(NearestTiesToEven, two_kp, half_ex2)) and
+  tqtisFinite(mul(NearestTiesToEven, two_kp, half_ex2))) and
+  (o41 = add(NearestTiesToEven, rad_gx2, o40))) and ((o42 = o41) and
+  tqtisFinite(o41))) and ((result25 = { t__content = rad_gx2 }) and
+  (rad_gx3 = o42))) and ((((((o43 = mul(NearestTiesToEven, two_kp,
+  half_ey2)) and tqtisFinite(mul(NearestTiesToEven, two_kp, half_ey2))) and
+  (o44 = add(NearestTiesToEven, rad_gy2, o43))) and ((o45 = o44) and
+  tqtisFinite(o44))) and ((result26 = { t__content = rad_gy2 }) and
+  (rad_gy3 = o45))) and (((((o46 = mul(NearestTiesToEven, two_kp,
+  half_ez2)) and tqtisFinite(mul(NearestTiesToEven, two_kp, half_ez2))) and
+  (o47 = add(NearestTiesToEven, rad_gz2, o46))) and ((o48 = o47) and
+  tqtisFinite(o47))) and ((result27 = { t__content = rad_gz2 }) and
+  (rad_gz3 = o48)))))))))))))) or ((eq(c6b, fliteral3) and (eq(c7b,
+  fliteral3) and eq(c8b, fliteral3))) and (((half_ez2 = half_ez) and
+  ((half_ey2 = half_ey) and ((half_ex2 = half_ex) and
+  ((rad_gz3 = rad_gz1) and ((rad_gy3 = rad_gy1) and ((rad_gx3 = rad_gx1) and
+  ((norm_az2 = norm_az) and ((norm_ay2 = norm_ay) and
+  ((norm_ax2 = norm_ax) and ((recip_norm2 = recip_norm) and
+  ((integral_fbz2 = integral_fbz) and ((integral_fby2 = integral_fby) and
+  (integral_fbx2 = integral_fbx))))))))))))) and ((half_ez2 = half_ez1) and
+  ((half_ey2 = half_ey1) and ((half_ex2 = half_ex1) and
+  ((rad_gz3 = rad_gz1) and ((rad_gy3 = rad_gy1) and ((rad_gx3 = rad_gx1) and
+  ((norm_az2 = norm_az1) and ((norm_ay2 = norm_ay1) and
+  ((norm_ax2 = norm_ax1) and ((recip_norm2 = recip_norm1) and
+  ((integral_fbz2 = integral_fbz1) and ((integral_fby2 = integral_fby1) and
+  (integral_fbx2 = integral_fbx1)))))))))))))))) -> (((result28 = {
+  t__content = rad_gx3 }) and (rad_gx4 = mul(NearestTiesToEven, rad_gx3,
+  mul(NearestTiesToEven, fliteral10, c9b)))) -> (((result29 = { t__content =
+  rad_gy3 }) and (rad_gy4 = mul(NearestTiesToEven, rad_gy3,
+  mul(NearestTiesToEven, fliteral10, c9b)))) -> (((result30 = { t__content =
+  rad_gz3 }) and (rad_gz4 = mul(NearestTiesToEven, rad_gz3,
+  mul(NearestTiesToEven, fliteral10, c9b)))) ->
+  ((((((((o53 = mul(NearestTiesToEven, q3, rad_gz4)) and
+  tqtisFinite(mul(NearestTiesToEven, q3, rad_gz4))) and
+  (((((o50 = mul(NearestTiesToEven, qc1, rad_gy4)) and
+  tqtisFinite(mul(NearestTiesToEven, qc1, rad_gy4))) and
+  ((((o49 = mul(NearestTiesToEven, qb1, rad_gx4)) and
+  tqtisFinite(mul(NearestTiesToEven, qb1, rad_gx4))) and
+  (o51 = neg(o49))) and (o52 = sub(NearestTiesToEven, o51, o50)))) and
+  ((o54 = o52) and tqtisFinite(o52))) and (o55 = sub(NearestTiesToEven, o54,
+  o53)))) and ((o56 = o55) and tqtisFinite(o55))) and
+  (o57 = add(NearestTiesToEven, q0, o56))) and ((o58 = o57) and
+  tqtisFinite(o57))) and ((result31 = { t__content = q0_tmp }) and
+  (q0_tmp1 = o58))) -> ((((((((o62 = mul(NearestTiesToEven, q3, rad_gy4)) and
+  tqtisFinite(mul(NearestTiesToEven, q3, rad_gy4))) and
+  (((((o59 = mul(NearestTiesToEven, qc1, rad_gz4)) and
+  tqtisFinite(mul(NearestTiesToEven, qc1, rad_gz4))) and
+  (((o60 = mul(NearestTiesToEven, qa1, rad_gx4)) and
+  tqtisFinite(mul(NearestTiesToEven, qa1, rad_gx4))) and
+  (o61 = add(NearestTiesToEven, o60, o59)))) and ((o63 = o61) and
+  tqtisFinite(o61))) and (o64 = sub(NearestTiesToEven, o63, o62)))) and
+  ((o65 = o64) and tqtisFinite(o64))) and (o66 = add(NearestTiesToEven, q1,
+  o65))) and ((o67 = o66) and tqtisFinite(o66))) and ((result32 = {
+  t__content = q1_tmp }) and (q1_tmp1 = o67))) ->
+  ((((((((o71 = mul(NearestTiesToEven, q3, rad_gx4)) and
+  tqtisFinite(mul(NearestTiesToEven, q3, rad_gx4))) and
+  (((((o68 = mul(NearestTiesToEven, qb1, rad_gz4)) and
+  tqtisFinite(mul(NearestTiesToEven, qb1, rad_gz4))) and
+  (((o69 = mul(NearestTiesToEven, qa1, rad_gy4)) and
+  tqtisFinite(mul(NearestTiesToEven, qa1, rad_gy4))) and
+  (o70 = sub(NearestTiesToEven, o69, o68)))) and ((o72 = o70) and
+  tqtisFinite(o70))) and (o73 = add(NearestTiesToEven, o72, o71)))) and
+  ((o74 = o73) and tqtisFinite(o73))) and (o75 = add(NearestTiesToEven, q2,
+  o74))) and ((o76 = o75) and tqtisFinite(o75))) and ((result33 = {
+  t__content = q2_tmp }) and (q2_tmp1 = o76))) ->
+  ((((((((o80 = mul(NearestTiesToEven, qc1, rad_gx4)) and
+  tqtisFinite(mul(NearestTiesToEven, qc1, rad_gx4))) and
+  (((((o77 = mul(NearestTiesToEven, qb1, rad_gy4)) and
+  tqtisFinite(mul(NearestTiesToEven, qb1, rad_gy4))) and
+  (((o78 = mul(NearestTiesToEven, qa1, rad_gz4)) and
+  tqtisFinite(mul(NearestTiesToEven, qa1, rad_gz4))) and
+  (o79 = add(NearestTiesToEven, o78, o77)))) and ((o81 = o79) and
+  tqtisFinite(o79))) and (o82 = sub(NearestTiesToEven, o81, o80)))) and
+  ((o83 = o82) and tqtisFinite(o82))) and (o84 = add(NearestTiesToEven, q3,
+  o83))) and ((o85 = o84) and tqtisFinite(o84))) and ((result34 = {
+  t__content = q3_tmp }) and (q3_tmp1 = o85))) ->
+  (((((o92 = mul(NearestTiesToEven, q3_tmp1, q3_tmp1)) and
+  tqtisFinite(mul(NearestTiesToEven, q3_tmp1, q3_tmp1))) and
+  (((((o89 = mul(NearestTiesToEven, q2_tmp1, q2_tmp1)) and
+  tqtisFinite(mul(NearestTiesToEven, q2_tmp1, q2_tmp1))) and
+  (((((o86 = mul(NearestTiesToEven, q1_tmp1, q1_tmp1)) and
+  tqtisFinite(mul(NearestTiesToEven, q1_tmp1, q1_tmp1))) and
+  (((o87 = mul(NearestTiesToEven, q0_tmp1, q0_tmp1)) and
+  tqtisFinite(mul(NearestTiesToEven, q0_tmp1, q0_tmp1))) and
+  (o88 = add(NearestTiesToEven, o87, o86)))) and ((o90 = o88) and
+  tqtisFinite(o88))) and (o91 = add(NearestTiesToEven, o90, o89)))) and
+  ((o93 = o91) and tqtisFinite(o91))) and (o94 = add(NearestTiesToEven, o93,
+  o92)))) and ((o95 = o94) and tqtisFinite(o94))) -> le(fliteral6,
+  o95))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

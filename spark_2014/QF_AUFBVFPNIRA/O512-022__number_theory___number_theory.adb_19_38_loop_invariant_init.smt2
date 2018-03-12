@@ -10,10 +10,6 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
@@ -21,29 +17,30 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range2
-                                     temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range2
+                                    temp___expr_39)))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range3
-                                     temp___expr_39)))
+(define-fun dynamic_invariant1 ((temp___expr_46 Int) (temp___is_init_42 Bool)
+  (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
+  (temp___do_typ_inv_45 Bool)) Bool (=>
+                                    (or (= temp___is_init_42 true)
+                                    (<= 1 2147483647)) (in_range3
+                                    temp___expr_46)))
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
 
-(define-fun dynamic_invariant2 ((temp___expr_185 Int)
-  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
-  (temp___do_toplevel_184 Bool)) Bool (=>
-                                      (or (= temp___is_init_182 true)
-                                      (<= 0 46)) (in_range4 temp___expr_185)))
+(define-fun dynamic_invariant2 ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 46)) (in_range4 temp___expr_208)))
 
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
                                                 (fp.isPositive x)))
@@ -100,12 +97,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(define-fun dynamic_invariant3 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant3 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-const result__ Int)
 
@@ -119,13 +116,13 @@
 
 (declare-const number_theory__fibonacci__result Int)
 
-(declare-const temp___194 Int)
+(declare-const temp___217 Int)
 
-(declare-const temp___193 Int)
+(declare-const temp___216 Int)
 
-(declare-const temp___192 Int)
+(declare-const temp___215 Int)
 
-(declare-const temp___191 Int)
+(declare-const temp___214 Int)
 
 (declare-const o Int)
 

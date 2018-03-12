@@ -1122,10 +1122,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1154,12 +1150,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range2 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range2 temp___expr_18)))
 
 (declare-sort float 0)
 
@@ -1185,12 +1181,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-sort character 0)
 
@@ -1211,11 +1207,11 @@
 (define-fun character__ref___projection ((a character__ref)) character
   (character__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_63 Int) (temp___is_init_60 Bool)
-  (temp___skip_constant_61 Bool)
-  (temp___do_toplevel_62 Bool)) Bool (=>
-                                     (or (= temp___is_init_60 true)
-                                     (<= 0 255)) (in_range3 temp___expr_63)))
+(define-fun dynamic_invariant2 ((temp___expr_74 Int) (temp___is_init_70 Bool)
+  (temp___skip_constant_71 Bool) (temp___do_toplevel_72 Bool)
+  (temp___do_typ_inv_73 Bool)) Bool (=>
+                                    (or (= temp___is_init_70 true)
+                                    (<= 0 255)) (in_range3 temp___expr_74)))
 
 (declare-sort field 0)
 
@@ -1234,12 +1230,12 @@
 (declare-datatypes () ((field__ref (mk_field__ref (field__content field)))))
 (define-fun field__ref___projection ((a field__ref)) field (field__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_466 Int)
-  (temp___is_init_463 Bool) (temp___skip_constant_464 Bool)
-  (temp___do_toplevel_465 Bool)) Bool (=>
-                                      (or (= temp___is_init_463 true)
-                                      (<= 0 255)) (in_range4
-                                      temp___expr_466)))
+(define-fun dynamic_invariant3 ((temp___expr_534 Int)
+  (temp___is_init_530 Bool) (temp___skip_constant_531 Bool)
+  (temp___do_toplevel_532 Bool)
+  (temp___do_typ_inv_533 Bool)) Bool (=>
+                                     (or (= temp___is_init_530 true)
+                                     (<= 0 255)) (in_range4 temp___expr_534)))
 
 (declare-sort number_base 0)
 
@@ -1260,11 +1256,12 @@
 (define-fun number_base__ref___projection ((a number_base__ref)) number_base
   (number_base__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_472 Int)
-  (temp___is_init_469 Bool) (temp___skip_constant_470 Bool)
-  (temp___do_toplevel_471 Bool)) Bool (=>
-                                      (or (= temp___is_init_469 true)
-                                      (<= 2 16)) (in_range5 temp___expr_472)))
+(define-fun dynamic_invariant4 ((temp___expr_541 Int)
+  (temp___is_init_537 Bool) (temp___skip_constant_538 Bool)
+  (temp___do_toplevel_539 Bool)
+  (temp___do_typ_inv_540 Bool)) Bool (=>
+                                     (or (= temp___is_init_537 true)
+                                     (<= 2 16)) (in_range5 temp___expr_541)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -1288,12 +1285,13 @@
 (declare-datatypes () ((num__ref (mk_num__ref (num__content num)))))
 (define-fun num__ref___projection ((a num__ref)) num (num__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_508 Int)
-  (temp___is_init_505 Bool) (temp___skip_constant_506 Bool)
-  (temp___do_toplevel_507 Bool)) Bool (=>
-                                      (or (= temp___is_init_505 true)
-                                      (<= (- 2147483648) 2147483647))
-                                      (in_range6 temp___expr_508)))
+(define-fun dynamic_invariant5 ((temp___expr_579 Int)
+  (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
+  (temp___do_toplevel_577 Bool)
+  (temp___do_typ_inv_578 Bool)) Bool (=>
+                                     (or (= temp___is_init_575 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range6 temp___expr_579)))
 
 (declare-fun sqrt2 (t) t)
 
@@ -1314,14 +1312,14 @@
 ;; sqrt__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (and (dynamic_invariant1 x true true true) (le fliteral2 x))
+  (! (=> (and (dynamic_invariant1 x true true true true) (le fliteral2 x))
      (let ((result (sqrt2 x)))
      (and
      (and (le fliteral2 result)
      (and (=> (eq x fliteral2) (eq result fliteral2))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant1
-     result true false true)))) :pattern ((sqrt2 x)) )))
+     result true false true true)))) :pattern ((sqrt2 x)) )))
 
 (declare-sort uppercase 0)
 
@@ -1342,12 +1340,12 @@
 (define-fun uppercase__ref___projection ((a uppercase__ref)) uppercase
   (uppercase__content a))
 
-(define-fun dynamic_invariant6 ((temp___expr_521 Int)
-  (temp___is_init_518 Bool) (temp___skip_constant_519 Bool)
-  (temp___do_toplevel_520 Bool)) Bool (=>
-                                      (or (= temp___is_init_518 true)
-                                      (<= 65 90)) (in_range7
-                                      temp___expr_521)))
+(define-fun dynamic_invariant6 ((temp___expr_594 Int)
+  (temp___is_init_590 Bool) (temp___skip_constant_591 Bool)
+  (temp___do_toplevel_592 Bool)
+  (temp___do_typ_inv_593 Bool)) Bool (=>
+                                     (or (= temp___is_init_590 true)
+                                     (<= 65 90)) (in_range7 temp___expr_594)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -1427,6 +1425,13 @@
 ;; tolerance__def_axiom
   (assert (= tolerance fliteral4))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 12345459747314453125.0 100000000000000000.0))))
+
 (declare-const default_width Int)
 
 (declare-const default_base Int)
@@ -1467,14 +1472,6 @@
 
 (declare-const letter Int)
 
-(declare-const count Int)
-
-(declare-const count1 int__ref)
-
-(declare-const count2 int__ref)
-
-(declare-const count3 int__ref)
-
 (declare-const o Int)
 
 (declare-const o1 Int)
@@ -1484,64 +1481,6 @@
 (declare-const o3 Int)
 
 (declare-const o4 Int)
-
-(declare-const o5 Int)
-
-(declare-const o6 t)
-
-(declare-const o7 t)
-
-(declare-const o8 t)
-
-(declare-const o9 t)
-
-(declare-const o10 t)
-
-(declare-const o11 t)
-
-(declare-const o12 t)
-
-(declare-const o13 Int)
-
-(declare-const o14 Int)
-
-(declare-const o15 Int)
-
-(declare-const temp___525 Int)
-
-(declare-const temp___524 Int)
-
-(declare-const o16 Int)
-
-(declare-const o17 t)
-
-(declare-const o18 t)
-
-(declare-const o19 t)
-
-(declare-const o20 t)
-
-(declare-const temp___526 t)
-
-(declare-const o21 t)
-
-(declare-const o22 t)
-
-(declare-const o23 t)
-
-(declare-const o24 t)
-
-(declare-const o25 t)
-
-(declare-const o26 t)
-
-(declare-const o27 t)
-
-(declare-const o28 t)
-
-(declare-const o29 Bool)
-
-(declare-const o30 Int)
 
 (declare-const g1 Int)
 
@@ -1681,165 +1620,11 @@
 
 (declare-const c7 Int)
 
-(declare-const result34 int__ref)
+(define-fun h6 () int__ref (mk_int__ref h))
 
-(declare-const c8 Int)
+(define-fun g5 () int__ref (mk_int__ref g))
 
-(declare-const result35 t__ref)
-
-(declare-const y1 t)
-
-(declare-const result36 t__ref)
-
-(declare-const y2 t)
-
-(declare-const result37 t__ref)
-
-(declare-const y3 t)
-
-(declare-const result38 Bool)
-
-(declare-const result39 Bool)
-
-(declare-const result40 Bool)
-
-(declare-const result41 Bool)
-
-(declare-const result42 Bool)
-
-(declare-const result43 int__ref)
-
-(declare-const value1 Int)
-
-(declare-const result44 int__ref)
-
-(declare-const sum1 Int)
-
-(declare-const value2 Int)
-
-(declare-const sum2 Int)
-
-(declare-const ada__integer_text_io__get__2__item Int)
-
-(declare-const result45 int__ref)
-
-(declare-const value3 Int)
-
-(declare-const sum3 int__ref)
-
-(declare-const sum4 Int)
-
-(declare-const value4 int__ref)
-
-(declare-const sum5 int__ref)
-
-(declare-const value5 Int)
-
-(declare-const sum6 Int)
-
-(declare-const value6 int__ref)
-
-(declare-const sum7 int__ref)
-
-(declare-const value7 Int)
-
-(declare-const sum8 Int)
-
-(declare-const result46 t__ref)
-
-(declare-const approx1 t)
-
-(declare-const result47 Bool)
-
-(declare-const approx2 t)
-
-(declare-const result48 t__ref)
-
-(declare-const approx3 t)
-
-(declare-const result49 Bool)
-
-(declare-const approx4 t__ref)
-
-(declare-const approx5 t)
-
-(declare-const approx6 t__ref)
-
-(declare-const approx7 t)
-
-(declare-const result50 int__ref)
-
-(declare-const count4 Int)
-
-(declare-const result51 int__ref)
-
-(declare-const count5 Int)
-
-(declare-const result52 int__ref)
-
-(declare-const count6 Int)
-
-(declare-const result53 int__ref)
-
-(declare-const count7 Int)
-
-(declare-const result54 int__ref)
-
-(declare-const count8 Int)
-
-(declare-const result55 int__ref)
-
-(declare-const count9 Int)
-
-(declare-const result56 int__ref)
-
-(declare-const count10 Int)
-
-(declare-const result57 int__ref)
-
-(declare-const count11 Int)
-
-(declare-const result58 int__ref)
-
-(declare-const a3 Int)
-
-(declare-const result59 int__ref)
-
-(declare-const b3 Int)
-
-(declare-const result60 int__ref)
-
-(declare-const count12 Int)
-
-(declare-const count13 Int)
-
-(declare-const count14 int__ref)
-
-(declare-const count15 Int)
-
-(declare-const count16 int__ref)
-
-(declare-const count17 Int)
-
-(declare-const result61 int__ref)
-
-(declare-const count18 Int)
-
-(declare-const count19 Int)
-
-(declare-const count20 int__ref)
-
-(declare-const count21 Int)
-
-(declare-const count22 int__ref)
-
-(declare-const count23 Int)
-
-(declare-const temperature1 Int)
-
-(declare-const valve_setting1 Int)
-
-(declare-const temperature2 Int)
+(define-fun f6 () int__ref (mk_int__ref f))
 
 ;; H
   (assert (in_range4 default_width))
@@ -1946,13 +1731,6 @@
 ;; H
   (assert (= result7 (mk_t__ref x)))
 
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 12345459747314453125.0 100000000000000000.0))))
-
 ;; H
   (assert (= x1 fliteral5))
 
@@ -1993,7 +1771,7 @@
   (assert (=> (< b2 a2) (= e2 1)))
 
 ;; H
-  (assert (=> (< b2 a2) (= result12 (mk_int__ref f))))
+  (assert (=> (< b2 a2) (= result12 f6)))
 
 ;; H
   (assert (=> (< b2 a2) (= f1 a2)))
@@ -2005,7 +1783,7 @@
   (assert (=> (not (< b2 a2)) (= e3 2)))
 
 ;; H
-  (assert (=> (not (< b2 a2)) (= result14 (mk_int__ref f))))
+  (assert (=> (not (< b2 a2)) (= result14 f6)))
 
 ;; H
   (assert (=> (not (< b2 a2)) (= f2 b2)))
@@ -2042,7 +1820,7 @@
   (assert (=> (not (= a2 b2)) (= f3 f4)))
 
 ;; H
-  (assert (=> (and (< b2 a2) (< c1 a2)) (= result18 (mk_int__ref g))))
+  (assert (=> (and (< b2 a2) (< c1 a2)) (= result18 g5)))
 
 ;; H
   (assert (=> (and (< b2 a2) (< c1 a2)) (= g2 6)))
@@ -2050,7 +1828,7 @@
 ;; H
   (assert
   (=> (not (and (< b2 a2) (< c1 a2)))
-  (=> (and (< a2 b2) (< c1 b2)) (= result19 (mk_int__ref g)))))
+  (=> (and (< a2 b2) (< c1 b2)) (= result19 g5))))
 
 ;; H
   (assert
@@ -2061,7 +1839,7 @@
   (assert
   (=> (not (and (< b2 a2) (< c1 a2)))
   (=> (not (and (< a2 b2) (< c1 b2)))
-  (=> (and (< a2 c1) (< b2 c1)) (= result20 (mk_int__ref g))))))
+  (=> (and (< a2 c1) (< b2 c1)) (= result20 g5)))))
 
 ;; H
   (assert
@@ -2093,10 +1871,10 @@
   (assert (= result21 (mk_bool__ref success)))
 
 ;; H
-  (assert (= success1 (of_int1 1)))
+  (assert (= success1 (distinct 1 0)))
 
 ;; H
-  (assert (=> (and (<= 97 ch1) (<= ch1 122)) (= result22 (mk_int__ref h))))
+  (assert (=> (and (<= 97 ch1) (<= ch1 122)) (= result22 h6)))
 
 ;; H
   (assert (=> (and (<= 97 ch1) (<= ch1 122)) (= h1 1)))
@@ -2107,7 +1885,7 @@
 ;; H
   (assert
   (=> (not (and (<= 97 ch1) (<= ch1 122)))
-  (=> (and (<= 65 ch1) (<= ch1 90)) (= result23 (mk_int__ref h)))))
+  (=> (and (<= 65 ch1) (<= ch1 90)) (= result23 h6))))
 
 ;; H
   (assert
@@ -2123,7 +1901,7 @@
   (assert
   (=> (not (and (<= 97 ch1) (<= ch1 122)))
   (=> (not (and (<= 65 ch1) (<= ch1 90)))
-  (=> (and (<= 48 ch1) (<= ch1 57)) (= result24 (mk_int__ref h))))))
+  (=> (and (<= 48 ch1) (<= ch1 57)) (= result24 h6)))))
 
 ;; H
   (assert
@@ -2142,8 +1920,7 @@
   (=> (not (and (<= 97 ch1) (<= ch1 122)))
   (=> (not (and (<= 65 ch1) (<= ch1 90)))
   (=> (not (and (<= 48 ch1) (<= ch1 57)))
-  (=> (=> (not (= ch1 46)) (=> (not (= ch1 33)) (= ch1 63)))
-  (= result25 (mk_int__ref h)))))))
+  (=> (=> (not (= ch1 46)) (=> (not (= ch1 33)) (= ch1 63))) (= result25 h6))))))
 
 ;; H
   (assert
@@ -2166,7 +1943,7 @@
   (=> (not (and (<= 65 ch1) (<= ch1 90)))
   (=> (not (and (<= 48 ch1) (<= ch1 57)))
   (=> (not (=> (not (= ch1 46)) (=> (not (= ch1 33)) (= ch1 63))))
-  (= result26 (mk_int__ref h)))))))
+  (= result26 h6))))))
 
 ;; H
   (assert
@@ -2189,7 +1966,7 @@
   (=> (not (and (<= 65 ch1) (<= ch1 90)))
   (=> (not (and (<= 48 ch1) (<= ch1 57)))
   (=> (not (=> (not (= ch1 46)) (=> (not (= ch1 33)) (= ch1 63))))
-  (= success2 (of_int1 0)))))))
+  (= success2 (distinct 0 0)))))))
 
 ;; H
   (assert

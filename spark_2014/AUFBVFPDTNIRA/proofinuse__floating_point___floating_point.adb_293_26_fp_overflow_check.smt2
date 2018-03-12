@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort squarable_float 0)
 
@@ -148,14 +149,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_217 Float32)
-  (temp___is_init_214 Bool) (temp___skip_constant_215 Bool)
-  (temp___do_toplevel_216 Bool)) Bool (=>
-                                      (or (= temp___is_init_214 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10111110 #b11111111111111111111111)) (fp #b0 #b10111110 #b11111111111111111111111)))
-                                      (in_range temp___expr_217)))
-
-(declare-const res Bool)
+(define-fun dynamic_invariant1 ((temp___expr_253 Float32)
+  (temp___is_init_249 Bool) (temp___skip_constant_250 Bool)
+  (temp___do_toplevel_251 Bool)
+  (temp___do_typ_inv_252 Bool)) Bool (=>
+                                     (or (= temp___is_init_249 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10111110 #b11111111111111111111111)) (fp #b0 #b10111110 #b11111111111111111111111)))
+                                     (in_range temp___expr_253)))
 
 (declare-const o Float32)
 
@@ -170,14 +170,6 @@
 (declare-const o5 Float32)
 
 (declare-const o6 Float32)
-
-(declare-const o7 Float32)
-
-(declare-const o8 Bool)
-
-(declare-const result Bool)
-
-(declare-const res1 Bool)
 
 ;; H
   (assert (fp.isFinite32 a))

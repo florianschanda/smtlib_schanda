@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1226,31 +1226,7 @@ axiom num__def_axiom : (num = of_int(NearestTiesToEven, numerator))
 
 axiom den__def_axiom : (den = of_int(NearestTiesToEven, denominator))
 
-logic basic_contracts__average__result : t
-
-logic basic_contracts__average__num__assume : t
-
-logic basic_contracts__average__den__assume : t
-
-logic o : t
-
-logic result : t
-
-logic basic_contracts__average__result1 : t
-
-logic basic_contracts__average__result2 : t
-
-logic basic_contracts__average__result3 : t
-
-logic basic_contracts__average__result4 : t
-
-logic basic_contracts__average__result5 : t
-
-axiom H : in_range2(numerator)
-
-axiom H1 : in_range2(denominator)
-
-axiom H2 : ((0 <= numerator) and (0 <  denominator))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range4(of_int(NearestTiesToEven, numerator))
+goal WP_parameter_def : (in_range2(numerator) -> (in_range2(denominator) ->
+  (((0 <= numerator) and (0 <  denominator)) ->
+  in_range4(of_int(NearestTiesToEven, numerator)))))

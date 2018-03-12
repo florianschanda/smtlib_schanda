@@ -1013,16 +1013,10 @@ axiom r3__def_axiom :
   (forall x1:t [r3(x1)]. (in_range3(x1) -> (r3(x1) = roundToIntegral(RTN,
   x1))))
 
-logic o : t
-
-logic o1 : t
-
-axiom H : in_range1(x)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 360.0))
 
  (* File "normalize.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral5))
+goal WP_parameter_def : (in_range1(x) -> (not is_zero(fliteral5)))

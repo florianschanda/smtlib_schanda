@@ -1027,33 +1027,8 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
 
 axiom den__def_axiom : (den = fliteral1)
 
-logic basic_contracts__average__result : t
-
-logic o : t
-
-logic result : t
-
-logic basic_contracts__average__result1 : t
-
-logic basic_contracts__average__result2 : t
-
-logic basic_contracts__average__result3 : t
-
-logic basic_contracts__average__result4 : t
-
-logic basic_contracts__average__result5 : t
-
-axiom H : in_range1(numerator)
-
-axiom H1 : in_range2(denominator)
-
-axiom H2 : (of_int(RNE, numerator) = num)
-
-axiom H3 : tqtisFinite(num)
-
-axiom H4 : tqtisFinite(den)
-
-axiom H5 : lt(fliteral, fliteral1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral1))
+goal WP_parameter_def : (in_range1(numerator) -> (in_range2(denominator) ->
+  ((of_int(RNE, numerator) = num) -> (tqtisFinite(num) ->
+  (tqtisFinite(den) -> (lt(fliteral, fliteral1) ->
+  (not is_zero(fliteral1))))))))

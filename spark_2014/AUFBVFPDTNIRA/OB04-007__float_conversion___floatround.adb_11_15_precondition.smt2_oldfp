@@ -1076,12 +1076,12 @@
 (declare-datatypes () ((t1__ref (mk_t1__ref (t1__content t1)))))
 (define-fun t1__ref___projection ((a t1__ref)) t1 (t1__content a))
 
-(define-fun dynamic_invariant ((temp___expr_171 t) (temp___is_init_168 Bool)
-  (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range1
-                                      temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 t) (temp___is_init_196 Bool)
+  (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range1
+                                     temp___expr_200)))
 
 (declare-sort t2 0)
 
@@ -1104,22 +1104,21 @@
 (declare-datatypes () ((t2__ref (mk_t2__ref (t2__content t2)))))
 (define-fun t2__ref___projection ((a t2__ref)) t2 (t2__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_177 t) (temp___is_init_174 Bool)
-  (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool (and
-                                      (=>
-                                      (or (= temp___is_init_174 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range2
-                                      temp___expr_177))
-                                      (=> (= temp___do_toplevel_176 true)
-                                      (=> (= temp___is_init_174 true)
-                                      (and (le (neg fliteral)
-                                      temp___expr_177) (le temp___expr_177
-                                      fliteral))))))
+(define-fun dynamic_invariant1 ((temp___expr_207 t) (temp___is_init_203 Bool)
+  (temp___skip_constant_204 Bool) (temp___do_toplevel_205 Bool)
+  (temp___do_typ_inv_206 Bool)) Bool (and
+                                     (=>
+                                     (or (= temp___is_init_203 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range2
+                                     temp___expr_207))
+                                     (=> (= temp___do_toplevel_205 true)
+                                     (=> (= temp___is_init_203 true)
+                                     (and (le (neg fliteral) temp___expr_207)
+                                     (le temp___expr_207 fliteral))))))
 
-(define-fun dynamic_predicate ((temp___181 t)) Bool (and (le (neg fliteral)
-                                                    temp___181) (le
-                                                    temp___181 fliteral)))
+(define-fun dynamic_predicate ((temp___211 t)) Bool (and (le (neg fliteral)
+                                                    temp___211) (le
+                                                    temp___211 fliteral)))
 
 (declare-fun convert (t) t)
 
@@ -1129,30 +1128,20 @@
   (assert
   (forall ((x t))
   (! (=>
-     (and (dynamic_invariant x true true true)
+     (and (dynamic_invariant x true true true true)
      (and (in_range2 x) (and (le (neg fliteral) x) (le x fliteral))))
-     (dynamic_invariant1 (convert x) true false true)) :pattern ((convert x)) )))
+     (dynamic_invariant1 (convert x) true false true true)) :pattern (
+  (convert x)) )))
 
 ;; convert__def_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true) (= (convert x) x)) :pattern (
+  (! (=> (dynamic_invariant x true true true true) (= (convert x) x)) :pattern (
   (convert x)) )))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const x1 t)
-
-(declare-const o t)
-
-(declare-const result t)
-
-(declare-const x11 t)
-
-;; H
-  (assert (= result x1))
 
 (declare-const fliteral2 t)
 
@@ -1160,6 +1149,15 @@
   (assert
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
+
+(declare-const x1 t)
+
+(declare-const result t)
+
+(declare-const x11 t)
+
+;; H
+  (assert (= result x1))
 
 ;; H
   (assert (= x11 fliteral2))

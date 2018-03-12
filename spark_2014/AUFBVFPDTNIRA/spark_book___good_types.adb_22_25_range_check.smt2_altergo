@@ -1094,77 +1094,29 @@ logic c3b : t
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
-logic default_fore : int
-
-logic default_aft : int
-
-logic default_exp : int
-
-logic default_fore1 : int
-
-logic default_aft1 : int
-
-logic default_exp1 : int
-
-logic room_length : t
-
-logic wall_thickness : t
-
-logic total : t
-
-logic o : t
-
-logic good_types__feet_io__get__2__item : t
-
-logic result : t
-
-logic room_length1 : t
-
-logic good_types__inch_io__get__2__item : t
-
-logic result1 : t
-
-logic wall_thickness1 : t
-
-axiom H : in_range1(default_fore)
-
-axiom H1 : in_range1(default_aft)
-
-axiom H2 : in_range1(default_exp)
-
-axiom H3 : in_range1(default_fore1)
-
-axiom H4 : in_range1(default_aft1)
-
-axiom H5 : in_range1(default_exp1)
-
-axiom H6 : (le(fliteral1, fliteral2) -> in_range2(room_length))
-
-axiom H7 : (le(fliteral1, fliteral3) -> in_range3(wall_thickness))
-
-axiom H8 : (le(fliteral1, fliteral2) -> in_range2(total))
-
-axiom H9 : in_range4(good_types__feet_io__get__2__item)
-
-axiom H10 : (result = room_length)
-
-axiom H11 : (room_length1 = good_types__feet_io__get__2__item)
-
-axiom H12 : in_range5(good_types__inch_io__get__2__item)
-
-axiom H13 : (result1 = wall_thickness)
-
-axiom H14 : (wall_thickness1 = good_types__inch_io__get__2__item)
-
-axiom H15 : (wall_thickness1 = c3b)
-
-axiom H16 : in_range3(c3b)
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 2.0))
 
  (* File "a-tiflio.ads", line 80, characters 0-0 *)
-goal WP_parameter_def : in_range2(add(RNE, room_length1, mul(RNE, fliteral4,
-  div(RNE, c3b, fliteral3))))
+goal WP_parameter_def :
+  (forall default_fore:int. forall default_aft:int. forall default_exp:int.
+  forall default_fore1:int. forall default_aft1:int. forall default_exp1:int.
+  forall room_length:t. forall wall_thickness:t. forall total:t.
+  forall good_types__feet_io__get__2__item:t. forall result:t.
+  forall room_length1:t. forall good_types__inch_io__get__2__item:t.
+  forall result1:t. forall wall_thickness1:t. (in_range1(default_fore) ->
+  (in_range1(default_aft) -> (in_range1(default_exp) ->
+  (in_range1(default_fore1) -> (in_range1(default_aft1) ->
+  (in_range1(default_exp1) -> ((le(fliteral1, fliteral2) ->
+  in_range2(room_length)) -> ((le(fliteral1, fliteral3) ->
+  in_range3(wall_thickness)) -> ((le(fliteral1, fliteral2) ->
+  in_range2(total)) -> ((in_range4(good_types__feet_io__get__2__item) and
+  ((result = room_length) and
+  (room_length1 = good_types__feet_io__get__2__item))) ->
+  ((in_range5(good_types__inch_io__get__2__item) and
+  ((result1 = wall_thickness) and
+  (wall_thickness1 = good_types__inch_io__get__2__item))) ->
+  (((wall_thickness1 = c3b) and in_range3(c3b)) -> in_range2(add(RNE,
+  room_length1, mul(RNE, fliteral4, div(RNE, c3b, fliteral3)))))))))))))))))

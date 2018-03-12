@@ -105,12 +105,13 @@
 (declare-datatypes () ((angle__ref (mk_angle__ref (angle__content angle)))))
 (define-fun angle__ref___projection ((a angle__ref)) angle (angle__content a))
 
-(define-fun dynamic_invariant ((temp___expr_135 Float32)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000111 #b01101000000000000000000)))
-                                      (in_range temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Float32)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000111 #b01101000000000000000000)))
+                                     (in_range temp___expr_158)))
 
 (declare-const a Float32)
 
@@ -123,8 +124,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const c Float32)
-
-(declare-const o Float32)
 
 ;; H
   (assert (in_range a))

@@ -930,28 +930,11 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : bool
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : bool
-
-logic result : bool
-
-logic res1 : bool
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 5800.0))
 
-axiom H2 : lt(abs1(a), mul(RNE, fliteral1, abs1(b)))
-
  (* File "floating_point.adb", line 245, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(div(RNE, a, b))
+goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) -> (lt(abs1(a),
+  mul(RNE, fliteral1, abs1(b))) -> tqtisFinite(div(RNE, a, b)))))

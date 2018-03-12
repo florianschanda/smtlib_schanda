@@ -212,19 +212,19 @@
 
 (declare-fun has_valid_order__function_guard (Bool us_rep) Bool)
 
-(define-fun default_initial_assumption ((temp___expr_136 us_rep)
-  (temp___skip_top_level_137 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_159 us_rep)
+  (temp___skip_top_level_160 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__interval__interval__low
                                             (us_split_fields1
-                                            temp___expr_136))) (fp #b0 #b00000000 #b00000000000000000000000))
+                                            temp___expr_159))) (fp #b0 #b00000000 #b00000000000000000000000))
                                          (= (to_rep
                                             (rec__interval__interval__high
                                             (us_split_fields1
-                                            temp___expr_136))) (fp #b0 #b00000000 #b00000000000000000000000))))
+                                            temp___expr_159))) (fp #b0 #b00000000 #b00000000000000000000000))))
 
-(define-fun type_invariant ((temp___138 us_rep)) Bool (= (has_valid_order
-                                                         temp___138) true))
+(define-fun type_invariant ((temp___161 us_rep)) Bool (= (has_valid_order
+                                                         temp___161) true))
 
 ;; has_valid_order__post_axiom
   (assert true)
@@ -237,26 +237,27 @@
      (to_rep (rec__interval__interval__high (us_split_fields1 int__))))) :pattern (
   (has_valid_order int__)) )))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
-(declare-const temp___140 float)
+(declare-const temp___163 float)
 
-(declare-const temp___1401 float)
+(declare-const temp___1631 float)
 
 ;; H
   (assert
-  (and (= (to_rep temp___140) (fp #b0 #b00000000 #b00000000000000000000000))
-  (= (to_rep temp___1401) (fp #b0 #b00000000 #b00000000000000000000000))))
+  (and (= (to_rep temp___163) (fp #b0 #b00000000 #b00000000000000000000000))
+  (= (to_rep temp___1631) (fp #b0 #b00000000 #b00000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "interval.ads", line 17, characters 0-0
   (not
-  (= (has_valid_order (mk___rep (mk___split_fields temp___140 temp___1401))) true)))
+  (= (has_valid_order (mk___rep (mk___split_fields temp___163 temp___1631))) true)))
 (check-sat)
 (exit)

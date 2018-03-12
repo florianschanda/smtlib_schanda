@@ -48,22 +48,19 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
-(define-fun dynamic_invariant ((temp___expr_171 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (<= 0 25000)) (in_range2
-                                      temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 25000)) (in_range2
+                                     temp___expr_200)))
 
 (declare-const n Int)
 

@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -131,12 +127,13 @@
 (define-fun float64__ref___projection ((a float64__ref)) float64 (float64__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_135 Float64)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Float64)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_158)))
 
 (declare-sort tframeB 0)
 
@@ -174,12 +171,13 @@
 (declare-datatypes () ((frame__ref (mk_frame__ref (frame__content frame)))))
 (define-fun frame__ref___projection ((a frame__ref)) frame (frame__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_141 Int)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (<= 0 25000)) (in_range2
-                                      temp___expr_141)))
+(define-fun dynamic_invariant1 ((temp___expr_165 Int)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (<= 0 25000)) (in_range2
+                                     temp___expr_165)))
 
 (declare-sort ratio_t 0)
 
@@ -203,12 +201,13 @@
 (define-fun ratio_t__ref___projection ((a ratio_t__ref)) ratio_t (ratio_t__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_147 Float64)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-                                      (in_range3 temp___expr_147)))
+(define-fun dynamic_invariant2 ((temp___expr_172 Float64)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
+                                     (in_range3 temp___expr_172)))
 
 (declare-fun low_bound (Int) Float64)
 
@@ -217,13 +216,13 @@
 ;; low_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
-     (low_bound n) true false true)) :pattern ((low_bound n)) )))
+  (! (=> (dynamic_invariant1 n true true true true) (dynamic_invariant
+     (low_bound n) true false true true)) :pattern ((low_bound n)) )))
 
 ;; low_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true)
+  (! (=> (dynamic_invariant1 n true true true true)
      (= (low_bound n) (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))) :pattern (
   (low_bound n)) )))
 
@@ -234,13 +233,13 @@
 ;; high_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
-     (high_bound n) true false true)) :pattern ((high_bound n)) )))
+  (! (=> (dynamic_invariant1 n true true true true) (dynamic_invariant
+     (high_bound n) true false true true)) :pattern ((high_bound n)) )))
 
 ;; high_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true)
+  (! (=> (dynamic_invariant1 n true true true true)
      (= (high_bound n) (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))) :pattern (
   (high_bound n)) )))
 
@@ -329,121 +328,13 @@
 
 (declare-const o2 Float64)
 
-(declare-const o3 Float64)
+(declare-const o3 Int)
 
 (declare-const o4 Float64)
-
-(declare-const o5 Float64)
-
-(declare-const o6 Float64)
-
-(declare-const o7 Float64)
-
-(declare-const o8 Float64)
-
-(declare-const o9 Int)
-
-(declare-const o10 Int)
-
-(declare-const o11 Int)
-
-(declare-const o12 Int)
-
-(declare-const o13 Int)
-
-(declare-const o14 Int)
-
-(declare-const o15 Int)
-
-(declare-const o16 Int)
-
-(declare-const o17 Float64)
-
-(declare-const o18 Int)
-
-(declare-const o19 Int)
-
-(declare-const o20 Int)
-
-(declare-const o21 Float64)
-
-(declare-const o22 Float64)
-
-(declare-const o23 Int)
-
-(declare-const o24 Float64)
-
-(declare-const o25 Float64)
-
-(declare-const o26 Float64)
-
-(declare-const o27 Int)
-
-(declare-const o28 Float64)
-
-(declare-const o29 Float64)
-
-(declare-const o30 Int)
-
-(declare-const o31 Float64)
-
-(declare-const o32 Float64)
-
-(declare-const o33 Float64)
-
-(declare-const o34 Float64)
-
-(declare-const o35 Float64)
-
-(declare-const o36 Float64)
-
-(declare-const o37 Float64)
-
-(declare-const o38 Float64)
-
-(declare-const o39 Float64)
-
-(declare-const o40 Float64)
-
-(declare-const o41 Int)
-
-(declare-const o42 Float64)
-
-(declare-const o43 Float64)
-
-(declare-const o44 Int)
-
-(declare-const o45 Float64)
-
-(declare-const o46 Float64)
-
-(declare-const o47 Float64)
-
-(declare-const o48 Int)
 
 (declare-const result Float64)
 
 (declare-const new_speed1 Float64)
-
-(declare-const result1 Float64)
-
-(declare-const average1 Float64)
-
-(declare-const result2 Float64)
-
-(declare-const distance1 Float64)
-
-(declare-const new_speed2 Float64)
-
-(declare-const average2 Float64)
-
-(declare-const distance2 Float64)
-
-(declare-const new_speed3 Float64)
-
-(declare-const average3 Float64)
-
-(declare-const distance3 Float64)
 
 ;; H
   (assert (in_range2 n))
@@ -559,27 +450,27 @@
   fnp1t65))
 
 ;; H
-  (assert (and (= o27 (+ n 1)) (in_range2 (+ n 1))))
+  (assert (and (= o3 (+ n 1)) (in_range2 (+ n 1))))
 
 ;; H
   (assert
-  (and (= o28 (high_bound o27))
-  (and (fp.isFinite64 o28)
-  (= o28 (fp.mul RNE (of_int RNE o27) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
+  (and (= o4 (high_bound o3))
+  (and (fp.isFinite64 o4)
+  (= o4 (fp.mul RNE (of_int RNE o3) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
 
 ;; H
   (assert
-  (and (= o25 (high_bound n))
-  (and (fp.isFinite64 o25)
-  (= o25 (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
+  (and (= o1 (high_bound n))
+  (and (fp.isFinite64 o1)
+  (= o1 (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))))
 
 ;; H
   (assert
-  (= o26 (fp.add RNE o25 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+  (= o2 (fp.add RNE o1 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "attempt_3.adb", line 25, characters 0-0
-  (not (fp.isFinite64 o26)))
+  (not (fp.isFinite64 o2)))
 (check-sat)
 (exit)

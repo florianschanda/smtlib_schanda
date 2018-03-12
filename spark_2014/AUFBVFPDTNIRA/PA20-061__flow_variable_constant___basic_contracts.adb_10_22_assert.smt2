@@ -104,12 +104,12 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range
-                                     temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range
+                                    temp___expr_39)))
 
 (declare-sort positive 0)
 
@@ -130,12 +130,12 @@
 (define-fun positive__ref___projection ((a positive__ref)) positive (positive__content
                                                                     a))
 
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range1
-                                     temp___expr_39)))
+(define-fun dynamic_invariant1 ((temp___expr_46 Int) (temp___is_init_42 Bool)
+  (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
+  (temp___do_typ_inv_45 Bool)) Bool (=>
+                                    (or (= temp___is_init_42 true)
+                                    (<= 1 2147483647)) (in_range1
+                                    temp___expr_46)))
 
 (declare-sort float 0)
 
@@ -152,12 +152,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const numerator Int)
 
@@ -180,22 +181,6 @@
 
 ;; den__def_axiom
   (assert (= den (fp #b0 #b00000000 #b00000000000000000000001)))
-
-(declare-const basic_contracts__average__result Float32)
-
-(declare-const o Float32)
-
-(declare-const result Float32)
-
-(declare-const basic_contracts__average__result1 Float32)
-
-(declare-const basic_contracts__average__result2 Float32)
-
-(declare-const basic_contracts__average__result3 Float32)
-
-(declare-const basic_contracts__average__result4 Float32)
-
-(declare-const basic_contracts__average__result5 Float32)
 
 ;; H
   (assert (in_range numerator))

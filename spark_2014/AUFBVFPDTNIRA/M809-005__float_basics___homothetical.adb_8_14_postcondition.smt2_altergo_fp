@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1098,83 +1098,46 @@ logic ka : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic homothetical__adjust2triangle__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic result : bool
-
-logic result1 : t
-
-logic homothetical__adjust2triangle__result1 : t
-
-logic result2 : t
-
-logic homothetical__adjust2triangle__result2 : t
-
-logic homothetical__adjust2triangle__result3 : t
-
-logic homothetical__adjust2triangle__result4 : t
-
-logic homothetical__adjust2triangle__result5 : t
-
-logic homothetical__adjust2triangle__result6 : t
-
-logic homothetical__adjust2triangle__result7 : t
-
-logic homothetical__adjust2triangle__result8 : t
-
-logic result3 : t
-
-axiom H : tqtisFinite(d)
-
-axiom H1 : tqtisFinite(kv)
-
-axiom H2 : tqtisFinite(ka)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H3 : ((neq(d, fliteral1) and lt(fliteral1, kv)) and lt(fliteral1, ka))
-
-axiom H4 :
-  (((homothetical__adjust2triangle__result5 = homothetical__adjust2triangle__result3) and
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall homothetical__adjust2triangle__result:t. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. forall o4:t. forall result:bool.
+  forall result1:t. forall homothetical__adjust2triangle__result1:t.
+  forall result2:t. forall homothetical__adjust2triangle__result2:t.
+  forall homothetical__adjust2triangle__result3:t.
+  forall homothetical__adjust2triangle__result4:t.
+  forall homothetical__adjust2triangle__result5:t.
+  forall homothetical__adjust2triangle__result6:t.
+  forall homothetical__adjust2triangle__result7:t.
+  forall homothetical__adjust2triangle__result8:t.
+  (forall result3:t. ((tqtisFinite(d) and (tqtisFinite(kv) and
+  (tqtisFinite(ka) and (((neq(d, fliteral1) and lt(fliteral1, kv)) and
+  lt(fliteral1, ka)) and
+  (((((homothetical__adjust2triangle__result3 = homothetical__adjust2triangle__result5) and
   (homothetical__adjust2triangle__result6 = homothetical__adjust2triangle__result4)) and
   ((((((o = mul(NearestTiesToEven, kv, kv)) and
   tqtisFinite(mul(NearestTiesToEven, kv, kv))) and
   (o1 = div(NearestTiesToEven, o, ka))) and ((o2 = o1) and
-  tqtisFinite(o1))) and ((lt(abs(d), o2) -> (result = true)) and
-  ((not lt(abs(d), o2)) -> (result = false)))) and (((result = true) ->
+  tqtisFinite(o1))) and ((lt(abs(d), o2) and (result = true)) or
+  ((not lt(abs(d), o2)) and (result = false)))) and (((result = true) and
   (((homothetical__adjust2triangle__result1 = homothetical__adjust2triangle__result3) and
   (homothetical__adjust2triangle__result4 = homothetical__adjust2triangle__result1)) and
   ((((o3 = mul(NearestTiesToEven, abs(d), ka)) and
   tqtisFinite(mul(NearestTiesToEven, abs(d), ka))) and
   (o4 = sqrt(NearestTiesToEven, o3))) and
   ((result1 = homothetical__adjust2triangle__result) and
-  (homothetical__adjust2triangle__result1 = o4))))) and
-  ((not (result = true)) ->
+  (homothetical__adjust2triangle__result1 = o4))))) or
+  ((not (result = true)) and
   (((homothetical__adjust2triangle__result2 = homothetical__adjust2triangle__result3) and
   (homothetical__adjust2triangle__result4 = homothetical__adjust2triangle__result2)) and
   ((result2 = homothetical__adjust2triangle__result) and
-  (homothetical__adjust2triangle__result2 = kv)))))))
-
-axiom H5 :
-  (homothetical__adjust2triangle__result7 = homothetical__adjust2triangle__result5)
-
-axiom H6 :
-  (homothetical__adjust2triangle__result8 = homothetical__adjust2triangle__result6)
-
-axiom H7 : (result3 = homothetical__adjust2triangle__result7)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : lt(fliteral1, homothetical__adjust2triangle__result7)
+  (homothetical__adjust2triangle__result2 = kv))))))) and
+  ((homothetical__adjust2triangle__result7 = homothetical__adjust2triangle__result5) and
+  (homothetical__adjust2triangle__result8 = homothetical__adjust2triangle__result6))) and
+  (result3 = homothetical__adjust2triangle__result7)))))) -> lt(fliteral1,
+  homothetical__adjust2triangle__result7))))

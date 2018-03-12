@@ -100,12 +100,13 @@
 (declare-datatypes () ((ft__ref (mk_ft__ref (ft__content ft)))))
 (define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
-(define-fun dynamic_invariant ((temp___expr_167 Float64)
-  (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_167)))
+(define-fun dynamic_invariant ((temp___expr_194 Float64)
+  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
+  (temp___do_toplevel_192 Bool)
+  (temp___do_typ_inv_193 Bool)) Bool (=>
+                                     (or (= temp___is_init_190 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_194)))
 
 (declare-fun to_rep (ft) Float64)
 
@@ -264,11 +265,11 @@
 
 (declare-const o5 ft)
 
-(declare-const temp___233 ft)
+(declare-const temp___263 ft)
 
-(declare-const temp___2331 ft)
+(declare-const temp___2631 ft)
 
-(declare-const temp___2332 ft)
+(declare-const temp___2632 ft)
 
 (declare-const o6 ft)
 
@@ -278,11 +279,11 @@
 
 (declare-const o9 ft)
 
-(declare-const temp___235 ft)
+(declare-const temp___265 ft)
 
-(declare-const temp___2351 ft)
+(declare-const temp___2651 ft)
 
-(declare-const temp___2352 ft)
+(declare-const temp___2652 ft)
 
 (declare-const result ft)
 
@@ -358,13 +359,13 @@
   (assert (= o o5))
 
 ;; H
-  (assert (= temp___233 o3))
+  (assert (= temp___263 o3))
 
 ;; H
-  (assert (= temp___2331 o4))
+  (assert (= temp___2631 o4))
 
 ;; H
-  (assert (= temp___2332 o5))
+  (assert (= temp___2632 o5))
 
 ;; H
   (assert (= result r__split_fields))
@@ -376,13 +377,13 @@
   (assert (= result2 r__split_fields2))
 
 ;; H
-  (assert (= temp___233 r__split_fields3))
+  (assert (= temp___263 r__split_fields3))
 
 ;; H
-  (assert (= temp___2331 r__split_fields4))
+  (assert (= temp___2631 r__split_fields4))
 
 ;; H
-  (assert (= temp___2332 r__split_fields5))
+  (assert (= temp___2632 r__split_fields5))
 
 ;; H
   (assert (= (to_rep o6) (to_rep r__split_fields4)))
@@ -397,13 +398,13 @@
   (assert (= r__split_fields5 o9))
 
 ;; H
-  (assert (= temp___235 o7))
+  (assert (= temp___265 o7))
 
 ;; H
-  (assert (= temp___2351 o8))
+  (assert (= temp___2651 o8))
 
 ;; H
-  (assert (= temp___2352 o9))
+  (assert (= temp___2652 o9))
 
 ;; H
   (assert (= result3 r__split_fields3))
@@ -415,13 +416,13 @@
   (assert (= result5 r__split_fields5))
 
 ;; H
-  (assert (= temp___235 r__split_fields6))
+  (assert (= temp___265 r__split_fields6))
 
 ;; H
-  (assert (= temp___2351 r__split_fields7))
+  (assert (= temp___2651 r__split_fields7))
 
 ;; H
-  (assert (= temp___2352 r__split_fields8))
+  (assert (= temp___2652 r__split_fields8))
 
 ;; H
   (assert (= result6 y))

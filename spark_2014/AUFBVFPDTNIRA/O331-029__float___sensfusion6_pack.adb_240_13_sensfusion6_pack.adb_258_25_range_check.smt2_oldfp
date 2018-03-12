@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1086,12 +1082,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-sort t_rate 0)
 
@@ -1121,12 +1117,12 @@
 (define-fun t_rate__ref___projection ((a t_rate__ref)) t_rate (t_rate__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_140 t) (temp___is_init_137 Bool)
-  (temp___skip_constant_138 Bool)
-  (temp___do_toplevel_139 Bool)) Bool (=>
-                                      (or (= temp___is_init_137 true) (le
-                                      (neg fliteral2) fliteral2)) (in_range2
-                                      temp___expr_140)))
+(define-fun dynamic_invariant1 ((temp___expr_163 t) (temp___is_init_159 Bool)
+  (temp___skip_constant_160 Bool) (temp___do_toplevel_161 Bool)
+  (temp___do_typ_inv_162 Bool)) Bool (=>
+                                     (or (= temp___is_init_159 true) (le
+                                     (neg fliteral2) fliteral2)) (in_range2
+                                     temp___expr_163)))
 
 (declare-sort t_acc 0)
 
@@ -1154,12 +1150,12 @@
 (declare-datatypes () ((t_acc__ref (mk_t_acc__ref (t_acc__content t_acc)))))
 (define-fun t_acc__ref___projection ((a t_acc__ref)) t_acc (t_acc__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_146 t) (temp___is_init_143 Bool)
-  (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true) (le
-                                      (neg fliteral3) fliteral3)) (in_range3
-                                      temp___expr_146)))
+(define-fun dynamic_invariant2 ((temp___expr_170 t) (temp___is_init_166 Bool)
+  (temp___skip_constant_167 Bool) (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true) (le
+                                     (neg fliteral3) fliteral3)) (in_range3
+                                     temp___expr_170)))
 
 (declare-sort t_acc_lifted 0)
 
@@ -1185,12 +1181,12 @@
 (define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted
   (t_acc_lifted__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_158 t) (temp___is_init_155 Bool)
-  (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true) (le
-                                      (neg fliteral3) fliteral3)) (in_range4
-                                      temp___expr_158)))
+(define-fun dynamic_invariant3 ((temp___expr_184 t) (temp___is_init_180 Bool)
+  (temp___skip_constant_181 Bool) (temp___do_toplevel_182 Bool)
+  (temp___do_typ_inv_183 Bool)) Bool (=>
+                                     (or (= temp___is_init_180 true) (le
+                                     (neg fliteral3) fliteral3)) (in_range4
+                                     temp___expr_184)))
 
 (declare-sort positive_float 0)
 
@@ -1220,12 +1216,13 @@
 (define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1288 t)
-  (temp___is_init_1285 Bool) (temp___skip_constant_1286 Bool)
-  (temp___do_toplevel_1287 Bool)) Bool (=>
-                                       (or (= temp___is_init_1285 true) (le
-                                       fliteral4 fliteral1)) (in_range5
-                                       temp___expr_1288)))
+(define-fun dynamic_invariant4 ((temp___expr_1501 t)
+  (temp___is_init_1497 Bool) (temp___skip_constant_1498 Bool)
+  (temp___do_toplevel_1499 Bool)
+  (temp___do_typ_inv_1500 Bool)) Bool (=>
+                                      (or (= temp___is_init_1497 true) (le
+                                      fliteral4 fliteral1)) (in_range5
+                                      temp___expr_1501)))
 
 (declare-sort t_delta_time 0)
 
@@ -1257,12 +1254,13 @@
 (define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time
   (t_delta_time__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_1294 t)
-  (temp___is_init_1291 Bool) (temp___skip_constant_1292 Bool)
-  (temp___do_toplevel_1293 Bool)) Bool (=>
-                                       (or (= temp___is_init_1291 true) (le
-                                       fliteral5 fliteral)) (in_range6
-                                       temp___expr_1294)))
+(define-fun dynamic_invariant5 ((temp___expr_1508 t)
+  (temp___is_init_1504 Bool) (temp___skip_constant_1505 Bool)
+  (temp___do_toplevel_1506 Bool)
+  (temp___do_typ_inv_1507 Bool)) Bool (=>
+                                      (or (= temp___is_init_1504 true) (le
+                                      fliteral5 fliteral)) (in_range6
+                                      temp___expr_1508)))
 
 (declare-sort t_alpha 0)
 
@@ -1286,12 +1284,13 @@
 (define-fun t_alpha__ref___projection ((a t_alpha__ref)) t_alpha (t_alpha__content
                                                                  a))
 
-(define-fun dynamic_invariant6 ((temp___expr_1300 t)
-  (temp___is_init_1297 Bool) (temp___skip_constant_1298 Bool)
-  (temp___do_toplevel_1299 Bool)) Bool (=>
-                                       (or (= temp___is_init_1297 true) (le
-                                       fliteral4 fliteral)) (in_range7
-                                       temp___expr_1300)))
+(define-fun dynamic_invariant6 ((temp___expr_1515 t)
+  (temp___is_init_1511 Bool) (temp___skip_constant_1512 Bool)
+  (temp___do_toplevel_1513 Bool)
+  (temp___do_typ_inv_1514 Bool)) Bool (=>
+                                      (or (= temp___is_init_1511 true) (le
+                                      fliteral4 fliteral)) (in_range7
+                                      temp___expr_1515)))
 
 (declare-sort t_quaternion 0)
 
@@ -1317,12 +1316,13 @@
 (define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
-(define-fun dynamic_invariant7 ((temp___expr_1330 t)
-  (temp___is_init_1327 Bool) (temp___skip_constant_1328 Bool)
-  (temp___do_toplevel_1329 Bool)) Bool (=>
-                                       (or (= temp___is_init_1327 true) (le
-                                       (neg fliteral) fliteral)) (in_range8
-                                       temp___expr_1330)))
+(define-fun dynamic_invariant7 ((temp___expr_1550 t)
+  (temp___is_init_1546 Bool) (temp___skip_constant_1547 Bool)
+  (temp___do_toplevel_1548 Bool)
+  (temp___do_typ_inv_1549 Bool)) Bool (=>
+                                      (or (= temp___is_init_1546 true) (le
+                                      (neg fliteral) fliteral)) (in_range8
+                                      temp___expr_1550)))
 
 (declare-fun inv_sqrt (t) t)
 
@@ -1345,10 +1345,11 @@
 ;; inv_sqrt__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (and (dynamic_invariant x true true true) (le fliteral6 x))
+  (! (=> (and (dynamic_invariant x true true true true) (le fliteral6 x))
      (let ((result (inv_sqrt x)))
      (and (and (lt fliteral4 result) (lt result fliteral7))
-     (dynamic_invariant result true false true)))) :pattern ((inv_sqrt x)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((inv_sqrt
+                                                                  x)) )))
 
 (declare-fun saturate (t t t) t)
 
@@ -1359,15 +1360,17 @@
   (forall ((value t) (min_value t) (max_value t))
   (! (=>
      (and
-     (and (dynamic_invariant value true true true) (dynamic_invariant
-     min_value true true true)) (dynamic_invariant max_value true true true))
+     (and (dynamic_invariant value true true true true) (dynamic_invariant
+     min_value true true true true)) (dynamic_invariant max_value true true
+     true true))
      (let ((result (saturate value min_value max_value)))
      (and
      (ite (lt value min_value) (eq result min_value)
      (ite (lt max_value value) (eq result max_value) (eq result value)))
-     (dynamic_invariant result true false true)))) :pattern ((saturate value
-                                                             min_value
-                                                             max_value)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((saturate
+                                                                  value
+                                                                  min_value
+                                                                  max_value)) )))
 
 (declare-fun lift_away_from_zero (t) t)
 
@@ -1376,12 +1379,12 @@
 ;; lift_away_from_zero__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant2 x true true true)
+  (! (=> (dynamic_invariant2 x true true true true)
      (let ((result (lift_away_from_zero x)))
      (and
      (ite (eq x fliteral4) (eq result fliteral4)
      (=> (neq x fliteral4) (neq result fliteral4))) (dynamic_invariant3
-     result true false true)))) :pattern ((lift_away_from_zero x)) )))
+     result true false true true)))) :pattern ((lift_away_from_zero x)) )))
 
 (declare-const gx t)
 
@@ -1592,6 +1595,25 @@
 (declare-const attr__ATTRIBUTE_ADDRESS82 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS83 Int)
+
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral8)
+  (= (tqtreal fliteral8) (/ 31415927410125732421875.0 10000000000000000000000.0))))
+
+(declare-const fliteral9 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 180.0)))
+
+(declare-const fliteral10 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral10)
+  (= (tqtreal fliteral10) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 (declare-const q0 t)
 
@@ -1863,14 +1885,6 @@
 
 (declare-const o104 t)
 
-(declare-const o105 t)
-
-(declare-const o106 t)
-
-(declare-const o107 t)
-
-(declare-const o108 t)
-
 (declare-const integral_fbx1 t)
 
 (declare-const integral_fby1 t)
@@ -2043,9 +2057,11 @@
 
 (declare-const q11 t)
 
-(declare-const result38 t__ref)
+(define-fun integral_fbz4 () t__ref (mk_t__ref integral_fbz))
 
-(declare-const q21 t)
+(define-fun integral_fby4 () t__ref (mk_t__ref integral_fby))
+
+(define-fun integral_fbx4 () t__ref (mk_t__ref integral_fbx))
 
 ;; H
   (assert (in_range2 gx))
@@ -2155,18 +2171,6 @@
 ;; H
   (assert (= result (mk_t__ref rad_gx)))
 
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral8)
-  (= (tqtreal fliteral8) (/ 31415927410125732421875.0 10000000000000000000000.0))))
-
-(declare-const fliteral9 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 180.0)))
-
 ;; H
   (assert (= rad_gx1 (div1 RNE1 (mul RNE1 c3b fliteral8) fliteral9)))
 
@@ -2211,13 +2215,6 @@
 
 ;; H
   (assert (= result5 (mk_t__ref half_vz)))
-
-(declare-const fliteral10 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral10)
-  (= (tqtreal fliteral10) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert
@@ -2555,7 +2552,7 @@
   (assert
   (=>
   (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
-  (=> (lt fliteral4 two_ki) (= result16 (mk_t__ref integral_fbx)))))
+  (=> (lt fliteral4 two_ki) (= result16 integral_fbx4))))
 
 ;; H
   (assert
@@ -2599,7 +2596,7 @@
   (assert
   (=>
   (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
-  (=> (lt fliteral4 two_ki) (= result17 (mk_t__ref integral_fby)))))
+  (=> (lt fliteral4 two_ki) (= result17 integral_fby4))))
 
 ;; H
   (assert
@@ -2643,7 +2640,7 @@
   (assert
   (=>
   (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
-  (=> (lt fliteral4 two_ki) (= result18 (mk_t__ref integral_fbz)))))
+  (=> (lt fliteral4 two_ki) (= result18 integral_fbz4))))
 
 ;; H
   (assert
@@ -2715,7 +2712,7 @@
   (assert
   (=>
   (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
-  (=> (not (lt fliteral4 two_ki)) (= result22 (mk_t__ref integral_fbx)))))
+  (=> (not (lt fliteral4 two_ki)) (= result22 integral_fbx4))))
 
 ;; H
   (assert
@@ -2727,7 +2724,7 @@
   (assert
   (=>
   (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
-  (=> (not (lt fliteral4 two_ki)) (= result23 (mk_t__ref integral_fby)))))
+  (=> (not (lt fliteral4 two_ki)) (= result23 integral_fby4))))
 
 ;; H
   (assert
@@ -2739,7 +2736,7 @@
   (assert
   (=>
   (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4))))
-  (=> (not (lt fliteral4 two_ki)) (= result24 (mk_t__ref integral_fbz)))))
+  (=> (not (lt fliteral4 two_ki)) (= result24 integral_fbz4))))
 
 ;; H
   (assert
@@ -2878,132 +2875,184 @@
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= (let ((subject half_ez)) (mk_t__ref half_ez2)) half_ez)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= (let ((subject half_ey)) (mk_t__ref half_ey2)) half_ey)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= half_ex2 half_ex)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gz3 rad_gz1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gy3 rad_gy1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gx3 rad_gx1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_az2 norm_az)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_ay2 norm_ay)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_ax2 norm_ax)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= recip_norm2 recip_norm)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fbz2 integral_fbz)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fby2 integral_fby)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fbx2 integral_fbx)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= half_ez2 half_ez1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= half_ey2 half_ey1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= half_ex2 half_ex1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gz3 rad_gz1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gy3 rad_gy1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= rad_gx3 rad_gx1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_az2 norm_az1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_ay2 norm_ay1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= norm_ax2 norm_ax1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= recip_norm2 recip_norm1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fbz2 integral_fbz1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fby2 integral_fby1)))
 
 ;; H
   (assert
-  (=> (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))
+  (=>
+  (not
+  (not (and (eq c6b fliteral4) (and (eq c7b fliteral4) (eq c8b fliteral4)))))
   (= integral_fbx2 integral_fbx1)))
 
 ;; H

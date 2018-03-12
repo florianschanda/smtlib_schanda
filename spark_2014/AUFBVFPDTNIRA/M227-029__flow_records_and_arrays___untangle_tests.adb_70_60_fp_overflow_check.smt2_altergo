@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1170,36 +1170,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:float1. forall v1:float1. forall v2:float1. forall v3:float1.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__untangle_tests__coordinate__x = v;
-  rec__untangle_tests__coordinate__y = v1;
-  rec__untangle_tests__coordinate__z = v2;
-  rec__untangle_tests__coordinate__w = v3 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__untangle_tests__coordinate__x = v;
-  rec__untangle_tests__coordinate__y = v1;
-  rec__untangle_tests__coordinate__z = v2;
-  rec__untangle_tests__coordinate__w = v3 } }, i)[i]) = { us_split_fields1 =
-  { rec__untangle_tests__coordinate__x = v;
-  rec__untangle_tests__coordinate__y = v1;
-  rec__untangle_tests__coordinate__z = v2;
-  rec__untangle_tests__coordinate__w = v3 } })))
-
 logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -1210,17 +1180,17 @@ axiom bool_eq_def5 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq6(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1230,9 +1200,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq3((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq3((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic dummy6 : (int,us_rep) farray
 
@@ -1426,43 +1396,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
-  int -> (int,us_rep1) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep1) farray. forall b:(int,us_rep1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep1, int -> (int,us_rep1) farray
-
-axiom singleton_def1 :
-  (forall v:(int,us_rep) farray. forall v1:float1. forall v2:float1.
-  forall v3:float1. forall v4:float1.
-  (forall i:int [(singleton1({ us_split_fields3 = {
-  rec__untangle_tests__triangle__vertices = v;
-  rec__untangle_tests__triangle__normal = { us_split_fields1 = {
-  rec__untangle_tests__coordinate__x = v1;
-  rec__untangle_tests__coordinate__y = v2;
-  rec__untangle_tests__coordinate__z = v3;
-  rec__untangle_tests__coordinate__w = v4 } } } }, i)[i])]. ((singleton1({
-  us_split_fields3 = { rec__untangle_tests__triangle__vertices = v;
-  rec__untangle_tests__triangle__normal = { us_split_fields1 = {
-  rec__untangle_tests__coordinate__x = v1;
-  rec__untangle_tests__coordinate__y = v2;
-  rec__untangle_tests__coordinate__z = v3;
-  rec__untangle_tests__coordinate__w = v4 } } } }, i)[i]) = {
-  us_split_fields3 = { rec__untangle_tests__triangle__vertices = v;
-  rec__untangle_tests__triangle__normal = { us_split_fields1 = {
-  rec__untangle_tests__coordinate__x = v1;
-  rec__untangle_tests__coordinate__y = v2;
-  rec__untangle_tests__coordinate__z = v3;
-  rec__untangle_tests__coordinate__w = v4 } } } })))
-
 logic bool_eq9 : (int,us_rep1) farray, int, int, (int,us_rep1) farray, int,
   int -> bool
 
@@ -1473,17 +1406,17 @@ axiom bool_eq_def8 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq7((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq7((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq7((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq9(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq7((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq9(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -1493,9 +1426,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq7((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq7((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1513,505 +1446,54 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic tl : (int,us_rep1) farray
-
-logic t1 : int
-
-logic o4 : t
-
-logic o5 : float1
-
-logic o6 : float1
-
-logic o7 : float1
-
-logic o8 : float1
-
-logic o9 : float1
-
-logic o10 : float1
-
-logic o11 : float1
-
-logic o12 : float1
-
-logic o13 : float1
-
-logic o14 : (int,us_rep) farray
-
-logic o15 : (int,us_rep) farray
-
-logic o16 : float1
-
-logic o17 : float1
-
-logic o18 : float1
-
-logic o19 : float1
-
-logic o20 : (int,us_rep) farray
-
-logic o21 : float1
-
-logic o22 : float1
-
-logic o23 : float1
-
-logic o24 : float1
-
-logic o25 : (int,us_rep1) farray
-
-logic o26 : t
-
-logic o27 : float1
-
-logic o28 : float1
-
-logic o29 : float1
-
-logic o30 : float1
-
-logic o31 : float1
-
-logic o32 : float1
-
-logic o33 : float1
-
-logic o34 : float1
-
-logic o35 : float1
-
-logic o36 : (int,us_rep) farray
-
-logic o37 : (int,us_rep) farray
-
-logic o38 : float1
-
-logic o39 : float1
-
-logic o40 : float1
-
-logic o41 : float1
-
-logic o42 : (int,us_rep) farray
-
-logic o43 : float1
-
-logic o44 : float1
-
-logic o45 : float1
-
-logic o46 : float1
-
-logic o47 : (int,us_rep1) farray
-
-logic o48 : t
-
-logic o49 : float1
-
-logic o50 : float1
-
-logic o51 : float1
-
-logic o52 : float1
-
-logic o53 : float1
-
-logic o54 : float1
-
-logic o55 : float1
-
-logic o56 : float1
-
-logic o57 : float1
-
-logic o58 : (int,us_rep) farray
-
-logic o59 : (int,us_rep) farray
-
-logic o60 : float1
-
-logic o61 : float1
-
-logic o62 : float1
-
-logic o63 : float1
-
-logic o64 : (int,us_rep) farray
-
-logic o65 : float1
-
-logic o66 : float1
-
-logic o67 : float1
-
-logic o68 : float1
-
-logic o69 : (int,us_rep1) farray
-
-logic o70 : t
-
-logic o71 : float1
-
-logic o72 : float1
-
-logic o73 : float1
-
-logic o74 : float1
-
-logic o75 : float1
-
-logic o76 : float1
-
-logic o77 : float1
-
-logic o78 : float1
-
-logic o79 : float1
-
-logic o80 : (int,us_rep) farray
-
-logic o81 : (int,us_rep) farray
-
-logic o82 : float1
-
-logic o83 : float1
-
-logic o84 : float1
-
-logic o85 : float1
-
-logic o86 : (int,us_rep) farray
-
-logic o87 : float1
-
-logic o88 : float1
-
-logic o89 : float1
-
-logic o90 : float1
-
-logic o91 : (int,us_rep1) farray
-
-logic o92 : t
-
-logic o93 : float1
-
-logic o94 : float1
-
-logic o95 : float1
-
-logic o96 : float1
-
-logic o97 : float1
-
-logic o98 : float1
-
-logic o99 : float1
-
-logic o100 : float1
-
-logic o101 : float1
-
-logic o102 : (int,us_rep) farray
-
-logic o103 : (int,us_rep) farray
-
-logic o104 : float1
-
-logic o105 : float1
-
-logic o106 : float1
-
-logic o107 : float1
-
-logic o108 : (int,us_rep) farray
-
-logic o109 : float1
-
-logic o110 : float1
-
-logic o111 : float1
-
-logic o112 : float1
-
-logic o113 : (int,us_rep1) farray
-
-logic o114 : t
-
-logic o115 : float1
-
-logic o116 : float1
-
-logic o117 : float1
-
-logic o118 : float1
-
-logic o119 : float1
-
-logic o120 : float1
-
-logic o121 : float1
-
-logic o122 : float1
-
-logic o123 : float1
-
-logic o124 : (int,us_rep) farray
-
-logic o125 : (int,us_rep) farray
-
-logic o126 : float1
-
-logic o127 : float1
-
-logic o128 : float1
-
-logic o129 : float1
-
-logic o130 : (int,us_rep) farray
-
-logic o131 : float1
-
-logic o132 : float1
-
-logic o133 : float1
-
-logic o134 : float1
-
-logic o135 : (int,us_rep1) farray
-
-logic o136 : t
-
-logic o137 : float1
-
-logic o138 : float1
-
-logic o139 : float1
-
-logic o140 : float1
-
-logic o141 : float1
-
-logic o142 : float1
-
-logic o143 : float1
-
-logic o144 : float1
-
-logic o145 : float1
-
-logic o146 : (int,us_rep) farray
-
-logic o147 : (int,us_rep) farray
-
-logic o148 : float1
-
-logic o149 : float1
-
-logic o150 : float1
-
-logic o151 : float1
-
-logic o152 : (int,us_rep) farray
-
-logic o153 : float1
-
-logic o154 : float1
-
-logic o155 : float1
-
-logic o156 : float1
-
-logic o157 : (int,us_rep1) farray
-
-logic o158 : t
-
-logic o159 : float1
-
-logic o160 : float1
-
-logic o161 : float1
-
-logic o162 : float1
-
-logic o163 : float1
-
-logic o164 : float1
-
-logic o165 : float1
-
-logic o166 : float1
-
-logic o167 : float1
-
-logic o168 : (int,us_rep) farray
-
-logic o169 : (int,us_rep) farray
-
-logic o170 : float1
-
-logic o171 : float1
-
-logic o172 : float1
-
-logic o173 : float1
-
-logic o174 : (int,us_rep) farray
-
-logic o175 : float1
-
-logic o176 : float1
-
-logic o177 : float1
-
-logic o178 : float1
-
-logic o179 : (int,us_rep1) farray
-
-logic o180 : t
-
-logic result : int
-
-logic t2 : int
-
-logic tl1 : (int,us_rep1) farray
-
-logic t3 : int
-
-logic v : int
-
-logic result1 : int
-
-logic v1 : int
-
-logic result2 : (int,us_rep1) farray
-
-logic tl2 : (int,us_rep1) farray
-
-logic result3 : (int,us_rep1) farray
-
-logic tl3 : (int,us_rep1) farray
-
-logic result4 : (int,us_rep1) farray
-
-logic tl4 : (int,us_rep1) farray
-
-logic result5 : int
-
-logic v2 : int
-
-logic result6 : (int,us_rep1) farray
-
-logic tl5 : (int,us_rep1) farray
-
-logic result7 : (int,us_rep1) farray
-
-logic tl6 : (int,us_rep1) farray
-
-logic result8 : (int,us_rep1) farray
-
-logic tl7 : (int,us_rep1) farray
-
-logic result9 : int
-
-logic v3 : int
-
-logic result10 : (int,us_rep1) farray
-
-logic tl8 : (int,us_rep1) farray
-
-logic result11 : (int,us_rep1) farray
-
-logic tl9 : (int,us_rep1) farray
-
-axiom H : (result = t1)
-
-axiom H1 : (t2 = 1)
-
-axiom H2 : (1 <= t2)
-
-axiom H3 : (t2 <= 100)
-
-axiom H4 :
-  ((forall temp___252:int. (((1 <= temp___252) and (temp___252 <= 100)) ->
-   (((t3 <= temp___252) -> ((tl1[temp___252]) = (tl[temp___252]))) and
-   ((not (t3 <= temp___252)) ->
-   ((forall temp___253:int. (((1 <= temp___253) and (temp___253 <= 3)) ->
-    (((((((tl1[temp___252])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___253])).us_split_fields1).rec__untangle_tests__coordinate__w = ((((((tl[temp___252])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___253])).us_split_fields1).rec__untangle_tests__coordinate__w))) and
-   ((((tl1[temp___252])).us_split_fields3).rec__untangle_tests__triangle__normal = (((tl[temp___252])).us_split_fields3).rec__untangle_tests__triangle__normal)))))) and
-  ((1 <= t3) and (t3 <= 100)))
-
-axiom H5 : (result1 = v)
-
-axiom H6 : (v1 = 1)
-
-axiom H7 : ((o4 = add(RNE,
+ (* File "untangle_tests.adb", line 44, characters 0-0 *)
+goal WP_parameter_def :
+  (forall tl:(int,us_rep1) farray. forall t1:int. forall o4:t.
+  forall o5:float1. forall o6:float1. forall o7:float1. forall o8:float1.
+  forall o9:float1. forall o10:float1. forall o11:float1. forall o12:float1.
+  forall o13:float1. forall o14:(int,us_rep) farray.
+  forall o15:(int,us_rep) farray. forall o16:float1. forall o17:float1.
+  forall o18:float1. forall o19:float1. forall o20:(int,us_rep) farray.
+  forall o21:float1. forall o22:float1. forall o23:float1. forall o24:float1.
+  forall o25:(int,us_rep1) farray. forall result:int__ref. forall t2:int.
+  forall tl1:(int,us_rep1) farray. forall t3:int. forall v:int.
+  forall result1:int__ref. forall v1:int. forall result2:map__ref1.
+  forall tl2:(int,us_rep1) farray. (((result = { int__content = t1 }) and
+  (t2 = 1)) -> (((1 <= t2) and (t2 <= 100)) ->
+  (((forall temp___279:int. (((1 <= temp___279) and (temp___279 <= 100)) ->
+    (((t3 <= temp___279) and ((tl1[temp___279]) = (tl[temp___279]))) or
+    ((not (t3 <= temp___279)) and
+    ((forall temp___280:int. (((1 <= temp___280) and (temp___280 <= 3)) ->
+     (((((((tl1[temp___279])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___280])).us_split_fields1).rec__untangle_tests__coordinate__w = ((((((tl[temp___279])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___280])).us_split_fields1).rec__untangle_tests__coordinate__w))) and
+    ((((tl1[temp___279])).us_split_fields3).rec__untangle_tests__triangle__normal = (((tl[temp___279])).us_split_fields3).rec__untangle_tests__triangle__normal)))))) and
+  ((1 <= t3) and (t3 <= 100))) -> (((result1 = { int__content = v }) and
+  (v1 = 1)) -> (((((((((((o4 = add(RNE,
   to_rep(((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__x),
   to_rep(o))) and tqtisFinite(add(RNE,
   to_rep(((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__x),
-  to_rep(o))))
-
-axiom H8 : (to_rep(o5) = o4)
-
-axiom H9 : (o5 = o6)
-
-axiom H10 :
-  (((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__y = o7)
-
-axiom H11 :
-  (((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__z = o8)
-
-axiom H12 :
-  (((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__w = o9)
-
-axiom H13 : (o10 = o6)
-
-axiom H14 : (o11 = o7)
-
-axiom H15 : (o12 = o8)
-
-axiom H16 : (o13 = o9)
-
-axiom H17 :
+  to_rep(o)))) and (to_rep(o5) = o4)) and ((o5 = o6) and
+  ((((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__y = o7) and
+  ((((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__z = o8) and
+  (((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__w = o9))))) and
+  ((o10 = o6) and ((o11 = o7) and ((o12 = o8) and (o13 = o9))))) and
   (o14 = ((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1 <- {
   us_split_fields1 = { rec__untangle_tests__coordinate__x = o10;
   rec__untangle_tests__coordinate__y = o11;
   rec__untangle_tests__coordinate__z = o12;
-  rec__untangle_tests__coordinate__w = o13 } }]))
-
-axiom H18 : (o14 = o15)
-
-axiom H19 :
+  rec__untangle_tests__coordinate__w = o13 } }]))) and ((o14 = o15) and
   ((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__normal = {
   us_split_fields1 = { rec__untangle_tests__coordinate__x = o16;
   rec__untangle_tests__coordinate__y = o17;
   rec__untangle_tests__coordinate__z = o18;
-  rec__untangle_tests__coordinate__w = o19 } })
-
-axiom H20 : (o20 = o15)
-
-axiom H21 : (o21 = o16)
-
-axiom H22 : (o22 = o17)
-
-axiom H23 : (o23 = o18)
-
-axiom H24 : (o24 = o19)
-
-axiom H25 : (o25 = (tl1[t3 <- { us_split_fields3 = {
+  rec__untangle_tests__coordinate__w = o19 } }))) and ((o20 = o15) and
+  ((o21 = o16) and ((o22 = o17) and ((o23 = o18) and (o24 = o19)))))) and
+  (o25 = (tl1[t3 <- { us_split_fields3 = {
   rec__untangle_tests__triangle__vertices = o20;
   rec__untangle_tests__triangle__normal = { us_split_fields1 = {
   rec__untangle_tests__coordinate__x = o21;
   rec__untangle_tests__coordinate__y = o22;
   rec__untangle_tests__coordinate__z = o23;
-  rec__untangle_tests__coordinate__w = o24 } } } }]))
-
-axiom H26 : (result2 = tl1)
-
-axiom H27 : (tl2 = o25)
-
- (* File "untangle_tests.adb", line 44, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE,
+  rec__untangle_tests__coordinate__w = o24 } } } }]))) and ((result2 = {
+  map__content1 = tl1 }) and (tl2 = o25))) -> tqtisFinite(add(RNE,
   to_rep(((((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__y),
-  to_rep(o1)))
+  to_rep(o1)))))))))

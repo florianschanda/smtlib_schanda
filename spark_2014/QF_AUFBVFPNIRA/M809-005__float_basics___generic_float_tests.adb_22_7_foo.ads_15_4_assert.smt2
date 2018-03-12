@@ -48,22 +48,23 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun dynamic_invariant ((temp___expr_167 Float64)
-  (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_167)))
+(define-fun dynamic_invariant ((temp___expr_194 Float64)
+  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
+  (temp___do_toplevel_192 Bool)
+  (temp___do_typ_inv_193 Bool)) Bool (=>
+                                     (or (= temp___is_init_190 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_194)))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
 
-(define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range temp___expr_15)))
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
 (declare-const a Float64)
 

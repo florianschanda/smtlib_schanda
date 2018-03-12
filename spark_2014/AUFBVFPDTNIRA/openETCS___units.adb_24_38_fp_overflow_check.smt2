@@ -117,12 +117,13 @@
 (define-fun speed_t__ref___projection ((a speed_t__ref)) speed_t (speed_t__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_135 Float32)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Float32)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_158)))
 
 (declare-fun is_valid_speed (Float32) Bool)
 
@@ -148,12 +149,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort speed_km_per_h_t 0)
 
@@ -173,12 +175,13 @@
 (define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t
   (speed_km_per_h_t__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_141 Float32)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_141)))
+(define-fun dynamic_invariant2 ((temp___expr_165 Float32)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_165)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -199,21 +202,17 @@
   (assert
   (forall ((speed1 Float32))
   (! (=>
-     (and (dynamic_invariant2 speed1 true true true)
+     (and (dynamic_invariant2 speed1 true true true true)
      (= (is_valid_speed_km_per_h speed1) true)) (dynamic_invariant
-     (m_per_s_from_km_per_h speed1) true false true)) :pattern ((m_per_s_from_km_per_h
-                                                                speed1)) )))
+     (m_per_s_from_km_per_h speed1) true false true true)) :pattern (
+  (m_per_s_from_km_per_h speed1)) )))
 
 ;; m_per_s_from_km_per_h__def_axiom
   (assert
   (forall ((speed1 Float32))
-  (! (=> (dynamic_invariant2 speed1 true true true)
+  (! (=> (dynamic_invariant2 speed1 true true true true)
      (= (m_per_s_from_km_per_h speed1) (fp.div RNE (fp.mul RNE speed1 (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000)))) :pattern (
   (m_per_s_from_km_per_h speed1)) )))
-
-(declare-const o Float32)
-
-(declare-const o1 Float32)
 
 ;; H
   (assert (fp.isFinite32 speed))

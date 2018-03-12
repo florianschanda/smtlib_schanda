@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const a t)
 
@@ -1095,11 +1095,17 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 5800.0)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
+
 (declare-const res Bool)
-
-(declare-const o t)
-
-(declare-const o1 t)
 
 (declare-const result Bool)
 
@@ -1114,21 +1120,11 @@
 ;; H
   (assert (tqtisFinite c))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 5800.0)))
-
 ;; H
   (assert (lt (mul RNE1 (abs1 a) (abs1 c)) (mul RNE1 fliteral2 (abs1 b))))
 
 ;; H
   (assert (= result res))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 ;; H
   (assert (= res1 (ite (not (eq b fliteral3)) true false)))

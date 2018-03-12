@@ -76,12 +76,13 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_324 Int)
-  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
-  (temp___do_toplevel_323 Bool)) Bool (=>
-                                      (or (= temp___is_init_321 true)
-                                      (<= 0 2147483647)) (in_range1
-                                      temp___expr_324)))
+(define-fun dynamic_invariant ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range1
+                                     temp___expr_365)))
 
 (declare-fun to_rep (count_type) Int)
 
@@ -267,11 +268,11 @@
 (define-fun cursor__ref___projection ((a cursor__ref)) us_rep1 (cursor__content
                                                                a))
 
-(define-fun default_initial_assumption ((temp___expr_413 us_rep1)
-  (temp___skip_top_level_414 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption ((temp___expr_466 us_rep1)
+  (temp___skip_top_level_467 Bool)) Bool (= (to_rep
                                             (rec__algorithm__gap_vectors__cursor__node
                                             (us_split_fields3
-                                            temp___expr_413))) 0))
+                                            temp___expr_466))) 0))
 
 (declare-const no_element us_rep1)
 
@@ -289,8 +290,8 @@
      (<= result (to_rep
                 (rec__algorithm__gap_vectors__list__capacity
                 (us_split_discrs1 container))))
-     (dynamic_invariant result true false true))) :pattern ((length
-                                                            container)) )))
+     (dynamic_invariant result true false true true))) :pattern ((length
+                                                                 container)) )))
 
 (declare-sort us_main_type1 0)
 
@@ -1698,23 +1699,23 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep2) Bool)
 
-(define-fun default_initial_assumption1 ((temp___expr_468 us_rep2)
-  (temp___skip_top_level_469 Bool)) Bool (=>
+(define-fun default_initial_assumption1 ((temp___expr_529 us_rep2)
+  (temp___skip_top_level_530 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_469 true))
+                                         (= temp___skip_top_level_530 true))
                                          (and
-                                         (= (is_empty temp___expr_468) true)
-                                         (= (length1 temp___expr_468) 0))))
+                                         (= (is_empty temp___expr_529) true)
+                                         (= (length1 temp___expr_529) 0))))
 
 (declare-fun get (us_rep2 us_rep1) Int)
 
 (declare-fun get__function_guard (Int us_rep2 us_rep1) Bool)
 
-(define-fun default_initial_assumption2 ((temp___expr_456 us_rep1)
-  (temp___skip_top_level_457 Bool)) Bool (= (to_rep
+(define-fun default_initial_assumption2 ((temp___expr_515 us_rep1)
+  (temp___skip_top_level_516 Bool)) Bool (= (to_rep
                                             (rec__algorithm__gap_vectors__cursor__node
                                             (us_split_fields3
-                                            temp___expr_456))) 0))
+                                            temp___expr_515))) 0))
 
 ;; positions__post_axiom
   (assert
@@ -1729,10 +1730,6 @@
      (=> (= (get result i) (get result j)) (= (bool_eq1 i j) true))))))))) :pattern (
   (positions container)) )))
 
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range5 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE5 (Bool) us_image)
@@ -1745,7 +1742,7 @@
   (assert
   (forall ((container us_rep2))
   (forall ((key us_rep1))
-  (! (=> (= (of_int1 0) true)
+  (! (=> (= (distinct 0 0) true)
      (=>
      (exists ((k us_rep1))
      (and (= (has_key container k) true) (= (bool_eq1 k key) true)))
@@ -1771,12 +1768,13 @@
 (define-fun element_type__ref___3__projection ((a element_type__ref1)) element_type
   (element_type__content1 a))
 
-(define-fun dynamic_invariant1 ((temp___expr_461 Int)
-  (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)
-  (temp___do_toplevel_460 Bool)) Bool (=>
-                                      (or (= temp___is_init_458 true)
-                                      (<= 1 2147483647)) (in_range6
-                                      temp___expr_461)))
+(define-fun dynamic_invariant1 ((temp___expr_521 Int)
+  (temp___is_init_517 Bool) (temp___skip_constant_518 Bool)
+  (temp___do_toplevel_519 Bool)
+  (temp___do_typ_inv_520 Bool)) Bool (=>
+                                     (or (= temp___is_init_517 true)
+                                     (<= 1 2147483647)) (in_range6
+                                     temp___expr_521)))
 
 (declare-fun witness (us_rep2 us_rep1) Int)
 
@@ -1793,19 +1791,20 @@
   (! (=> (= (has_key container key) true)
      (let ((result (get container key)))
      (and
-     (=> (= (of_int1 0) true)
+     (=> (= (distinct 0 0) true)
      (and (= result (w_get container (witness container key)))
      (forall ((k us_rep1))
      (=> (= (has_key container k) true)
      (= (= (bool_eq1 k key) true)
      (= (witness container key) (witness container k)))))))
-     (dynamic_invariant1 result true false true)))) :pattern ((get container
-                                                              key)) ))))
+     (dynamic_invariant1 result true false true true)))) :pattern ((get
+                                                                   container
+                                                                   key)) ))))
 
 ;; length__post_axiom
   (assert
   (forall ((container us_rep2)) (! (dynamic_invariant (length1 container)
-  true false true) :pattern ((length1 container)) )))
+  true false true true) :pattern ((length1 container)) )))
 
 ;; is_empty__post_axiom
   (assert
@@ -1828,25 +1827,24 @@
   (! (=> (= (has_key container key) true)
      (let ((result (witness container key)))
      (and (= (has_witness container result) true) (dynamic_invariant result
-     true false true)))) :pattern ((witness container key)) ))))
+     true false true true)))) :pattern ((witness container key)) ))))
 
 ;; w_get__post_axiom
   (assert
   (forall ((container us_rep2))
   (forall ((witness1 Int))
   (! (=>
-     (and (dynamic_invariant witness1 true true true)
+     (and (dynamic_invariant witness1 true true true true)
      (= (has_witness container witness1) true)) (dynamic_invariant1
-     (w_get container witness1) true false true)) :pattern ((w_get container
-                                                            witness1)) ))))
+     (w_get container witness1) true false true true)) :pattern ((w_get
+                                                                 container
+                                                                 witness1)) ))))
 
 (declare-const o count_type)
 
 (declare-const o1 count_type)
 
-(declare-const temp___720 count_type)
-
-(declare-const o2 Int)
+(declare-const temp___789 count_type)
 
 ;; H
   (assert (= (to_rep o) 0))
@@ -1855,10 +1853,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___720 o1))
+  (assert (= temp___789 o1))
 
 ;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___720)) no_element))
+  (assert (= (mk___rep1 (mk___split_fields1 temp___789)) no_element))
 
 ;; H
   (assert (in_range1 count))

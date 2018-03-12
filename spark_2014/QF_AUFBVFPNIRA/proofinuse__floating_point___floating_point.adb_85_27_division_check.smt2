@@ -158,10 +158,6 @@
 (define-fun eq_sub3 ((a (_ BitVec 64)) (b (_ BitVec 64)) (i Int)
   (n Int)) Bool abstr27)
 
-(define-fun to_int5 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun bv_min ((x (_ BitVec 16))
@@ -172,16 +168,17 @@
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
 
-(define-fun dynamic_invariant ((temp___expr_154 (_ BitVec 16))
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_180 (_ BitVec 16))
+  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
+  (temp___do_toplevel_178 Bool) (temp___do_typ_inv_179 Bool)) Bool true)
 
-(define-fun dynamic_invariant1 ((temp___expr_178 Float32)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_208 Float32)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_208)))
 
 (declare-const x (_ BitVec 16))
 
@@ -206,6 +203,9 @@
 (declare-const result1 Float32)
 
 (declare-const res2 Float32)
+
+;; H
+  (assert true)
 
 ;; H
   (assert (fp.isFinite32 y))

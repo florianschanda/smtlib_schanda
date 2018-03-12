@@ -1021,12 +1021,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1038,6 +1032,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1216,24 +1216,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-axiom concat_def :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : bool, int -> (int,bool) farray
-
-axiom singleton_def :
-  (forall v:bool.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (int,bool) farray, int, int, (int,bool) farray, int,
   int -> bool
 
@@ -1244,17 +1226,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  ((a[temp___idx_132]) = (b[((b__first - a__first) + temp___idx_132)]))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)]))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  ((a[temp___idx_132]) = (b[((b__first - a__first) + temp___idx_132)])))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)])))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1264,81 +1246,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  ((a[temp___idx_132]) = (b[((b__first - a__first) + temp___idx_132)]))))))))
-
-logic compare : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq7(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq7(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_int1((a[(i + 1)])) <  to_int1((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq7(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_int1((b[(i + 1)])) <  to_int1((a[(j + 1)]))))))))))))
-
-logic xorb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic andb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic orb1 : (int,bool) farray, int, int, (int,bool) farray, int,
-  int -> (int,bool) farray
-
-logic notb1 : (int,bool) farray, int, int -> (int,bool) farray
-
-axiom op_def :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(orb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((orb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), true,
-  (b[((i - a_first) + b_first)])))))))
-
-axiom op_def1 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(andb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((andb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = match_bool((a[i]), (b[((i - a_first) + b_first)]),
-  false))))))
-
-axiom op_def2 :
-  (forall a:(int,bool) farray. forall b:(int,bool) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(xorb1(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((a_first <= i) and (i <= a_last)) -> ((xorb1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = xorb((a[i]), (b[((i - a_first) + b_first)])))))))
-
-axiom notb_def :
-  (forall a:(int,bool) farray.
-  (forall a_first:int. forall a_last:int.
-  (forall i:int [(notb1(a, a_first, a_last)[i])]. (((a_first <= i) and
-  (i <= a_last)) -> ((notb1(a, a_first, a_last)[i]) = match_bool((a[i]),
-  false, true))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  ((a[temp___idx_154]) = (b[((b__first - a__first) + temp___idx_154)]))))))))
 
 logic is_prime : int -> bool
 
@@ -1415,377 +1325,84 @@ function t88b__ref___projection(a: t88b__ref) : integer = (a).t88b__content
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic temp___250 : bool -> (int,bool) farray
+logic temp___285 : bool -> (int,bool) farray
 
 axiom def_axiom :
-  (forall temp___252:bool.
-  (forall temp___253:int.
-  ((temp___250(temp___252)[temp___253]) = temp___252)))
-
-logic is_prime1 : (int,bool) farray
-
-logic index_1 : int
-
-logic index_3 : int
-
-logic index_2 : int
-
-logic o : t
-
-logic o1 : int
-
-logic test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume : int
-
-logic temp___260 : (int,bool) farray
-
-logic temp___259 : int
-
-logic temp___258 : int
-
-logic temp___257 : int
-
-logic v : int
-
-logic o2 : bool
-
-logic o3 : int
-
-logic v1 : int
-
-logic div1 : int
-
-logic o4 : bool
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-logic temp___255 : (int,bool) farray
-
-logic temp___254 : int
-
-logic o8 : int
-
-logic o9 : (int,bool) farray
-
-logic v2 : int
-
-logic o10 : bool
-
-logic o11 : int
-
-logic v3 : int
-
-logic div2 : int
-
-logic o12 : int
-
-logic o13 : bool
-
-logic o14 : bool
-
-logic o15 : bool
-
-logic o16 : bool
-
-logic o17 : int
-
-logic o18 : int
-
-logic o19 : int
-
-logic o20 : (int,bool) farray
-
-logic index_11 : int
-
-logic index_31 : int
-
-logic result : (int,bool) farray
-
-logic is_prime2 : (int,bool) farray
-
-logic result1 : (int,bool) farray
-
-logic is_prime3 : (int,bool) farray
-
-logic result2 : (int,bool) farray
-
-logic is_prime4 : (int,bool) farray
-
-logic result3 : int
-
-logic index_21 : int
-
-logic is_prime5 : (int,bool) farray
-
-logic index_12 : int
-
-logic index_32 : int
-
-logic index_22 : int
-
-logic result4 : bool
-
-logic result5 : int
-
-logic index_13 : int
-
-logic result6 : int
-
-logic index_33 : int
-
-logic result7 : (int,bool) farray
-
-logic is_prime6 : (int,bool) farray
-
-logic is_prime7 : (int,bool) farray
-
-logic index_34 : int
-
-logic result8 : bool
-
-logic result9 : int
-
-logic index_35 : int
-
-logic result10 : (int,bool) farray
-
-logic is_prime8 : (int,bool) farray
-
-logic is_prime9 : (int,bool) farray
-
-logic index_36 : int
-
-logic is_prime10 : (int,bool) farray
-
-logic index_37 : int
-
-logic is_prime11 : (int,bool) farray
-
-logic index_38 : int
-
-logic is_prime12 : (int,bool) farray
-
-logic index_39 : int
-
-logic is_prime13 : (int,bool) farray
-
-logic index_14 : int
-
-logic index_310 : int
-
-logic is_prime14 : (int,bool) farray
-
-logic index_15 : int
-
-logic index_311 : int
-
-logic result11 : int
-
-logic index_23 : int
-
-logic is_prime15 : (int,bool) farray
-
-logic index_16 : int
-
-logic index_312 : int
-
-logic index_24 : int
-
-logic is_prime16 : (int,bool) farray
-
-logic index_17 : int
-
-logic index_313 : int
-
-logic index_25 : int
-
-logic is_prime17 : (int,bool) farray
-
-logic index_18 : int
-
-logic index_314 : int
-
-logic index_26 : int
-
-logic is_prime18 : (int,bool) farray
-
-logic index_19 : int
-
-logic index_315 : int
-
-logic index_27 : int
-
-logic is_prime19 : (int,bool) farray
-
-logic index_110 : int
-
-logic index_316 : int
-
-logic index_28 : int
-
-logic is_prime20 : (int,bool) farray
-
-logic index_111 : int
-
-logic index_317 : int
-
-logic index_29 : int
-
-logic is_prime21 : (int,bool) farray
-
-logic index_112 : int
-
-logic index_318 : int
-
-logic index_210 : int
-
-logic is_prime22 : (int,bool) farray
-
-logic index_113 : int
-
-logic index_319 : int
-
-logic index_211 : int
-
-axiom H : ((0 <= 2147483647) -> in_range3(index_1))
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(index_3))
-
-axiom H2 : (result = is_prime1)
-
-axiom H3 : (is_prime2 = temp___250(of_int1(1)))
-
-axiom H4 : (is_prime2 = result1)
-
-axiom H5 : (is_prime3 = (is_prime2[0 <- of_int1(0)]))
-
-axiom H6 : (is_prime3 = result2)
-
-axiom H7 : (is_prime4 = (is_prime3[1 <- of_int1(0)]))
+  (forall temp___287:bool.
+  (forall temp___288:int.
+  ((temp___285(temp___287)[temp___288]) = temp___287)))
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 100000.0))
 
-axiom H8 : ((o = sqrt2(fliteral3)) and (tqtisFinite(o) and (le(fliteral1,
-  o) and ((eq(fliteral3, fliteral1) -> eq(o, fliteral1)) and ((eq(fliteral3,
+ (* File "prime_and_coprime_numbers.adb", line 205, characters 0-0 *)
+goal WP_parameter_def :
+  (forall is_prime1:(int,bool) farray. forall index_1:int.
+  forall index_3:int. forall index_2:int. forall o:t. forall o1:int.
+  forall test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:(int,bool) farray.
+  forall o6:int. forall o7:int. forall o8:(int,bool) farray.
+  forall result:(int,bool) farray. forall is_prime2:(int,bool) farray.
+  forall result1:(int,bool) farray. forall is_prime3:(int,bool) farray.
+  forall result2:(int,bool) farray. forall is_prime4:(int,bool) farray.
+  forall result3:int. forall index_21:int.
+  forall is_prime5:(int,bool) farray. forall index_11:int.
+  forall index_31:int. forall index_22:int. forall result4:bool.
+  forall result5:int. forall index_12:int. forall result6:int.
+  forall index_32:int. forall result7:(int,bool) farray.
+  forall is_prime6:(int,bool) farray. forall is_prime7:(int,bool) farray.
+  forall index_33:int. forall result8:int. forall index_34:int.
+  forall result9:(int,bool) farray. forall is_prime8:(int,bool) farray.
+  (((0 <= 2147483647) -> in_range3(index_1)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(index_3)) -> ((({
+  map__content = result } = { map__content = is_prime1 }) and
+  (is_prime2 = temp___285(of_int1(1)))) -> (((is_prime2 = result1) and
+  (is_prime3 = (is_prime2[0 <- of_int1(0)]))) -> (((is_prime3 = result2) and
+  (is_prime4 = (is_prime3[1 <- of_int1(0)]))) ->
+  (((((((o = sqrt2(fliteral3)) and (tqtisFinite(o) and (le(fliteral1, o) and
+  ((eq(fliteral3, fliteral1) -> eq(o, fliteral1)) and ((eq(fliteral3,
   fliteral) -> eq(o, fliteral)) and (le(fliteral2, fliteral3) ->
-  lt(fliteral1, o)))))))
-
-axiom H9 : (o1 = to_int(RNA, o))
-
-axiom H10 :
+  lt(fliteral1, o))))))) and (o1 = to_int(RNA, o))) and
   ((test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume = o1) and
-  in_range3(o1))
-
-axiom H11 :
-  (test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume = r87b)
-
-axiom H12 : in_range3(r87b)
-
-axiom H13 : (result3 = index_2)
-
-axiom H14 : (index_21 = 2)
-
-axiom H15 : (2 <= index_21)
-
-axiom H16 : (index_21 <= r87b)
-
-axiom H17 : ((2 <= index_22) and (index_22 <= 100000))
-
-axiom H18 :
-  (forall v4:int. (((0 <= v4) and (v4 <= index_22)) ->
-  (((is_prime5[v4]) = true) <-> (is_prime(v4) = true))))
-
-axiom H19 :
-  (forall v4:int. (((index_22 <= v4) and (v4 <= 100000)) ->
-  (((is_prime5[v4]) = true) <->
-  (forall div3:int. (((2 <= div3) and (div3 <= (index_22 - 1))) ->
-  (not (mod(v4, div3) = 0)))))))
-
-axiom H20 : (((((2 <= r87b) -> dynamic_property(2, r87b, index_22)) and
-  ((0 <= 2147483647) -> in_range3(index_12))) and
-  (((- 2147483648) <= 2147483647) -> in_range2(index_32))) and
-  ((2 <= index_22) and (index_22 <= r87b)))
-
-axiom H21 : ((0 <= index_22) and (index_22 <= 100000))
-
-axiom H22 : (o6 = index_22)
-
-axiom H23 : (result4 = (is_prime5[o6]))
-
-axiom H24 : (result4 = true)
-
-axiom H25 : (index_12 = result5)
-
-axiom H26 : (index_13 = index_22)
-
-axiom H27 : ((o7 = (2 * index_13)) and in_range2((2 * index_13)))
-
-axiom H28 : (index_32 = result6)
-
-axiom H29 : (index_33 = o7)
-
-axiom H30 : (index_33 <= 100000)
-
-axiom H31 : ((0 <= index_33) and (index_33 <= 100000))
-
-axiom H32 : (o8 = index_33)
-
-axiom H33 : (o9 = (is_prime5[o8 <- of_int1(0)]))
-
-axiom H34 : (is_prime5 = result7)
-
-axiom H35 : (is_prime6 = o9)
-
-axiom H36 :
-  (forall v4:int. (((0 <= v4) and (v4 <= index_22)) ->
-  (((is_prime7[v4]) = true) <-> (is_prime(v4) = true))))
-
-axiom H37 :
-  (forall v4:int. (((index_22 <= v4) and (v4 <= 100000)) ->
-  (((is_prime7[v4]) = true) <->
-  ((forall div3:int. (((2 <= div3) and (div3 <= (index_22 - 1))) ->
-   (not (mod(v4, div3) = 0)))) and
-  ((((index_22 + 1) <= v4) and (v4 <= index_34)) -> (not (mod(v4,
-  index_22) = 0)))))))
-
-axiom H38 : ((index_22 <= index_34) and (index_34 <= 100000))
-
-axiom H39 : (mod(index_34, index_22) = 0)
-
-axiom H40 : (((- 2147483648) <= 2147483647) -> in_range2(index_34))
-
-axiom H41 : ((o18 = (index_34 + index_13)) and
-  in_range2((index_34 + index_13)))
-
-axiom H42 : (index_34 = result9)
-
-axiom H43 : (index_35 = o18)
-
-axiom H44 : (index_35 <= 100000)
-
-axiom H45 : ((0 <= index_35) and (index_35 <= 100000))
-
-axiom H46 : (o19 = index_35)
-
-axiom H47 : (o20 = (is_prime7[o19 <- of_int1(0)]))
-
-axiom H48 : (result10 = is_prime7)
-
-axiom H49 : (is_prime8 = o20)
-
-logic v4 : int
-
-axiom H50 : (0 <= v4)
-
-axiom H51 : (v4 <= index_22)
-
-axiom H52 : ((is_prime8[v4]) = true)
-
- (* File "prime_and_coprime_numbers.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (is_prime(v4) = true)
+  in_range3(o1))) and
+  (test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume = r87b)) and
+  in_range3(r87b)) -> ((({ int__content = result3 } = { int__content =
+  index_2 }) and (index_21 = 2)) -> (((2 <= index_21) and
+  (index_21 <= r87b)) -> ((((2 <= index_22) and (index_22 <= 100000)) and
+  ((forall v:int. (((0 <= v) and (v <= index_22)) ->
+   (((is_prime5[v]) = true) <-> (is_prime(v) = true)))) and
+  (forall v:int. (((index_22 <= v) and (v <= 100000)) ->
+  (((is_prime5[v]) = true) <->
+  (forall div1:int. (((2 <= div1) and (div1 <= (index_22 - 1))) ->
+  (not (mod(v, div1) = 0))))))))) -> (((((((- 2147483648) <= 2147483647) ->
+  in_range2(index_31)) and ((2 <= r87b) -> dynamic_property(2, r87b,
+  index_22))) and ((0 <= 2147483647) -> in_range3(index_11))) and
+  ((2 <= index_22) and (index_22 <= r87b))) -> (((((0 <= index_22) and
+  (index_22 <= 100000)) and (o2 = index_22)) and
+  (result4 = (is_prime5[o2]))) -> ((result4 = true) ->
+  (((index_11 = result5) and (index_12 = index_22)) ->
+  ((((o3 = (2 * index_12)) and in_range2((2 * index_12))) and
+  ((index_31 = result6) and (index_32 = o3))) -> ((index_32 <= 100000) ->
+  ((((((0 <= index_32) and (index_32 <= 100000)) and (o4 = index_32)) and
+  (o5 = (is_prime5[o4 <- of_int1(0)]))) and ((is_prime5 = result7) and
+  (is_prime6 = o5))) ->
+  (((forall v:int. (((0 <= v) and (v <= index_22)) ->
+    (((is_prime7[v]) = true) <-> (is_prime(v) = true)))) and
+  ((forall v:int. (((index_22 <= v) and (v <= 100000)) ->
+   (((is_prime7[v]) = true) <->
+   ((forall div1:int. (((2 <= div1) and (div1 <= (index_22 - 1))) ->
+    (not (mod(v, div1) = 0)))) and
+   ((((index_22 + 1) <= v) and (v <= index_33)) -> (not (mod(v,
+   index_22) = 0))))))) and
+  (((index_22 <= index_33) and (index_33 <= 100000)) and (mod(index_33,
+  index_22) = 0)))) -> (((((- 2147483648) <= 2147483647) ->
+  in_range2(index_33)) and ((((o6 = (index_33 + index_12)) and
+  in_range2((index_33 + index_12))) and ((index_33 = result8) and
+  (index_34 = o6))) and ((index_34 <= 100000) and (((((0 <= index_34) and
+  (index_34 <= 100000)) and (o7 = index_34)) and
+  (o8 = (is_prime7[o7 <- of_int1(0)]))) and ((result9 = is_prime7) and
+  (is_prime8 = o8)))))) ->
+  (forall v:int. (((0 <= v) and (v <= index_22)) ->
+  (((is_prime8[v]) = true) -> (is_prime(v) = true)))))))))))))))))))))))

@@ -119,12 +119,13 @@
 (define-fun float_32__ref___projection ((a float_32__ref)) float_32 (float_32__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_178 Float32)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_178)))
+(define-fun dynamic_invariant ((temp___expr_208 Float32)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_208)))
 
 (declare-const x Float32)
 
@@ -147,8 +148,6 @@
 (declare-const o1 Float32)
 
 (declare-const o2 Float32)
-
-(declare-const o3 Float32)
 
 (declare-const result Float32)
 
@@ -190,19 +189,19 @@
   y)))
 
 ;; H
-  (assert (and (= o1 (fp.mul RNE y z)) (fp.isFinite32 (fp.mul RNE y z))))
+  (assert (and (= o (fp.mul RNE y z)) (fp.isFinite32 (fp.mul RNE y z))))
 
 ;; H
-  (assert (= o2 (fp.add RNE x o1)))
+  (assert (= o1 (fp.add RNE x o)))
 
 ;; H
-  (assert (and (= o3 o2) (fp.isFinite32 o2)))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 ;; H
   (assert (= result res))
 
 ;; H
-  (assert (= res1 o3))
+  (assert (= res1 o2))
 
 (assert
 ;; WP_parameter_def

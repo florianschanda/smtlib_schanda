@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun to_rep (float) Float32)
 
@@ -219,19 +220,19 @@
 
 (declare-fun has_valid_order__function_guard (Bool us_rep) Bool)
 
-(define-fun default_initial_assumption ((temp___expr_136 us_rep)
-  (temp___skip_top_level_137 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_159 us_rep)
+  (temp___skip_top_level_160 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__interval__interval__low
                                             (us_split_fields1
-                                            temp___expr_136))) (fp #b0 #b00000000 #b00000000000000000000000))
+                                            temp___expr_159))) (fp #b0 #b00000000 #b00000000000000000000000))
                                          (= (to_rep
                                             (rec__interval__interval__high
                                             (us_split_fields1
-                                            temp___expr_136))) (fp #b0 #b00000000 #b00000000000000000000000))))
+                                            temp___expr_159))) (fp #b0 #b00000000 #b00000000000000000000000))))
 
-(define-fun type_invariant ((temp___138 us_rep)) Bool (= (has_valid_order
-                                                         temp___138) true))
+(define-fun type_invariant ((temp___161 us_rep)) Bool (= (has_valid_order
+                                                         temp___161) true))
 
 (declare-const low Float32)
 
@@ -310,6 +311,16 @@
 
 (declare-const interval__make__result12 us_rep)
 
+(define-fun interval__make__result13 () us_rep (mk___rep
+                                               (mk___split_fields
+                                               interval__make__result4
+                                               interval__make__result5)))
+
+(define-fun interval__make__result14 () us_rep (mk___rep
+                                               (mk___split_fields
+                                               interval__make__result2
+                                               interval__make__result3)))
+
 ;; H
   (assert (fp.isFinite32 low))
 
@@ -318,49 +329,98 @@
 
 ;; H
   (assert
-  (and
-  (and
   (= interval__make__result9 (mk_interval__ref
                              (mk___rep
                              (mk___split_fields interval__make__result6
-                             interval__make__result7))))
-  (= interval__make__result10 interval__make__result8))
-  (ite (fp.leq low high)
-  (and
-  (and
-  (and (= interval__make__result6 interval__make__result2)
-  (= interval__make__result7 interval__make__result3))
-  (= interval__make__result8 (mk___rep
-                             (mk___split_fields interval__make__result2
-                             interval__make__result3))))
-  (and
-  (and
-  (and (= (to_rep o) high)
-  (and (= (to_rep o1) low) (and (= o1 o2) (= o o3))))
-  (and (= o4 o2) (= o5 o3)))
-  (and
-  (and (= result interval__make__result) (= result1 interval__make__result1))
-  (= (mk___rep
-     (mk___split_fields interval__make__result2 interval__make__result3))
-  (mk___rep (mk___split_fields o4 o5))))))
-  (and
-  (and
-  (and (= interval__make__result6 interval__make__result4)
-  (= interval__make__result7 interval__make__result5))
-  (= interval__make__result8 (mk___rep
-                             (mk___split_fields interval__make__result4
-                             interval__make__result5))))
-  (and
-  (and
-  (and (= (to_rep o6) low)
-  (and (= (to_rep o7) high) (and (= o7 o8) (= o6 o9))))
-  (and (= o10 o8) (= o11 o9)))
-  (and
-  (and (= result2 interval__make__result)
-  (= result3 interval__make__result1))
-  (= (mk___rep
-     (mk___split_fields interval__make__result4 interval__make__result5))
-  (mk___rep (mk___split_fields o10 o11)))))))))
+                             interval__make__result7)))))
+
+;; H
+  (assert (= interval__make__result10 interval__make__result8))
+
+;; H
+  (assert
+  (=> (fp.leq low high) (= interval__make__result6 interval__make__result2)))
+
+;; H
+  (assert
+  (=> (fp.leq low high) (= interval__make__result7 interval__make__result3)))
+
+;; H
+  (assert
+  (=> (fp.leq low high) (= interval__make__result8 interval__make__result14)))
+
+;; H
+  (assert (=> (fp.leq low high) (= (to_rep o) high)))
+
+;; H
+  (assert (=> (fp.leq low high) (= (to_rep o1) low)))
+
+;; H
+  (assert (=> (fp.leq low high) (= o1 o2)))
+
+;; H
+  (assert (=> (fp.leq low high) (= o o3)))
+
+;; H
+  (assert (=> (fp.leq low high) (= o4 o2)))
+
+;; H
+  (assert (=> (fp.leq low high) (= o5 o3)))
+
+;; H
+  (assert (=> (fp.leq low high) (= result interval__make__result)))
+
+;; H
+  (assert (=> (fp.leq low high) (= result1 interval__make__result1)))
+
+;; H
+  (assert
+  (=> (fp.leq low high)
+  (= interval__make__result14 (mk___rep (mk___split_fields o4 o5)))))
+
+;; H
+  (assert
+  (=> (not (fp.leq low high))
+  (= interval__make__result6 interval__make__result4)))
+
+;; H
+  (assert
+  (=> (not (fp.leq low high))
+  (= interval__make__result7 interval__make__result5)))
+
+;; H
+  (assert
+  (=> (not (fp.leq low high))
+  (= interval__make__result8 interval__make__result13)))
+
+;; H
+  (assert (=> (not (fp.leq low high)) (= (to_rep o6) low)))
+
+;; H
+  (assert (=> (not (fp.leq low high)) (= (to_rep o7) high)))
+
+;; H
+  (assert (=> (not (fp.leq low high)) (= o7 o8)))
+
+;; H
+  (assert (=> (not (fp.leq low high)) (= o6 o9)))
+
+;; H
+  (assert (=> (not (fp.leq low high)) (= o10 o8)))
+
+;; H
+  (assert (=> (not (fp.leq low high)) (= o11 o9)))
+
+;; H
+  (assert (=> (not (fp.leq low high)) (= result2 interval__make__result)))
+
+;; H
+  (assert (=> (not (fp.leq low high)) (= result3 interval__make__result1)))
+
+;; H
+  (assert
+  (=> (not (fp.leq low high))
+  (= interval__make__result13 (mk___rep (mk___split_fields o10 o11)))))
 
 ;; H
   (assert (= interval__make__result11 interval__make__result9))

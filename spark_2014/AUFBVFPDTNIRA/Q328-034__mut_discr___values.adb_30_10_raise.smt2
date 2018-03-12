@@ -105,12 +105,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
 (declare-fun to_rep (integer) Int)
 
@@ -145,12 +145,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort positive 0)
 
@@ -229,29 +230,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
-  Int) (Array Int character))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int character)) (b (Array Int character)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (character Int) (Array Int character))
-
-;; singleton_def
-  (assert
-  (forall ((v character))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq ((a (Array Int character)) (a__first Int) (a__last Int)
   (b (Array Int character)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -259,12 +237,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_78 Int))
+                           (forall ((temp___idx_91 Int))
                            (=>
-                           (and (<= a__first temp___idx_78)
-                           (<= temp___idx_78 a__last))
-                           (= (to_rep1 (select a temp___idx_78)) (to_rep1
-                                                                 (select b (+ (- b__first a__first) temp___idx_78)))))))
+                           (and (<= a__first temp___idx_91)
+                           (<= temp___idx_91 a__last))
+                           (= (to_rep1 (select a temp___idx_91)) (to_rep1
+                                                                 (select b (+ (- b__first a__first) temp___idx_91)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -276,49 +254,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_78 Int))
-  (=> (and (<= a__first temp___idx_78) (<= temp___idx_78 a__last))
-  (= (to_rep1 (select a temp___idx_78)) (to_rep1
-                                        (select b (+ (- b__first a__first) temp___idx_78)))))))))))
-
-(declare-fun compare ((Array Int character) Int Int (Array Int character) Int
-  Int) Int)
-
-;; compare_def_eq
-  (assert
-  (forall ((a (Array Int character)) (b (Array Int character)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_lt
-  (assert
-  (forall ((a (Array Int character)) (b (Array Int character)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< (compare a a_first a_last b b_first b_last) 0)
-     (exists ((i Int) (j Int))
-     (and (<= i a_last)
-     (and (< j b_last)
-     (and (= (bool_eq a a_first i b b_first j) true)
-     (or (= i a_last)
-     (and (< i a_last)
-     (< (to_rep1 (select a (+ i 1))) (to_rep1 (select b (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_gt
-  (assert
-  (forall ((a (Array Int character)) (b (Array Int character)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< 0 (compare a a_first a_last b b_first b_last))
-     (exists ((i Int) (j Int))
-     (and (<= i b_last)
-     (and (< j a_last)
-     (and (= (bool_eq a a_first j b b_first i) true)
-     (or (= i b_last)
-     (and (< i b_last)
-     (< (to_rep1 (select b (+ i 1))) (to_rep1 (select a (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
+  (forall ((temp___idx_91 Int))
+  (=> (and (<= a__first temp___idx_91) (<= temp___idx_91 a__last))
+  (= (to_rep1 (select a temp___idx_91)) (to_rep1
+                                        (select b (+ (- b__first a__first) temp___idx_91)))))))))))
 
 (declare-sort t 0)
 
@@ -403,13 +342,14 @@
 (define-fun string__ref___projection ((a string__ref)) us_t (string__content
                                                             a))
 
-(define-fun dynamic_invariant2 ((temp___expr_82 us_t)
-  (temp___is_init_79 Bool) (temp___skip_constant_80 Bool)
-  (temp___do_toplevel_81 Bool)) Bool (=>
-                                     (not (= temp___skip_constant_80 true))
-                                     (dynamic_property 1 2147483647
-                                     (first1 temp___expr_82)
-                                     (last1 temp___expr_82))))
+(define-fun dynamic_invariant2 ((temp___expr_96 us_t)
+  (temp___is_init_92 Bool) (temp___skip_constant_93 Bool)
+  (temp___do_toplevel_94 Bool)
+  (temp___do_typ_inv_95 Bool)) Bool (=>
+                                    (not (= temp___skip_constant_93 true))
+                                    (dynamic_property 1 2147483647
+                                    (first1 temp___expr_96)
+                                    (last1 temp___expr_96))))
 
 (declare-sort number_kind 0)
 
@@ -430,11 +370,12 @@
 (define-fun number_kind__ref___projection ((a number_kind__ref)) number_kind
   (number_kind__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_137 Int)
-  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
-  (temp___do_toplevel_136 Bool)) Bool (=>
-                                      (or (= temp___is_init_134 true)
-                                      (<= 0 2)) (in_range3 temp___expr_137)))
+(define-fun dynamic_invariant3 ((temp___expr_160 Int)
+  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
+  (temp___do_toplevel_158 Bool)
+  (temp___do_typ_inv_159 Bool)) Bool (=>
+                                     (or (= temp___is_init_156 true)
+                                     (<= 0 2)) (in_range3 temp___expr_160)))
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__types__value__e integer)))))
@@ -511,18 +452,18 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range1
-                                     temp___expr_39)))
+(define-fun dynamic_invariant4 ((temp___expr_46 Int) (temp___is_init_42 Bool)
+  (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
+  (temp___do_typ_inv_45 Bool)) Bool (=>
+                                    (or (= temp___is_init_42 true)
+                                    (<= 1 2147483647)) (in_range1
+                                    temp___expr_46)))
 
-(define-fun dynamic_invariant5 ((temp___expr_63 Int) (temp___is_init_60 Bool)
-  (temp___skip_constant_61 Bool)
-  (temp___do_toplevel_62 Bool)) Bool (=>
-                                     (or (= temp___is_init_60 true)
-                                     (<= 0 255)) (in_range2 temp___expr_63)))
+(define-fun dynamic_invariant5 ((temp___expr_74 Int) (temp___is_init_70 Bool)
+  (temp___skip_constant_71 Bool) (temp___do_toplevel_72 Bool)
+  (temp___do_typ_inv_73 Bool)) Bool (=>
+                                    (or (= temp___is_init_70 true)
+                                    (<= 0 255)) (in_range2 temp___expr_74)))
 
 (declare-const int_val Int)
 
@@ -537,7 +478,7 @@
 (declare-const kind1 Int)
 
 ;; H
-  (assert (dynamic_invariant2 word true false true))
+  (assert (dynamic_invariant2 word true false true true))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range int_val)))
@@ -555,12 +496,9 @@
   (assert
   (and (and (in_range int_val1) (fp.isFinite32 real_val1)) (in_range3 kind1)))
 
-;; H
-  (assert (not (= kind1 1)))
-
 (assert
 ;; WP_parameter_def
  ;; File "types.ads", line 5, characters 0-0
-  (not false))
+  (not (= kind1 1)))
 (check-sat)
 (exit)

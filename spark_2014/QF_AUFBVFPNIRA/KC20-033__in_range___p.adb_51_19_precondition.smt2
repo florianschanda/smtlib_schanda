@@ -50,27 +50,29 @@
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range
-                                     temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range
+                                    temp___expr_39)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
 
-(define-fun dynamic_invariant2 ((temp___expr_171 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (<= 0 2)) (in_range1 temp___expr_171)))
+(define-fun dynamic_invariant2 ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 2)) (in_range1 temp___expr_200)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2040)))
 

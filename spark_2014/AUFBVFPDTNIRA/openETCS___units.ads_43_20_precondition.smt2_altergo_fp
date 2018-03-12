@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1160,9 +1160,6 @@ axiom is_valid_speed_km_per_h__def_axiom :
   ((is_valid_speed_km_per_h(speed1) = true) <-> (le(fliteral3, speed1) and
   le(speed1, fliteral4))))
 
-logic o : t
-
-axiom H : tqtisFinite(speed)
-
  (* File "units.ads", line 41, characters 0-0 *)
-goal WP_parameter_def : (is_valid_speed_km_per_h(fliteral4) = true)
+goal WP_parameter_def : (tqtisFinite(speed) ->
+  (is_valid_speed_km_per_h(fliteral4) = true))

@@ -1338,110 +1338,28 @@ axiom sin__post_axiom :
   le(sin(x), fliteral)) and (eq(x, fliteral10) -> eq(sin(x),
   fliteral10))) and tqtisFinite(sin(x)))))
 
-logic delta_lat : t
-
-logic delta_long : t
-
-logic lat_long__distance__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic o15 : t
-
-logic o16 : t
-
-logic o17 : t
-
-logic result : t
-
-logic delta_lat1 : t
-
-logic result1 : t
-
-logic delta_long1 : t
-
-logic result2 : t
-
-logic lat_long__distance__result1 : t
-
-logic lat_long__distance__result2 : t
-
-logic lat_long__distance__result3 : t
-
-logic delta_lat2 : t
-
-logic delta_long2 : t
-
-logic lat_long__distance__result4 : t
-
-logic delta_lat3 : t
-
-logic delta_long3 : t
-
-logic lat_long__distance__result5 : t
-
 logic fliteral12 : t
 
 axiom fliteral_axiom12 : (tqtisFinite(fliteral12) and
   (tqtreal(fliteral12) = 340282346638528859811704183484516925440.0))
 
-axiom H : (le(neg(fliteral12), fliteral12) -> tqtisFinite(delta_lat))
-
-axiom H1 : (le(neg(fliteral12), fliteral12) -> tqtisFinite(delta_long))
-
-axiom H2 : (result = delta_lat)
-
-axiom H3 : (delta_lat1 = mul(RNE, mul(RNE, sub(RNE, to_rep(destination),
-  to_rep(source)), fliteral6), fliteral7))
-
-axiom H4 : ((o = cos(to_rep(source))) and (tqtisFinite(o) and
-  ((o = sin(to_rep(source))) and ((le(neg(fliteral1), to_rep(source)) and
-  le(to_rep(source), fliteral1)) -> le(fliteral2, o)))))
-
-axiom H5 : (o1 = div(RNE, mul(RNE, sub(RNE, to_rep1(destination1),
-  to_rep1(source1)), fliteral6), o))
-
-axiom H6 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H7 : (result1 = delta_long)
-
-axiom H8 : (delta_long1 = o2)
-
-axiom H9 : ((o3 = mul(RNE, delta_long1, delta_long1)) and
-  tqtisFinite(mul(RNE, delta_long1, delta_long1)))
-
-axiom H10 : ((o4 = mul(RNE, delta_lat1, delta_lat1)) and tqtisFinite(mul(RNE,
-  delta_lat1, delta_lat1)))
-
-axiom H11 : (o5 = add(RNE, o4, o3))
-
  (* File "lat_long.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o5)
+goal WP_parameter_def :
+  (forall delta_lat:t. forall delta_long:t. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall result:t.
+  forall delta_lat1:t. forall result1:t. forall delta_long1:t.
+  ((le(neg(fliteral12), fliteral12) -> tqtisFinite(delta_lat)) ->
+  ((le(neg(fliteral12), fliteral12) -> tqtisFinite(delta_long)) -> ((({
+  t__content = result } = { t__content = delta_lat }) and
+  (delta_lat1 = mul(RNE, mul(RNE, sub(RNE, to_rep(destination),
+  to_rep(source)), fliteral6), fliteral7))) ->
+  ((((((o = cos(to_rep(source))) and (tqtisFinite(o) and
+  ((o = sin(to_rep(source))) and ((le(neg(fliteral1), to_rep(source)) and
+  le(to_rep(source), fliteral1)) -> le(fliteral2, o))))) and (o1 = div(RNE,
+  mul(RNE, sub(RNE, to_rep1(destination1), to_rep1(source1)), fliteral6),
+  o))) and ((o2 = o1) and tqtisFinite(o1))) and (({ t__content = result1
+  } = { t__content = delta_long }) and (delta_long1 = o2))) ->
+  ((((o3 = mul(RNE, delta_long1, delta_long1)) and tqtisFinite(mul(RNE,
+  delta_long1, delta_long1))) and (((o4 = mul(RNE, delta_lat1,
+  delta_lat1)) and tqtisFinite(mul(RNE, delta_lat1, delta_lat1))) and
+  (o5 = add(RNE, o4, o3)))) -> tqtisFinite(o5)))))))

@@ -1064,7 +1064,6 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : tqtisFinite(x)
-
  (* File "generic_float_tests.adb", line 338, characters 0-0 *)
-goal WP_parameter_def : le(roundToIntegral(Down, x), roundToIntegral(Up, x))
+goal WP_parameter_def : (tqtisFinite(x) -> le(roundToIntegral(Down, x),
+  roundToIntegral(Up, x)))

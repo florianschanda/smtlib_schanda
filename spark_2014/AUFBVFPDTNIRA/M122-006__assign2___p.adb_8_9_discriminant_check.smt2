@@ -321,14 +321,14 @@
 (declare-datatypes () ((r__ref (mk_r__ref (r__content us_rep)))))
 (define-fun r__ref___projection ((a r__ref)) us_rep (r__content a))
 
-(define-fun default_initial_assumption ((temp___expr_143 us_rep)
-  (temp___skip_top_level_144 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_167 us_rep)
+  (temp___skip_top_level_168 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_143) false)
+                                            temp___expr_167) false)
                                          (= (to_rep1
                                             (rec__types__r__i
                                             (us_split_discrs1
-                                            temp___expr_143))) 0)))
+                                            temp___expr_167))) 0)))
 
 (define-fun in_range2 ((rec__types__r__i1 Int)
   (a us_rep)) Bool (= rec__types__r__i1 (to_rep1
@@ -488,25 +488,27 @@
 (declare-datatypes () ((t2b__ref (mk_t2b__ref (t2b__content us_rep)))))
 (define-fun t2b__ref___projection ((a t2b__ref)) us_rep (t2b__content a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant2 ((temp___expr_135 Int)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (<= 0 1)) (in_range1 temp___expr_135)))
+(define-fun dynamic_invariant2 ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 0 1)) (in_range1 temp___expr_158)))
 
 (declare-const x__split_fields integer)
 
@@ -542,13 +544,13 @@
 
 (declare-const o9 enum)
 
-(declare-const temp___148 enum)
+(declare-const temp___172 enum)
 
-(declare-const temp___1481 integer)
+(declare-const temp___1721 integer)
 
-(declare-const temp___1482 float)
+(declare-const temp___1722 float)
 
-(declare-const temp___1483 Bool)
+(declare-const temp___1723 Bool)
 
 (declare-const result integer)
 
@@ -626,16 +628,16 @@
   (assert (= o5 o9))
 
 ;; H
-  (assert (= temp___148 o9))
+  (assert (= temp___172 o9))
 
 ;; H
-  (assert (= temp___1481 o7))
+  (assert (= temp___1721 o7))
 
 ;; H
-  (assert (= temp___1482 o8))
+  (assert (= temp___1722 o8))
 
 ;; H
-  (assert (= true temp___1483))
+  (assert (= true temp___1723))
 
 ;; H
   (assert (= x__attr__constrained true))
@@ -643,6 +645,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 3, characters 0-0
-  (not (= temp___148 x__split_discrs1)))
+  (not (= temp___172 x__split_discrs1)))
 (check-sat)
 (exit)

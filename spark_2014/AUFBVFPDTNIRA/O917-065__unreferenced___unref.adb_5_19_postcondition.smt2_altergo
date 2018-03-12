@@ -922,30 +922,13 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : t
-
-logic result : t
-
-logic x1 : t
-
-logic x2 : t
-
-logic x3 : t
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H : (le(neg(fliteral1), fliteral1) -> tqtisFinite(x))
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = fliteral)
-
-axiom H3 : (x1 = x2)
-
-axiom H4 : (x3 = x1)
-
  (* File "unref.adb", line 16, characters 0-0 *)
-goal WP_parameter_def : eq(x2, fliteral)
+goal WP_parameter_def :
+  (forall x:t. forall result:t. forall x1:t. forall x2:t. forall x3:t.
+  (((le(neg(fliteral1), fliteral1) -> tqtisFinite(x)) and (((result = x) and
+  (x1 = fliteral)) and ((x1 = x2) and (x3 = x1)))) -> eq(x2, fliteral)))

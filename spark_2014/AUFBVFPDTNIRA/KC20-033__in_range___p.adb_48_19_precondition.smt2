@@ -104,12 +104,12 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range
-                                     temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range
+                                    temp___expr_39)))
 
 (declare-sort float 0)
 
@@ -126,12 +126,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort color 0)
 
@@ -150,11 +151,12 @@
 (declare-datatypes () ((color__ref (mk_color__ref (color__content color)))))
 (define-fun color__ref___projection ((a color__ref)) color (color__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_171 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (<= 0 2)) (in_range1 temp___expr_171)))
+(define-fun dynamic_invariant2 ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 2)) (in_range1 temp___expr_200)))
 
 (declare-sort volt 0)
 
@@ -472,8 +474,9 @@
 ;; ident__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (and (dynamic_invariant n true true true) (and (<= 1 n) (<= n 10)))
-     (dynamic_invariant (ident n) true false true)) :pattern ((ident n)) )))
+  (! (=>
+     (and (dynamic_invariant n true true true true) (and (<= 1 n) (<= n 10)))
+     (dynamic_invariant (ident n) true false true true)) :pattern ((ident n)) )))
 
 (declare-fun ident__2 (Int) Int)
 
@@ -482,9 +485,10 @@
 ;; ident__2__post_axiom
   (assert
   (forall ((c Int))
-  (! (=> (and (dynamic_invariant2 c true true true) (and (<= 0 c) (<= c 1)))
-     (dynamic_invariant2 (ident__2 c) true false true)) :pattern ((ident__2
-                                                                  c)) )))
+  (! (=>
+     (and (dynamic_invariant2 c true true true true) (and (<= 0 c) (<= c 1)))
+     (dynamic_invariant2 (ident__2 c) true false true true)) :pattern (
+  (ident__2 c)) )))
 
 (declare-fun ident__3 (volt) volt)
 
@@ -508,11 +512,11 @@
   (assert
   (forall ((f Float32))
   (! (=>
-     (and (dynamic_invariant1 f true true true)
+     (and (dynamic_invariant1 f true true true true)
      (and (fp.leq (fp.neg (fp #b0 #b01111110 #b11111111011111001110111)) f)
      (fp.leq f (fp #b0 #b01111110 #b11111111011111001110111))))
-     (dynamic_invariant1 (ident__5 f) true false true)) :pattern ((ident__5
-                                                                  f)) )))
+     (dynamic_invariant1 (ident__5 f) true false true true)) :pattern (
+  (ident__5 f)) )))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -523,44 +527,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
-
-(declare-const n Int)
-
-(declare-const c Int)
-
-(declare-const v volt)
-
-(declare-const m money)
-
-(declare-const o Int)
-
-(declare-const o1 Int)
-
-(declare-const o2 volt)
-
-(declare-const o3 volt)
-
-(declare-const o4 money)
-
-(declare-const o5 money)
-
-(declare-const o6 Float32)
-
-(declare-const result Int)
-
-(declare-const n1 Int)
-
-(declare-const result1 Int)
-
-(declare-const c1 Int)
-
-(declare-const result2 volt)
-
-(declare-const v1 volt)
-
-(declare-const result3 money)
-
-(declare-const m1 money)
 
 (assert
 ;; WP_parameter_def

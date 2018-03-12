@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun sqrt2 (t) t)
 
@@ -1100,14 +1100,14 @@
 ;; sqrt__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (and (dynamic_invariant x true true true) (le fliteral2 x))
+  (! (=> (and (dynamic_invariant x true true true true) (le fliteral2 x))
      (let ((result (sqrt2 x)))
      (and
      (and (le fliteral2 result)
      (and (=> (eq x fliteral2) (eq result fliteral2))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant result
-     true false true)))) :pattern ((sqrt2 x)) )))
+     true false true true)))) :pattern ((sqrt2 x)) )))
 
 (declare-sort integer_8 0)
 
@@ -1128,12 +1128,13 @@
 (define-fun integer_8__ref___2__projection ((a integer_8__ref)) integer_8
   (integer_8__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_147 Int)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (<= (- 128) 127)) (in_range1
-                                      temp___expr_147)))
+(define-fun dynamic_invariant1 ((temp___expr_172 Int)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (<= (- 128) 127)) (in_range1
+                                     temp___expr_172)))
 
 (declare-const i Int)
 
@@ -1142,8 +1143,6 @@
 (declare-const o t)
 
 (declare-const o1 Int)
-
-(declare-const o2 Int)
 
 ;; H
   (assert (in_range1 i))

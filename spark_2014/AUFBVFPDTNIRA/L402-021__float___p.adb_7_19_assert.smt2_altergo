@@ -932,59 +932,12 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic c : t
-
-logic f : t
-
-logic r : t
-
-logic t1 : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic c1 : t
-
-logic result1 : t
-
-logic f1 : t
-
-logic result2 : t
-
-logic r1 : t
-
-logic result3 : t
-
-logic t2 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : (result = c)
-
-axiom H2 : (c1 = roundToIntegral(RTP, x))
-
-axiom H3 : tqtisFinite(c1)
-
-axiom H4 : (result1 = f)
-
-axiom H5 : (f1 = roundToIntegral(RTN, x))
-
-axiom H6 : tqtisFinite(f1)
-
-axiom H7 : (result2 = r)
-
-axiom H8 : (r1 = roundToIntegral(RNA, x))
-
-axiom H9 : tqtisFinite(r1)
-
-axiom H10 : (result3 = t1)
-
-axiom H11 : (t2 = roundToIntegral(RTZ, x))
-
-axiom H12 : tqtisFinite(t2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : le(x, c1)
+goal WP_parameter_def :
+  (forall c:t. forall f:t. forall r:t. forall t1:t. forall result:t.
+  forall c1:t. forall result1:t. forall f1:t. forall result2:t. forall r1:t.
+  forall result3:t. forall t2:t. (tqtisFinite(x) -> (((result = c) and
+  (c1 = roundToIntegral(RTP, x))) -> (tqtisFinite(c1) -> (((result1 = f) and
+  (f1 = roundToIntegral(RTN, x))) -> (tqtisFinite(f1) -> (((result2 = r) and
+  (r1 = roundToIntegral(RNA, x))) -> (tqtisFinite(r1) -> (((result3 = t1) and
+  (t2 = roundToIntegral(RTZ, x))) -> (tqtisFinite(t2) -> le(x, c1)))))))))))

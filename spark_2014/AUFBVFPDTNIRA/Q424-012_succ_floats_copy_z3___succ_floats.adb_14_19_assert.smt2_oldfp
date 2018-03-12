@@ -1116,12 +1116,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const a Bool)
 
@@ -1133,6 +1133,25 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 110000002384185791015625.0 100000000000000000000000.0))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 899999976158142089843750.0 1000000000000000000000000.0))))
+
 (declare-const x t)
 
 (declare-const result t)
@@ -1143,32 +1162,11 @@
 
 (declare-const x2 t)
 
-(declare-const result2 t)
-
-(declare-const x3 t)
-
-(declare-const result3 t)
-
-(declare-const x4 t)
-
-(declare-const result4 t)
-
-(declare-const x5 t)
-
-(declare-const result5 t)
-
-(declare-const x6 t)
-
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x)))
 
 ;; H
   (assert (= result x))
-
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
   (assert (= x1 fliteral2))
@@ -1194,25 +1192,11 @@
 ;; H
   (assert (lt fliteral (next_representable x2)))
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 110000002384185791015625.0 100000000000000000000000.0))))
-
 ;; H
   (assert (lt (next_representable x2) fliteral3))
 
 ;; H
   (assert (lt (prev_representable x2) fliteral))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 899999976158142089843750.0 1000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

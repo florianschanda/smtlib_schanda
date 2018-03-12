@@ -80,40 +80,34 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
-(define-fun dynamic_invariant ((temp___expr_160 (_ BitVec 8))
-  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
-  (temp___do_toplevel_159 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_187 (_ BitVec 8))
+  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
+  (temp___do_toplevel_185 Bool) (temp___do_typ_inv_186 Bool)) Bool true)
 
-(define-fun dynamic_invariant1 ((temp___expr_202 Float32)
-  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
-  (temp___do_toplevel_201 Bool)) Bool (=>
-                                      (or (= temp___is_init_199 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_202)))
+(define-fun dynamic_invariant1 ((temp___expr_236 Float32)
+  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
+  (temp___do_toplevel_234 Bool)
+  (temp___do_typ_inv_235 Bool)) Bool (=>
+                                     (or (= temp___is_init_232 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_236)))
 
-(declare-const abstr7 (_ BitVec 8))
-
-(declare-const abstr8 (_ BitVec 8))
-
-(define-fun in_range1 ((x (_ BitVec 8))) Bool (and (bvule abstr8 x)
-                                              (bvule x abstr7)))
+(define-fun in_range1 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
+                                              (bvule x #x31)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
 
-(define-fun dynamic_invariant2 ((temp___expr_208 (_ BitVec 8))
-  (temp___is_init_205 Bool) (temp___skip_constant_206 Bool)
-  (temp___do_toplevel_207 Bool)) Bool (=>
-                                      (or (= temp___is_init_205 true)
-                                      (bvule abstr8 abstr7)) (in_range1
-                                      temp___expr_208)))
+(define-fun dynamic_invariant2 ((temp___expr_243 (_ BitVec 8))
+  (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
+  (temp___do_toplevel_241 Bool)
+  (temp___do_typ_inv_242 Bool)) Bool (=>
+                                     (or (= temp___is_init_239 true)
+                                     (bvule #x00 #x31)) (in_range1
+                                     temp___expr_243)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -121,35 +115,35 @@
 
 (declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 8))
 
-(declare-const abstr9 (_ BitVec 8))
-
-(define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule abstr8 x)
-                                              (bvule x abstr9)))
+(define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
+                                              (bvule x #x32)))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
 
-(define-fun dynamic_invariant3 ((temp___expr_214 (_ BitVec 8))
-  (temp___is_init_211 Bool) (temp___skip_constant_212 Bool)
-  (temp___do_toplevel_213 Bool)) Bool (=>
-                                      (or (= temp___is_init_211 true)
-                                      (bvule abstr8 abstr9)) (in_range2
-                                      temp___expr_214)))
+(define-fun dynamic_invariant3 ((temp___expr_250 (_ BitVec 8))
+  (temp___is_init_246 Bool) (temp___skip_constant_247 Bool)
+  (temp___do_toplevel_248 Bool)
+  (temp___do_typ_inv_249 Bool)) Bool (=>
+                                     (or (= temp___is_init_246 true)
+                                     (bvule #x00 #x32)) (in_range2
+                                     temp___expr_250)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 8))
 
-(define-fun in_range3 ((x (_ BitVec 8))) Bool (and (bvule abstr8 x)
-                                              (bvule x abstr9)))
+(define-fun in_range3 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
+                                              (bvule x #x32)))
 
 (define-fun in_range_int2 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
 
-(define-fun dynamic_invariant4 ((temp___expr_244 (_ BitVec 8))
-  (temp___is_init_241 Bool) (temp___skip_constant_242 Bool)
-  (temp___do_toplevel_243 Bool)) Bool (=>
-                                      (or (= temp___is_init_241 true)
-                                      (bvule abstr8 abstr9)) (in_range3
-                                      temp___expr_244)))
+(define-fun dynamic_invariant4 ((temp___expr_282 (_ BitVec 8))
+  (temp___is_init_278 Bool) (temp___skip_constant_279 Bool)
+  (temp___do_toplevel_280 Bool)
+  (temp___do_typ_inv_281 Bool)) Bool (=>
+                                     (or (= temp___is_init_278 true)
+                                     (bvule #x00 #x32)) (in_range3
+                                     temp___expr_282)))
 
 (declare-const battery_level Float32)
 
@@ -175,19 +169,19 @@
 
 (declare-const o5 (_ BitVec 8))
 
-(declare-const temp___280 (_ BitVec 8))
+(declare-const temp___318 (_ BitVec 8))
 
 (declare-const o6 (_ BitVec 8))
 
 (declare-const o7 (_ BitVec 8))
 
-(declare-const temp___282 (_ BitVec 8))
+(declare-const temp___320 (_ BitVec 8))
 
 (declare-const o8 (_ BitVec 8))
 
 (declare-const o9 (_ BitVec 8))
 
-(declare-const temp___279 (_ BitVec 8))
+(declare-const temp___317 (_ BitVec 8))
 
 (declare-const o10 (_ BitVec 8))
 
@@ -237,17 +231,18 @@
 ;; H
   (assert (= counter c))
 
-(declare-const abstr10 (_ BitVec 8))
+;; H
+  (assert true)
 
 ;; H
   (assert
-  (=> (bvule (bvsub abstr9 current_time) abstr10)
-  (= o (bvsub (bvadd current_time abstr10) abstr9))))
+  (=> (bvule (bvsub #x32 current_time) #x01)
+  (= o (bvsub (bvadd current_time #x01) #x32))))
 
 ;; H
   (assert
-  (=> (not (bvule (bvsub abstr9 current_time) abstr10))
-  (= o (bvadd current_time abstr10))))
+  (=> (not (bvule (bvsub #x32 current_time) #x01))
+  (= o (bvadd current_time #x01))))
 
 ;; H
   (assert (= current_time1 o))
@@ -258,14 +253,14 @@
 
 ;; H
   (assert
-  (and (= o1 (bv_min (bvadd counter abstr10) abstr9)) (in_range3
-  (bv_min (bvadd counter abstr10) abstr9))))
+  (and (= o1 (bv_min (bvadd counter #x01) #x32)) (in_range3
+  (bv_min (bvadd counter #x01) #x32))))
 
 ;; H
   (assert (= counter1 o1))
 
 ;; H
-  (assert (=> (= c abstr9) (= counter1 abstr9)))
+  (assert (=> (= c #x32) (= counter1 #x32)))
 
 ;; H
   (assert (= o3 (ite (not (= o2 true)) true false)))
@@ -277,7 +272,7 @@
   (assert (and (= o9 counter1) (in_range1 counter1)))
 
 ;; H
-  (assert (= temp___279 (bvsub current_time1 o9)))
+  (assert (= temp___317 (bvsub current_time1 o9)))
 
 ;; H
   (assert (and (= o10 counter1) (in_range1 counter1)))
@@ -286,10 +281,10 @@
   (assert (= result4 (ite (bvult current_time1 o10) true false)))
 
 ;; H
-  (assert (=> (= result4 true) (= o11 (bvadd temp___279 abstr9))))
+  (assert (=> (= result4 true) (= o11 (bvadd temp___317 #x32))))
 
 ;; H
-  (assert (=> (not (= result4 true)) (= o11 temp___279)))
+  (assert (=> (not (= result4 true)) (= o11 temp___317)))
 
 ;; H
   (assert
@@ -301,7 +296,7 @@
 
 ;; H
   (assert
-  (and (= o4 (bvsub counter1 abstr10)) (in_range1 (bvsub counter1 abstr10))))
+  (and (= o4 (bvsub counter1 #x01)) (in_range1 (bvsub counter1 #x01))))
 
 ;; H
   (assert (= result5 (ite (bvuge current_time1 o4) true false)))
@@ -315,6 +310,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "failsafe.adb", line 31, characters 0-0
-  (not (in_range1 (bvsub counter1 abstr10))))
+  (not (in_range1 (bvsub counter1 #x01))))
 (check-sat)
 (exit)

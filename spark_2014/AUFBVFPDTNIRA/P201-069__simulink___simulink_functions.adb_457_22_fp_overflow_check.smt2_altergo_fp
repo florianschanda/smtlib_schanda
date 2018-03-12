@@ -1066,39 +1066,17 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-axiom H : tqtisFinite(left)
-
-axiom H1 : tqtisFinite(right)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H2 : (not eq(right, fliteral1))
-
-axiom H3 : ((o = div(NearestTiesToEven, left, right)) and
-  tqtisFinite(div(NearestTiesToEven, left, right)))
-
-axiom H4 : (o1 = roundToIntegral(Down, o))
-
-axiom H5 : (o2 = mul(NearestTiesToEven, o1, right))
-
-axiom H6 : ((o3 = o2) and tqtisFinite(o2))
-
-axiom H7 : (o4 = sub(NearestTiesToEven, left, o3))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o4)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
+  (tqtisFinite(left) -> (tqtisFinite(right) -> ((not eq(right, fliteral1)) ->
+  (((((((o = div(NearestTiesToEven, left, right)) and
+  tqtisFinite(div(NearestTiesToEven, left, right))) and
+  (o1 = roundToIntegral(Down, o))) and (o2 = mul(NearestTiesToEven, o1,
+  right))) and ((o3 = o2) and tqtisFinite(o2))) and
+  (o4 = sub(NearestTiesToEven, left, o3))) -> tqtisFinite(o4))))))

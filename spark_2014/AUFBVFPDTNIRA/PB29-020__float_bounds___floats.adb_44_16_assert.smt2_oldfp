@@ -2083,10 +2083,6 @@
   (and (tqtisFinite (to_float32 m x))
   (= (tqtreal (to_float32 m x)) (round m (tqtreal1 x))))))))
 
-(define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int2 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range2 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -2188,29 +2184,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int float) Int Int (Array Int float) Int
-  Int) (Array Int float))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int float)) (b (Array Int float)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (float Int) (Array Int float))
-
-;; singleton_def
-  (assert
-  (forall ((v float))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq4 ((a (Array Int float)) (a__first Int) (a__last Int)
   (b (Array Int float)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -2218,12 +2191,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (to_rep (select a temp___idx_132)) (to_rep
-                                                                 (select b (+ (- b__first a__first) temp___idx_132)))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (to_rep (select a temp___idx_154)) (to_rep
+                                                                 (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -2235,10 +2208,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (to_rep (select a temp___idx_132)) (to_rep
-                                        (select b (+ (- b__first a__first) temp___idx_132)))))))))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (to_rep (select a temp___idx_154)) (to_rep
+                                        (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int long_float))))))
@@ -2259,29 +2232,6 @@
   (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
-(declare-fun concat2 ((Array Int long_float) Int Int (Array Int long_float)
-  Int Int) (Array Int long_float))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int long_float)) (b (Array Int long_float)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat2 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton2 (long_float Int) (Array Int long_float))
-
-;; singleton_def
-  (assert
-  (forall ((v long_float))
-  (forall ((i Int))
-  (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
-
 (define-fun bool_eq5 ((a (Array Int long_float)) (a__first Int) (a__last Int)
   (b (Array Int long_float)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -2289,12 +2239,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_133 Int))
+                           (forall ((temp___idx_155 Int))
                            (=>
-                           (and (<= a__first temp___idx_133)
-                           (<= temp___idx_133 a__last))
-                           (= (to_rep1 (select a temp___idx_133)) (to_rep1
-                                                                  (select b (+ (- b__first a__first) temp___idx_133)))))))
+                           (and (<= a__first temp___idx_155)
+                           (<= temp___idx_155 a__last))
+                           (= (to_rep1 (select a temp___idx_155)) (to_rep1
+                                                                  (select b (+ (- b__first a__first) temp___idx_155)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -2306,10 +2256,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_133 Int))
-  (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (to_rep1 (select a temp___idx_133)) (to_rep1
-                                         (select b (+ (- b__first a__first) temp___idx_133)))))))))))
+  (forall ((temp___idx_155 Int))
+  (=> (and (<= a__first temp___idx_155) (<= temp___idx_155 a__last))
+  (= (to_rep1 (select a temp___idx_155)) (to_rep1
+                                         (select b (+ (- b__first a__first) temp___idx_155)))))))))))
 
 (declare-const a (Array Int float))
 
@@ -2326,47 +2276,11 @@
 (declare-fun floats__test__b__aggregate_def (t1 t1 t1
   t1) (Array Int long_float))
 
-;; def_axiom
-  (assert
-  (forall ((temp___156 t1) (temp___157 t1) (temp___158 t1) (temp___159 t1))
-  (let ((temp___155 (floats__test__b__aggregate_def temp___156 temp___157
-                    temp___158 temp___159)))
-  (and
-  (and
-  (and (= (select temp___155 1) (of_rep1 temp___156))
-  (= (select temp___155 2) (of_rep1 temp___157)))
-  (= (select temp___155 3) (of_rep1 temp___158)))
-  (= (select temp___155 4) (of_rep1 temp___159))))))
-
 (declare-fun floats__test__c__aggregate_def (t1 t1 t1
   t1) (Array Int long_float))
 
-;; def_axiom
-  (assert
-  (forall ((temp___162 t1) (temp___163 t1) (temp___164 t1) (temp___165 t1))
-  (let ((temp___161 (floats__test__c__aggregate_def temp___162 temp___163
-                    temp___164 temp___165)))
-  (and
-  (and
-  (and (= (select temp___161 1) (of_rep1 temp___162))
-  (= (select temp___161 2) (of_rep1 temp___163)))
-  (= (select temp___161 3) (of_rep1 temp___164)))
-  (= (select temp___161 4) (of_rep1 temp___165))))))
-
 (declare-fun floats__test__d__aggregate_def (t1 t1 t1
   t1) (Array Int long_float))
-
-;; def_axiom
-  (assert
-  (forall ((temp___168 t1) (temp___169 t1) (temp___170 t1) (temp___171 t1))
-  (let ((temp___167 (floats__test__d__aggregate_def temp___168 temp___169
-                    temp___170 temp___171)))
-  (and
-  (and
-  (and (= (select temp___167 1) (of_rep1 temp___168))
-  (= (select temp___167 2) (of_rep1 temp___169)))
-  (= (select temp___167 3) (of_rep1 temp___170)))
-  (= (select temp___167 4) (of_rep1 temp___171))))))
 
 (declare-const fliteral2 t)
 
@@ -2375,12 +2289,12 @@
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral2) fliteral2)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral2) fliteral2)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const fliteral3 t1)
 
@@ -2389,12 +2303,82 @@
   (and (tqtisFinite1 fliteral3)
   (= (tqtreal1 fliteral3) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant1 ((temp___expr_57 t1) (temp___is_init_54 Bool)
-  (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true) (le1
-                                     (neg1 fliteral3) fliteral3))
-                                     (tqtisFinite1 temp___expr_57)))
+(define-fun dynamic_invariant1 ((temp___expr_67 t1) (temp___is_init_63 Bool)
+  (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true) (le1
+                                    (neg1 fliteral3) fliteral3))
+                                    (tqtisFinite1 temp___expr_67)))
+
+;; def_axiom
+  (assert
+  (forall ((temp___180 t1) (temp___181 t1) (temp___182 t1) (temp___183 t1))
+  (let ((temp___179 (floats__test__b__aggregate_def temp___180 temp___181
+                    temp___182 temp___183)))
+  (=>
+  (and
+  (and
+  (and (dynamic_invariant1 temp___180 true true true true)
+  (dynamic_invariant1 temp___181 true true true true)) (dynamic_invariant1
+  temp___182 true true true true)) (dynamic_invariant1 temp___183 true true
+  true true))
+  (and
+  (and
+  (and (= (to_rep1 (select temp___179 1)) temp___180)
+  (= (to_rep1 (select temp___179 2)) temp___181))
+  (= (to_rep1 (select temp___179 3)) temp___182))
+  (= (to_rep1 (select temp___179 4)) temp___183))))))
+
+;; def_axiom
+  (assert
+  (forall ((temp___186 t1) (temp___187 t1) (temp___188 t1) (temp___189 t1))
+  (let ((temp___185 (floats__test__c__aggregate_def temp___186 temp___187
+                    temp___188 temp___189)))
+  (=>
+  (and
+  (and
+  (and (dynamic_invariant1 temp___186 true true true true)
+  (dynamic_invariant1 temp___187 true true true true)) (dynamic_invariant1
+  temp___188 true true true true)) (dynamic_invariant1 temp___189 true true
+  true true))
+  (and
+  (and
+  (and (= (to_rep1 (select temp___185 1)) temp___186)
+  (= (to_rep1 (select temp___185 2)) temp___187))
+  (= (to_rep1 (select temp___185 3)) temp___188))
+  (= (to_rep1 (select temp___185 4)) temp___189))))))
+
+;; def_axiom
+  (assert
+  (forall ((temp___192 t1) (temp___193 t1) (temp___194 t1) (temp___195 t1))
+  (let ((temp___191 (floats__test__d__aggregate_def temp___192 temp___193
+                    temp___194 temp___195)))
+  (=>
+  (and
+  (and
+  (and (dynamic_invariant1 temp___192 true true true true)
+  (dynamic_invariant1 temp___193 true true true true)) (dynamic_invariant1
+  temp___194 true true true true)) (dynamic_invariant1 temp___195 true true
+  true true))
+  (and
+  (and
+  (and (= (to_rep1 (select temp___191 1)) temp___192)
+  (= (to_rep1 (select temp___191 2)) temp___193))
+  (= (to_rep1 (select temp___191 3)) temp___194))
+  (= (to_rep1 (select temp___191 4)) temp___195))))))
+
+(declare-const fliteral4 t1)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite1 fliteral4) (= (tqtreal1 fliteral4) (/ 0.0 10.0))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 (declare-const e (Array Int long_float))
 
@@ -2451,30 +2435,6 @@
 (declare-const o22 long_float)
 
 (declare-const o23 (Array Int long_float))
-
-(declare-const o24 t1)
-
-(declare-const o25 long_float)
-
-(declare-const o26 (Array Int long_float))
-
-(declare-const o27 t1)
-
-(declare-const o28 long_float)
-
-(declare-const o29 (Array Int long_float))
-
-(declare-const o30 t1)
-
-(declare-const o31 long_float)
-
-(declare-const o32 (Array Int long_float))
-
-(declare-const o33 t1)
-
-(declare-const o34 long_float)
-
-(declare-const o35 (Array Int long_float))
 
 (declare-const result (Array Int long_float))
 
@@ -2536,22 +2496,6 @@
 
 (declare-const b5 (Array Int long_float))
 
-(declare-const result15 (Array Int long_float))
-
-(declare-const d2 (Array Int long_float))
-
-(declare-const result16 (Array Int long_float))
-
-(declare-const d3 (Array Int long_float))
-
-(declare-const result17 map__ref1)
-
-(declare-const d4 (Array Int long_float))
-
-(declare-const result18 map__ref1)
-
-(declare-const d5 (Array Int long_float))
-
 ;; H
   (assert
   (forall ((i Int))
@@ -2561,12 +2505,6 @@
 
 ;; H
   (assert (= result b))
-
-(declare-const fliteral4 t1)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite1 fliteral4) (= (tqtreal1 fliteral4) (/ 0.0 10.0))))
 
 ;; H
   (assert
@@ -2615,13 +2553,6 @@
 
 ;; H
   (assert (= e1 o1))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert
@@ -2839,7 +2770,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "floats.ads", line 6, characters 0-0
+ ;; File "floats.adb", line 7, characters 0-0
   (not (le1 (neg1 fliteral1) (to_rep1 (select b5 3)))))
 (check-sat)
 (exit)

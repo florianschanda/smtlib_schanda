@@ -57,12 +57,12 @@
 (define-fun positive__ref___projection ((a positive__ref)) positive (positive__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range
-                                     temp___expr_39)))
+(define-fun dynamic_invariant ((temp___expr_46 Int) (temp___is_init_42 Bool)
+  (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
+  (temp___do_typ_inv_45 Bool)) Bool (=>
+                                    (or (= temp___is_init_42 true)
+                                    (<= 1 2147483647)) (in_range
+                                    temp___expr_46)))
 
 (declare-fun pow2 (Int) Int)
 
@@ -297,29 +297,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int us_rep) Int Int (Array Int us_rep) Int
-  Int) (Array Int us_rep))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int us_rep)) (b (Array Int us_rep)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (us_rep Int) (Array Int us_rep))
-
-;; singleton_def
-  (assert
-  (forall ((v us_rep))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq1 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
   (b (Array Int us_rep)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -327,12 +304,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (bool_eq (select a temp___idx_132)
-                              (select b (+ (- b__first a__first) temp___idx_132))) true))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (bool_eq (select a temp___idx_154)
+                              (select b (+ (- b__first a__first) temp___idx_154))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -344,10 +321,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (bool_eq (select a temp___idx_132)
-     (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (bool_eq (select a temp___idx_154)
+     (select b (+ (- b__first a__first) temp___idx_154))) true))))))))
 
 (declare-const dummy3 (Array Int us_rep))
 
@@ -519,29 +496,6 @@
   (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
-(declare-fun concat2 ((Array Int us_rep1) Int Int (Array Int us_rep1) Int
-  Int) (Array Int us_rep1))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int us_rep1)) (b (Array Int us_rep1)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat2 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton2 (us_rep1 Int) (Array Int us_rep1))
-
-;; singleton_def
-  (assert
-  (forall ((v us_rep1))
-  (forall ((i Int))
-  (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
-
 (define-fun bool_eq3 ((a (Array Int us_rep1)) (a__first Int) (a__last Int)
   (b (Array Int us_rep1)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -549,12 +503,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_133 Int))
+                           (forall ((temp___idx_155 Int))
                            (=>
-                           (and (<= a__first temp___idx_133)
-                           (<= temp___idx_133 a__last))
-                           (= (bool_eq2 (select a temp___idx_133)
-                              (select b (+ (- b__first a__first) temp___idx_133))) true))))
+                           (and (<= a__first temp___idx_155)
+                           (<= temp___idx_155 a__last))
+                           (= (bool_eq2 (select a temp___idx_155)
+                              (select b (+ (- b__first a__first) temp___idx_155))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -566,10 +520,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_133 Int))
-  (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq2 (select a temp___idx_133)
-     (select b (+ (- b__first a__first) temp___idx_133))) true))))))))
+  (forall ((temp___idx_155 Int))
+  (=> (and (<= a__first temp___idx_155) (<= temp___idx_155 a__last))
+  (= (bool_eq2 (select a temp___idx_155)
+     (select b (+ (- b__first a__first) temp___idx_155))) true))))))))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -583,12 +537,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const l (Array Int us_rep1))
 
@@ -614,22 +569,6 @@
 
 (declare-const untangle_tests__swap_triangle__tmp__assume4 float)
 
-(declare-const o1 Int)
-
-(declare-const o2 (Array Int us_rep))
-
-(declare-const o3 float)
-
-(declare-const o4 float)
-
-(declare-const o5 float)
-
-(declare-const o6 float)
-
-(declare-const o7 Int)
-
-(declare-const o8 (Array Int us_rep1))
-
 (declare-const result (Array Int us_rep))
 
 (declare-const result1 float)
@@ -649,10 +588,6 @@
 (declare-const tmp__split_fields8 float)
 
 (declare-const tmp__split_fields9 float)
-
-(declare-const result5 (Array Int us_rep1))
-
-(declare-const l1 (Array Int us_rep1))
 
 ;; H
   (assert (in_range a))

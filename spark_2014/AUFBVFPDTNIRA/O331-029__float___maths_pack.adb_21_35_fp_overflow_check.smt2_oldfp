@@ -1143,10 +1143,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t)))))
-(define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1179,12 +1175,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-sort unsigned_32 0)
 
@@ -1205,9 +1201,9 @@
 (define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32
   (unsigned_32__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_182 (_ BitVec 32))
-  (temp___is_init_179 Bool) (temp___skip_constant_180 Bool)
-  (temp___do_toplevel_181 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_212 (_ BitVec 32))
+  (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
+  (temp___do_toplevel_210 Bool) (temp___do_typ_inv_211 Bool)) Bool true)
 
 (declare-const x t)
 
@@ -1240,12 +1236,13 @@
 (define-fun source__ref___projection ((a source__ref)) source (source__content
                                                               a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1342 t)
-  (temp___is_init_1339 Bool) (temp___skip_constant_1340 Bool)
-  (temp___do_toplevel_1341 Bool)) Bool (=>
-                                       (or (= temp___is_init_1339 true) (le
-                                       (neg fliteral1) fliteral1))
-                                       (tqtisFinite temp___expr_1342)))
+(define-fun dynamic_invariant2 ((temp___expr_1564 t)
+  (temp___is_init_1560 Bool) (temp___skip_constant_1561 Bool)
+  (temp___do_toplevel_1562 Bool)
+  (temp___do_typ_inv_1563 Bool)) Bool (=>
+                                      (or (= temp___is_init_1560 true) (le
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_1564)))
 
 (declare-sort target 0)
 
@@ -1266,9 +1263,9 @@
 (define-fun target__ref___projection ((a target__ref)) target (target__content
                                                               a))
 
-(define-fun dynamic_invariant3 ((temp___expr_1348 (_ BitVec 32))
-  (temp___is_init_1345 Bool) (temp___skip_constant_1346 Bool)
-  (temp___do_toplevel_1347 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_1571 (_ BitVec 32))
+  (temp___is_init_1567 Bool) (temp___skip_constant_1568 Bool)
+  (temp___do_toplevel_1569 Bool) (temp___do_typ_inv_1570 Bool)) Bool true)
 
 (declare-fun float_to_unsigned_32 (t) (_ BitVec 32))
 
@@ -1277,9 +1274,9 @@
 ;; float_to_unsigned_32__post_axiom
   (assert
   (forall ((s t))
-  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3
-     (float_to_unsigned_32 s) true false true)) :pattern ((float_to_unsigned_32
-                                                          s)) )))
+  (! (=> (dynamic_invariant2 s true true true true) (dynamic_invariant3
+     (float_to_unsigned_32 s) true false true true)) :pattern ((float_to_unsigned_32
+                                                               s)) )))
 
 (declare-sort source1 0)
 
@@ -1300,9 +1297,9 @@
 (define-fun source__ref___2__projection ((a source__ref1)) source1 (source__content1
                                                                    a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1354 (_ BitVec 32))
-  (temp___is_init_1351 Bool) (temp___skip_constant_1352 Bool)
-  (temp___do_toplevel_1353 Bool)) Bool true)
+(define-fun dynamic_invariant4 ((temp___expr_1578 (_ BitVec 32))
+  (temp___is_init_1574 Bool) (temp___skip_constant_1575 Bool)
+  (temp___do_toplevel_1576 Bool) (temp___do_typ_inv_1577 Bool)) Bool true)
 
 (declare-sort target1 0)
 
@@ -1323,12 +1320,13 @@
 (define-fun target__ref___2__projection ((a target__ref1)) target1 (target__content1
                                                                    a))
 
-(define-fun dynamic_invariant5 ((temp___expr_1360 t)
-  (temp___is_init_1357 Bool) (temp___skip_constant_1358 Bool)
-  (temp___do_toplevel_1359 Bool)) Bool (=>
-                                       (or (= temp___is_init_1357 true) (le
-                                       (neg fliteral1) fliteral1))
-                                       (tqtisFinite temp___expr_1360)))
+(define-fun dynamic_invariant5 ((temp___expr_1585 t)
+  (temp___is_init_1581 Bool) (temp___skip_constant_1582 Bool)
+  (temp___do_toplevel_1583 Bool)
+  (temp___do_typ_inv_1584 Bool)) Bool (=>
+                                      (or (= temp___is_init_1581 true) (le
+                                      (neg fliteral1) fliteral1))
+                                      (tqtisFinite temp___expr_1585)))
 
 (declare-fun unsigned_32_to_float ((_ BitVec 32)) t)
 
@@ -1337,9 +1335,23 @@
 ;; unsigned_32_to_float__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant4 s true true true) (dynamic_invariant5
-     (unsigned_32_to_float s) true false true)) :pattern ((unsigned_32_to_float
-                                                          s)) )))
+  (! (=> (dynamic_invariant4 s true true true true) (dynamic_invariant5
+     (unsigned_32_to_float s) true false true true)) :pattern ((unsigned_32_to_float
+                                                               s)) )))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 (declare-const half_x t)
 
@@ -1349,8 +1361,6 @@
 
 (declare-const i (_ BitVec 32))
 
-(declare-const maths_pack__inv_sqrt__result t)
-
 (declare-const o (_ BitVec 32))
 
 (declare-const o1 t)
@@ -1358,16 +1368,6 @@
 (declare-const o2 t)
 
 (declare-const o3 t)
-
-(declare-const o4 t)
-
-(declare-const o5 t)
-
-(declare-const o6 t)
-
-(declare-const o7 t)
-
-(declare-const o8 t)
 
 (declare-const result t)
 
@@ -1393,60 +1393,14 @@
 
 (declare-const y2 t)
 
-(declare-const result6 t)
-
-(declare-const y3 t)
-
-(declare-const result7 t)
-
-(declare-const maths_pack__inv_sqrt__result1 t)
-
-(declare-const maths_pack__inv_sqrt__result2 t)
-
-(declare-const maths_pack__inv_sqrt__result3 t)
-
-(declare-const half_x2 t)
-
-(declare-const y4 t)
-
-(declare-const magic_num2 (_ BitVec 32))
-
-(declare-const i3 (_ BitVec 32))
-
-(declare-const maths_pack__inv_sqrt__result4 t)
-
-(declare-const half_x3 t)
-
-(declare-const y5 t)
-
-(declare-const magic_num3 (_ BitVec 32))
-
-(declare-const i4 (_ BitVec 32))
-
-(declare-const maths_pack__inv_sqrt__result5 t)
-
 ;; H
   (assert (tqtisFinite x))
-
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert (le fliteral2 x))
 
 ;; H
   (assert (= (mk_t__ref1 result) (mk_t__ref1 half_x)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert (= half_x1 (mul RNE1 fliteral3 x)))
@@ -1467,13 +1421,7 @@
   (assert (= (mk_t__ref result2) (mk_t__ref magic_num)))
 
 ;; H
-  (assert (= magic_num1 ((_ int2bv 32) 1597463007)))
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
+  (assert (= magic_num1 #x5F3759DF))
 
 ;; H
   (assert (= o (float_to_unsigned_32 y1)))

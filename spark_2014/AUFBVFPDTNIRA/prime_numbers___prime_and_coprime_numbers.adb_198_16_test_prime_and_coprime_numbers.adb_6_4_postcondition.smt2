@@ -157,10 +157,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -189,12 +185,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-sort value_type 0)
 
@@ -215,12 +211,13 @@
 (define-fun value_type__ref___projection ((a value_type__ref)) value_type
   (value_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 Int)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (<= 0 2147483647)) (in_range2
-                                      temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 2147483647)) (in_range2
+                                     temp___expr_208)))
 
 (declare-sort tnumber_list_typeD1 0)
 
@@ -262,29 +259,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int Bool) Int Int (Array Int Bool) Int
-  Int) (Array Int Bool))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (Bool Int) (Array Int Bool))
-
-;; singleton_def
-  (assert
-  (forall ((v Bool))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq ((a (Array Int Bool)) (a__first Int) (a__last Int)
   (b (Array Int Bool)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -292,11 +266,11 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (select a temp___idx_132) (select b (+ (- b__first a__first) temp___idx_132))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (select a temp___idx_154) (select b (+ (- b__first a__first) temp___idx_154))))))
                       true false))
 
 ;; bool_eq_rev
@@ -308,94 +282,9 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (select a temp___idx_132) (select b (+ (- b__first a__first) temp___idx_132))))))))))
-
-(declare-fun compare ((Array Int Bool) Int Int (Array Int Bool) Int Int) Int)
-
-;; compare_def_eq
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_lt
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< (compare a a_first a_last b b_first b_last) 0)
-     (exists ((i Int) (j Int))
-     (and (<= i a_last)
-     (and (< j b_last)
-     (and (= (bool_eq a a_first i b b_first j) true)
-     (or (= i a_last)
-     (and (< i a_last)
-     (< (to_int2 (select a (+ i 1))) (to_int2 (select b (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_gt
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< 0 (compare a a_first a_last b b_first b_last))
-     (exists ((i Int) (j Int))
-     (and (<= i b_last)
-     (and (< j a_last)
-     (and (= (bool_eq a a_first j b b_first i) true)
-     (or (= i b_last)
-     (and (< i b_last)
-     (< (to_int2 (select b (+ i 1))) (to_int2 (select a (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-(declare-fun xorb ((Array Int Bool) Int Int (Array Int Bool) Int
-  Int) (Array Int Bool))
-
-(declare-fun andb ((Array Int Bool) Int Int (Array Int Bool) Int
-  Int) (Array Int Bool))
-
-(declare-fun orb ((Array Int Bool) Int Int (Array Int Bool) Int
-  Int) (Array Int Bool))
-
-(declare-fun notb ((Array Int Bool) Int Int) (Array Int Bool))
-
-;; op_def
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
-  (orb a a_first a_last b b_first b_last) i)) )))))
-
-;; op_def
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
-  (andb a a_first a_last b b_first b_last) i)) )))))
-
-;; op_def
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
-  (xorb a a_first a_last b b_first b_last) i)) )))))
-
-;; notb_def
-  (assert
-  (forall ((a (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int))
-  (forall ((i Int))
-  (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select
-  (notb a a_first a_last) i)) )))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (select a temp___idx_154) (select b (+ (- b__first a__first) temp___idx_154))))))))))
 
 (declare-fun is_prime (Int) Bool)
 
@@ -478,13 +367,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun temp___250 (Bool) (Array Int Bool))
+(declare-fun temp___285 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___252 Bool))
-  (forall ((temp___253 Int))
-  (= (select (temp___250 temp___252) temp___253) temp___252))))
+  (forall ((temp___287 Bool))
+  (forall ((temp___288 Int))
+  (= (select (temp___285 temp___287) temp___288) temp___287))))
 
 (declare-const is_prime1 (Array Int Bool))
 
@@ -496,67 +385,27 @@
 
 (declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
 
-(declare-const temp___260 (Array Int Bool))
+(declare-const temp___296 Int)
 
-(declare-const temp___259 Int)
+(declare-const temp___295 Int)
 
-(declare-const temp___258 Int)
+(declare-const temp___293 (Array Int Bool))
 
-(declare-const temp___257 Int)
+(declare-const temp___292 Int)
 
-(declare-const v Int)
-
-(declare-const o Bool)
+(declare-const o Int)
 
 (declare-const o1 Int)
 
-(declare-const v1 Int)
+(declare-const temp___290 (Array Int Bool))
 
-(declare-const div2 Int)
+(declare-const temp___289 Int)
 
-(declare-const o2 Bool)
+(declare-const o2 Int)
 
-(declare-const o3 Int)
+(declare-const o3 (Array Int Bool))
 
 (declare-const o4 Int)
-
-(declare-const o5 Int)
-
-(declare-const temp___255 (Array Int Bool))
-
-(declare-const temp___254 Int)
-
-(declare-const o6 Int)
-
-(declare-const o7 (Array Int Bool))
-
-(declare-const v2 Int)
-
-(declare-const o8 Bool)
-
-(declare-const o9 Int)
-
-(declare-const v3 Int)
-
-(declare-const div3 Int)
-
-(declare-const o10 Int)
-
-(declare-const o11 Bool)
-
-(declare-const o12 Bool)
-
-(declare-const o13 Bool)
-
-(declare-const o14 Bool)
-
-(declare-const o15 Int)
-
-(declare-const o16 Int)
-
-(declare-const o17 Int)
-
-(declare-const o18 (Array Int Bool))
 
 (declare-const index_11 Int)
 
@@ -604,111 +453,91 @@
 
 (declare-const index_34 Int)
 
-(declare-const result8 Bool)
-
-(declare-const result9 Int)
+(declare-const result8 Int)
 
 (declare-const index_35 Int)
 
-(declare-const result10 (Array Int Bool))
-
 (declare-const is_prime8 (Array Int Bool))
-
-(declare-const is_prime9 (Array Int Bool))
 
 (declare-const index_36 Int)
 
-(declare-const is_prime10 (Array Int Bool))
+(declare-const is_prime9 (Array Int Bool))
 
 (declare-const index_37 Int)
 
-(declare-const is_prime11 (Array Int Bool))
+(declare-const is_prime10 (Array Int Bool))
 
 (declare-const index_38 Int)
 
-(declare-const is_prime12 (Array Int Bool))
+(declare-const is_prime11 (Array Int Bool))
 
 (declare-const index_39 Int)
 
-(declare-const is_prime13 (Array Int Bool))
+(declare-const is_prime12 (Array Int Bool))
 
 (declare-const index_14 Int)
 
 (declare-const index_310 int__ref)
 
-(declare-const is_prime14 (Array Int Bool))
+(declare-const is_prime13 (Array Int Bool))
 
 (declare-const index_15 Int)
 
 (declare-const index_311 Int)
 
-(declare-const result11 int__ref)
-
-(declare-const index_23 Int)
-
-(declare-const is_prime15 map__ref)
+(declare-const is_prime14 map__ref)
 
 (declare-const index_16 int__ref)
 
 (declare-const index_312 int__ref)
 
-(declare-const index_24 int__ref)
+(declare-const index_23 int__ref)
 
-(declare-const is_prime16 (Array Int Bool))
+(declare-const is_prime15 (Array Int Bool))
 
 (declare-const index_17 Int)
 
 (declare-const index_313 Int)
 
-(declare-const index_25 Int)
+(declare-const index_24 Int)
 
-(declare-const is_prime17 map__ref)
+(declare-const is_prime16 map__ref)
 
 (declare-const index_18 int__ref)
 
 (declare-const index_314 int__ref)
 
-(declare-const index_26 int__ref)
+(declare-const index_25 int__ref)
 
-(declare-const is_prime18 (Array Int Bool))
+(declare-const is_prime17 (Array Int Bool))
 
 (declare-const index_19 Int)
 
 (declare-const index_315 Int)
 
-(declare-const index_27 Int)
+(declare-const index_26 Int)
 
-(declare-const is_prime19 map__ref)
+(declare-const is_prime18 map__ref)
 
 (declare-const index_110 int__ref)
 
 (declare-const index_316 int__ref)
 
-(declare-const index_28 int__ref)
+(declare-const index_27 int__ref)
 
-(declare-const is_prime20 (Array Int Bool))
+(declare-const is_prime19 (Array Int Bool))
 
 (declare-const index_111 Int)
 
 (declare-const index_317 Int)
 
-(declare-const index_29 Int)
+(declare-const index_28 Int)
 
-(declare-const is_prime21 map__ref)
+(define-fun is_prime20 () map__ref (mk_map__ref is_prime12))
 
-(declare-const index_112 int__ref)
+(define-fun index_318 () int__ref (mk_int__ref index_38))
 
-(declare-const index_318 int__ref)
-
-(declare-const index_210 int__ref)
-
-(declare-const is_prime22 (Array Int Bool))
-
-(declare-const index_113 Int)
-
-(declare-const index_319 Int)
-
-(declare-const index_211 Int)
+(define-fun is_prime21 () map__ref (mk_map__ref is_prime10))
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range2 index_1)))
@@ -720,19 +549,19 @@
   (assert (= (mk_map__ref result) (mk_map__ref is_prime1)))
 
 ;; H
-  (assert (= is_prime2 (temp___250 (of_int1 1))))
+  (assert (= is_prime2 (temp___285 (distinct 1 0))))
 
 ;; H
   (assert (= is_prime2 result1))
 
 ;; H
-  (assert (= is_prime3 (store is_prime2 0 (of_int1 0))))
+  (assert (= is_prime3 (store is_prime2 0 (distinct 0 0))))
 
 ;; H
   (assert (= is_prime3 result2))
 
 ;; H
-  (assert (= is_prime4 (store is_prime3 1 (of_int1 0))))
+  (assert (= is_prime4 (store is_prime3 1 (distinct 0 0))))
 
 ;; H
   (assert
@@ -758,19 +587,19 @@
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___260 is_prime4)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___296 index_1)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___259 index_3)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___295 index_21)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___258 index_1)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___293 is_prime4)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___257 index_21)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___292 index_3)))
 
 ;; H
   (assert
@@ -780,27 +609,27 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (forall ((v4 Int))
-  (=> (and (<= 0 v4) (<= v4 index_22))
-  (= (= (select is_prime5 v4) true) (= (is_prime v4) true))))))
+  (forall ((v Int))
+  (=> (and (<= 0 v) (<= v index_22))
+  (= (= (select is_prime5 v) true) (= (is_prime v) true))))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (forall ((v4 Int))
-  (=> (and (<= index_22 v4) (<= v4 100000))
-  (= (= (select is_prime5 v4) true)
-  (forall ((div4 Int))
-  (=> (and (<= 2 div4) (<= div4 (- index_22 1))) (not (= (mod2 v4 div4) 0)))))))))
+  (forall ((v Int))
+  (=> (and (<= index_22 v) (<= v 100000))
+  (= (= (select is_prime5 v) true)
+  (forall ((div2 Int))
+  (=> (and (<= 2 div2) (<= div2 (- index_22 1))) (not (= (mod2 v div2) 0)))))))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (and
   (and
-  (and (=> (<= 2 r87b) (dynamic_property 2 r87b index_22))
+  (and (=> (<= (- 2147483648) 2147483647) (in_range1 index_32))
+  (=> (<= 2 r87b) (dynamic_property 2 r87b index_22)))
   (=> (<= 0 2147483647) (in_range2 index_12)))
-  (=> (<= (- 2147483648) 2147483647) (in_range1 index_32)))
   (and (<= 2 index_22) (<= index_22 r87b)))))
 
 ;; H
@@ -809,12 +638,12 @@
   (and (<= 0 index_22) (<= index_22 100000))))
 
 ;; H
-  (assert (=> (and (<= 2 index_21) (<= index_21 r87b)) (= o4 index_22)))
+  (assert (=> (and (<= 2 index_21) (<= index_21 r87b)) (= o index_22)))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (= result4 (select is_prime5 o4))))
+  (= result4 (select is_prime5 o))))
 
 ;; H
   (assert
@@ -830,7 +659,7 @@
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
-  (and (= o5 (* 2 index_13)) (in_range1 (* 2 index_13))))))
+  (and (= o1 (* 2 index_13)) (in_range1 (* 2 index_13))))))
 
 ;; H
   (assert
@@ -840,17 +669,17 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (= index_33 o5))))
+  (=> (= result4 true) (= index_33 o1))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= temp___255 is_prime5)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= temp___290 is_prime5)))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= temp___254 index_33)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= temp___289 index_33)))))
 
 ;; H
   (assert
@@ -861,13 +690,13 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= o6 index_33)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= o2 index_33)))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
-  (=> (<= index_33 100000) (= o7 (store is_prime5 o6 (of_int1 0)))))))
+  (=> (<= index_33 100000) (= o3 (store is_prime5 o2 (distinct 0 0)))))))
 
 ;; H
   (assert
@@ -877,30 +706,30 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= is_prime6 o7)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= is_prime6 o3)))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
   (=> (<= index_33 100000)
-  (forall ((v4 Int))
-  (=> (and (<= 0 v4) (<= v4 index_22))
-  (= (= (select is_prime7 v4) true) (= (is_prime v4) true))))))))
+  (forall ((v Int))
+  (=> (and (<= 0 v) (<= v index_22))
+  (= (= (select is_prime7 v) true) (= (is_prime v) true))))))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
   (=> (<= index_33 100000)
-  (forall ((v4 Int))
-  (=> (and (<= index_22 v4) (<= v4 100000))
-  (= (= (select is_prime7 v4) true)
+  (forall ((v Int))
+  (=> (and (<= index_22 v) (<= v 100000))
+  (= (= (select is_prime7 v) true)
   (and
-  (forall ((div4 Int))
-  (=> (and (<= 2 div4) (<= div4 (- index_22 1))) (not (= (mod2 v4 div4) 0))))
-  (=> (and (<= (+ index_22 1) v4) (<= v4 index_34))
-  (not (= (mod2 v4 index_22) 0)))))))))))
+  (forall ((div2 Int))
+  (=> (and (<= 2 div2) (<= div2 (- index_22 1))) (not (= (mod2 v div2) 0))))
+  (=> (and (<= (+ index_22 1) v) (<= v index_34))
+  (not (= (mod2 v index_22) 0)))))))))))
 
 ;; H
   (assert
@@ -926,17 +755,17 @@
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
   (=> (<= index_33 100000)
-  (and (= o16 (+ index_34 index_13)) (in_range1 (+ index_34 index_13)))))))
+  (and (= o4 (+ index_34 index_13)) (in_range1 (+ index_34 index_13)))))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= index_34 result9)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= index_34 result8)))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= index_35 o16)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= index_35 o4)))))
 
 ;; H
   (assert
@@ -951,7 +780,7 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= is_prime7 is_prime9)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= is_prime7 is_prime8)))))
 
 ;; H
   (assert
@@ -961,20 +790,19 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= is_prime10 is_prime7)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= is_prime9 is_prime7)))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
-  (=> (<= index_33 100000) (= (mk_int__ref index_38) (mk_int__ref index_36))))))
+  (=> (<= index_33 100000) (= index_318 (mk_int__ref index_36))))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
-  (=> (<= index_33 100000)
-  (= (mk_map__ref is_prime11) (mk_map__ref is_prime9))))))
+  (=> (<= index_33 100000) (= is_prime21 (mk_map__ref is_prime8))))))
 
 ;; H
   (assert
@@ -984,7 +812,7 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= is_prime12 is_prime10)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= is_prime11 is_prime9)))))
 
 ;; H
   (assert
@@ -995,7 +823,7 @@
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
-  (=> (not (<= index_33 100000)) (= is_prime5 is_prime11)))))
+  (=> (not (<= index_33 100000)) (= is_prime5 is_prime10)))))
 
 ;; H
   (assert
@@ -1006,12 +834,12 @@
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
   (=> (= result4 true)
-  (=> (not (<= index_33 100000)) (= is_prime12 is_prime5)))))
+  (=> (not (<= index_33 100000)) (= is_prime11 is_prime5)))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (= index_310 (mk_int__ref index_38)))))
+  (=> (= result4 true) (= index_310 index_318))))
 
 ;; H
   (assert
@@ -1021,7 +849,7 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (= (mk_map__ref is_prime13) (mk_map__ref is_prime11)))))
+  (=> (= result4 true) (= is_prime20 is_prime21))))
 
 ;; H
   (assert
@@ -1036,7 +864,7 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (= is_prime14 is_prime12))))
+  (=> (= result4 true) (= is_prime13 is_prime11))))
 
 ;; H
   (assert
@@ -1051,7 +879,7 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (not (= result4 true)) (= is_prime5 is_prime13))))
+  (=> (not (= result4 true)) (= is_prime5 is_prime12))))
 
 ;; H
   (assert
@@ -1066,7 +894,7 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (not (= result4 true)) (= is_prime14 is_prime5))))
+  (=> (not (= result4 true)) (= is_prime13 is_prime5))))
 
 ;; H
   (assert (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_22 r87b)))
@@ -1074,134 +902,133 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (= index_26 (mk_int__ref index_22))))
+  (= index_23 (mk_int__ref index_22))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_314 index_310)))
-
-;; H
-  (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (= index_18 (mk_int__ref index_14))))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_312 index_310)))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (= is_prime17 (mk_map__ref is_prime13))))
+  (= index_16 (mk_int__ref index_14))))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_27 index_22)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= is_prime14 is_prime20)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_315 index_311)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_24 index_22)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_19 index_15)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_313 index_311)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= is_prime18 is_prime14)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_17 index_15)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_28 index_26)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= is_prime15 is_prime13)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_316 index_314)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_25 index_23)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_110 index_18)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_314 index_312)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= is_prime19 is_prime17)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_18 index_16)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_29 index_27)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= is_prime16 is_prime14)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_317 index_315)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_26 index_24)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_111 index_19)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_315 index_313)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= is_prime20 is_prime18)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= index_19 index_17)))
 
 ;; H
   (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r87b)))
-  (= index_28 (mk_int__ref index_21))))
-
-;; H
-  (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r87b)))
-  (= index_316 (mk_int__ref index_3))))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= is_prime17 is_prime15)))
 
 ;; H
   (assert
   (=> (not (and (<= 2 index_21) (<= index_21 r87b)))
-  (= index_110 (mk_int__ref index_1))))
+  (= index_25 (mk_int__ref index_21))))
 
 ;; H
   (assert
   (=> (not (and (<= 2 index_21) (<= index_21 r87b)))
-  (= is_prime19 (mk_map__ref is_prime4))))
-
-;; H
-  (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r87b))) (= index_29 index_21)))
-
-;; H
-  (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r87b))) (= index_317 index_31)))
-
-;; H
-  (assert
-  (=> (not (and (<= 2 index_21) (<= index_21 r87b))) (= index_111 index_11)))
+  (= index_314 (mk_int__ref index_3))))
 
 ;; H
   (assert
   (=> (not (and (<= 2 index_21) (<= index_21 r87b)))
-  (= is_prime20 is_prime4)))
+  (= index_18 (mk_int__ref index_1))))
 
 ;; H
-  (assert (= index_210 index_28))
+  (assert
+  (=> (not (and (<= 2 index_21) (<= index_21 r87b)))
+  (= is_prime16 (mk_map__ref is_prime4))))
 
 ;; H
-  (assert (= index_318 index_316))
+  (assert
+  (=> (not (and (<= 2 index_21) (<= index_21 r87b))) (= index_26 index_21)))
 
 ;; H
-  (assert (= index_112 index_110))
+  (assert
+  (=> (not (and (<= 2 index_21) (<= index_21 r87b))) (= index_315 index_31)))
 
 ;; H
-  (assert (= is_prime21 is_prime19))
+  (assert
+  (=> (not (and (<= 2 index_21) (<= index_21 r87b))) (= index_19 index_11)))
 
 ;; H
-  (assert (= index_211 index_29))
+  (assert
+  (=> (not (and (<= 2 index_21) (<= index_21 r87b)))
+  (= is_prime17 is_prime4)))
 
 ;; H
-  (assert (= index_319 index_317))
+  (assert (= index_27 index_25))
 
 ;; H
-  (assert (= index_113 index_111))
+  (assert (= index_316 index_314))
 
 ;; H
-  (assert (= is_prime22 is_prime20))
+  (assert (= index_110 index_18))
+
+;; H
+  (assert (= is_prime18 is_prime16))
+
+;; H
+  (assert (= index_28 index_26))
+
+;; H
+  (assert (= index_317 index_315))
+
+;; H
+  (assert (= index_111 index_19))
+
+;; H
+  (assert (= is_prime19 is_prime17))
 
 (assert
 ;; WP_parameter_def
- ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
-  (not (= (valid_prime_data (map__content is_prime21)) true)))
+ ;; File "prime_and_coprime_numbers.adb", line 205, characters 0-0
+  (not (= (valid_prime_data (map__content is_prime18)) true)))
 (check-sat)
 (exit)

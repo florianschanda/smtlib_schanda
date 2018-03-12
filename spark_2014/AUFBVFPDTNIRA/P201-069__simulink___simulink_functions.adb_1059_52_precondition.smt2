@@ -102,12 +102,13 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (declare-fun arccos (Float64) Float64)
 
@@ -117,20 +118,18 @@
   (assert
   (forall ((x Float64))
   (! (=>
-     (and (dynamic_invariant x true true true)
+     (and (dynamic_invariant x true true true true)
      (fp.leq (fp.abs x) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
      (let ((result (arccos x)))
      (and
      (=>
      (fp.eq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
      (fp.eq result (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-     (dynamic_invariant result true false true)))) :pattern ((arccos x)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((arccos x)) )))
 
 (declare-const lf Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const o Float64)
 
 ;; H
   (assert (fp.isFinite64 lf))

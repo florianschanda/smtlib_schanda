@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1060,55 +1060,10 @@ axiom pow9__def_axiom :
   mul(RNE, mul(RNE, mul(RNE, mul(RNE, mul(RNE, mul(RNE, x1, x1), x1), x1),
   x1), x1), x1), x1), x1))))
 
-logic trigo__tan__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic trigo__tan__result1 : t
-
-logic trigo__tan__result2 : t
-
-logic trigo__tan__result3 : t
-
-logic trigo__tan__result4 : t
-
-logic trigo__tan__result5 : t
-
-logic result1 : t
-
-axiom H : tqtisFinite(x)
-
 logic fliteral9 : t
 
 axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
   (tqtreal(fliteral9) = 0.500000000000000000000000))
-
-axiom H1 : (le(neg(fliteral9), x) and le(x, fliteral9))
-
-axiom H2 : (trigo__tan__result1 = trigo__tan__result2)
-
-axiom H3 : (trigo__tan__result3 = trigo__tan__result1)
-
-axiom H4 : ((o = tan(x)) and (tqtisFinite(o) and (eq(x, fliteral1) -> eq(o,
-  fliteral1))))
-
-axiom H5 : (result = trigo__tan__result)
-
-axiom H6 : (trigo__tan__result1 = o)
-
-axiom H7 : (trigo__tan__result4 = trigo__tan__result2)
-
-axiom H8 : (trigo__tan__result5 = trigo__tan__result3)
-
-axiom H9 : (result1 = trigo__tan__result4)
 
 logic fliteral10 : t
 
@@ -1116,5 +1071,18 @@ axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
   (tqtreal(fliteral10) = 0.0000999999974737875163555145263671875))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : lt(abs1(sub(RNE, trigo__tan__result4,
-  approx_tan(x))), fliteral10)
+goal WP_parameter_def :
+  (forall trigo__tan__result:t. forall o:t. forall result:t.
+  forall trigo__tan__result1:t. forall trigo__tan__result2:t.
+  forall trigo__tan__result3:t. forall trigo__tan__result4:t.
+  forall trigo__tan__result5:t.
+  (forall result1:t. ((tqtisFinite(x) and ((le(neg(fliteral9), x) and le(x,
+  fliteral9)) and (((((trigo__tan__result1 = trigo__tan__result2) and
+  (trigo__tan__result3 = trigo__tan__result1)) and (((o = tan(x)) and
+  (tqtisFinite(o) and (eq(x, fliteral1) -> eq(o, fliteral1)))) and (({
+  t__content = result } = { t__content = trigo__tan__result }) and
+  (trigo__tan__result1 = o)))) and (({ t__content = trigo__tan__result4 } = {
+  t__content = trigo__tan__result2 }) and
+  (trigo__tan__result5 = trigo__tan__result3))) and
+  (result1 = trigo__tan__result4)))) -> lt(abs1(sub(RNE, trigo__tan__result4,
+  approx_tan(x))), fliteral10))))

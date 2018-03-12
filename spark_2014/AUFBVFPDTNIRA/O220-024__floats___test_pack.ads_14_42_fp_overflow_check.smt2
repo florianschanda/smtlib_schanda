@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun to_rep (float) Float32)
 
@@ -215,30 +216,22 @@
 (define-fun pid_obj__ref___projection ((a pid_obj__ref)) us_rep (pid_obj__content
                                                                 a))
 
-(define-fun default_initial_assumption ((temp___expr_136 us_rep)
-  (temp___skip_top_level_137 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_159 us_rep)
+  (temp___skip_top_level_160 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__test_pack__pid_obj__desired
                                             (us_split_fields1
-                                            temp___expr_136))) (fp #b0 #b00000000 #b00000000000000000000000))
+                                            temp___expr_159))) (fp #b0 #b00000000 #b00000000000000000000000))
                                          (= (to_rep
                                             (rec__test_pack__pid_obj__error
                                             (us_split_fields1
-                                            temp___expr_136))) (fp #b0 #b00000000 #b00000000000000000000000))))
+                                            temp___expr_159))) (fp #b0 #b00000000 #b00000000000000000000000))))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const measured Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const pid__split_fields float)
-
-(declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const o2 Float32)
 
 ;; H
   (assert (fp.isFinite32 measured))

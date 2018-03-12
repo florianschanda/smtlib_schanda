@@ -1021,12 +1021,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1038,6 +1032,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1272,102 +1272,26 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 
 axiom threehalfs__def_axiom : (threehalfs = fliteral2)
 
-logic i : int
-
-logic y : t
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic o15 : t
-
-logic o16 : bool
-
-logic result : int
-
-logic i1 : int
-
-logic result1 : int
-
-logic i2 : int
-
-logic result2 : t
-
-logic y1 : t
-
-logic result3 : t
-
-logic y2 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(i))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
-
-axiom H2 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(y))
-
-axiom H3 : (mul(RNE, x, fliteral1) = x2)
-
-axiom H4 : tqtisFinite(x2)
-
-axiom H5 : tqtisFinite(threehalfs)
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.0000099999997473787516355514526367187500))
 
-axiom H6 : le(fliteral4, x)
-
-axiom H7 : ((o = to_int2(x)) and in_range4(o))
-
-axiom H8 : (result = i)
-
-axiom H9 : (i1 = o)
-
-axiom H10 : ((o1 = (1597463007 - comp_div(i1,2))) and
-  in_range2((1597463007 - comp_div(i1,2))))
-
-axiom H11 : (result1 = i1)
-
-axiom H12 : (i2 = o1)
-
-axiom H13 : ((o2 = to_float(i2)) and tqtisFinite(o2))
-
-axiom H14 : (result2 = y)
-
-axiom H15 : (y1 = o2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(RNE, y1, y1))
+goal WP_parameter_def :
+  (forall i:int. forall y:t. forall o:int. forall o1:int. forall o2:t.
+  forall result:int. forall i1:int. forall result1:int. forall i2:int.
+  forall result2:t. forall y1:t. (tqtisFinite(x) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(i)) -> ((le(neg(fliteral3),
+  fliteral3) -> tqtisFinite(y)) -> ((mul(RNE, x, fliteral1) = x2) ->
+  (tqtisFinite(x2) -> (tqtisFinite(threehalfs) -> (le(fliteral4, x) ->
+  ((((o = to_int2(x)) and in_range4(o)) and ((result = i) and (i1 = o))) ->
+  ((((o1 = (1597463007 - comp_div(i1,2))) and
+  in_range2((1597463007 - comp_div(i1,2)))) and ((result1 = i1) and
+  (i2 = o1))) -> ((((o2 = to_float(i2)) and tqtisFinite(o2)) and
+  ((result2 = y) and (y1 = o2))) -> tqtisFinite(mul(RNE, y1, y1)))))))))))))

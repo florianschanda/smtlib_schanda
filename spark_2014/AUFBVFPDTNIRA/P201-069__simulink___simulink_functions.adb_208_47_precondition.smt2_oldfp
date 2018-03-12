@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun log__2 (t t) t)
 
@@ -1095,18 +1095,16 @@
   (forall ((x t) (base t))
   (! (=>
      (and
-     (and (dynamic_invariant x true true true) (dynamic_invariant base true
-     true true))
+     (and (dynamic_invariant x true true true true) (dynamic_invariant base
+     true true true true))
      (and (and (lt fliteral2 x) (lt fliteral2 base)) (neq base fliteral)))
      (let ((result (log__2 x base)))
      (and (=> (eq x fliteral) (eq result fliteral2)) (dynamic_invariant
-     result true false true)))) :pattern ((log__2 x base)) )))
+     result true false true true)))) :pattern ((log__2 x base)) )))
 
 (declare-const f t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const o t)
 
 ;; H
   (assert (tqtisFinite f))

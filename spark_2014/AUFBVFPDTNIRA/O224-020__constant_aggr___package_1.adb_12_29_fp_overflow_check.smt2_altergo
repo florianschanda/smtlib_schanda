@@ -1053,85 +1053,36 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 axiom record_const__def_axiom : ((record_const = of_rep(fliteral1)) and
   (record_const1 = of_rep(fliteral2)))
 
-logic res_1 : t
-
-logic res_2 : t
-
-logic res_3 : t
-
-logic o : float1
-
-logic o1 : float1
-
-logic o2 : float1
-
-logic o3 : float1
-
-logic temp___140 : float1
-
-logic temp___1401 : float1
-
-logic o4 : t
-
-logic o5 : t
-
-logic result : t
-
-logic res_11 : t
-
-logic result1 : t
-
-logic res_21 : t
-
-axiom H : (to_rep(o) = fliteral2)
-
-axiom H1 : (to_rep(o1) = fliteral1)
-
-axiom H2 : (o1 = o2)
-
-axiom H3 : (o = o3)
-
-axiom H4 : (temp___140 = o2)
-
-axiom H5 : (temp___1401 = o3)
-
-axiom H6 : ((temp___140 = record_const) and (temp___1401 = record_const1))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
-
-axiom H7 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(res_1))
-
-axiom H8 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(res_2))
-
-axiom H9 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(res_3))
-
-axiom H10 : (to_rep(record_const) = temp)
-
-axiom H11 : tqtisFinite(temp)
-
-axiom H12 : (result = res_1)
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.01999999955296516418457031250))
 
-axiom H13 : (res_11 = fliteral4)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.009999999776482582092285156250))
 
-axiom H14 : ((o4 = add(RNE, fliteral5, to_rep(record_const))) and
-  tqtisFinite(add(RNE, fliteral5, to_rep(record_const))))
-
-axiom H15 : (result1 = res_2)
-
-axiom H16 : (res_21 = o4)
-
  (* File "package_1.ads", line 11, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE, fliteral5, temp))
+goal WP_parameter_def :
+  (forall res_1:t. forall res_2:t. forall res_3:t. forall o:float1.
+  forall o1:float1. forall o2:float1. forall o3:float1.
+  forall temp___163:float1. forall temp___1631:float1. forall o4:t.
+  forall result:t. forall res_11:t. forall result1:t. forall res_21:t.
+  (((((to_rep(o) = fliteral2) and ((to_rep(o1) = fliteral1) and
+  ((o1 = o2) and (o = o3)))) and ((temp___163 = o2) and
+  (temp___1631 = o3))) and ((temp___163 = record_const) and
+  (temp___1631 = record_const1))) -> ((le(neg(fliteral3), fliteral3) ->
+  tqtisFinite(res_1)) -> ((le(neg(fliteral3), fliteral3) ->
+  tqtisFinite(res_2)) -> ((le(neg(fliteral3), fliteral3) ->
+  tqtisFinite(res_3)) -> ((to_rep(record_const) = temp) ->
+  (tqtisFinite(temp) -> (((result = res_1) and (res_11 = fliteral4)) ->
+  ((((o4 = add(RNE, fliteral5, to_rep(record_const))) and
+  tqtisFinite(add(RNE, fliteral5, to_rep(record_const)))) and
+  ((result1 = res_2) and (res_21 = o4))) -> tqtisFinite(add(RNE, fliteral5,
+  temp)))))))))))

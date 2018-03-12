@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -117,12 +113,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-sort float 0)
 
@@ -139,12 +135,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const numerator Int)
 
@@ -195,37 +192,62 @@
 
 ;; H
   (assert
-  (and
-  (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 res))
-  (and
+  (fp.isFinite32 res)))
+
+;; H
+  (assert
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (of_int RNE
-                                                        numerator))
-  (and
+                                                        numerator)))
+
+;; H
+  (assert
   (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (of_int RNE
-                                                        denominator))
-  (and
-  (and
+                                                        denominator)))
+
+;; H
+  (assert
   (and (= o (fp.div RNE (of_int RNE numerator) (of_int RNE denominator)))
-  (fp.isFinite32 (fp.div RNE (of_int RNE numerator) (of_int RNE denominator))))
-  (and (= (mk_t__ref result) (mk_t__ref res)) (= res1 o)))
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) res1)
-  (and
-  (and
-  (= basic_contracts__average_orig__result1 basic_contracts__average_orig__result2)
+  (fp.isFinite32 (fp.div RNE (of_int RNE numerator) (of_int RNE denominator)))))
+
+;; H
+  (assert (= (mk_t__ref result) (mk_t__ref res)))
+
+;; H
+  (assert (= res1 o))
+
+;; H
+  (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) res1))
+
+;; H
+  (assert
+  (= basic_contracts__average_orig__result1 basic_contracts__average_orig__result2))
+
+;; H
+  (assert
   (= basic_contracts__average_orig__result3 basic_contracts__average_orig__result1))
-  (and (= result1 basic_contracts__average_orig__result)
-  (= basic_contracts__average_orig__result1 res1))))))))
-  (and
-  (and
+
+;; H
+  (assert (= result1 basic_contracts__average_orig__result))
+
+;; H
+  (assert (= basic_contracts__average_orig__result1 res1))
+
+;; H
+  (assert
   (= (mk_t__ref basic_contracts__average_orig__result4) (mk_t__ref
-                                                        basic_contracts__average_orig__result2))
-  (= res1 res2))
-  (and
-  (= basic_contracts__average_orig__result5 basic_contracts__average_orig__result3)
-  (= res3 res1)))))
+                                                        basic_contracts__average_orig__result2)))
+
+;; H
+  (assert (= res1 res2))
+
+;; H
+  (assert
+  (= basic_contracts__average_orig__result5 basic_contracts__average_orig__result3))
+
+;; H
+  (assert (= res3 res1))
 
 ;; H
   (assert (= result2 basic_contracts__average_orig__result4))

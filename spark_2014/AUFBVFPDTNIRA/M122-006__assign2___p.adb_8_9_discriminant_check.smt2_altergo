@@ -1344,111 +1344,29 @@ type t2b__ref = { t2b__content : us_rep
 
 function t2b__ref___projection(a: t2b__ref) : us_rep = (a).t2b__content
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : float1
-
-logic x__split_discrs : enum
-
-logic o : enum
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : float1
-
-logic o4 : enum
-
-logic p__good__x__assume : enum
-
-logic p__good__x__assume1 : integer
-
-logic p__good__x__assume2 : float1
-
-logic p__good__x__assume3 : bool
-
-logic o5 : enum
-
-logic o6 : integer
-
-logic o7 : integer
-
-logic o8 : float1
-
-logic o9 : enum
-
-logic temp___148 : enum
-
-logic temp___1481 : integer
-
-logic temp___1482 : float1
-
-logic temp___1483 : bool
-
-logic result : integer
-
-logic result1 : float1
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : float1
-
-logic result2 : enum
-
-logic x__split_discrs1 : enum
-
-axiom H : (to_rep(o1) = 1)
-
-axiom H1 : (o1 = o2)
-
-axiom H2 : (dummy1 = o3)
-
-axiom H3 : (to_rep1(o) = 0)
-
-axiom H4 : (o = o4)
-
-axiom H5 : (p__good__x__assume = o4)
-
-axiom H6 : (p__good__x__assume1 = o2)
-
-axiom H7 : (p__good__x__assume2 = o3)
-
-axiom H8 : (true = p__good__x__assume3)
-
-axiom H9 : (result = x__split_fields)
-
-axiom H10 : (result1 = x__split_fields1)
-
-axiom H11 : (p__good__x__assume1 = x__split_fields2)
-
-axiom H12 : (p__good__x__assume2 = x__split_fields3)
-
-axiom H13 : (result2 = x__split_discrs)
-
-axiom H14 : (p__good__x__assume = x__split_discrs1)
-
-axiom H15 : (x__attr__constrained = false)
-
-axiom H16 : (to_rep(o6) = 2)
-
-axiom H17 : (o6 = o7)
-
-axiom H18 : (dummy1 = o8)
-
-axiom H19 : (to_rep1(o5) = 0)
-
-axiom H20 : (o5 = o9)
-
-axiom H21 : (temp___148 = o9)
-
-axiom H22 : (temp___1481 = o7)
-
-axiom H23 : (temp___1482 = o8)
-
-axiom H24 : (true = temp___1483)
-
-axiom H25 : (x__attr__constrained = true)
-
  (* File "p.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (temp___148 = x__split_discrs1)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:float1.
+  forall x__split_discrs:enum. forall o:enum. forall o1:integer.
+  forall o2:integer. forall o3:float1. forall o4:enum.
+  forall p__good__x__assume:enum. forall p__good__x__assume1:integer.
+  forall p__good__x__assume2:float1. forall p__good__x__assume3:bool.
+  forall o5:enum. forall o6:integer. forall o7:integer. forall o8:float1.
+  forall o9:enum. forall temp___172:enum. forall temp___1721:integer.
+  forall temp___1722:float1. forall temp___1723:bool. forall result:integer.
+  forall result1:float1. forall x__split_fields2:integer.
+  forall x__split_fields3:float1. forall result2:enum.
+  forall x__split_discrs1:enum. (((((to_rep(o1) = 1) and ((o1 = o2) and
+  (dummy1 = o3))) and (((to_rep1(o) = 0) and (o = o4)) and
+  ((p__good__x__assume = o4) and (((p__good__x__assume1 = o2) and
+  (p__good__x__assume2 = o3)) and (true = p__good__x__assume3))))) and
+  ((((result = x__split_fields) and (result1 = x__split_fields1)) and
+  ((p__good__x__assume1 = x__split_fields2) and
+  (p__good__x__assume2 = x__split_fields3))) and
+  (((result2 = x__split_discrs) and
+  (p__good__x__assume = x__split_discrs1)) and
+  (x__attr__constrained = false)))) -> ((((to_rep(o6) = 2) and ((o6 = o7) and
+  (dummy1 = o8))) and (((to_rep1(o5) = 0) and (o5 = o9)) and
+  ((temp___172 = o9) and (((temp___1721 = o7) and (temp___1722 = o8)) and
+  (true = temp___1723))))) -> ((x__attr__constrained = true) ->
+  (temp___172 = x__split_discrs1)))))

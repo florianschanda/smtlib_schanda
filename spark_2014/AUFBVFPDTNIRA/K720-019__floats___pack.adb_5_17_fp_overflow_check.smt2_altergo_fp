@@ -1066,30 +1066,7 @@ logic r2 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic pack__add__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic pack__add__result1 : t
-
-logic pack__add__result2 : t
-
-logic pack__add__result3 : t
-
-logic pack__add__result4 : t
-
-logic pack__add__result5 : t
-
-axiom H : tqtisFinite(r1)
-
-axiom H1 : tqtisFinite(r2)
-
-axiom H2 : (lt(r1, fliteral) and (lt(r2, fliteral) and (lt(neg(fliteral),
-  r1) and lt(neg(fliteral), r2))))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, r1, r2))
+goal WP_parameter_def : (tqtisFinite(r1) -> (tqtisFinite(r2) -> ((lt(r1,
+  fliteral) and (lt(r2, fliteral) and (lt(neg(fliteral), r1) and
+  lt(neg(fliteral), r2)))) -> tqtisFinite(add(NearestTiesToEven, r1, r2)))))

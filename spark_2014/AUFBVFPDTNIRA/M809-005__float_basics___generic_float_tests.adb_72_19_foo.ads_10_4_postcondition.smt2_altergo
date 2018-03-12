@@ -947,51 +947,26 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic foo__float_tests__negate_wrong__result : t
-
-logic o : t
-
-logic result : t
-
-logic foo__float_tests__negate_wrong__result1 : t
-
-logic foo__float_tests__negate_wrong__result2 : t
-
-logic foo__float_tests__negate_wrong__result3 : t
-
-logic foo__float_tests__negate_wrong__result4 : t
-
-logic foo__float_tests__negate_wrong__result5 : t
-
-logic result1 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 :
-  (foo__float_tests__negate_wrong__result1 = foo__float_tests__negate_wrong__result2)
-
-axiom H2 :
-  (foo__float_tests__negate_wrong__result3 = foo__float_tests__negate_wrong__result1)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H3 : ((o = sub(RNE, fliteral1, x)) and tqtisFinite(sub(RNE, fliteral1,
-  x)))
-
-axiom H4 : (result = foo__float_tests__negate_wrong__result)
-
-axiom H5 : (foo__float_tests__negate_wrong__result1 = o)
-
-axiom H6 :
-  (foo__float_tests__negate_wrong__result4 = foo__float_tests__negate_wrong__result2)
-
-axiom H7 :
-  (foo__float_tests__negate_wrong__result5 = foo__float_tests__negate_wrong__result3)
-
-axiom H8 : (result1 = foo__float_tests__negate_wrong__result4)
-
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : eq(foo__float_tests__negate_wrong__result4, neg(x))
+goal WP_parameter_def :
+  (forall foo__float_tests__negate_wrong__result:t. forall o:t.
+  forall result:t. forall foo__float_tests__negate_wrong__result1:t.
+  forall foo__float_tests__negate_wrong__result2:t.
+  forall foo__float_tests__negate_wrong__result3:t.
+  forall foo__float_tests__negate_wrong__result4:t.
+  forall foo__float_tests__negate_wrong__result5:t.
+  (forall result1:t. ((tqtisFinite(x) and
+  (((((foo__float_tests__negate_wrong__result1 = foo__float_tests__negate_wrong__result2) and
+  (foo__float_tests__negate_wrong__result3 = foo__float_tests__negate_wrong__result1)) and
+  (((o = sub(RNE, fliteral1, x)) and tqtisFinite(sub(RNE, fliteral1, x))) and
+  ((result = foo__float_tests__negate_wrong__result) and
+  (foo__float_tests__negate_wrong__result1 = o)))) and
+  ((foo__float_tests__negate_wrong__result4 = foo__float_tests__negate_wrong__result2) and
+  (foo__float_tests__negate_wrong__result5 = foo__float_tests__negate_wrong__result3))) and
+  (result1 = foo__float_tests__negate_wrong__result4))) ->
+  eq(foo__float_tests__negate_wrong__result4, neg(x)))))

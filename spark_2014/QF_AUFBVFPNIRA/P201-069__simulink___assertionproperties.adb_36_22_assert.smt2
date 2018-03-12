@@ -48,24 +48,26 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun dynamic_invariant ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (define-fun in_range ((x Float64)) Bool (and (fp.isFinite64 x)
                                         (and
                                         (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x)
                                         (fp.leq x (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))))
 
-(define-fun dynamic_invariant1 ((temp___expr_213 Float64)
-  (temp___is_init_210 Bool) (temp___skip_constant_211 Bool)
-  (temp___do_toplevel_212 Bool)) Bool (=>
-                                      (or (= temp___is_init_210 true)
-                                      (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (in_range temp___expr_213)))
+(define-fun dynamic_invariant1 ((temp___expr_249 Float64)
+  (temp___is_init_245 Bool) (temp___skip_constant_246 Bool)
+  (temp___do_toplevel_247 Bool)
+  (temp___do_typ_inv_248 Bool)) Bool (=>
+                                     (or (= temp___is_init_245 true)
+                                     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (in_range temp___expr_249)))
 
 (declare-const x Float64)
 

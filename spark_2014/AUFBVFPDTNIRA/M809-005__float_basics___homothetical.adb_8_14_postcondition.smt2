@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -112,12 +108,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const d Float32)
 
@@ -165,6 +162,9 @@
 
 (declare-const homothetical__adjust2triangle__result8 Float32)
 
+(define-fun homothetical__adjust2triangle__result9 () t__ref (mk_t__ref
+                                                             homothetical__adjust2triangle__result5))
+
 (declare-const result3 Float32)
 
 ;; H
@@ -185,39 +185,73 @@
 
 ;; H
   (assert
-  (and
-  (and
-  (= (mk_t__ref homothetical__adjust2triangle__result5) (mk_t__ref
-                                                        homothetical__adjust2triangle__result3))
-  (= homothetical__adjust2triangle__result6 homothetical__adjust2triangle__result4))
-  (and
-  (and
-  (and
-  (and (and (= o (fp.mul RNE kv kv)) (fp.isFinite32 (fp.mul RNE kv kv)))
-  (= o1 (fp.div RNE o ka))) (and (= o2 o1) (fp.isFinite32 o1)))
-  (= result (ite (fp.lt (fp.abs d) o2) true false)))
-  (ite (= result true)
-  (and
-  (and
-  (= homothetical__adjust2triangle__result1 homothetical__adjust2triangle__result3)
-  (= homothetical__adjust2triangle__result4 homothetical__adjust2triangle__result1))
-  (and
-  (and
-  (and (= o3 (fp.mul RNE (fp.abs d) ka))
-  (fp.isFinite32 (fp.mul RNE (fp.abs d) ka))) (= o4 (fp.sqrt RNE o3)))
-  (and (= result1 homothetical__adjust2triangle__result)
-  (= homothetical__adjust2triangle__result1 o4))))
-  (and
-  (and
-  (= homothetical__adjust2triangle__result2 homothetical__adjust2triangle__result3)
-  (= homothetical__adjust2triangle__result4 homothetical__adjust2triangle__result2))
-  (and (= result2 homothetical__adjust2triangle__result)
-  (= homothetical__adjust2triangle__result2 kv)))))))
+  (= homothetical__adjust2triangle__result9 (mk_t__ref
+                                            homothetical__adjust2triangle__result3)))
 
 ;; H
   (assert
-  (= (mk_t__ref homothetical__adjust2triangle__result7) (mk_t__ref
-                                                        homothetical__adjust2triangle__result5)))
+  (= homothetical__adjust2triangle__result6 homothetical__adjust2triangle__result4))
+
+;; H
+  (assert (and (= o (fp.mul RNE kv kv)) (fp.isFinite32 (fp.mul RNE kv kv))))
+
+;; H
+  (assert (= o1 (fp.div RNE o ka)))
+
+;; H
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
+
+;; H
+  (assert (= result (ite (fp.lt (fp.abs d) o2) true false)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (= homothetical__adjust2triangle__result1 homothetical__adjust2triangle__result3)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (= homothetical__adjust2triangle__result4 homothetical__adjust2triangle__result1)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (and (= o3 (fp.mul RNE (fp.abs d) ka))
+  (fp.isFinite32 (fp.mul RNE (fp.abs d) ka)))))
+
+;; H
+  (assert (=> (= result true) (= o4 (fp.sqrt RNE o3))))
+
+;; H
+  (assert
+  (=> (= result true) (= result1 homothetical__adjust2triangle__result)))
+
+;; H
+  (assert (=> (= result true) (= homothetical__adjust2triangle__result1 o4)))
+
+;; H
+  (assert
+  (=> (not (= result true))
+  (= homothetical__adjust2triangle__result2 homothetical__adjust2triangle__result3)))
+
+;; H
+  (assert
+  (=> (not (= result true))
+  (= homothetical__adjust2triangle__result4 homothetical__adjust2triangle__result2)))
+
+;; H
+  (assert
+  (=> (not (= result true))
+  (= result2 homothetical__adjust2triangle__result)))
+
+;; H
+  (assert
+  (=> (not (= result true)) (= homothetical__adjust2triangle__result2 kv)))
+
+;; H
+  (assert
+  (= (mk_t__ref homothetical__adjust2triangle__result7) homothetical__adjust2triangle__result9))
 
 ;; H
   (assert

@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun to_rep (float) t)
 
@@ -1194,30 +1194,22 @@
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
-(define-fun default_initial_assumption ((temp___expr_136 us_rep)
-  (temp___skip_top_level_137 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_159 us_rep)
+  (temp___skip_top_level_160 Bool)) Bool (and
                                          (= (to_rep
                                             (rec__test_pack__pid_obj__desired
                                             (us_split_fields1
-                                            temp___expr_136))) fliteral2)
+                                            temp___expr_159))) fliteral2)
                                          (= (to_rep
                                             (rec__test_pack__pid_obj__error
                                             (us_split_fields1
-                                            temp___expr_136))) fliteral2)))
+                                            temp___expr_159))) fliteral2)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const measured t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const pid__split_fields float)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
 
 ;; H
   (assert (tqtisFinite measured))

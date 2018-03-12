@@ -102,12 +102,13 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (declare-fun atan__2 (Float64) Float64)
 
@@ -116,8 +117,8 @@
 ;; atan__2__post_axiom
   (assert
   (forall ((lf Float64))
-  (! (=> (dynamic_invariant lf true true true) (dynamic_invariant
-     (atan__2 lf) true false true)) :pattern ((atan__2 lf)) )))
+  (! (=> (dynamic_invariant lf true true true true) (dynamic_invariant
+     (atan__2 lf) true false true true)) :pattern ((atan__2 lf)) )))
 
 (declare-const left Float64)
 
@@ -153,25 +154,9 @@
 
 (declare-const o2 Float64)
 
-(declare-const o3 Float64)
-
-(declare-const o4 Float64)
-
-(declare-const o5 Float64)
-
-(declare-const o6 Float64)
-
-(declare-const o7 Float64)
-
-(declare-const o8 Float64)
-
 (declare-const result Float64)
 
 (declare-const result__1 Float64)
-
-(declare-const result1 Float64)
-
-(declare-const result__2 Float64)
 
 ;; H
   (assert (fp.isFinite64 left))
@@ -203,20 +188,19 @@
 
 ;; H
   (assert
-  (and (= o4 (fp.div RNE right left))
-  (fp.isFinite64 (fp.div RNE right left))))
+  (and (= o (fp.div RNE right left)) (fp.isFinite64 (fp.div RNE right left))))
 
 ;; H
-  (assert (= o5 (fp.neg o4)))
+  (assert (= o1 (fp.neg o)))
 
 ;; H
-  (assert (and (= o6 (atan__2 o5)) (fp.isFinite64 o6)))
+  (assert (and (= o2 (atan__2 o1)) (fp.isFinite64 o2)))
 
 ;; H
-  (assert (= result1 result__))
+  (assert (= result result__))
 
 ;; H
-  (assert (= result__2 o6))
+  (assert (= result__1 o2))
 
 ;; H
   (assert
@@ -226,6 +210,6 @@
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
   (not
-  (fp.isFinite64 (fp.sub RNE result__2 (fp #b0 #b01111111111 #b1001001000011111101101010100010001000010110100011000)))))
+  (fp.isFinite64 (fp.sub RNE result__1 (fp #b0 #b01111111111 #b1001001000011111101101010100010001000010110100011000)))))
 (check-sat)
 (exit)

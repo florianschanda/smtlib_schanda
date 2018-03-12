@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -967,43 +967,14 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : t
-
-logic y : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic x1 : t
-
-logic result1 : t
-
-logic y1 : t
-
-axiom H : ((o = v(of_int1(1))) and (tqtisFinite(o) and
-  (((of_int1(1) = true) -> (o = fliteral1)) and ((not (of_int1(1) = true)) ->
-  (o = neg(fliteral1))))))
-
-axiom H1 : (result = x)
-
-axiom H2 : (x1 = o)
-
-axiom H3 : tqtisFinite(x1)
-
-axiom H4 : ((o1 = v(of_int1(0))) and (tqtisFinite(o1) and
-  (((of_int1(0) = true) -> (o1 = fliteral1)) and
-  ((not (of_int1(0) = true)) -> (o1 = neg(fliteral1))))))
-
-axiom H5 : (result1 = y)
-
-axiom H6 : (y1 = o1)
-
-axiom H7 : tqtisFinite(y1)
-
-axiom H8 : eq(x1, fliteral1)
-
  (* File "u.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : eq(y1, neg(fliteral1))
+goal WP_parameter_def :
+  (forall x:t. forall y:t. forall o:t. forall o1:t. forall result:t.
+  forall x1:t. forall result1:t. forall y1:t. ((((o = v(of_int1(1))) and
+  (tqtisFinite(o) and (((of_int1(1) = true) and (o = fliteral1)) or
+  ((not (of_int1(1) = true)) and (o = neg(fliteral1)))))) and
+  ((result = x) and (x1 = o))) -> (tqtisFinite(x1) ->
+  ((((o1 = v(of_int1(0))) and (tqtisFinite(o1) and (((of_int1(0) = true) and
+  (o1 = fliteral1)) or ((not (of_int1(0) = true)) and
+  (o1 = neg(fliteral1)))))) and ((result1 = y) and (y1 = o1))) ->
+  (tqtisFinite(y1) -> (eq(x1, fliteral1) -> eq(y1, neg(fliteral1))))))))

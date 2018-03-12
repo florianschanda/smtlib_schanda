@@ -270,12 +270,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
 (declare-sort float 0)
 
@@ -292,12 +292,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort source 0)
 
@@ -318,9 +319,9 @@
 (define-fun source__ref___2__projection ((a source__ref)) source (source__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_189 (_ BitVec 32))
-  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
-  (temp___do_toplevel_188 Bool)) Bool true)
+(define-fun dynamic_invariant2 ((temp___expr_221 (_ BitVec 32))
+  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
+  (temp___do_toplevel_219 Bool) (temp___do_typ_inv_220 Bool)) Bool true)
 
 (declare-sort target 0)
 
@@ -339,12 +340,13 @@
 (define-fun target__ref___2__projection ((a target__ref)) target (target__content
                                                                  a))
 
-(define-fun dynamic_invariant3 ((temp___expr_195 Float32)
-  (temp___is_init_192 Bool) (temp___skip_constant_193 Bool)
-  (temp___do_toplevel_194 Bool)) Bool (=>
-                                      (or (= temp___is_init_192 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_195)))
+(define-fun dynamic_invariant3 ((temp___expr_228 Float32)
+  (temp___is_init_224 Bool) (temp___skip_constant_225 Bool)
+  (temp___do_toplevel_226 Bool)
+  (temp___do_typ_inv_227 Bool)) Bool (=>
+                                     (or (= temp___is_init_224 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_228)))
 
 (declare-fun convert ((_ BitVec 32)) Float32)
 
@@ -353,8 +355,8 @@
 ;; convert__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant2 s true true true) (dynamic_invariant3
-     (convert s) true false true)) :pattern ((convert s)) )))
+  (! (=> (dynamic_invariant2 s true true true true) (dynamic_invariant3
+     (convert s) true false true true)) :pattern ((convert s)) )))
 
 (declare-const zero_plus Float32)
 
@@ -389,12 +391,13 @@
 (define-fun source__ref___3__projection ((a source__ref1)) source1 (source__content1
                                                                    a))
 
-(define-fun dynamic_invariant4 ((temp___expr_201 Float32)
-  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
-  (temp___do_toplevel_200 Bool)) Bool (=>
-                                      (or (= temp___is_init_198 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_201)))
+(define-fun dynamic_invariant4 ((temp___expr_235 Float32)
+  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
+  (temp___do_toplevel_233 Bool)
+  (temp___do_typ_inv_234 Bool)) Bool (=>
+                                     (or (= temp___is_init_231 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_235)))
 
 (declare-sort target1 0)
 
@@ -416,12 +419,13 @@
 (define-fun target__ref___3__projection ((a target__ref1)) target1 (target__content1
                                                                    a))
 
-(define-fun dynamic_invariant5 ((temp___expr_207 Int)
-  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
-  (temp___do_toplevel_206 Bool)) Bool (=>
-                                      (or (= temp___is_init_204 true)
-                                      (<= (- 2147483648) 2147483647))
-                                      (in_range1 temp___expr_207)))
+(define-fun dynamic_invariant5 ((temp___expr_242 Int)
+  (temp___is_init_238 Bool) (temp___skip_constant_239 Bool)
+  (temp___do_toplevel_240 Bool)
+  (temp___do_typ_inv_241 Bool)) Bool (=>
+                                     (or (= temp___is_init_238 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range1 temp___expr_242)))
 
 (declare-fun magic (Float32) Int)
 
@@ -430,16 +434,16 @@
 ;; magic__post_axiom
   (assert
   (forall ((s Float32))
-  (! (=> (dynamic_invariant4 s true true true) (dynamic_invariant5 (magic s)
-     true false true)) :pattern ((magic s)) )))
+  (! (=> (dynamic_invariant4 s true true true true) (dynamic_invariant5
+     (magic s) true false true true)) :pattern ((magic s)) )))
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 ;; zero_plus__def_axiom
-  (assert (= zero_plus (convert ((_ int2bv 32) 0))))
+  (assert (= zero_plus (convert #x00000000)))
 
 ;; zero_neg__def_axiom
-  (assert (= zero_neg (convert ((_ int2bv 32) 2147483648))))
+  (assert (= zero_neg (convert #x80000000)))
 
 (declare-const x Int)
 
@@ -453,13 +457,11 @@
 
 (declare-const o2 Int)
 
-(declare-const o3 Int)
-
 (declare-const result Bool)
 
 ;; H
   (assert
-  (and (= zero_and_unchecked__zero_plus__assume (convert ((_ int2bv 32) 0)))
+  (and (= zero_and_unchecked__zero_plus__assume (convert #x00000000))
   (fp.isFinite32 zero_and_unchecked__zero_plus__assume)))
 
 ;; H
@@ -470,9 +472,7 @@
 
 ;; H
   (assert
-  (and
-  (= zero_and_unchecked__zero_neg__assume (convert
-                                          ((_ int2bv 32) 2147483648)))
+  (and (= zero_and_unchecked__zero_neg__assume (convert #x80000000))
   (fp.isFinite32 zero_and_unchecked__zero_neg__assume)))
 
 ;; H

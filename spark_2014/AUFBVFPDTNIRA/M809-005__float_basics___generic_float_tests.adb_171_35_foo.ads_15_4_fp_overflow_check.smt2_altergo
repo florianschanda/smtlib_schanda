@@ -954,13 +954,6 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-logic o1 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
  (* File "generic_float_tests.adb", line 162, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE, b, a))
+goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) ->
+  tqtisFinite(add(RNE, b, a))))

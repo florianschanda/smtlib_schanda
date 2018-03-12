@@ -102,12 +102,13 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (declare-const y Float64)
 
@@ -124,22 +125,6 @@
 (declare-const o Float64)
 
 (declare-const o1 Float64)
-
-(declare-const o2 Float64)
-
-(declare-const o3 Float64)
-
-(declare-const o4 Float64)
-
-(declare-const o5 Float64)
-
-(declare-const result Float64)
-
-(declare-const r1 Float64)
-
-(declare-const r2 Float64)
-
-(declare-const r3 Float64)
 
 ;; H
   (assert (fp.isFinite64 y))

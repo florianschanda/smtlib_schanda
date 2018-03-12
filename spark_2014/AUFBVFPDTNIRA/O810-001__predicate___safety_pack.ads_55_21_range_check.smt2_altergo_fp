@@ -1118,21 +1118,17 @@ logic value : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : tqtisFinite(value)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 32767.0))
-
-axiom H1 : (not lt(fliteral1, value))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 32768.0))
 
-axiom H2 : (not lt(value, neg(fliteral2)))
-
  (* File "types.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : in_range1(to_int(NearestTiesToAway, value))
+goal WP_parameter_def : (tqtisFinite(value) -> ((not lt(fliteral1, value)) ->
+  ((not lt(value, neg(fliteral2))) -> in_range1(to_int(NearestTiesToAway,
+  value)))))

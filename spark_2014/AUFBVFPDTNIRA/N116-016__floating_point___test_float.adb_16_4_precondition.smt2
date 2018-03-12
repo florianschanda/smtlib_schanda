@@ -105,12 +105,13 @@
 (declare-datatypes () ((rt__ref (mk_rt__ref (rt__content rt)))))
 (define-fun rt__ref___projection ((a rt__ref)) rt (rt__content a))
 
-(define-fun dynamic_invariant ((temp___expr_171 Float32)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10001000 #b11110100000000000000000)))
-                                      (in_range temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 Float32)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10001000 #b11110100000000000000000)))
+                                     (in_range temp___expr_200)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -119,8 +120,6 @@
 (declare-const result Float32)
 
 (declare-const x1 Float32)
-
-(declare-const x2 Float32)
 
 ;; H
   (assert (= result x))

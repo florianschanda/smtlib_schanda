@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -2018,33 +2018,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep6) farray, int, int, (int,us_rep6) farray, int,
-  int -> (int,us_rep6) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep6) farray. forall b:(int,us_rep6) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep6, int -> (int,us_rep6) farray
-
-axiom singleton_def :
-  (forall v:nonnegative_float. forall v1:normalized2pi.
-  (forall i:int [(singleton({ us_split_fields9 = {
-  rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = v1 } } } }, i)[i])]. ((singleton({
-  us_split_fields9 = { rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = v1 } } } }, i)[i]) = {
-  us_split_fields9 = { rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = v1 } } } })))
-
 logic bool_eq16 : (int,us_rep6) farray, int, int, (int,us_rep6) farray, int,
   int -> bool
 
@@ -2055,17 +2028,17 @@ axiom bool_eq_def13 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq15((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq15((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq16(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq15((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq16(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq15((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq16(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -2075,9 +2048,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq15((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq15((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 logic gapvec__split_discrs : count_type
 
@@ -2425,345 +2398,59 @@ axiom w_get__post_axiom :
   ((in_range6(witness1) and (has_witness(container, witness1) = true)) ->
   in_range10(w_get(container, witness1)))))
 
-logic gapvec__split_fields : us_main_type
-
-logic rayr__split_fields : nonnegative_float
-
-logic rayr__split_fields1 : normalized2pi
-
-logic rayl__split_fields : nonnegative_float
-
-logic rayl__split_fields1 : normalized2pi
-
-logic i : int
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic algorithm__buildgapvector__B_7__dist__assume : t
-
-logic o12 : normalized2pi
-
-logic o13 : float1
-
-logic o14 : idir_t
-
-logic temp___820 : nonnegative_float
-
-logic temp___8201 : normalized2pi
-
-logic temp___819 : nonnegative_float
-
-logic temp___8191 : normalized2pi
-
-logic temp___818 : count_type
-
-logic temp___8181 : us_main_type
-
-logic temp___817 : int
-
-logic algorithm__buildgapvector__B_9__dist__assume : t
-
-logic o15 : normalized2pi
-
-logic o16 : float1
-
-logic o17 : idir_t
-
-logic o18 : normalized2pi
-
-logic o19 : float1
-
-logic o20 : idir_t
-
-logic o21 : t
-
-logic o22 : t
-
-logic o23 : t
-
-logic o24 : t
-
-logic o25 : t
-
-logic o26 : t
-
-logic o27 : t
-
-logic o28 : t
-
-logic o29 : t
-
-logic o30 : t
-
-logic o31 : t
-
-logic o32 : t
-
-logic algorithm__buildgapvector__B_10__dist__assume : t
-
-logic o33 : normalized2pi
-
-logic o34 : float1
-
-logic o35 : idir_t
-
-logic algorithm__gap_vectors__clear__container__fields : us_main_type
-
-logic result : us_main_type
-
-logic gapvec__split_fields1 : us_main_type
-
-logic result1 : nonnegative_float
-
-logic result2 : normalized2pi
-
-logic rayr__split_fields2 : nonnegative_float
-
-logic rayr__split_fields3 : normalized2pi
-
-logic result3 : nonnegative_float
-
-logic result4 : normalized2pi
-
-logic rayl__split_fields2 : nonnegative_float
-
-logic rayl__split_fields3 : normalized2pi
-
-logic algorithm__gap_vectors__append__container__fields : us_main_type
-
-logic result5 : us_main_type
-
-logic gapvec__split_fields2 : us_main_type
-
-logic result6 : int
-
-logic i1 : int
-
-logic gapvec__split_fields3 : us_main_type
-
-logic rayr__split_fields4 : nonnegative_float
-
-logic rayr__split_fields5 : normalized2pi
-
-logic rayl__split_fields4 : nonnegative_float
-
-logic rayl__split_fields5 : normalized2pi
-
-logic i2 : int
-
-logic rho : us_main_type
-
-logic rho1 : us_main_type
-
-logic result7 : nonnegative_float
-
-logic result8 : normalized2pi
-
-logic rayr__split_fields6 : nonnegative_float
-
-logic rayr__split_fields7 : normalized2pi
-
-logic result9 : nonnegative_float
-
-logic result10 : normalized2pi
-
-logic rayl__split_fields6 : nonnegative_float
-
-logic rayl__split_fields7 : normalized2pi
-
-logic algorithm__gap_vectors__append__container__fields1 : us_main_type
-
-logic result11 : us_main_type
-
-logic gapvec__split_fields4 : us_main_type
-
-logic algorithm__gap_vectors__append__container__fields2 : us_main_type
-
-logic result12 : us_main_type
-
-logic gapvec__split_fields5 : us_main_type
-
-logic result13 : int
-
-logic i3 : int
-
-logic gapvec__split_fields6 : us_main_type
-
-logic rayr__split_fields8 : nonnegative_float
-
-logic rayr__split_fields9 : normalized2pi
-
-logic rayl__split_fields8 : nonnegative_float
-
-logic rayl__split_fields9 : normalized2pi
-
-logic i4 : int
-
-logic gapvec__split_fields7 : us_main_type
-
-logic rayr__split_fields10 : nonnegative_float
-
-logic rayr__split_fields11 : normalized2pi
-
-logic rayl__split_fields10 : nonnegative_float
-
-logic rayl__split_fields11 : normalized2pi
-
-logic i5 : int
-
-logic gapvec__split_fields8 : us_main_type
-
-logic rayr__split_fields12 : nonnegative_float
-
-logic rayr__split_fields13 : normalized2pi
-
-logic rayl__split_fields12 : nonnegative_float
-
-logic rayl__split_fields13 : normalized2pi
-
-logic i6 : int
-
-logic gapvec__split_fields9 : us_main_type
-
-logic rayr__split_fields14 : nonnegative_float
-
-logic rayr__split_fields15 : normalized2pi
-
-logic rayl__split_fields14 : nonnegative_float
-
-logic rayl__split_fields15 : normalized2pi
-
-logic i7 : int
-
-logic gapvec__split_fields10 : us_main_type
-
-logic rayr__split_fields16 : nonnegative_float
-
-logic rayr__split_fields17 : normalized2pi
-
-logic rayl__split_fields16 : nonnegative_float
-
-logic rayl__split_fields17 : normalized2pi
-
-logic i8 : int
-
-logic gapvec__split_fields11 : us_main_type
-
-logic rayr__split_fields18 : nonnegative_float
-
-logic rayr__split_fields19 : normalized2pi
-
-logic rayl__split_fields18 : nonnegative_float
-
-logic rayl__split_fields19 : normalized2pi
-
-logic i9 : int
-
-logic result14 : nonnegative_float
-
-logic result15 : normalized2pi
-
-logic rayr__split_fields20 : nonnegative_float
-
-logic rayr__split_fields21 : normalized2pi
-
-logic result16 : nonnegative_float
-
-logic result17 : normalized2pi
-
-logic rayl__split_fields20 : nonnegative_float
-
-logic rayl__split_fields21 : normalized2pi
-
-logic algorithm__gap_vectors__append__container__fields3 : us_main_type
-
-axiom H : (1000 = to_rep4(gapvec__split_discrs))
-
-axiom H1 : in_range2(robotradius)
-
-axiom H2 : in_range2(mingapwidth)
-
-axiom H3 : in_range2(fmaxrange)
-
-axiom H4 : (to_rep4(gapvec__split_discrs) = 1000)
-
-axiom H5 : (length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
-  us_split_fields5 = { rec__algorithm__gap_vectors__list =
-  algorithm__gap_vectors__clear__container__fields } }) = 0)
-
-axiom H6 : (result = gapvec__split_fields)
-
-axiom H7 :
-  (gapvec__split_fields1 = algorithm__gap_vectors__clear__container__fields)
-
-axiom H8 : ((result1 = rayr__split_fields) and
-  (result2 = rayr__split_fields1))
-
-axiom H9 : ({ rec__algorithm__laser_scan_data__first = rayr__split_fields2;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = rayr__split_fields3 } }
-  } = ((laserscan[1000])).us_split_fields9)
-
-axiom H10 : ((result3 = rayl__split_fields) and
-  (result4 = rayl__split_fields1))
-
-axiom H11 : ({ rec__algorithm__laser_scan_data__first = rayl__split_fields2;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = rayl__split_fields3 } }
-  } = ((laserscan[1])).us_split_fields9)
-
-axiom H12 : ((o5 = ccwdiff({ us_split_fields1 = {
-  rec__spaces__angles__angle__theta = rayr__split_fields3 } }, {
-  us_split_fields1 = { rec__spaces__angles__angle__theta =
-  rayl__split_fields3 } })) and tqtisFinite(o5))
-
-axiom H13 : ((o6 = cos(o5)) and (tqtisFinite(o6) and ((le(neg(fliteral),
-  o6) and le(o6, fliteral)) and (eq(o5, fliteral1) -> eq(o6, fliteral)))))
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 2.0))
 
-axiom H14 : ((o3 = mul(NearestTiesToEven, fliteral4,
-  to_rep(rayr__split_fields2))) and tqtisFinite(mul(NearestTiesToEven,
-  fliteral4, to_rep(rayr__split_fields2))))
-
-axiom H15 : (o4 = mul(NearestTiesToEven, o3, to_rep(rayl__split_fields2)))
-
-axiom H16 : ((o7 = o4) and tqtisFinite(o4))
-
-axiom H17 : (o8 = mul(NearestTiesToEven, o7, o6))
-
-axiom H18 : ((o9 = o8) and tqtisFinite(o8))
-
-axiom H19 : ((o = mul(NearestTiesToEven, to_rep(rayl__split_fields2),
-  to_rep(rayl__split_fields2))) and tqtisFinite(mul(NearestTiesToEven,
-  to_rep(rayl__split_fields2), to_rep(rayl__split_fields2))))
-
  (* File "algorithm.adb", line 132, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven,
-  to_rep(rayr__split_fields2), to_rep(rayr__split_fields2)))
+goal WP_parameter_def :
+  (forall gapvec__split_fields:us_main_type.
+  forall rayr__split_fields:nonnegative_float.
+  forall rayr__split_fields1:normalized2pi.
+  forall rayl__split_fields:nonnegative_float.
+  forall rayl__split_fields1:normalized2pi. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall o6:t.
+  forall o7:t.
+  forall algorithm__gap_vectors__clear__container__fields:us_main_type.
+  forall result:us_main_type. forall gapvec__split_fields1:us_main_type.
+  forall result1:nonnegative_float. forall result2:normalized2pi.
+  forall rayr__split_fields2:us_split_fields8.
+  forall result3:us_split_fields__ref4.
+  forall rayl__split_fields2:us_split_fields8.
+  ((1000 = to_rep4(gapvec__split_discrs)) -> (in_range2(robotradius) ->
+  (in_range2(mingapwidth) -> (in_range2(fmaxrange) ->
+  ((to_rep4(gapvec__split_discrs) = 1000) -> (((length({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = gapvec__split_discrs };
+  us_split_fields5 = { rec__algorithm__gap_vectors__list =
+  algorithm__gap_vectors__clear__container__fields } }) = 0) and
+  ((result = gapvec__split_fields) and
+  (gapvec__split_fields1 = algorithm__gap_vectors__clear__container__fields))) ->
+  ((((result1 = rayr__split_fields) and (result2 = rayr__split_fields1)) and
+  (rayr__split_fields2 = ((laserscan[1000])).us_split_fields9)) ->
+  (((result3 = { us_split_fields__content4 = {
+  rec__algorithm__laser_scan_data__first = rayl__split_fields;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = rayl__split_fields1 } } } }) and
+  (rayl__split_fields2 = ((laserscan[1])).us_split_fields9)) ->
+  ((((((o3 = ccwdiff((rayr__split_fields2).rec__algorithm__laser_scan_data__second,
+  (rayl__split_fields2).rec__algorithm__laser_scan_data__second)) and
+  tqtisFinite(o3)) and ((o4 = cos(o3)) and (tqtisFinite(o4) and
+  ((le(neg(fliteral), o4) and le(o4, fliteral)) and (eq(o3, fliteral1) ->
+  eq(o4, fliteral)))))) and (((((o1 = mul(NearestTiesToEven, fliteral4,
+  to_rep((rayr__split_fields2).rec__algorithm__laser_scan_data__first))) and
+  tqtisFinite(mul(NearestTiesToEven, fliteral4,
+  to_rep((rayr__split_fields2).rec__algorithm__laser_scan_data__first)))) and
+  (o2 = mul(NearestTiesToEven, o1,
+  to_rep((rayl__split_fields2).rec__algorithm__laser_scan_data__first)))) and
+  ((o5 = o2) and tqtisFinite(o2))) and (o6 = mul(NearestTiesToEven, o5,
+  o4)))) and ((o7 = o6) and tqtisFinite(o6))) ->
+  (((o = mul(NearestTiesToEven,
+  to_rep((rayl__split_fields2).rec__algorithm__laser_scan_data__first),
+  to_rep((rayl__split_fields2).rec__algorithm__laser_scan_data__first))) and
+  tqtisFinite(mul(NearestTiesToEven,
+  to_rep((rayl__split_fields2).rec__algorithm__laser_scan_data__first),
+  to_rep((rayl__split_fields2).rec__algorithm__laser_scan_data__first)))) ->
+  tqtisFinite(mul(NearestTiesToEven,
+  to_rep((rayr__split_fields2).rec__algorithm__laser_scan_data__first),
+  to_rep((rayr__split_fields2).rec__algorithm__laser_scan_data__first))))))))))))))

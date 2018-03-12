@@ -1463,10 +1463,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t)))))
-(define-fun to_int6 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1494,9 +1490,9 @@
 (define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
-(define-fun dynamic_invariant ((temp___expr_165 (_ BitVec 16))
-  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
-  (temp___do_toplevel_164 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_193 (_ BitVec 16))
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool true)
 
 (declare-sort tfloat64B 0)
 
@@ -1543,12 +1539,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant1 ((temp___expr_201 t) (temp___is_init_198 Bool)
-  (temp___skip_constant_199 Bool)
-  (temp___do_toplevel_200 Bool)) Bool (=>
-                                      (or (= temp___is_init_198 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_201)))
+(define-fun dynamic_invariant1 ((temp___expr_235 t) (temp___is_init_231 Bool)
+  (temp___skip_constant_232 Bool) (temp___do_toplevel_233 Bool)
+  (temp___do_typ_inv_234 Bool)) Bool (=>
+                                     (or (= temp___is_init_231 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_235)))
 
 (declare-sort frame 0)
 
@@ -1567,12 +1563,13 @@
 (declare-datatypes () ((frame__ref (mk_frame__ref (frame__content frame)))))
 (define-fun frame__ref___projection ((a frame__ref)) frame (frame__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_207 Int)
-  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
-  (temp___do_toplevel_206 Bool)) Bool (=>
-                                      (or (= temp___is_init_204 true)
-                                      (<= 0 25000)) (in_range2
-                                      temp___expr_207)))
+(define-fun dynamic_invariant2 ((temp___expr_242 Int)
+  (temp___is_init_238 Bool) (temp___skip_constant_239 Bool)
+  (temp___do_toplevel_240 Bool)
+  (temp___do_typ_inv_241 Bool)) Bool (=>
+                                     (or (= temp___is_init_238 true)
+                                     (<= 0 25000)) (in_range2
+                                     temp___expr_242)))
 
 (declare-sort ratio_t 0)
 
@@ -1597,12 +1594,12 @@
 (define-fun ratio_t__ref___projection ((a ratio_t__ref)) ratio_t (ratio_t__content
                                                                  a))
 
-(define-fun dynamic_invariant3 ((temp___expr_213 t) (temp___is_init_210 Bool)
-  (temp___skip_constant_211 Bool)
-  (temp___do_toplevel_212 Bool)) Bool (=>
-                                      (or (= temp___is_init_210 true) (le
-                                      (neg fliteral) fliteral)) (in_range3
-                                      temp___expr_213)))
+(define-fun dynamic_invariant3 ((temp___expr_249 t) (temp___is_init_245 Bool)
+  (temp___skip_constant_246 Bool) (temp___do_toplevel_247 Bool)
+  (temp___do_typ_inv_248 Bool)) Bool (=>
+                                     (or (= temp___is_init_245 true) (le
+                                     (neg fliteral) fliteral)) (in_range3
+                                     temp___expr_249)))
 
 (declare-sort drag_t 0)
 
@@ -1632,12 +1629,12 @@
 (define-fun drag_t__ref___projection ((a drag_t__ref)) drag_t (drag_t__content
                                                               a))
 
-(define-fun dynamic_invariant4 ((temp___expr_219 t) (temp___is_init_216 Bool)
-  (temp___skip_constant_217 Bool)
-  (temp___do_toplevel_218 Bool)) Bool (=>
-                                      (or (= temp___is_init_216 true) (le
-                                      (neg fliteral2) fliteral2)) (in_range4
-                                      temp___expr_219)))
+(define-fun dynamic_invariant4 ((temp___expr_256 t) (temp___is_init_252 Bool)
+  (temp___skip_constant_253 Bool) (temp___do_toplevel_254 Bool)
+  (temp___do_typ_inv_255 Bool)) Bool (=>
+                                     (or (= temp___is_init_252 true) (le
+                                     (neg fliteral2) fliteral2)) (in_range4
+                                     temp___expr_256)))
 
 (declare-fun low_bound (Int) t)
 
@@ -1646,8 +1643,8 @@
 ;; low_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant2 n true true true) (dynamic_invariant1
-     (low_bound n) true false true)) :pattern ((low_bound n)) )))
+  (! (=> (dynamic_invariant2 n true true true true) (dynamic_invariant1
+     (low_bound n) true false true true)) :pattern ((low_bound n)) )))
 
 (declare-const fliteral3 t)
 
@@ -1657,7 +1654,7 @@
 ;; low_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant2 n true true true)
+  (! (=> (dynamic_invariant2 n true true true true)
      (= (low_bound n) (mul RNE1 (of_int RNE1 n) (neg fliteral3)))) :pattern (
   (low_bound n)) )))
 
@@ -1668,13 +1665,13 @@
 ;; high_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant2 n true true true) (dynamic_invariant1
-     (high_bound n) true false true)) :pattern ((high_bound n)) )))
+  (! (=> (dynamic_invariant2 n true true true true) (dynamic_invariant1
+     (high_bound n) true false true true)) :pattern ((high_bound n)) )))
 
 ;; high_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant2 n true true true)
+  (! (=> (dynamic_invariant2 n true true true true)
      (= (high_bound n) (mul RNE1 (of_int RNE1 n) fliteral3))) :pattern (
   (high_bound n)) )))
 
@@ -1774,24 +1771,24 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant5 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range5 temp___expr_15)))
+(define-fun dynamic_invariant5 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range5 temp___expr_18)))
 
 ;; t__post_axiom
   (assert
   (forall ((n1 Int))
-  (! (=> (dynamic_invariant5 n1 true true true) (dynamic_invariant1 (t1 n1)
-     true false true)) :pattern ((t1 n1)) )))
+  (! (=> (dynamic_invariant5 n1 true true true true) (dynamic_invariant1
+     (t1 n1) true false true true)) :pattern ((t1 n1)) )))
 
 ;; t__def_axiom
   (assert
   (forall ((n1 Int))
-  (! (=> (dynamic_invariant5 n1 true true true) (= (t1 n1) (of_int RNE1 n1))) :pattern (
-  (t1 n1)) )))
+  (! (=> (dynamic_invariant5 n1 true true true true)
+     (= (t1 n1) (of_int RNE1 n1))) :pattern ((t1 n1)) )))
 
 (declare-const n_bv (_ BitVec 16))
 
@@ -1819,6 +1816,11 @@
 ;; n_bv__def_axiom
   (assert (= n_bv ((_ int2bv 16) n)))
 
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 2.0)))
+
 (declare-const speed t)
 
 (declare-const distance t)
@@ -1831,25 +1833,7 @@
 
 (declare-const o2 t)
 
-(declare-const o3 Int)
-
-(declare-const o4 Int)
-
-(declare-const o5 t)
-
-(declare-const o6 Bool)
-
-(declare-const o7 Int)
-
-(declare-const o8 Int)
-
-(declare-const o9 t)
-
-(declare-const o10 Bool)
-
-(declare-const o11 t)
-
-(declare-const o12 Int)
+(declare-const o3 t)
 
 (declare-const result t)
 
@@ -1896,118 +1880,210 @@
 ;; H
   (assert (and (< n 25000) (= (invariant__ n speed distance) true)))
 
-(declare-const fliteral8 t)
+;; H
+  (assert (= speed old_speed))
 
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 2.0)))
+;; H
+  (assert (tqtisFinite old_speed))
 
 ;; H
   (assert
-  (and
-  (and (= speed old_speed)
-  (and (tqtisFinite old_speed)
-  (and
   (= (add RNE1 drag (mul RNE1 (mul RNE1 factor fliteral6) fliteral7))
-  delta_speed)
-  (and (tqtisFinite delta_speed)
-  (and (= ((_ int2bv 16) n) n_bv)
-  (and
-  (and
+  delta_speed))
+
+;; H
+  (assert (tqtisFinite delta_speed))
+
+;; H
+  (assert (= ((_ int2bv 16) n) n_bv))
+
+;; H
+  (assert
   (and (= o (add RNE1 speed delta_speed)) (tqtisFinite
-  (add RNE1 speed delta_speed)))
-  (and (= (mk_t__ref1 result) (mk_t__ref1 speed)) (= speed1 o)))
-  (and (and (le (neg fliteral3) delta_speed) (le delta_speed fliteral3))
-  (and (= (in_bounds (high_bound n)) true)
-  (and (= (in_bounds (low_bound n)) true)
-  (and (eq (add RNE1 (mul RNE1 (of_ubv16 RNE1 n_bv) fliteral3) fliteral3)
-  (mul RNE1 (add RNE1 (of_ubv16 RNE1 n_bv) fliteral) fliteral3))
-  (and (eq (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3)
-  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) fliteral3))
-  (and (eq (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
-  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) (neg fliteral3)))
-  (and (eq (t1 1) fliteral)
-  (and (eq (add RNE1 (of_int RNE1 n) fliteral) (of_int RNE1 (+ n 1)))
-  (and (le (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
-  speed1)
-  (and (le (mul RNE1 (of_int RNE1 (+ n 1)) (neg fliteral3)) speed1)
-  (and (le speed1 (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3))
-  (and (le speed1 (mul RNE1 (of_int RNE1 (+ n 1)) fliteral3))
-  (and
-  (and
-  (and
+  (add RNE1 speed delta_speed))))
+
+;; H
+  (assert (= (mk_t__ref1 result) (mk_t__ref1 speed)))
+
+;; H
+  (assert (= speed1 o))
+
+;; H
+  (assert (and (le (neg fliteral3) delta_speed) (le delta_speed fliteral3)))
+
+;; H
+  (assert (= (in_bounds (high_bound n)) true))
+
+;; H
+  (assert (= (in_bounds (low_bound n)) true))
+
+;; H
+  (assert (eq (add RNE1 (mul RNE1 (of_ubv16 RNE1 n_bv) fliteral3) fliteral3)
+  (mul RNE1 (add RNE1 (of_ubv16 RNE1 n_bv) fliteral) fliteral3)))
+
+;; H
+  (assert (eq (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3)
+  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) fliteral3)))
+
+;; H
+  (assert (eq (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
+  (mul RNE1 (add RNE1 (of_int RNE1 n) fliteral) (neg fliteral3))))
+
+;; H
+  (assert (eq (t1 1) fliteral))
+
+;; H
+  (assert (eq (add RNE1 (of_int RNE1 n) fliteral) (of_int RNE1 (+ n 1))))
+
+;; H
+  (assert (le (sub RNE1 (mul RNE1 (of_int RNE1 n) (neg fliteral3)) fliteral3)
+  speed1))
+
+;; H
+  (assert (le (mul RNE1 (of_int RNE1 (+ n 1)) (neg fliteral3)) speed1))
+
+;; H
+  (assert (le speed1
+  (add RNE1 (mul RNE1 (of_int RNE1 n) fliteral3) fliteral3)))
+
+;; H
+  (assert (le speed1 (mul RNE1 (of_int RNE1 (+ n 1)) fliteral3)))
+
+;; H
+  (assert
   (and (= o1 (add RNE1 old_speed speed1)) (tqtisFinite
-  (add RNE1 old_speed speed1))) (= o2 (div1 RNE1 o1 fliteral8)))
-  (and (= (mk_t__ref1 result1) (mk_t__ref1 average)) (= average1 o2)))
-  (and
+  (add RNE1 old_speed speed1))))
+
+;; H
+  (assert (= o2 (div1 RNE1 o1 fliteral8)))
+
+;; H
+  (assert (= (mk_t__ref1 result1) (mk_t__ref1 average)))
+
+;; H
+  (assert (= average1 o2))
+
+;; H
+  (assert
   (and (le (low_bound (+ n 1)) old_speed) (le old_speed
-  (high_bound (+ n 1))))
-  (and
-  (ite (le old_speed speed1)
-  (and (le old_speed average1) (le average1 speed1))
-  (and (le speed1 average1) (le average1 old_speed)))
-  (and
-  (and (le (low_bound (+ n 1)) average1) (le average1 (high_bound (+ n 1))))
-  (and (le
+  (high_bound (+ n 1)))))
+
+;; H
+  (assert
+  (=> (le old_speed speed1)
+  (and (le old_speed average1) (le average1 speed1))))
+
+;; H
+  (assert
+  (=> (not (le old_speed speed1))
+  (and (le speed1 average1) (le average1 old_speed))))
+
+;; H
+  (assert
+  (and (le (low_bound (+ n 1)) average1) (le average1 (high_bound (+ n 1)))))
+
+;; H
+  (assert (le
   (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) (neg fliteral3))
-  fliteral5) average1)
-  (and (le average1
-  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) fliteral3)
-  fliteral5))
-  (and (le
-  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) (neg fliteral3))
-  fliteral5) (mul RNE1 average1 fliteral7))
-  (and (le (mul RNE1 average1 fliteral7)
-  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) fliteral3)
-  fliteral5))
-  (and
-  (and
-  (and (= o11 (add RNE1 distance (mul RNE1 average1 fliteral7))) (tqtisFinite
-  (add RNE1 distance (mul RNE1 average1 fliteral7))))
-  (and (= (mk_t__ref1 result2) (mk_t__ref1 distance)) (= distance1 o11)))
-  (and (eq
-  (add RNE1
-  (mul RNE1
-  (mul RNE1 (mul RNE1 (of_int RNE1 n) (of_int RNE1 (+ n 1))) (neg fliteral3))
-  fliteral5)
-  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) (neg fliteral3))
-  fliteral5))
-  (mul RNE1
-  (mul RNE1 (mul RNE1 (of_int RNE1 (+ n 1)) (of_int RNE1 (+ n 2)))
-  (neg fliteral3)) fliteral5))
-  (and (eq
-  (add RNE1
-  (mul RNE1
-  (mul RNE1 (mul RNE1 (of_int RNE1 n) (of_int RNE1 (+ n 1))) fliteral3)
-  fliteral5)
-  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) fliteral3)
-  fliteral5))
-  (mul RNE1
-  (mul RNE1 (mul RNE1 (of_int RNE1 (+ n 1)) (of_int RNE1 (+ n 2))) fliteral3)
-  fliteral5))
-  (and (le
-  (add RNE1
-  (mul RNE1
-  (mul RNE1 (mul RNE1 (of_int RNE1 n) (of_int RNE1 (+ n 1))) (neg fliteral3))
-  fliteral5)
-  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) (neg fliteral3))
-  fliteral5)) distance1)
-  (and (le distance1
-  (add RNE1
-  (mul RNE1
-  (mul RNE1 (mul RNE1 (of_int RNE1 n) (of_int RNE1 (+ n 1))) fliteral3)
-  fliteral5)
+  fliteral5) average1))
+
+;; H
+  (assert (le average1
   (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) fliteral3)
   fliteral5)))
-  (and (le
+
+;; H
+  (assert (le
+  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) (neg fliteral3))
+  fliteral5) (mul RNE1 average1 fliteral7)))
+
+;; H
+  (assert (le (mul RNE1 average1 fliteral7)
+  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) fliteral3)
+  fliteral5)))
+
+;; H
+  (assert
+  (and (= o3 (add RNE1 distance (mul RNE1 average1 fliteral7))) (tqtisFinite
+  (add RNE1 distance (mul RNE1 average1 fliteral7)))))
+
+;; H
+  (assert (= (mk_t__ref1 result2) (mk_t__ref1 distance)))
+
+;; H
+  (assert (= distance1 o3))
+
+;; H
+  (assert (eq
+  (add RNE1
+  (mul RNE1
+  (mul RNE1 (mul RNE1 (of_int RNE1 n) (of_int RNE1 (+ n 1))) (neg fliteral3))
+  fliteral5)
+  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) (neg fliteral3))
+  fliteral5))
   (mul RNE1
   (mul RNE1 (mul RNE1 (of_int RNE1 (+ n 1)) (of_int RNE1 (+ n 2)))
-  (neg fliteral3)) fliteral5) distance1) (le
+  (neg fliteral3)) fliteral5)))
+
+;; H
+  (assert (eq
+  (add RNE1
+  (mul RNE1
+  (mul RNE1 (mul RNE1 (of_int RNE1 n) (of_int RNE1 (+ n 1))) fliteral3)
+  fliteral5)
+  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) fliteral3)
+  fliteral5))
   (mul RNE1
   (mul RNE1 (mul RNE1 (of_int RNE1 (+ n 1)) (of_int RNE1 (+ n 2))) fliteral3)
-  fliteral5) distance1)))))))))))))))))))))))))))))))))
-  (and
-  (and (= average1 average2) (and (= distance1 distance2) (= speed1 speed2)))
-  (and (= average3 average1) (and (= distance3 distance1) (= speed3 speed1))))))
+  fliteral5)))
+
+;; H
+  (assert (le
+  (add RNE1
+  (mul RNE1
+  (mul RNE1 (mul RNE1 (of_int RNE1 n) (of_int RNE1 (+ n 1))) (neg fliteral3))
+  fliteral5)
+  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) (neg fliteral3))
+  fliteral5)) distance1))
+
+;; H
+  (assert (le distance1
+  (add RNE1
+  (mul RNE1
+  (mul RNE1 (mul RNE1 (of_int RNE1 n) (of_int RNE1 (+ n 1))) fliteral3)
+  fliteral5)
+  (mul RNE1 (mul RNE1 (mul RNE1 fliteral8 (of_int RNE1 n)) fliteral3)
+  fliteral5))))
+
+;; H
+  (assert (le
+  (mul RNE1
+  (mul RNE1 (mul RNE1 (of_int RNE1 (+ n 1)) (of_int RNE1 (+ n 2)))
+  (neg fliteral3)) fliteral5) distance1))
+
+;; H
+  (assert (le
+  (mul RNE1
+  (mul RNE1 (mul RNE1 (of_int RNE1 (+ n 1)) (of_int RNE1 (+ n 2))) fliteral3)
+  fliteral5) distance1))
+
+;; H
+  (assert (= average1 average2))
+
+;; H
+  (assert (= distance1 distance2))
+
+;; H
+  (assert (= speed1 speed2))
+
+;; H
+  (assert (= average3 average1))
+
+;; H
+  (assert (= distance3 distance1))
+
+;; H
+  (assert (= speed3 speed1))
 
 (assert
 ;; WP_parameter_def

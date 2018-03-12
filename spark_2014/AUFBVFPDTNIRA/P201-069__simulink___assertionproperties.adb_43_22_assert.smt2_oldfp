@@ -1080,12 +1080,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant ((temp___expr_57 t) (temp___is_init_54 Bool)
-  (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 t) (temp___is_init_63 Bool)
+  (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_67)))
 
 (declare-fun pow__2 (t t) t)
 
@@ -1095,9 +1095,9 @@
   (assert
   (forall ((left t) (right t))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (pow__2 left right) true false
-     true)) :pattern ((pow__2 left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (pow__2 left right) true
+     false true true)) :pattern ((pow__2 left right)) )))
 
 (declare-sort long_float_m0_0_minf 0)
 
@@ -1128,12 +1128,12 @@
 (define-fun long_float_m0_0_minf__ref___projection ((a long_float_m0_0_minf__ref)) long_float_m0_0_minf
   (long_float_m0_0_minf__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_213 t) (temp___is_init_210 Bool)
-  (temp___skip_constant_211 Bool)
-  (temp___do_toplevel_212 Bool)) Bool (=>
-                                      (or (= temp___is_init_210 true) (le
-                                      fliteral2 fliteral1)) (in_range1
-                                      temp___expr_213)))
+(define-fun dynamic_invariant1 ((temp___expr_249 t) (temp___is_init_245 Bool)
+  (temp___skip_constant_246 Bool) (temp___do_toplevel_247 Bool)
+  (temp___do_typ_inv_248 Bool)) Bool (=>
+                                     (or (= temp___is_init_245 true) (le
+                                     fliteral2 fliteral1)) (in_range1
+                                     temp___expr_249)))
 
 (declare-const x t)
 
@@ -1142,6 +1142,23 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 16.0)))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 50000000000000000000000000000000000000000000000000000.0 100000000000000000000000000000000000000000000000000000.0))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 4.0)))
 
 (declare-const y t)
 
@@ -1163,23 +1180,11 @@
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite y)))
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 16.0)))
-
 ;; H
   (assert (neq x fliteral3))
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite sqrt_out1)))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 50000000000000000000000000000000000000000000000000000.0 100000000000000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert (and (= o (pow__2 x fliteral4)) (tqtisFinite o)))
@@ -1198,11 +1203,6 @@
 
 ;; H
   (assert (neq x fliteral3))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 4.0)))
 
 (assert
 ;; WP_parameter_def

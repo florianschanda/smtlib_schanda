@@ -954,44 +954,22 @@ logic f : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__ident__5__result : t
-
-logic result : t
-
-logic p__ident__5__result1 : t
-
-logic p__ident__5__result2 : t
-
-logic p__ident__5__result3 : t
-
-logic p__ident__5__result4 : t
-
-logic p__ident__5__result5 : t
-
-logic result1 : t
-
-axiom H : tqtisFinite(f)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H1 : neq(f, fliteral1)
-
-axiom H2 : (p__ident__5__result1 = p__ident__5__result2)
-
-axiom H3 : (p__ident__5__result3 = p__ident__5__result1)
-
-axiom H4 : (result = p__ident__5__result)
-
-axiom H5 : (p__ident__5__result1 = prev_representable(next_representable(f)))
-
-axiom H6 : (p__ident__5__result4 = p__ident__5__result2)
-
-axiom H7 : (p__ident__5__result5 = p__ident__5__result3)
-
-axiom H8 : (result1 = p__ident__5__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : eq(p__ident__5__result4, f)
+goal WP_parameter_def :
+  (forall p__ident__5__result:t. forall result:t.
+  forall p__ident__5__result1:t. forall p__ident__5__result2:t.
+  forall p__ident__5__result3:t. forall p__ident__5__result4:t.
+  forall p__ident__5__result5:t.
+  (forall result1:t. ((tqtisFinite(f) and (neq(f, fliteral1) and
+  (((((p__ident__5__result1 = p__ident__5__result2) and
+  (p__ident__5__result3 = p__ident__5__result1)) and
+  ((result = p__ident__5__result) and
+  (p__ident__5__result1 = prev_representable(next_representable(f))))) and
+  ((p__ident__5__result4 = p__ident__5__result2) and
+  (p__ident__5__result5 = p__ident__5__result3))) and
+  (result1 = p__ident__5__result4)))) -> eq(p__ident__5__result4, f))))

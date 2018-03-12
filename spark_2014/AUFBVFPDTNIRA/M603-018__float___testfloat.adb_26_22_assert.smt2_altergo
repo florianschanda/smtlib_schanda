@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -962,55 +962,25 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic t1 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic t2 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : tqtisFinite(z)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
-
-axiom H3 : ((le(x, z) and le(z, y)) and ((le(neg(fliteral1), x) and le(x,
-  fliteral1)) and (eq(y, add(RNE, x, fliteral)) and (eq(roundToIntegral(RTN,
-  z), x) and eq(roundToIntegral(RTP, z), y)))))
-
-axiom H4 : ((o1 = add(RNE, x, y)) and tqtisFinite(add(RNE, x, y)))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
-axiom H5 : (o2 = div(RNE, o1, fliteral2))
-
-axiom H6 : (result = t1)
-
-axiom H7 : (t2 = o2)
-
-axiom H8 : tqtisFinite(t2)
-
-axiom H9 : eq(roundToIntegral(RTN, x), x)
-
-axiom H10 : eq(roundToIntegral(RTN, y), y)
-
-axiom H11 : eq(roundToIntegral(RTN, z), x)
-
-axiom H12 : eq(roundToIntegral(RTN, t2), x)
-
  (* File "testfloat.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : eq(roundToIntegral(RTP, x), x)
+goal WP_parameter_def :
+  (forall t1:t. forall o:t. forall o1:t. forall result:t. forall t2:t.
+  (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) -> (((le(x, z) and
+  le(z, y)) and ((le(neg(fliteral1), x) and le(x, fliteral1)) and (eq(y,
+  add(RNE, x, fliteral)) and (eq(roundToIntegral(RTN, z), x) and
+  eq(roundToIntegral(RTP, z), y))))) -> (((((o = add(RNE, x, y)) and
+  tqtisFinite(add(RNE, x, y))) and (o1 = div(RNE, o, fliteral2))) and
+  ((result = t1) and (t2 = o1))) -> (tqtisFinite(t2) ->
+  (eq(roundToIntegral(RTN, x), x) -> (eq(roundToIntegral(RTN, y), y) ->
+  (eq(roundToIntegral(RTN, z), x) -> (eq(roundToIntegral(RTN, t2), x) ->
+  eq(roundToIntegral(RTP, x), x))))))))))))

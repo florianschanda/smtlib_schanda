@@ -928,18 +928,11 @@ logic cycle : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(cycle)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H2 : lt(fliteral1, cycle)
-
-axiom H3 : neq(x, fliteral1)
-
  (* File "formal-numerics-elementary_functions.ads", line 95, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(cycle))
+goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(cycle) ->
+  (lt(fliteral1, cycle) -> (neq(x, fliteral1) -> (not is_zero(cycle))))))

@@ -1468,96 +1468,28 @@ type t2b__ref = { t2b__content : us_rep
 
 function t2b__ref___projection(a: t2b__ref) : us_rep = (a).t2b__content
 
-logic x__split_fields : integer
-
-logic x__split_fields1 : float1
-
-logic o : enum
-
-logic o1 : integer
-
-logic o2 : integer
-
-logic o3 : float1
-
-logic o4 : enum
-
-logic p__bad__x__assume : enum
-
-logic p__bad__x__assume1 : integer
-
-logic p__bad__x__assume2 : float1
-
-logic o5 : enum
-
-logic o6 : float1
-
-logic o7 : integer
-
-logic o8 : float1
-
-logic o9 : enum
-
-logic temp___143 : enum
-
-logic temp___1431 : integer
-
-logic temp___1432 : float1
-
-logic result : integer
-
-logic result1 : float1
-
-logic x__split_fields2 : integer
-
-logic x__split_fields3 : float1
-
-axiom H : (to_rep(o1) = 1)
-
-axiom H1 : (o1 = o2)
-
-axiom H2 : (dummy1 = o3)
-
-axiom H3 : (to_rep2(o) = 0)
-
-axiom H4 : (o = o4)
-
-axiom H5 : (p__bad__x__assume = o4)
-
-axiom H6 : (p__bad__x__assume1 = o2)
-
-axiom H7 : (p__bad__x__assume2 = o3)
-
-axiom H8 : (result = x__split_fields)
-
-axiom H9 : (result1 = x__split_fields1)
-
-axiom H10 : (p__bad__x__assume1 = x__split_fields2)
-
-axiom H11 : (p__bad__x__assume2 = x__split_fields3)
-
-axiom H12 : (x__split_discrs = p__bad__x__assume)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 2.0))
 
-axiom H13 : (to_rep1(o6) = fliteral1)
-
-axiom H14 : (dummy = o7)
-
-axiom H15 : (o6 = o8)
-
-axiom H16 : (to_rep2(o5) = 1)
-
-axiom H17 : (o5 = o9)
-
-axiom H18 : (temp___143 = o9)
-
-axiom H19 : (temp___1431 = o7)
-
-axiom H20 : (temp___1432 = o8)
-
  (* File "p.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (temp___143 = x__split_discrs)
+goal WP_parameter_def :
+  (forall x__split_fields:integer. forall x__split_fields1:float1.
+  forall o:enum. forall o1:integer. forall o2:integer. forall o3:float1.
+  forall o4:enum. forall p__bad__x__assume:enum.
+  forall p__bad__x__assume1:integer. forall p__bad__x__assume2:float1.
+  forall o5:enum. forall o6:float1. forall o7:integer. forall o8:float1.
+  forall o9:enum. forall temp___167:enum. forall temp___1671:integer.
+  forall temp___1672:float1. forall result:integer. forall result1:float1.
+  forall x__split_fields2:integer. forall x__split_fields3:float1.
+  (((((to_rep(o1) = 1) and ((o1 = o2) and (dummy1 = o3))) and
+  (((to_rep2(o) = 0) and (o = o4)) and ((p__bad__x__assume = o4) and
+  ((p__bad__x__assume1 = o2) and (p__bad__x__assume2 = o3))))) and
+  ((((result = x__split_fields) and (result1 = x__split_fields1)) and
+  ((p__bad__x__assume1 = x__split_fields2) and
+  (p__bad__x__assume2 = x__split_fields3))) and
+  (x__split_discrs = p__bad__x__assume))) -> ((((to_rep1(o6) = fliteral1) and
+  ((dummy = o7) and (o6 = o8))) and (((to_rep2(o5) = 1) and (o5 = o9)) and
+  ((temp___167 = o9) and ((temp___1671 = o7) and (temp___1672 = o8))))) ->
+  (temp___167 = x__split_discrs))))

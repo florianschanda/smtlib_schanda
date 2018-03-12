@@ -948,11 +948,7 @@ axiom coerce_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic b : t
-
-logic o : t
-
-axiom H : (le(neg(fliteral1), neg(fliteral2)) -> in_range1(b))
-
  (* File "demo.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range1(fliteral1)
+goal WP_parameter_def :
+  (forall b:t. ((le(neg(fliteral1), neg(fliteral2)) -> in_range1(b)) ->
+  in_range1(fliteral1)))

@@ -426,10 +426,6 @@
   (= (eq_sub3 a b (bv2nat i) (bv2nat n)) (eq_sub_bv3 a b i n))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
-(define-fun to_int6 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -455,12 +451,13 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (declare-sort tinteger_32B 0)
 
@@ -503,12 +500,13 @@
 (define-fun integer_32__ref___2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_147 Int)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (<= (- 2147483648) 2147483647))
-                                      (in_range2 temp___expr_147)))
+(define-fun dynamic_invariant1 ((temp___expr_172 Int)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range2 temp___expr_172)))
 
 (declare-sort unsigned_16 0)
 
@@ -529,9 +527,9 @@
 (define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_165 (_ BitVec 16))
-  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
-  (temp___do_toplevel_164 Bool)) Bool true)
+(define-fun dynamic_invariant2 ((temp___expr_193 (_ BitVec 16))
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool true)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -651,8 +649,6 @@
 
 (declare-const estimatedgroundvelocity Float64)
 
-(declare-const estimatedgroundvelocityisavailable Bool)
-
 (declare-const old_ngclicktime_memory (_ BitVec 16))
 
 (declare-const old_ngrotations_memory (_ BitVec 16))
@@ -733,21 +729,11 @@
 
 (declare-const left_2_out1 int__ref)
 
-(declare-const to_uint16_result_out1 t__ref)
-
-(declare-const to_uint16_result_1_out1 t__ref)
-
-(declare-const to_uint16_result_2_out1 t__ref)
-
 (declare-const distance_km_out1 t__ref1)
 
 (declare-const elapsed_time_h_out1 t__ref1)
 
-(declare-const relational_operator_out1 bool__ref)
-
 (declare-const avoid_div_by_zero_out1 t__ref1)
-
-(declare-const relational_operator_out1_1 bool__ref)
 
 (declare-const speed_out1 t__ref1)
 
@@ -766,30 +752,6 @@
 (declare-const o5 Int)
 
 (declare-const o6 Int)
-
-(declare-const o7 Int)
-
-(declare-const o8 Int)
-
-(declare-const o9 Int)
-
-(declare-const o10 Int)
-
-(declare-const o11 (_ BitVec 16))
-
-(declare-const o12 Int)
-
-(declare-const o13 (_ BitVec 16))
-
-(declare-const o14 Int)
-
-(declare-const o15 (_ BitVec 16))
-
-(declare-const o16 Float64)
-
-(declare-const o17 Float64)
-
-(declare-const o18 Float64)
 
 (declare-const result t__ref)
 
@@ -915,111 +877,14 @@
 
 (declare-const compare_to_constant_out11 Bool)
 
-(declare-const result31 int__ref)
-
-(declare-const sum_1_out11 Int)
-
-(declare-const result32 int__ref)
-
-(declare-const sum_2_out11 Int)
-
-(declare-const result33 int__ref)
-
-(declare-const sum_3_out11 Int)
-
-(declare-const result34 int__ref)
-
-(declare-const left_out11 Int)
-
-(declare-const result35 int__ref)
-
-(declare-const left_out12 Int)
-
-(declare-const result36 int__ref)
-
-(declare-const left_1_out11 Int)
-
-(declare-const result37 int__ref)
-
-(declare-const left_1_out12 Int)
-
-(declare-const result38 int__ref)
-
-(declare-const left_2_out11 Int)
-
-(declare-const result39 int__ref)
-
-(declare-const left_2_out12 Int)
-
-(declare-const result40 t__ref)
-
-(declare-const to_uint16_result_out11 (_ BitVec 16))
-
-(declare-const result41 t__ref)
-
-(declare-const to_uint16_result_1_out11 (_ BitVec 16))
-
-(declare-const result42 t__ref)
-
-(declare-const to_uint16_result_2_out11 (_ BitVec 16))
-
-(declare-const result43 t__ref1)
-
-(declare-const distance_km_out11 Float64)
-
-(declare-const result44 t__ref1)
-
-(declare-const elapsed_time_h_out11 Float64)
-
-(declare-const result45 bool__ref)
-
-(declare-const relational_operator_out11 Bool)
-
-(declare-const result46 t__ref1)
-
-(declare-const avoid_div_by_zero_out11 Float64)
-
-(declare-const result47 t__ref1)
-
-(declare-const avoid_div_by_zero_out12 Float64)
-
-(declare-const result48 bool__ref)
-
-(declare-const estimatedgroundvelocityisavailable1 Bool)
-
-(declare-const result49 bool__ref)
-
-(declare-const relational_operator_out1_11 Bool)
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
-
 ;; H
   (assert (fp.isFinite64 old_estimatedgroundvelocity_memory))
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (fp.isFinite64 estimatedgroundvelocity)))
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
 
 ;; H
   (assert
@@ -1035,15 +900,6 @@
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 max_uint16_2_out1)))
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
 
 ;; H
   (assert
@@ -1062,12 +918,6 @@
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (fp.isFinite64 ms_in_our1_out1)))
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 to_int32_left_out1)))
@@ -1105,9 +955,6 @@
   (assert
   (=> (<= (- 2147483648) 2147483647) (in_range2
   (int__content data_type_conversion_out1))))
-
-;; H
-  (assert true)
 
 ;; H
   (assert
@@ -1161,15 +1008,6 @@
 ;; H
   (assert
   (=> (<= (- 2147483648) 2147483647) (in_range2 (int__content left_2_out1))))
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
-
-;; H
-  (assert true)
 
 ;; H
   (assert
@@ -1281,13 +1119,13 @@
   (assert (= result12 (mk_t__ref update_period_os_interrupt_out1)))
 
 ;; H
-  (assert (= update_period_os_interrupt_out11 ((_ int2bv 16) 500)))
+  (assert (= update_period_os_interrupt_out11 #x01F4))
 
 ;; H
   (assert (= result13 (mk_t__ref validity_period_out1)))
 
 ;; H
-  (assert (= validity_period_out11 ((_ int2bv 16) 3000)))
+  (assert (= validity_period_out11 #x0BB8))
 
 ;; H
   (assert (= result14 (mk_int__ref to_int32_left_out1)))

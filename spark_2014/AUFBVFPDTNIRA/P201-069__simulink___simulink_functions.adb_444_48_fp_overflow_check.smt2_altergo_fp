@@ -1122,28 +1122,7 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-axiom H : in_range1(left)
-
-axiom H1 : in_range1(right)
-
-axiom H2 : (not (right = 0))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(div(NearestTiesToEven,
-  of_int(NearestTiesToEven, left), of_int(NearestTiesToEven, right)))
+goal WP_parameter_def : (in_range1(left) -> (in_range1(right) ->
+  ((not (right = 0)) -> tqtisFinite(div(NearestTiesToEven,
+  of_int(NearestTiesToEven, left), of_int(NearestTiesToEven, right))))))

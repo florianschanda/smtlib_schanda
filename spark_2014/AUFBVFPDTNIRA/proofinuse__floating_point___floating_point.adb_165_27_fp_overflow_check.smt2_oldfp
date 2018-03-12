@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1086,12 +1082,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun sqrt2 (t) t)
 
@@ -1112,14 +1108,14 @@
 ;; sqrt__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (and (dynamic_invariant x true true true) (le fliteral2 x))
+  (! (=> (and (dynamic_invariant x true true true true) (le fliteral2 x))
      (let ((result (sqrt2 x)))
      (and
      (and (le fliteral2 result)
      (and (=> (eq x fliteral2) (eq result fliteral2))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant result
-     true false true)))) :pattern ((sqrt2 x)) )))
+     true false true true)))) :pattern ((sqrt2 x)) )))
 
 (declare-sort coord 0)
 
@@ -1147,12 +1143,12 @@
 (declare-datatypes () ((coord__ref (mk_coord__ref (coord__content coord)))))
 (define-fun coord__ref___projection ((a coord__ref)) coord (coord__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_211 t) (temp___is_init_208 Bool)
-  (temp___skip_constant_209 Bool)
-  (temp___do_toplevel_210 Bool)) Bool (=>
-                                      (or (= temp___is_init_208 true) (le
-                                      (neg fliteral4) fliteral4)) (in_range2
-                                      temp___expr_211)))
+(define-fun dynamic_invariant1 ((temp___expr_246 t) (temp___is_init_242 Bool)
+  (temp___skip_constant_243 Bool) (temp___do_toplevel_244 Bool)
+  (temp___do_typ_inv_245 Bool)) Bool (=>
+                                     (or (= temp___is_init_242 true) (le
+                                     (neg fliteral4) fliteral4)) (in_range2
+                                     temp___expr_246)))
 
 (declare-const a_x t)
 
@@ -1262,20 +1258,6 @@
 (declare-const o8 t)
 
 (declare-const o9 t)
-
-(declare-const o10 t)
-
-(declare-const floating_point__angle_between__length_bc__assume t)
-
-(declare-const o11 t)
-
-(declare-const o12 t)
-
-(declare-const o13 t)
-
-(declare-const result t)
-
-(declare-const res1 t)
 
 ;; H
   (assert (in_range2 a_x))

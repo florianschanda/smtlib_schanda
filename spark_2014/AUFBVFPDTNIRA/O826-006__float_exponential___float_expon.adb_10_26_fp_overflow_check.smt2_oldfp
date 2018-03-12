@@ -1112,12 +1112,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-sort t1 0)
 
@@ -1144,18 +1144,23 @@
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t1)))))
 (define-fun t__ref___projection ((a t__ref1)) t1 (t__content1 a))
 
-(define-fun dynamic_invariant1 ((temp___expr_171 t) (temp___is_init_168 Bool)
-  (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true) (le
-                                      fliteral fliteral2)) (in_range1
-                                      temp___expr_171)))
+(define-fun dynamic_invariant1 ((temp___expr_200 t) (temp___is_init_196 Bool)
+  (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true) (le
+                                     fliteral fliteral2)) (in_range1
+                                     temp___expr_200)))
 
 (declare-const x t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 7.0)))
 
 (declare-const y t)
 
@@ -1165,32 +1170,6 @@
 
 (declare-const o2 t)
 
-(declare-const o3 t)
-
-(declare-const o4 t)
-
-(declare-const o5 t)
-
-(declare-const o6 t)
-
-(declare-const o7 t)
-
-(declare-const o8 t)
-
-(declare-const o9 t)
-
-(declare-const o10 t)
-
-(declare-const o11 t)
-
-(declare-const o12 t)
-
-(declare-const o13 t)
-
-(declare-const o14 t)
-
-(declare-const o15 t)
-
 ;; H
   (assert (in_range1 x))
 
@@ -1198,24 +1177,19 @@
   (assert (tqtisFinite y))
 
 ;; H
-  (assert (and (= o8 (mul RNE1 x x)) (tqtisFinite (mul RNE1 x x))))
+  (assert (and (= o2 (mul RNE1 x x)) (tqtisFinite (mul RNE1 x x))))
 
 ;; H
   (assert
-  (and (= o3 (mul RNE1 x (mul RNE1 x x))) (tqtisFinite
+  (and (= o (mul RNE1 x (mul RNE1 x x))) (tqtisFinite
   (mul RNE1 x (mul RNE1 x x)))))
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 7.0)))
-
 ;; H
-  (assert (= o4 (mul RNE1 fliteral3 o3)))
+  (assert (= o1 (mul RNE1 fliteral3 o)))
 
 (assert
 ;; WP_parameter_def
  ;; File "float_expon.adb", line 1, characters 0-0
-  (not (tqtisFinite o4)))
+  (not (tqtisFinite o1)))
 (check-sat)
 (exit)

@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1103,12 +1099,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_135 t) (temp___is_init_132 Bool)
-  (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 t) (temp___is_init_154 Bool)
+  (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_158)))
 
 (declare-const x t)
 
@@ -1116,34 +1112,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
-
-(declare-const z t)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const result t)
-
-(declare-const z1 t)
-
-(declare-const z2 t)
-
-(declare-const z3 t)
-
-;; H
-  (assert (tqtisFinite x))
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite z)))
+(define-fun dynamic_invariant1 ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const fliteral2 t)
 
@@ -1165,15 +1139,27 @@
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 20.0)))
 
-;; H
-  (assert
-  (and (and (le fliteral2 x) (le x fliteral3))
-  (and (le fliteral4 x) (le x fliteral5))))
-
 (declare-const fliteral6 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) 2.0)))
+
+(declare-const z t)
+
+(declare-const o t)
+
+(declare-const o1 t)
+
+;; H
+  (assert (tqtisFinite x))
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite z)))
+
+;; H
+  (assert
+  (and (and (le fliteral2 x) (le x fliteral3))
+  (and (le fliteral4 x) (le x fliteral5))))
 
 ;; H
   (assert

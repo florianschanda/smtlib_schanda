@@ -115,12 +115,13 @@
 (declare-datatypes () ((ft__ref (mk_ft__ref (ft__content ft)))))
 (define-fun ft__ref___projection ((a ft__ref)) ft (ft__content a))
 
-(define-fun dynamic_invariant ((temp___expr_137 Float32)
-  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
-  (temp___do_toplevel_136 Bool)) Bool (=>
-                                      (or (= temp___is_init_134 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_137)))
+(define-fun dynamic_invariant ((temp___expr_160 Float32)
+  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
+  (temp___do_toplevel_158 Bool)
+  (temp___do_typ_inv_159 Bool)) Bool (=>
+                                     (or (= temp___is_init_156 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_160)))
 
 (declare-const a Float32)
 
@@ -134,24 +135,19 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const o Float32)
 
 (declare-const o1 Float32)
 
 (declare-const o2 Float32)
-
-(declare-const o3 Float32)
-
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
 
 ;; H
   (assert (fp.isFinite32 a))
@@ -163,13 +159,13 @@
   (assert (fp.isFinite32 c))
 
 ;; H
-  (assert (and (= o2 (fp.add RNE b c)) (fp.isFinite32 (fp.add RNE b c))))
+  (assert (and (= o (fp.add RNE b c)) (fp.isFinite32 (fp.add RNE b c))))
 
 ;; H
-  (assert (= o3 (fp.add RNE a o2)))
+  (assert (= o1 (fp.add RNE a o)))
 
 ;; H
-  (assert (and (= o4 o3) (fp.isFinite32 o3)))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 (assert
 ;; WP_parameter_def

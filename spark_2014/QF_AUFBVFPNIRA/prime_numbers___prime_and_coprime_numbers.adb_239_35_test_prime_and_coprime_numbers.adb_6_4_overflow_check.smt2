@@ -51,30 +51,27 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 Int)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (<= 0 2147483647)) (in_range2
-                                      temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 2147483647)) (in_range2
+                                     temp___expr_208)))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
 
@@ -114,13 +111,13 @@
 
 (declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
 
-(declare-const temp___260 (Array Int Bool))
+(declare-const temp___296 Int)
 
-(declare-const temp___259 Int)
+(declare-const temp___295 Int)
 
-(declare-const temp___258 Int)
+(declare-const temp___293 (Array Int Bool))
 
-(declare-const temp___257 Int)
+(declare-const temp___292 Int)
 
 (declare-const v Int)
 
@@ -140,9 +137,9 @@
 
 (declare-const o5 Int)
 
-(declare-const temp___255 (Array Int Bool))
+(declare-const temp___290 (Array Int Bool))
 
-(declare-const temp___254 Int)
+(declare-const temp___289 Int)
 
 (declare-const o6 Int)
 
@@ -307,13 +304,13 @@
   (assert (= is_prime1 result1))
 
 ;; H
-  (assert (= is_prime2 (store is_prime1 0 (of_int 0))))
+  (assert (= is_prime2 (store is_prime1 0 (distinct 0 0))))
 
 ;; H
   (assert (= is_prime2 result2))
 
 ;; H
-  (assert (= is_prime3 (store is_prime2 1 (of_int 0))))
+  (assert (= is_prime3 (store is_prime2 1 (distinct 0 0))))
 
 ;; H
   (assert
@@ -346,9 +343,9 @@
   (assert
   (and
   (and
-  (and (=> (<= 2 r87b) (dynamic_property 2 r87b index_22))
+  (and (=> (<= (- 2147483648) 2147483647) (in_range1 index_32))
+  (=> (<= 2 r87b) (dynamic_property 2 r87b index_22)))
   (=> (<= 0 2147483647) (in_range2 index_12)))
-  (=> (<= (- 2147483648) 2147483647) (in_range1 index_32)))
   (and (<= 2 index_22) (<= index_22 r87b))))
 
 ;; H
@@ -388,7 +385,7 @@
   (assert (= o6 index_33))
 
 ;; H
-  (assert (= o7 (store is_prime4 o6 (of_int 0))))
+  (assert (= o7 (store is_prime4 o6 (distinct 0 0))))
 
 ;; H
   (assert (= is_prime4 result7))
@@ -407,7 +404,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
+ ;; File "prime_and_coprime_numbers.adb", line 205, characters 0-0
   (not (in_range1 (+ index_34 index_13))))
 (check-sat)
 (exit)

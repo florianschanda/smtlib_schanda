@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun pow3 (Float32) Float32)
 
@@ -114,13 +115,13 @@
 ;; pow3__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow3 x)
-     true false true)) :pattern ((pow3 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (pow3 x) true false true true)) :pattern ((pow3 x)) )))
 
 ;; pow3__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (pow3 x) (fp.mul RNE (fp.mul RNE x x) x))) :pattern ((pow3 x)) )))
 
 (declare-fun pow5 (Float32) Float32)
@@ -130,13 +131,13 @@
 ;; pow5__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow5 x)
-     true false true)) :pattern ((pow5 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (pow5 x) true false true true)) :pattern ((pow5 x)) )))
 
 ;; pow5__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (pow5 x) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x))) :pattern (
   (pow5 x)) )))
 
@@ -147,13 +148,13 @@
 ;; pow7__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow7 x)
-     true false true)) :pattern ((pow7 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (pow7 x) true false true true)) :pattern ((pow7 x)) )))
 
 ;; pow7__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (pow7 x) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x) x) x))) :pattern (
   (pow7 x)) )))
 
@@ -164,13 +165,13 @@
 ;; pow9__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow9 x)
-     true false true)) :pattern ((pow9 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (pow9 x) true false true true)) :pattern ((pow9 x)) )))
 
 ;; pow9__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (pow9 x) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x) x) x) x) x))) :pattern (
   (pow9 x)) )))
 
@@ -208,58 +209,44 @@
 
 (declare-const o14 Float32)
 
-(declare-const o15 Float32)
-
-(declare-const o16 Float32)
-
-(declare-const o17 Float32)
-
-(declare-const o18 Float32)
-
-(declare-const o19 Float32)
-
-(declare-const o20 Float32)
-
-(declare-const o21 Float32)
-
 ;; H
   (assert (fp.isFinite32 x))
 
 ;; H
   (assert
-  (and (= o15 (pow9 x))
-  (and (fp.isFinite32 o15)
-  (= o15 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
+  (and (= o11 (pow9 x))
+  (and (fp.isFinite32 o11)
+  (= o11 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
   x x) x) x) x) x) x) x) x)))))
 
 ;; H
   (assert
-  (= o16 (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000) o15)))
+  (= o12 (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000) o11)))
 
 ;; H
-  (assert (and (= o17 o16) (fp.isFinite32 o16)))
-
-;; H
-  (assert
-  (= o18 (fp.div RNE o17 (fp #b0 #b10001010 #b01100010011000000000000))))
+  (assert (and (= o13 o12) (fp.isFinite32 o12)))
 
 ;; H
   (assert
-  (and (= o9 (pow7 x))
-  (and (fp.isFinite32 o9)
-  (= o9 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
+  (= o14 (fp.div RNE o13 (fp #b0 #b10001010 #b01100010011000000000000))))
+
+;; H
+  (assert
+  (and (= o7 (pow7 x))
+  (and (fp.isFinite32 o7)
+  (= o7 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
   x x) x) x) x) x) x)))))
 
 ;; H
   (assert
-  (= o10 (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000) o9)))
+  (= o8 (fp.mul RNE (fp #b0 #b10000011 #b00010000000000000000000) o7)))
 
 ;; H
-  (assert (and (= o11 o10) (fp.isFinite32 o10)))
+  (assert (and (= o9 o8) (fp.isFinite32 o8)))
 
 ;; H
   (assert
-  (= o12 (fp.div RNE o11 (fp #b0 #b10000111 #b00111011000000000000000))))
+  (= o10 (fp.div RNE o9 (fp #b0 #b10000111 #b00111011000000000000000))))
 
 ;; H
   (assert

@@ -102,12 +102,13 @@
 (define-fun t_float__ref___projection ((a t_float__ref)) t_float (t_float__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float32)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float32)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_165)))
 
 (declare-fun odivide__function_guard (Float32 Float32 Float32) Bool)
 
@@ -122,8 +123,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const y Float32)
-
-(declare-const o Float32)
 
 ;; H
   (assert (fp.isFinite32 x1))

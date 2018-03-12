@@ -934,32 +934,10 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic result__ : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic result__1 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : tqtisFinite(z)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H3 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(result__))
 
 logic fliteral2 : t
 
@@ -971,13 +949,11 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 180.0))
 
-axiom H4 : (le(fliteral2, x) and le(x, fliteral3))
-
-axiom H5 : (le(neg(fliteral3), y) and le(y, fliteral2))
-
-axiom H6 : (le(fliteral2, z) and le(z, fliteral))
-
-axiom H7 : le(fliteral2, add(RNE, x, y))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(RNE, y, z))
+goal WP_parameter_def :
+  (forall result__:t. (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (tqtisFinite(z) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(result__)) -> ((le(fliteral2, x) and le(x, fliteral3)) ->
+  ((le(neg(fliteral3), y) and le(y, fliteral2)) -> ((le(fliteral2, z) and
+  le(z, fliteral)) -> (le(fliteral2, add(RNE, x, y)) -> tqtisFinite(mul(RNE,
+  y, z)))))))))))

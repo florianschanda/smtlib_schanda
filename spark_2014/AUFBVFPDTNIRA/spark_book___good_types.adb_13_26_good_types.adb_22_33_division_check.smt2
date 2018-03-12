@@ -102,11 +102,12 @@
 (declare-datatypes () ((field__ref (mk_field__ref (field__content field)))))
 (define-fun field__ref___projection ((a field__ref)) field (field__content a))
 
-(define-fun dynamic_invariant ((temp___expr_466 Int)
-  (temp___is_init_463 Bool) (temp___skip_constant_464 Bool)
-  (temp___do_toplevel_465 Bool)) Bool (=>
-                                      (or (= temp___is_init_463 true)
-                                      (<= 0 255)) (in_range temp___expr_466)))
+(define-fun dynamic_invariant ((temp___expr_534 Int)
+  (temp___is_init_530 Bool) (temp___skip_constant_531 Bool)
+  (temp___do_toplevel_532 Bool)
+  (temp___do_typ_inv_533 Bool)) Bool (=>
+                                     (or (= temp___is_init_530 true)
+                                     (<= 0 255)) (in_range temp___expr_534)))
 
 (declare-sort feet 0)
 
@@ -128,12 +129,13 @@
 (declare-datatypes () ((feet__ref (mk_feet__ref (feet__content feet)))))
 (define-fun feet__ref___projection ((a feet__ref)) feet (feet__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_509 Float32)
-  (temp___is_init_506 Bool) (temp___skip_constant_507 Bool)
-  (temp___do_toplevel_508 Bool)) Bool (=>
-                                      (or (= temp___is_init_506 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                      (in_range1 temp___expr_509)))
+(define-fun dynamic_invariant1 ((temp___expr_580 Float32)
+  (temp___is_init_576 Bool) (temp___skip_constant_577 Bool)
+  (temp___do_toplevel_578 Bool)
+  (temp___do_typ_inv_579 Bool)) Bool (=>
+                                     (or (= temp___is_init_576 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
+                                     (in_range1 temp___expr_580)))
 
 (declare-sort inches 0)
 
@@ -157,12 +159,13 @@
 (define-fun inches__ref___projection ((a inches__ref)) inches (inches__content
                                                               a))
 
-(define-fun dynamic_invariant2 ((temp___expr_515 Float32)
-  (temp___is_init_512 Bool) (temp___skip_constant_513 Bool)
-  (temp___do_toplevel_514 Bool)) Bool (=>
-                                      (or (= temp___is_init_512 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
-                                      (in_range2 temp___expr_515)))
+(define-fun dynamic_invariant2 ((temp___expr_587 Float32)
+  (temp___is_init_583 Bool) (temp___skip_constant_584 Bool)
+  (temp___do_toplevel_585 Bool)
+  (temp___do_typ_inv_586 Bool)) Bool (=>
+                                     (or (= temp___is_init_583 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
+                                     (in_range2 temp___expr_587)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -190,12 +193,13 @@
 (declare-datatypes () ((num__ref (mk_num__ref (num__content num)))))
 (define-fun num__ref___projection ((a num__ref)) num (num__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_521 Float32)
-  (temp___is_init_518 Bool) (temp___skip_constant_519 Bool)
-  (temp___do_toplevel_520 Bool)) Bool (=>
-                                      (or (= temp___is_init_518 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                      (in_range3 temp___expr_521)))
+(define-fun dynamic_invariant3 ((temp___expr_594 Float32)
+  (temp___is_init_590 Bool) (temp___skip_constant_591 Bool)
+  (temp___do_toplevel_592 Bool)
+  (temp___do_typ_inv_593 Bool)) Bool (=>
+                                     (or (= temp___is_init_590 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
+                                     (in_range3 temp___expr_594)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -223,12 +227,13 @@
 (declare-datatypes () ((num__ref1 (mk_num__ref1 (num__content1 num1)))))
 (define-fun num__ref___2__projection ((a num__ref1)) num1 (num__content1 a))
 
-(define-fun dynamic_invariant4 ((temp___expr_528 Float32)
-  (temp___is_init_525 Bool) (temp___skip_constant_526 Bool)
-  (temp___do_toplevel_527 Bool)) Bool (=>
-                                      (or (= temp___is_init_525 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
-                                      (in_range4 temp___expr_528)))
+(define-fun dynamic_invariant4 ((temp___expr_602 Float32)
+  (temp___is_init_598 Bool) (temp___skip_constant_599 Bool)
+  (temp___do_toplevel_600 Bool)
+  (temp___do_typ_inv_601 Bool)) Bool (=>
+                                     (or (= temp___is_init_598 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
+                                     (in_range4 temp___expr_602)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
@@ -257,8 +262,6 @@
 (declare-const wall_thickness Float32)
 
 (declare-const total Float32)
-
-(declare-const o Float32)
 
 (declare-const good_types__feet_io__get__2__item Float32)
 

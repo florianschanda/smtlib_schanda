@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -117,12 +113,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-sort coordinate_type 0)
 
@@ -147,12 +143,13 @@
 (define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type
   (coordinate_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_135 Float64)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
-                                      (in_range2 temp___expr_135)))
+(define-fun dynamic_invariant1 ((temp___expr_158 Float64)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
+                                     (in_range2 temp___expr_158)))
 
 (declare-fun to_rep (coordinate_type) Float64)
 
@@ -196,12 +193,13 @@
 (define-fun radius_type__ref___projection ((a radius_type__ref)) radius_type
   (radius_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_141 Float64)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
-                                      (in_range3 temp___expr_141)))
+(define-fun dynamic_invariant2 ((temp___expr_165 Float64)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
+                                     (in_range3 temp___expr_165)))
 
 (declare-fun to_rep1 (radius_type) Float64)
 
@@ -442,6 +440,12 @@
 
 (declare-const shapes5__make_circle__result11 us_rep)
 
+(define-fun shapes5__make_circle__result12 () us_rep (mk___rep
+                                                     (mk___split_fields
+                                                     shapes5__make_circle__result3
+                                                     shapes5__make_circle__result4
+                                                     shapes5__make_circle__result5)))
+
 ;; H
   (assert (in_range2 x))
 
@@ -589,12 +593,7 @@
   (assert (= shapes5__make_circle__result8 shapes5__make_circle__result5))
 
 ;; H
-  (assert
-  (= shapes5__make_circle__result9 (mk___rep
-                                   (mk___split_fields
-                                   shapes5__make_circle__result3
-                                   shapes5__make_circle__result4
-                                   shapes5__make_circle__result5))))
+  (assert (= shapes5__make_circle__result9 shapes5__make_circle__result12))
 
 ;; H
   (assert (= (to_rep1 o4) r5))
@@ -634,13 +633,8 @@
 
 ;; H
   (assert
-  (= (mk___rep
-     (mk___split_fields shapes5__make_circle__result3
-     shapes5__make_circle__result4 shapes5__make_circle__result5)) (mk___rep
-                                                                   (mk___split_fields
-                                                                   o10
-                                                                   o11
-                                                                   o12))))
+  (= shapes5__make_circle__result12 (mk___rep
+                                    (mk___split_fields o10 o11 o12))))
 
 ;; H
   (assert

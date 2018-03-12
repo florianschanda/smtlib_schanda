@@ -949,62 +949,31 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic room_length : t
-
-logic wall_thickness : t
-
-logic total : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic ada__float_text_io__get__2__item : t
-
-logic result : t
-
-logic room_length1 : t
-
-logic ada__float_text_io__get__2__item1 : t
-
-logic result1 : t
-
-logic wall_thickness1 : t
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H : (le(neg(fliteral1), fliteral1) -> tqtisFinite(room_length))
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(wall_thickness))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(total))
-
-axiom H3 : tqtisFinite(ada__float_text_io__get__2__item)
-
-axiom H4 : (result = room_length)
-
-axiom H5 : (room_length1 = ada__float_text_io__get__2__item)
-
-axiom H6 : tqtisFinite(ada__float_text_io__get__2__item1)
-
-axiom H7 : (result1 = wall_thickness)
-
-axiom H8 : (wall_thickness1 = ada__float_text_io__get__2__item1)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
-axiom H9 : ((o = mul(RNE, fliteral2, wall_thickness1)) and
-  tqtisFinite(mul(RNE, fliteral2, wall_thickness1)))
-
-axiom H10 : (o1 = add(RNE, room_length1, o))
-
  (* File "bad_types.adb", line 2, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o1)
+goal WP_parameter_def :
+  (forall room_length:t. forall wall_thickness:t. forall total:t. forall o:t.
+  forall o1:t. forall ada__float_text_io__get__2__item:t. forall result:t.
+  forall room_length1:t. forall ada__float_text_io__get__2__item1:t.
+  forall result1:t. forall wall_thickness1:t. ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(room_length)) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(wall_thickness)) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(total)) ->
+  ((tqtisFinite(ada__float_text_io__get__2__item) and
+  ((result = room_length) and
+  (room_length1 = ada__float_text_io__get__2__item))) ->
+  ((tqtisFinite(ada__float_text_io__get__2__item1) and
+  ((result1 = wall_thickness) and
+  (wall_thickness1 = ada__float_text_io__get__2__item1))) -> ((((o = mul(RNE,
+  fliteral2, wall_thickness1)) and tqtisFinite(mul(RNE, fliteral2,
+  wall_thickness1))) and (o1 = add(RNE, room_length1, o))) ->
+  tqtisFinite(o1))))))))

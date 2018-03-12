@@ -129,10 +129,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
-(define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int2 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -158,12 +154,13 @@
 (define-fun float_32__ref___projection ((a float_32__ref)) float_32 (float_32__content
                                                                     a))
 
-(define-fun dynamic_invariant ((temp___expr_178 Float32)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_178)))
+(define-fun dynamic_invariant ((temp___expr_208 Float32)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_208)))
 
 (declare-sort float_64 0)
 
@@ -182,12 +179,13 @@
 (define-fun float_64__ref___projection ((a float_64__ref)) float_64 (float_64__content
                                                                     a))
 
-(define-fun dynamic_invariant1 ((temp___expr_184 Float64)
-  (temp___is_init_181 Bool) (temp___skip_constant_182 Bool)
-  (temp___do_toplevel_183 Bool)) Bool (=>
-                                      (or (= temp___is_init_181 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_184)))
+(define-fun dynamic_invariant1 ((temp___expr_215 Float64)
+  (temp___is_init_211 Bool) (temp___skip_constant_212 Bool)
+  (temp___do_toplevel_213 Bool)
+  (temp___do_typ_inv_214 Bool)) Bool (=>
+                                     (or (= temp___is_init_211 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_215)))
 
 (declare-const x Float32)
 

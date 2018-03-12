@@ -1029,22 +1029,10 @@ logic measured : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic pid__split_fields : float1
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-axiom H : tqtisFinite(measured)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
-
-axiom H1 : (not lt(fliteral1, measured))
 
 logic fliteral2 : t
 
@@ -1052,4 +1040,5 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
  (* File "test_pack.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE, fliteral2, measured))
+goal WP_parameter_def : (tqtisFinite(measured) -> ((not lt(fliteral1,
+  measured)) -> tqtisFinite(add(RNE, fliteral2, measured))))

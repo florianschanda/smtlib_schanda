@@ -48,24 +48,26 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float32)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float32)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_165)))
 
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
                                         (and
                                         (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) x)
                                         (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
 
-(define-fun dynamic_invariant1 ((temp___expr_147 Float32)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                      (in_range temp___expr_147)))
+(define-fun dynamic_invariant1 ((temp___expr_172 Float32)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
+                                     (in_range temp___expr_172)))
 
 (declare-const x1 Float32)
 

@@ -105,18 +105,17 @@
 (define-fun integer_32__ref___2__projection ((a integer_32__ref)) integer_32
   (integer_32__content a))
 
-(define-fun dynamic_invariant ((temp___expr_159 Int)
-  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
-  (temp___do_toplevel_158 Bool)) Bool (=>
-                                      (or (= temp___is_init_156 true)
-                                      (<= (- 2147483648) 2147483647))
-                                      (in_range temp___expr_159)))
+(define-fun dynamic_invariant ((temp___expr_186 Int)
+  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
+  (temp___do_toplevel_184 Bool)
+  (temp___do_typ_inv_185 Bool)) Bool (=>
+                                     (or (= temp___is_init_182 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range temp___expr_186)))
 
 (declare-const i Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const o Int)
 
 ;; H
   (assert (in_range i))

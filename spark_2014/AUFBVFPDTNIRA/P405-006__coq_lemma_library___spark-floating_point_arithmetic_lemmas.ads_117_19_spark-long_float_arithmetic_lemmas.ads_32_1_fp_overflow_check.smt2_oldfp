@@ -1054,10 +1054,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1109,12 +1105,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant ((temp___expr_135 t) (temp___is_init_132 Bool)
-  (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 t) (temp___is_init_154 Bool)
+  (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_158)))
 
 (declare-const val1 t)
 
@@ -1128,25 +1124,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_57 t) (temp___is_init_54 Bool)
-  (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_57)))
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-;; H
-  (assert (tqtisFinite val1))
-
-;; H
-  (assert (tqtisFinite val2))
-
-;; H
-  (assert (tqtisFinite val3))
+(define-fun dynamic_invariant1 ((temp___expr_67 t) (temp___is_init_63 Bool)
+  (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_67)))
 
 (declare-const fliteral2 t)
 
@@ -1161,6 +1144,17 @@
   (assert
   (and (tqtisFinite fliteral3)
   (= (tqtreal fliteral3) (/ 14916681462400413486581930630925867674752943069200813788543036666412556770140236609872349780800855606723023206511672202906825456190450605320972329659184169382962521584637562754990408148532870525882893108730127829530828434521177014240063373646006445484595127398530700430674412116673033257292007225854867103693937314652998016306639783579157665371894836425781250000000000000000000000000000000000000000000000000000.0 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
+
+(declare-const o t)
+
+;; H
+  (assert (tqtisFinite val1))
+
+;; H
+  (assert (tqtisFinite val2))
+
+;; H
+  (assert (tqtisFinite val3))
 
 ;; H
   (assert

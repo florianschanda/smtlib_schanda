@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -133,12 +129,13 @@
 (declare-datatypes () ((frame__ref (mk_frame__ref (frame__content frame)))))
 (define-fun frame__ref___projection ((a frame__ref)) frame (frame__content a))
 
-(define-fun dynamic_invariant ((temp___expr_171 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (<= 0 25000)) (in_range2
-                                      temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 25000)) (in_range2
+                                     temp___expr_200)))
 
 (declare-const n Int)
 
@@ -146,21 +143,7 @@
 
 (declare-const o Int)
 
-(declare-const o1 Int)
-
-(declare-const o2 Int)
-
-(declare-const o3 Int)
-
-(declare-const o4 Int)
-
-(declare-const o5 Int)
-
-(declare-const o6 Int)
-
-(declare-const o7 Int)
-
-(declare-const o8 Float32)
+(declare-const o1 Float32)
 
 ;; H
   (assert (in_range2 n))
@@ -169,10 +152,10 @@
   (assert (<= (+ (* n 65) 1) (* (+ n 1) 65)))
 
 ;; H
-  (assert (and (= o7 (* (+ n 1) 65)) (in_range1 (* (+ n 1) 65))))
+  (assert (and (= o (* (+ n 1) 65)) (in_range1 (* (+ n 1) 65))))
 
 ;; H
-  (assert (= o8 (of_int RNE o7)))
+  (assert (= o1 (of_int RNE o)))
 
 (assert
 ;; WP_parameter_def

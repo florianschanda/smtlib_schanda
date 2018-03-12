@@ -1483,12 +1483,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun sqrt2 (t) t)
 
@@ -1509,14 +1509,14 @@
 ;; sqrt__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (and (dynamic_invariant x true true true) (le fliteral2 x))
+  (! (=> (and (dynamic_invariant x true true true true) (le fliteral2 x))
      (let ((result (sqrt2 x)))
      (and
      (and (le fliteral2 result)
      (and (=> (eq x fliteral2) (eq result fliteral2))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant result
-     true false true)))) :pattern ((sqrt2 x)) )))
+     true false true true)))) :pattern ((sqrt2 x)) )))
 
 (declare-sort unsigned_16 0)
 
@@ -1537,9 +1537,9 @@
 (define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_177 (_ BitVec 16))
-  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_207 (_ BitVec 16))
+  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
+  (temp___do_toplevel_205 Bool) (temp___do_typ_inv_206 Bool)) Bool true)
 
 (declare-const i (_ BitVec 16))
 
@@ -1548,11 +1548,6 @@
 (declare-const o t)
 
 (declare-const o1 t)
-
-(declare-const o2 t)
-
-;; H
-  (assert true)
 
 ;; H
   (assert
@@ -1569,6 +1564,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "interfac.ads", line 66, characters 0-0
-  (not (le (of_ubv16 RTP1 ((_ int2bv 16) 0)) o1)))
+  (not (le (of_ubv16 RTP1 #x0000) o1)))
 (check-sat)
 (exit)

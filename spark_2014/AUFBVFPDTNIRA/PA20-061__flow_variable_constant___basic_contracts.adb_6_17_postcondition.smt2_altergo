@@ -1027,29 +1027,21 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
 
 axiom den__def_axiom : (den = fliteral1)
 
-logic basic_contracts__average__result : t
+logic fliteral2 : t
 
-logic o : t
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0e-1))
 
-logic result : t
-
-logic basic_contracts__average__result1 : t
-
-logic basic_contracts__average__result2 : t
-
-logic basic_contracts__average__result3 : t
-
-logic basic_contracts__average__result4 : t
-
-logic basic_contracts__average__result5 : t
-
-logic result1 : t
-
-axiom H : in_range1(numerator)
-
-axiom H1 : in_range2(denominator)
-
-axiom H2 : (((of_int(RNE, numerator) = num) and (tqtisFinite(num) and
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall basic_contracts__average__result:t. forall o:t. forall result:t.
+  forall basic_contracts__average__result1:t.
+  forall basic_contracts__average__result2:t.
+  forall basic_contracts__average__result3:t.
+  forall basic_contracts__average__result4:t.
+  forall basic_contracts__average__result5:t.
+  (forall result1:t. ((in_range1(numerator) and (in_range2(denominator) and
+  ((((of_int(RNE, numerator) = num) and (tqtisFinite(num) and
   (tqtisFinite(den) and (lt(fliteral, fliteral1) and
   (((basic_contracts__average__result1 = basic_contracts__average__result2) and
   (basic_contracts__average__result3 = basic_contracts__average__result1)) and
@@ -1057,14 +1049,6 @@ axiom H2 : (((of_int(RNE, numerator) = num) and (tqtisFinite(num) and
   fliteral1))) and ((result = basic_contracts__average__result) and
   (basic_contracts__average__result1 = o)))))))) and
   ((basic_contracts__average__result4 = basic_contracts__average__result2) and
-  (basic_contracts__average__result5 = basic_contracts__average__result3)))
-
-axiom H3 : (result1 = basic_contracts__average__result4)
-
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 0.0e-1))
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : le(fliteral2, basic_contracts__average__result4)
+  (basic_contracts__average__result5 = basic_contracts__average__result3))) and
+  (result1 = basic_contracts__average__result4)))) -> le(fliteral2,
+  basic_contracts__average__result4))))

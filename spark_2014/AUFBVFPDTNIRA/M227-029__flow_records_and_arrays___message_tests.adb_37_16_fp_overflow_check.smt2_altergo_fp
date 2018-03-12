@@ -1327,17 +1327,12 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic w : t
-
-logic o : t
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H : (le(neg(fliteral1), fliteral1) -> tqtisFinite(w))
-
  (* File "message_tests.adb", line 23, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, to_rep(c),
-  to_rep(c1)))
+goal WP_parameter_def :
+  (forall w:t. ((le(neg(fliteral1), fliteral1) -> tqtisFinite(w)) ->
+  tqtisFinite(add(NearestTiesToEven, to_rep(c), to_rep(c1)))))

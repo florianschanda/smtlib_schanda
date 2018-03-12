@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -147,12 +143,13 @@
 (define-fun speed_t__ref___projection ((a speed_t__ref)) speed_t (speed_t__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_151 Float32)
-  (temp___is_init_148 Bool) (temp___skip_constant_149 Bool)
-  (temp___do_toplevel_150 Bool)) Bool (=>
-                                      (or (= temp___is_init_148 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_151)))
+(define-fun dynamic_invariant ((temp___expr_174 Float32)
+  (temp___is_init_170 Bool) (temp___skip_constant_171 Bool)
+  (temp___do_toplevel_172 Bool)
+  (temp___do_typ_inv_173 Bool)) Bool (=>
+                                     (or (= temp___is_init_170 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_174)))
 
 (declare-sort deceleration_t 0)
 
@@ -177,12 +174,13 @@
 (define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t
   (deceleration_t__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_169 Float32)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)) Bool (=>
-                                      (or (= temp___is_init_166 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (in_range1 temp___expr_169)))
+(define-fun dynamic_invariant1 ((temp___expr_195 Float32)
+  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
+  (temp___do_toplevel_193 Bool)
+  (temp___do_typ_inv_194 Bool)) Bool (=>
+                                     (or (= temp___is_init_191 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range1 temp___expr_195)))
 
 (declare-sort distance_t 0)
 
@@ -203,12 +201,13 @@
 (define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
   (distance_t__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_175 Int)
-  (temp___is_init_172 Bool) (temp___skip_constant_173 Bool)
-  (temp___do_toplevel_174 Bool)) Bool (=>
-                                      (or (= temp___is_init_172 true)
-                                      (<= 0 2147483647)) (in_range2
-                                      temp___expr_175)))
+(define-fun dynamic_invariant2 ((temp___expr_202 Int)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)
+  (temp___do_typ_inv_201 Bool)) Bool (=>
+                                     (or (= temp___is_init_198 true)
+                                     (<= 0 2147483647)) (in_range2
+                                     temp___expr_202)))
 
 (declare-sort time_t 0)
 
@@ -227,12 +226,13 @@
 (define-fun time_t__ref___projection ((a time_t__ref)) time_t (time_t__content
                                                               a))
 
-(define-fun dynamic_invariant3 ((temp___expr_181 Float32)
-  (temp___is_init_178 Bool) (temp___skip_constant_179 Bool)
-  (temp___do_toplevel_180 Bool)) Bool (=>
-                                      (or (= temp___is_init_178 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_181)))
+(define-fun dynamic_invariant3 ((temp___expr_209 Float32)
+  (temp___is_init_205 Bool) (temp___skip_constant_206 Bool)
+  (temp___do_toplevel_207 Bool)
+  (temp___do_typ_inv_208 Bool)) Bool (=>
+                                     (or (= temp___is_init_205 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_209)))
 
 (declare-sort speed_km_per_h_t 0)
 
@@ -252,12 +252,13 @@
 (define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t
   (speed_km_per_h_t__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_157 Float32)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)) Bool (=>
-                                      (or (= temp___is_init_154 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_157)))
+(define-fun dynamic_invariant4 ((temp___expr_181 Float32)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)
+  (temp___do_typ_inv_180 Bool)) Bool (=>
+                                     (or (= temp___is_init_177 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_181)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -271,15 +272,15 @@
   (assert
   (forall ((speed Float32))
   (! (=>
-     (and (dynamic_invariant4 speed true true true)
+     (and (dynamic_invariant4 speed true true true true)
      (= (is_valid_speed_km_per_h speed) true)) (dynamic_invariant
-     (m_per_s_from_km_per_h speed) true false true)) :pattern ((m_per_s_from_km_per_h
-                                                               speed)) )))
+     (m_per_s_from_km_per_h speed) true false true true)) :pattern ((m_per_s_from_km_per_h
+                                                                    speed)) )))
 
 ;; m_per_s_from_km_per_h__def_axiom
   (assert
   (forall ((speed Float32))
-  (! (=> (dynamic_invariant4 speed true true true)
+  (! (=> (dynamic_invariant4 speed true true true true)
      (= (m_per_s_from_km_per_h speed) (fp.div RNE (fp.mul RNE speed (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000)))) :pattern (
   (m_per_s_from_km_per_h speed)) )))
 
@@ -477,29 +478,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int us_rep) Int Int (Array Int us_rep) Int
-  Int) (Array Int us_rep))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int us_rep)) (b (Array Int us_rep)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (us_rep Int) (Array Int us_rep))
-
-;; singleton_def
-  (assert
-  (forall ((v us_rep))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq1 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
   (b (Array Int us_rep)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -507,12 +485,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (bool_eq (select a temp___idx_132)
-                              (select b (+ (- b__first a__first) temp___idx_132))) true))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (bool_eq (select a temp___idx_154)
+                              (select b (+ (- b__first a__first) temp___idx_154))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -524,10 +502,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (bool_eq (select a temp___idx_132)
-     (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (bool_eq (select a temp___idx_154)
+     (select b (+ (- b__first a__first) temp___idx_154))) true))))))))
 
 (declare-const dummy9 (Array Int us_rep))
 
@@ -684,11 +662,12 @@
 (define-fun breaking_model_t__ref___projection ((a breaking_model_t__ref)) breaking_model_t
   (breaking_model_t__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_280 Int)
-  (temp___is_init_277 Bool) (temp___skip_constant_278 Bool)
-  (temp___do_toplevel_279 Bool)) Bool (=>
-                                      (or (= temp___is_init_277 true)
-                                      (<= 0 1)) (in_range5 temp___expr_280)))
+(define-fun dynamic_invariant5 ((temp___expr_314 Int)
+  (temp___is_init_310 Bool) (temp___skip_constant_311 Bool)
+  (temp___do_toplevel_312 Bool)
+  (temp___do_typ_inv_313 Bool)) Bool (=>
+                                     (or (= temp___is_init_310 true)
+                                     (<= 0 1)) (in_range5 temp___expr_314)))
 
 (declare-const breaking_model Int)
 
@@ -702,15 +681,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun temp___133 (us_rep us_rep) (Array Int us_rep))
-
-;; def_axiom
-  (assert
-  (forall ((temp___135 us_rep) (temp___136 us_rep))
-  (let ((temp___134 (temp___133 temp___135 temp___136)))
-  (forall ((temp___137 Int))
-  (ite (= temp___137 0) (= (select temp___134 temp___137) temp___135)
-  (= (select temp___134 temp___137) temp___136))))))
+(declare-fun temp___155 (us_rep us_rep) (Array Int us_rep))
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -764,29 +735,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS16 Int)
 
-(declare-fun temp___138 (us_rep us_rep) (Array Int us_rep))
-
-;; def_axiom
-  (assert
-  (forall ((temp___140 us_rep) (temp___141 us_rep))
-  (let ((temp___139 (temp___138 temp___140 temp___141)))
-  (forall ((temp___142 Int))
-  (ite (= temp___142 0) (= (select temp___139 temp___142) temp___140)
-  (= (select temp___139 temp___142) temp___141))))))
+(declare-fun temp___160 (us_rep us_rep) (Array Int us_rep))
 
 (declare-const kwet_rst_model us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS17 Int)
 
-(declare-fun temp___143 (us_rep us_rep) (Array Int us_rep))
-
-;; def_axiom
-  (assert
-  (forall ((temp___145 us_rep) (temp___146 us_rep))
-  (let ((temp___144 (temp___143 temp___145 temp___146)))
-  (forall ((temp___147 Int))
-  (ite (= temp___147 0) (= (select temp___144 temp___147) temp___145)
-  (= (select temp___144 temp___147) temp___146))))))
+(declare-fun temp___165 (us_rep us_rep) (Array Int us_rep))
 
 (declare-const attr__ATTRIBUTE_ADDRESS18 Int)
 
@@ -800,12 +755,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS21 Int)
 
-(define-fun dynamic_invariant6 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant6 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 ;; breaking_model__def_axiom
   (assert (= breaking_model 0))
@@ -818,7 +774,7 @@
   (assert
   (= a_brake_emergency_model (mk___rep1
                              (mk___split_fields1 (of_rep1 0)
-                             (temp___133
+                             (temp___155
                              (mk___rep
                              (mk___split_fields (of_rep2 0)
                              (of_rep
@@ -870,7 +826,7 @@
   (assert
   (= kdry_rst_model (mk___rep1
                     (mk___split_fields1 (of_rep1 0)
-                    (temp___138
+                    (temp___160
                     (mk___rep
                     (mk___split_fields (of_rep2 0)
                     (of_rep (fp #b0 #b01111111 #b00000000000000000000000))))
@@ -882,7 +838,7 @@
   (assert
   (= kwet_rst_model (mk___rep1
                     (mk___split_fields1 (of_rep1 0)
-                    (temp___143
+                    (temp___165
                     (mk___rep
                     (mk___split_fields (of_rep2 0)
                     (of_rep (fp #b0 #b01111111 #b00000000000000000000000))))
@@ -909,18 +865,44 @@
      (fp.leq speed (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
   (is_valid_speed_km_per_h speed)) )))
 
-(define-fun dynamic_invariant7 ((temp___expr_187 Int)
-  (temp___is_init_184 Bool) (temp___skip_constant_185 Bool)
-  (temp___do_toplevel_186 Bool)) Bool (=>
-                                      (or (= temp___is_init_184 true)
-                                      (<= 0 10)) (in_range3 temp___expr_187)))
+(define-fun dynamic_invariant7 ((temp___expr_216 Int)
+  (temp___is_init_212 Bool) (temp___skip_constant_213 Bool)
+  (temp___do_toplevel_214 Bool)
+  (temp___do_typ_inv_215 Bool)) Bool (=>
+                                     (or (= temp___is_init_212 true)
+                                     (<= 0 10)) (in_range3 temp___expr_216)))
 
-(define-fun dynamic_invariant8 ((temp___expr_193 Int)
-  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
-  (temp___do_toplevel_192 Bool)) Bool (=>
-                                      (or (= temp___is_init_190 true)
-                                      (<= 0 2147483647)) (in_range4
-                                      temp___expr_193)))
+(define-fun dynamic_invariant8 ((temp___expr_223 Int)
+  (temp___is_init_219 Bool) (temp___skip_constant_220 Bool)
+  (temp___do_toplevel_221 Bool)
+  (temp___do_typ_inv_222 Bool)) Bool (=>
+                                     (or (= temp___is_init_219 true)
+                                     (<= 0 2147483647)) (in_range4
+                                     temp___expr_223)))
+
+;; def_axiom
+  (assert
+  (forall ((temp___157 us_rep) (temp___158 us_rep))
+  (let ((temp___156 (temp___155 temp___157 temp___158)))
+  (forall ((temp___159 Int))
+  (ite (= temp___159 0) (= (select temp___156 temp___159) temp___157)
+  (= (select temp___156 temp___159) temp___158))))))
+
+;; def_axiom
+  (assert
+  (forall ((temp___162 us_rep) (temp___163 us_rep))
+  (let ((temp___161 (temp___160 temp___162 temp___163)))
+  (forall ((temp___164 Int))
+  (ite (= temp___164 0) (= (select temp___161 temp___164) temp___162)
+  (= (select temp___161 temp___164) temp___163))))))
+
+;; def_axiom
+  (assert
+  (forall ((temp___167 us_rep) (temp___168 us_rep))
+  (let ((temp___166 (temp___165 temp___167 temp___168)))
+  (forall ((temp___169 Int))
+  (ite (= temp___169 0) (= (select temp___166 temp___169) temp___167)
+  (= (select temp___166 temp___169) temp___168))))))
 
 (declare-const o float)
 
@@ -1012,8 +994,6 @@
 
 (declare-const sec_3_13_2_monitoring_inputs__kwet_rst_model__assume us_rep1)
 
-(declare-const sec_3_13_2_monitoring_inputs__maximum_train_speed__assume Float32)
-
 ;; H
   (assert (in_range5 breaking_model))
 
@@ -1058,7 +1038,7 @@
 
 ;; H
   (assert
-  (= o12 (temp___133 (mk___rep (mk___split_fields o10 o11))
+  (= o12 (temp___155 (mk___rep (mk___split_fields o10 o11))
          (mk___rep (mk___split_fields o8 o9)))))
 
 ;; H
@@ -1153,7 +1133,7 @@
   (assert (= o26 (mk___rep (mk___split_fields o18 o19))))
 
 ;; H
-  (assert (= o27 (temp___138 o26 (mk___rep (mk___split_fields o24 o25)))))
+  (assert (= o27 (temp___160 o26 (mk___rep (mk___split_fields o24 o25)))))
 
 ;; H
   (assert (= (to_rep1 o28) 0))
@@ -1194,7 +1174,7 @@
   (assert (= o37 (mk___rep o32)))
 
 ;; H
-  (assert (= o38 (temp___143 o37 o36)))
+  (assert (= o38 (temp___165 o37 o36)))
 
 ;; H
   (assert (= (to_rep1 o39) 0))

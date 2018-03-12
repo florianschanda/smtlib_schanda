@@ -947,29 +947,6 @@ logic a : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic foo__float_tests__inverse_reciprocal__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic foo__float_tests__inverse_reciprocal__result1 : t
-
-logic foo__float_tests__inverse_reciprocal__result2 : t
-
-logic foo__float_tests__inverse_reciprocal__result3 : t
-
-logic foo__float_tests__inverse_reciprocal__result4 : t
-
-logic foo__float_tests__inverse_reciprocal__result5 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : lt(fliteral, a)
-
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(a))
+goal WP_parameter_def : (tqtisFinite(a) -> (lt(fliteral, a) ->
+  (not is_zero(a))))

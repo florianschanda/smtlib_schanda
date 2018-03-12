@@ -105,12 +105,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
 (declare-sort coordinate_type 0)
 
@@ -135,12 +135,13 @@
 (define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type
   (coordinate_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_135 Float64)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
-                                      (in_range1 temp___expr_135)))
+(define-fun dynamic_invariant1 ((temp___expr_158 Float64)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
+                                     (in_range1 temp___expr_158)))
 
 (declare-fun to_rep (coordinate_type) Float64)
 
@@ -360,37 +361,31 @@
 (define-fun full_width_type__ref___projection ((a full_width_type__ref)) full_width_type
   (full_width_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_156 Float64)
-  (temp___is_init_153 Bool) (temp___skip_constant_154 Bool)
-  (temp___do_toplevel_155 Bool)) Bool (=>
-                                      (or (= temp___is_init_153 true)
-                                      (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000110 #b1001000000000000000000000000000000000000000000000000)))
-                                      (in_range3 temp___expr_156)))
+(define-fun dynamic_invariant2 ((temp___expr_182 Float64)
+  (temp___is_init_178 Bool) (temp___skip_constant_179 Bool)
+  (temp___do_toplevel_180 Bool)
+  (temp___do_typ_inv_181 Bool)) Bool (=>
+                                     (or (= temp___is_init_178 true)
+                                     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000110 #b1001000000000000000000000000000000000000000000000000)))
+                                     (in_range3 temp___expr_182)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(define-fun dynamic_invariant3 ((temp___expr_141 Float64)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
-                                      (in_range2 temp___expr_141)))
+(define-fun dynamic_invariant3 ((temp___expr_165 Float64)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
+                                     (in_range2 temp___expr_165)))
 
 (declare-const wild_man Int)
 
 (declare-const delta_x Float64)
 
 (declare-const delta_y Float64)
-
-(declare-const o Float64)
-
-(declare-const o1 Float64)
-
-(declare-const result Float64)
-
-(declare-const delta_x1 Float64)
 
 ;; H
   (assert (in_range1 x))

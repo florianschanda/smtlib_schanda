@@ -163,36 +163,30 @@
 (define-fun eq_sub3 ((a (_ BitVec 64)) (b (_ BitVec 64)) (i Int)
   (n Int)) Bool abstr27)
 
-(define-fun to_int5 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float64)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float64)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_165)))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
-(declare-const abstr28 (_ BitVec 32))
-
-(declare-const abstr29 (_ BitVec 32))
-
-(define-fun in_range1 ((x (_ BitVec 32))) Bool (and (bvule abstr29 x)
-                                               (bvule x abstr28)))
+(define-fun in_range1 ((x (_ BitVec 32))) Bool (and (bvule #x00000000 x)
+                                               (bvule x #x000F4240)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 1000000)))
 
-(define-fun dynamic_invariant1 ((temp___expr_153 (_ BitVec 32))
-  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
-  (temp___do_toplevel_152 Bool)) Bool (=>
-                                      (or (= temp___is_init_150 true)
-                                      (bvule abstr29 abstr28)) (in_range1
-                                      temp___expr_153)))
+(define-fun dynamic_invariant1 ((temp___expr_179 (_ BitVec 32))
+  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
+  (temp___do_toplevel_177 Bool)
+  (temp___do_typ_inv_178 Bool)) Bool (=>
+                                     (or (= temp___is_init_175 true)
+                                     (bvule #x00000000 #x000F4240))
+                                     (in_range1 temp___expr_179)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -220,7 +214,7 @@
 
 ;; H
   (assert
-  (and (bvult x abstr28)
+  (and (bvult x #x000F4240)
   (fp.leq state (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE x) (fp #b0 #b10000000010 #b0110000000000000000000000000000000000000000000000000)))))
 
 (assert

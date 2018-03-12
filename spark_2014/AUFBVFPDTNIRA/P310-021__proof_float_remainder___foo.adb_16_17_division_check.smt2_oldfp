@@ -1080,12 +1080,12 @@
 (declare-datatypes () ((angle__ref (mk_angle__ref (angle__content angle)))))
 (define-fun angle__ref___projection ((a angle__ref)) angle (angle__content a))
 
-(define-fun dynamic_invariant ((temp___expr_135 t) (temp___is_init_132 Bool)
-  (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true) (le
-                                      fliteral1 fliteral2)) (in_range1
-                                      temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 t) (temp___is_init_154 Bool)
+  (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true) (le
+                                     fliteral1 fliteral2)) (in_range1
+                                     temp___expr_158)))
 
 (declare-const a t)
 
@@ -1098,8 +1098,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const c t)
-
-(declare-const o t)
 
 ;; H
   (assert (in_range1 a))

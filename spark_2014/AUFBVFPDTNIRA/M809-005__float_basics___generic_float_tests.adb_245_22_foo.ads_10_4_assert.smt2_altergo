@@ -924,14 +924,11 @@ logic f : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : tqtisFinite(f)
-
-axiom H1 : eq(f, neg(f))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : eq(f, fliteral1)
+goal WP_parameter_def : (tqtisFinite(f) -> (eq(f, neg(f)) -> eq(f,
+  fliteral1)))

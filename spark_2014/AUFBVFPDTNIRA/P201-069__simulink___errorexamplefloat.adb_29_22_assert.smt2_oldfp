@@ -1080,12 +1080,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant ((temp___expr_57 t) (temp___is_init_54 Bool)
-  (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 t) (temp___is_init_63 Bool)
+  (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_67)))
 
 (declare-sort long_float_m1_0_m100_0 0)
 
@@ -1116,12 +1116,12 @@
 (define-fun long_float_m1_0_m100_0__ref___projection ((a long_float_m1_0_m100_0__ref)) long_float_m1_0_m100_0
   (long_float_m1_0_m100_0__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_135 t) (temp___is_init_132 Bool)
-  (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true) (le
-                                      fliteral fliteral2)) (in_range1
-                                      temp___expr_135)))
+(define-fun dynamic_invariant1 ((temp___expr_158 t) (temp___is_init_154 Bool)
+  (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true) (le
+                                     fliteral fliteral2)) (in_range1
+                                     temp___expr_158)))
 
 (declare-sort long_float_m2_220446049250313e_16_minf 0)
 
@@ -1155,12 +1155,12 @@
 (define-fun long_float_m2_220446049250313e_16_minf__ref___projection ((a long_float_m2_220446049250313e_16_minf__ref)) long_float_m2_220446049250313e_16_minf
   (long_float_m2_220446049250313e_16_minf__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_141 t) (temp___is_init_138 Bool)
-  (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true) (le
-                                      fliteral3 fliteral1)) (in_range2
-                                      temp___expr_141)))
+(define-fun dynamic_invariant2 ((temp___expr_165 t) (temp___is_init_161 Bool)
+  (temp___skip_constant_162 Bool) (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true) (le
+                                     fliteral3 fliteral1)) (in_range2
+                                     temp___expr_165)))
 
 (declare-const requested_force t)
 
@@ -1174,21 +1174,14 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
+
 (declare-const relative_error t)
 
 (declare-const abs_out1 t)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 t)
-
-(declare-const result t)
-
-(declare-const abs_out11 t)
 
 ;; H
   (assert (in_range2 requested_force))
@@ -1198,11 +1191,6 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite relative_error)))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
 
 ;; H
   (assert (neq requested_force fliteral4))

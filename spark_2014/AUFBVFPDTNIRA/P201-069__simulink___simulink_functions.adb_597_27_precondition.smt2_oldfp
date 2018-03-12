@@ -1484,12 +1484,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun sqrt2 (t) t)
 
@@ -1510,14 +1510,14 @@
 ;; sqrt__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (and (dynamic_invariant x true true true) (le fliteral2 x))
+  (! (=> (and (dynamic_invariant x true true true true) (le fliteral2 x))
      (let ((result (sqrt2 x)))
      (and
      (and (le fliteral2 result)
      (and (=> (eq x fliteral2) (eq result fliteral2))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant result
-     true false true)))) :pattern ((sqrt2 x)) )))
+     true false true true)))) :pattern ((sqrt2 x)) )))
 
 (declare-sort unsigned_32 0)
 
@@ -1538,22 +1538,13 @@
 (define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32
   (unsigned_32__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_189 (_ BitVec 32))
-  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
-  (temp___do_toplevel_188 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_221 (_ BitVec 32))
+  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
+  (temp___do_toplevel_219 Bool) (temp___do_typ_inv_220 Bool)) Bool true)
 
 (declare-const i (_ BitVec 32))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-;; H
-  (assert true)
 
 (assert
 ;; WP_parameter_def

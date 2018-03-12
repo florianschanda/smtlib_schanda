@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -114,12 +110,13 @@
 (define-fun speed_t__ref___projection ((a speed_t__ref)) speed_t (speed_t__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_148 Float32)
-  (temp___is_init_145 Bool) (temp___skip_constant_146 Bool)
-  (temp___do_toplevel_147 Bool)) Bool (=>
-                                      (or (= temp___is_init_145 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_148)))
+(define-fun dynamic_invariant ((temp___expr_172 Float32)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_172)))
 
 (declare-fun to_rep (speed_t) Float32)
 
@@ -197,12 +194,13 @@
 (define-fun speed_km_per_h_t__ref___projection ((a speed_km_per_h_t__ref)) speed_km_per_h_t
   (speed_km_per_h_t__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_154 Float32)
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool (=>
-                                      (or (= temp___is_init_151 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_154)))
+(define-fun dynamic_invariant1 ((temp___expr_179 Float32)
+  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
+  (temp___do_toplevel_177 Bool)
+  (temp___do_typ_inv_178 Bool)) Bool (=>
+                                     (or (= temp___is_init_175 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_179)))
 
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
@@ -216,15 +214,15 @@
   (assert
   (forall ((speed Float32))
   (! (=>
-     (and (dynamic_invariant1 speed true true true)
+     (and (dynamic_invariant1 speed true true true true)
      (= (is_valid_speed_km_per_h speed) true)) (dynamic_invariant
-     (m_per_s_from_km_per_h speed) true false true)) :pattern ((m_per_s_from_km_per_h
-                                                               speed)) )))
+     (m_per_s_from_km_per_h speed) true false true true)) :pattern ((m_per_s_from_km_per_h
+                                                                    speed)) )))
 
 ;; m_per_s_from_km_per_h__def_axiom
   (assert
   (forall ((speed Float32))
-  (! (=> (dynamic_invariant1 speed true true true)
+  (! (=> (dynamic_invariant1 speed true true true true)
      (= (m_per_s_from_km_per_h speed) (fp.div RNE (fp.mul RNE speed (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000)))) :pattern (
   (m_per_s_from_km_per_h speed)) )))
 
@@ -342,29 +340,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int us_rep) Int Int (Array Int us_rep) Int
-  Int) (Array Int us_rep))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int us_rep)) (b (Array Int us_rep)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (us_rep Int) (Array Int us_rep))
-
-;; singleton_def
-  (assert
-  (forall ((v us_rep))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq1 ((a (Array Int us_rep)) (a__first Int) (a__last Int)
   (b (Array Int us_rep)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -372,12 +347,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (bool_eq (select a temp___idx_132)
-                              (select b (+ (- b__first a__first) temp___idx_132))) true))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (bool_eq (select a temp___idx_154)
+                              (select b (+ (- b__first a__first) temp___idx_154))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -389,10 +364,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (bool_eq (select a temp___idx_132)
-     (select b (+ (- b__first a__first) temp___idx_132))) true))))))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (bool_eq (select a temp___idx_154)
+     (select b (+ (- b__first a__first) temp___idx_154))) true))))))))
 
 (declare-const dummy4 (Array Int us_rep))
 
@@ -647,12 +622,13 @@
 (declare-fun distance_to_speed__function_guard (Int Float32 Float32
   Float32) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_172 Int)
-  (temp___is_init_169 Bool) (temp___skip_constant_170 Bool)
-  (temp___do_toplevel_171 Bool)) Bool (=>
-                                      (or (= temp___is_init_169 true)
-                                      (<= 0 2147483647)) (in_range1
-                                      temp___expr_172)))
+(define-fun dynamic_invariant2 ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 2147483647)) (in_range1
+                                     temp___expr_200)))
 
 (declare-const maximum_valid_speed Float32)
 
@@ -679,50 +655,6 @@
   (assert
   (= maximum_valid_speed (m_per_s_from_km_per_h
                          (fp #b0 #b10000111 #b11110100000000000000000))))
-
-(declare-const initial_speed Float32)
-
-(declare-const target__split_fields Bool)
-
-(declare-const target__split_fields1 distance_t)
-
-(declare-const target__split_fields2 speed_t)
-
-(declare-const o Float32)
-
-(declare-const o1 speed_t)
-
-(declare-const o2 distance_t)
-
-(declare-const o3 Bool)
-
-(declare-const o4 distance_t)
-
-(declare-const o5 speed_t)
-
-(declare-const deceleration_curve_test__target__assume Bool)
-
-(declare-const deceleration_curve_test__target__assume1 distance_t)
-
-(declare-const deceleration_curve_test__target__assume2 speed_t)
-
-(declare-const o6 Int)
-
-(declare-const result Float32)
-
-(declare-const initial_speed1 Float32)
-
-(declare-const result1 Bool)
-
-(declare-const result2 distance_t)
-
-(declare-const result3 speed_t)
-
-(declare-const target__split_fields3 Bool)
-
-(declare-const target__split_fields4 distance_t)
-
-(declare-const target__split_fields5 speed_t)
 
 (assert
 ;; WP_parameter_def

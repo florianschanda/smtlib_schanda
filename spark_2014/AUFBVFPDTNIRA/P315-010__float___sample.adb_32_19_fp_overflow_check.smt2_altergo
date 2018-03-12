@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1024,49 +1024,20 @@ function ttmpS__ref___projection(a: ttmpS__ref) : ttmpS = (a).ttmpS__content
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic time : t
-
-logic tmp : t
-
-logic o : t
-
-logic result : t
-
-logic tmp1 : t
-
-logic result1 : t
-
-logic time1 : t
-
-logic time2 : t
-
-logic tmp2 : t
-
-logic time3 : t
-
-logic tmp3 : t
-
-axiom H : in_range2(nb)
-
-axiom H1 : tqtisFinite(time)
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 10.0))
-
-axiom H2 : (lt(fliteral1, time) and lt(time, fliteral4))
-
-axiom H3 : (result = tmp)
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.500000000000000000000000))
 
-axiom H4 : (tmp1 = mul(RNE, fliteral5, nb))
-
-axiom H5 : in_range3(tmp1)
-
  (* File "sample.ads", line 37, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE, time, tmp1))
+goal WP_parameter_def :
+  (forall time:t. forall tmp:t. forall result:t. forall tmp1:t.
+  (in_range2(nb) -> (tqtisFinite(time) -> ((lt(fliteral1, time) and lt(time,
+  fliteral4)) -> ((({ t__content = result } = { t__content = tmp }) and
+  (tmp1 = mul(RNE, fliteral5, nb))) -> (in_range3(tmp1) ->
+  tqtisFinite(add(RNE, time, tmp1))))))))

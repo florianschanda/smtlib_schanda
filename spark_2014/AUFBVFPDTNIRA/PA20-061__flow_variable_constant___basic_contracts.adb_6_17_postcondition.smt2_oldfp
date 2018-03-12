@@ -1069,12 +1069,12 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range1
-                                     temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range1
+                                    temp___expr_39)))
 
 (declare-sort positive 0)
 
@@ -1095,12 +1095,12 @@
 (define-fun positive__ref___projection ((a positive__ref)) positive (positive__content
                                                                     a))
 
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range2
-                                     temp___expr_39)))
+(define-fun dynamic_invariant1 ((temp___expr_46 Int) (temp___is_init_42 Bool)
+  (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
+  (temp___do_typ_inv_45 Bool)) Bool (=>
+                                    (or (= temp___is_init_42 true)
+                                    (<= 1 2147483647)) (in_range2
+                                    temp___expr_46)))
 
 (declare-sort float 0)
 
@@ -1126,12 +1126,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant2 ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant2 ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const numerator Int)
 
@@ -1162,6 +1162,11 @@
 ;; den__def_axiom
   (assert (= den fliteral2))
 
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
+
 (declare-const basic_contracts__average__result t)
 
 (declare-const o t)
@@ -1187,33 +1192,47 @@
   (assert (in_range2 denominator))
 
 ;; H
+  (assert (= (of_int RNE1 numerator) num))
+
+;; H
+  (assert (tqtisFinite num))
+
+;; H
+  (assert (tqtisFinite den))
+
+;; H
+  (assert (lt fliteral fliteral2))
+
+;; H
   (assert
-  (and
-  (and (= (of_int RNE1 numerator) num)
-  (and (tqtisFinite num)
-  (and (tqtisFinite den)
-  (and (lt fliteral fliteral2)
-  (and
-  (and
-  (= basic_contracts__average__result1 basic_contracts__average__result2)
+  (= basic_contracts__average__result1 basic_contracts__average__result2))
+
+;; H
+  (assert
   (= basic_contracts__average__result3 basic_contracts__average__result1))
-  (and
+
+;; H
+  (assert
   (and (= o (div1 RNE1 num fliteral2)) (tqtisFinite
-  (div1 RNE1 num fliteral2)))
-  (and (= result basic_contracts__average__result)
-  (= basic_contracts__average__result1 o))))))))
-  (and
+  (div1 RNE1 num fliteral2))))
+
+;; H
+  (assert (= result basic_contracts__average__result))
+
+;; H
+  (assert (= basic_contracts__average__result1 o))
+
+;; H
+  (assert
   (= (mk_t__ref basic_contracts__average__result4) (mk_t__ref
-                                                   basic_contracts__average__result2))
-  (= basic_contracts__average__result5 basic_contracts__average__result3))))
+                                                   basic_contracts__average__result2)))
+
+;; H
+  (assert
+  (= basic_contracts__average__result5 basic_contracts__average__result3))
 
 ;; H
   (assert (= result1 basic_contracts__average__result4))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 (assert
 ;; WP_parameter_def

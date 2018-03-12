@@ -928,48 +928,20 @@ logic r2 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic pack__add__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic pack__add__result1 : t
-
-logic pack__add__result2 : t
-
-logic pack__add__result3 : t
-
-logic pack__add__result4 : t
-
-logic pack__add__result5 : t
-
-logic result1 : t
-
-axiom H : tqtisFinite(r1)
-
-axiom H1 : tqtisFinite(r2)
-
-axiom H2 : (lt(r1, fliteral) and (lt(r2, fliteral) and (lt(neg(fliteral),
-  r1) and lt(neg(fliteral), r2))))
-
-axiom H3 : (pack__add__result1 = pack__add__result2)
-
-axiom H4 : (pack__add__result3 = pack__add__result1)
-
-axiom H5 : ((o = add(RNE, r1, r2)) and tqtisFinite(add(RNE, r1, r2)))
-
-axiom H6 : (result = pack__add__result)
-
-axiom H7 : (pack__add__result1 = o)
-
-axiom H8 : (pack__add__result4 = pack__add__result2)
-
-axiom H9 : (pack__add__result5 = pack__add__result3)
-
-axiom H10 : (result1 = pack__add__result4)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : eq(pack__add__result4, add(RNE, r1, r2))
+goal WP_parameter_def :
+  (forall pack__add__result:t. forall o:t. forall result:t.
+  forall pack__add__result1:t. forall pack__add__result2:t.
+  forall pack__add__result3:t. forall pack__add__result4:t.
+  forall pack__add__result5:t.
+  (forall result1:t. ((tqtisFinite(r1) and (tqtisFinite(r2) and ((lt(r1,
+  fliteral) and (lt(r2, fliteral) and (lt(neg(fliteral), r1) and
+  lt(neg(fliteral), r2)))) and
+  (((((pack__add__result1 = pack__add__result2) and
+  (pack__add__result3 = pack__add__result1)) and (((o = add(RNE, r1, r2)) and
+  tqtisFinite(add(RNE, r1, r2))) and (({ t__content = result } = {
+  t__content = pack__add__result }) and (pack__add__result1 = o)))) and (({
+  t__content = pack__add__result4 } = { t__content = pack__add__result2
+  }) and (pack__add__result5 = pack__add__result3))) and
+  (result1 = pack__add__result4))))) -> eq(pack__add__result4, add(RNE, r1,
+  r2)))))

@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun oexpon (t t) t)
 
@@ -1095,8 +1095,8 @@
   (forall ((left t) (right t))
   (! (=>
      (and
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
      (and (=> (eq left fliteral2) (lt fliteral2 right)) (le fliteral2 left)))
      (let ((result (oexpon left right)))
      (and
@@ -1105,7 +1105,7 @@
      (and (=> (eq right fliteral) (eq result left))
      (and (=> (eq left fliteral) (eq result fliteral))
      (=> (eq left fliteral2) (eq result fliteral2)))))) (dynamic_invariant
-     result true false true)))) :pattern ((oexpon left right)) )))
+     result true false true true)))) :pattern ((oexpon left right)) )))
 
 (declare-const left t)
 
@@ -1114,8 +1114,6 @@
 (declare-const right t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const o t)
 
 ;; H
   (assert (tqtisFinite left))

@@ -1080,12 +1080,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant ((temp___expr_57 t) (temp___is_init_54 Bool)
-  (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 t) (temp___is_init_63 Bool)
+  (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_67)))
 
 (declare-fun atan__2 (t) t)
 
@@ -1094,8 +1094,8 @@
 ;; atan__2__post_axiom
   (assert
   (forall ((lf t))
-  (! (=> (dynamic_invariant lf true true true) (dynamic_invariant
-     (atan__2 lf) true false true)) :pattern ((atan__2 lf)) )))
+  (! (=> (dynamic_invariant lf true true true true) (dynamic_invariant
+     (atan__2 lf) true false true true)) :pattern ((atan__2 lf)) )))
 
 (declare-const left t)
 
@@ -1135,6 +1135,11 @@
 ;; pi_over_two__def_axiom
   (assert (= pi_over_two fliteral3))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
+
 (declare-const result__ t)
 
 (declare-const o t)
@@ -1143,25 +1148,9 @@
 
 (declare-const o2 t)
 
-(declare-const o3 t)
-
-(declare-const o4 t)
-
-(declare-const o5 t)
-
-(declare-const o6 t)
-
-(declare-const o7 t)
-
-(declare-const o8 t)
-
 (declare-const result t)
 
 (declare-const result__1 t)
-
-(declare-const result1 t)
-
-(declare-const result__2 t)
 
 ;; H
   (assert (tqtisFinite left))
@@ -1178,11 +1167,6 @@
 ;; H
   (assert (tqtisFinite pi_over_two))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) (/ 0.0 10.0))))
-
 ;; H
   (assert (not (and (eq left fliteral4) (eq right fliteral4))))
 
@@ -1191,19 +1175,19 @@
 
 ;; H
   (assert
-  (and (= o4 (div1 RNE1 right left)) (tqtisFinite (div1 RNE1 right left))))
+  (and (= o (div1 RNE1 right left)) (tqtisFinite (div1 RNE1 right left))))
 
 ;; H
-  (assert (= o5 (neg o4)))
+  (assert (= o1 (neg o)))
 
 ;; H
-  (assert (and (= o6 (atan__2 o5)) (tqtisFinite o6)))
+  (assert (and (= o2 (atan__2 o1)) (tqtisFinite o2)))
 
 ;; H
-  (assert (= result1 result__))
+  (assert (= result result__))
 
 ;; H
-  (assert (= result__2 o6))
+  (assert (= result__1 o2))
 
 ;; H
   (assert (not (le left fliteral4)))
@@ -1211,6 +1195,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (tqtisFinite (add RNE1 result__2 fliteral3))))
+  (not (tqtisFinite (add RNE1 result__1 fliteral3))))
 (check-sat)
 (exit)

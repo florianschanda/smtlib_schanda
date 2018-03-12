@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -112,12 +108,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun cos1 (Float32) Float32)
 
@@ -126,7 +123,7 @@
 ;; cos__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (let ((result (cos1 x)))
      (and
      (and
@@ -135,7 +132,7 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((cos1 x)) )))
 
 (declare-fun approx_cos (Float32) Float32)
 
@@ -160,13 +157,13 @@
 ;; approx_cos__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
-     (approx_cos x) true false true)) :pattern ((approx_cos x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (approx_cos x) true false true true)) :pattern ((approx_cos x)) )))
 
 ;; approx_cos__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (approx_cos x) (fp.add RNE (fp.sub RNE (fp.add RNE (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) (fp.div RNE
      (pow21 x) (fp #b0 #b10000000 #b00000000000000000000000))) (fp.div RNE
      (pow4 x) (fp #b0 #b10000011 #b10000000000000000000000))) (fp.div RNE
@@ -181,63 +178,57 @@
 ;; pow2__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow21 x1)
-     true false true)) :pattern ((pow21 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true true) (dynamic_invariant
+     (pow21 x1) true false true true)) :pattern ((pow21 x1)) )))
 
 ;; pow2__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
+  (! (=> (dynamic_invariant x1 true true true true)
      (= (pow21 x1) (fp.mul RNE x1 x1))) :pattern ((pow21 x1)) )))
 
 ;; pow4__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow4 x1)
-     true false true)) :pattern ((pow4 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true true) (dynamic_invariant
+     (pow4 x1) true false true true)) :pattern ((pow4 x1)) )))
 
 ;; pow4__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
+  (! (=> (dynamic_invariant x1 true true true true)
      (= (pow4 x1) (fp.mul RNE (fp.mul RNE (fp.mul RNE x1 x1) x1) x1))) :pattern (
   (pow4 x1)) )))
 
 ;; pow6__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow6 x1)
-     true false true)) :pattern ((pow6 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true true) (dynamic_invariant
+     (pow6 x1) true false true true)) :pattern ((pow6 x1)) )))
 
 ;; pow6__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
+  (! (=> (dynamic_invariant x1 true true true true)
      (= (pow6 x1) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x1 x1) x1) x1) x1) x1))) :pattern (
   (pow6 x1)) )))
 
 ;; pow8__post_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow8 x1)
-     true false true)) :pattern ((pow8 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true true) (dynamic_invariant
+     (pow8 x1) true false true true)) :pattern ((pow8 x1)) )))
 
 ;; pow8__def_axiom
   (assert
   (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true)
+  (! (=> (dynamic_invariant x1 true true true true)
      (= (pow8 x1) (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x1 x1) x1) x1) x1) x1) x1) x1))) :pattern (
   (pow8 x1)) )))
 
 (declare-const trigo__cos__result Float32)
 
 (declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const o2 Float32)
-
-(declare-const o3 Float32)
 
 (declare-const result Float32)
 

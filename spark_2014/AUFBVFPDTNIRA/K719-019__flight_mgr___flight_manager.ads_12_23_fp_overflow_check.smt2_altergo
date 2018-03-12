@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1070,393 +1070,152 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic result____split_fields : float1
-
-logic result____split_fields1 : float1
-
-logic flight_manager__set_engine_speed__result : float1
-
-logic flight_manager__set_engine_speed__result1 : float1
-
-logic o : float1
-
-logic o1 : float1
-
-logic o2 : float1
-
-logic temp___145 : float1
-
-logic temp___1451 : float1
-
-logic o3 : float1
-
-logic o4 : float1
-
-logic o5 : float1
-
-logic temp___143 : float1
-
-logic temp___1431 : float1
-
-logic o6 : float1
-
-logic o7 : float1
-
-logic o8 : float1
-
-logic temp___149 : float1
-
-logic temp___1491 : float1
-
-logic o9 : float1
-
-logic o10 : float1
-
-logic o11 : float1
-
-logic temp___147 : float1
-
-logic temp___1471 : float1
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : float1
-
-logic o15 : float1
-
-logic o16 : float1
-
-logic temp___151 : float1
-
-logic temp___1511 : float1
-
-logic o17 : t
-
-logic o18 : t
-
-logic o19 : float1
-
-logic o20 : float1
-
-logic o21 : float1
-
-logic temp___153 : float1
-
-logic temp___1531 : float1
-
-logic o22 : t
-
-logic o23 : t
-
-logic o24 : t
-
-logic o25 : t
-
-logic o26 : t
-
-logic o27 : t
-
-logic o28 : t
-
-logic o29 : t
-
-logic o30 : bool
-
-logic result____split_fields2 : float1
-
-logic result____split_fields3 : float1
-
-logic result : float1
-
-logic result1 : float1
-
-logic result____split_fields4 : float1
-
-logic result____split_fields5 : float1
-
-logic result2 : float1
-
-logic result3 : float1
-
-logic result____split_fields6 : float1
-
-logic result____split_fields7 : float1
-
-logic result4 : float1
-
-logic result5 : float1
-
-logic result____split_fields8 : float1
-
-logic result____split_fields9 : float1
-
-logic result6 : float1
-
-logic result7 : float1
-
-logic result____split_fields10 : float1
-
-logic result____split_fields11 : float1
-
-logic flight_manager__set_engine_speed__adjust_speed__f : t
-
-logic result8 : float1
-
-logic result9 : float1
-
-logic result____split_fields12 : float1
-
-logic result____split_fields13 : float1
-
-logic flight_manager__set_engine_speed__adjust_speed__f1 : t
-
-logic result10 : float1
-
-logic result11 : float1
-
-logic result____split_fields14 : float1
-
-logic result____split_fields15 : float1
-
-logic result12 : float1
-
-logic result13 : float1
-
-logic flight_manager__set_engine_speed__result2 : float1
-
-logic flight_manager__set_engine_speed__result3 : float1
-
-logic flight_manager__set_engine_speed__result4 : float1
-
-logic flight_manager__set_engine_speed__result5 : float1
-
-logic flight_manager__set_engine_speed__result6 : float1
-
-logic flight_manager__set_engine_speed__result7 : float1
-
-logic result____split_fields16 : float1
-
-logic result____split_fields17 : float1
-
-logic flight_manager__set_engine_speed__result8 : float1
-
-logic flight_manager__set_engine_speed__result9 : float1
-
-logic result____split_fields18 : float1
-
-logic result____split_fields19 : float1
-
-logic flight_manager__set_engine_speed__result10 : float1
-
-logic flight_manager__set_engine_speed__result11 : float1
-
-axiom H : tqtisFinite(position_x)
-
-axiom H1 : tqtisFinite(position_y)
-
-axiom H2 : tqtisFinite(target_x)
-
-axiom H3 : tqtisFinite(target_y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 100.0))
-
-axiom H4 : (lt(target_x, position_x) -> (to_rep(o) = neg(fliteral1)))
-
-axiom H5 : (lt(target_x, position_x) -> (o = o1))
-
-axiom H6 : (lt(target_x, position_x) -> (result____split_fields1 = o2))
-
-axiom H7 : (lt(target_x, position_x) -> (temp___145 = o1))
-
-axiom H8 : (lt(target_x, position_x) -> (temp___1451 = o2))
-
-axiom H9 : (lt(target_x, position_x) ->
-  ((result = result____split_fields) and
-  (result1 = result____split_fields1)))
-
-axiom H10 : (lt(target_x, position_x) ->
-  ((result____split_fields4 = temp___145) and
-  (result____split_fields5 = temp___1451)))
-
-axiom H11 : ((not lt(target_x, position_x)) -> (lt(position_x, target_x) ->
-  (to_rep(o3) = fliteral1)))
-
-axiom H12 : ((not lt(target_x, position_x)) -> (lt(position_x, target_x) ->
-  (o3 = o4)))
-
-axiom H13 : ((not lt(target_x, position_x)) -> (lt(position_x, target_x) ->
-  (result____split_fields1 = o5)))
-
-axiom H14 : ((not lt(target_x, position_x)) -> (lt(position_x, target_x) ->
-  (temp___143 = o4)))
-
-axiom H15 : ((not lt(target_x, position_x)) -> (lt(position_x, target_x) ->
-  (temp___1431 = o5)))
-
-axiom H16 : ((not lt(target_x, position_x)) -> (lt(position_x, target_x) ->
-  ((result2 = result____split_fields) and
-  (result3 = result____split_fields1))))
-
-axiom H17 : ((not lt(target_x, position_x)) -> (lt(position_x, target_x) ->
-  ((result____split_fields6 = temp___143) and
-  (result____split_fields7 = temp___1431))))
-
-axiom H18 : ((not lt(target_x, position_x)) -> ((not lt(position_x,
-  target_x)) -> ((result____split_fields6 = result____split_fields) and
-  (result____split_fields7 = result____split_fields1))))
-
-axiom H19 : ((not lt(target_x, position_x)) -> ((not lt(position_x,
-  target_x)) -> ((result____split_fields6 = result____split_fields2) and
-  (result____split_fields7 = result____split_fields3))))
-
-axiom H20 : ((not lt(target_x, position_x)) ->
-  ((result____split_fields4 = result____split_fields6) and
-  (result____split_fields5 = result____split_fields7)))
-
-axiom H21 : (lt(target_y, position_y) -> (to_rep(o6) = neg(fliteral1)))
-
-axiom H22 : (lt(target_y, position_y) -> (result____split_fields4 = o7))
-
-axiom H23 : (lt(target_y, position_y) -> (o6 = o8))
-
-axiom H24 : (lt(target_y, position_y) -> (temp___149 = o7))
-
-axiom H25 : (lt(target_y, position_y) -> (temp___1491 = o8))
-
-axiom H26 : (lt(target_y, position_y) ->
-  ((result4 = result____split_fields4) and
-  (result5 = result____split_fields5)))
-
-axiom H27 : (lt(target_y, position_y) ->
-  ((result____split_fields8 = temp___149) and
-  (result____split_fields9 = temp___1491)))
-
-axiom H28 : ((not lt(target_y, position_y)) -> (lt(position_y, target_y) ->
-  (to_rep(o9) = fliteral1)))
-
-axiom H29 : ((not lt(target_y, position_y)) -> (lt(position_y, target_y) ->
-  (result____split_fields4 = o10)))
-
-axiom H30 : ((not lt(target_y, position_y)) -> (lt(position_y, target_y) ->
-  (o9 = o11)))
-
-axiom H31 : ((not lt(target_y, position_y)) -> (lt(position_y, target_y) ->
-  (temp___147 = o10)))
-
-axiom H32 : ((not lt(target_y, position_y)) -> (lt(position_y, target_y) ->
-  (temp___1471 = o11)))
-
-axiom H33 : ((not lt(target_y, position_y)) -> (lt(position_y, target_y) ->
-  ((result6 = result____split_fields4) and
-  (result7 = result____split_fields5))))
-
-axiom H34 : ((not lt(target_y, position_y)) -> (lt(position_y, target_y) ->
-  ((result____split_fields10 = temp___147) and
-  (result____split_fields11 = temp___1471))))
-
-axiom H35 : ((not lt(target_y, position_y)) -> ((not lt(position_y,
-  target_y)) -> ((result____split_fields10 = result____split_fields4) and
-  (result____split_fields11 = result____split_fields5))))
-
-axiom H36 : ((not lt(target_y, position_y)) ->
-  ((result____split_fields8 = result____split_fields10) and
-  (result____split_fields9 = result____split_fields11)))
-
-axiom H37 : ((o12 = sub(RNE, position_x, target_x)) and tqtisFinite(sub(RNE,
-  position_x, target_x)))
-
-axiom H38 : (o13 = abs1(o12))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 10.0))
 
-axiom H39 : ((lt(o13, fliteral2) ->
+ (* File "flight_manager.ads", line 3, characters 0-0 *)
+goal WP_parameter_def :
+  (forall result____split_fields:float1.
+  forall result____split_fields1:float1.
+  forall flight_manager__set_engine_speed__result:float1.
+  forall flight_manager__set_engine_speed__result1:float1. forall o:float1.
+  forall o1:float1. forall o2:float1. forall temp___168:float1.
+  forall temp___1681:float1. forall o3:float1. forall o4:float1.
+  forall o5:float1. forall temp___166:float1. forall temp___1661:float1.
+  forall o6:float1. forall o7:float1. forall o8:float1.
+  forall temp___172:float1. forall temp___1721:float1. forall o9:float1.
+  forall o10:float1. forall o11:float1. forall temp___170:float1.
+  forall temp___1701:float1. forall o12:t. forall o13:t. forall o14:float1.
+  forall o15:float1. forall o16:float1. forall temp___174:float1.
+  forall temp___1741:float1. forall o17:t. forall o18:t. forall o19:float1.
+  forall o20:float1. forall o21:float1. forall temp___176:float1.
+  forall temp___1761:float1. forall o22:t.
+  forall result____split_fields2:float1.
+  forall result____split_fields3:float1. forall result:float1.
+  forall result1:float1. forall result____split_fields4:float1.
+  forall result____split_fields5:float1. forall result2:float1.
+  forall result3:float1. forall result____split_fields6:float1.
+  forall result____split_fields7:float1. forall result4:float1.
+  forall result5:float1. forall result____split_fields8:float1.
+  forall result____split_fields9:float1. forall result6:float1.
+  forall result7:float1. forall result____split_fields10:float1.
+  forall result____split_fields11:float1.
+  forall flight_manager__set_engine_speed__adjust_speed__f:t.
+  forall result8:float1. forall result9:float1.
+  forall result____split_fields12:float1.
+  forall result____split_fields13:float1.
+  forall flight_manager__set_engine_speed__adjust_speed__f1:t.
+  forall result10:float1. forall result11:float1.
+  forall result____split_fields14:float1.
+  forall result____split_fields15:float1. forall result12:engine_values__ref.
+  forall flight_manager__set_engine_speed__result2:us_rep.
+  forall flight_manager__set_engine_speed__result3:engine_values__ref.
+  forall flight_manager__set_engine_speed__result4:us_rep.
+  forall result____split_fields16:us_split_fields__ref.
+  forall flight_manager__set_engine_speed__result5:engine_values__ref.
+  forall result____split_fields17:us_split_fields.
+  forall flight_manager__set_engine_speed__result6:us_rep.
+  (tqtisFinite(position_x) -> (tqtisFinite(position_y) ->
+  (tqtisFinite(target_x) -> (tqtisFinite(target_y) -> (((((lt(target_x,
+  position_x) and ((((to_rep(o) = neg(fliteral1)) and ((o = o1) and
+  (result____split_fields1 = o2))) and ((temp___168 = o1) and
+  (temp___1681 = o2))) and (((result = result____split_fields) and
+  (result1 = result____split_fields1)) and
+  ((temp___168 = result____split_fields4) and
+  (temp___1681 = result____split_fields5))))) or ((not lt(target_x,
+  position_x)) and (((lt(position_x, target_x) and
+  ((((to_rep(o3) = fliteral1) and ((o3 = o4) and
+  (result____split_fields1 = o5))) and ((temp___166 = o4) and
+  (temp___1661 = o5))) and (((result2 = result____split_fields) and
+  (result3 = result____split_fields1)) and
+  ((temp___166 = result____split_fields6) and
+  (temp___1661 = result____split_fields7))))) or ((not lt(position_x,
+  target_x)) and (((result____split_fields = result____split_fields6) and
+  (result____split_fields1 = result____split_fields7)) and
+  ((result____split_fields2 = result____split_fields6) and
+  (result____split_fields3 = result____split_fields7))))) and ({
+  rec__flight_manager__engine_values__x_speed = result____split_fields4;
+  rec__flight_manager__engine_values__y_speed = result____split_fields5 } = {
+  rec__flight_manager__engine_values__x_speed = result____split_fields6;
+  rec__flight_manager__engine_values__y_speed = result____split_fields7
+  })))) and (((lt(target_y, position_y) and
+  ((((to_rep(o6) = neg(fliteral1)) and ((result____split_fields4 = o7) and
+  (o6 = o8))) and ((temp___172 = o7) and (temp___1721 = o8))) and
+  (((result4 = result____split_fields4) and
+  (result5 = result____split_fields5)) and
+  ((temp___172 = result____split_fields8) and
+  (temp___1721 = result____split_fields9))))) or ((not lt(target_y,
+  position_y)) and (((lt(position_y, target_y) and
+  ((((to_rep(o9) = fliteral1) and ((result____split_fields4 = o10) and
+  (o9 = o11))) and ((temp___170 = o10) and (temp___1701 = o11))) and
+  (((result6 = result____split_fields4) and
+  (result7 = result____split_fields5)) and
+  ((temp___170 = result____split_fields10) and
+  (temp___1701 = result____split_fields11))))) or ((not lt(position_y,
+  target_y)) and ({ rec__flight_manager__engine_values__x_speed =
+  result____split_fields10; rec__flight_manager__engine_values__y_speed =
+  result____split_fields11 } = {
+  rec__flight_manager__engine_values__x_speed = result____split_fields4;
+  rec__flight_manager__engine_values__y_speed = result____split_fields5
+  }))) and ({ rec__flight_manager__engine_values__x_speed =
+  result____split_fields8; rec__flight_manager__engine_values__y_speed =
+  result____split_fields9 } = { rec__flight_manager__engine_values__x_speed =
+  result____split_fields10; rec__flight_manager__engine_values__y_speed =
+  result____split_fields11 })))) and ((((((o12 = sub(RNE, position_x,
+  target_x)) and tqtisFinite(sub(RNE, position_x, target_x))) and
+  (o13 = abs1(o12))) and ((lt(o13, fliteral2) ->
   eq(flight_manager__set_engine_speed__adjust_speed__f, div(RNE, mul(RNE,
   to_rep(result____split_fields8), o13), fliteral2))) and
-  tqtisFinite(flight_manager__set_engine_speed__adjust_speed__f))
-
-axiom H40 : (to_rep(o14) = flight_manager__set_engine_speed__adjust_speed__f)
-
-axiom H41 : (o14 = o15)
-
-axiom H42 : (result____split_fields9 = o16)
-
-axiom H43 : (temp___151 = o15)
-
-axiom H44 : (temp___1511 = o16)
-
-axiom H45 : ((result8 = result____split_fields8) and
-  (result9 = result____split_fields9))
-
-axiom H46 : ((result____split_fields12 = temp___151) and
-  (result____split_fields13 = temp___1511))
-
-axiom H47 : ((o17 = sub(RNE, position_y, target_y)) and tqtisFinite(sub(RNE,
-  position_y, target_y)))
-
-axiom H48 : (o18 = abs1(o17))
-
-axiom H49 : ((lt(o18, fliteral2) ->
+  tqtisFinite(flight_manager__set_engine_speed__adjust_speed__f))) and
+  ((((to_rep(o14) = flight_manager__set_engine_speed__adjust_speed__f) and
+  ((o14 = o15) and (result____split_fields9 = o16))) and
+  ((temp___174 = o15) and (temp___1741 = o16))) and
+  (((result8 = result____split_fields8) and
+  (result9 = result____split_fields9)) and
+  ((temp___174 = result____split_fields12) and
+  (temp___1741 = result____split_fields13))))) and ((((((o17 = sub(RNE,
+  position_y, target_y)) and tqtisFinite(sub(RNE, position_y, target_y))) and
+  (o18 = abs1(o17))) and ((lt(o18, fliteral2) ->
   eq(flight_manager__set_engine_speed__adjust_speed__f1, div(RNE, mul(RNE,
   to_rep(result____split_fields13), o18), fliteral2))) and
-  tqtisFinite(flight_manager__set_engine_speed__adjust_speed__f1))
-
-axiom H50 :
-  (to_rep(o19) = flight_manager__set_engine_speed__adjust_speed__f1)
-
-axiom H51 : (result____split_fields12 = o20)
-
-axiom H52 : (o19 = o21)
-
-axiom H53 : ((temp___153 = o20) and (temp___1531 = o21))
-
-axiom H54 : ((result10 = result____split_fields12) and
-  (result11 = result____split_fields13))
-
-axiom H55 : ((result____split_fields14 = temp___153) and
-  (result____split_fields15 = temp___1531))
-
-axiom H56 :
-  ((flight_manager__set_engine_speed__result4 = flight_manager__set_engine_speed__result2) and
-  (flight_manager__set_engine_speed__result5 = flight_manager__set_engine_speed__result3))
-
-axiom H57 :
-  ((flight_manager__set_engine_speed__result6 = flight_manager__set_engine_speed__result2) and
-  (flight_manager__set_engine_speed__result7 = flight_manager__set_engine_speed__result3))
-
-axiom H58 : ((result12 = flight_manager__set_engine_speed__result) and
-  (result13 = flight_manager__set_engine_speed__result1))
-
-axiom H59 :
-  ((flight_manager__set_engine_speed__result2 = result____split_fields14) and
-  (flight_manager__set_engine_speed__result3 = result____split_fields15))
-
-axiom H60 :
-  ((flight_manager__set_engine_speed__result8 = flight_manager__set_engine_speed__result4) and
-  (flight_manager__set_engine_speed__result9 = flight_manager__set_engine_speed__result5))
-
-axiom H61 : ((result____split_fields16 = result____split_fields14) and
-  (result____split_fields17 = result____split_fields15))
-
-axiom H62 :
-  ((flight_manager__set_engine_speed__result10 = flight_manager__set_engine_speed__result6) and
-  (flight_manager__set_engine_speed__result11 = flight_manager__set_engine_speed__result7))
-
-axiom H63 : ((result____split_fields18 = result____split_fields14) and
-  (result____split_fields19 = result____split_fields15))
-
-axiom H64 : ((o28 = add(RNE, position_y,
-  to_rep(flight_manager__set_engine_speed__result9))) and
+  tqtisFinite(flight_manager__set_engine_speed__adjust_speed__f1))) and
+  ((((to_rep(o19) = flight_manager__set_engine_speed__adjust_speed__f1) and
+  ((result____split_fields12 = o20) and (o19 = o21))) and
+  ((temp___176 = o20) and (temp___1761 = o21))) and
+  (((result10 = result____split_fields12) and
+  (result11 = result____split_fields13)) and
+  ((temp___176 = result____split_fields14) and
+  (temp___1761 = result____split_fields15))))) and
+  (((flight_manager__set_engine_speed__result3 = { engine_values__content =
+  flight_manager__set_engine_speed__result2 }) and
+  (flight_manager__set_engine_speed__result4 = flight_manager__set_engine_speed__result2)) and
+  ((result12 = { engine_values__content = { us_split_fields1 = {
+  rec__flight_manager__engine_values__x_speed =
+  flight_manager__set_engine_speed__result;
+  rec__flight_manager__engine_values__y_speed =
+  flight_manager__set_engine_speed__result1 } } }) and
+  (flight_manager__set_engine_speed__result2 = { us_split_fields1 = {
+  rec__flight_manager__engine_values__x_speed = result____split_fields14;
+  rec__flight_manager__engine_values__y_speed = result____split_fields15 }
+  }))))))) and
+  (((flight_manager__set_engine_speed__result5 = flight_manager__set_engine_speed__result3) and
+  (result____split_fields16 = { us_split_fields__content = {
+  rec__flight_manager__engine_values__x_speed = result____split_fields14;
+  rec__flight_manager__engine_values__y_speed = result____split_fields15 }
+  })) and
+  ((flight_manager__set_engine_speed__result6 = flight_manager__set_engine_speed__result4) and
+  (result____split_fields17 = { rec__flight_manager__engine_values__x_speed =
+  result____split_fields14; rec__flight_manager__engine_values__y_speed =
+  result____split_fields15 })))) -> (((o22 = add(RNE, position_y,
+  to_rep((((flight_manager__set_engine_speed__result5).engine_values__content).us_split_fields1).rec__flight_manager__engine_values__y_speed))) and
   tqtisFinite(add(RNE, position_y,
-  to_rep(flight_manager__set_engine_speed__result9))))
-
- (* File "flight_manager.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE, position_y,
-  to_rep(flight_manager__set_engine_speed__result9)))
+  to_rep((((flight_manager__set_engine_speed__result5).engine_values__content).us_split_fields1).rec__flight_manager__engine_values__y_speed)))) ->
+  tqtisFinite(add(RNE, position_y,
+  to_rep((((flight_manager__set_engine_speed__result5).engine_values__content).us_split_fields1).rec__flight_manager__engine_values__y_speed))))))))))

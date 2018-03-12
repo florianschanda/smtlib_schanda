@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1320,30 +1320,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:function_range. forall v1:float1.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i])]. ((singleton({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i]) = {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -1354,17 +1330,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1374,9 +1350,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic dummy5 : (int,us_rep) farray
 
@@ -1591,847 +1567,50 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic merge__split_fields : num_delimiters_range
-
-logic merge__split_fields1 : (int,us_rep) farray
-
-logic i1 : int
-
-logic i2 : int
-
-logic im : int
-
-logic scan_sfun1 : bool
-
-logic scan_sfun2 : bool
-
-logic temp___389 : bool
-
-logic temp___387 : num_delimiters_range
-
-logic temp___3871 : (int,us_rep) farray
-
-logic temp___386 : bool
-
-logic temp___385 : int
-
-logic temp___384 : int
-
-logic temp___383 : int
-
-logic o : float1
-
-logic o1 : function_range
-
-logic o2 : function_range
-
-logic o3 : float1
-
-logic o4 : function_range
-
-logic o5 : float1
-
-logic o6 : (int,us_rep) farray
-
-logic o7 : num_delimiters_range
-
-logic o8 : (int,us_rep) farray
-
-logic temp___313 : num_delimiters_range
-
-logic temp___3131 : (int,us_rep) farray
-
-logic i : int
-
-logic o9 : int
-
-logic o10 : function_range
-
-logic o11 : float1
-
-logic o12 : function_range
-
-logic o13 : float1
-
-logic o14 : function_range
-
-logic o15 : int
-
-logic i3 : int
-
-logic j : int
-
-logic o16 : int
-
-logic o17 : function_range
-
-logic o18 : float1
-
-logic o19 : function_range
-
-logic o20 : float1
-
-logic o21 : function_range
-
-logic o22 : int
-
-logic i4 : int
-
-logic j1 : int
-
-logic o23 : int
-
-logic o24 : function_range
-
-logic o25 : float1
-
-logic o26 : function_range
-
-logic o27 : float1
-
-logic o28 : function_range
-
-logic o29 : int
-
-logic i5 : int
-
-logic j2 : int
-
-logic o30 : int
-
-logic o31 : function_range
-
-logic o32 : float1
-
-logic o33 : function_range
-
-logic o34 : float1
-
-logic o35 : function_range
-
-logic o36 : int
-
-logic i6 : int
-
-logic j3 : int
-
-logic o37 : int
-
-logic o38 : function_range
-
-logic o39 : float1
-
-logic o40 : function_range
-
-logic o41 : float1
-
-logic o42 : function_range
-
-logic o43 : int
-
-logic i7 : int
-
-logic o44 : int
-
-logic o45 : function_range
-
-logic o46 : float1
-
-logic o47 : function_range
-
-logic o48 : float1
-
-logic o49 : function_range
-
-logic o50 : int
-
-logic o51 : t
-
-logic o52 : int
-
-logic o53 : function_range
-
-logic o54 : float1
-
-logic o55 : function_range
-
-logic o56 : float1
-
-logic o57 : function_range
-
-logic o58 : int
-
-logic o59 : t
-
-logic o60 : t
-
-logic o61 : function_range
-
-logic o62 : function_range
-
-logic o63 : float1
-
-logic o64 : function_range
-
-logic o65 : float1
-
-logic o66 : (int,us_rep) farray
-
-logic o67 : num_delimiters_range
-
-logic o68 : (int,us_rep) farray
-
-logic temp___375 : num_delimiters_range
-
-logic temp___3751 : (int,us_rep) farray
-
-logic o69 : t
-
-logic o70 : t
-
-logic o71 : t
-
-logic o72 : float1
-
-logic o73 : function_range
-
-logic o74 : float1
-
-logic o75 : function_range
-
-logic o76 : float1
-
-logic o77 : (int,us_rep) farray
-
-logic o78 : num_delimiters_range
-
-logic o79 : (int,us_rep) farray
-
-logic temp___382 : num_delimiters_range
-
-logic temp___3821 : (int,us_rep) farray
-
-logic o80 : function_range
-
-logic o81 : function_range
-
-logic o82 : float1
-
-logic o83 : function_range
-
-logic o84 : float1
-
-logic o85 : (int,us_rep) farray
-
-logic o86 : num_delimiters_range
-
-logic o87 : (int,us_rep) farray
-
-logic temp___360 : num_delimiters_range
-
-logic temp___3601 : (int,us_rep) farray
-
-logic o88 : t
-
-logic o89 : t
-
-logic o90 : t
-
-logic o91 : float1
-
-logic o92 : function_range
-
-logic o93 : float1
-
-logic o94 : function_range
-
-logic o95 : float1
-
-logic o96 : (int,us_rep) farray
-
-logic o97 : num_delimiters_range
-
-logic o98 : (int,us_rep) farray
-
-logic temp___367 : num_delimiters_range
-
-logic temp___3671 : (int,us_rep) farray
-
-logic o99 : function_range
-
-logic o100 : function_range
-
-logic o101 : float1
-
-logic o102 : function_range
-
-logic o103 : float1
-
-logic o104 : (int,us_rep) farray
-
-logic o105 : num_delimiters_range
-
-logic o106 : (int,us_rep) farray
-
-logic temp___345 : num_delimiters_range
-
-logic temp___3451 : (int,us_rep) farray
-
-logic o107 : t
-
-logic o108 : t
-
-logic o109 : t
-
-logic o110 : float1
-
-logic o111 : function_range
-
-logic o112 : float1
-
-logic o113 : function_range
-
-logic o114 : float1
-
-logic o115 : (int,us_rep) farray
-
-logic o116 : num_delimiters_range
-
-logic o117 : (int,us_rep) farray
-
-logic temp___352 : num_delimiters_range
-
-logic temp___3521 : (int,us_rep) farray
-
-logic o118 : function_range
-
-logic o119 : function_range
-
-logic o120 : float1
-
-logic o121 : function_range
-
-logic o122 : float1
-
-logic o123 : (int,us_rep) farray
-
-logic o124 : num_delimiters_range
-
-logic o125 : (int,us_rep) farray
-
-logic temp___332 : num_delimiters_range
-
-logic temp___3321 : (int,us_rep) farray
-
-logic o126 : t
-
-logic o127 : t
-
-logic o128 : t
-
-logic o129 : float1
-
-logic o130 : function_range
-
-logic o131 : float1
-
-logic o132 : function_range
-
-logic o133 : float1
-
-logic o134 : (int,us_rep) farray
-
-logic o135 : num_delimiters_range
-
-logic o136 : (int,us_rep) farray
-
-logic temp___339 : num_delimiters_range
-
-logic temp___3391 : (int,us_rep) farray
-
-logic o137 : function_range
-
-logic o138 : function_range
-
-logic o139 : float1
-
-logic o140 : function_range
-
-logic o141 : float1
-
-logic o142 : (int,us_rep) farray
-
-logic o143 : num_delimiters_range
-
-logic o144 : (int,us_rep) farray
-
-logic temp___319 : num_delimiters_range
-
-logic temp___3191 : (int,us_rep) farray
-
-logic o145 : t
-
-logic o146 : t
-
-logic o147 : t
-
-logic o148 : float1
-
-logic o149 : function_range
-
-logic o150 : float1
-
-logic o151 : function_range
-
-logic o152 : float1
-
-logic o153 : (int,us_rep) farray
-
-logic o154 : num_delimiters_range
-
-logic o155 : (int,us_rep) farray
-
-logic temp___326 : num_delimiters_range
-
-logic temp___3261 : (int,us_rep) farray
-
-logic o156 : int
-
-logic o157 : float1
-
-logic o158 : function_range
-
-logic o159 : function_range
-
-logic o160 : float1
-
-logic o161 : function_range
-
-logic o162 : float1
-
-logic o163 : (int,us_rep) farray
-
-logic o164 : num_delimiters_range
-
-logic o165 : (int,us_rep) farray
-
-logic temp___3132 : num_delimiters_range
-
-logic temp___3133 : (int,us_rep) farray
-
-logic o166 : num_delimiters_range
-
-logic o167 : num_delimiters_range
-
-logic o168 : (int,us_rep) farray
-
-logic temp___451 : num_delimiters_range
-
-logic temp___4511 : (int,us_rep) farray
-
-logic i8 : int
-
-logic j4 : int
-
-logic o169 : int
-
-logic o170 : function_range
-
-logic o171 : float1
-
-logic o172 : function_range
-
-logic o173 : float1
-
-logic o174 : function_range
-
-logic o175 : int
-
-logic i9 : int
-
-logic j5 : int
-
-logic o176 : int
-
-logic o177 : function_range
-
-logic o178 : float1
-
-logic o179 : function_range
-
-logic o180 : float1
-
-logic o181 : function_range
-
-logic o182 : int
-
-logic o183 : bool
-
-logic i10 : int
-
-logic o184 : int
-
-logic o185 : function_range
-
-logic o186 : float1
-
-logic o187 : function_range
-
-logic o188 : float1
-
-logic o189 : function_range
-
-logic o190 : int
-
-logic o191 : t
-
-logic o192 : int
-
-logic o193 : function_range
-
-logic o194 : float1
-
-logic o195 : function_range
-
-logic o196 : float1
-
-logic o197 : function_range
-
-logic o198 : int
-
-logic o199 : t
-
-logic o200 : t
-
-logic o201 : bool
-
-logic result : int
-
-logic i11 : int
-
-logic result1 : int
-
-logic i21 : int
-
-logic result2 : int
-
-logic im1 : int
-
-logic result3 : bool
-
-logic scan_sfun11 : bool
-
-logic result4 : bool
-
-logic scan_sfun21 : bool
-
-logic result5 : num_delimiters_range
-
-logic result6 : (int,us_rep) farray
-
-logic merge__split_fields2 : num_delimiters_range
-
-logic merge__split_fields3 : (int,us_rep) farray
-
-logic merge__split_fields4 : num_delimiters_range
-
-logic merge__split_fields5 : (int,us_rep) farray
-
-logic i12 : int
-
-logic i22 : int
-
-logic im2 : int
-
-logic scan_sfun12 : bool
-
-logic scan_sfun22 : bool
-
-logic result7 : num_delimiters_range
-
-logic result8 : (int,us_rep) farray
-
-logic merge__split_fields6 : num_delimiters_range
-
-logic merge__split_fields7 : (int,us_rep) farray
-
-logic result9 : num_delimiters_range
-
-logic result10 : (int,us_rep) farray
-
-logic merge__split_fields8 : num_delimiters_range
-
-logic merge__split_fields9 : (int,us_rep) farray
-
-logic i13 : int
-
-logic scan_sfun13 : bool
-
-logic result11 : num_delimiters_range
-
-logic result12 : (int,us_rep) farray
-
-logic merge__split_fields10 : num_delimiters_range
-
-logic merge__split_fields11 : (int,us_rep) farray
-
-logic result13 : num_delimiters_range
-
-logic result14 : (int,us_rep) farray
-
-logic merge__split_fields12 : num_delimiters_range
-
-logic merge__split_fields13 : (int,us_rep) farray
-
-logic i23 : int
-
-logic scan_sfun23 : bool
-
-logic result15 : num_delimiters_range
-
-logic result16 : (int,us_rep) farray
-
-logic merge__split_fields14 : num_delimiters_range
-
-logic merge__split_fields15 : (int,us_rep) farray
-
-logic result17 : num_delimiters_range
-
-logic result18 : (int,us_rep) farray
-
-logic merge__split_fields16 : num_delimiters_range
-
-logic merge__split_fields17 : (int,us_rep) farray
-
-logic i14 : int
-
-logic scan_sfun14 : bool
-
-logic i24 : int
-
-logic scan_sfun24 : bool
-
-logic result19 : num_delimiters_range
-
-logic result20 : (int,us_rep) farray
-
-logic merge__split_fields18 : num_delimiters_range
-
-logic merge__split_fields19 : (int,us_rep) farray
-
-logic result21 : num_delimiters_range
-
-logic result22 : (int,us_rep) farray
-
-logic merge__split_fields20 : num_delimiters_range
-
-logic merge__split_fields21 : (int,us_rep) farray
-
-logic i15 : int
-
-logic scan_sfun15 : bool
-
-logic result23 : num_delimiters_range
-
-logic result24 : (int,us_rep) farray
-
-logic merge__split_fields22 : num_delimiters_range
-
-logic merge__split_fields23 : (int,us_rep) farray
-
-logic result25 : num_delimiters_range
-
-logic result26 : (int,us_rep) farray
-
-logic merge__split_fields24 : num_delimiters_range
-
-logic merge__split_fields25 : (int,us_rep) farray
-
-logic i25 : int
-
-logic scan_sfun25 : bool
-
-logic result27 : int
-
-logic im3 : int
-
-logic result28 : num_delimiters_range
-
-logic result29 : (int,us_rep) farray
-
-logic merge__split_fields26 : num_delimiters_range
-
-logic merge__split_fields27 : (int,us_rep) farray
-
-logic im4 : int
-
-logic im5 : int
-
-logic merge__split_fields28 : num_delimiters_range
-
-logic merge__split_fields29 : (int,us_rep) farray
-
-logic i16 : int
-
-logic i26 : int
-
-logic im6 : int
-
-logic scan_sfun16 : bool
-
-logic scan_sfun26 : bool
-
-logic merge__split_fields30 : num_delimiters_range
-
-logic merge__split_fields31 : (int,us_rep) farray
-
-logic i17 : int
-
-logic i27 : int
-
-logic im7 : int
-
-logic scan_sfun17 : bool
-
-logic scan_sfun27 : bool
-
-logic merge__split_fields32 : num_delimiters_range
-
-logic merge__split_fields33 : (int,us_rep) farray
-
-logic i18 : int
-
-logic i28 : int
-
-logic im8 : int
-
-logic scan_sfun18 : bool
-
-logic scan_sfun28 : bool
-
-logic merge__split_fields34 : num_delimiters_range
-
-logic merge__split_fields35 : (int,us_rep) farray
-
-logic i19 : int
-
-logic i29 : int
-
-logic im9 : int
-
-logic scan_sfun19 : bool
-
-logic scan_sfun29 : bool
-
-logic result30 : num_delimiters_range
-
-logic result31 : (int,us_rep) farray
-
-logic merge__split_fields36 : num_delimiters_range
-
-logic merge__split_fields37 : (int,us_rep) farray
-
-logic merge__split_fields38 : num_delimiters_range
-
-logic merge__split_fields39 : (int,us_rep) farray
-
-logic i110 : int
-
-logic i210 : int
-
-logic im10 : int
-
-logic scan_sfun110 : bool
-
-logic scan_sfun210 : bool
-
-logic merge__split_fields40 : num_delimiters_range
-
-logic merge__split_fields41 : (int,us_rep) farray
-
-logic i111 : int
-
-logic i211 : int
-
-logic im11 : int
-
-logic scan_sfun111 : bool
-
-logic scan_sfun211 : bool
-
-axiom H : (((is_valid({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun1;
-  rec__step_function__step_function_t__step = sfun11 } }) = true) and
-  (is_valid({ us_split_fields3 = {
-  rec__step_function__step_function_t__number_of_delimiters = sfun2;
-  rec__step_function__step_function_t__step = sfun21 } }) = true)) and
-  ((to_rep1(sfun1) + to_rep1(sfun2)) <= 10))
-
-axiom H1 : (result = i1)
-
-axiom H2 : (i11 = 0)
-
-axiom H3 : in_range2(i11)
-
-axiom H4 : (result1 = i2)
-
-axiom H5 : (i21 = 0)
-
-axiom H6 : in_range2(i21)
-
-axiom H7 : (result2 = im)
-
-axiom H8 : (im1 = 0)
-
-axiom H9 : in_range2(im1)
-
-axiom H10 : (result3 = scan_sfun1)
-
-axiom H11 : (scan_sfun11 = of_int1(1))
-
-axiom H12 : (result4 = scan_sfun2)
-
-axiom H13 : (scan_sfun21 = of_int1(1))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H14 : (to_rep(o) = fliteral1)
-
-axiom H15 : (to_rep2(o1) = 0)
-
-axiom H16 : (o1 = o2)
-
-axiom H17 : (o = o3)
-
-axiom H18 : (o4 = o2)
-
-axiom H19 : (o5 = o3)
-
-axiom H20 : (o6 = (merge__split_fields1[im1 <- { us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = o4;
-  rec__step_function__delimiter_entry__value = o5 } }]))
-
-axiom H21 : (merge__split_fields = o7)
-
-axiom H22 : (o6 = o8)
-
-axiom H23 : (temp___313 = o7)
-
-axiom H24 : (temp___3131 = o8)
-
-axiom H25 : ((result5 = merge__split_fields) and
-  (result6 = merge__split_fields1))
-
-axiom H26 : ((merge__split_fields2 = temp___313) and
-  (merge__split_fields3 = temp___3131))
-
-axiom H27 : (0 <  im1)
-
-axiom H28 : (scan_sfun11 = true)
-
  (* File "step_function.ads", line 89, characters 0-0 *)
 goal WP_parameter_def :
-  (to_rep2((((merge__split_fields3[(im1 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i11])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))
+  (forall merge__split_fields:num_delimiters_range.
+  forall merge__split_fields1:(int,us_rep) farray. forall i1:int.
+  forall i2:int. forall im:int. forall scan_sfun1:bool.
+  forall scan_sfun2:bool. forall o:float1. forall o1:function_range.
+  forall o2:function_range. forall o3:float1. forall o4:function_range.
+  forall o5:float1. forall o6:(int,us_rep) farray.
+  forall o7:num_delimiters_range. forall o8:(int,us_rep) farray.
+  forall temp___340:num_delimiters_range.
+  forall temp___3401:(int,us_rep) farray. forall result:int__ref.
+  forall i11:int. forall result1:int__ref. forall i21:int.
+  forall result2:int__ref. forall im1:int. forall result3:bool__ref.
+  forall scan_sfun11:bool. forall result4:bool__ref. forall scan_sfun21:bool.
+  forall result5:us_split_fields__ref1.
+  forall merge__split_fields2:us_split_fields2. ((((is_valid({
+  us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun1;
+  rec__step_function__step_function_t__step = sfun11 } }) = true) and
+  (is_valid({ us_split_fields3 = {
+  rec__step_function__step_function_t__number_of_delimiters = sfun2;
+  rec__step_function__step_function_t__step = sfun21 } }) = true)) and
+  ((to_rep1(sfun1) + to_rep1(sfun2)) <= 10)) -> (((result = { int__content =
+  i1 }) and (i11 = 0)) -> (in_range2(i11) -> (((result1 = { int__content = i2
+  }) and (i21 = 0)) -> (in_range2(i21) -> (((result2 = { int__content = im
+  }) and (im1 = 0)) -> (in_range2(im1) -> (((result3 = { bool__content =
+  scan_sfun1 }) and (scan_sfun11 = of_int1(1))) -> (((result4 = {
+  bool__content = scan_sfun2 }) and (scan_sfun21 = of_int1(1))) ->
+  ((((((((to_rep(o) = fliteral1) and ((to_rep2(o1) = 0) and ((o1 = o2) and
+  (o = o3)))) and ((o4 = o2) and (o5 = o3))) and
+  (o6 = (merge__split_fields1[im1 <- { us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o4;
+  rec__step_function__delimiter_entry__value = o5 } }]))) and
+  ((merge__split_fields = o7) and (o6 = o8))) and ((temp___340 = o7) and
+  (temp___3401 = o8))) and ((result5 = { us_split_fields__content1 = {
+  rec__step_function__step_function_t__number_of_delimiters =
+  merge__split_fields; rec__step_function__step_function_t__step =
+  merge__split_fields1 } }) and (merge__split_fields2 = {
+  rec__step_function__step_function_t__number_of_delimiters = temp___340;
+  rec__step_function__step_function_t__step = temp___3401 }))) ->
+  (((0 <  im1) and (scan_sfun11 = true)) ->
+  (to_rep2(((((merge__split_fields2).rec__step_function__step_function_t__step[(im1 - 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun11[i11])).us_split_fields1).rec__step_function__delimiter_entry__delimiter))))))))))))))

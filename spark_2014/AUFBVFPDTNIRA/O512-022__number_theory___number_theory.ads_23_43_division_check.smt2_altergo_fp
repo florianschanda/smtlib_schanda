@@ -1065,12 +1065,6 @@ axiom Power_neg3 :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1082,6 +1076,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1236,49 +1236,6 @@ axiom fib__def_axiom :
   (fib(n1) = n1)) and ((not ((n1 = 0) or (n1 = 1))) ->
   (fib(n1) = (fib((n1 - 1)) + fib((n1 - 2))))))))
 
-logic number_theory__fib__result : int
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic result : int
-
-logic number_theory__fib__result1 : int
-
-logic number_theory__fib__result2 : int
-
-logic number_theory__fib__result3 : int
-
-logic number_theory__fib__result4 : int
-
-logic number_theory__fib__result5 : int
-
-axiom H : in_range3(n)
-
-axiom H1 : (number_theory__fib__result1 = number_theory__fib__result2)
-
-axiom H2 : (number_theory__fib__result3 = number_theory__fib__result1)
-
-axiom H3 : (((not (n = 0)) -> (n = 1)) -> (o5 = n))
-
-axiom H4 : ((not ((not (n = 0)) -> (n = 1))) -> ((o1 = (n - 2)) and
-  in_range3((n - 2))))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1289,36 +1246,32 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.2360000610351562500000))
 
-axiom H5 : ((not ((not (n = 0)) -> (n = 1))) -> ((o2 = fib(o1)) and
-  (in_range4(o2) and (((((o1 = 0) or (o1 = 1)) -> (o2 = o1)) and
-  ((not ((o1 = 0) or (o1 = 1))) ->
+ (* File "system.ads", line 1, characters 0-0 *)
+goal WP_parameter_def :
+  (forall number_theory__fib__result:int. forall o:int. forall o1:int.
+  forall o2:int. forall o3:int. forall o4:int. forall o5:int.
+  forall result:int. forall number_theory__fib__result1:int.
+  forall number_theory__fib__result2:int.
+  forall number_theory__fib__result3:int.
+  forall number_theory__fib__result4:int.
+  forall number_theory__fib__result5:int. (in_range3(n) ->
+  (((((number_theory__fib__result1 = number_theory__fib__result2) and
+  (number_theory__fib__result3 = number_theory__fib__result1)) and
+  (((((not (n = 0)) -> (n = 1)) and (o5 = n)) or ((not ((not (n = 0)) ->
+  (n = 1))) and (((((o1 = (n - 2)) and in_range3((n - 2))) and
+  ((o2 = fib(o1)) and (in_range4(o2) and (((((o1 = 0) or (o1 = 1)) and
+  (o2 = o1)) or ((not ((o1 = 0) or (o1 = 1))) and
   (o2 = (fib((o1 - 1)) + fib((o1 - 2)))))) and lt(of_int(NearestTiesToEven,
   o2), add(NearestTiesToEven, div(NearestTiesToEven, power(fliteral1, o1),
-  fliteral2), fliteral))))))
-
-axiom H6 : ((not ((not (n = 0)) -> (n = 1))) -> ((o = (n - 1)) and
-  in_range3((n - 1))))
-
-axiom H7 : ((not ((not (n = 0)) -> (n = 1))) -> ((o3 = fib(o)) and
-  (in_range4(o3) and (((((o = 0) or (o = 1)) -> (o3 = o)) and
-  ((not ((o = 0) or (o = 1))) -> (o3 = (fib((o - 1)) + fib((o - 2)))))) and
-  lt(of_int(NearestTiesToEven, o3), add(NearestTiesToEven,
-  div(NearestTiesToEven, power(fliteral1, o), fliteral2), fliteral))))))
-
-axiom H8 : ((not ((not (n = 0)) -> (n = 1))) -> (o4 = (o3 + o2)))
-
-axiom H9 : ((not ((not (n = 0)) -> (n = 1))) -> ((o5 = o4) and
-  in_range2(o4)))
-
-axiom H10 : (result = number_theory__fib__result)
-
-axiom H11 : (number_theory__fib__result1 = o5)
-
-axiom H12 : (number_theory__fib__result4 = number_theory__fib__result2)
-
-axiom H13 : (number_theory__fib__result5 = number_theory__fib__result3)
-
-axiom H14 : (n <  0)
-
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : neq(fliteral1, zeroF)
+  fliteral2), fliteral)))))) and ((((o = (n - 1)) and in_range3((n - 1))) and
+  ((o3 = fib(o)) and (in_range4(o3) and (((((o = 0) or (o = 1)) and
+  (o3 = o)) or ((not ((o = 0) or (o = 1))) and
+  (o3 = (fib((o - 1)) + fib((o - 2)))))) and lt(of_int(NearestTiesToEven,
+  o3), add(NearestTiesToEven, div(NearestTiesToEven, power(fliteral1, o),
+  fliteral2), fliteral)))))) and (o4 = (o3 + o2)))) and ((o5 = o4) and
+  in_range2(o4))))) and (({ int__content = result } = { int__content =
+  number_theory__fib__result }) and (number_theory__fib__result1 = o5)))) and
+  (({ int__content = number_theory__fib__result4 } = { int__content =
+  number_theory__fib__result2 }) and
+  (number_theory__fib__result5 = number_theory__fib__result3))) ->
+  ((n <  0) -> neq(fliteral1, zeroF)))))

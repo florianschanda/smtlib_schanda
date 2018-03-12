@@ -48,10 +48,6 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
@@ -59,11 +55,12 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
 
-(define-fun dynamic_invariant ((temp___expr_135 Int)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (<= 0 3)) (in_range2 temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 0 3)) (in_range2 temp___expr_158)))
 
 (declare-const us_tag Int)
 
@@ -462,19 +459,20 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const us_tag4 Int)
 
@@ -809,17 +807,17 @@
 
 (declare-const o1 Bool)
 
-(declare-const temp___227 Bool)
+(declare-const temp___256 Bool)
 
-(declare-const temp___2271 Int)
+(declare-const temp___2561 Int)
 
 (declare-const usq_ Bool)
 
 (declare-const usq_1 Int)
 
-(declare-const temp___229 Bool)
+(declare-const temp___258 Bool)
 
-(declare-const temp___2291 Int)
+(declare-const temp___2581 Int)
 
 (declare-const result Bool)
 
@@ -831,7 +829,7 @@
   (assert (in_range2 r10b))
 
 ;; H
-  (assert (= (of_int 0) o))
+  (assert (= (distinct 0 0) o))
 
 ;; H
   (assert (= tagged_discr__init__3__R12b__assume o))
@@ -840,22 +838,22 @@
   (assert (= us_tag3 tagged_discr__init__3__R12b__assume1))
 
 ;; H
-  (assert (= temp___227 o1))
+  (assert (= temp___256 o1))
 
 ;; H
-  (assert (= us_tag2 temp___2271))
+  (assert (= us_tag2 temp___2561))
 
 ;; H
-  (assert (= usq_ temp___229))
+  (assert (= usq_ temp___258))
 
 ;; H
-  (assert (= v__attr__tag temp___2291))
+  (assert (= v__attr__tag temp___2581))
 
 ;; H
   (assert (= result v__split_fields))
 
 ;; H
-  (assert (= temp___229 v__split_fields1))
+  (assert (= temp___258 v__split_fields1))
 
 ;; H
   (assert (= v__split_fields2 v__split_fields1))

@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -975,30 +975,12 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : bool
-
-logic o : t
-
-logic o1 : bool
-
-logic result : bool
-
-logic res1 : bool
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : (le(fliteral1, x) and le(x, fliteral))
-
-axiom H2 : ((o = sqrt2(x)) and (tqtisFinite(o) and (le(fliteral1, o) and
-  ((eq(x, fliteral1) -> eq(o, fliteral1)) and ((eq(x, fliteral) -> eq(o,
-  fliteral)) and (le(fliteral2, x) -> lt(fliteral1, o)))))))
-
-axiom H3 : ((le(o, fliteral) -> (o1 = true)) and ((not le(o, fliteral)) ->
-  (o1 = false)))
-
-axiom H4 : (result = res)
-
-axiom H5 : (res1 = o1)
-
  (* File "floating_point.adb", line 197, characters 0-0 *)
-goal WP_parameter_def : (res1 = true)
+goal WP_parameter_def :
+  (forall res:bool. forall o:t. forall o1:bool. forall result:bool.
+  forall res1:bool. (tqtisFinite(x) -> ((le(fliteral1, x) and le(x,
+  fliteral)) -> (((((o = sqrt2(x)) and (tqtisFinite(o) and (le(fliteral1,
+  o) and ((eq(x, fliteral1) -> eq(o, fliteral1)) and ((eq(x, fliteral) ->
+  eq(o, fliteral)) and (le(fliteral2, x) -> lt(fliteral1, o))))))) and
+  ((le(o, fliteral) and (o1 = true)) or ((not le(o, fliteral)) and
+  (o1 = false)))) and ((result = res) and (res1 = o1))) -> (res1 = true)))))

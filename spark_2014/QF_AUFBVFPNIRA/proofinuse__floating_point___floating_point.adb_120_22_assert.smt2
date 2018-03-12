@@ -48,27 +48,25 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(define-fun dynamic_invariant ((temp___expr_178 Float32)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_178)))
+(define-fun dynamic_invariant ((temp___expr_208 Float32)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_208)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 1000000)))
 
-(define-fun dynamic_invariant1 ((temp___expr_205 Int)
-  (temp___is_init_202 Bool) (temp___skip_constant_203 Bool)
-  (temp___do_toplevel_204 Bool)) Bool (=>
-                                      (or (= temp___is_init_202 true)
-                                      (<= 0 1000000)) (in_range1
-                                      temp___expr_205)))
+(define-fun dynamic_invariant1 ((temp___expr_239 Int)
+  (temp___is_init_235 Bool) (temp___skip_constant_236 Bool)
+  (temp___do_toplevel_237 Bool)
+  (temp___do_typ_inv_238 Bool)) Bool (=>
+                                     (or (= temp___is_init_235 true)
+                                     (<= 0 1000000)) (in_range1
+                                     temp___expr_239)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 

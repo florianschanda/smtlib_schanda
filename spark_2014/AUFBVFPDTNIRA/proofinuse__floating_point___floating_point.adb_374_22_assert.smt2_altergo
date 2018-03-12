@@ -932,26 +932,12 @@ logic z : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : tqtisFinite(z)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H3 : lt(fliteral1, sub(RNE, x, y))
-
-axiom H4 : lt(fliteral1, sub(RNE, y, z))
-
  (* File "floating_point.adb", line 363, characters 0-0 *)
-goal WP_parameter_def : lt(fliteral1, sub(RNE, x, z))
+goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (tqtisFinite(z) -> (lt(fliteral1, sub(RNE, x, y)) -> (lt(fliteral1,
+  sub(RNE, y, z)) -> lt(fliteral1, sub(RNE, x, z)))))))

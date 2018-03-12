@@ -1316,12 +1316,6 @@ type t__ref1 = { t__content1 : t1
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def1 :
@@ -1333,6 +1327,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1376,26 +1376,10 @@ function output_t__ref___projection(a: output_t__ref) : output_t =
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic value : t1
-
-logic value1 : t1
-
-logic value2 : t1
-
-logic value3 : t1
-
-axiom H : (le(neg1(fliteral1), fliteral1) -> in_range2(value))
-
-axiom H1 : in_range2(value1)
-
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0000999999974737875163555145263671875))
-
-axiom H2 : (le(neg1(fliteral2), value1) and le(value1, fliteral2))
-
-axiom H3 : in_range2(value2)
 
 logic fliteral3 : t1
 
@@ -1407,14 +1391,16 @@ logic fliteral4 : t1
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.001000000047497451305389404296875))
 
-axiom H4 : (le(neg1(fliteral3), value2) and le(value2, neg1(fliteral4)))
-
-axiom H5 : in_range2(value3)
-
 logic fliteral5 : t1
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 31.9990005493164062500))
 
  (* File "test.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : le(fliteral5, value3)
+goal WP_parameter_def :
+  (forall value:t1. forall value1:t1. forall value2:t1. forall value3:t1.
+  ((le(neg1(fliteral1), fliteral1) -> in_range2(value)) ->
+  (in_range2(value1) -> ((le(neg1(fliteral2), value1) and le(value1,
+  fliteral2)) -> (in_range2(value2) -> ((le(neg1(fliteral3), value2) and
+  le(value2, neg1(fliteral4))) -> (in_range2(value3) -> le(fliteral5,
+  value3))))))))

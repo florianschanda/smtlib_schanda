@@ -48,10 +48,6 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
@@ -393,39 +389,40 @@
 ;; depends_legal_2__dis_rec__z__position_axiom
   (assert (<= 0 depends_legal_2__dis_rec__z__position2))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const rec1__split_discrs Bool)
 
 (declare-const par1__split_discrs Bool)
 
-(declare-const temp___164 Bool)
+(declare-const temp___188 Bool)
 
-(declare-const temp___1641 Bool)
+(declare-const temp___1881 Bool)
 
 (declare-const usq_ Bool)
 
 (declare-const usq_1 Bool)
 
-(declare-const temp___166 Bool)
+(declare-const temp___190 Bool)
 
-(declare-const temp___1661 Bool)
+(declare-const temp___1901 Bool)
 
-(declare-const temp___161 Bool)
+(declare-const temp___185 Bool)
 
-(declare-const temp___1611 Bool)
+(declare-const temp___1851 Bool)
 
 ;; H
   (assert (= rec1__attr__constrained false))
@@ -437,10 +434,10 @@
   (assert (= par1__split_discrs r4b))
 
 ;; H
-  (assert (= (of_int 1) temp___164))
+  (assert (= (distinct 1 0) temp___188))
 
 ;; H
-  (assert (= true temp___1641))
+  (assert (= true temp___1881))
 
 ;; H
   (assert (= par1__attr__constrained true))
@@ -448,6 +445,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "depends_legal_2.adb", line 14, characters 0-0
-  (not (= temp___164 par1__split_discrs)))
+  (not (= temp___188 par1__split_discrs)))
 (check-sat)
 (exit)

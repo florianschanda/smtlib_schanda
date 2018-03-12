@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1086,65 +1082,16 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const x t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 t)
-
-(declare-const o4 t)
-
-(declare-const o5 t)
-
-(declare-const o6 t)
-
-(declare-const o7 t)
-
-(declare-const o8 t)
-
-(declare-const o9 t)
-
-(declare-const o10 t)
-
-(declare-const o11 t)
-
-(declare-const o12 t)
-
-(declare-const o13 t)
-
-(declare-const o14 t)
-
-(declare-const o15 t)
-
-(declare-const o16 t)
-
-(declare-const o17 t)
-
-(declare-const o18 t)
-
-(declare-const o19 t)
-
-(declare-const o20 t)
-
-(declare-const o21 t)
-
-(declare-const o22 Bool)
-
-;; H
-  (assert (tqtisFinite x))
 
 (declare-const fliteral2 t)
 
@@ -1156,13 +1103,16 @@
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 60.0)))
 
-;; H
-  (assert (and (le fliteral2 x) (le x fliteral3)))
-
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
+
+;; H
+  (assert (tqtisFinite x))
+
+;; H
+  (assert (and (le fliteral2 x) (le x fliteral3)))
 
 (assert
 ;; WP_parameter_def

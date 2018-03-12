@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1088,12 +1084,12 @@
 (declare-datatypes () ((t_acc__ref (mk_t_acc__ref (t_acc__content t_acc)))))
 (define-fun t_acc__ref___projection ((a t_acc__ref)) t_acc (t_acc__content a))
 
-(define-fun dynamic_invariant ((temp___expr_146 t) (temp___is_init_143 Bool)
-  (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range2
-                                      temp___expr_146)))
+(define-fun dynamic_invariant ((temp___expr_170 t) (temp___is_init_166 Bool)
+  (temp___skip_constant_167 Bool) (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range2
+                                     temp___expr_170)))
 
 (declare-sort t_acc_lifted 0)
 
@@ -1119,18 +1115,30 @@
 (define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted
   (t_acc_lifted__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_158 t) (temp___is_init_155 Bool)
-  (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range3
-                                      temp___expr_158)))
+(define-fun dynamic_invariant1 ((temp___expr_184 t) (temp___is_init_180 Bool)
+  (temp___skip_constant_181 Bool) (temp___do_toplevel_182 Bool)
+  (temp___do_typ_inv_183 Bool)) Bool (=>
+                                     (or (= temp___is_init_180 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range3
+                                     temp___expr_184)))
 
 (declare-const x t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 529395592033937711917701562924776226282119750976562500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
 
 (declare-const res t)
 
@@ -1174,23 +1182,11 @@
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (in_range3 res)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
 ;; H
   (assert (=> (eq x fliteral2) (= result res)))
 
 ;; H
   (assert (=> (eq x fliteral2) (= res1 fliteral2)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 529395592033937711917701562924776226282119750976562500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
 
 ;; H
   (assert

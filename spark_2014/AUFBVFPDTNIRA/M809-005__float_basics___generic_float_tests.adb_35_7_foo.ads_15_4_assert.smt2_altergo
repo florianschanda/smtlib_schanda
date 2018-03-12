@@ -993,9 +993,6 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
  (* File "generic_float_tests.adb", line 14, characters 0-0 *)
-goal WP_parameter_def : (magic(min(a, b)) = magic(min(b, a)))
+goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) -> (magic(min(a,
+  b)) = magic(min(b, a)))))

@@ -1090,22 +1090,12 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : t
-
-logic result : t
-
-logic x1 : t
-
-axiom H : (result = x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H1 : (x1 = neg(fliteral1))
-
-axiom H2 : tqtisFinite(x1)
-
  (* File "compute.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (x1 = fliteral1))
+goal WP_parameter_def :
+  (forall x:t. forall result:t. forall x1:t. (((result = x) and
+  (x1 = neg(fliteral1))) -> (tqtisFinite(x1) -> (not (x1 = fliteral1)))))

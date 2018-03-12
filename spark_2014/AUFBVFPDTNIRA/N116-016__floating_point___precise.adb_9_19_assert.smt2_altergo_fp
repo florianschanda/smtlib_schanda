@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1092,79 +1092,20 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic x : t
-
-logic y : t
-
-logic z : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic x1 : t
-
-logic result1 : t
-
-logic y1 : t
-
-logic result2 : t
-
-logic z1 : t
-
-logic result3 : t
-
-logic z2 : t
-
-logic result4 : t
-
-logic z3 : t
-
-logic result5 : t
-
-logic z4 : t
-
-axiom H : (result = x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
-
-axiom H1 : (x1 = fliteral1)
-
-axiom H2 : tqtisFinite(x1)
-
-axiom H3 : (result1 = y)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.4000000059604644775390625))
 
-axiom H4 : (y1 = fliteral2)
-
-axiom H5 : tqtisFinite(y1)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
-
-axiom H6 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(z))
-
-axiom H7 : ((o = add(NearestTiesToEven, x1, y1)) and
-  tqtisFinite(add(NearestTiesToEven, x1, y1)))
-
-axiom H8 : (result2 = z)
-
-axiom H9 : (z1 = o)
 
 logic fliteral4 : t
 
@@ -1176,19 +1117,22 @@ logic fliteral5 : t
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 10.40001010894775390625))
 
-axiom H10 : (le(fliteral4, z1) and le(z1, fliteral5))
-
-axiom H11 : ((o1 = sub(NearestTiesToEven, x1, y1)) and
-  tqtisFinite(sub(NearestTiesToEven, x1, y1)))
-
-axiom H12 : (result3 = z1)
-
-axiom H13 : (z2 = o1)
-
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 9.59998989105224609375))
 
  (* File "precise.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : le(fliteral6, z2)
+goal WP_parameter_def :
+  (forall x:t. forall y:t. forall z:t. forall o:t. forall o1:t.
+  forall result:t. forall x1:t. forall result1:t. forall y1:t.
+  forall result2:t. forall z1:t. forall result3:t. forall z2:t.
+  (((result = x) and (x1 = fliteral1)) -> (tqtisFinite(x1) ->
+  (((result1 = y) and (y1 = fliteral2)) -> (tqtisFinite(y1) ->
+  ((le(neg(fliteral3), fliteral3) -> tqtisFinite(z)) ->
+  ((((o = add(NearestTiesToEven, x1, y1)) and
+  tqtisFinite(add(NearestTiesToEven, x1, y1))) and ((result2 = z) and
+  (z1 = o))) -> ((le(fliteral4, z1) and le(z1, fliteral5)) ->
+  ((((o1 = sub(NearestTiesToEven, x1, y1)) and
+  tqtisFinite(sub(NearestTiesToEven, x1, y1))) and ((result3 = z1) and
+  (z2 = o1))) -> le(fliteral6, z2))))))))))

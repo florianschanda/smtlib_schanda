@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const x1 t)
 
@@ -1111,6 +1111,9 @@
 
 (declare-const step_function__min__result8 t)
 
+(define-fun step_function__min__result9 () t__ref (mk_t__ref
+                                                  step_function__min__result5))
+
 (declare-const result2 t)
 
 ;; H
@@ -1121,27 +1124,44 @@
 
 ;; H
   (assert
-  (and
-  (and
-  (= (mk_t__ref step_function__min__result5) (mk_t__ref
-                                             step_function__min__result3))
-  (= step_function__min__result6 step_function__min__result4))
-  (ite (le x1 x2)
-  (and
-  (and (= step_function__min__result1 step_function__min__result3)
-  (= step_function__min__result4 step_function__min__result1))
-  (and (= result step_function__min__result)
-  (= step_function__min__result1 x1)))
-  (and
-  (and (= step_function__min__result2 step_function__min__result3)
-  (= step_function__min__result4 step_function__min__result2))
-  (and (= result1 step_function__min__result)
-  (= step_function__min__result2 x2))))))
+  (= step_function__min__result9 (mk_t__ref step_function__min__result3)))
+
+;; H
+  (assert (= step_function__min__result6 step_function__min__result4))
 
 ;; H
   (assert
-  (= (mk_t__ref step_function__min__result7) (mk_t__ref
-                                             step_function__min__result5)))
+  (=> (le x1 x2) (= step_function__min__result1 step_function__min__result3)))
+
+;; H
+  (assert
+  (=> (le x1 x2) (= step_function__min__result4 step_function__min__result1)))
+
+;; H
+  (assert (=> (le x1 x2) (= result step_function__min__result)))
+
+;; H
+  (assert (=> (le x1 x2) (= step_function__min__result1 x1)))
+
+;; H
+  (assert
+  (=> (not (le x1 x2))
+  (= step_function__min__result2 step_function__min__result3)))
+
+;; H
+  (assert
+  (=> (not (le x1 x2))
+  (= step_function__min__result4 step_function__min__result2)))
+
+;; H
+  (assert (=> (not (le x1 x2)) (= result1 step_function__min__result)))
+
+;; H
+  (assert (=> (not (le x1 x2)) (= step_function__min__result2 x2)))
+
+;; H
+  (assert
+  (= (mk_t__ref step_function__min__result7) step_function__min__result9))
 
 ;; H
   (assert (= step_function__min__result8 step_function__min__result6))

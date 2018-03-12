@@ -1512,69 +1512,13 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic n : int
-
-logic c : int
-
-logic v : volt
-
-logic m : money
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : volt
-
-logic o3 : volt
-
-logic o4 : money
-
-logic o5 : money
-
-logic o6 : t
-
-logic result : int
-
-logic n1 : int
-
-logic result1 : int
-
-logic c1 : int
-
-logic result2 : volt
-
-logic v1 : volt
-
-logic result3 : money
-
-logic m1 : money
-
-axiom H : ((o = ident(5)) and in_range1(o))
-
-axiom H1 : (result = n)
-
-axiom H2 : (n1 = o)
-
-axiom H3 : in_range1(n1)
-
-axiom H4 : ((o1 = ident__2(0)) and in_range2(o1))
-
-axiom H5 : (result1 = c)
-
-axiom H6 : (c1 = o1)
-
-axiom H7 : in_range2(c1)
-
-axiom H8 : (to_fixed(o2) = 5)
-
-axiom H9 : (o3 = ident__3(o2))
-
-axiom H10 : (result2 = v)
-
-axiom H11 : (v1 = o3)
-
-axiom H12 : (to_fixed1(o4) = 120)
-
  (* File "p.adb", line 40, characters 0-0 *)
-goal WP_parameter_def : (10 <= to_fixed1(o4))
+goal WP_parameter_def :
+  (forall n:int. forall c:int. forall v:volt. forall o:int. forall o1:int.
+  forall o2:volt. forall o3:volt. forall o4:money. forall result:int.
+  forall n1:int. forall result1:int. forall c1:int. forall result2:volt.
+  forall v1:volt. ((((o = ident(5)) and in_range1(o)) and ((result = n) and
+  (n1 = o))) -> (in_range1(n1) -> ((((o1 = ident__2(0)) and
+  in_range2(o1)) and ((result1 = c) and (c1 = o1))) -> (in_range2(c1) ->
+  ((((to_fixed(o2) = 5) and (o3 = ident__3(o2))) and ((result2 = v) and
+  (v1 = o3))) -> ((to_fixed1(o4) = 120) -> (10 <= to_fixed1(o4)))))))))

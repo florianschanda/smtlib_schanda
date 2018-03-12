@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -962,36 +962,12 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic t1 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic t2 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : tqtisFinite(z)
-
-axiom H3 : le(x, z)
-
-axiom H4 : le(z, y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
 
-axiom H5 : le(neg(fliteral1), x)
-
-axiom H6 : le(x, fliteral1)
-
  (* File "testfloat.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE, x, fliteral))
+goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (tqtisFinite(z) -> ((le(x, z) and le(z, y)) -> ((le(neg(fliteral1), x) and
+  le(x, fliteral1)) -> tqtisFinite(add(RNE, x, fliteral)))))))

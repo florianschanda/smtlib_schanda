@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -117,12 +113,13 @@
 (declare-datatypes () ((t_acc__ref (mk_t_acc__ref (t_acc__content t_acc)))))
 (define-fun t_acc__ref___projection ((a t_acc__ref)) t_acc (t_acc__content a))
 
-(define-fun dynamic_invariant ((temp___expr_1324 Float32)
-  (temp___is_init_1321 Bool) (temp___skip_constant_1322 Bool)
-  (temp___do_toplevel_1323 Bool)) Bool (=>
-                                       (or (= temp___is_init_1321 true)
-                                       (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
-                                       (in_range1 temp___expr_1324)))
+(define-fun dynamic_invariant ((temp___expr_1543 Float32)
+  (temp___is_init_1539 Bool) (temp___skip_constant_1540 Bool)
+  (temp___do_toplevel_1541 Bool)
+  (temp___do_typ_inv_1542 Bool)) Bool (=>
+                                      (or (= temp___is_init_1539 true)
+                                      (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
+                                      (in_range1 temp___expr_1543)))
 
 (declare-const x Float32)
 
@@ -146,13 +143,15 @@
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
   (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))))
 
+(define-fun temp___1570 () Float32 x)
+
 (assert
 ;; WP_parameter_def
  ;; File "types.ads", line 65, characters 0-0
   (not
   (or
-  (or (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.leq x (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))))
-  (fp.leq (fp #b0 #b00110101 #b00000000000000000000000) x))))
+  (or (fp.eq temp___1570 (fp #b0 #b00000000 #b00000000000000000000000))
+  (fp.leq temp___1570 (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))))
+  (fp.leq (fp #b0 #b00110101 #b00000000000000000000000) temp___1570))))
 (check-sat)
 (exit)

@@ -1081,12 +1081,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_141 t) (temp___is_init_138 Bool)
-  (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 t) (temp___is_init_161 Bool)
+  (temp___skip_constant_162 Bool) (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_165)))
 
 ;; olt__post_axiom
   (assert true)
@@ -1304,19 +1304,37 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_147 t) (temp___is_init_144 Bool)
-  (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true) (le
-                                      (neg fliteral3) fliteral3)) (in_range1
-                                      temp___expr_147)))
+(define-fun dynamic_invariant1 ((temp___expr_172 t) (temp___is_init_168 Bool)
+  (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true) (le
+                                     (neg fliteral3) fliteral3)) (in_range1
+                                     temp___expr_172)))
 
-(define-fun dynamic_invariant2 ((temp___expr_153 t) (temp___is_init_150 Bool)
-  (temp___skip_constant_151 Bool)
-  (temp___do_toplevel_152 Bool)) Bool (=>
-                                      (or (= temp___is_init_150 true) (le
-                                      (neg fliteral4) fliteral5)) (in_range2
-                                      temp___expr_153)))
+(define-fun dynamic_invariant2 ((temp___expr_179 t) (temp___is_init_175 Bool)
+  (temp___skip_constant_176 Bool) (temp___do_toplevel_177 Bool)
+  (temp___do_typ_inv_178 Bool)) Bool (=>
+                                     (or (= temp___is_init_175 true) (le
+                                     (neg fliteral4) fliteral5)) (in_range2
+                                     temp___expr_179)))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) (/ 63674445.0 10.0))))
+
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral7)
+  (= (tqtreal fliteral7) (/ 1745329238474369049072265625.0 100000000000000000000000000000.0))))
+
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 20003916.0)))
 
 (declare-const lat_long__delta_lat_in_meters__result t)
 
@@ -1345,19 +1363,6 @@
 ;; H
   (assert (= result lat_long__delta_lat_in_meters__result))
 
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) (/ 63674445.0 10.0))))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral7)
-  (= (tqtreal fliteral7) (/ 1745329238474369049072265625.0 100000000000000000000000000000.0))))
-
 ;; H
   (assert
   (= lat_long__delta_lat_in_meters__result1 (mul RNE1
@@ -1382,11 +1387,6 @@
 
 ;; H
   (assert (= result1 lat_long__delta_lat_in_meters__result4))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) 20003916.0)))
 
 (assert
 ;; WP_parameter_def

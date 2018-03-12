@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -285,8 +281,8 @@
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 us_rep)))))
 (define-fun t__ref___projection ((a t__ref1)) us_rep (t__content1 a))
 
-(define-fun default_initial_assumption ((temp___expr_136 us_rep)
-  (temp___skip_top_level_137 Bool)) Bool (= (attr__tag temp___expr_136)
+(define-fun default_initial_assumption ((temp___expr_159 us_rep)
+  (temp___skip_top_level_160 Bool)) Bool (= (attr__tag temp___expr_159)
   us_tag))
 
 (declare-fun is_zero (us_rep) Bool)
@@ -644,19 +640,19 @@
 ;; classwide__t__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int2 (is_zero v)) (to_int2 (is_zero1 us_tag v))) :pattern (
+  (! (= (ite (is_zero v) 1 0) (ite (is_zero1 us_tag v) 1 0)) :pattern (
   (is_zero1 us_tag v)) )))
 
 ;; classwide__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero1 us_tag1 v))) :pattern (
+  (! (= (ite (is_zero__2 v) 1 0) (ite (is_zero1 us_tag1 v) 1 0)) :pattern (
   (is_zero1 us_tag1 v)) )))
 
 ;; classwide__u2__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int2 (is_zero__3 (of_base v))) (to_int2 (is_zero1 us_tag2 v))) :pattern (
+  (! (= (ite (is_zero__3 (of_base v)) 1 0) (ite (is_zero1 us_tag2 v) 1 0)) :pattern (
   (is_zero1 us_tag2 v)) )))
 
 ;; is_zero__def_axiom
@@ -673,22 +669,23 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
-(define-fun default_initial_assumption1 ((temp___expr_165 us_rep)
-  (temp___skip_top_level_166 Bool)) Bool (= (attr__tag temp___expr_165)
+(define-fun default_initial_assumption1 ((temp___expr_192 us_rep)
+  (temp___skip_top_level_193 Bool)) Bool (= (attr__tag temp___expr_192)
   us_tag1))
 
 ;; is_zero__2__post_axiom
@@ -700,7 +697,7 @@
 ;; classwide__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero__21 us_tag1 v))) :pattern (
+  (! (= (ite (is_zero__2 v) 1 0) (ite (is_zero__21 us_tag1 v) 1 0)) :pattern (
   (is_zero__21 us_tag1 v)) )))
 
 ;; is_zero__2__def_axiom
@@ -713,8 +710,8 @@
      (fp.eq (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_zero__2 v)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_184 us_rep1)
-  (temp___skip_top_level_185 Bool)) Bool (= (attr__tag1 temp___expr_184)
+(define-fun default_initial_assumption2 ((temp___expr_214 us_rep1)
+  (temp___skip_top_level_215 Bool)) Bool (= (attr__tag1 temp___expr_214)
   us_tag2))
 
 ;; is_zero__3__post_axiom
@@ -726,7 +723,7 @@
 ;; classwide__u2__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (= (to_int2 (is_zero__3 v)) (to_int2 (is_zero__31 us_tag2 v))) :pattern (
+  (! (= (ite (is_zero__3 v) 1 0) (ite (is_zero__31 us_tag2 v) 1 0)) :pattern (
   (is_zero__31 us_tag2 v)) )))
 
 ;; is_zero__3__def_axiom
@@ -759,15 +756,15 @@
 
 (declare-const o4 us_private)
 
-(declare-const temp___202 Bool)
+(declare-const temp___228 Bool)
 
-(declare-const temp___2021 integer)
+(declare-const temp___2281 integer)
 
-(declare-const temp___2022 float)
+(declare-const temp___2282 float)
 
-(declare-const temp___2023 us_private)
+(declare-const temp___2283 us_private)
 
-(declare-const temp___2024 Int)
+(declare-const temp___2284 Int)
 
 (declare-const o5 float)
 
@@ -779,15 +776,15 @@
 
 (declare-const o9 us_private)
 
-(declare-const temp___204 Bool)
+(declare-const temp___230 Bool)
 
-(declare-const temp___2041 integer)
+(declare-const temp___2301 integer)
 
-(declare-const temp___2042 float)
+(declare-const temp___2302 float)
 
-(declare-const temp___2043 us_private)
+(declare-const temp___2303 us_private)
 
-(declare-const temp___2044 Int)
+(declare-const temp___2304 Int)
 
 (declare-const result Bool)
 
@@ -866,7 +863,7 @@
   (assert (= result3 v__split_fields3))
 
 ;; H
-  (assert (= (of_int1 0) v__split_fields4))
+  (assert (= (distinct 0 0) v__split_fields4))
 
 ;; H
   (assert (= v__split_fields1 v__split_fields5))
@@ -893,19 +890,19 @@
   (assert (= v__split_fields7 o4))
 
 ;; H
-  (assert (= temp___202 o1))
+  (assert (= temp___228 o1))
 
 ;; H
-  (assert (= temp___2021 o2))
+  (assert (= temp___2281 o2))
 
 ;; H
-  (assert (= temp___2022 o3))
+  (assert (= temp___2282 o3))
 
 ;; H
-  (assert (= temp___2023 o4))
+  (assert (= temp___2283 o4))
 
 ;; H
-  (assert (= v__attr__tag temp___2024))
+  (assert (= v__attr__tag temp___2284))
 
 ;; H
   (assert (= result4 v__split_fields4))
@@ -920,16 +917,16 @@
   (assert (= result7 v__split_fields7))
 
 ;; H
-  (assert (= temp___202 v__split_fields8))
+  (assert (= temp___228 v__split_fields8))
 
 ;; H
-  (assert (= temp___2021 v__split_fields9))
+  (assert (= temp___2281 v__split_fields9))
 
 ;; H
-  (assert (= temp___2022 v__split_fields10))
+  (assert (= temp___2282 v__split_fields10))
 
 ;; H
-  (assert (= temp___2023 v__split_fields11))
+  (assert (= temp___2283 v__split_fields11))
 
 ;; H
   (assert (= (to_rep1 o5) (fp #b0 #b00000000 #b00000000000000000000000)))
@@ -947,19 +944,19 @@
   (assert (= v__split_fields11 o9))
 
 ;; H
-  (assert (= temp___204 o6))
+  (assert (= temp___230 o6))
 
 ;; H
-  (assert (= temp___2041 o7))
+  (assert (= temp___2301 o7))
 
 ;; H
-  (assert (= temp___2042 o8))
+  (assert (= temp___2302 o8))
 
 ;; H
-  (assert (= temp___2043 o9))
+  (assert (= temp___2303 o9))
 
 ;; H
-  (assert (= v__attr__tag temp___2044))
+  (assert (= v__attr__tag temp___2304))
 
 ;; H
   (assert (= result8 v__split_fields8))
@@ -974,16 +971,16 @@
   (assert (= result11 v__split_fields11))
 
 ;; H
-  (assert (= temp___204 v__split_fields12))
+  (assert (= temp___230 v__split_fields12))
 
 ;; H
-  (assert (= temp___2041 v__split_fields13))
+  (assert (= temp___2301 v__split_fields13))
 
 ;; H
-  (assert (= temp___2042 v__split_fields14))
+  (assert (= temp___2302 v__split_fields14))
 
 ;; H
-  (assert (= temp___2043 v__split_fields15))
+  (assert (= temp___2303 v__split_fields15))
 
 ;; H
   (assert (= v__split_fields16 v__split_fields12))

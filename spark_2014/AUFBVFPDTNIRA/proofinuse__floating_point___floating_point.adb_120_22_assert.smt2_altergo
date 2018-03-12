@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1034,18 +1034,6 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic state : t
-
-logic o : t
-
-logic result : t
-
-logic state1 : t
-
-axiom H : tqtisFinite(state)
-
-axiom H1 : in_range2(x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1056,15 +1044,11 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 10.0))
 
-axiom H2 : ((x <  1000000) and ((state = fliteral1) or (le(fliteral2,
-  state) and le(state, mul(RNE, of_int(RNE, x), fliteral2)))))
-
-axiom H3 : ((o = add(RNE, state, fliteral2)) and tqtisFinite(add(RNE, state,
-  fliteral2)))
-
-axiom H4 : (result = state)
-
-axiom H5 : (state1 = o)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : le(fliteral2, state1)
+goal WP_parameter_def :
+  (forall state:t. forall o:t. forall result:t. forall state1:t.
+  (tqtisFinite(state) -> (in_range2(x) -> (((x <  1000000) and
+  ((state = fliteral1) or (le(fliteral2, state) and le(state, mul(RNE,
+  of_int(RNE, x), fliteral2))))) -> ((((o = add(RNE, state, fliteral2)) and
+  tqtisFinite(add(RNE, state, fliteral2))) and ((result = state) and
+  (state1 = o))) -> le(fliteral2, state1))))))

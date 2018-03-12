@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -280,12 +276,12 @@
 (define-fun mod2 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-fun prop__ (Int) Bool)
 
@@ -459,88 +455,86 @@
 (declare-datatypes () ((r__ref (mk_r__ref (r__content us_rep)))))
 (define-fun r__ref___projection ((a r__ref)) us_rep (r__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_155 us_rep)
-  (temp___is_init_152 Bool) (temp___skip_constant_153 Bool)
-  (temp___do_toplevel_154 Bool)) Bool (=> (= temp___do_toplevel_154 true)
-                                      (=> (= temp___is_init_152 true)
-                                      (and
-                                      (= (prop__
-                                         (to_rep1
-                                         (rec__pred__r__d
-                                         (us_split_discrs1 temp___expr_155)))) true)
-                                      (ite (= (to_rep1
-                                              (rec__pred__r__d
-                                              (us_split_discrs1
-                                              temp___expr_155))) 1)
-                                      (not
-                                      (= (to_rep
-                                         (rec__pred__r__c1
-                                         (us_split_fields1 temp___expr_155))) 0))
-                                      (ite (= (to_rep1
-                                              (rec__pred__r__d
-                                              (us_split_discrs1
-                                              temp___expr_155))) 2)
-                                      (not (fp.eq (to_rep2
-                                                  (rec__pred__r__c2
-                                                  (us_split_fields1
-                                                  temp___expr_155))) (fp #b0 #b00000000 #b00000000000000000000000)))
-                                      (not
-                                      (= (rec__pred__r__c3
-                                         (us_split_fields1 temp___expr_155))
-                                      (of_int1 0)))))))))
+(define-fun dynamic_invariant1 ((temp___expr_180 us_rep)
+  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
+  (temp___do_toplevel_178 Bool)
+  (temp___do_typ_inv_179 Bool)) Bool (=> (= temp___do_toplevel_178 true)
+                                     (=> (= temp___is_init_176 true)
+                                     (and
+                                     (= (prop__
+                                        (to_rep1
+                                        (rec__pred__r__d
+                                        (us_split_discrs1 temp___expr_180)))) true)
+                                     (ite (= (to_rep1
+                                             (rec__pred__r__d
+                                             (us_split_discrs1
+                                             temp___expr_180))) 1)
+                                     (not
+                                     (= (to_rep
+                                        (rec__pred__r__c1
+                                        (us_split_fields1 temp___expr_180))) 0))
+                                     (ite (= (to_rep1
+                                             (rec__pred__r__d
+                                             (us_split_discrs1
+                                             temp___expr_180))) 2)
+                                     (not (fp.eq (to_rep2
+                                                 (rec__pred__r__c2
+                                                 (us_split_fields1
+                                                 temp___expr_180))) (fp #b0 #b00000000 #b00000000000000000000000)))
+                                     (not
+                                     (= (rec__pred__r__c3
+                                        (us_split_fields1 temp___expr_180)) (distinct 0 0)))))))))
 
-(define-fun dynamic_predicate ((temp___158 us_rep)) Bool (and
+(define-fun dynamic_predicate ((temp___183 us_rep)) Bool (and
                                                          (= (prop__
                                                             (to_rep1
                                                             (rec__pred__r__d
                                                             (us_split_discrs1
-                                                            temp___158)))) true)
+                                                            temp___183)))) true)
                                                          (ite (= (to_rep1
                                                                  (rec__pred__r__d
                                                                  (us_split_discrs1
-                                                                 temp___158))) 1)
+                                                                 temp___183))) 1)
                                                          (not
                                                          (= (to_rep
                                                             (rec__pred__r__c1
                                                             (us_split_fields1
-                                                            temp___158))) 0))
+                                                            temp___183))) 0))
                                                          (ite (= (to_rep1
                                                                  (rec__pred__r__d
                                                                  (us_split_discrs1
-                                                                 temp___158))) 2)
+                                                                 temp___183))) 2)
                                                          (not (fp.eq
                                                          (to_rep2
                                                          (rec__pred__r__c2
                                                          (us_split_fields1
-                                                         temp___158))) (fp #b0 #b00000000 #b00000000000000000000000)))
+                                                         temp___183))) (fp #b0 #b00000000 #b00000000000000000000000)))
                                                          (not
                                                          (= (rec__pred__r__c3
                                                             (us_split_fields1
-                                                            temp___158))
-                                                         (of_int1 0)))))))
+                                                            temp___183)) (distinct 0 0)))))))
 
 (declare-const i13b us_rep)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant2 ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range2
-                                     temp___expr_39)))
+(define-fun dynamic_invariant2 ((temp___expr_46 Int) (temp___is_init_42 Bool)
+  (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
+  (temp___do_typ_inv_45 Bool)) Bool (=>
+                                    (or (= temp___is_init_42 true)
+                                    (<= 1 2147483647)) (in_range2
+                                    temp___expr_46)))
 
-(define-fun dynamic_invariant3 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
-
-(declare-const result Bool)
+(define-fun dynamic_invariant3 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 ;; H
-  (assert (dynamic_invariant1 i13b true false false))
+  (assert (dynamic_invariant1 i13b true false false true))
 
 (assert
 ;; WP_parameter_def

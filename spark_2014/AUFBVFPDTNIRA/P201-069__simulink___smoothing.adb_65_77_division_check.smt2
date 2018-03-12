@@ -102,12 +102,13 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (declare-const new_value Float64)
 
@@ -147,18 +148,6 @@
 
 (declare-const o2 Float64)
 
-(declare-const o3 Float64)
-
-(declare-const o4 Float64)
-
-(declare-const o5 Float64)
-
-(declare-const o6 Float64)
-
-(declare-const o7 Float64)
-
-(declare-const o8 Float64)
-
 (declare-const result Float64)
 
 (declare-const abs_delta_out11 Float64)
@@ -166,14 +155,6 @@
 (declare-const result1 Bool)
 
 (declare-const compare_to_zero_out11 Bool)
-
-(declare-const result2 Float64)
-
-(declare-const smoother_value_out11 Float64)
-
-(declare-const result3 Float64)
-
-(declare-const abs_new_delta_out11 Float64)
 
 ;; H
   (assert (fp.isFinite64 new_value))

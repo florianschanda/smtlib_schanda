@@ -1145,10 +1145,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t)))))
-(define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1232,12 +1228,12 @@
   (forall ((x (_ BitVec 16)))
   (! (= (to_rep1 (of_rep1 x)) x) :pattern ((to_rep1 (of_rep1 x))) )))
 
-(define-fun to_int4 ((x unsigned_16)) Int (bv2nat (to_rep1 x)))
+(define-fun to_int3 ((x unsigned_16)) Int (bv2nat (to_rep1 x)))
 
 ;; range_int_axiom
   (assert
   (forall ((x unsigned_16)) (! (uint_in_range
-  (to_int4 x)) :pattern ((to_int4 x)) )))
+  (to_int3 x)) :pattern ((to_int3 x)) )))
 
 (declare-datatypes ()
 ((us_split_fields
@@ -1410,9 +1406,8 @@
 
 (declare-sort log_index 0)
 
-(define-fun in_range2 ((x (_ BitVec 16))) Bool (and
-                                               (bvule ((_ int2bv 16) 0) x)
-                                               (bvule x ((_ int2bv 16) 599))))
+(define-fun in_range2 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
+                                               (bvule x #x0257)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 599)))
 
@@ -1431,12 +1426,13 @@
 (define-fun log_index__ref___projection ((a log_index__ref)) log_index
   (log_index__content a))
 
-(define-fun dynamic_invariant ((temp___expr_213 (_ BitVec 16))
-  (temp___is_init_210 Bool) (temp___skip_constant_211 Bool)
-  (temp___do_toplevel_212 Bool)) Bool (=>
-                                      (or (= temp___is_init_210 true)
-                                      (bvule ((_ int2bv 16) 0) ((_ int2bv 16) 599)))
-                                      (in_range2 temp___expr_213)))
+(define-fun dynamic_invariant ((temp___expr_248 (_ BitVec 16))
+  (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
+  (temp___do_toplevel_246 Bool)
+  (temp___do_typ_inv_247 Bool)) Bool (=>
+                                     (or (= temp___is_init_244 true)
+                                     (bvule #x0000 #x0257)) (in_range2
+                                     temp___expr_248)))
 
 (declare-fun to_rep2 (log_index) (_ BitVec 16))
 
@@ -1455,16 +1451,16 @@
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 16)))
-  (! (let ((y (bvurem x ((_ int2bv 16) 600))))
+  (! (let ((y (bvurem x #x0258)))
      (=> (in_range2 y) (= (to_rep2 (of_rep2 x)) y))) :pattern ((to_rep2
                                                                (of_rep2 x))) )))
 
-(define-fun to_int5 ((x log_index)) Int (bv2nat (to_rep2 x)))
+(define-fun to_int4 ((x log_index)) Int (bv2nat (to_rep2 x)))
 
 ;; range_int_axiom
   (assert
   (forall ((x log_index)) (! (in_range_int
-  (to_int5 x)) :pattern ((to_int5 x)) )))
+  (to_int4 x)) :pattern ((to_int4 x)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array (_ BitVec 16) us_rep))))))
@@ -1486,6 +1482,38 @@
   (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
+(define-fun bool_eq3 ((a (Array (_ BitVec 16) us_rep))
+  (a__first (_ BitVec 16)) (a__last (_ BitVec 16))
+  (b (Array (_ BitVec 16) us_rep)) (b__first (_ BitVec 16))
+  (b__last (_ BitVec 16))) Bool (ite (and
+                                     (ite (bvule a__first a__last)
+                                     (and (bvule b__first b__last)
+                                     (= (bvsub a__last a__first) (bvsub b__last b__first)))
+                                     (bvugt b__first b__last))
+                                     (forall ((temp___idx_154 (_ BitVec 16)))
+                                     (=>
+                                     (and (bvule a__first temp___idx_154)
+                                     (bvule temp___idx_154 a__last))
+                                     (= (bool_eq2 (select a temp___idx_154)
+                                        (select b (bvadd (bvsub b__first a__first) temp___idx_154))) true))))
+                                true false))
+
+;; bool_eq_rev
+  (assert
+  (forall ((a (Array (_ BitVec 16) us_rep)) (b (Array (_ BitVec 16) us_rep)))
+  (forall ((a__first (_ BitVec 16)) (a__last (_ BitVec 16))
+  (b__first (_ BitVec 16)) (b__last (_ BitVec 16)))
+  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
+  (and
+  (ite (bvule a__first a__last)
+  (and (bvule b__first b__last)
+  (= (bvsub a__last a__first) (bvsub b__last b__first)))
+  (bvugt b__first b__last))
+  (forall ((temp___idx_154 (_ BitVec 16)))
+  (=> (and (bvule a__first temp___idx_154) (bvule temp___idx_154 a__last))
+  (= (bool_eq2 (select a temp___idx_154)
+     (select b (bvadd (bvsub b__first a__first) temp___idx_154))) true))))))))
+
 (declare-fun concat1 ((Array (_ BitVec 16) us_rep) (_ BitVec 16)
   (_ BitVec 16) (Array (_ BitVec 16) us_rep) (_ BitVec 16)
   (_ BitVec 16)) (Array (_ BitVec 16) us_rep))
@@ -1503,6 +1531,51 @@
      (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x0001)))))) :pattern ((select
   (concat1 a a_first a_last b b_first b_last) i)) )))))
 
+(declare-fun concat_singleton_left (us_rep (_ BitVec 16)
+  (Array (_ BitVec 16) us_rep) (_ BitVec 16)
+  (_ BitVec 16)) (Array (_ BitVec 16) us_rep))
+
+;; concat_singleton_left_def
+  (assert
+  (forall ((a us_rep))
+  (forall ((b (Array (_ BitVec 16) us_rep)))
+  (forall ((a_first (_ BitVec 16)) (b_first (_ BitVec 16))
+  (b_last (_ BitVec 16)))
+  (! (and
+     (= (select (concat_singleton_left a a_first b b_first b_last) a_first) a)
+     (forall ((i (_ BitVec 16)))
+     (! (=> (bvugt i a_first)
+        (= (select (concat_singleton_left a a_first b b_first b_last) i) (select b (bvadd (bvsub i a_first) (bvsub b_first #x0001))))) :pattern ((select
+     (concat_singleton_left a a_first b b_first b_last) i)) ))) :pattern (
+  (concat_singleton_left a a_first b b_first b_last)) )))))
+
+(declare-fun concat_singleton_right ((Array (_ BitVec 16) us_rep)
+  (_ BitVec 16) (_ BitVec 16) us_rep) (Array (_ BitVec 16) us_rep))
+
+;; concat_singleton_right_def
+  (assert
+  (forall ((a (Array (_ BitVec 16) us_rep)))
+  (forall ((b us_rep))
+  (forall ((a_first (_ BitVec 16)) (a_last (_ BitVec 16)))
+  (! (and
+     (= (select (concat_singleton_right a a_first a_last b) (bvadd a_last #x0001)) b)
+     (forall ((i (_ BitVec 16)))
+     (! (=> (and (bvule a_first i) (bvule i a_last))
+        (= (select (concat_singleton_right a a_first a_last b) i) (select a i))) :pattern ((select
+     (concat_singleton_right a a_first a_last b) i)) :pattern ((select a i)) ))) :pattern (
+  (concat_singleton_right a a_first a_last b)) )))))
+
+(declare-fun concat_singletons (us_rep (_ BitVec 16)
+  us_rep) (Array (_ BitVec 16) us_rep))
+
+;; concat_singletons_def
+  (assert
+  (forall ((a us_rep) (b us_rep))
+  (forall ((a_first (_ BitVec 16)))
+  (! (and (= (select (concat_singletons a a_first b) a_first) a)
+     (= (select (concat_singletons a a_first b) (bvadd a_first #x0001)) b)) :pattern (
+  (concat_singletons a a_first b)) ))))
+
 (declare-fun singleton1 (us_rep (_ BitVec 16)) (Array (_ BitVec 16) us_rep))
 
 ;; singleton_def
@@ -1510,38 +1583,6 @@
   (forall ((v us_rep))
   (forall ((i (_ BitVec 16)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
-(define-fun bool_eq3 ((a (Array (_ BitVec 16) us_rep))
-  (a__first (_ BitVec 16)) (a__last (_ BitVec 16))
-  (b (Array (_ BitVec 16) us_rep)) (b__first (_ BitVec 16))
-  (b__last (_ BitVec 16))) Bool (ite (and
-                                     (ite (bvule a__first a__last)
-                                     (and (bvule b__first b__last)
-                                     (= (bvsub a__last a__first) (bvsub b__last b__first)))
-                                     (bvugt b__first b__last))
-                                     (forall ((temp___idx_132 (_ BitVec 16)))
-                                     (=>
-                                     (and (bvule a__first temp___idx_132)
-                                     (bvule temp___idx_132 a__last))
-                                     (= (bool_eq2 (select a temp___idx_132)
-                                        (select b (bvadd (bvsub b__first a__first) temp___idx_132))) true))))
-                                true false))
-
-;; bool_eq_rev
-  (assert
-  (forall ((a (Array (_ BitVec 16) us_rep)) (b (Array (_ BitVec 16) us_rep)))
-  (forall ((a__first (_ BitVec 16)) (a__last (_ BitVec 16))
-  (b__first (_ BitVec 16)) (b__last (_ BitVec 16)))
-  (=> (= (bool_eq3 b b__first b__last a a__first a__last) true)
-  (and
-  (ite (bvule a__first a__last)
-  (and (bvule b__first b__last)
-  (= (bvsub a__last a__first) (bvsub b__last b__first)))
-  (bvugt b__first b__last))
-  (forall ((temp___idx_132 (_ BitVec 16)))
-  (=> (and (bvule a__first temp___idx_132) (bvule temp___idx_132 a__last))
-  (= (bool_eq2 (select a temp___idx_132)
-     (select b (bvadd (bvsub b__first a__first) temp___idx_132))) true))))))))
 
 (declare-sort t1 0)
 
@@ -1631,9 +1672,8 @@
 
 (declare-sort t4s 0)
 
-(define-fun in_range3 ((x (_ BitVec 16))) Bool (and
-                                               (bvule ((_ int2bv 16) 0) x)
-                                               (bvule x ((_ int2bv 16) 599))))
+(define-fun in_range3 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
+                                               (bvule x #x0257)))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 599)))
 
@@ -1722,11 +1762,9 @@
                          (and
                          (= (bool_eq3
                             (rec__logger__log_database__data
-                            (us_split_fields3 a)) ((_ int2bv 16) 0)
-                            ((_ int2bv 16) 599)
+                            (us_split_fields3 a)) #x0000 #x0257
                             (rec__logger__log_database__data
-                            (us_split_fields3 b)) ((_ int2bv 16) 0)
-                            ((_ int2bv 16) 599)) true)
+                            (us_split_fields3 b)) #x0000 #x0257) true)
                          (= (to_rep2
                             (rec__logger__log_database__first
                             (us_split_fields3 a))) (to_rep2
@@ -1860,17 +1898,17 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range4
-                                     temp___expr_33)))
+(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range4
+                                    temp___expr_39)))
 
 ;; log_size__post_axiom
   (assert
   (forall ((logger__event_log__fields us_split_fields2))
-  (! (dynamic_invariant1 (log_size logger__event_log__fields) true false
+  (! (dynamic_invariant1 (log_size logger__event_log__fields) true false true
   true) :pattern ((log_size logger__event_log__fields)) )))
 
 ;; log_size__def_axiom
@@ -1881,7 +1919,7 @@
                                                      (mk___rep1
                                                      logger__event_log__fields))) true)
                                              0
-                                             (+ (bv2nat (let ((temp___242 (bvsub
+                                             (+ (bv2nat (let ((temp___279 (bvsub
                                                         (to_rep2
                                                         (rec__logger__log_database__last
                                                         (us_split_fields3
@@ -1902,8 +1940,8 @@
                                                         (us_split_fields3
                                                         (mk___rep1
                                                         logger__event_log__fields)))))
-                                                        (bvadd temp___242 ((_ int2bv 16) 600))
-                                                        temp___242))) 1))) :pattern (
+                                                        (bvadd temp___279 #x0258)
+                                                        temp___279))) 1))) :pattern (
   (log_size logger__event_log__fields)) )))
 
 (declare-const fliteral1 t)
@@ -1913,16 +1951,16 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant2 ((temp___expr_57 t) (temp___is_init_54 Bool)
-  (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_57)))
+(define-fun dynamic_invariant2 ((temp___expr_67 t) (temp___is_init_63 Bool)
+  (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_67)))
 
-(define-fun dynamic_invariant3 ((temp___expr_166 (_ BitVec 16))
-  (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
-  (temp___do_toplevel_165 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_194 (_ BitVec 16))
+  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
+  (temp___do_toplevel_192 Bool) (temp___do_typ_inv_193 Bool)) Bool true)
 
 (declare-fun make_entry ((_ BitVec 16) (_ BitVec 16) (_ BitVec 16) t
   Bool) us_rep)
@@ -1942,9 +1980,10 @@
   (! (=>
      (and
      (and
-     (and (dynamic_invariant3 ngrotations true true true) (dynamic_invariant3
-     ngclicktime true true true)) (dynamic_invariant3 millisecs true true
-     true)) (dynamic_invariant2 estimatedgroundvelocity true true true))
+     (and (dynamic_invariant3 ngrotations true true true true)
+     (dynamic_invariant3 ngclicktime true true true true))
+     (dynamic_invariant3 millisecs true true true true)) (dynamic_invariant2
+     estimatedgroundvelocity true true true true))
      (= (make_entry ngrotations ngclicktime millisecs estimatedgroundvelocity
         estimatedgroundvelocityisavailable) (mk___rep
                                             (mk___split_fields
@@ -2070,17 +2109,16 @@
 (define-fun tresultS__ref___projection ((a tresultS__ref)) us_t1 (tresultS__content
                                                                  a))
 
-(define-fun dynamic_invariant4 ((temp___expr_250 us_t1)
-  (temp___is_init_247 Bool) (temp___skip_constant_248 Bool)
-  (temp___do_toplevel_249 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_248 true))
-                                      (and (dynamic_property2
-                                      ((_ int2bv 16) 0) tmp
-                                      (first3 temp___expr_250)
-                                      (last3 temp___expr_250))
-                                      (and
-                                      (= (first3 temp___expr_250) ((_ int2bv 16) 0))
-                                      (= (last3 temp___expr_250) tmp)))))
+(define-fun dynamic_invariant4 ((temp___expr_288 us_t1)
+  (temp___is_init_284 Bool) (temp___skip_constant_285 Bool)
+  (temp___do_toplevel_286 Bool)
+  (temp___do_typ_inv_287 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_285 true))
+                                     (and (dynamic_property2 #x0000 tmp
+                                     (first3 temp___expr_288)
+                                     (last3 temp___expr_288))
+                                     (and (= (first3 temp___expr_288) #x0000)
+                                     (= (last3 temp___expr_288) tmp)))))
 
 (declare-const result____first log_index)
 
@@ -2423,22 +2461,22 @@
 (declare-datatypes () ((t13b__ref (mk_t13b__ref (t13b__content us_t4)))))
 (define-fun t13b__ref___projection ((a t13b__ref)) us_t4 (t13b__content a))
 
-(declare-fun temp___284 (us_rep) (Array (_ BitVec 16) us_rep))
+(declare-fun temp___322 (us_rep) (Array (_ BitVec 16) us_rep))
 
 ;; def_axiom
   (assert
-  (forall ((temp___286 us_rep))
-  (forall ((temp___287 (_ BitVec 16)))
-  (= (select (temp___284 temp___286) temp___287) temp___286))))
+  (forall ((temp___324 us_rep))
+  (forall ((temp___325 (_ BitVec 16)))
+  (= (select (temp___322 temp___324) temp___325) temp___324))))
 
-(define-fun dynamic_invariant5 ((temp___expr_219 us_t)
-  (temp___is_init_216 Bool) (temp___skip_constant_217 Bool)
-  (temp___do_toplevel_218 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_217 true))
-                                      (dynamic_property ((_ int2bv 16) 0)
-                                      ((_ int2bv 16) 599)
-                                      (first1 temp___expr_219)
-                                      (last1 temp___expr_219))))
+(define-fun dynamic_invariant5 ((temp___expr_255 us_t)
+  (temp___is_init_251 Bool) (temp___skip_constant_252 Bool)
+  (temp___do_toplevel_253 Bool)
+  (temp___do_typ_inv_254 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_252 true))
+                                     (dynamic_property #x0000 #x0257
+                                     (first1 temp___expr_255)
+                                     (last1 temp___expr_255))))
 
 (declare-const event_log__split_fields (Array (_ BitVec 16) us_rep))
 
@@ -2448,143 +2486,35 @@
 
 (declare-const event_log__split_fields3 Bool)
 
-(declare-const result__ (Array (_ BitVec 16) us_rep))
+(declare-const o Int)
 
-(declare-const logger__log_content__result (Array (_ BitVec 16) us_rep))
+(declare-const o1 Int)
 
-(declare-const logger__log_content__result1 t1)
+(declare-const o2 Int)
 
-(declare-const o unsigned_16)
+(declare-const logger__log_content__B_1__tmp__assume (_ BitVec 16))
 
-(declare-const o1 unsigned_16)
+(declare-const o3 (Array (_ BitVec 16) us_rep))
 
-(declare-const o2 unsigned_16)
+(declare-const temp___313 (Array (_ BitVec 16) us_rep))
 
-(declare-const o3 long_float)
+(declare-const temp___3131 t5)
 
-(declare-const o4 Bool)
+(declare-const o4 (Array (_ BitVec 16) us_rep))
 
-(declare-const o5 (Array (_ BitVec 16) us_rep))
+(declare-const temp___312 (Array (_ BitVec 16) us_rep))
 
-(declare-const o6 (Array (_ BitVec 16) us_rep))
+(declare-const temp___3121 t4)
 
-(declare-const o7 t1)
+(declare-const o5 Int)
+
+(declare-const o6 Int)
+
+(declare-const o7 Int)
 
 (declare-const o8 Int)
 
 (declare-const o9 Int)
-
-(declare-const o10 Int)
-
-(declare-const logger__log_content__B_1__tmp__assume (_ BitVec 16))
-
-(declare-const o11 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___279 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___2791 t3)
-
-(declare-const temp___280 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___2801 t2)
-
-(declare-const o12 (Array (_ BitVec 16) us_rep))
-
-(declare-const o13 t2)
-
-(declare-const o14 (Array (_ BitVec 16) us_rep))
-
-(declare-const o15 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___275 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___2751 t5)
-
-(declare-const o16 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___274 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___2741 t4)
-
-(declare-const o17 Int)
-
-(declare-const o18 Int)
-
-(declare-const o19 Int)
-
-(declare-const o20 Int)
-
-(declare-const o21 Int)
-
-(declare-const o22 Int)
-
-(declare-const o23 (_ BitVec 16))
-
-(declare-const temp___276 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___2761 t1)
-
-(declare-const temp___277 (Array (_ BitVec 16) us_rep))
-
-(declare-const temp___2771 t2)
-
-(declare-const o24 (Array (_ BitVec 16) us_rep))
-
-(declare-const o25 t2)
-
-(declare-const o26 (Array (_ BitVec 16) us_rep))
-
-(declare-const o27 Int)
-
-(declare-const o28 Int)
-
-(declare-const o29 Int)
-
-(declare-const result__1 (Array (_ BitVec 16) us_rep))
-
-(declare-const result (Array (_ BitVec 16) us_rep))
-
-(declare-const result1 t1)
-
-(declare-const logger__log_content__result2 (Array (_ BitVec 16) us_rep))
-
-(declare-const logger__log_content__result3 t1)
-
-(declare-const result2 (Array (_ BitVec 16) us_rep))
-
-(declare-const result__2 (Array (_ BitVec 16) us_rep))
-
-(declare-const result3 (Array (_ BitVec 16) us_rep))
-
-(declare-const result__3 (Array (_ BitVec 16) us_rep))
-
-(declare-const result4 log_array__ref)
-
-(declare-const logger__log_content__result4 us_t)
-
-(declare-const result__4 map__ref)
-
-(declare-const logger__log_content__result5 log_array__ref)
-
-(declare-const result__5 (Array (_ BitVec 16) us_rep))
-
-(declare-const logger__log_content__result6 us_t)
-
-(declare-const result__6 map__ref)
-
-(declare-const logger__log_content__result7 log_array__ref)
-
-(declare-const result__7 (Array (_ BitVec 16) us_rep))
-
-(declare-const logger__log_content__result8 us_t)
-
-(declare-const result__8 map__ref)
-
-(declare-const logger__log_content__result9 log_array__ref)
-
-(declare-const result__9 (Array (_ BitVec 16) us_rep))
-
-(declare-const logger__log_content__result10 us_t)
 
 ;; H
   (assert (not (= event_log__split_fields3 true)))
@@ -2592,26 +2522,25 @@
 ;; H
   (assert
   (and
-  (= o8 (log_size
-        (mk___split_fields1 event_log__split_fields event_log__split_fields1
-        event_log__split_fields2 event_log__split_fields3)))
-  (and (in_range4 o8)
-  (= o8 (ite (= event_log__split_fields3 true) 0
-        (+ (bv2nat (let ((temp___239 (bvsub (to_rep2
-                                            event_log__split_fields2)
-                   (to_rep2 event_log__split_fields1))))
-                   (ite (bvult (to_rep2 event_log__split_fields2) (to_rep2
-                                                                  event_log__split_fields1))
-                   (bvadd temp___239 ((_ int2bv 16) 600)) temp___239))) 1))))))
+  (= o (log_size
+       (mk___split_fields1 event_log__split_fields event_log__split_fields1
+       event_log__split_fields2 event_log__split_fields3)))
+  (and (in_range4 o)
+  (= o (ite (= event_log__split_fields3 true) 0
+       (+ (bv2nat (let ((temp___276 (bvsub (to_rep2 event_log__split_fields2)
+                  (to_rep2 event_log__split_fields1))))
+                  (ite (bvult (to_rep2 event_log__split_fields2) (to_rep2
+                                                                 event_log__split_fields1))
+                  (bvadd temp___276 #x0258) temp___276))) 1))))))
 
 ;; H
-  (assert (= o9 (- o8 1)))
+  (assert (= o1 (- o 1)))
 
 ;; H
-  (assert (and (= o10 o9) (in_range_int o9)))
+  (assert (and (= o2 o1) (in_range_int o1)))
 
 ;; H
-  (assert (= logger__log_content__B_1__tmp__assume ((_ int2bv 16) o10)))
+  (assert (= logger__log_content__B_1__tmp__assume ((_ int2bv 16) o2)))
 
 ;; H
   (assert (= logger__log_content__B_1__tmp__assume tmp))
@@ -2621,10 +2550,9 @@
 
 ;; H
   (assert
-  (and (dynamic_property2 ((_ int2bv 16) 0) tmp (to_rep2 result____first)
+  (and (dynamic_property2 #x0000 tmp (to_rep2 result____first)
   (to_rep2 result____last))
-  (and (= (to_rep2 result____first) ((_ int2bv 16) 0))
-  (= (to_rep2 result____last) tmp))))
+  (and (= (to_rep2 result____first) #x0000) (= (to_rep2 result____last) tmp))))
 
 ;; H
   (assert
@@ -2646,86 +2574,83 @@
 
 ;; H
   (assert
-  (=> (bvule ((_ int2bv 16) 0) r11b)
-  (and
-  (and (bvule ((_ int2bv 16) 0) ((_ int2bv 16) 0))
-  (bvule ((_ int2bv 16) 0) ((_ int2bv 16) 599)))
-  (and (bvule ((_ int2bv 16) 0) r11b) (bvule r11b ((_ int2bv 16) 599))))))
+  (=> (bvule #x0000 r11b)
+  (and (and (bvule #x0000 #x0000) (bvule #x0000 #x0257))
+  (and (bvule #x0000 r11b) (bvule r11b #x0257)))))
 
 ;; H
-  (assert (= o15 event_log__split_fields))
+  (assert (= o3 event_log__split_fields))
 
 ;; H
-  (assert (= o15 temp___275))
+  (assert (= o3 temp___313))
 
 ;; H
-  (assert (= (mk4 ((_ int2bv 16) 0) r11b) temp___2751))
+  (assert (= (mk4 #x0000 r11b) temp___3131))
 
 ;; H
   (assert
-  (=> (bvule r8b ((_ int2bv 16) 599))
-  (and (and (bvule ((_ int2bv 16) 0) r8b) (bvule r8b ((_ int2bv 16) 599)))
-  (and (bvule ((_ int2bv 16) 0) ((_ int2bv 16) 599))
-  (bvule ((_ int2bv 16) 599) ((_ int2bv 16) 599))))))
+  (=> (bvule r8b #x0257)
+  (and (and (bvule #x0000 r8b) (bvule r8b #x0257))
+  (and (bvule #x0000 #x0257) (bvule #x0257 #x0257)))))
 
 ;; H
-  (assert (= o16 event_log__split_fields))
+  (assert (= o4 event_log__split_fields))
 
 ;; H
-  (assert (= o16 temp___274))
+  (assert (= o4 temp___312))
 
 ;; H
-  (assert (= (mk3 r8b ((_ int2bv 16) 599)) temp___2741))
+  (assert (= (mk3 r8b #x0257) temp___3121))
 
 ;; H
-  (assert (not (= (length3 (mk___t3 temp___274 temp___2741)) 0)))
+  (assert (not (= (length3 (mk___t3 temp___312 temp___3121)) 0)))
 
 ;; H
   (assert
   (=>
-  (<= (bv2nat (to_rep2 (first8 temp___2751))) (bv2nat (to_rep2
-                                                      (last8 temp___2751))))
-  (= o17 (+ (- (bv2nat (to_rep2 (last8 temp___2751))) (bv2nat (to_rep2
-                                                              (first8
-                                                              temp___2751)))) 1))))
+  (<= (bv2nat (to_rep2 (first8 temp___3131))) (bv2nat (to_rep2
+                                                      (last8 temp___3131))))
+  (= o5 (+ (- (bv2nat (to_rep2 (last8 temp___3131))) (bv2nat (to_rep2
+                                                             (first8
+                                                             temp___3131)))) 1))))
 
 ;; H
   (assert
   (=>
   (not
-  (<= (bv2nat (to_rep2 (first8 temp___2751))) (bv2nat (to_rep2
-                                                      (last8 temp___2751)))))
-  (= o17 0)))
+  (<= (bv2nat (to_rep2 (first8 temp___3131))) (bv2nat (to_rep2
+                                                      (last8 temp___3131)))))
+  (= o5 0)))
 
 ;; H
   (assert
   (=>
-  (<= (bv2nat (to_rep2 (first6 temp___2741))) (bv2nat (to_rep2
-                                                      (last6 temp___2741))))
-  (= o18 (+ (- (bv2nat (to_rep2 (last6 temp___2741))) (bv2nat (to_rep2
-                                                              (first6
-                                                              temp___2741)))) 1))))
+  (<= (bv2nat (to_rep2 (first6 temp___3121))) (bv2nat (to_rep2
+                                                      (last6 temp___3121))))
+  (= o6 (+ (- (bv2nat (to_rep2 (last6 temp___3121))) (bv2nat (to_rep2
+                                                             (first6
+                                                             temp___3121)))) 1))))
 
 ;; H
   (assert
   (=>
   (not
-  (<= (bv2nat (to_rep2 (first6 temp___2741))) (bv2nat (to_rep2
-                                                      (last6 temp___2741)))))
-  (= o18 0)))
+  (<= (bv2nat (to_rep2 (first6 temp___3121))) (bv2nat (to_rep2
+                                                      (last6 temp___3121)))))
+  (= o6 0)))
 
 ;; H
-  (assert (= o19 (+ o18 o17)))
+  (assert (= o7 (+ o6 o5)))
 
 ;; H
-  (assert (= o20 (+ (bv2nat (to_rep2 (first6 temp___2741))) o19)))
+  (assert (= o8 (+ (bv2nat (to_rep2 (first6 temp___3121))) o7)))
 
 ;; H
-  (assert (= o21 (- o20 1)))
+  (assert (= o9 (- o8 1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "logger.ads", line 23, characters 0-0
-  (not (in_range_int o21)))
+  (not (in_range_int o9)))
 (check-sat)
 (exit)

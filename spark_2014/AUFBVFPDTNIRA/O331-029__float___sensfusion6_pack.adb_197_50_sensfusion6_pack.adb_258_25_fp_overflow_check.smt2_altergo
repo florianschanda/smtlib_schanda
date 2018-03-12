@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1414,532 +1414,6 @@ logic attr__ATTRIBUTE_ADDRESS82 : int
 
 logic attr__ATTRIBUTE_ADDRESS83 : int
 
-logic q0 : t
-
-logic q1 : t
-
-logic q2 : t
-
-logic q3 : t
-
-logic two_kp : t
-
-logic two_ki : t
-
-logic integral_fbx : t
-
-logic integral_fby : t
-
-logic integral_fbz : t
-
-logic beta : t
-
-logic recip_norm : t
-
-logic norm_ax : t
-
-logic norm_ay : t
-
-logic norm_az : t
-
-logic rad_gx : t
-
-logic rad_gy : t
-
-logic rad_gz : t
-
-logic half_vx : t
-
-logic half_vy : t
-
-logic half_vz : t
-
-logic half_ex : t
-
-logic half_ey : t
-
-logic half_ez : t
-
-logic q0_tmp : t
-
-logic q1_tmp : t
-
-logic q2_tmp : t
-
-logic q3_tmp : t
-
-logic qa : t
-
-logic qb : t
-
-logic qc : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic o15 : t
-
-logic o16 : t
-
-logic o17 : t
-
-logic o18 : t
-
-logic o19 : t
-
-logic o20 : t
-
-logic o21 : t
-
-logic o22 : t
-
-logic o23 : t
-
-logic o24 : t
-
-logic o25 : t
-
-logic o26 : t
-
-logic o27 : t
-
-logic o28 : t
-
-logic o29 : t
-
-logic o30 : t
-
-logic o31 : t
-
-logic o32 : t
-
-logic o33 : t
-
-logic o34 : t
-
-logic o35 : t
-
-logic o36 : t
-
-logic o37 : t
-
-logic o38 : t
-
-logic o39 : t
-
-logic o40 : t
-
-logic o41 : t
-
-logic o42 : t
-
-logic o43 : t
-
-logic o44 : t
-
-logic o45 : t
-
-logic o46 : t
-
-logic o47 : t
-
-logic o48 : t
-
-logic o49 : t
-
-logic o50 : t
-
-logic o51 : t
-
-logic o52 : t
-
-logic o53 : t
-
-logic o54 : t
-
-logic o55 : t
-
-logic o56 : t
-
-logic o57 : t
-
-logic o58 : t
-
-logic o59 : t
-
-logic o60 : t
-
-logic o61 : t
-
-logic o62 : t
-
-logic o63 : t
-
-logic o64 : t
-
-logic o65 : t
-
-logic o66 : t
-
-logic o67 : t
-
-logic o68 : t
-
-logic o69 : t
-
-logic o70 : t
-
-logic o71 : t
-
-logic o72 : t
-
-logic o73 : t
-
-logic o74 : t
-
-logic o75 : t
-
-logic o76 : t
-
-logic o77 : t
-
-logic o78 : t
-
-logic o79 : t
-
-logic o80 : t
-
-logic o81 : t
-
-logic o82 : t
-
-logic o83 : t
-
-logic o84 : t
-
-logic o85 : t
-
-logic o86 : t
-
-logic o87 : t
-
-logic o88 : t
-
-logic o89 : t
-
-logic o90 : t
-
-logic o91 : t
-
-logic o92 : t
-
-logic o93 : t
-
-logic o94 : t
-
-logic o95 : t
-
-logic o96 : t
-
-logic o97 : t
-
-logic o98 : t
-
-logic o99 : t
-
-logic o100 : t
-
-logic o101 : t
-
-logic o102 : t
-
-logic o103 : t
-
-logic o104 : t
-
-logic o105 : t
-
-logic o106 : t
-
-logic o107 : t
-
-logic o108 : t
-
-logic integral_fbx1 : t
-
-logic integral_fby1 : t
-
-logic integral_fbz1 : t
-
-logic recip_norm1 : t
-
-logic norm_ax1 : t
-
-logic norm_ay1 : t
-
-logic norm_az1 : t
-
-logic half_ex1 : t
-
-logic half_ey1 : t
-
-logic half_ez1 : t
-
-logic result : t
-
-logic rad_gx1 : t
-
-logic result1 : t
-
-logic rad_gy1 : t
-
-logic result2 : t
-
-logic rad_gz1 : t
-
-logic result3 : t
-
-logic half_vx1 : t
-
-logic result4 : t
-
-logic half_vy1 : t
-
-logic result5 : t
-
-logic half_vz1 : t
-
-logic result6 : t
-
-logic qa1 : t
-
-logic result7 : t
-
-logic qb1 : t
-
-logic result8 : t
-
-logic qc1 : t
-
-logic result9 : t
-
-logic recip_norm2 : t
-
-logic result10 : t
-
-logic norm_ax2 : t
-
-logic result11 : t
-
-logic norm_ay2 : t
-
-logic result12 : t
-
-logic norm_az2 : t
-
-logic result13 : t
-
-logic half_ex2 : t
-
-logic result14 : t
-
-logic half_ey2 : t
-
-logic result15 : t
-
-logic half_ez2 : t
-
-logic result16 : t
-
-logic integral_fbx2 : t
-
-logic result17 : t
-
-logic integral_fby2 : t
-
-logic result18 : t
-
-logic integral_fbz2 : t
-
-logic result19 : t
-
-logic rad_gx2 : t
-
-logic result20 : t
-
-logic rad_gy2 : t
-
-logic result21 : t
-
-logic rad_gz2 : t
-
-logic result22 : t
-
-logic integral_fbx3 : t
-
-logic result23 : t
-
-logic integral_fby3 : t
-
-logic result24 : t
-
-logic integral_fbz3 : t
-
-logic result25 : t
-
-logic rad_gx3 : t
-
-logic result26 : t
-
-logic rad_gy3 : t
-
-logic result27 : t
-
-logic rad_gz3 : t
-
-logic result28 : t
-
-logic rad_gx4 : t
-
-logic result29 : t
-
-logic rad_gy4 : t
-
-logic result30 : t
-
-logic rad_gz4 : t
-
-logic result31 : t
-
-logic q0_tmp1 : t
-
-logic result32 : t
-
-logic q1_tmp1 : t
-
-logic result33 : t
-
-logic q2_tmp1 : t
-
-logic result34 : t
-
-logic q3_tmp1 : t
-
-logic result35 : t
-
-logic recip_norm3 : t
-
-logic result36 : t
-
-logic q01 : t
-
-logic result37 : t
-
-logic q11 : t
-
-logic result38 : t
-
-logic q21 : t
-
-axiom H : in_range2(gx)
-
-axiom H1 : in_range2(gy)
-
-axiom H2 : in_range2(gz)
-
-axiom H3 : in_range3(ax)
-
-axiom H4 : in_range3(ay)
-
-axiom H5 : in_range3(az)
-
-axiom H6 : in_range6(dt)
-
-axiom H7 : in_range8(q0)
-
-axiom H8 : in_range8(q1)
-
-axiom H9 : in_range8(q2)
-
-axiom H10 : in_range8(q3)
-
-axiom H11 : tqtisFinite(two_kp)
-
-axiom H12 : tqtisFinite(two_ki)
-
-axiom H13 : tqtisFinite(integral_fbx)
-
-axiom H14 : tqtisFinite(integral_fby)
-
-axiom H15 : tqtisFinite(integral_fbz)
-
-axiom H16 : in_range7(beta)
-
-axiom H17 : (gx = c3b)
-
-axiom H18 : in_range2(c3b)
-
-axiom H19 : (gy = c4b)
-
-axiom H20 : in_range2(c4b)
-
-axiom H21 : (gz = c5b)
-
-axiom H22 : in_range2(c5b)
-
-axiom H23 : (ax = c6b)
-
-axiom H24 : in_range3(c6b)
-
-axiom H25 : (ay = c7b)
-
-axiom H26 : in_range3(c7b)
-
-axiom H27 : (az = c8b)
-
-axiom H28 : in_range3(c8b)
-
-axiom H29 : (dt = c9b)
-
-axiom H30 : in_range6(c9b)
-
-axiom H31 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(recip_norm))
-
-axiom H32 : (le(neg(fliteral2), fliteral2) -> in_range3(norm_ax))
-
-axiom H33 : (le(neg(fliteral2), fliteral2) -> in_range3(norm_ay))
-
-axiom H34 : (le(neg(fliteral2), fliteral2) -> in_range3(norm_az))
-
-axiom H35 : (result = rad_gx)
-
 logic fliteral8 : t
 
 axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
@@ -1950,130 +1424,84 @@ logic fliteral9 : t
 axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
   (tqtreal(fliteral9) = 180.0))
 
-axiom H36 : (rad_gx1 = div(RNE, mul(RNE, c3b, fliteral8), fliteral9))
-
-axiom H37 : tqtisFinite(rad_gx1)
-
-axiom H38 : (result1 = rad_gy)
-
-axiom H39 : (rad_gy1 = div(RNE, mul(RNE, c4b, fliteral8), fliteral9))
-
-axiom H40 : tqtisFinite(rad_gy1)
-
-axiom H41 : (result2 = rad_gz)
-
-axiom H42 : (rad_gz1 = div(RNE, mul(RNE, c5b, fliteral8), fliteral9))
-
-axiom H43 : tqtisFinite(rad_gz1)
-
-axiom H44 : (result3 = half_vx)
-
-axiom H45 : (half_vx1 = sub(RNE, mul(RNE, q1, q3), mul(RNE, q0, q2)))
-
-axiom H46 : tqtisFinite(half_vx1)
-
-axiom H47 : (result4 = half_vy)
-
-axiom H48 : (half_vy1 = add(RNE, mul(RNE, q0, q1), mul(RNE, q2, q3)))
-
-axiom H49 : tqtisFinite(half_vy1)
-
-axiom H50 : (result5 = half_vz)
-
 logic fliteral10 : t
 
 axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
   (tqtreal(fliteral10) = 0.500000000000000000000000))
 
-axiom H51 : (half_vz1 = add(RNE, sub(RNE, mul(RNE, q0, q0), fliteral10),
-  mul(RNE, q3, q3)))
-
-axiom H52 : tqtisFinite(half_vz1)
-
-axiom H53 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(half_ex))
-
-axiom H54 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(half_ey))
-
-axiom H55 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(half_ez))
-
-axiom H56 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(q0_tmp))
-
-axiom H57 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(q1_tmp))
-
-axiom H58 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(q2_tmp))
-
-axiom H59 : (le(neg(fliteral4), fliteral4) -> tqtisFinite(q3_tmp))
-
-axiom H60 : (result6 = qa)
-
-axiom H61 : (qa1 = q0)
-
-axiom H62 : in_range8(qa1)
-
-axiom H63 : (result7 = qb)
-
-axiom H64 : (qb1 = q1)
-
-axiom H65 : in_range8(qb1)
-
-axiom H66 : (result8 = qc)
-
-axiom H67 : (qc1 = q2)
-
-axiom H68 : in_range8(qc1)
-
-axiom H69 : (not (eq(c6b, fliteral3) and (eq(c7b, fliteral3) and eq(c8b,
-  fliteral3))))
-
-axiom H70 : ((o = inv_sqrt(add(RNE, add(RNE, mul(RNE, c6b, c6b), mul(RNE,
-  c7b, c7b)), mul(RNE, c8b, c8b)))) and (tqtisFinite(o) and (lt(fliteral3,
-  o) and lt(o, fliteral7))))
-
-axiom H71 : (result9 = recip_norm)
-
-axiom H72 : (recip_norm2 = o)
-
-axiom H73 : ((o1 = mul(RNE, c6b, recip_norm2)) and tqtisFinite(mul(RNE, c6b,
-  recip_norm2)))
-
-axiom H74 : ((o2 = saturate(o1, neg(fliteral), fliteral)) and
-  (tqtisFinite(o2) and ((lt(o1, neg(fliteral)) -> eq(o2, neg(fliteral))) and
-  ((not lt(o1, neg(fliteral))) -> ((lt(fliteral, o1) -> eq(o2, fliteral)) and
-  ((not lt(fliteral, o1)) -> eq(o2, o1)))))))
-
-axiom H75 : ((o3 = o2) and tqtisFinite(o2))
-
-axiom H76 : (result10 = norm_ax)
-
-axiom H77 : (norm_ax2 = o3)
-
-axiom H78 : ((o4 = mul(RNE, c7b, recip_norm2)) and tqtisFinite(mul(RNE, c7b,
-  recip_norm2)))
-
-axiom H79 : ((o5 = saturate(o4, neg(fliteral), fliteral)) and
-  (tqtisFinite(o5) and ((lt(o4, neg(fliteral)) -> eq(o5, neg(fliteral))) and
-  ((not lt(o4, neg(fliteral))) -> ((lt(fliteral, o4) -> eq(o5, fliteral)) and
-  ((not lt(fliteral, o4)) -> eq(o5, o4)))))))
-
-axiom H80 : ((o6 = o5) and tqtisFinite(o5))
-
-axiom H81 : (result11 = norm_ay)
-
-axiom H82 : (norm_ay2 = o6)
-
-axiom H83 : ((o7 = mul(RNE, c8b, recip_norm2)) and tqtisFinite(mul(RNE, c8b,
-  recip_norm2)))
-
-axiom H84 : ((o8 = saturate(o7, neg(fliteral), fliteral)) and
-  (tqtisFinite(o8) and ((lt(o7, neg(fliteral)) -> eq(o8, neg(fliteral))) and
-  ((not lt(o7, neg(fliteral))) -> ((lt(fliteral, o7) -> eq(o8, fliteral)) and
-  ((not lt(fliteral, o7)) -> eq(o8, o7)))))))
-
-axiom H85 : ((o9 = o8) and tqtisFinite(o8))
-
-axiom H86 : (result12 = norm_az)
-
-axiom H87 : (norm_az2 = o9)
-
  (* File "i-cexten.ads", line 59, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(RNE, norm_az2, half_vy1))
+goal WP_parameter_def :
+  (forall q0:t. forall q1:t. forall q2:t. forall q3:t. forall two_kp:t.
+  forall two_ki:t. forall integral_fbx:t. forall integral_fby:t.
+  forall integral_fbz:t. forall beta:t. forall recip_norm:t.
+  forall norm_ax:t. forall norm_ay:t. forall norm_az:t. forall rad_gx:t.
+  forall rad_gy:t. forall rad_gz:t. forall half_vx:t. forall half_vy:t.
+  forall half_vz:t. forall half_ex:t. forall half_ey:t. forall half_ez:t.
+  forall q0_tmp:t. forall q1_tmp:t. forall q2_tmp:t. forall q3_tmp:t.
+  forall qa:t. forall qb:t. forall qc:t. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall o6:t.
+  forall o7:t. forall o8:t. forall o9:t. forall result:t. forall rad_gx1:t.
+  forall result1:t. forall rad_gy1:t. forall result2:t. forall rad_gz1:t.
+  forall result3:t. forall half_vx1:t. forall result4:t. forall half_vy1:t.
+  forall result5:t. forall half_vz1:t. forall result6:t. forall qa1:t.
+  forall result7:t. forall qb1:t. forall result8:t. forall qc1:t.
+  forall result9:t. forall recip_norm1:t. forall result10:t.
+  forall norm_ax1:t. forall result11:t. forall norm_ay1:t.
+  forall result12:t__ref. forall norm_az1:t. (in_range2(gx) ->
+  (in_range2(gy) -> (in_range2(gz) -> (in_range3(ax) -> (in_range3(ay) ->
+  (in_range3(az) -> (in_range6(dt) -> (in_range8(q0) -> (in_range8(q1) ->
+  (in_range8(q2) -> (in_range8(q3) -> (tqtisFinite(two_kp) ->
+  (tqtisFinite(two_ki) -> (tqtisFinite(integral_fbx) ->
+  (tqtisFinite(integral_fby) -> (tqtisFinite(integral_fbz) ->
+  (in_range7(beta) -> (((gx = c3b) and in_range2(c3b)) -> (((gy = c4b) and
+  in_range2(c4b)) -> (((gz = c5b) and in_range2(c5b)) -> (((ax = c6b) and
+  in_range3(c6b)) -> (((ay = c7b) and in_range3(c7b)) -> (((az = c8b) and
+  in_range3(c8b)) -> (((dt = c9b) and in_range6(c9b)) -> ((le(neg(fliteral4),
+  fliteral4) -> tqtisFinite(recip_norm)) -> ((le(neg(fliteral2),
+  fliteral2) -> in_range3(norm_ax)) -> ((le(neg(fliteral2), fliteral2) ->
+  in_range3(norm_ay)) -> ((le(neg(fliteral2), fliteral2) ->
+  in_range3(norm_az)) -> (((result = rad_gx) and (rad_gx1 = div(RNE, mul(RNE,
+  c3b, fliteral8), fliteral9))) -> (tqtisFinite(rad_gx1) ->
+  (((result1 = rad_gy) and (rad_gy1 = div(RNE, mul(RNE, c4b, fliteral8),
+  fliteral9))) -> (tqtisFinite(rad_gy1) -> (((result2 = rad_gz) and
+  (rad_gz1 = div(RNE, mul(RNE, c5b, fliteral8), fliteral9))) ->
+  (tqtisFinite(rad_gz1) -> (((result3 = half_vx) and (half_vx1 = sub(RNE,
+  mul(RNE, q1, q3), mul(RNE, q0, q2)))) -> (tqtisFinite(half_vx1) ->
+  (((result4 = half_vy) and (half_vy1 = add(RNE, mul(RNE, q0, q1), mul(RNE,
+  q2, q3)))) -> (tqtisFinite(half_vy1) -> (((result5 = half_vz) and
+  (half_vz1 = add(RNE, sub(RNE, mul(RNE, q0, q0), fliteral10), mul(RNE, q3,
+  q3)))) -> (tqtisFinite(half_vz1) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(half_ex)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(half_ey)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(half_ez)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(q0_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(q1_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(q2_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
+  tqtisFinite(q3_tmp)) -> (((result6 = qa) and (qa1 = q0)) ->
+  (in_range8(qa1) -> (((result7 = qb) and (qb1 = q1)) -> (in_range8(qb1) ->
+  (((result8 = qc) and (qc1 = q2)) -> (in_range8(qc1) -> ((not (eq(c6b,
+  fliteral3) and (eq(c7b, fliteral3) and eq(c8b, fliteral3)))) ->
+  ((((o = inv_sqrt(add(RNE, add(RNE, mul(RNE, c6b, c6b), mul(RNE, c7b, c7b)),
+  mul(RNE, c8b, c8b)))) and (tqtisFinite(o) and (lt(fliteral3, o) and lt(o,
+  fliteral7)))) and ((result9 = recip_norm) and (recip_norm1 = o))) ->
+  ((((((o1 = mul(RNE, c6b, recip_norm1)) and tqtisFinite(mul(RNE, c6b,
+  recip_norm1))) and ((o2 = saturate(o1, neg(fliteral), fliteral)) and
+  (tqtisFinite(o2) and ((lt(o1, neg(fliteral)) and eq(o2, neg(fliteral))) or
+  ((not lt(o1, neg(fliteral))) and ((lt(fliteral, o1) and eq(o2,
+  fliteral)) or ((not lt(fliteral, o1)) and eq(o2, o1)))))))) and
+  ((o3 = o2) and tqtisFinite(o2))) and ((result10 = norm_ax) and
+  (norm_ax1 = o3))) -> ((((((o4 = mul(RNE, c7b, recip_norm1)) and
+  tqtisFinite(mul(RNE, c7b, recip_norm1))) and ((o5 = saturate(o4,
+  neg(fliteral), fliteral)) and (tqtisFinite(o5) and ((lt(o4,
+  neg(fliteral)) and eq(o5, neg(fliteral))) or ((not lt(o4,
+  neg(fliteral))) and ((lt(fliteral, o4) and eq(o5, fliteral)) or
+  ((not lt(fliteral, o4)) and eq(o5, o4)))))))) and ((o6 = o5) and
+  tqtisFinite(o5))) and ((result11 = norm_ay) and (norm_ay1 = o6))) ->
+  ((((((o7 = mul(RNE, c8b, recip_norm1)) and tqtisFinite(mul(RNE, c8b,
+  recip_norm1))) and ((o8 = saturate(o7, neg(fliteral), fliteral)) and
+  (tqtisFinite(o8) and ((lt(o7, neg(fliteral)) and eq(o8, neg(fliteral))) or
+  ((not lt(o7, neg(fliteral))) and ((lt(fliteral, o7) and eq(o8,
+  fliteral)) or ((not lt(fliteral, o7)) and eq(o8, o7)))))))) and
+  ((o9 = o8) and tqtisFinite(o8))) and ((result12 = { t__content = norm_az
+  }) and (norm_az1 = o9))) -> tqtisFinite(mul(RNE, norm_az1,
+  half_vy1)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))

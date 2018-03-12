@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -168,29 +164,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int float) Int Int (Array Int float) Int
-  Int) (Array Int float))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int float)) (b (Array Int float)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (float Int) (Array Int float))
-
-;; singleton_def
-  (assert
-  (forall ((v float))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq ((a (Array Int float)) (a__first Int) (a__last Int)
   (b (Array Int float)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -198,12 +171,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (to_rep (select a temp___idx_132)) (to_rep
-                                                                 (select b (+ (- b__first a__first) temp___idx_132)))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (to_rep (select a temp___idx_154)) (to_rep
+                                                                 (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -215,10 +188,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (to_rep (select a temp___idx_132)) (to_rep
-                                        (select b (+ (- b__first a__first) temp___idx_132)))))))))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (to_rep (select a temp___idx_154)) (to_rep
+                                        (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
 (declare-const d (Array Int float))
 
@@ -236,12 +209,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun adjust2triangle (Float32 Float32 Float32) Float32)
 
@@ -254,8 +228,8 @@
   (! (=>
      (and
      (and
-     (and (dynamic_invariant d1 true true true) (dynamic_invariant kv1 true
-     true true)) (dynamic_invariant ka1 true true true))
+     (and (dynamic_invariant d1 true true true true) (dynamic_invariant kv1
+     true true true true)) (dynamic_invariant ka1 true true true true))
      (and
      (and (not (fp.eq d1 (fp #b0 #b00000000 #b00000000000000000000000)))
      (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) kv1))
@@ -263,7 +237,7 @@
      (let ((result (adjust2triangle d1 kv1 ka1)))
      (and
      (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (fp.leq result kv1)) (dynamic_invariant result true false true)))) :pattern (
+     (fp.leq result kv1)) (dynamic_invariant result true false true true)))) :pattern (
   (adjust2triangle d1 kv1 ka1)) )))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
@@ -297,56 +271,58 @@
 
 (declare-fun homothetical__homothetical__lambda__aggregate_def (Float32) (Array Int float))
 
-;; def_axiom
-  (assert
-  (forall ((temp___160 Float32))
-  (forall ((temp___161 Int))
-  (= (select (homothetical__homothetical__lambda__aggregate_def temp___160) temp___161)
-  (of_rep temp___160)))))
-
 (declare-fun homothetical__homothetical__upsilon__aggregate_def (Float32) (Array Int float))
-
-;; def_axiom
-  (assert
-  (forall ((temp___163 Float32))
-  (forall ((temp___164 Int))
-  (= (select (homothetical__homothetical__upsilon__aggregate_def temp___163) temp___164)
-  (of_rep temp___163)))))
 
 (declare-fun homothetical__homothetical__kvp__aggregate_def (Float32) (Array Int float))
 
-;; def_axiom
-  (assert
-  (forall ((temp___166 Float32))
-  (forall ((temp___167 Int))
-  (= (select (homothetical__homothetical__kvp__aggregate_def temp___166) temp___167)
-  (of_rep temp___166)))))
+(declare-fun temp___198 (Float32) (Array Int float))
 
-(declare-fun temp___173 (Float32) (Array Int float))
+(declare-fun temp___202 (Float32) (Array Int float))
 
 ;; def_axiom
   (assert
-  (forall ((temp___175 Float32))
-  (forall ((temp___176 Int))
-  (= (select (temp___173 temp___175) temp___176) (of_rep temp___175)))))
-
-(declare-fun temp___177 (Float32) (Array Int float))
+  (forall ((temp___185 Float32))
+  (=> (dynamic_invariant temp___185 true true true true)
+  (forall ((temp___186 Int))
+  (= (to_rep
+     (select (homothetical__homothetical__lambda__aggregate_def temp___185) temp___186)) temp___185)))))
 
 ;; def_axiom
   (assert
-  (forall ((temp___179 Float32))
-  (forall ((temp___180 Int))
-  (= (select (temp___177 temp___179) temp___180) (of_rep temp___179)))))
+  (forall ((temp___188 Float32))
+  (=> (dynamic_invariant temp___188 true true true true)
+  (forall ((temp___189 Int))
+  (= (to_rep
+     (select (homothetical__homothetical__upsilon__aggregate_def temp___188) temp___189)) temp___188)))))
 
-(define-fun dynamic_invariant1 ((temp___expr_142 Int)
-  (temp___is_init_139 Bool) (temp___skip_constant_140 Bool)
-  (temp___do_toplevel_141 Bool)) Bool (=>
-                                      (or (= temp___is_init_139 true)
-                                      (<= 1 2)) (in_range1 temp___expr_142)))
+;; def_axiom
+  (assert
+  (forall ((temp___191 Float32))
+  (=> (dynamic_invariant temp___191 true true true true)
+  (forall ((temp___192 Int))
+  (= (to_rep
+     (select (homothetical__homothetical__kvp__aggregate_def temp___191) temp___192)) temp___191)))))
 
-(declare-const kvmax (Array Int float))
+;; def_axiom
+  (assert
+  (forall ((temp___200 Float32))
+  (=> (dynamic_invariant temp___200 true true true true)
+  (forall ((temp___201 Int))
+  (= (to_rep (select (temp___198 temp___200) temp___201)) temp___200)))))
 
-(declare-const kamax (Array Int float))
+;; def_axiom
+  (assert
+  (forall ((temp___204 Float32))
+  (=> (dynamic_invariant temp___204 true true true true)
+  (forall ((temp___205 Int))
+  (= (to_rep (select (temp___202 temp___204) temp___205)) temp___204)))))
+
+(define-fun dynamic_invariant1 ((temp___expr_166 Int)
+  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
+  (temp___do_toplevel_164 Bool)
+  (temp___do_typ_inv_165 Bool)) Bool (=>
+                                     (or (= temp___is_init_162 true)
+                                     (<= 1 2)) (in_range1 temp___expr_166)))
 
 (declare-const lambda (Array Int float))
 
@@ -356,157 +332,11 @@
 
 (declare-const i Int)
 
-(declare-const i1 Int)
-
-(declare-const j Int)
-
-(declare-const temp___169 (Array Int float))
-
-(declare-const temp___168 Int)
-
-(declare-const j1 Int)
-
 (declare-const o Float32)
 
 (declare-const o1 float)
 
 (declare-const o2 (Array Int float))
-
-(declare-const o3 Float32)
-
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
-(declare-const o6 Float32)
-
-(declare-const o7 Float32)
-
-(declare-const o8 float)
-
-(declare-const o9 (Array Int float))
-
-(declare-const o10 Float32)
-
-(declare-const o11 Float32)
-
-(declare-const o12 Float32)
-
-(declare-const o13 Float32)
-
-(declare-const o14 Float32)
-
-(declare-const o15 float)
-
-(declare-const o16 (Array Int float))
-
-(declare-const o17 Float32)
-
-(declare-const o18 Float32)
-
-(declare-const o19 Float32)
-
-(declare-const o20 Float32)
-
-(declare-const o21 Float32)
-
-(declare-const o22 float)
-
-(declare-const o23 (Array Int float))
-
-(declare-const o24 Float32)
-
-(declare-const o25 Float32)
-
-(declare-const o26 Float32)
-
-(declare-const o27 Float32)
-
-(declare-const o28 Float32)
-
-(declare-const o29 float)
-
-(declare-const o30 (Array Int float))
-
-(declare-const o31 Float32)
-
-(declare-const o32 float)
-
-(declare-const o33 (Array Int float))
-
-(declare-const o34 Float32)
-
-(declare-const o35 float)
-
-(declare-const o36 (Array Int float))
-
-(declare-const o37 Float32)
-
-(declare-const o38 Float32)
-
-(declare-const o39 Float32)
-
-(declare-const o40 Float32)
-
-(declare-const o41 Float32)
-
-(declare-const o42 float)
-
-(declare-const o43 (Array Int float))
-
-(declare-const o44 Float32)
-
-(declare-const o45 Float32)
-
-(declare-const o46 Float32)
-
-(declare-const o47 Float32)
-
-(declare-const o48 Float32)
-
-(declare-const o49 float)
-
-(declare-const o50 (Array Int float))
-
-(declare-const o51 Float32)
-
-(declare-const o52 Float32)
-
-(declare-const o53 Float32)
-
-(declare-const o54 Float32)
-
-(declare-const o55 Float32)
-
-(declare-const o56 float)
-
-(declare-const o57 (Array Int float))
-
-(declare-const o58 Float32)
-
-(declare-const o59 Float32)
-
-(declare-const o60 Float32)
-
-(declare-const o61 Float32)
-
-(declare-const o62 Float32)
-
-(declare-const o63 float)
-
-(declare-const o64 (Array Int float))
-
-(declare-const o65 Float32)
-
-(declare-const o66 float)
-
-(declare-const o67 (Array Int float))
-
-(declare-const o68 Float32)
-
-(declare-const o69 float)
-
-(declare-const o70 (Array Int float))
 
 (declare-const result (Array Int float))
 
@@ -522,11 +352,11 @@
 
 (declare-const result3 Int)
 
-(declare-const i2 Int)
+(declare-const i1 Int)
 
 (declare-const kvp2 (Array Int float))
 
-(declare-const i3 Int)
+(declare-const i2 Int)
 
 (declare-const result4 (Array Int float))
 
@@ -534,187 +364,17 @@
 
 (declare-const result5 Int)
 
-(declare-const i4 Int)
-
-(declare-const kvp4 (Array Int float))
-
-(declare-const i5 Int)
-
-(declare-const kvp5 (Array Int float))
-
-(declare-const i6 Int)
-
-(declare-const kvp6 (Array Int float))
-
-(declare-const i7 Int)
-
-(declare-const kvp7 (Array Int float))
-
-(declare-const i8 Int)
-
-(declare-const kvp8 (Array Int float))
-
-(declare-const i9 Int)
-
-(declare-const kvp9 (Array Int float))
-
-(declare-const i10 Int)
-
-(declare-const result6 (Array Int float))
-
-(declare-const kvmax1 (Array Int float))
-
-(declare-const result7 map__ref)
-
-(declare-const kamax1 (Array Int float))
-
-(declare-const result8 int__ref)
-
-(declare-const i11 Int)
-
-(declare-const result9 int__ref)
-
-(declare-const j2 Int)
-
-(declare-const result10 map__ref)
-
-(declare-const lambda2 (Array Int float))
-
-(declare-const result11 map__ref)
-
-(declare-const upsilon2 (Array Int float))
-
-(declare-const lambda3 map__ref)
-
-(declare-const upsilon3 map__ref)
-
-(declare-const lambda4 (Array Int float))
-
-(declare-const upsilon4 (Array Int float))
-
-(declare-const result12 int__ref)
-
-(declare-const j3 Int)
-
-(declare-const result13 map__ref)
-
-(declare-const lambda5 (Array Int float))
-
-(declare-const result14 map__ref)
-
-(declare-const upsilon5 (Array Int float))
-
-(declare-const lambda6 map__ref)
-
-(declare-const upsilon6 map__ref)
-
-(declare-const lambda7 (Array Int float))
-
-(declare-const upsilon7 (Array Int float))
-
-(declare-const result15 map__ref)
-
-(declare-const kvmax2 (Array Int float))
-
-(declare-const result16 map__ref)
-
-(declare-const kamax2 (Array Int float))
-
-(declare-const result17 int__ref)
-
-(declare-const i12 Int)
-
-(declare-const result18 int__ref)
-
-(declare-const j4 Int)
-
-(declare-const result19 map__ref)
-
-(declare-const lambda8 (Array Int float))
-
-(declare-const result20 map__ref)
-
-(declare-const upsilon8 (Array Int float))
-
-(declare-const lambda9 map__ref)
-
-(declare-const upsilon9 map__ref)
-
-(declare-const lambda10 (Array Int float))
-
-(declare-const upsilon10 (Array Int float))
-
-(declare-const result21 int__ref)
-
-(declare-const j5 Int)
-
-(declare-const result22 map__ref)
-
-(declare-const lambda11 (Array Int float))
-
-(declare-const result23 map__ref)
-
-(declare-const upsilon11 (Array Int float))
-
-(declare-const lambda12 map__ref)
-
-(declare-const upsilon12 map__ref)
-
-(declare-const lambda13 (Array Int float))
-
-(declare-const upsilon13 (Array Int float))
-
-(declare-const result24 map__ref)
-
-(declare-const kvmax3 (Array Int float))
-
-(declare-const result25 map__ref)
-
-(declare-const kamax3 (Array Int float))
-
-(declare-const kvmax4 map__ref)
-
-(declare-const kamax4 map__ref)
-
-(declare-const lambda14 map__ref)
-
-(declare-const upsilon14 map__ref)
-
-(declare-const kvp10 map__ref)
-
-(declare-const i13 int__ref)
-
-(declare-const i14 int__ref)
-
-(declare-const j6 int__ref)
-
-(declare-const kvmax5 (Array Int float))
-
-(declare-const kamax5 (Array Int float))
-
-(declare-const lambda15 (Array Int float))
-
-(declare-const upsilon15 (Array Int float))
-
-(declare-const kvp11 (Array Int float))
-
-(declare-const i15 Int)
-
-(declare-const i16 Int)
-
-(declare-const j7 Int)
+(declare-const i3 Int)
 
 ;; H
   (assert
-  (forall ((j8 Int))
-  (=> (and (<= 1 j8) (<= j8 2))
+  (forall ((j Int))
+  (=> (and (<= 1 j) (<= j 2))
   (and
   (and
-  (not (fp.eq (to_rep (select d j8)) (fp #b0 #b00000000 #b00000000000000000000000)))
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep
-                                                       (select kv j8))))
-  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep
-                                                       (select ka j8)))))))
+  (not (fp.eq (to_rep (select d j)) (fp #b0 #b00000000 #b00000000000000000000000)))
+  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep (select kv j))))
+  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep (select ka j)))))))
 
 ;; H
   (assert (= (mk_map__ref result) (mk_map__ref lambda)))
@@ -744,45 +404,45 @@
   (assert (= (mk_int__ref result3) (mk_int__ref i)))
 
 ;; H
-  (assert (= i2 1))
+  (assert (= i1 1))
 
 ;; H
-  (assert (<= 1 i2))
+  (assert (<= 1 i1))
 
 ;; H
-  (assert (<= i2 2))
+  (assert (<= i1 2))
 
 ;; H
   (assert
-  (forall ((j8 Int))
-  (=> (and (<= 1 j8) (<= j8 (- i3 1)))
+  (forall ((j Int))
+  (=> (and (<= 1 j) (<= j (- i2 1)))
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep
-                                                       (select kvp2 j8))))))
+                                                       (select kvp2 j))))))
 
 ;; H
   (assert
   (and
-  (and (=> (<= 1 2) (in_range2 i3))
-  (forall ((temp___170 Int))
-  (=> (and (<= 1 temp___170) (<= temp___170 2))
-  (=> (<= i3 temp___170)
-  (= (select kvp2 temp___170) (select kvp1 temp___170))))))
-  (and (<= 1 i3) (<= i3 2))))
+  (and (=> (<= 1 2) (in_range2 i2))
+  (forall ((temp___195 Int))
+  (=> (and (<= 1 temp___195) (<= temp___195 2))
+  (=> (<= i2 temp___195)
+  (= (select kvp2 temp___195) (select kvp1 temp___195))))))
+  (and (<= 1 i2) (<= i2 2))))
 
 ;; H
   (assert
   (and
-  (= o (adjust2triangle (to_rep (select d i3)) (to_rep (select kv i3))
-       (to_rep (select ka i3))))
+  (= o (adjust2triangle (to_rep (select d i2)) (to_rep (select kv i2))
+       (to_rep (select ka i2))))
   (and (fp.isFinite32 o)
   (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o)
-  (fp.leq o (to_rep (select kv i3)))))))
+  (fp.leq o (to_rep (select kv i2)))))))
 
 ;; H
   (assert (= (to_rep o1) o))
 
 ;; H
-  (assert (= o2 (store kvp2 i3 o1)))
+  (assert (= o2 (store kvp2 i2 o1)))
 
 ;; H
   (assert (= kvp2 result4))
@@ -791,27 +451,27 @@
   (assert (= kvp3 o2))
 
 ;; H
-  (assert (not (= i3 2)))
+  (assert (not (= i2 2)))
 
 ;; H
-  (assert (= result5 i3))
+  (assert (= result5 i2))
 
 ;; H
-  (assert (= i4 (+ i3 1)))
+  (assert (= i3 (+ i2 1)))
 
-(declare-const j8 Int)
-
-;; H
-  (assert (<= 1 j8))
+(declare-const j Int)
 
 ;; H
-  (assert (<= j8 (- i4 1)))
+  (assert (<= 1 j))
+
+;; H
+  (assert (<= j (- i3 1)))
 
 (assert
 ;; WP_parameter_def
- ;; File "homothetical.ads", line 5, characters 0-0
+ ;; File "homothetical.adb", line 48, characters 0-0
   (not
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (to_rep
-                                                       (select kvp3 j8)))))
+                                                       (select kvp3 j)))))
 (check-sat)
 (exit)

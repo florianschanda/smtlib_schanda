@@ -955,51 +955,21 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic res1 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(res))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
-axiom H3 : le(fliteral2, x)
-
-axiom H4 : le(fliteral2, y)
-
-axiom H5 : le(y, x)
-
-axiom H6 : ((o = sub(RNE, y, x)) and tqtisFinite(sub(RNE, y, x)))
-
-axiom H7 : (o1 = add(RNE, x, o))
-
-axiom H8 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H9 : (result = res)
-
-axiom H10 : (res1 = o2)
-
-axiom H11 : le(res1, x)
-
  (* File "floating_point.adb", line 377, characters 0-0 *)
-goal WP_parameter_def : le(y, res1)
+goal WP_parameter_def :
+  (forall res:t. forall o:t. forall o1:t. forall o2:t. forall result:t.
+  forall res1:t. (tqtisFinite(x) -> (tqtisFinite(y) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(res)) -> (le(fliteral2, x) -> (le(fliteral2,
+  y) -> (le(y, x) -> ((((((o = sub(RNE, y, x)) and tqtisFinite(sub(RNE, y,
+  x))) and (o1 = add(RNE, x, o))) and ((o2 = o1) and tqtisFinite(o1))) and
+  ((result = res) and (res1 = o2))) -> (le(res1, x) -> le(y, res1))))))))))

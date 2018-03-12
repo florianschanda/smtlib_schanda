@@ -146,12 +146,12 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range
-                                     temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range
+                                    temp___expr_39)))
 
 (declare-sort float 0)
 
@@ -168,12 +168,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort oper 0)
 
@@ -192,11 +193,12 @@
 (declare-datatypes () ((oper__ref (mk_oper__ref (oper__content oper)))))
 (define-fun oper__ref___projection ((a oper__ref)) oper (oper__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_171 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (<= 0 6)) (in_range1 temp___expr_171)))
+(define-fun dynamic_invariant2 ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 6)) (in_range1 temp___expr_200)))
 
 (declare-const op Int)
 
@@ -219,16 +221,6 @@
 (declare-const u Float32)
 
 (declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const o2 Float32)
-
-(declare-const o3 Float32)
-
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
 
 ;; H
   (assert (in_range1 op))
@@ -270,11 +262,11 @@
   (assert (=> (< e 0) (not (= x ((_ to_fp 8 24) #x00000000)))))
 
 ;; H
-  (assert (= o4 (power x e)))
+  (assert (= o (power x e)))
 
 (assert
 ;; WP_parameter_def
  ;; File "overflow_check.adb", line 9, characters 0-0
-  (not (fp.isFinite32 o4)))
+  (not (fp.isFinite32 o)))
 (check-sat)
 (exit)

@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -169,29 +165,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int float) Int Int (Array Int float) Int
-  Int) (Array Int float))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int float)) (b (Array Int float)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (float Int) (Array Int float))
-
-;; singleton_def
-  (assert
-  (forall ((v float))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq ((a (Array Int float)) (a__first Int) (a__last Int)
   (b (Array Int float)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -199,12 +172,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_133 Int))
+                           (forall ((temp___idx_155 Int))
                            (=>
-                           (and (<= a__first temp___idx_133)
-                           (<= temp___idx_133 a__last))
-                           (= (to_rep (select a temp___idx_133)) (to_rep
-                                                                 (select b (+ (- b__first a__first) temp___idx_133)))))))
+                           (and (<= a__first temp___idx_155)
+                           (<= temp___idx_155 a__last))
+                           (= (to_rep (select a temp___idx_155)) (to_rep
+                                                                 (select b (+ (- b__first a__first) temp___idx_155)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -216,10 +189,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_133 Int))
-  (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (to_rep (select a temp___idx_133)) (to_rep
-                                        (select b (+ (- b__first a__first) temp___idx_133)))))))))))
+  (forall ((temp___idx_155 Int))
+  (=> (and (<= a__first temp___idx_155) (<= temp___idx_155 a__last))
+  (= (to_rep (select a temp___idx_155)) (to_rep
+                                        (select b (+ (- b__first a__first) temp___idx_155)))))))))))
 
 (declare-fun to_rep1 (integer) Int)
 
@@ -320,13 +293,14 @@
 (define-fun arr_float_unconstrained__ref___projection ((a arr_float_unconstrained__ref)) us_t
   (arr_float_unconstrained__content a))
 
-(define-fun dynamic_invariant ((temp___expr_168 us_t)
-  (temp___is_init_165 Bool) (temp___skip_constant_166 Bool)
-  (temp___do_toplevel_167 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_166 true))
-                                      (dynamic_property (- 2147483648)
-                                      2147483647 (first1 temp___expr_168)
-                                      (last1 temp___expr_168))))
+(define-fun dynamic_invariant ((temp___expr_195 us_t)
+  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
+  (temp___do_toplevel_193 Bool)
+  (temp___do_typ_inv_194 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_192 true))
+                                     (dynamic_property (- 2147483648)
+                                     2147483647 (first1 temp___expr_195)
+                                     (last1 temp___expr_195))))
 
 (declare-const arr us_t)
 
@@ -409,87 +383,70 @@
 (declare-datatypes () ((a__ref (mk_a__ref (a__content us_t1)))))
 (define-fun a__ref___2__projection ((a a__ref)) us_t1 (a__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant3 ((temp___expr_214 us_t1)
-  (temp___is_init_211 Bool) (temp___skip_constant_212 Bool)
-  (temp___do_toplevel_213 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_212 true))
-                                      (dynamic_property1 (- 2147483648)
-                                      2147483647 (first3 temp___expr_214)
-                                      (last3 temp___expr_214))))
+(define-fun dynamic_invariant3 ((temp___expr_248 us_t1)
+  (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
+  (temp___do_toplevel_246 Bool)
+  (temp___do_typ_inv_247 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_245 true))
+                                     (dynamic_property1 (- 2147483648)
+                                     2147483647 (first3 temp___expr_248)
+                                     (last3 temp___expr_248))))
 
-(declare-const i Int)
+(declare-const o (Array Int float))
 
-(declare-const o Int)
-
-(declare-const o1 float)
-
-(declare-const o2 Float32)
-
-(declare-const o3 (Array Int float))
-
-(declare-const o4 t1)
-
-(declare-const i1 Int)
-
-(declare-const j Int)
-
-(declare-const o5 Int)
-
-(declare-const o6 float)
-
-(declare-const o7 Float32)
+(declare-const o1 t1)
 
 ;; H
-  (assert (dynamic_invariant arr true false true))
+  (assert (dynamic_invariant arr true false true true))
 
 ;; H
   (assert
-  (forall ((i2 Int))
+  (forall ((i Int))
   (=>
-  (and (<= (+ (to_rep1 (first (rt arr))) 1) i2)
-  (<= i2 (to_rep1 (last (rt arr)))))
-  (fp.lt (to_rep (select (elts arr) (- i2 1))) (to_rep
-                                               (select (elts arr) i2))))))
+  (and (<= (+ (to_rep1 (first (rt arr))) 1) i)
+  (<= i (to_rep1 (last (rt arr)))))
+  (fp.lt (to_rep (select (elts arr) (- i 1))) (to_rep (select (elts arr) i))))))
 
 ;; H
   (assert (dynamic_property1 (- 2147483648) 2147483647
   (to_rep1 (first (rt arr))) (to_rep1 (last (rt arr)))))
 
 ;; H
-  (assert (= (elts arr) o3))
+  (assert (= (elts arr) o))
 
 ;; H
   (assert (= (mk1 (to_rep1 (first (rt arr))) (to_rep1 (last (rt arr))))
-  o4))
+  o1))
 
-(declare-const i2 Int)
-
-;; H
-  (assert (<= (to_rep1 (first2 o4)) i2))
+(declare-const i Int)
 
 ;; H
-  (assert (<= i2 (to_rep1 (last2 o4))))
+  (assert (<= (to_rep1 (first2 o1)) i))
 
 ;; H
-  (assert (not (= i2 (to_rep1 (first2 o4)))))
+  (assert (<= i (to_rep1 (last2 o1))))
+
+;; H
+  (assert (not (= i (to_rep1 (first2 o1)))))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (fp.lt (to_rep (select o3 (- i2 1))) (to_rep (select o3 i2)))))
+  (not (fp.lt (to_rep (select o (- i 1))) (to_rep (select o i)))))
 (check-sat)
 (exit)

@@ -992,54 +992,17 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic y : t
-
-logic o : int
-
-logic o1 : bool
-
-logic o2 : int
-
-logic o3 : t
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : t
-
-logic result : bool
-
-logic result1 : int
-
-logic x1 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic x2 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : ((o = abs(x)) and in_range1(abs(x)))
-
-axiom H3 : (((o <  1000) -> (o1 = true)) and ((not (o <  1000)) ->
-  (o1 = false)))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 1000.0))
 
-axiom H4 : ((((o1 = true) and lt(abs2(y), fliteral1)) -> (result = true)) and
-  ((not ((o1 = true) and lt(abs2(y), fliteral1))) -> (result = false)))
-
-axiom H5 : (not (result = true))
-
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1((x * x))
+goal WP_parameter_def :
+  (forall x:int. forall y:t. forall o:int. forall o1:bool.
+  forall result:bool. (in_range1(x) -> (tqtisFinite(y) ->
+  (((((o = abs(x)) and in_range1(abs(x))) and (((o <  1000) and
+  (o1 = true)) or ((not (o <  1000)) and (o1 = false)))) and
+  ((((o1 = true) and lt(abs2(y), fliteral1)) and (result = true)) or
+  ((not ((o1 = true) and lt(abs2(y), fliteral1))) and (result = false)))) ->
+  ((not (result = true)) -> in_range1((x * x)))))))

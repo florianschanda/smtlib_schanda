@@ -107,12 +107,13 @@
 (define-fun float1__ref___projection ((a float1__ref)) float1 (float1__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_171 Float32)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) (fp #b0 #b01111110 #b11001100110011001100110)))
-                                      (in_range temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 Float32)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) (fp #b0 #b01111110 #b11001100110011001100110)))
+                                     (in_range temp___expr_200)))
 
 (declare-sort float2 0)
 
@@ -136,92 +137,19 @@
 (define-fun float2__ref___projection ((a float2__ref)) float2 (float2__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_177 Float32)
-  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool (=>
-                                      (or (= temp___is_init_174 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000000 #b00001100110011001100110)))
-                                      (in_range1 temp___expr_177)))
+(define-fun dynamic_invariant1 ((temp___expr_207 Float32)
+  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
+  (temp___do_toplevel_205 Bool)
+  (temp___do_typ_inv_206 Bool)) Bool (=>
+                                     (or (= temp___is_init_203 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000000 #b00001100110011001100110)))
+                                     (in_range1 temp___expr_207)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const x Float32)
-
-(declare-const y Float32)
-
-(declare-const z Float32)
-
-(declare-const result Float32)
-
-(declare-const x1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const y1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const z1 Float32)
-
-(declare-const z2 Float32)
-
-(declare-const result3 Float32)
-
-(declare-const x2 Float32)
-
-(declare-const z3 Float32)
-
-(declare-const result4 Float32)
-
-(declare-const x3 Float32)
-
-(declare-const z4 Float32)
-
-(declare-const result5 Float32)
-
-(declare-const y2 Float32)
-
-(declare-const z5 Float32)
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) (fp #b0 #b01111110 #b11001100110011001100110))
-  (in_range x)))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) (fp #b0 #b01111110 #b11001100110011001100110))
-  (in_range y)))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000000 #b00001100110011001100110))
-  (in_range1 z)))
-
-;; H
-  (assert (= result x))
-
-;; H
-  (assert (= x1 (fp #b0 #b01111110 #b11001100110011001100110)))
-
-;; H
-  (assert (= result1 y))
-
-;; H
-  (assert (= y1 (fp #b0 #b01111110 #b11001100110011001100110)))
-
-;; H
-  (assert (= result2 z))
-
-;; H
-  (assert (= z1 (fp #b0 #b00000000 #b00000000000000000000000)))
 
 (assert
 ;; WP_parameter_def

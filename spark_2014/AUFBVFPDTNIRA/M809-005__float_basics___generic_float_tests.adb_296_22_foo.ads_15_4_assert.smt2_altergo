@@ -926,7 +926,5 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-axiom H : tqtisFinite(x)
-
  (* File "generic_float_tests.adb", line 277, characters 0-0 *)
-goal WP_parameter_def : eq(neg(neg(x)), x)
+goal WP_parameter_def : (tqtisFinite(x) -> eq(neg(neg(x)), x))

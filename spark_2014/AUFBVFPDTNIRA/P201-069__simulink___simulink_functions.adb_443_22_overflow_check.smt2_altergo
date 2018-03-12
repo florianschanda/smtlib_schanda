@@ -984,42 +984,13 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : int
-
-logic o7 : int
-
-axiom H : in_range1(left)
-
-axiom H1 : in_range1(right)
-
-axiom H2 : (not (right = 0))
-
-axiom H3 : ((o = div(RNE, of_int(RNE, left), of_int(RNE, right))) and
-  tqtisFinite(div(RNE, of_int(RNE, left), of_int(RNE, right))))
-
-axiom H4 : (o1 = roundToIntegral(RTN, o))
-
-axiom H5 : (o2 = to_int(RNA, o1))
-
-axiom H6 : ((o3 = o2) and in_range1(o2))
-
-axiom H7 : (o4 = (o3 * right))
-
-axiom H8 : ((o5 = o4) and in_range1(o4))
-
-axiom H9 : (o6 = (left - o5))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(o6)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:int. forall o3:int. forall o4:int.
+  forall o5:int. forall o6:int. (in_range1(left) -> (in_range1(right) ->
+  ((not (right = 0)) -> (((((((((o = div(RNE, of_int(RNE, left), of_int(RNE,
+  right))) and tqtisFinite(div(RNE, of_int(RNE, left), of_int(RNE,
+  right)))) and (o1 = roundToIntegral(RTN, o))) and (o2 = to_int(RNA,
+  o1))) and ((o3 = o2) and in_range1(o2))) and (o4 = (o3 * right))) and
+  ((o5 = o4) and in_range1(o4))) and (o6 = (left - o5))) ->
+  in_range1(o6))))))

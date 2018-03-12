@@ -51,12 +51,13 @@
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
 
-(define-fun dynamic_invariant ((temp___expr_159 Int)
-  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
-  (temp___do_toplevel_158 Bool)) Bool (=>
-                                      (or (= temp___is_init_156 true)
-                                      (<= (- 2147483648) 2147483647))
-                                      (in_range temp___expr_159)))
+(define-fun dynamic_invariant ((temp___expr_186 Int)
+  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
+  (temp___do_toplevel_184 Bool)
+  (temp___do_typ_inv_185 Bool)) Bool (=>
+                                     (or (= temp___is_init_182 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range temp___expr_186)))
 
 (declare-const i Int)
 

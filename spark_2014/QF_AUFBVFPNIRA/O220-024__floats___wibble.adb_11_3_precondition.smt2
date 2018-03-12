@@ -125,25 +125,27 @@
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
-(define-fun dynamic_invariant ((temp___expr_183 (_ BitVec 32))
-  (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
-  (temp___do_toplevel_182 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_214 (_ BitVec 32))
+  (temp___is_init_210 Bool) (temp___skip_constant_211 Bool)
+  (temp___do_toplevel_212 Bool) (temp___do_typ_inv_213 Bool)) Bool true)
 
-(define-fun dynamic_invariant1 ((temp___expr_189 Float32)
-  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
-  (temp___do_toplevel_188 Bool)) Bool (=>
-                                      (or (= temp___is_init_186 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_189)))
+(define-fun dynamic_invariant1 ((temp___expr_221 Float32)
+  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
+  (temp___do_toplevel_219 Bool)
+  (temp___do_typ_inv_220 Bool)) Bool (=>
+                                     (or (= temp___is_init_217 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_221)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const o Float32)
 

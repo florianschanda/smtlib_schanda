@@ -1214,66 +1214,10 @@ logic old_speed : t
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic speed : t
-
-logic distance : t
-
-logic average : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : int
-
-logic result : t
-
-logic speed1 : t
-
-logic result1 : t
-
-logic average1 : t
-
-logic result2 : t
-
-logic distance1 : t
-
-logic speed2 : t
-
-logic distance2 : t
-
-logic average2 : t
-
-logic speed3 : t
-
-logic distance3 : t
-
-logic average3 : t
-
-axiom H : in_range1(n)
-
-axiom H1 : in_range2(factor)
-
-axiom H2 : tqtisFinite(speed)
-
-axiom H3 : tqtisFinite(distance)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H4 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(average))
-
-axiom H5 : ((n <  25000) and (invariant__(n, speed, distance) = true))
-
-axiom H6 : (speed = old_speed)
-
-axiom H7 : tqtisFinite(old_speed)
 
 logic fliteral4 : t
 
@@ -1286,6 +1230,11 @@ axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.01000000000000000020816681711721685132943093776702880859375))
 
  (* File "attempt_4.adb", line 22, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, speed,
-  mul(NearestTiesToEven, mul(NearestTiesToEven, factor, fliteral4),
-  fliteral5)))
+goal WP_parameter_def :
+  (forall speed:t. forall distance:t. forall average:t. (in_range1(n) ->
+  (in_range2(factor) -> (tqtisFinite(speed) -> (tqtisFinite(distance) ->
+  ((le(neg(fliteral3), fliteral3) -> tqtisFinite(average)) ->
+  (((n <  25000) and (invariant__(n, speed, distance) = true)) ->
+  ((speed = old_speed) -> (tqtisFinite(old_speed) ->
+  tqtisFinite(add(NearestTiesToEven, speed, mul(NearestTiesToEven,
+  mul(NearestTiesToEven, factor, fliteral4), fliteral5))))))))))))

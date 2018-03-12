@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -954,77 +954,53 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : t
-
-logic result : t
-
-logic y1 : t
-
-logic y2 : t
-
-logic y3 : t
-
-axiom H : tqtisFinite(x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(y))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 4096.0))
 
-axiom H2 : (le(neg(fliteral2), x) and le(x, fliteral2))
-
-axiom H3 : (result = y)
-
-axiom H4 : (y1 = roundToIntegral(RTZ, x))
-
-axiom H5 : (y1 = y2)
-
-axiom H6 : (y3 = y1)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 1.60000002384185791015625))
-
-axiom H7 : ((bool_eq(x, neg(fliteral3)) = true) -> eq(y2, neg(fliteral)))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 1.50000000000000000000000))
 
-axiom H8 : ((bool_eq(x, neg(fliteral4)) = true) -> eq(y2, neg(fliteral)))
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 1.39999997615814208984375))
-
-axiom H9 : ((bool_eq(x, neg(fliteral5)) = true) -> eq(y2, neg(fliteral)))
-
-axiom H10 : ((bool_eq(x, neg(fliteral)) = true) -> eq(y2, neg(fliteral)))
 
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 0.0e-1))
 
-axiom H11 : ((bool_eq(x, fliteral6) = true) -> eq(y2, fliteral6))
-
-axiom H12 : ((bool_eq(x, fliteral) = true) -> eq(y2, fliteral))
-
-axiom H13 : ((bool_eq(x, fliteral5) = true) -> eq(y2, fliteral))
-
-axiom H14 : ((bool_eq(x, fliteral4) = true) -> eq(y2, fliteral))
-
-axiom H15 : (bool_eq(x, fliteral3) = true)
-
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : eq(y2, fliteral)
+goal WP_parameter_def :
+  (forall y:t. forall result:t. forall y1:t. forall y2:t. forall y3:t.
+  (tqtisFinite(x) -> ((le(neg(fliteral1), fliteral1) -> tqtisFinite(y)) ->
+  ((le(neg(fliteral2), x) and le(x, fliteral2)) -> ((((result = y) and
+  (y1 = roundToIntegral(RTZ, x))) and ((y1 = y2) and (y3 = y1))) ->
+  ((((bool_eq(x, neg(fliteral3)) = true) and eq(y2, neg(fliteral))) or
+  (not (bool_eq(x, neg(fliteral3)) = true))) -> ((((bool_eq(x,
+  neg(fliteral4)) = true) and eq(y2, neg(fliteral))) or (not (bool_eq(x,
+  neg(fliteral4)) = true))) -> ((((bool_eq(x, neg(fliteral5)) = true) and
+  eq(y2, neg(fliteral))) or (not (bool_eq(x, neg(fliteral5)) = true))) ->
+  ((((bool_eq(x, neg(fliteral)) = true) and eq(y2, neg(fliteral))) or
+  (not (bool_eq(x, neg(fliteral)) = true))) -> ((((bool_eq(x,
+  fliteral6) = true) and eq(y2, fliteral6)) or (not (bool_eq(x,
+  fliteral6) = true))) -> ((((bool_eq(x, fliteral) = true) and eq(y2,
+  fliteral)) or (not (bool_eq(x, fliteral) = true))) -> ((((bool_eq(x,
+  fliteral5) = true) and eq(y2, fliteral)) or (not (bool_eq(x,
+  fliteral5) = true))) -> ((((bool_eq(x, fliteral4) = true) and eq(y2,
+  fliteral)) or (not (bool_eq(x, fliteral4) = true))) -> ((bool_eq(x,
+  fliteral3) = true) -> eq(y2, fliteral)))))))))))))))

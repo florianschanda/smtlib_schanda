@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -979,25 +979,6 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic foo__float_tests__underflow_2__result : bool
-
-logic o : t
-
-logic result : bool
-
-logic foo__float_tests__underflow_2__result1 : bool
-
-logic foo__float_tests__underflow_2__result2 : bool
-
-logic foo__float_tests__underflow_2__result3 : bool
-
-logic foo__float_tests__underflow_2__result4 : bool
-
-logic foo__float_tests__underflow_2__result5 : bool
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
  (* File "generic_float_tests.adb", line 96, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(RNE, a, b))
+goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) ->
+  tqtisFinite(mul(RNE, a, b))))

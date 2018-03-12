@@ -53,12 +53,13 @@
                                         (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x)
                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111101110)))))
 
-(define-fun dynamic_invariant ((temp___expr_172 Float32)
-  (temp___is_init_169 Bool) (temp___skip_constant_170 Bool)
-  (temp___do_toplevel_171 Bool)) Bool (=>
-                                      (or (= temp___is_init_169 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
-                                      (in_range temp___expr_172)))
+(define-fun dynamic_invariant ((temp___expr_201 Float32)
+  (temp___is_init_197 Bool) (temp___skip_constant_198 Bool)
+  (temp___do_toplevel_199 Bool)
+  (temp___do_typ_inv_200 Bool)) Bool (=>
+                                     (or (= temp___is_init_197 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
+                                     (in_range temp___expr_201)))
 
 (declare-const c_2pi_in_degrees Float32)
 
@@ -78,12 +79,13 @@
 ;; c_2pi_in_degrees__def_axiom
   (assert (= c_2pi_in_degrees (fp #b0 #b10000111 #b01101000000000000000000)))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 Float32)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000111 #b01101000000000000000000)))
-                                      (in_range1 temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_208 Float32)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000111 #b01101000000000000000000)))
+                                     (in_range1 temp___expr_208)))
 
 (declare-const o Float32)
 
@@ -102,7 +104,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "access_inline.adb", line 1, characters 0-0
+ ;; File "access_inline.adb", line 11, characters 0-0
   (not (in_range1 o1)))
 (check-sat)
 (exit)

@@ -418,10 +418,6 @@
   (= (eq_sub3 a b (bv2nat i) (bv2nat n)) (eq_sub_bv3 a b i n))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int6 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -458,9 +454,9 @@
 (define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
-(define-fun dynamic_invariant ((temp___expr_154 (_ BitVec 16))
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_180 (_ BitVec 16))
+  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
+  (temp___do_toplevel_178 Bool) (temp___do_typ_inv_179 Bool)) Bool true)
 
 (declare-sort tfloat_32B 0)
 
@@ -496,12 +492,13 @@
 (define-fun float_32__ref___projection ((a float_32__ref)) float_32 (float_32__content
                                                                     a))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 Float32)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_208 Float32)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_208)))
 
 (declare-const x (_ BitVec 16))
 
@@ -514,21 +511,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const res Float32)
-
-(declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const result Float32)
-
-(declare-const res1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const res2 Float32)
-
-;; H
-  (assert true)
 
 ;; H
   (assert (fp.isFinite32 y))

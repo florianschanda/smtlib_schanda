@@ -38,10 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -102,9 +98,9 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int1 (RoundingMode Int) Float32)
+(declare-fun of_int (RoundingMode Int) Float32)
 
-(declare-fun to_int2 (RoundingMode Float32) Int)
+(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -167,11 +163,12 @@
 (declare-datatypes () ((e__ref (mk_e__ref (e__content e)))))
 (define-fun e__ref___projection ((a e__ref)) e (e__content a))
 
-(define-fun dynamic_invariant ((temp___expr_135 Int)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (<= 0 3)) (in_range2 temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 0 3)) (in_range2 temp___expr_158)))
 
 (declare-fun to_rep1 (e) Int)
 
@@ -744,13 +741,13 @@
 ;; tagged_discr__u1__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag1 v))) :pattern (
+  (! (= (ite (is_zero__2 v) 1 0) (ite (is_zero__21 us_tag1 v) 1 0)) :pattern (
   (is_zero__21 us_tag1 v)) )))
 
 ;; tagged_discr__init__2__T8b__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag2 v))) :pattern (
+  (! (= (ite (is_zero__2 v) 1 0) (ite (is_zero__21 us_tag2 v) 1 0)) :pattern (
   (is_zero__21 us_tag2 v)) )))
 
 ;; is_zero__2__def_axiom
@@ -876,29 +873,20 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
-
-(declare-const v__split_fields integer)
-
-(declare-const v__split_fields1 Bool)
-
-(declare-const v__split_fields2 integer)
-
-(declare-const v__split_fields3 float)
-
-(declare-const v__split_fields4 us_private)
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const o e)
 
@@ -938,79 +926,19 @@
 
 (declare-const o12 us_private)
 
-(declare-const temp___211 e)
+(declare-const temp___240 e)
 
-(declare-const temp___2111 integer)
+(declare-const temp___2401 integer)
 
-(declare-const temp___2112 Bool)
+(declare-const temp___2402 Bool)
 
-(declare-const temp___2113 integer)
+(declare-const temp___2403 integer)
 
-(declare-const temp___2114 float)
+(declare-const temp___2404 float)
 
-(declare-const temp___2115 us_private)
+(declare-const temp___2405 us_private)
 
-(declare-const temp___2116 Int)
-
-(declare-const usq_ e)
-
-(declare-const usq_1 integer)
-
-(declare-const usq_2 Bool)
-
-(declare-const usq_3 integer)
-
-(declare-const usq_4 float)
-
-(declare-const usq_5 us_private)
-
-(declare-const usq_6 Int)
-
-(declare-const temp___213 e)
-
-(declare-const temp___2131 integer)
-
-(declare-const temp___2132 Bool)
-
-(declare-const temp___2133 integer)
-
-(declare-const temp___2134 float)
-
-(declare-const temp___2135 us_private)
-
-(declare-const temp___2136 Int)
-
-(declare-const result integer)
-
-(declare-const result1 Bool)
-
-(declare-const result2 integer)
-
-(declare-const result3 float)
-
-(declare-const result4 us_private)
-
-(declare-const v__split_fields5 integer)
-
-(declare-const v__split_fields6 Bool)
-
-(declare-const v__split_fields7 integer)
-
-(declare-const v__split_fields8 float)
-
-(declare-const v__split_fields9 us_private)
-
-(declare-const v__split_fields10 integer)
-
-(declare-const v__split_fields11 Bool)
-
-(declare-const v__split_fields12 integer)
-
-(declare-const v__split_fields13 float)
-
-(declare-const v__split_fields14 us_private)
-
-(declare-const v__split_fields15 us_split_fields2)
+(declare-const temp___2406 Int)
 
 ;; H
   (assert (= (to_rep1 (rec__tagged_discr__t__discr v__split_discrs)) 0))
@@ -1025,7 +953,7 @@
   (assert (= (to_rep o1) 0))
 
 ;; H
-  (assert (= (of_int 0) o2))
+  (assert (= (distinct 0 0) o2))
 
 ;; H
   (assert (= o1 o3))
@@ -1090,29 +1018,29 @@
   (assert (= us_null_ext__ o12))
 
 ;; H
-  (assert (= (us_split_discrs1 r7b) (mk___split_discrs temp___211)))
+  (assert (= (us_split_discrs1 r7b) (mk___split_discrs temp___240)))
 
 ;; H
-  (assert (= temp___2111 o8))
+  (assert (= temp___2401 o8))
 
 ;; H
-  (assert (= temp___2112 o9))
+  (assert (= temp___2402 o9))
 
 ;; H
-  (assert (= temp___2113 o10))
+  (assert (= temp___2403 o10))
 
 ;; H
-  (assert (= temp___2114 o11))
+  (assert (= temp___2404 o11))
 
 ;; H
-  (assert (= temp___2115 o12))
+  (assert (= temp___2405 o12))
 
 ;; H
-  (assert (= us_tag2 temp___2116))
+  (assert (= us_tag2 temp___2406))
 
 (assert
 ;; WP_parameter_def
  ;; File "tagged_discr.ads", line 33, characters 0-0
-  (not (= temp___211 (rec__tagged_discr__t__discr v__split_discrs))))
+  (not (= temp___240 (rec__tagged_discr__t__discr v__split_discrs))))
 (check-sat)
 (exit)

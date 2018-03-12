@@ -933,20 +933,10 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic y : t
-
-logic o : t
-
-axiom H : tqtisFinite(x1)
-
-axiom H1 : tqtisFinite(x2)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(y))
 
 logic fliteral2 : t
 
@@ -954,4 +944,6 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
  (* File "run.ads", line 28, characters 0-0 *)
-goal WP_parameter_def : neq(x1, fliteral2)
+goal WP_parameter_def :
+  (forall y:t. (tqtisFinite(x1) -> (tqtisFinite(x2) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(y)) -> neq(x1, fliteral2)))))

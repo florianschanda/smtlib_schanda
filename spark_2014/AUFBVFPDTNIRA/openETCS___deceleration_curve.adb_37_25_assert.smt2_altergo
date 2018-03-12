@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1172,109 +1172,33 @@ axiom m_per_s_from_km_per_h__def_axiom :
   (m_per_s_from_km_per_h(speed) = div(RNE, mul(RNE, speed, fliteral3),
   fliteral4))))
 
-logic speed : t
-
-logic delta_speed : t
-
-logic distance : int
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : bool
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : int
-
-logic result : t
-
-logic speed1 : t
-
-logic result1 : int
-
-logic distance1 : int
-
-logic speed2 : t
-
-logic delta_speed1 : t
-
-logic distance2 : int
-
-logic result2 : t
-
-logic delta_speed2 : t
-
-logic result3 : t
-
-logic speed3 : t
-
-logic result4 : int
-
-logic distance3 : int
-
-axiom H : tqtisFinite(maximum_valid_speed)
-
-axiom H1 : (m_per_s_from_km_per_h(fliteral1) = maximum_valid_speed)
-
-axiom H2 : tqtisFinite(initial_speed)
-
-axiom H3 : tqtisFinite(final_speed)
-
-axiom H4 : tqtisFinite(acceleration)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 10.0))
-
-axiom H5 : (((((lt(fliteral2, initial_speed) and le(fliteral2,
-  final_speed)) and le(initial_speed, maximum_valid_speed)) and
-  lt(final_speed, initial_speed)) and lt(acceleration, fliteral2)) and
-  le(neg(fliteral5), acceleration))
-
-axiom H6 : (result = speed)
-
-axiom H7 : (speed1 = initial_speed)
-
-axiom H8 : tqtisFinite(speed1)
 
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 340282346638528859811704183484516925440.0))
 
-axiom H9 : (le(neg(fliteral6), fliteral6) -> tqtisFinite(delta_speed))
-
-axiom H10 : (result1 = distance)
-
-axiom H11 : (distance1 = 0)
-
-axiom H12 : in_range3(distance1)
-
-axiom H13 : lt(final_speed, speed1)
-
 logic fliteral7 : t
 
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
   (tqtreal(fliteral7) = 0.100000001490116119384765625))
 
-axiom H14 : lt(fliteral7, speed1)
-
  (* File "units.ads", line 27, characters 0-0 *)
-goal WP_parameter_def : le(neg(fliteral5), acceleration)
+goal WP_parameter_def :
+  (forall speed:t. forall delta_speed:t. forall distance:int.
+  forall result:t. forall speed1:t. forall result1:int. forall distance1:int.
+  (tqtisFinite(maximum_valid_speed) ->
+  ((m_per_s_from_km_per_h(fliteral1) = maximum_valid_speed) ->
+  (tqtisFinite(initial_speed) -> (tqtisFinite(final_speed) ->
+  (tqtisFinite(acceleration) -> ((((((lt(fliteral2, initial_speed) and
+  le(fliteral2, final_speed)) and le(initial_speed, maximum_valid_speed)) and
+  lt(final_speed, initial_speed)) and lt(acceleration, fliteral2)) and
+  le(neg(fliteral5), acceleration)) -> (((result = speed) and
+  (speed1 = initial_speed)) -> (tqtisFinite(speed1) -> ((le(neg(fliteral6),
+  fliteral6) -> tqtisFinite(delta_speed)) -> (((result1 = distance) and
+  (distance1 = 0)) -> (in_range3(distance1) -> ((lt(final_speed, speed1) and
+  lt(fliteral7, speed1)) -> le(neg(fliteral5), acceleration))))))))))))))

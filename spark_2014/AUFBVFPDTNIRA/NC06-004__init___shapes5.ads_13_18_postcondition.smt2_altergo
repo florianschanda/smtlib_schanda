@@ -901,12 +901,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -918,6 +912,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1213,132 +1213,26 @@ axiom in_bounds__post_axiom : true
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic wild_man : int
-
-logic r : t
-
-logic shapes5__make_circle__result : coordinate_type
-
-logic shapes5__make_circle__result1 : coordinate_type
-
-logic shapes5__make_circle__result2 : radius_type
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : radius_type
-
-logic o5 : coordinate_type
-
-logic o6 : coordinate_type
-
-logic o7 : coordinate_type
-
-logic o8 : coordinate_type
-
-logic o9 : radius_type
-
-logic o10 : coordinate_type
-
-logic o11 : coordinate_type
-
-logic o12 : radius_type
-
-logic result : t
-
-logic r1 : t
-
-logic result1 : t
-
-logic r2 : t
-
-logic result2 : t
-
-logic r3 : t
-
-logic result3 : t
-
-logic r4 : t
-
-logic result4 : t
-
-logic r5 : t
-
-logic result5 : coordinate_type
-
-logic result6 : coordinate_type
-
-logic result7 : radius_type
-
-logic shapes5__make_circle__result3 : coordinate_type
-
-logic shapes5__make_circle__result4 : coordinate_type
-
-logic shapes5__make_circle__result5 : radius_type
-
-logic shapes5__make_circle__result6 : coordinate_type
-
-logic shapes5__make_circle__result7 : coordinate_type
-
-logic shapes5__make_circle__result8 : radius_type
-
-logic shapes5__make_circle__result9 : coordinate_type
-
-logic shapes5__make_circle__result10 : coordinate_type
-
-logic shapes5__make_circle__result11 : radius_type
-
-logic r6 : t
-
-logic shapes5__make_circle__result12 : coordinate_type
-
-logic shapes5__make_circle__result13 : coordinate_type
-
-logic shapes5__make_circle__result14 : radius_type
-
-logic r7 : t
-
-logic shapes5__make_circle__result15 : coordinate_type
-
-logic shapes5__make_circle__result16 : coordinate_type
-
-logic shapes5__make_circle__result17 : radius_type
-
-logic result8 : coordinate_type
-
-logic result9 : coordinate_type
-
-logic result10 : radius_type
-
-axiom H : in_range3(x)
-
-axiom H1 : in_range3(y)
-
-axiom H2 : in_range4(radius)
-
-axiom H3 : in_range2(wild_man)
-
-axiom H4 : (((in_range3(add(RNE, to_rep(shapes5__make_circle__result12),
-  to_rep1(shapes5__make_circle__result14))) and in_range3(sub(RNE,
-  to_rep(shapes5__make_circle__result12),
-  to_rep1(shapes5__make_circle__result14)))) and in_range3(add(RNE,
-  to_rep(shapes5__make_circle__result13),
-  to_rep1(shapes5__make_circle__result14)))) and in_range3(sub(RNE,
-  to_rep(shapes5__make_circle__result13),
-  to_rep1(shapes5__make_circle__result14))))
-
-axiom H5 : ((result8 = shapes5__make_circle__result12) and
-  ((result9 = shapes5__make_circle__result13) and
-  (result10 = shapes5__make_circle__result14)))
-
  (* File "shapes5.ads", line 27, characters 0-0 *)
-goal WP_parameter_def : (in_bounds({ us_split_fields1 = {
-  rec__shapes5__circle__center_x = shapes5__make_circle__result12;
-  rec__shapes5__circle__center_y = shapes5__make_circle__result13;
-  rec__shapes5__circle__radius = shapes5__make_circle__result14 } },
-  wild_man) = true)
+goal WP_parameter_def :
+  (forall wild_man:int. forall shapes5__make_circle__result:coordinate_type.
+  forall shapes5__make_circle__result1:coordinate_type.
+  forall shapes5__make_circle__result2:radius_type.
+  (forall result:coordinate_type. forall result1:coordinate_type.
+  forall result2:radius_type. ((in_range3(x) and (in_range3(y) and
+  (in_range4(radius) and (in_range2(wild_man) and ((((in_range3(add(RNE,
+  to_rep(shapes5__make_circle__result),
+  to_rep1(shapes5__make_circle__result2))) and in_range3(sub(RNE,
+  to_rep(shapes5__make_circle__result),
+  to_rep1(shapes5__make_circle__result2)))) and in_range3(add(RNE,
+  to_rep(shapes5__make_circle__result1),
+  to_rep1(shapes5__make_circle__result2)))) and in_range3(sub(RNE,
+  to_rep(shapes5__make_circle__result1),
+  to_rep1(shapes5__make_circle__result2)))) and
+  ((result = shapes5__make_circle__result) and
+  ((result1 = shapes5__make_circle__result1) and
+  (result2 = shapes5__make_circle__result2)))))))) -> (in_bounds({
+  us_split_fields1 = { rec__shapes5__circle__center_x =
+  shapes5__make_circle__result; rec__shapes5__circle__center_y =
+  shapes5__make_circle__result1; rec__shapes5__circle__radius =
+  shapes5__make_circle__result2 } }, wild_man) = true))))

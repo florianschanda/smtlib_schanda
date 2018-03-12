@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -127,12 +123,13 @@
 (declare-datatypes () ((ft__ref (mk_ft__ref (ft__content ft)))))
 (define-fun ft__ref___projection ((a ft__ref)) ft (ft__content a))
 
-(define-fun dynamic_invariant ((temp___expr_137 Float32)
-  (temp___is_init_134 Bool) (temp___skip_constant_135 Bool)
-  (temp___do_toplevel_136 Bool)) Bool (=>
-                                      (or (= temp___is_init_134 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_137)))
+(define-fun dynamic_invariant ((temp___expr_160 Float32)
+  (temp___is_init_156 Bool) (temp___skip_constant_157 Bool)
+  (temp___do_toplevel_158 Bool)
+  (temp___do_typ_inv_159 Bool)) Bool (=>
+                                     (or (= temp___is_init_156 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_160)))
 
 (declare-const x Float32)
 
@@ -140,20 +137,19 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const y Float32)
 
 (declare-const o Float32)
 
-(declare-const o1 Float32)
-
-(declare-const o2 Bool)
+(declare-const o1 Bool)
 
 (declare-const result Float32)
 
@@ -191,11 +187,11 @@
 
 ;; H
   (assert
-  (and (= o1 (fp.add RNE x (fp #b0 #b01111110 #b00000000000000000000000)))
+  (and (= o (fp.add RNE x (fp #b0 #b01111110 #b00000000000000000000000)))
   (fp.isFinite32 (fp.add RNE x (fp #b0 #b01111110 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o2 (ite (fp.leq y2 o1) true false)))
+  (assert (= o1 (ite (fp.leq y2 o) true false)))
 
 (assert
 ;; WP_parameter_def

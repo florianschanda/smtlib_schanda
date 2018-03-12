@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -119,12 +115,13 @@
 (define-fun float1__ref___projection ((a float1__ref)) float1 (float1__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_171 Float32)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) (fp #b0 #b01111110 #b11001100110011001100110)))
-                                      (in_range1 temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 Float32)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) (fp #b0 #b01111110 #b11001100110011001100110)))
+                                     (in_range1 temp___expr_200)))
 
 (declare-sort float2 0)
 
@@ -148,12 +145,13 @@
 (define-fun float2__ref___projection ((a float2__ref)) float2 (float2__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_177 Float32)
-  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool (=>
-                                      (or (= temp___is_init_174 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000000 #b00001100110011001100110)))
-                                      (in_range2 temp___expr_177)))
+(define-fun dynamic_invariant1 ((temp___expr_207 Float32)
+  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
+  (temp___do_toplevel_205 Bool)
+  (temp___do_typ_inv_206 Bool)) Bool (=>
+                                     (or (= temp___is_init_203 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000000 #b00001100110011001100110)))
+                                     (in_range2 temp___expr_207)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -166,8 +164,6 @@
 (declare-const y Float32)
 
 (declare-const z Float32)
-
-(declare-const o Float32)
 
 (declare-const result Float32)
 

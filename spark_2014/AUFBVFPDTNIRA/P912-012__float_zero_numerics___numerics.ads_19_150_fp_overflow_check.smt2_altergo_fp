@@ -1091,49 +1091,24 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic numerics__Odivide__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic numerics__Odivide__result1 : t
-
-logic numerics__Odivide__result2 : t
-
-logic numerics__Odivide__result3 : t
-
-logic numerics__Odivide__result4 : t
-
-logic numerics__Odivide__result5 : t
-
-axiom H : tqtisFinite(left)
-
-axiom H1 : tqtisFinite(right)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H2 : neq(right, fliteral1)
-
-axiom H3 : (numerics__Odivide__result1 = numerics__Odivide__result2)
-
-axiom H4 : (numerics__Odivide__result3 = numerics__Odivide__result1)
-
-axiom H5 : ((o = div(NearestTiesToEven, left, right)) and
-  tqtisFinite(div(NearestTiesToEven, left, right)))
-
-axiom H6 : (result = numerics__Odivide__result)
-
-axiom H7 : (numerics__Odivide__result1 = o)
-
-axiom H8 : (numerics__Odivide__result4 = numerics__Odivide__result2)
-
-axiom H9 : (numerics__Odivide__result5 = numerics__Odivide__result3)
-
  (* File "numerics.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(div(NearestTiesToEven, left, right))
+goal WP_parameter_def :
+  (forall numerics__Odivide__result:t. forall o:t. forall result:t.
+  forall numerics__Odivide__result1:t. forall numerics__Odivide__result2:t.
+  forall numerics__Odivide__result3:t. forall numerics__Odivide__result4:t.
+  forall numerics__Odivide__result5:t. (tqtisFinite(left) ->
+  (tqtisFinite(right) -> (neq(right, fliteral1) ->
+  (((((numerics__Odivide__result1 = numerics__Odivide__result2) and
+  (numerics__Odivide__result3 = numerics__Odivide__result1)) and
+  (((o = div(NearestTiesToEven, left, right)) and
+  tqtisFinite(div(NearestTiesToEven, left, right))) and (({ t__content =
+  result } = { t__content = numerics__Odivide__result }) and
+  (numerics__Odivide__result1 = o)))) and (({ t__content =
+  numerics__Odivide__result4 } = { t__content = numerics__Odivide__result2
+  }) and (numerics__Odivide__result5 = numerics__Odivide__result3))) ->
+  tqtisFinite(div(NearestTiesToEven, left, right)))))))

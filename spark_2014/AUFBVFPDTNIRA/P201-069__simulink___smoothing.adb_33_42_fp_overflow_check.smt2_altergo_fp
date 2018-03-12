@@ -1083,78 +1083,25 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic smoothed_value : t
-
-logic abs_delta_out1 : t
-
-logic compare_to_zero_out1 : bool
-
-logic smoother_value_out1 : t
-
-logic abs_new_delta_out1 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic result : t
-
-logic abs_delta_out11 : t
-
-logic result1 : bool
-
-logic compare_to_zero_out11 : bool
-
-logic result2 : t
-
-logic smoother_value_out11 : t
-
-logic result3 : t
-
-logic abs_new_delta_out11 : t
-
-axiom H : tqtisFinite(new_value)
-
-axiom H1 : tqtisFinite(prior_value)
-
-axiom H2 : tqtisFinite(smoothing_factor)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H3 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(smoothed_value))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
-axiom H4 : (lt(fliteral, smoothing_factor) and (le(fliteral2, new_value) and
-  le(fliteral2, prior_value)))
-
-axiom H5 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(abs_delta_out1))
-
-axiom H6 : (le(neg(fliteral1), fliteral1) ->
-  tqtisFinite(smoother_value_out1))
-
-axiom H7 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(abs_new_delta_out1))
-
  (* File "smoothing.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(sub(NearestTiesToEven, new_value,
-  prior_value))
+goal WP_parameter_def :
+  (forall smoothed_value:t. forall abs_delta_out1:t.
+  forall smoother_value_out1:t. forall abs_new_delta_out1:t.
+  (tqtisFinite(new_value) -> (tqtisFinite(prior_value) ->
+  (tqtisFinite(smoothing_factor) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(smoothed_value)) -> ((lt(fliteral, smoothing_factor) and
+  (le(fliteral2, new_value) and le(fliteral2, prior_value))) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(abs_delta_out1)) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(smoother_value_out1)) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(abs_new_delta_out1)) ->
+  tqtisFinite(sub(NearestTiesToEven, new_value, prior_value)))))))))))

@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1088,12 +1084,12 @@
 (declare-datatypes () ((t1__ref (mk_t1__ref (t1__content t1)))))
 (define-fun t1__ref___projection ((a t1__ref)) t1 (t1__content a))
 
-(define-fun dynamic_invariant ((temp___expr_171 t) (temp___is_init_168 Bool)
-  (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range2
-                                      temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 t) (temp___is_init_196 Bool)
+  (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range2
+                                     temp___expr_200)))
 
 (declare-sort t2 0)
 
@@ -1120,22 +1116,21 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_177 t) (temp___is_init_174 Bool)
-  (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool (and
-                                      (=>
-                                      (or (= temp___is_init_174 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range3
-                                      temp___expr_177))
-                                      (=> (= temp___do_toplevel_176 true)
-                                      (=> (= temp___is_init_174 true)
-                                      (and (le (neg fliteral)
-                                      temp___expr_177) (le temp___expr_177
-                                      fliteral))))))
+(define-fun dynamic_invariant1 ((temp___expr_207 t) (temp___is_init_203 Bool)
+  (temp___skip_constant_204 Bool) (temp___do_toplevel_205 Bool)
+  (temp___do_typ_inv_206 Bool)) Bool (and
+                                     (=>
+                                     (or (= temp___is_init_203 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range3
+                                     temp___expr_207))
+                                     (=> (= temp___do_toplevel_205 true)
+                                     (=> (= temp___is_init_203 true)
+                                     (and (le (neg fliteral) temp___expr_207)
+                                     (le temp___expr_207 fliteral))))))
 
-(define-fun dynamic_predicate ((temp___181 t)) Bool (and (le (neg fliteral)
-                                                    temp___181) (le
-                                                    temp___181 fliteral)))
+(define-fun dynamic_predicate ((temp___211 t)) Bool (and (le (neg fliteral)
+                                                    temp___211) (le
+                                                    temp___211 fliteral)))
 
 ;; H
   (assert (in_range2 x))
@@ -1143,8 +1138,8 @@
 ;; H
   (assert
   (and (in_range3 x)
-  (let ((temp___188 x))
-  (and (le (neg fliteral) temp___188) (le temp___188 fliteral)))))
+  (let ((temp___218 x))
+  (and (le (neg fliteral) temp___218) (le temp___218 fliteral)))))
 
 (assert
 ;; WP_parameter_def

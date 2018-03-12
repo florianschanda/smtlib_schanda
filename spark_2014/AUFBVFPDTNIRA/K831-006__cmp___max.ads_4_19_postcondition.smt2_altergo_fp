@@ -1066,47 +1066,18 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic max__max__result : t
-
-logic o : t
-
-logic result : t
-
-logic max__max__result1 : t
-
-logic max__max__result2 : t
-
-logic max__max__result3 : t
-
-logic max__max__result4 : t
-
-logic max__max__result5 : t
-
-logic result1 : t
-
-axiom H : tqtisFinite(left)
-
-axiom H1 : tqtisFinite(right)
-
-axiom H2 : (max__max__result1 = max__max__result2)
-
-axiom H3 : (max__max__result3 = max__max__result1)
-
-axiom H4 : (lt(left, right) -> (o = right))
-
-axiom H5 : ((not lt(left, right)) -> (o = left))
-
-axiom H6 : (result = max__max__result)
-
-axiom H7 : (max__max__result1 = o)
-
-axiom H8 : (max__max__result4 = max__max__result2)
-
-axiom H9 : (max__max__result5 = max__max__result3)
-
-axiom H10 : (result1 = max__max__result4)
-
-axiom H11 : lt(left, right)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : eq(max__max__result4, right)
+goal WP_parameter_def :
+  (forall max__max__result:t. forall o:t. forall result:t.
+  forall max__max__result1:t. forall max__max__result2:t.
+  forall max__max__result3:t. forall max__max__result4:t.
+  forall max__max__result5:t.
+  (forall result1:t. ((tqtisFinite(left) and (tqtisFinite(right) and
+  (((((max__max__result1 = max__max__result2) and
+  (max__max__result3 = max__max__result1)) and (((lt(left, right) and
+  (o = right)) or ((not lt(left, right)) and (o = left))) and
+  ((result = max__max__result) and (max__max__result1 = o)))) and
+  ((max__max__result4 = max__max__result2) and
+  (max__max__result5 = max__max__result3))) and
+  (result1 = max__max__result4)))) -> (lt(left, right) ->
+  eq(max__max__result4, right)))))

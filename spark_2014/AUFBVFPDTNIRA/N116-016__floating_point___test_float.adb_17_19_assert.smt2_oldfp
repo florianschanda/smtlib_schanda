@@ -1080,14 +1080,28 @@
 (declare-datatypes () ((rt__ref (mk_rt__ref (rt__content rt)))))
 (define-fun rt__ref___projection ((a rt__ref)) rt (rt__content a))
 
-(define-fun dynamic_invariant ((temp___expr_171 t) (temp___is_init_168 Bool)
-  (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true) (le
-                                      fliteral1 fliteral2)) (in_range1
-                                      temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 t) (temp___is_init_196 Bool)
+  (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true) (le
+                                     fliteral1 fliteral2)) (in_range1
+                                     temp___expr_200)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 100000001490116119384765625.0 1000000000000000000000000000.0))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 4000000059604644775390625.0 10000000000000000000000000.0))))
 
 (declare-const x t)
 
@@ -1100,25 +1114,11 @@
 ;; H
   (assert (= result x))
 
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 100000001490116119384765625.0 1000000000000000000000000000.0))))
-
 ;; H
   (assert (= x1 fliteral3))
 
 ;; H
   (assert (in_range1 x1))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 4000000059604644775390625.0 10000000000000000000000000.0))))
 
 ;; H
   (assert (and (eq x2 (add RNE1 x1 fliteral4)) (in_range1 x2)))

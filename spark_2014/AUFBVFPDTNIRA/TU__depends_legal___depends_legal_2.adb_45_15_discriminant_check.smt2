@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -210,30 +206,20 @@
 
 (define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 
-(define-fun depends_legal_2__dis_rec__a__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 1))
+(define-fun depends_legal_2__dis_rec__a__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 1))
 
-(define-fun depends_legal_2__dis_rec__b__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 1))
+(define-fun depends_legal_2__dis_rec__b__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 1))
 
-(define-fun depends_legal_2__dis_rec__x__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 0))
+(define-fun depends_legal_2__dis_rec__x__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 0))
 
-(define-fun depends_legal_2__dis_rec__y__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 0))
+(define-fun depends_legal_2__dis_rec__y__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 0))
 
-(define-fun depends_legal_2__dis_rec__z__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 0))
+(define-fun depends_legal_2__dis_rec__z__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 0))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -401,13 +387,13 @@
 (define-fun dis_rec__ref___projection ((a dis_rec__ref)) us_rep (dis_rec__content
                                                                 a))
 
-(define-fun default_initial_assumption ((temp___expr_137 us_rep)
-  (temp___skip_top_level_138 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_160 us_rep)
+  (temp___skip_top_level_161 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_137) false)
+                                            temp___expr_160) false)
                                          (= (rec__depends_legal_2__dis_rec__d
                                             (us_split_discrs1
-                                            temp___expr_137)) (of_int1 1))))
+                                            temp___expr_160)) (distinct 1 0))))
 
 (declare-const rec1__attr__constrained Bool)
 
@@ -683,139 +669,52 @@
 (declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content us_rep)))))
 (define-fun t8b__ref___projection ((a t8b__ref)) us_rep (t8b__content a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
-
-(declare-const rec1__split_discrs Bool)
-
-(declare-const par1__split_fields integer)
-
-(declare-const par1__split_fields1 integer)
-
-(declare-const par1__split_fields2 float)
-
-(declare-const par1__split_fields3 float)
-
-(declare-const par1__split_fields4 float)
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const par1__split_discrs Bool)
 
-(declare-const o integer)
+(declare-const o float)
 
-(declare-const o1 integer)
+(declare-const o1 float)
 
-(declare-const o2 integer)
+(declare-const o2 float)
 
 (declare-const o3 integer)
 
-(declare-const o4 float)
+(declare-const o4 integer)
 
 (declare-const o5 float)
 
 (declare-const o6 float)
 
-(declare-const temp___164 Bool)
-
-(declare-const temp___1641 integer)
-
-(declare-const temp___1642 integer)
-
-(declare-const temp___1643 float)
-
-(declare-const temp___1644 float)
-
-(declare-const temp___1645 float)
-
-(declare-const temp___1646 Bool)
-
-(declare-const usq_ Bool)
-
-(declare-const usq_1 integer)
-
-(declare-const usq_2 integer)
-
-(declare-const usq_3 float)
-
-(declare-const usq_4 float)
-
-(declare-const usq_5 float)
-
-(declare-const usq_6 Bool)
-
-(declare-const temp___166 Bool)
-
-(declare-const temp___1661 integer)
-
-(declare-const temp___1662 integer)
-
-(declare-const temp___1663 float)
-
-(declare-const temp___1664 float)
-
-(declare-const temp___1665 float)
-
-(declare-const temp___1666 Bool)
-
 (declare-const o7 float)
 
-(declare-const o8 float)
+(declare-const temp___185 Bool)
 
-(declare-const o9 float)
+(declare-const temp___1851 integer)
 
-(declare-const o10 integer)
+(declare-const temp___1852 integer)
 
-(declare-const o11 integer)
+(declare-const temp___1853 float)
 
-(declare-const o12 float)
+(declare-const temp___1854 float)
 
-(declare-const o13 float)
+(declare-const temp___1855 float)
 
-(declare-const o14 float)
-
-(declare-const temp___161 Bool)
-
-(declare-const temp___1611 integer)
-
-(declare-const temp___1612 integer)
-
-(declare-const temp___1613 float)
-
-(declare-const temp___1614 float)
-
-(declare-const temp___1615 float)
-
-(declare-const temp___1616 Bool)
-
-(declare-const usq_7 us_rep)
-
-(declare-const temp___163 us_rep)
-
-(declare-const result us_split_fields__ref)
-
-(declare-const par1__split_fields5 us_split_fields)
-
-(declare-const result1 us_split_discrs__ref)
-
-(declare-const par1__split_discrs1 us_split_discrs)
-
-(declare-const result2 us_split_fields__ref)
-
-(declare-const par1__split_fields6 us_split_fields)
-
-(declare-const result3 us_split_discrs__ref)
-
-(declare-const par1__split_discrs2 us_split_discrs)
+(declare-const temp___1856 Bool)
 
 ;; H
   (assert (= rec1__attr__constrained false))
@@ -827,49 +726,49 @@
   (assert (= par1__split_discrs r7b))
 
 ;; H
-  (assert (= (to_rep1 o7) (fp #b0 #b00000000 #b00000000000000000000000)))
+  (assert (= (to_rep1 o) (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (= (to_rep1 o8) (fp #b0 #b00000000 #b00000000000000000000000)))
+  (assert (= (to_rep1 o1) (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (= (to_rep1 o9) (fp #b0 #b00000000 #b00000000000000000000000)))
+  (assert (= (to_rep1 o2) (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (= dummy o10))
+  (assert (= dummy o3))
 
 ;; H
-  (assert (= dummy o11))
+  (assert (= dummy o4))
 
 ;; H
-  (assert (= o9 o12))
+  (assert (= o2 o5))
 
 ;; H
-  (assert (= o8 o13))
+  (assert (= o1 o6))
 
 ;; H
-  (assert (= o7 o14))
+  (assert (= o o7))
 
 ;; H
-  (assert (= (of_int1 0) temp___161))
+  (assert (= (distinct 0 0) temp___185))
 
 ;; H
-  (assert (= temp___1611 o10))
+  (assert (= temp___1851 o3))
 
 ;; H
-  (assert (= temp___1612 o11))
+  (assert (= temp___1852 o4))
 
 ;; H
-  (assert (= temp___1613 o12))
+  (assert (= temp___1853 o5))
 
 ;; H
-  (assert (= temp___1614 o13))
+  (assert (= temp___1854 o6))
 
 ;; H
-  (assert (= temp___1615 o14))
+  (assert (= temp___1855 o7))
 
 ;; H
-  (assert (= true temp___1616))
+  (assert (= true temp___1856))
 
 ;; H
   (assert (= par1__attr__constrained true))
@@ -877,6 +776,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "depends_legal_2.adb", line 14, characters 0-0
-  (not (= temp___161 par1__split_discrs)))
+  (not (= temp___185 par1__split_discrs)))
 (check-sat)
 (exit)

@@ -971,18 +971,12 @@ logic speed : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-logic o1 : t
-
-axiom H : tqtisFinite(speed)
-
-axiom H1 : (is_valid_speed_km_per_h(speed) = true)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 1000.0))
 
  (* File "units.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(RNE, speed, fliteral3))
+goal WP_parameter_def : (tqtisFinite(speed) ->
+  ((is_valid_speed_km_per_h(speed) = true) -> tqtisFinite(mul(RNE, speed,
+  fliteral3))))

@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1119,47 +1119,20 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic numerics__Oadd__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic numerics__Oadd__result1 : t
-
-logic numerics__Oadd__result2 : t
-
-logic numerics__Oadd__result3 : t
-
-logic numerics__Oadd__result4 : t
-
-logic numerics__Oadd__result5 : t
-
-logic result1 : t
-
-axiom H : tqtisFinite(left)
-
-axiom H1 : tqtisFinite(right)
-
-axiom H2 : (numerics__Oadd__result1 = numerics__Oadd__result2)
-
-axiom H3 : (numerics__Oadd__result3 = numerics__Oadd__result1)
-
-axiom H4 : ((o = add(NearestTiesToEven, left, right)) and
-  tqtisFinite(add(NearestTiesToEven, left, right)))
-
-axiom H5 : (result = numerics__Oadd__result)
-
-axiom H6 : (numerics__Oadd__result1 = o)
-
-axiom H7 : (numerics__Oadd__result4 = numerics__Oadd__result2)
-
-axiom H8 : (numerics__Oadd__result5 = numerics__Oadd__result3)
-
-axiom H9 : (result1 = numerics__Oadd__result4)
-
  (* File "numerics.ads", line 7, characters 0-0 *)
-goal WP_parameter_def : eq(numerics__Oadd__result4, add(NearestTiesToEven,
-  left, right))
+goal WP_parameter_def :
+  (forall numerics__Oadd__result:t. forall o:t. forall result:t.
+  forall numerics__Oadd__result1:t. forall numerics__Oadd__result2:t.
+  forall numerics__Oadd__result3:t. forall numerics__Oadd__result4:t.
+  forall numerics__Oadd__result5:t.
+  (forall result1:t. ((tqtisFinite(left) and (tqtisFinite(right) and
+  (((((numerics__Oadd__result1 = numerics__Oadd__result2) and
+  (numerics__Oadd__result3 = numerics__Oadd__result1)) and
+  (((o = add(NearestTiesToEven, left, right)) and
+  tqtisFinite(add(NearestTiesToEven, left, right))) and (({ t__content =
+  result } = { t__content = numerics__Oadd__result }) and
+  (numerics__Oadd__result1 = o)))) and (({ t__content =
+  numerics__Oadd__result4 } = { t__content = numerics__Oadd__result2 }) and
+  (numerics__Oadd__result5 = numerics__Oadd__result3))) and
+  (result1 = numerics__Oadd__result4)))) -> eq(numerics__Oadd__result4,
+  add(NearestTiesToEven, left, right)))))

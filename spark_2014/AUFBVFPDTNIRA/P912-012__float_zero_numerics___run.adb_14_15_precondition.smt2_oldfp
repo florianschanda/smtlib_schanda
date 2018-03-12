@@ -1076,12 +1076,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_141 t) (temp___is_init_138 Bool)
-  (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 t) (temp___is_init_161 Bool)
+  (temp___skip_constant_162 Bool) (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_165)))
 
 (declare-fun osubtract__function_guard (t t t) Bool)
 
@@ -1113,12 +1113,12 @@
 (define-fun t_float_value__ref___projection ((a t_float_value__ref)) t_float_value
   (t_float_value__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_147 t) (temp___is_init_144 Bool)
-  (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true) (le
-                                      fliteral fliteral2)) (in_range1
-                                      temp___expr_147)))
+(define-fun dynamic_invariant1 ((temp___expr_172 t) (temp___is_init_168 Bool)
+  (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true) (le
+                                     fliteral fliteral2)) (in_range1
+                                     temp___expr_172)))
 
 (declare-const x1 t)
 
@@ -1129,30 +1129,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const y t)
-
-(declare-const o t)
-
-(declare-const result t)
-
-(declare-const y1 t)
-
-(declare-const y2 t)
-
-(declare-const y3 t)
-
-;; H
-  (assert (in_range1 x1))
-
-;; H
-  (assert (in_range1 x2))
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite y)))
-
-;; H
-  (assert (lt x1 x2))
 
 (assert
 ;; WP_parameter_def

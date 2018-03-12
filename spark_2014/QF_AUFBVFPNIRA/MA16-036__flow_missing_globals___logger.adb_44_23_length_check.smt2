@@ -80,10 +80,6 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
@@ -181,21 +177,18 @@
   (assert
   (<= 0 logger__log_entry__estimatedgroundvelocityisavailable__position))
 
-(declare-const abstr7 (_ BitVec 16))
-
-(declare-const abstr8 (_ BitVec 16))
-
-(define-fun in_range1 ((x (_ BitVec 16))) Bool (and (bvule abstr8 x)
-                                               (bvule x abstr7)))
+(define-fun in_range1 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
+                                               (bvule x #x0257)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 599)))
 
-(define-fun dynamic_invariant ((temp___expr_213 (_ BitVec 16))
-  (temp___is_init_210 Bool) (temp___skip_constant_211 Bool)
-  (temp___do_toplevel_212 Bool)) Bool (=>
-                                      (or (= temp___is_init_210 true)
-                                      (bvule abstr8 abstr7)) (in_range1
-                                      temp___expr_213)))
+(define-fun dynamic_invariant ((temp___expr_248 (_ BitVec 16))
+  (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
+  (temp___do_toplevel_246 Bool)
+  (temp___do_typ_inv_247 Bool)) Bool (=>
+                                     (or (= temp___is_init_244 true)
+                                     (bvule #x0000 #x0257)) (in_range1
+                                     temp___expr_248)))
 
 (define-fun dynamic_property ((range_first (_ BitVec 16))
   (range_last (_ BitVec 16)) (low (_ BitVec 16))
@@ -219,8 +212,8 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(define-fun in_range2 ((x (_ BitVec 16))) Bool (and (bvule abstr8 x)
-                                               (bvule x abstr7)))
+(define-fun in_range2 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
+                                               (bvule x #x0257)))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 599)))
 
@@ -317,23 +310,24 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range3
-                                     temp___expr_33)))
+(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range3
+                                    temp___expr_39)))
 
-(define-fun dynamic_invariant2 ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant2 ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
-(define-fun dynamic_invariant3 ((temp___expr_166 (_ BitVec 16))
-  (temp___is_init_163 Bool) (temp___skip_constant_164 Bool)
-  (temp___do_toplevel_165 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_194 (_ BitVec 16))
+  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
+  (temp___do_toplevel_192 Bool) (temp___do_typ_inv_193 Bool)) Bool true)
 
 (declare-const tmp (_ BitVec 16))
 
@@ -522,10 +516,10 @@
 ;; H
   (assert (and (= o3 o2) (in_range_int o2)))
 
-(declare-const abstr9 (_ BitVec 16))
+(declare-const abstr7 (_ BitVec 16))
 
 ;; H
-  (assert (= logger__log_content__B_1__tmp__assume abstr9))
+  (assert (= logger__log_content__B_1__tmp__assume abstr7))
 
 ;; H
   (assert (= logger__log_content__B_1__tmp__assume tmp))
@@ -541,15 +535,15 @@
 
 ;; H
   (assert
-  (=> (bvule abstr8 r11b)
-  (and (and (bvule abstr8 abstr8) (bvule abstr8 abstr7))
-  (and (bvule abstr8 r11b) (bvule r11b abstr7)))))
+  (=> (bvule #x0000 r11b)
+  (and (and (bvule #x0000 #x0000) (bvule #x0000 #x0257))
+  (and (bvule #x0000 r11b) (bvule r11b #x0257)))))
 
 ;; H
   (assert
-  (=> (bvule r8b abstr7)
-  (and (and (bvule abstr8 r8b) (bvule r8b abstr7))
-  (and (bvule abstr8 abstr7) (bvule abstr7 abstr7)))))
+  (=> (bvule r8b #x0257)
+  (and (and (bvule #x0000 r8b) (bvule r8b #x0257))
+  (and (bvule #x0000 #x0257) (bvule #x0257 #x0257)))))
 
 (assert
 ;; WP_parameter_def

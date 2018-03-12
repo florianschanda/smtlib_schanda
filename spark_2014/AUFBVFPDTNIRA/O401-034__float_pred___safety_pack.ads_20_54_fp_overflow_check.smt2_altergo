@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -995,123 +995,38 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
-
-logic safety_pack__dead_band__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic res1 : t
-
-logic result1 : t
-
-logic res2 : t
-
-logic result2 : t
-
-logic res3 : t
-
-logic result3 : t
-
-logic res4 : t
-
-logic result4 : t
-
-logic safety_pack__dead_band__result1 : t
-
-logic safety_pack__dead_band__result2 : t
-
-logic safety_pack__dead_band__result3 : t
-
-logic res5 : t
-
-logic safety_pack__dead_band__result4 : t
-
-logic res6 : t
-
-logic safety_pack__dead_band__result5 : t
-
-axiom H : tqtisFinite(value)
-
-axiom H1 : in_range2(threshold)
-
-axiom H2 : (result = res)
-
-axiom H3 : (res1 = value)
-
-axiom H4 : tqtisFinite(res1)
-
-axiom H5 : ((le(neg(threshold), value) and le(value, threshold)) ->
-  (result1 = res1))
-
-axiom H6 : ((le(neg(threshold), value) and le(value, threshold)) ->
-  (res2 = fliteral1))
-
-axiom H7 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  (lt(fliteral1, value) -> ((o = sub(RNE, res1, threshold)) and
-  tqtisFinite(sub(RNE, res1, threshold)))))
-
-axiom H8 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  (lt(fliteral1, value) -> (result2 = res1)))
-
-axiom H9 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  (lt(fliteral1, value) -> (res3 = o)))
-
-axiom H10 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  ((not lt(fliteral1, value)) -> (lt(value, fliteral1) -> ((o1 = add(RNE,
-  res1, threshold)) and tqtisFinite(add(RNE, res1, threshold))))))
-
-axiom H11 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  ((not lt(fliteral1, value)) -> (lt(value, fliteral1) -> (result3 = res1))))
-
-axiom H12 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  ((not lt(fliteral1, value)) -> (lt(value, fliteral1) -> (res4 = o1))))
-
-axiom H13 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  ((not lt(fliteral1, value)) -> ((not lt(value, fliteral1)) ->
-  (res4 = res1))))
-
-axiom H14 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  ((not lt(fliteral1, value)) -> (res3 = res4)))
-
-axiom H15 : ((not (le(neg(threshold), value) and le(value, threshold))) ->
-  (res2 = res3))
-
-axiom H16 :
-  (safety_pack__dead_band__result1 = safety_pack__dead_band__result2)
-
-axiom H17 :
-  (safety_pack__dead_band__result3 = safety_pack__dead_band__result1)
-
-axiom H18 : (result4 = safety_pack__dead_band__result)
-
-axiom H19 : (safety_pack__dead_band__result1 = res2)
-
-axiom H20 :
-  (safety_pack__dead_band__result4 = safety_pack__dead_band__result2)
-
-axiom H21 : (res5 = res2)
-
-axiom H22 :
-  (safety_pack__dead_band__result5 = safety_pack__dead_band__result3)
-
-axiom H23 : (res6 = res2)
-
-axiom H24 : ((le(neg(threshold), value) and le(value, threshold)) ->
-  eq(safety_pack__dead_band__result4, fliteral1))
-
-axiom H25 : ((bool_gt(value, threshold) = true) ->
-  eq(safety_pack__dead_band__result4, sub(RNE, value, threshold)))
-
-axiom H26 : (bool_lt(value, neg(threshold)) = true)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE, value, threshold))
+goal WP_parameter_def :
+  (forall res:t. forall safety_pack__dead_band__result:t. forall o:t.
+  forall o1:t. forall result:t. forall res1:t. forall result1:t.
+  forall res2:t. forall result2:t. forall res3:t. forall result3:t.
+  forall res4:t. forall result4:t. forall safety_pack__dead_band__result1:t.
+  forall safety_pack__dead_band__result2:t.
+  forall safety_pack__dead_band__result3:t. forall res5:t.
+  forall safety_pack__dead_band__result4:t. forall res6:t.
+  forall safety_pack__dead_band__result5:t. (tqtisFinite(value) ->
+  (in_range2(threshold) -> ((((({ t__content = result } = { t__content = res
+  }) and (res1 = value)) and (tqtisFinite(res1) and ((((le(neg(threshold),
+  value) and le(value, threshold)) and ((result1 = res1) and
+  (res2 = fliteral1))) or ((not (le(neg(threshold), value) and le(value,
+  threshold))) and (((lt(fliteral1, value) and (((o = sub(RNE, res1,
+  threshold)) and tqtisFinite(sub(RNE, res1, threshold))) and
+  ((result2 = res1) and (res3 = o)))) or ((not lt(fliteral1, value)) and
+  (((lt(value, fliteral1) and (((o1 = add(RNE, res1, threshold)) and
+  tqtisFinite(add(RNE, res1, threshold))) and ((result3 = res1) and
+  (res4 = o1)))) or ((not lt(value, fliteral1)) and (res4 = res1))) and
+  (res3 = res4)))) and (res2 = res3)))) and
+  (((safety_pack__dead_band__result1 = safety_pack__dead_band__result2) and
+  (safety_pack__dead_band__result3 = safety_pack__dead_band__result1)) and
+  ((result4 = safety_pack__dead_band__result) and
+  (safety_pack__dead_band__result1 = res2)))))) and
+  (((safety_pack__dead_band__result4 = safety_pack__dead_band__result2) and
+  (res5 = res2)) and
+  ((safety_pack__dead_band__result5 = safety_pack__dead_band__result3) and
+  (res6 = res2)))) -> ((((le(neg(threshold), value) and le(value,
+  threshold)) and eq(safety_pack__dead_band__result4, fliteral1)) or
+  (not (le(neg(threshold), value) and le(value, threshold)))) ->
+  ((((bool_gt(value, threshold) = true) and
+  eq(safety_pack__dead_band__result4, sub(RNE, value, threshold))) or
+  (not (bool_gt(value, threshold) = true))) -> ((bool_lt(value,
+  neg(threshold)) = true) -> tqtisFinite(add(RNE, value, threshold)))))))))

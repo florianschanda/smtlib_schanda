@@ -119,12 +119,13 @@
 (define-fun float_7__ref___projection ((a float_7__ref)) float_7 (float_7__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_135 Float64)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Float64)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_158)))
 
 (declare-const a Float64)
 
@@ -133,22 +134,6 @@
 (declare-const b Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const float_example__bounded_add__result Float64)
-
-(declare-const o Float64)
-
-(declare-const result Float64)
-
-(declare-const float_example__bounded_add__result1 Float64)
-
-(declare-const float_example__bounded_add__result2 Float64)
-
-(declare-const float_example__bounded_add__result3 Float64)
-
-(declare-const float_example__bounded_add__result4 Float64)
-
-(declare-const float_example__bounded_add__result5 Float64)
 
 ;; H
   (assert (fp.isFinite64 a))

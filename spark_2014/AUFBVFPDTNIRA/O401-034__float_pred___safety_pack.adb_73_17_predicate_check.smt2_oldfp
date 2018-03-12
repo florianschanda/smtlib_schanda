@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1088,12 +1084,12 @@
 (declare-datatypes () ((t_acc__ref (mk_t_acc__ref (t_acc__content t_acc)))))
 (define-fun t_acc__ref___projection ((a t_acc__ref)) t_acc (t_acc__content a))
 
-(define-fun dynamic_invariant ((temp___expr_146 t) (temp___is_init_143 Bool)
-  (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range2
-                                      temp___expr_146)))
+(define-fun dynamic_invariant ((temp___expr_170 t) (temp___is_init_166 Bool)
+  (temp___skip_constant_167 Bool) (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range2
+                                     temp___expr_170)))
 
 (declare-sort t_acc_lifted 0)
 
@@ -1131,25 +1127,25 @@
   (and (tqtisFinite fliteral3)
   (= (tqtreal fliteral3) (/ 529395592033937711917701562924776226282119750976562500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
 
-(define-fun dynamic_invariant1 ((temp___expr_158 t) (temp___is_init_155 Bool)
-  (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (and
-                                      (=>
-                                      (or (= temp___is_init_155 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range3
-                                      temp___expr_158))
-                                      (=> (= temp___do_toplevel_157 true)
-                                      (=> (= temp___is_init_155 true)
-                                      (or
-                                      (or (eq temp___expr_158 fliteral2) (le
-                                      temp___expr_158 (neg fliteral3))) (le
-                                      fliteral3 temp___expr_158))))))
+(define-fun dynamic_invariant1 ((temp___expr_184 t) (temp___is_init_180 Bool)
+  (temp___skip_constant_181 Bool) (temp___do_toplevel_182 Bool)
+  (temp___do_typ_inv_183 Bool)) Bool (and
+                                     (=>
+                                     (or (= temp___is_init_180 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range3
+                                     temp___expr_184))
+                                     (=> (= temp___do_toplevel_182 true)
+                                     (=> (= temp___is_init_180 true)
+                                     (or
+                                     (or (eq temp___expr_184 fliteral2) (le
+                                     temp___expr_184 (neg fliteral3))) (le
+                                     fliteral3 temp___expr_184))))))
 
-(define-fun dynamic_predicate ((temp___162 t)) Bool (or
-                                                    (or (eq temp___162
-                                                    fliteral2) (le temp___162
+(define-fun dynamic_predicate ((temp___188 t)) Bool (or
+                                                    (or (eq temp___188
+                                                    fliteral2) (le temp___188
                                                     (neg fliteral3))) (le
-                                                    fliteral3 temp___162)))
+                                                    fliteral3 temp___188)))
 
 (declare-const x t)
 
@@ -1159,53 +1155,11 @@
 
 (declare-const res t)
 
-(declare-const safety_pack__lift_away_from_zero__result t)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 t)
-
-(declare-const result t)
-
-(declare-const res1 t)
-
-(declare-const result1 t)
-
-(declare-const res2 t)
-
-(declare-const result2 t)
-
-(declare-const res3 t)
-
-(declare-const result3 t)
-
-(declare-const res4 t)
-
-(declare-const result4 t)
-
-(declare-const safety_pack__lift_away_from_zero__result1 t)
-
-(declare-const safety_pack__lift_away_from_zero__result2 t)
-
-(declare-const safety_pack__lift_away_from_zero__result3 t)
-
-(declare-const res5 t)
-
-(declare-const safety_pack__lift_away_from_zero__result4 t)
-
-(declare-const res6 t)
-
-(declare-const safety_pack__lift_away_from_zero__result5 t)
-
 ;; H
   (assert (in_range2 x))
 
 ;; H
-  (assert (dynamic_invariant1 res false false true))
+  (assert (dynamic_invariant1 res false false true true))
 
 ;; H
   (assert (not (eq x fliteral2)))
@@ -1216,9 +1170,13 @@
 ;; H
   (assert (not (and (le fliteral2 x) (le x fliteral3))))
 
+(define-fun temp___1562 () t x)
+
 (assert
 ;; WP_parameter_def
  ;; File "imu_pack.ads", line 16, characters 0-0
-  (not (or (or (eq x fliteral2) (le x (neg fliteral3))) (le fliteral3 x))))
+  (not
+  (or (or (eq temp___1562 fliteral2) (le temp___1562 (neg fliteral3))) (le
+  fliteral3 temp___1562))))
 (check-sat)
 (exit)

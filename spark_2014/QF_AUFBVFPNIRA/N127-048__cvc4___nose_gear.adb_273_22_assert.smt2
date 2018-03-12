@@ -164,18 +164,15 @@
 (define-fun eq_sub3 ((a (_ BitVec 64)) (b (_ BitVec 64)) (i Int)
   (n Int)) Bool abstr27)
 
-(define-fun to_int5 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(define-fun dynamic_invariant ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -183,18 +180,19 @@
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun dynamic_invariant1 ((temp___expr_147 Int)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (<= (- 2147483648) 2147483647))
-                                      (in_range2 temp___expr_147)))
+(define-fun dynamic_invariant1 ((temp___expr_172 Int)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range2 temp___expr_172)))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
 
-(define-fun dynamic_invariant2 ((temp___expr_165 (_ BitVec 16))
-  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
-  (temp___do_toplevel_164 Bool)) Bool true)
+(define-fun dynamic_invariant2 ((temp___expr_193 (_ BitVec 16))
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool true)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -493,13 +491,34 @@
 (declare-const relational_operator_out1_1 Bool)
 
 ;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
   (assert (fp.isFinite64 old_estimatedgroundvelocity_memory))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (fp.isFinite64 estimatedgroundvelocity)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -515,6 +534,15 @@
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 max_uint16_2_out1)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert
@@ -535,11 +563,29 @@
   (fp.isFinite64 ms_in_our1_out1)))
 
 ;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 to_int32_left_out1)))
 
 ;; H
   (assert
   (=> (<= (- 2147483648) 2147483647) (in_range2 to_int32_left_1_out1)))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
 
 ;; H
   (assert (= old_ngclicktime_out11 old_ngclicktime_memory))
@@ -581,30 +627,26 @@
   (assert
   (= ms_in_our1_out11 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
-(declare-const abstr28 (_ BitVec 16))
+;; H
+  (assert (= update_period_os_interrupt_out11 #x01F4))
 
 ;; H
-  (assert (= update_period_os_interrupt_out11 abstr28))
+  (assert (= validity_period_out11 #x0BB8))
 
-(declare-const abstr29 (_ BitVec 16))
-
-;; H
-  (assert (= validity_period_out11 abstr29))
-
-(declare-const abstr30 Int)
+(declare-const abstr28 Int)
 
 ;; H
-  (assert (= to_int32_left_out11 abstr30))
+  (assert (= to_int32_left_out11 abstr28))
 
-(declare-const abstr31 Int)
-
-;; H
-  (assert (= to_int32_left_1_out11 abstr31))
-
-(declare-const abstr32 (_ BitVec 16))
+(declare-const abstr29 Int)
 
 ;; H
-  (assert (= o11 abstr32))
+  (assert (= to_int32_left_1_out11 abstr29))
+
+(declare-const abstr30 (_ BitVec 16))
+
+;; H
+  (assert (= o11 abstr30))
 
 (assert
 ;; WP_parameter_def

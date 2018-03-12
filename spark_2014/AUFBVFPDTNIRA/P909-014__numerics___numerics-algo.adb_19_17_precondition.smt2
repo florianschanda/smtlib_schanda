@@ -102,12 +102,13 @@
 (define-fun t_float__ref___projection ((a t_float__ref)) t_float (t_float__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float32)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float32)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_165)))
 
 (declare-fun oadd (Float32 Float32) Float32)
 
@@ -117,17 +118,18 @@
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (oadd left right) true false true)) :pattern (
-  (oadd left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (oadd left right) true
+     false true true)) :pattern ((oadd left right)) )))
 
 ;; oadd__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (oadd left right) (fp.add RNE left right))) :pattern (
-  (oadd left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (oadd left right) (fp.add RNE left right))) :pattern ((oadd left
+                                                              right)) )))
 
 (declare-fun osubtract (Float32 Float32) Float32)
 
@@ -137,17 +139,19 @@
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (osubtract left right) true false
-     true)) :pattern ((osubtract left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (osubtract left right)
+     true false true true)) :pattern ((osubtract left right)) )))
 
 ;; osubtract__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (osubtract left right) (fp.sub RNE left right))) :pattern (
-  (osubtract left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (osubtract left right) (fp.sub RNE left right))) :pattern ((osubtract
+                                                                   left
+                                                                   right)) )))
 
 (declare-fun omultiply (Float32 Float32) Float32)
 
@@ -157,17 +161,19 @@
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (omultiply left right) true false
-     true)) :pattern ((omultiply left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (omultiply left right)
+     true false true true)) :pattern ((omultiply left right)) )))
 
 ;; omultiply__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (omultiply left right) (fp.mul RNE left right))) :pattern (
-  (omultiply left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (omultiply left right) (fp.mul RNE left right))) :pattern ((omultiply
+                                                                   left
+                                                                   right)) )))
 
 (declare-fun odivide (Float32 Float32) Float32)
 
@@ -178,19 +184,20 @@
   (forall ((left Float32) (right Float32))
   (! (=>
      (and
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
      (not (fp.eq right (fp #b0 #b00000000 #b00000000000000000000000))))
-     (dynamic_invariant (odivide left right) true false true)) :pattern (
+     (dynamic_invariant (odivide left right) true false true true)) :pattern (
   (odivide left right)) )))
 
 ;; odivide__def_axiom
   (assert
   (forall ((left Float32) (right Float32))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (odivide left right) (fp.div RNE left right))) :pattern (
-  (odivide left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (odivide left right) (fp.div RNE left right))) :pattern ((odivide
+                                                                 left right)) )))
 
 (declare-const x Float32)
 
@@ -224,10 +231,6 @@
 
 (declare-const o3 Float32)
 
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
 (declare-const result Float32)
 
 (declare-const x11 Float32)
@@ -255,10 +258,6 @@
 (declare-const result6 Float32)
 
 (declare-const x41 Float32)
-
-(declare-const result7 Float32)
-
-(declare-const x42 Float32)
 
 ;; H
   (assert (fp.isFinite32 x))

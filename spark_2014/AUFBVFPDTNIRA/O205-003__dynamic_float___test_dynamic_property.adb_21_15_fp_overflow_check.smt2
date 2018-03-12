@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -112,12 +108,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const d Float32)
 
@@ -146,12 +143,13 @@
 (define-fun pos_static_float__ref___projection ((a pos_static_float__ref)) pos_static_float
   (pos_static_float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_135 Float32)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                      (in_range1 temp___expr_135)))
+(define-fun dynamic_invariant1 ((temp___expr_158 Float32)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
+                                     (in_range1 temp___expr_158)))
 
 (declare-const c Float32)
 
@@ -200,14 +198,15 @@
 (define-fun dynamic_float__ref___projection ((a dynamic_float__ref)) float
   (dynamic_float__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_147 Float32)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000)
-                                      last)) (dynamic_property
-                                      (fp #b0 #b00000000 #b00000000000000000000000)
-                                      last temp___expr_147)))
+(define-fun dynamic_invariant2 ((temp___expr_172 Float32)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000)
+                                     last)) (dynamic_property
+                                     (fp #b0 #b00000000 #b00000000000000000000000)
+                                     last temp___expr_172)))
 
 ;; last__def_axiom
   (assert (= last c))
@@ -218,32 +217,6 @@
   (assert (= c d))
 
 (declare-const x Float32)
-
-(declare-const o Float32)
-
-(declare-const temp___152 Float32)
-
-(declare-const us Float32)
-
-(declare-const o1 Float32)
-
-(declare-const us1 Float32)
-
-(declare-const o2 Float32)
-
-(declare-const result Bool)
-
-(declare-const result1 Float32)
-
-(declare-const x1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const x2 Float32)
-
-(declare-const x3 Float32)
-
-(declare-const x4 Float32)
 
 ;; H
   (assert (fp.isFinite32 d))

@@ -1001,13 +1001,5 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range1(i)
-
  (* File "interfac.ads", line 46, characters 0-0 *)
-goal WP_parameter_def : le(fliteral1, of_int(RNE, i))
+goal WP_parameter_def : (in_range1(i) -> le(fliteral1, of_int(RNE, i)))

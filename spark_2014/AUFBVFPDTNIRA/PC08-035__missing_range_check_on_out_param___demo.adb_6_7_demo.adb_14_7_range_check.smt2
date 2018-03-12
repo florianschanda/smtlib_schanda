@@ -107,12 +107,13 @@
 (define-fun range_b__ref___projection ((a range_b__ref)) range_b (range_b__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float32)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10000011 #b01000000000000000000000)) (fp.neg (fp #b0 #b10000010 #b01000000000000000000000))))
-                                      (in_range temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float32)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000011 #b01000000000000000000000)) (fp.neg (fp #b0 #b10000010 #b01000000000000000000000))))
+                                     (in_range temp___expr_165)))
 
 (declare-fun to_rep (range_b) Float32)
 
@@ -135,8 +136,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const b Float32)
-
-(declare-const o Float32)
 
 ;; H
   (assert

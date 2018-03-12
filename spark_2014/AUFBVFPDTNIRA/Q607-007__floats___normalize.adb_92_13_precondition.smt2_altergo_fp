@@ -1154,36 +1154,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic v1 : t
-
-logic v2 : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic v11 : t
-
-logic result1 : t
-
-logic v21 : t
-
-axiom H : in_range2(x)
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> in_range1(v1))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> in_range1(v2))
-
-axiom H3 : (result = v1)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 360.0))
 
-axiom H4 : (v11 = div(NearestTiesToEven, x, fliteral5))
-
  (* File "normalize.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : le(neg(fliteral1), v11)
+goal WP_parameter_def :
+  (forall v1:t. forall v2:t. forall result:t. forall v11:t. (in_range2(x) ->
+  ((le(neg(fliteral1), fliteral1) -> in_range1(v1)) -> ((le(neg(fliteral1),
+  fliteral1) -> in_range1(v2)) -> (((result = v1) and
+  (v11 = div(NearestTiesToEven, x, fliteral5))) -> le(neg(fliteral1),
+  v11))))))

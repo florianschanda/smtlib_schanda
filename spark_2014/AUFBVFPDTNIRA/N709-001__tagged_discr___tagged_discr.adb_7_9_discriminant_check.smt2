@@ -38,10 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -102,9 +98,9 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int1 (RoundingMode Int) Float32)
+(declare-fun of_int (RoundingMode Int) Float32)
 
-(declare-fun to_int2 (RoundingMode Float32) Int)
+(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -167,11 +163,12 @@
 (declare-datatypes () ((e__ref (mk_e__ref (e__content e)))))
 (define-fun e__ref___projection ((a e__ref)) e (e__content a))
 
-(define-fun dynamic_invariant ((temp___expr_135 Int)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (<= 0 3)) (in_range2 temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 0 3)) (in_range2 temp___expr_158)))
 
 (declare-fun to_rep1 (e) Int)
 
@@ -1488,49 +1485,49 @@
 ;; tagged_discr__t__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag v))) :pattern (
+  (! (= (ite (is_zero v) 1 0) (ite (is_zero1 us_tag v) 1 0)) :pattern (
   (is_zero1 us_tag v)) )))
 
 ;; tagged_discr__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int1 (is_zero__2 (of_base v))) (to_int1 (is_zero1 us_tag1 v))) :pattern (
+  (! (= (ite (is_zero__2 (of_base v)) 1 0) (ite (is_zero1 us_tag1 v) 1 0)) :pattern (
   (is_zero1 us_tag1 v)) )))
 
 ;; tagged_discr__u2__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int1 (is_zero__3 (of_base1 v))) (to_int1 (is_zero1 us_tag2 v))) :pattern (
+  (! (= (ite (is_zero__3 (of_base1 v)) 1 0) (ite (is_zero1 us_tag2 v) 1 0)) :pattern (
   (is_zero1 us_tag2 v)) )))
 
 ;; tagged_discr__init__T3b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag3 v))) :pattern (
+  (! (= (ite (is_zero v) 1 0) (ite (is_zero1 us_tag3 v) 1 0)) :pattern (
   (is_zero1 us_tag3 v)) )))
 
 ;; tagged_discr__init__2__T6b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag4 v))) :pattern (
+  (! (= (ite (is_zero v) 1 0) (ite (is_zero1 us_tag4 v) 1 0)) :pattern (
   (is_zero1 us_tag4 v)) )))
 
 ;; tagged_discr__init__2__T8b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int1 (is_zero__2 (of_base v))) (to_int1 (is_zero1 us_tag5 v))) :pattern (
+  (! (= (ite (is_zero__2 (of_base v)) 1 0) (ite (is_zero1 us_tag5 v) 1 0)) :pattern (
   (is_zero1 us_tag5 v)) )))
 
 ;; tagged_discr__init__3__T11b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int1 (is_zero v)) (to_int1 (is_zero1 us_tag6 v))) :pattern (
+  (! (= (ite (is_zero v) 1 0) (ite (is_zero1 us_tag6 v) 1 0)) :pattern (
   (is_zero1 us_tag6 v)) )))
 
 ;; tagged_discr__init__3__T13b__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int1 (is_zero__3 (of_base1 v))) (to_int1 (is_zero1 us_tag7 v))) :pattern (
+  (! (= (ite (is_zero__3 (of_base1 v)) 1 0) (ite (is_zero1 us_tag7 v) 1 0)) :pattern (
   (is_zero1 us_tag7 v)) )))
 
 ;; is_zero__def_axiom
@@ -1555,19 +1552,20 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 ;; is_zero__2__post_axiom
   (assert true)
@@ -1578,13 +1576,13 @@
 ;; tagged_discr__u1__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag1 v))) :pattern (
+  (! (= (ite (is_zero__2 v) 1 0) (ite (is_zero__21 us_tag1 v) 1 0)) :pattern (
   (is_zero__21 us_tag1 v)) )))
 
 ;; tagged_discr__init__2__T8b__compat_axiom
   (assert
   (forall ((v us_rep1))
-  (! (= (to_int1 (is_zero__2 v)) (to_int1 (is_zero__21 us_tag5 v))) :pattern (
+  (! (= (ite (is_zero__2 v) 1 0) (ite (is_zero__21 us_tag5 v) 1 0)) :pattern (
   (is_zero__21 us_tag5 v)) )))
 
 ;; is_zero__2__def_axiom
@@ -1610,13 +1608,13 @@
 ;; tagged_discr__u2__compat_axiom
   (assert
   (forall ((v us_rep2))
-  (! (= (to_int1 (is_zero__3 v)) (to_int1 (is_zero__31 us_tag2 v))) :pattern (
+  (! (= (ite (is_zero__3 v) 1 0) (ite (is_zero__31 us_tag2 v) 1 0)) :pattern (
   (is_zero__31 us_tag2 v)) )))
 
 ;; tagged_discr__init__3__T13b__compat_axiom
   (assert
   (forall ((v us_rep2))
-  (! (= (to_int1 (is_zero__3 v)) (to_int1 (is_zero__31 us_tag7 v))) :pattern (
+  (! (= (ite (is_zero__3 v) 1 0) (ite (is_zero__31 us_tag7 v) 1 0)) :pattern (
   (is_zero__31 us_tag7 v)) )))
 
 ;; is_zero__3__def_axiom
@@ -1630,14 +1628,6 @@
      (= (to_rep (rec__tagged_discr__u2__xx (us_split_fields5 v))) 0))
      (fp.eq (to_rep2 (rec__tagged_discr__u2__yy (us_split_fields5 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_zero__3 v)) )))
-
-(declare-const v__split_fields Bool)
-
-(declare-const v__split_fields1 integer)
-
-(declare-const v__split_fields2 float)
-
-(declare-const v__split_fields3 us_private)
 
 (declare-const o e)
 
@@ -1653,73 +1643,17 @@
 
 (declare-const o6 e)
 
-(declare-const temp___197 e)
+(declare-const temp___226 e)
 
-(declare-const temp___1971 Bool)
+(declare-const temp___2261 Bool)
 
-(declare-const temp___1972 integer)
+(declare-const temp___2262 integer)
 
-(declare-const temp___1973 float)
+(declare-const temp___2263 float)
 
-(declare-const temp___1974 us_private)
+(declare-const temp___2264 us_private)
 
-(declare-const temp___1975 Int)
-
-(declare-const usq_ e)
-
-(declare-const usq_1 Bool)
-
-(declare-const usq_2 integer)
-
-(declare-const usq_3 float)
-
-(declare-const usq_4 us_private)
-
-(declare-const usq_5 Int)
-
-(declare-const temp___199 e)
-
-(declare-const temp___1991 Bool)
-
-(declare-const temp___1992 integer)
-
-(declare-const temp___1993 float)
-
-(declare-const temp___1994 us_private)
-
-(declare-const temp___1995 Int)
-
-(declare-const result Bool)
-
-(declare-const result1 integer)
-
-(declare-const result2 float)
-
-(declare-const result3 us_private)
-
-(declare-const v__split_fields4 Bool)
-
-(declare-const v__split_fields5 integer)
-
-(declare-const v__split_fields6 float)
-
-(declare-const v__split_fields7 us_private)
-
-(declare-const v__split_fields8 Bool)
-
-(declare-const v__split_fields9 integer)
-
-(declare-const v__split_fields10 float)
-
-(declare-const v__split_fields11 us_private)
-
-(declare-const v__split_fields12 Bool)
-
-(declare-const v__split_fields13 integer)
-
-(declare-const v__split_fields14 float)
-
-(declare-const v__split_fields15 us_private)
+(declare-const temp___2265 Int)
 
 ;; H
   (assert (= (to_rep1 (rec__tagged_discr__t__discr v__split_discrs)) 0))
@@ -1734,7 +1668,7 @@
   (assert (= (to_rep o1) 0))
 
 ;; H
-  (assert (= (of_int 0) o2))
+  (assert (= (distinct 0 0) o2))
 
 ;; H
   (assert (= o1 o3))
@@ -1752,26 +1686,26 @@
   (assert (= o o6))
 
 ;; H
-  (assert (= temp___197 o6))
+  (assert (= temp___226 o6))
 
 ;; H
-  (assert (= temp___1971 o2))
+  (assert (= temp___2261 o2))
 
 ;; H
-  (assert (= temp___1972 o3))
+  (assert (= temp___2262 o3))
 
 ;; H
-  (assert (= temp___1973 o4))
+  (assert (= temp___2263 o4))
 
 ;; H
-  (assert (= temp___1974 o5))
+  (assert (= temp___2264 o5))
 
 ;; H
-  (assert (= us_tag3 temp___1975))
+  (assert (= us_tag3 temp___2265))
 
 (assert
 ;; WP_parameter_def
  ;; File "tagged_discr.ads", line 16, characters 0-0
-  (not (= temp___197 (rec__tagged_discr__t__discr v__split_discrs))))
+  (not (= temp___226 (rec__tagged_discr__t__discr v__split_discrs))))
 (check-sat)
 (exit)

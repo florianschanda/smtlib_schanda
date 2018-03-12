@@ -1319,12 +1319,6 @@ type t__ref1 = { t__content1 : t1
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def1 :
@@ -1336,6 +1330,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1550,195 +1550,24 @@ axiom unsigned_32_to_float__post_axiom :
   (forall s:t [unsigned_32_to_float(s)].
   tqtisFinite(unsigned_32_to_float(s)))
 
-logic half_x : t1
-
-logic y : t1
-
-logic magic_num : t
-
-logic i : t
-
-logic maths_pack__inv_sqrt__result : t1
-
-logic o : t
-
-logic o1 : t1
-
-logic o2 : t1
-
-logic o3 : t1
-
-logic o4 : t1
-
-logic o5 : t1
-
-logic o6 : t1
-
-logic o7 : t1
-
-logic o8 : t1
-
-logic result : t1
-
-logic half_x1 : t1
-
-logic result1 : t1
-
-logic y1 : t1
-
-logic result2 : t
-
-logic magic_num1 : t
-
-logic result3 : t
-
-logic i1 : t
-
-logic result4 : t
-
-logic i2 : t
-
-logic result5 : t1
-
-logic y2 : t1
-
-logic result6 : t1
-
-logic y3 : t1
-
-logic result7 : t1
-
-logic maths_pack__inv_sqrt__result1 : t1
-
-logic maths_pack__inv_sqrt__result2 : t1
-
-logic maths_pack__inv_sqrt__result3 : t1
-
-logic half_x2 : t1
-
-logic y4 : t1
-
-logic magic_num2 : t
-
-logic i3 : t
-
-logic maths_pack__inv_sqrt__result4 : t1
-
-logic half_x3 : t1
-
-logic y5 : t1
-
-logic magic_num3 : t
-
-logic i4 : t
-
-logic maths_pack__inv_sqrt__result5 : t1
-
-logic result8 : t1
-
-axiom H : tqtisFinite(x)
-
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
-
-axiom H1 : le(fliteral1, x)
-
-axiom H2 : (result = half_x)
 
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.500000000000000000000000))
 
-axiom H3 : (half_x1 = mul1(RNE, fliteral2, x))
+logic rliteral : t
 
-axiom H4 : tqtisFinite(half_x1)
-
-axiom H5 : (result1 = y)
-
-axiom H6 : (y1 = x)
-
-axiom H7 : tqtisFinite(y1)
-
-axiom H8 : (result2 = magic_num)
-
-axiom H9 : (magic_num1 = of_int(1597463007))
-
-axiom H10 : true
-
-axiom H11 : true
-
-axiom H12 : (o = float_to_unsigned_32(y1))
-
-axiom H13 : (result3 = i)
-
-axiom H14 : (i1 = o)
-
-axiom H15 : (i1 = result4)
-
-axiom H16 : (i2 = sub(magic_num1, lsr_bv(i1, of_int(1))))
-
-axiom H17 : ((o1 = unsigned_32_to_float(i2)) and tqtisFinite(o1))
-
-axiom H18 : (y1 = result5)
-
-axiom H19 : (y2 = o1)
-
-axiom H20 : ((o2 = mul1(RNE, half_x1, y2)) and tqtisFinite(mul1(RNE, half_x1,
-  y2)))
-
-axiom H21 : (o3 = mul1(RNE, o2, y2))
-
-axiom H22 : ((o4 = o3) and tqtisFinite(o3))
+axiom rliteral_axiom : (tqtint(rliteral) = 1597463007)
 
 logic fliteral3 : t1
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 1.50000000000000000000000))
-
-axiom H23 : (o5 = sub1(RNE, fliteral3, o4))
-
-axiom H24 : ((o6 = o5) and tqtisFinite(o5))
-
-axiom H25 : (o7 = mul1(RNE, y2, o6))
-
-axiom H26 : ((o8 = o7) and tqtisFinite(o7))
-
-axiom H27 : (result6 = y2)
-
-axiom H28 : (y3 = o8)
-
-axiom H29 : (maths_pack__inv_sqrt__result1 = maths_pack__inv_sqrt__result2)
-
-axiom H30 : (maths_pack__inv_sqrt__result3 = maths_pack__inv_sqrt__result1)
-
-axiom H31 : (result7 = maths_pack__inv_sqrt__result)
-
-axiom H32 : (maths_pack__inv_sqrt__result1 = y3)
-
-axiom H33 : (maths_pack__inv_sqrt__result4 = maths_pack__inv_sqrt__result2)
-
-axiom H34 : (i3 = i2)
-
-axiom H35 : (magic_num2 = magic_num1)
-
-axiom H36 : (y4 = y3)
-
-axiom H37 : (half_x2 = half_x1)
-
-axiom H38 : (maths_pack__inv_sqrt__result5 = maths_pack__inv_sqrt__result3)
-
-axiom H39 : (i4 = i2)
-
-axiom H40 : (magic_num3 = magic_num1)
-
-axiom H41 : (y5 = y3)
-
-axiom H42 : (half_x3 = half_x1)
-
-axiom H43 : (result8 = maths_pack__inv_sqrt__result4)
 
 logic fliteral4 : t1
 
@@ -1746,4 +1575,44 @@ axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.0e-1))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : lt(fliteral4, maths_pack__inv_sqrt__result4)
+goal WP_parameter_def :
+  (forall half_x:t1. forall y:t1. forall magic_num:t. forall i:t.
+  forall maths_pack__inv_sqrt__result:t1. forall o:t. forall o1:t1.
+  forall o2:t1. forall o3:t1. forall o4:t1. forall o5:t1. forall o6:t1.
+  forall o7:t1. forall o8:t1. forall result:t1. forall half_x1:t1.
+  forall result1:t1. forall y1:t1. forall result2:t. forall magic_num1:t.
+  forall result3:t. forall i1:t. forall result4:t. forall i2:t.
+  forall result5:t1. forall y2:t1. forall result6:t1. forall y3:t1.
+  forall result7:t1. forall maths_pack__inv_sqrt__result1:t1.
+  forall maths_pack__inv_sqrt__result2:t1.
+  forall maths_pack__inv_sqrt__result3:t1. forall half_x2:t1. forall y4:t1.
+  forall magic_num2:t. forall i3:t. forall maths_pack__inv_sqrt__result4:t1.
+  forall half_x3:t1. forall y5:t1. forall magic_num3:t. forall i4:t.
+  forall maths_pack__inv_sqrt__result5:t1.
+  (forall result8:t1. ((tqtisFinite(x) and (le(fliteral1, x) and ((((({
+  t__content1 = result } = { t__content1 = half_x }) and (half_x1 = mul1(RNE,
+  fliteral2, x))) and (tqtisFinite(half_x1) and ((({ t__content1 = result1
+  } = { t__content1 = y }) and (y1 = x)) and (tqtisFinite(y1) and ((({
+  t__content = result2 } = { t__content = magic_num }) and
+  (magic_num1 = rliteral)) and (((o = float_to_unsigned_32(y1)) and (({
+  t__content = result3 } = { t__content = i }) and (i1 = o))) and
+  (((i1 = result4) and (i2 = sub(magic_num1, lsr_bv(i1, of_int(1))))) and
+  ((((o1 = unsigned_32_to_float(i2)) and tqtisFinite(o1)) and
+  ((y1 = result5) and (y2 = o1))) and ((((((((((o2 = mul1(RNE, half_x1,
+  y2)) and tqtisFinite(mul1(RNE, half_x1, y2))) and (o3 = mul1(RNE, o2,
+  y2))) and ((o4 = o3) and tqtisFinite(o3))) and (o5 = sub1(RNE, fliteral3,
+  o4))) and ((o6 = o5) and tqtisFinite(o5))) and (o7 = mul1(RNE, y2,
+  o6))) and ((o8 = o7) and tqtisFinite(o7))) and ((result6 = y2) and
+  (y3 = o8))) and
+  (((maths_pack__inv_sqrt__result1 = maths_pack__inv_sqrt__result2) and
+  (maths_pack__inv_sqrt__result3 = maths_pack__inv_sqrt__result1)) and
+  ((result7 = maths_pack__inv_sqrt__result) and
+  (maths_pack__inv_sqrt__result1 = y3)))))))))))) and
+  (((maths_pack__inv_sqrt__result4 = maths_pack__inv_sqrt__result2) and
+  ((i3 = i2) and ((magic_num2 = magic_num1) and ((y4 = y3) and
+  (half_x2 = half_x1))))) and
+  ((maths_pack__inv_sqrt__result5 = maths_pack__inv_sqrt__result3) and
+  ((i4 = i2) and ((magic_num3 = magic_num1) and ((y5 = y3) and
+  (half_x3 = half_x1))))))) and
+  (result8 = maths_pack__inv_sqrt__result4)))) -> lt(fliteral4,
+  maths_pack__inv_sqrt__result4))))

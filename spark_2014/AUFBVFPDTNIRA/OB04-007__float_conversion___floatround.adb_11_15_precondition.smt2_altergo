@@ -970,24 +970,12 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x1 : t
-
-logic o : t
-
-logic result : t
-
-logic x11 : t
-
-axiom H : (result = x1)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.500000000000000000000000))
 
-axiom H1 : (x11 = fliteral2)
-
-axiom H2 : in_range1(x11)
-
  (* File "floatround.adb", line 7, characters 0-0 *)
-goal WP_parameter_def : in_range2(x11)
+goal WP_parameter_def :
+  (forall x1:t. forall result:t. forall x11:t. (((result = x1) and
+  (x11 = fliteral2)) -> (in_range1(x11) -> in_range2(x11))))

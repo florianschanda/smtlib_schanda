@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -1103,6 +1103,69 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 3333333432674407958984375.0 10000000000000000000000000.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 14285714924335479736328125.0 100000000000000000000000000.0))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 111111111938953399658203125.0 1000000000000000000000000000.0))))
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6)
+  (= (tqtreal fliteral6) (/ 90909093618392944335937500.0 1000000000000000000000000000.0))))
+
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral7)
+  (= (tqtreal fliteral7) (/ 76923079788684844970703125.0 1000000000000000000000000000.0))))
+
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral8)
+  (= (tqtreal fliteral8) (/ 66666670143604278564453125.0 1000000000000000000000000000.0))))
+
+(declare-const fliteral9 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral9)
+  (= (tqtreal fliteral9) (/ 588235296308994293212890625.0 10000000000000000000000000000.0))))
+
+(declare-const fliteral10 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral10)
+  (= (tqtreal fliteral10) (/ 526315793395042419433593750.0 10000000000000000000000000000.0))))
+
 (declare-const t1 t)
 
 (declare-const t2 t)
@@ -1124,8 +1187,6 @@
 (declare-const t10 t)
 
 (declare-const res t)
-
-(declare-const pi_compute__leibniz_float__result t)
 
 (declare-const o t)
 
@@ -1158,12 +1219,6 @@
 (declare-const o14 t)
 
 (declare-const o15 t)
-
-(declare-const o16 t)
-
-(declare-const o17 t)
-
-(declare-const o18 t)
 
 (declare-const result t)
 
@@ -1205,66 +1260,6 @@
 
 (declare-const t101 t)
 
-(declare-const result10 t__ref)
-
-(declare-const res1 t)
-
-(declare-const result11 t__ref)
-
-(declare-const pi_compute__leibniz_float__result1 t)
-
-(declare-const pi_compute__leibniz_float__result2 t__ref)
-
-(declare-const pi_compute__leibniz_float__result3 t)
-
-(declare-const t12 t__ref)
-
-(declare-const t22 t__ref)
-
-(declare-const t32 t__ref)
-
-(declare-const t42 t__ref)
-
-(declare-const t52 t__ref)
-
-(declare-const t62 t__ref)
-
-(declare-const t72 t__ref)
-
-(declare-const t82 t__ref)
-
-(declare-const t92 t__ref)
-
-(declare-const t102 t__ref)
-
-(declare-const res2 t__ref)
-
-(declare-const pi_compute__leibniz_float__result4 t__ref)
-
-(declare-const t13 t)
-
-(declare-const t23 t)
-
-(declare-const t33 t)
-
-(declare-const t43 t)
-
-(declare-const t53 t)
-
-(declare-const t63 t)
-
-(declare-const t73 t)
-
-(declare-const t83 t)
-
-(declare-const t93 t)
-
-(declare-const t103 t)
-
-(declare-const res3 t)
-
-(declare-const pi_compute__leibniz_float__result5 t)
-
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref t1)))
 
@@ -1277,13 +1272,6 @@
 ;; H
   (assert (= (mk_t__ref result1) (mk_t__ref t2)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 3333333432674407958984375.0 10000000000000000000000000.0))))
-
 ;; H
   (assert (= t21 fliteral2))
 
@@ -1292,13 +1280,6 @@
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref t3)))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
 
 ;; H
   (assert (= t31 fliteral3))
@@ -1309,13 +1290,6 @@
 ;; H
   (assert (= (mk_t__ref result3) (mk_t__ref t4)))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 14285714924335479736328125.0 100000000000000000000000000.0))))
-
 ;; H
   (assert (= t41 fliteral4))
 
@@ -1324,13 +1298,6 @@
 
 ;; H
   (assert (= (mk_t__ref result4) (mk_t__ref t5)))
-
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral5)
-  (= (tqtreal fliteral5) (/ 111111111938953399658203125.0 1000000000000000000000000000.0))))
 
 ;; H
   (assert (= t51 fliteral5))
@@ -1341,13 +1308,6 @@
 ;; H
   (assert (= (mk_t__ref result5) (mk_t__ref t6)))
 
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6)
-  (= (tqtreal fliteral6) (/ 90909093618392944335937500.0 1000000000000000000000000000.0))))
-
 ;; H
   (assert (= t61 fliteral6))
 
@@ -1356,13 +1316,6 @@
 
 ;; H
   (assert (= (mk_t__ref result6) (mk_t__ref t7)))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral7)
-  (= (tqtreal fliteral7) (/ 76923079788684844970703125.0 1000000000000000000000000000.0))))
 
 ;; H
   (assert (= t71 fliteral7))
@@ -1373,13 +1326,6 @@
 ;; H
   (assert (= (mk_t__ref result7) (mk_t__ref t8)))
 
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral8)
-  (= (tqtreal fliteral8) (/ 66666670143604278564453125.0 1000000000000000000000000000.0))))
-
 ;; H
   (assert (= t81 fliteral8))
 
@@ -1389,13 +1335,6 @@
 ;; H
   (assert (= (mk_t__ref result8) (mk_t__ref t9)))
 
-(declare-const fliteral9 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral9)
-  (= (tqtreal fliteral9) (/ 588235296308994293212890625.0 10000000000000000000000000000.0))))
-
 ;; H
   (assert (= t91 fliteral9))
 
@@ -1404,13 +1343,6 @@
 
 ;; H
   (assert (= result9 (mk_t__ref t10)))
-
-(declare-const fliteral10 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral10)
-  (= (tqtreal fliteral10) (/ 526315793395042419433593750.0 10000000000000000000000000000.0))))
 
 ;; H
   (assert (= t101 fliteral10))

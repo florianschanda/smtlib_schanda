@@ -2179,7 +2179,15 @@ type unsigned_32_m1_0_m100_0
 
 logic attr__ATTRIBUTE_MODULUS1 : t
 
-predicate in_range1(x: t) = (ule(of_int(1), x) and ule(x, of_int(100)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 1)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 100)
+
+predicate in_range1(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((1 <= x) and (x <= 100))
 
@@ -2218,37 +2226,11 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic relative_error : t
+logic rliteral2 : t
 
-logic abs_out1 : t
-
-logic result : t
-
-logic abs_out11 : t
-
-logic result1 : t
-
-logic relative_error1 : t
-
-logic relative_error2 : t
-
-logic abs_out12 : t
-
-logic relative_error3 : t
-
-logic abs_out13 : t
-
-axiom H : true
-
-axiom H1 : in_range1(calculated_force)
-
-axiom H2 : true
-
-axiom H3 : (not (requested_force = of_int(0)))
-
-axiom H4 : true
-
-axiom H5 : (not (requested_force = of_int(0)))
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 0)
 
  (* File "errorexample.ads", line 22, characters 0-0 *)
-goal WP_parameter_def : (not (requested_force = zeros))
+goal WP_parameter_def : (in_range1(calculated_force) ->
+  ((not (requested_force = rliteral2)) ->
+  ((not (requested_force = rliteral2)) -> (not (requested_force = zeros)))))

@@ -928,28 +928,11 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-axiom H : tqtisFinite(left)
-
-axiom H1 : tqtisFinite(right)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H2 : (not eq(right, fliteral1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(div(RNE, left, right))
+goal WP_parameter_def : (tqtisFinite(left) -> (tqtisFinite(right) ->
+  ((not eq(right, fliteral1)) -> tqtisFinite(div(RNE, left, right)))))

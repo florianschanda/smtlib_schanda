@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -112,12 +108,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const x Float32)
 
@@ -135,40 +132,6 @@
 
 (declare-const o5 Float32)
 
-(declare-const o6 Float32)
-
-(declare-const o7 Float32)
-
-(declare-const o8 Float32)
-
-(declare-const o9 Float32)
-
-(declare-const o10 Float32)
-
-(declare-const o11 Float32)
-
-(declare-const o12 Float32)
-
-(declare-const o13 Float32)
-
-(declare-const o14 Float32)
-
-(declare-const o15 Float32)
-
-(declare-const o16 Float32)
-
-(declare-const o17 Float32)
-
-(declare-const o18 Float32)
-
-(declare-const o19 Float32)
-
-(declare-const o20 Float32)
-
-(declare-const o21 Float32)
-
-(declare-const o22 Bool)
-
 ;; H
   (assert (fp.isFinite32 x))
 
@@ -179,29 +142,29 @@
 
 ;; H
   (assert
-  (and (= o11 (fp.add RNE x (fp #b0 #b10000000 #b00000000000000000000000)))
+  (and (= o (fp.add RNE x (fp #b0 #b10000000 #b00000000000000000000000)))
   (fp.isFinite32 (fp.add RNE x (fp #b0 #b10000000 #b00000000000000000000000)))))
 
 ;; H
-  (assert (= o12 (fp.mul RNE o11 x)))
+  (assert (= o1 (fp.mul RNE o x)))
 
 ;; H
-  (assert (and (= o13 o12) (fp.isFinite32 o12)))
-
-;; H
-  (assert
-  (= o14 (fp.add RNE o13 (fp #b0 #b10000000 #b10000000000000000000000))))
-
-;; H
-  (assert (and (= o15 o14) (fp.isFinite32 o14)))
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
 
 ;; H
   (assert
-  (= o16 (fp.add RNE o15 (fp #b0 #b10000001 #b00000000000000000000000))))
+  (= o3 (fp.add RNE o2 (fp #b0 #b10000000 #b10000000000000000000000))))
+
+;; H
+  (assert (and (= o4 o3) (fp.isFinite32 o3)))
+
+;; H
+  (assert
+  (= o5 (fp.add RNE o4 (fp #b0 #b10000001 #b00000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-unccon.ads", line 20, characters 0-0
-  (not (fp.isFinite32 o16)))
+  (not (fp.isFinite32 o5)))
 (check-sat)
 (exit)

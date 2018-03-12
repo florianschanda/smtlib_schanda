@@ -993,11 +993,6 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
-axiom H2 : eq(a, b)
-
  (* File "generic_float_tests.adb", line 9, characters 0-0 *)
-goal WP_parameter_def : (magic(a) = magic(b))
+goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) -> (eq(a, b) ->
+  (magic(a) = magic(b)))))

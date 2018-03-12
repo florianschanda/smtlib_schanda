@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -977,30 +977,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : bool
-
-logic result : t
-
-logic y1 : t
-
-logic y2 : t
-
-logic y3 : t
-
-axiom H : tqtisFinite(x)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(y))
 
 logic fliteral2 : t
 
@@ -1012,26 +992,18 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 16777216.0))
 
-axiom H2 : (le(fliteral2, x) and le(x, fliteral3))
-
-axiom H3 : (result = y)
-
-axiom H4 : (y1 = roundToIntegral(RNA, x))
-
-axiom H5 : (y1 = y2)
-
-axiom H6 : (y3 = y1)
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.500000000000000000000000))
 
-axiom H7 : ((o1 = add(RNE, x, fliteral4)) and tqtisFinite(add(RNE, x,
-  fliteral4)))
-
-axiom H8 : ((le(y2, o1) -> (o2 = true)) and ((not le(y2, o1)) ->
-  (o2 = false)))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(sub(RNE, x, fliteral4))
+goal WP_parameter_def :
+  (forall y:t. forall o:t. forall o1:bool. forall result:t. forall y1:t.
+  forall y2:t. forall y3:t. (tqtisFinite(x) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(y)) -> ((le(fliteral2, x) and le(x,
+  fliteral3)) -> (((({ t__content = result } = { t__content = y }) and
+  (y1 = roundToIntegral(RNA, x))) and ((y1 = y2) and (y3 = y1))) ->
+  ((((o = add(RNE, x, fliteral4)) and tqtisFinite(add(RNE, x,
+  fliteral4))) and ((le(y2, o) and (o1 = true)) or ((not le(y2, o)) and
+  (o1 = false)))) -> tqtisFinite(sub(RNE, x, fliteral4))))))))

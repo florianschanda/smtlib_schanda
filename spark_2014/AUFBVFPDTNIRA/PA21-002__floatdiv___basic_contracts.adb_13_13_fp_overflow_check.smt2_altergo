@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1088,45 +1088,15 @@ axiom num__def_axiom : (num = of_int(RNE, numerator))
 
 axiom den__def_axiom : (den = of_int(RNE, denominator))
 
-logic basic_contracts__average__result : t
-
-logic basic_contracts__average__num__assume : t
-
-logic basic_contracts__average__den__assume : t
-
-logic o : t
-
-logic result : t
-
-logic basic_contracts__average__result1 : t
-
-logic basic_contracts__average__result2 : t
-
-logic basic_contracts__average__result3 : t
-
-logic basic_contracts__average__result4 : t
-
-logic basic_contracts__average__result5 : t
-
-axiom H : in_range2(numerator)
-
-axiom H1 : in_range2(denominator)
-
-axiom H2 : ((0 <= numerator) and (0 <  denominator))
-
-axiom H3 : ((basic_contracts__average__num__assume = of_int(RNE,
-  numerator)) and tqtisFinite(of_int(RNE, numerator)))
-
-axiom H4 : (basic_contracts__average__num__assume = num)
-
-axiom H5 : in_range4(num)
-
-axiom H6 : ((basic_contracts__average__den__assume = of_int(RNE,
-  denominator)) and tqtisFinite(of_int(RNE, denominator)))
-
-axiom H7 : (basic_contracts__average__den__assume = den)
-
-axiom H8 : in_range3(den)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(div(RNE, num, den))
+goal WP_parameter_def :
+  (forall basic_contracts__average__num__assume:t.
+  forall basic_contracts__average__den__assume:t. (in_range2(numerator) ->
+  (in_range2(denominator) -> (((0 <= numerator) and (0 <  denominator)) ->
+  ((((basic_contracts__average__num__assume = of_int(RNE, numerator)) and
+  tqtisFinite(of_int(RNE, numerator))) and
+  (basic_contracts__average__num__assume = num)) -> (in_range4(num) ->
+  ((((basic_contracts__average__den__assume = of_int(RNE, denominator)) and
+  tqtisFinite(of_int(RNE, denominator))) and
+  (basic_contracts__average__den__assume = den)) -> (in_range3(den) ->
+  tqtisFinite(div(RNE, num, den))))))))))

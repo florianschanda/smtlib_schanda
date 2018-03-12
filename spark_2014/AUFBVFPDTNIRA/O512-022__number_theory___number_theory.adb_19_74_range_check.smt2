@@ -38,10 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -89,12 +85,12 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range2
-                                     temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range2
+                                    temp___expr_39)))
 
 (declare-sort positive 0)
 
@@ -115,12 +111,12 @@
 (define-fun positive__ref___projection ((a positive__ref)) positive (positive__content
                                                                     a))
 
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range3
-                                     temp___expr_39)))
+(define-fun dynamic_invariant1 ((temp___expr_46 Int) (temp___is_init_42 Bool)
+  (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
+  (temp___do_typ_inv_45 Bool)) Bool (=>
+                                    (or (= temp___is_init_42 true)
+                                    (<= 1 2147483647)) (in_range3
+                                    temp___expr_46)))
 
 (declare-sort fibonacci_argument_type 0)
 
@@ -143,11 +139,12 @@
 (define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
   (fibonacci_argument_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_185 Int)
-  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
-  (temp___do_toplevel_184 Bool)) Bool (=>
-                                      (or (= temp___is_init_182 true)
-                                      (<= 0 46)) (in_range4 temp___expr_185)))
+(define-fun dynamic_invariant2 ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 46)) (in_range4 temp___expr_208)))
 
 (declare-fun fib (Int) Int)
 
@@ -167,9 +164,9 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int1 (RoundingMode Int) Float32)
+(declare-fun of_int (RoundingMode Int) Float32)
 
-(declare-fun to_int2 (RoundingMode Float32) Int)
+(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -205,7 +202,7 @@
 ;; Power_0
   (assert
   (forall ((x Float32))
-  (=> (fp.isFinite32 x) (fp.eq (power x 0) (of_int1 RNE 1)))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 0) (of_int RNE 1)))))
 
 ;; Power_1
   (assert
@@ -226,26 +223,26 @@
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 1)) (fp.div RNE (of_int1 RNE 1) x))))))
+  (fp.eq (power x (- 1)) (fp.div RNE (of_int RNE 1) x))))))
 
 ;; Power_neg2
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int1 RNE 1) (power x 2)))))))
+  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 2)))))))
 
 ;; Power_neg3
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int1 RNE 1) (power x 3)))))))
+  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 3)))))))
 
 ;; fib__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant2 n true true true)
+  (! (=> (dynamic_invariant2 n true true true true)
      (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))) :pattern (
   (fib n)) )))
 
@@ -297,12 +294,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(define-fun dynamic_invariant3 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant3 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-const result__ Int)
 
@@ -314,177 +311,25 @@
 
 (declare-const i Int)
 
-(declare-const number_theory__fibonacci__result Int)
-
-(declare-const temp___194 Int)
-
-(declare-const temp___193 Int)
-
-(declare-const temp___192 Int)
-
-(declare-const temp___191 Int)
-
-(declare-const o Int)
-
-(declare-const o1 Int)
-
-(declare-const o2 Int)
-
-(declare-const o3 Bool)
-
-(declare-const o4 Int)
-
-(declare-const old__1 Int)
+(declare-const result Int)
 
 (declare-const oldest1 Int)
 
-(declare-const temp1 Int)
-
-(declare-const i1 Int)
-
-(declare-const result Int)
-
-(declare-const result__1 Int)
-
 (declare-const result1 Int)
 
-(declare-const oldest2 Int)
+(declare-const old__1 Int)
 
 (declare-const result2 Int)
 
+(declare-const i1 Int)
+
 (declare-const old__2 Int)
 
-(declare-const result3 Int)
+(declare-const oldest2 Int)
+
+(declare-const temp1 Int)
 
 (declare-const i2 Int)
-
-(declare-const old__3 Int)
-
-(declare-const oldest3 Int)
-
-(declare-const temp2 Int)
-
-(declare-const i3 Int)
-
-(declare-const result4 Int)
-
-(declare-const temp3 Int)
-
-(declare-const result5 Int)
-
-(declare-const oldest4 Int)
-
-(declare-const result6 Int)
-
-(declare-const old__4 Int)
-
-(declare-const result7 Int)
-
-(declare-const i4 Int)
-
-(declare-const old__5 Int)
-
-(declare-const oldest5 Int)
-
-(declare-const temp4 Int)
-
-(declare-const i5 Int)
-
-(declare-const old__6 Int)
-
-(declare-const oldest6 Int)
-
-(declare-const temp5 Int)
-
-(declare-const i6 Int)
-
-(declare-const old__7 Int)
-
-(declare-const oldest7 Int)
-
-(declare-const temp6 Int)
-
-(declare-const i7 int__ref)
-
-(declare-const old__8 Int)
-
-(declare-const oldest8 Int)
-
-(declare-const temp7 Int)
-
-(declare-const i8 Int)
-
-(declare-const old__9 int__ref)
-
-(declare-const oldest9 int__ref)
-
-(declare-const temp8 int__ref)
-
-(declare-const i9 int__ref)
-
-(declare-const old__10 Int)
-
-(declare-const oldest10 Int)
-
-(declare-const temp9 Int)
-
-(declare-const i10 Int)
-
-(declare-const result8 int__ref)
-
-(declare-const result__2 Int)
-
-(declare-const result__3 int__ref)
-
-(declare-const old__11 int__ref)
-
-(declare-const oldest11 int__ref)
-
-(declare-const temp10 int__ref)
-
-(declare-const i11 int__ref)
-
-(declare-const result__4 Int)
-
-(declare-const old__12 Int)
-
-(declare-const oldest12 Int)
-
-(declare-const temp11 Int)
-
-(declare-const i12 Int)
-
-(declare-const result9 int__ref)
-
-(declare-const number_theory__fibonacci__result1 Int)
-
-(declare-const number_theory__fibonacci__result2 int__ref)
-
-(declare-const number_theory__fibonacci__result3 Int)
-
-(declare-const result__5 int__ref)
-
-(declare-const old__13 int__ref)
-
-(declare-const oldest13 int__ref)
-
-(declare-const temp12 int__ref)
-
-(declare-const i13 int__ref)
-
-(declare-const number_theory__fibonacci__result4 int__ref)
-
-(declare-const result__6 Int)
-
-(declare-const old__14 Int)
-
-(declare-const oldest14 Int)
-
-(declare-const temp13 Int)
-
-(declare-const i14 Int)
-
-(declare-const number_theory__fibonacci__result5 Int)
 
 ;; H
   (assert (in_range4 n))
@@ -502,51 +347,51 @@
   (assert (=> (<= 0 2147483647) (in_range2 temp)))
 
 ;; H
-  (assert (not (= n 0)))
+  (assert (not (not (not (= n 0)))))
 
 ;; H
   (assert (not (= n 1)))
 
 ;; H
-  (assert (= (mk_int__ref result1) (mk_int__ref oldest)))
+  (assert (= (mk_int__ref result) (mk_int__ref oldest)))
 
 ;; H
-  (assert (= oldest2 0))
+  (assert (= oldest1 0))
 
 ;; H
-  (assert (= (mk_int__ref result2) (mk_int__ref old__)))
+  (assert (= (mk_int__ref result1) (mk_int__ref old__)))
 
 ;; H
-  (assert (= old__2 1))
+  (assert (= old__1 1))
 
 ;; H
-  (assert (= (mk_int__ref result3) (mk_int__ref i)))
+  (assert (= (mk_int__ref result2) (mk_int__ref i)))
 
 ;; H
-  (assert (= i2 2))
+  (assert (= i1 2))
 
 ;; H
-  (assert (<= 2 i2))
+  (assert (<= 2 i1))
 
 ;; H
-  (assert (<= i2 n))
+  (assert (<= i1 n))
 
 ;; H
-  (assert (and (= old__3 (fib (- i3 1))) (= oldest3 (fib (- i3 2)))))
+  (assert (and (= old__2 (fib (- i2 1))) (= oldest2 (fib (- i2 2)))))
 
 ;; H
   (assert
   (and
   (and
   (and
-  (and (=> (<= 2 n) (dynamic_property 2 n i3))
-  (=> (<= 1 2147483647) (in_range3 old__3)))
-  (=> (<= 0 2147483647) (in_range2 oldest3)))
-  (=> (<= 0 2147483647) (in_range2 temp2))) (and (<= 2 i3) (<= i3 n))))
+  (and (=> (<= 2 n) (dynamic_property 2 n i2))
+  (=> (<= 1 2147483647) (in_range3 old__2)))
+  (=> (<= 0 2147483647) (in_range2 oldest2)))
+  (=> (<= 0 2147483647) (in_range2 temp1))) (and (<= 2 i2) (<= i2 n))))
 
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not (in_range4 (- i3 2))))
+  (not (in_range4 (- i2 2))))
 (check-sat)
 (exit)

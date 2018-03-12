@@ -446,17 +446,16 @@
 (define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32
   (unsigned_32__content a))
 
-(define-fun dynamic_invariant ((temp___expr_177 (_ BitVec 32))
-  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_207 (_ BitVec 32))
+  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
+  (temp___do_toplevel_205 Bool) (temp___do_typ_inv_206 Bool)) Bool true)
 
 (declare-sort unsigned_32_m1_0_m100_0 0)
 
 (declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
 
-(define-fun in_range ((x (_ BitVec 32))) Bool (and
-                                              (bvule ((_ int2bv 32) 1) x)
-                                              (bvule x ((_ int2bv 32) 100))))
+(define-fun in_range ((x (_ BitVec 32))) Bool (and (bvule #x00000001 x)
+                                              (bvule x #x00000064)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 1 x) (<= x 100)))
 
@@ -477,12 +476,13 @@
 (define-fun unsigned_32_m1_0_m100_0__ref___projection ((a unsigned_32_m1_0_m100_0__ref)) unsigned_32_m1_0_m100_0
   (unsigned_32_m1_0_m100_0__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_201 (_ BitVec 32))
-  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
-  (temp___do_toplevel_200 Bool)) Bool (=>
-                                      (or (= temp___is_init_198 true)
-                                      (bvule ((_ int2bv 32) 1) ((_ int2bv 32) 100)))
-                                      (in_range temp___expr_201)))
+(define-fun dynamic_invariant1 ((temp___expr_235 (_ BitVec 32))
+  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
+  (temp___do_toplevel_233 Bool)
+  (temp___do_typ_inv_234 Bool)) Bool (=>
+                                     (or (= temp___is_init_231 true)
+                                     (bvule #x00000001 #x00000064)) (in_range
+                                     temp___expr_235)))
 
 (declare-const requested_force (_ BitVec 32))
 
@@ -517,30 +517,42 @@
 (declare-const abs_out13 (_ BitVec 32))
 
 ;; H
-  (assert true)
-
-;; H
   (assert (in_range calculated_force))
 
 ;; H
-  (assert true)
+  (assert (not (= requested_force #x00000000)))
 
 ;; H
-  (assert (not (= requested_force ((_ int2bv 32) 0))))
+  (assert (not (= requested_force #x00000000)))
+
+;; H
+  (assert (= (mk_t__ref result) (mk_t__ref abs_out1)))
 
 ;; H
   (assert
-  (and
-  (and (not (= requested_force ((_ int2bv 32) 0)))
-  (and
-  (and (= (mk_t__ref result) (mk_t__ref abs_out1))
   (= abs_out11 (bvudiv (bvsub requested_force calculated_force) requested_force)))
-  (and
-  (fp.leq ((_ to_fp_unsigned 11 53) RNE abs_out11) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011))
-  (and (= (mk_t__ref result1) (mk_t__ref relative_error))
-  (= relative_error1 abs_out11)))))
-  (and (and (= abs_out11 abs_out12) (= relative_error1 relative_error2))
-  (and (= abs_out13 abs_out11) (= relative_error3 relative_error1)))))
+
+;; H
+  (assert
+  (fp.leq ((_ to_fp_unsigned 11 53) RNE abs_out11) (fp #b0 #b01111111000 #b0100011110101110000101000111101011100001010001111011)))
+
+;; H
+  (assert (= (mk_t__ref result1) (mk_t__ref relative_error)))
+
+;; H
+  (assert (= relative_error1 abs_out11))
+
+;; H
+  (assert (= abs_out11 abs_out12))
+
+;; H
+  (assert (= relative_error1 relative_error2))
+
+;; H
+  (assert (= abs_out13 abs_out11))
+
+;; H
+  (assert (= relative_error3 relative_error1))
 
 (assert
 ;; WP_parameter_def

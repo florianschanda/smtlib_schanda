@@ -970,60 +970,17 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic res : bool
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : bool
-
-logic result : bool
-
-logic res1 : bool
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
-axiom H2 : tqtisFinite(c)
-
-axiom H3 : tqtisFinite(d)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
-axiom H4 : le(fliteral2, a)
-
-axiom H5 : le(fliteral2, b)
-
-axiom H6 : in_range1(c)
-
-axiom H7 : in_range1(d)
-
-axiom H8 : ((o2 = mul(RNE, d, d)) and tqtisFinite(mul(RNE, d, d)))
-
-axiom H9 : (o3 = mul(RNE, o2, b))
-
-axiom H10 : ((o4 = o3) and tqtisFinite(o3))
-
-axiom H11 : ((o = mul(RNE, c, c)) and tqtisFinite(mul(RNE, c, c)))
-
-axiom H12 : (o1 = mul(RNE, o, a))
-
  (* File "floating_point.adb", line 274, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o1)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
+  (tqtisFinite(a) -> (tqtisFinite(b) -> (tqtisFinite(c) -> (tqtisFinite(d) ->
+  (le(fliteral2, a) -> (le(fliteral2, b) -> (in_range1(c) -> (in_range1(d) ->
+  (((((o2 = mul(RNE, d, d)) and tqtisFinite(mul(RNE, d, d))) and
+  (o3 = mul(RNE, o2, b))) and ((o4 = o3) and tqtisFinite(o3))) ->
+  ((((o = mul(RNE, c, c)) and tqtisFinite(mul(RNE, c, c))) and (o1 = mul(RNE,
+  o, a))) -> tqtisFinite(o1))))))))))))

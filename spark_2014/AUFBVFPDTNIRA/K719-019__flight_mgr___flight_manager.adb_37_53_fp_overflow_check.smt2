@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -112,12 +108,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun to_rep (float) Float32)
 
@@ -249,19 +246,15 @@
 
 (declare-const result____split_fields1 float)
 
-(declare-const flight_manager__set_engine_speed__result float)
-
-(declare-const flight_manager__set_engine_speed__result1 float)
-
 (declare-const o float)
 
 (declare-const o1 float)
 
 (declare-const o2 float)
 
-(declare-const temp___145 float)
+(declare-const temp___168 float)
 
-(declare-const temp___1451 float)
+(declare-const temp___1681 float)
 
 (declare-const o3 float)
 
@@ -269,9 +262,9 @@
 
 (declare-const o5 float)
 
-(declare-const temp___143 float)
+(declare-const temp___166 float)
 
-(declare-const temp___1431 float)
+(declare-const temp___1661 float)
 
 (declare-const o6 float)
 
@@ -279,9 +272,9 @@
 
 (declare-const o8 float)
 
-(declare-const temp___149 float)
+(declare-const temp___172 float)
 
-(declare-const temp___1491 float)
+(declare-const temp___1721 float)
 
 (declare-const o9 float)
 
@@ -289,9 +282,9 @@
 
 (declare-const o11 float)
 
-(declare-const temp___147 float)
+(declare-const temp___170 float)
 
-(declare-const temp___1471 float)
+(declare-const temp___1701 float)
 
 (declare-const o12 Float32)
 
@@ -303,39 +296,9 @@
 
 (declare-const o16 float)
 
-(declare-const temp___151 float)
+(declare-const temp___174 float)
 
-(declare-const temp___1511 float)
-
-(declare-const o17 Float32)
-
-(declare-const o18 Float32)
-
-(declare-const o19 float)
-
-(declare-const o20 float)
-
-(declare-const o21 float)
-
-(declare-const temp___153 us_rep)
-
-(declare-const o22 Float32)
-
-(declare-const o23 Float32)
-
-(declare-const o24 Float32)
-
-(declare-const o25 Float32)
-
-(declare-const o26 Float32)
-
-(declare-const o27 Float32)
-
-(declare-const o28 Float32)
-
-(declare-const o29 Float32)
-
-(declare-const o30 Bool)
+(declare-const temp___1741 float)
 
 (declare-const result____split_fields2 us_split_fields)
 
@@ -361,27 +324,10 @@
 
 (declare-const result____split_fields7 us_split_fields)
 
-(declare-const flight_manager__set_engine_speed__adjust_speed__f1 Float32)
-
-(declare-const result5 us_split_fields__ref)
-
-(declare-const result____split_fields8 us_split_fields)
-
-(declare-const result6 engine_values__ref)
-
-(declare-const flight_manager__set_engine_speed__result2 us_rep)
-
-(declare-const flight_manager__set_engine_speed__result3 engine_values__ref)
-
-(declare-const flight_manager__set_engine_speed__result4 us_rep)
-
-(declare-const result____split_fields9 us_split_fields__ref)
-
-(declare-const flight_manager__set_engine_speed__result5 engine_values__ref)
-
-(declare-const result____split_fields10 us_split_fields)
-
-(declare-const flight_manager__set_engine_speed__result6 us_rep)
+(define-fun result____split_fields8 () us_split_fields__ref (mk___split_fields__ref
+                                                            (mk___split_fields
+                                                            result____split_fields
+                                                            result____split_fields1)))
 
 ;; H
   (assert (fp.isFinite32 position_x))
@@ -407,22 +353,19 @@
   (assert (=> (fp.lt target_x position_x) (= result____split_fields1 o2)))
 
 ;; H
-  (assert (=> (fp.lt target_x position_x) (= temp___145 o1)))
+  (assert (=> (fp.lt target_x position_x) (= temp___168 o1)))
 
 ;; H
-  (assert (=> (fp.lt target_x position_x) (= temp___1451 o2)))
+  (assert (=> (fp.lt target_x position_x) (= temp___1681 o2)))
+
+;; H
+  (assert
+  (=> (fp.lt target_x position_x) (= result result____split_fields8)))
 
 ;; H
   (assert
   (=> (fp.lt target_x position_x)
-  (= result (mk___split_fields__ref
-            (mk___split_fields result____split_fields
-            result____split_fields1)))))
-
-;; H
-  (assert
-  (=> (fp.lt target_x position_x)
-  (= result____split_fields3 (mk___split_fields temp___145 temp___1451))))
+  (= result____split_fields3 (mk___split_fields temp___168 temp___1681))))
 
 ;; H
   (assert
@@ -443,26 +386,23 @@
 ;; H
   (assert
   (=> (not (fp.lt target_x position_x))
-  (=> (fp.lt position_x target_x) (= temp___143 o4))))
+  (=> (fp.lt position_x target_x) (= temp___166 o4))))
 
 ;; H
   (assert
   (=> (not (fp.lt target_x position_x))
-  (=> (fp.lt position_x target_x) (= temp___1431 o5))))
+  (=> (fp.lt position_x target_x) (= temp___1661 o5))))
+
+;; H
+  (assert
+  (=> (not (fp.lt target_x position_x))
+  (=> (fp.lt position_x target_x) (= result1 result____split_fields8))))
 
 ;; H
   (assert
   (=> (not (fp.lt target_x position_x))
   (=> (fp.lt position_x target_x)
-  (= result1 (mk___split_fields__ref
-             (mk___split_fields result____split_fields
-             result____split_fields1))))))
-
-;; H
-  (assert
-  (=> (not (fp.lt target_x position_x))
-  (=> (fp.lt position_x target_x)
-  (= result____split_fields4 (mk___split_fields temp___143 temp___1431)))))
+  (= result____split_fields4 (mk___split_fields temp___166 temp___1661)))))
 
 ;; H
   (assert
@@ -497,10 +437,10 @@
   (assert (=> (fp.lt target_y position_y) (= o6 o8)))
 
 ;; H
-  (assert (=> (fp.lt target_y position_y) (= temp___149 o7)))
+  (assert (=> (fp.lt target_y position_y) (= temp___172 o7)))
 
 ;; H
-  (assert (=> (fp.lt target_y position_y) (= temp___1491 o8)))
+  (assert (=> (fp.lt target_y position_y) (= temp___1721 o8)))
 
 ;; H
   (assert
@@ -510,7 +450,7 @@
 ;; H
   (assert
   (=> (fp.lt target_y position_y)
-  (= result____split_fields5 (mk___split_fields temp___149 temp___1491))))
+  (= result____split_fields5 (mk___split_fields temp___172 temp___1721))))
 
 ;; H
   (assert
@@ -533,12 +473,12 @@
 ;; H
   (assert
   (=> (not (fp.lt target_y position_y))
-  (=> (fp.lt position_y target_y) (= temp___147 o10))))
+  (=> (fp.lt position_y target_y) (= temp___170 o10))))
 
 ;; H
   (assert
   (=> (not (fp.lt target_y position_y))
-  (=> (fp.lt position_y target_y) (= temp___1471 o11))))
+  (=> (fp.lt position_y target_y) (= temp___1701 o11))))
 
 ;; H
   (assert
@@ -550,7 +490,7 @@
   (assert
   (=> (not (fp.lt target_y position_y))
   (=> (fp.lt position_y target_y)
-  (= result____split_fields6 (mk___split_fields temp___147 temp___1471)))))
+  (= result____split_fields6 (mk___split_fields temp___170 temp___1701)))))
 
 ;; H
   (assert
@@ -593,17 +533,17 @@
   o16))
 
 ;; H
-  (assert (= temp___151 o15))
+  (assert (= temp___174 o15))
 
 ;; H
-  (assert (= temp___1511 o16))
+  (assert (= temp___1741 o16))
 
 ;; H
   (assert (= result4 (mk___split_fields__ref result____split_fields5)))
 
 ;; H
   (assert
-  (= result____split_fields7 (mk___split_fields temp___151 temp___1511)))
+  (= result____split_fields7 (mk___split_fields temp___174 temp___1741)))
 
 (assert
 ;; WP_parameter_def

@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const x Float32)
 
@@ -141,12 +142,13 @@
 (define-fun t_rate__ref___projection ((a t_rate__ref)) t_rate (t_rate__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_135 Float32)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) (fp #b0 #b10001010 #b01110111000000000000000)))
-                                      (in_range temp___expr_135)))
+(define-fun dynamic_invariant1 ((temp___expr_158 Float32)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) (fp #b0 #b10001010 #b01110111000000000000000)))
+                                     (in_range temp___expr_158)))
 
 (declare-fun to_rep (t_rate) Float32)
 
@@ -179,20 +181,6 @@
 
 (declare-const yaw_rate_desired Float32)
 
-(declare-const o Float32)
-
-(declare-const get_out_subtype__controller_get_desired_rate__pitch_rate_desired Float32)
-
-(declare-const o1 Float32)
-
-(declare-const o2 Float32)
-
-(declare-const o3 t_rate)
-
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
 (declare-const result Float32)
 
 (declare-const roll_rate_desired1 Float32)
@@ -204,20 +192,6 @@
 (declare-const result2 Float32)
 
 (declare-const yaw_rate_desired1 Float32)
-
-(declare-const get_out_subtype__controller_get_desired_rate__yaw_rate_desired Float32)
-
-(declare-const get_out_subtype__controller_get_desired_rate__pitch_rate_desired1 Float32)
-
-(declare-const get_out_subtype__controller_get_desired_rate__roll_rate_desired Float32)
-
-(declare-const result3 Float32)
-
-(declare-const roll_rate_desired2 Float32)
-
-(declare-const result4 Float32)
-
-(declare-const pitch_rate_desired2 Float32)
 
 ;; H
   (assert (fp.isFinite32 x))

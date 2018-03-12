@@ -119,12 +119,13 @@
 (define-fun float64__ref___projection ((a float64__ref)) float64 (float64__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_135 Float64)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Float64)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_158)))
 
 (declare-sort frame 0)
 
@@ -143,12 +144,13 @@
 (declare-datatypes () ((frame__ref (mk_frame__ref (frame__content frame)))))
 (define-fun frame__ref___projection ((a frame__ref)) frame (frame__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_141 Int)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (<= 0 25000)) (in_range
-                                      temp___expr_141)))
+(define-fun dynamic_invariant1 ((temp___expr_165 Int)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (<= 0 25000)) (in_range
+                                     temp___expr_165)))
 
 (declare-sort ratio_t 0)
 
@@ -172,12 +174,13 @@
 (define-fun ratio_t__ref___projection ((a ratio_t__ref)) ratio_t (ratio_t__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_147 Float64)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-                                      (in_range1 temp___expr_147)))
+(define-fun dynamic_invariant2 ((temp___expr_172 Float64)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
+                                     (in_range1 temp___expr_172)))
 
 (declare-fun invariant__ (Int Float64 Float64) Bool)
 
@@ -228,37 +231,9 @@
 
 (declare-const o Float64)
 
-(declare-const o1 Float64)
-
-(declare-const o2 Float64)
-
-(declare-const o3 Float64)
-
-(declare-const o4 Int)
-
 (declare-const result Float64)
 
 (declare-const speed1 Float64)
-
-(declare-const result1 Float64)
-
-(declare-const average1 Float64)
-
-(declare-const result2 Float64)
-
-(declare-const distance1 Float64)
-
-(declare-const speed2 Float64)
-
-(declare-const distance2 Float64)
-
-(declare-const average2 Float64)
-
-(declare-const speed3 Float64)
-
-(declare-const distance3 Float64)
-
-(declare-const average3 Float64)
 
 ;; H
   (assert (in_range n))

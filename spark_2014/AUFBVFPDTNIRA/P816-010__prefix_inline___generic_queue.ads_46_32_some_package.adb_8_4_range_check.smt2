@@ -396,33 +396,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (bvsub i (bvsub new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array (_ BitVec 8) element_type) (_ BitVec 8)
-  (_ BitVec 8) (Array (_ BitVec 8) element_type) (_ BitVec 8)
-  (_ BitVec 8)) (Array (_ BitVec 8) element_type))
-
-;; concat_def
-  (assert
-  (forall ((a (Array (_ BitVec 8) element_type))
-  (b (Array (_ BitVec 8) element_type)))
-  (forall ((a_first (_ BitVec 8)) (a_last (_ BitVec 8))
-  (b_first (_ BitVec 8)) (b_last (_ BitVec 8)))
-  (forall ((i (_ BitVec 8)))
-  (! (and
-     (=> (and (bvule a_first i) (bvule i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (bvugt i a_last)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (bvadd (bvsub i a_last) (bvsub b_first #x01)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (element_type
-  (_ BitVec 8)) (Array (_ BitVec 8) element_type))
-
-;; singleton_def
-  (assert
-  (forall ((v element_type))
-  (forall ((i (_ BitVec 8)))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq ((a (Array (_ BitVec 8) element_type))
   (a__first (_ BitVec 8)) (a__last (_ BitVec 8))
   (b (Array (_ BitVec 8) element_type)) (b__first (_ BitVec 8))
@@ -431,13 +404,13 @@
                                     (and (bvule b__first b__last)
                                     (= (bvsub a__last a__first) (bvsub b__last b__first)))
                                     (bvugt b__first b__last))
-                                    (forall ((temp___idx_133 (_ BitVec 8)))
+                                    (forall ((temp___idx_155 (_ BitVec 8)))
                                     (=>
-                                    (and (bvule a__first temp___idx_133)
-                                    (bvule temp___idx_133 a__last))
-                                    (= (to_rep4 (select a temp___idx_133))
+                                    (and (bvule a__first temp___idx_155)
+                                    (bvule temp___idx_155 a__last))
+                                    (= (to_rep4 (select a temp___idx_155))
                                     (to_rep4
-                                    (select b (bvadd (bvsub b__first a__first) temp___idx_133)))))))
+                                    (select b (bvadd (bvsub b__first a__first) temp___idx_155)))))))
                                true false))
 
 ;; bool_eq_rev
@@ -452,10 +425,10 @@
   (and (bvule b__first b__last)
   (= (bvsub a__last a__first) (bvsub b__last b__first)))
   (bvugt b__first b__last))
-  (forall ((temp___idx_133 (_ BitVec 8)))
-  (=> (and (bvule a__first temp___idx_133) (bvule temp___idx_133 a__last))
-  (= (to_rep4 (select a temp___idx_133)) (to_rep4
-                                         (select b (bvadd (bvsub b__first a__first) temp___idx_133)))))))))))
+  (forall ((temp___idx_155 (_ BitVec 8)))
+  (=> (and (bvule a__first temp___idx_155) (bvule temp___idx_155 a__last))
+  (= (to_rep4 (select a temp___idx_155)) (to_rep4
+                                         (select b (bvadd (bvsub b__first a__first) temp___idx_155)))))))))))
 
 (declare-const dummy5 (Array (_ BitVec 8) element_type))
 
@@ -548,11 +521,9 @@
                                                   (us_split_fields1 b))))
                         (= (bool_eq
                            (rec__some_package__float_buffer__buffer_tag__buffer
-                           (us_split_fields1 a)) ((_ int2bv 8) 0)
-                           ((_ int2bv 8) 255)
+                           (us_split_fields1 a)) #x00 #xFF
                            (rec__some_package__float_buffer__buffer_tag__buffer
-                           (us_split_fields1 b)) ((_ int2bv 8) 0)
-                           ((_ int2bv 8) 255)) true))
+                           (us_split_fields1 b)) #x00 #xFF) true))
                         (= (to_rep2
                            (rec__some_package__float_buffer__buffer_tag__index_head
                            (us_split_fields1 a))) (to_rep2
@@ -712,10 +683,6 @@
 (define-fun buffer_tag__ref___projection ((a buffer_tag__ref)) us_rep
   (buffer_tag__content a))
 
-(define-fun to_int4 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range4 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE5 (Bool) us_image)
@@ -724,9 +691,9 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Bool)
 
-(define-fun default_initial_assumption ((temp___expr_251 us_rep)
-  (temp___skip_top_level_252 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_251)
+(define-fun default_initial_assumption ((temp___expr_292 us_rep)
+  (temp___skip_top_level_293 Bool)) Bool (and
+                                         (= (attr__tag temp___expr_292)
                                          us_tag)
                                          (and
                                          (and
@@ -736,31 +703,30 @@
                                          (= (to_rep3
                                             (rec__some_package__float_buffer__buffer_tag__mode
                                             (us_split_fields1
-                                            temp___expr_251))) 0)
-                                         (forall ((temp___254 (_ BitVec 8)))
+                                            temp___expr_292))) 0)
+                                         (forall ((temp___295 (_ BitVec 8)))
                                          (=>
-                                         (and
-                                         (bvule ((_ int2bv 8) 0) temp___254)
-                                         (bvule temp___254 ((_ int2bv 8) 255)))
+                                         (and (bvule #x00 temp___295)
+                                         (bvule temp___295 #xFF))
                                          (fp.eq (to_rep4
                                                 (select (rec__some_package__float_buffer__buffer_tag__buffer
                                                         (us_split_fields1
-                                                        temp___expr_251)) temp___254)) (fp #b0 #b00000000 #b00000000000000000000000)))))
+                                                        temp___expr_292)) temp___295)) (fp #b0 #b00000000 #b00000000000000000000000)))))
                                          (= (to_rep2
                                             (rec__some_package__float_buffer__buffer_tag__index_head
                                             (us_split_fields1
-                                            temp___expr_251))) ((_ int2bv 8) 0)))
+                                            temp___expr_292))) #x00))
                                          (= (to_rep2
                                             (rec__some_package__float_buffer__buffer_tag__index_tail
                                             (us_split_fields1
-                                            temp___expr_251))) ((_ int2bv 8) 0)))
+                                            temp___expr_292))) #x00))
                                          (= (rec__some_package__float_buffer__buffer_tag__haselements
                                             (us_split_fields1
-                                            temp___expr_251)) (of_int1 0)))
+                                            temp___expr_292)) (distinct 0 0)))
                                          (= (to_rep1
                                             (rec__some_package__float_buffer__buffer_tag__num_overflows
                                             (us_split_fields1
-                                            temp___expr_251))) 0))))
+                                            temp___expr_292))) 0))))
 
 (declare-sort length_type 0)
 
@@ -801,29 +767,6 @@
   (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
-(declare-fun concat2 ((Array Int element_type) Int Int
-  (Array Int element_type) Int Int) (Array Int element_type))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int element_type)) (b (Array Int element_type)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat2 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton2 (element_type Int) (Array Int element_type))
-
-;; singleton_def
-  (assert
-  (forall ((v element_type))
-  (forall ((i Int))
-  (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
-
 (define-fun bool_eq2 ((a (Array Int element_type)) (a__first Int)
   (a__last Int) (b (Array Int element_type)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -831,12 +774,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (to_rep4 (select a temp___idx_132)) (to_rep4
-                                                                  (select b (+ (- b__first a__first) temp___idx_132)))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (to_rep4 (select a temp___idx_154)) (to_rep4
+                                                                  (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -848,10 +791,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (to_rep4 (select a temp___idx_132)) (to_rep4
-                                         (select b (+ (- b__first a__first) temp___idx_132)))))))))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (to_rep4 (select a temp___idx_154)) (to_rep4
+                                         (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
 (declare-sort t 0)
 
@@ -944,12 +887,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun dynamic_invariant ((temp___expr_223 Int)
-  (temp___is_init_220 Bool) (temp___skip_constant_221 Bool)
-  (temp___do_toplevel_222 Bool)) Bool (=>
-                                      (or (= temp___is_init_220 true)
-                                      (<= 0 256)) (in_range5
-                                      temp___expr_223)))
+(define-fun dynamic_invariant ((temp___expr_260 Int)
+  (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
+  (temp___do_toplevel_258 Bool)
+  (temp___do_typ_inv_259 Bool)) Bool (=>
+                                     (or (= temp___is_init_256 true)
+                                     (<= 0 256)) (in_range5 temp___expr_260)))
 
 (declare-fun length1 (us_rep) Int)
 
@@ -964,53 +907,55 @@
   (forall ((self us_rep))
   (! (= (length1 self) (length2 us_tag self)) :pattern ((length2 us_tag self)) )))
 
-(define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range1
-                                     temp___expr_33)))
+(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range1
+                                    temp___expr_39)))
 
-(define-fun dynamic_invariant2 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range temp___expr_15)))
+(define-fun dynamic_invariant2 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
-(define-fun dynamic_invariant3 ((temp___expr_229 us_t)
-  (temp___is_init_226 Bool) (temp___skip_constant_227 Bool)
-  (temp___do_toplevel_228 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_227 true))
-                                      (dynamic_property 0 256
-                                      (first1 temp___expr_229)
-                                      (last1 temp___expr_229))))
+(define-fun dynamic_invariant3 ((temp___expr_267 us_t)
+  (temp___is_init_263 Bool) (temp___skip_constant_264 Bool)
+  (temp___do_toplevel_265 Bool)
+  (temp___do_typ_inv_266 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_264 true))
+                                     (dynamic_property 0 256
+                                     (first1 temp___expr_267)
+                                     (last1 temp___expr_267))))
 
-(define-fun dynamic_invariant4 ((temp___expr_234 Int)
-  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
-  (temp___do_toplevel_233 Bool)) Bool (=>
-                                      (or (= temp___is_init_231 true)
-                                      (<= 0 1)) (in_range2 temp___expr_234)))
+(define-fun dynamic_invariant4 ((temp___expr_273 Int)
+  (temp___is_init_269 Bool) (temp___skip_constant_270 Bool)
+  (temp___do_toplevel_271 Bool)
+  (temp___do_typ_inv_272 Bool)) Bool (=>
+                                     (or (= temp___is_init_269 true)
+                                     (<= 0 1)) (in_range2 temp___expr_273)))
 
-(define-fun default_initial_assumption1 ((temp___expr_242 (Array (_ BitVec 8) element_type))
-  (temp___skip_top_level_243 Bool)) Bool (forall ((temp___244 (_ BitVec 8)))
+(define-fun default_initial_assumption1 ((temp___expr_282 (Array (_ BitVec 8) element_type))
+  (temp___skip_top_level_283 Bool)) Bool (forall ((temp___284 (_ BitVec 8)))
                                          (=>
-                                         (and
-                                         (bvule ((_ int2bv 8) 0) temp___244)
-                                         (bvule temp___244 ((_ int2bv 8) 255)))
+                                         (and (bvule #x00 temp___284)
+                                         (bvule temp___284 #xFF))
                                          (fp.eq (to_rep4
-                                                (select temp___expr_242 temp___244)) (fp #b0 #b00000000 #b00000000000000000000000)))))
+                                                (select temp___expr_282 temp___284)) (fp #b0 #b00000000 #b00000000000000000000000)))))
 
-(define-fun dynamic_invariant5 ((temp___expr_211 (_ BitVec 8))
-  (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
-  (temp___do_toplevel_210 Bool)) Bool true)
+(define-fun dynamic_invariant5 ((temp___expr_246 (_ BitVec 8))
+  (temp___is_init_242 Bool) (temp___skip_constant_243 Bool)
+  (temp___do_toplevel_244 Bool) (temp___do_typ_inv_245 Bool)) Bool true)
 
-(define-fun dynamic_invariant6 ((temp___expr_217 Float32)
-  (temp___is_init_214 Bool) (temp___skip_constant_215 Bool)
-  (temp___do_toplevel_216 Bool)) Bool (=>
-                                      (or (= temp___is_init_214 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b01000000000000000000000)))
-                                      (in_range3 temp___expr_217)))
+(define-fun dynamic_invariant6 ((temp___expr_253 Float32)
+  (temp___is_init_249 Bool) (temp___skip_constant_250 Bool)
+  (temp___do_toplevel_251 Bool)
+  (temp___do_typ_inv_252 Bool)) Bool (=>
+                                     (or (= temp___is_init_249 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b01000000000000000000000)))
+                                     (in_range3 temp___expr_253)))
 
 (declare-const self__split_fields mode_type)
 
@@ -1029,8 +974,6 @@
 (declare-const o Int)
 
 (declare-const o1 Int)
-
-(declare-const o2 Int)
 
 ;; H
   (assert (dynamic_property 0 256 (to_rep elements__first)

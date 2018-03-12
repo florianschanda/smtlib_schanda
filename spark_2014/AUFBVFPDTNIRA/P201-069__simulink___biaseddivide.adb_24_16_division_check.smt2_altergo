@@ -933,48 +933,19 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic r : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic result : t
-
-logic r1 : t
-
-logic r2 : t
-
-logic r3 : t
-
-axiom H : tqtisFinite(y)
-
-axiom H1 : tqtisFinite(z)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(r))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 4.0))
 
-axiom H3 : neq(z, fliteral2)
-
-axiom H4 : ((o = add(RNE, z, neg(fliteral2))) and tqtisFinite(add(RNE, z,
-  neg(fliteral2))))
-
  (* File "biaseddivide.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(o))
+goal WP_parameter_def :
+  (forall r:t. forall o:t. (tqtisFinite(y) -> (tqtisFinite(z) ->
+  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(r)) -> (neq(z, fliteral2) ->
+  (((o = add(RNE, z, neg(fliteral2))) and tqtisFinite(add(RNE, z,
+  neg(fliteral2)))) -> (not is_zero(o))))))))

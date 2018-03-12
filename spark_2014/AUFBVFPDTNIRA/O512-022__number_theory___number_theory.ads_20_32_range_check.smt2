@@ -127,10 +127,6 @@
   (=> (not (fp.isZero x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 3)))))))
 
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -195,11 +191,12 @@
 (define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
   (fibonacci_argument_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_185 Int)
-  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
-  (temp___do_toplevel_184 Bool)) Bool (=>
-                                      (or (= temp___is_init_182 true)
-                                      (<= 0 46)) (in_range2 temp___expr_185)))
+(define-fun dynamic_invariant ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 46)) (in_range2 temp___expr_208)))
 
 (declare-const n Int)
 
@@ -224,12 +221,12 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range3
-                                     temp___expr_33)))
+(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range3
+                                    temp___expr_39)))
 
 (declare-fun fib (Int) Int)
 
@@ -238,77 +235,49 @@
 ;; fib__def_axiom
   (assert
   (forall ((n1 Int))
-  (! (=> (dynamic_invariant n1 true true true)
+  (! (=> (dynamic_invariant n1 true true true true)
      (= (fib n1) (ite (or (= n1 0) (= n1 1)) n1
                  (+ (fib (- n1 1)) (fib (- n1 2)))))) :pattern ((fib n1)) )))
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant3 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
-
-(declare-const number_theory__fib__result Int)
+(define-fun dynamic_invariant3 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-const o Int)
 
 (declare-const o1 Int)
 
-(declare-const o2 Int)
-
-(declare-const o3 Int)
-
-(declare-const o4 Int)
-
-(declare-const o5 Int)
-
-(declare-const o6 Float32)
-
-(declare-const o7 Float32)
-
-(declare-const o8 Float32)
-
-(declare-const result Int)
-
-(declare-const number_theory__fib__result1 Int)
-
-(declare-const number_theory__fib__result2 Int)
-
-(declare-const number_theory__fib__result3 Int)
-
-(declare-const number_theory__fib__result4 Int)
-
-(declare-const number_theory__fib__result5 Int)
-
 ;; H
   (assert (in_range2 n))
 
 ;; H
-  (assert (not (= n 0)))
+  (assert (not (not (not (= n 0)))))
 
 ;; H
   (assert (not (= n 1)))
 
 ;; H
-  (assert (and (= o1 (- n 2)) (in_range2 (- n 2))))
+  (assert (and (= o (- n 2)) (in_range2 (- n 2))))
 
 ;; H
   (assert
-  (and (= o2 (fib o1))
-  (and (in_range3 o2)
-  (and
-  (= o2 (ite (or (= o1 0) (= o1 1)) o1 (+ (fib (- o1 1)) (fib (- o1 2)))))
-  (fp.lt (of_int RNE o2) (fp.add RNE (fp.div RNE (power
+  (and (= o1 (fib o))
+  (and (in_range3 o1)
+  (and (= o1 (ite (or (= o 0) (= o 1)) o (+ (fib (- o 1)) (fib (- o 2)))))
+  (fp.lt (of_int RNE o1) (fp.add RNE (fp.div RNE (power
                                                  (fp #b0 #b01111111 #b10011110001110111100111)
-                                                 o1) (fp #b0 #b10000000 #b00011110001101010100000)) (fp #b0 #b01111111 #b00000000000000000000000)))))))
+                                                 o) (fp #b0 #b10000000 #b00011110001101010100000)) (fp #b0 #b01111111 #b00000000000000000000000)))))))
 
 (assert
 ;; WP_parameter_def

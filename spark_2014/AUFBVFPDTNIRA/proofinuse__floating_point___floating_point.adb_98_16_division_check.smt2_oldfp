@@ -1478,9 +1478,9 @@
 (define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
-(define-fun dynamic_invariant ((temp___expr_154 (_ BitVec 16))
-  (temp___is_init_151 Bool) (temp___skip_constant_152 Bool)
-  (temp___do_toplevel_153 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_180 (_ BitVec 16))
+  (temp___is_init_176 Bool) (temp___skip_constant_177 Bool)
+  (temp___do_toplevel_178 Bool) (temp___do_typ_inv_179 Bool)) Bool true)
 
 (declare-sort tfloat_32B 0)
 
@@ -1527,12 +1527,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 t) (temp___is_init_175 Bool)
-  (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_208 t) (temp___is_init_204 Bool)
+  (temp___skip_constant_205 Bool) (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_208)))
 
 (declare-const x (_ BitVec 16))
 
@@ -1540,25 +1540,20 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const res t)
-
-(declare-const o t)
-
-;; H
-  (assert true)
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite res)))
-
-;; H
-  (assert (not (= x ((_ int2bv 16) 0))))
-
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) (/ 899999976158142089843750.0 1000000000000000000000000.0))))
+
+(declare-const res t)
+
+;; H
+  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite res)))
+
+;; H
+  (assert (not (= x #x0000)))
 
 ;; H
   (assert (le fliteral2 (of_ubv16 RNE1 x)))

@@ -1054,50 +1054,16 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic a : int
-
-logic b : t
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-logic o3 : int
-
-logic o4 : t
-
-logic result : int
-
-logic a1 : int
-
-logic result1 : int
-
-logic a2 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : (((- 2147483648) <= 2147483647) -> in_range1(a))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H3 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(b))
-
-axiom H4 : ((o = x) and in_range2(x))
-
-axiom H5 : (o1 = power(2, o))
-
-axiom H6 : ((o2 = o1) and in_range1(o1))
-
-axiom H7 : (result = a)
-
-axiom H8 : (a1 = o2)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1((x * x))
+goal WP_parameter_def :
+  (forall a:int. forall b:t. forall o:int. forall o1:int. forall o2:int.
+  forall result:int. forall a1:int. (in_range1(x) -> (tqtisFinite(y) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(a)) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(b)) -> ((((((o = x) and in_range2(x)) and
+  (o1 = power(2, o))) and ((o2 = o1) and in_range1(o1))) and
+  ((result = a) and (a1 = o2))) -> in_range1((x * x))))))))

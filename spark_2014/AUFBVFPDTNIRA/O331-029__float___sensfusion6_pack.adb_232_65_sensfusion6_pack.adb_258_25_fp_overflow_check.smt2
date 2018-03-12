@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -112,12 +108,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort t_rate 0)
 
@@ -141,12 +138,13 @@
 (define-fun t_rate__ref___projection ((a t_rate__ref)) t_rate (t_rate__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_140 Float32)
-  (temp___is_init_137 Bool) (temp___skip_constant_138 Bool)
-  (temp___do_toplevel_139 Bool)) Bool (=>
-                                      (or (= temp___is_init_137 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) (fp #b0 #b10001010 #b01110111000000000000000)))
-                                      (in_range1 temp___expr_140)))
+(define-fun dynamic_invariant1 ((temp___expr_163 Float32)
+  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
+  (temp___do_toplevel_161 Bool)
+  (temp___do_typ_inv_162 Bool)) Bool (=>
+                                     (or (= temp___is_init_159 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) (fp #b0 #b10001010 #b01110111000000000000000)))
+                                     (in_range1 temp___expr_163)))
 
 (declare-sort t_acc 0)
 
@@ -168,12 +166,13 @@
 (declare-datatypes () ((t_acc__ref (mk_t_acc__ref (t_acc__content t_acc)))))
 (define-fun t_acc__ref___projection ((a t_acc__ref)) t_acc (t_acc__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_146 Float32)
-  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
-                                      (in_range2 temp___expr_146)))
+(define-fun dynamic_invariant2 ((temp___expr_170 Float32)
+  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
+  (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
+                                     (in_range2 temp___expr_170)))
 
 (declare-sort t_acc_lifted 0)
 
@@ -198,12 +197,13 @@
 (define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted
   (t_acc_lifted__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_158 Float32)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
-                                      (in_range3 temp___expr_158)))
+(define-fun dynamic_invariant3 ((temp___expr_184 Float32)
+  (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
+  (temp___do_toplevel_182 Bool)
+  (temp___do_typ_inv_183 Bool)) Bool (=>
+                                     (or (= temp___is_init_180 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
+                                     (in_range3 temp___expr_184)))
 
 (declare-sort positive_float 0)
 
@@ -228,12 +228,13 @@
 (define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_1288 Float32)
-  (temp___is_init_1285 Bool) (temp___skip_constant_1286 Bool)
-  (temp___do_toplevel_1287 Bool)) Bool (=>
-                                       (or (= temp___is_init_1285 true)
-                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (in_range4 temp___expr_1288)))
+(define-fun dynamic_invariant4 ((temp___expr_1501 Float32)
+  (temp___is_init_1497 Bool) (temp___skip_constant_1498 Bool)
+  (temp___do_toplevel_1499 Bool)
+  (temp___do_typ_inv_1500 Bool)) Bool (=>
+                                      (or (= temp___is_init_1497 true)
+                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                      (in_range4 temp___expr_1501)))
 
 (declare-sort t_delta_time 0)
 
@@ -258,12 +259,13 @@
 (define-fun t_delta_time__ref___projection ((a t_delta_time__ref)) t_delta_time
   (t_delta_time__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_1294 Float32)
-  (temp___is_init_1291 Bool) (temp___skip_constant_1292 Bool)
-  (temp___do_toplevel_1293 Bool)) Bool (=>
-                                       (or (= temp___is_init_1291 true)
-                                       (fp.leq (fp #b0 #b01110101 #b00000110001001001101111) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range5 temp___expr_1294)))
+(define-fun dynamic_invariant5 ((temp___expr_1508 Float32)
+  (temp___is_init_1504 Bool) (temp___skip_constant_1505 Bool)
+  (temp___do_toplevel_1506 Bool)
+  (temp___do_typ_inv_1507 Bool)) Bool (=>
+                                      (or (= temp___is_init_1504 true)
+                                      (fp.leq (fp #b0 #b01110101 #b00000110001001001101111) (fp #b0 #b01111111 #b00000000000000000000000)))
+                                      (in_range5 temp___expr_1508)))
 
 (declare-sort t_alpha 0)
 
@@ -287,12 +289,13 @@
 (define-fun t_alpha__ref___projection ((a t_alpha__ref)) t_alpha (t_alpha__content
                                                                  a))
 
-(define-fun dynamic_invariant6 ((temp___expr_1300 Float32)
-  (temp___is_init_1297 Bool) (temp___skip_constant_1298 Bool)
-  (temp___do_toplevel_1299 Bool)) Bool (=>
-                                       (or (= temp___is_init_1297 true)
-                                       (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range6 temp___expr_1300)))
+(define-fun dynamic_invariant6 ((temp___expr_1515 Float32)
+  (temp___is_init_1511 Bool) (temp___skip_constant_1512 Bool)
+  (temp___do_toplevel_1513 Bool)
+  (temp___do_typ_inv_1514 Bool)) Bool (=>
+                                      (or (= temp___is_init_1511 true)
+                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000)))
+                                      (in_range6 temp___expr_1515)))
 
 (declare-sort t_quaternion 0)
 
@@ -317,12 +320,13 @@
 (define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
-(define-fun dynamic_invariant7 ((temp___expr_1330 Float32)
-  (temp___is_init_1327 Bool) (temp___skip_constant_1328 Bool)
-  (temp___do_toplevel_1329 Bool)) Bool (=>
-                                       (or (= temp___is_init_1327 true)
-                                       (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range7 temp___expr_1330)))
+(define-fun dynamic_invariant7 ((temp___expr_1550 Float32)
+  (temp___is_init_1546 Bool) (temp___skip_constant_1547 Bool)
+  (temp___do_toplevel_1548 Bool)
+  (temp___do_typ_inv_1549 Bool)) Bool (=>
+                                      (or (= temp___is_init_1546 true)
+                                      (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
+                                      (in_range7 temp___expr_1550)))
 
 (declare-fun inv_sqrt (Float32) Float32)
 
@@ -332,13 +336,14 @@
   (assert
   (forall ((x Float32))
   (! (=>
-     (and (dynamic_invariant x true true true)
+     (and (dynamic_invariant x true true true true)
      (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x))
      (let ((result (inv_sqrt x)))
      (and
      (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
      (fp.lt result (fp #b0 #b11000010 #b01011010111100011101100)))
-     (dynamic_invariant result true false true)))) :pattern ((inv_sqrt x)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((inv_sqrt
+                                                                  x)) )))
 
 (declare-fun saturate (Float32 Float32 Float32) Float32)
 
@@ -349,13 +354,14 @@
   (forall ((value Float32) (min_value Float32) (max_value Float32))
   (! (=>
      (and
-     (and (dynamic_invariant value true true true) (dynamic_invariant
-     min_value true true true)) (dynamic_invariant max_value true true true))
+     (and (dynamic_invariant value true true true true) (dynamic_invariant
+     min_value true true true true)) (dynamic_invariant max_value true true
+     true true))
      (let ((result (saturate value min_value max_value)))
      (and
      (ite (fp.lt value min_value) (fp.eq result min_value)
      (ite (fp.lt max_value value) (fp.eq result max_value)
-     (fp.eq result value))) (dynamic_invariant result true false true)))) :pattern (
+     (fp.eq result value))) (dynamic_invariant result true false true true)))) :pattern (
   (saturate value min_value max_value)) )))
 
 (declare-fun lift_away_from_zero (Float32) Float32)
@@ -365,15 +371,15 @@
 ;; lift_away_from_zero__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant2 x true true true)
+  (! (=> (dynamic_invariant2 x true true true true)
      (let ((result (lift_away_from_zero x)))
      (and
      (ite (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))
      (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
      (not (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))))
-     (dynamic_invariant3 result true false true)))) :pattern ((lift_away_from_zero
-                                                              x)) )))
+     (dynamic_invariant3 result true false true true)))) :pattern ((lift_away_from_zero
+                                                                   x)) )))
 
 (declare-const gx Float32)
 
@@ -831,38 +837,6 @@
 
 (declare-const o92 Float32)
 
-(declare-const o93 Float32)
-
-(declare-const o94 Float32)
-
-(declare-const o95 Float32)
-
-(declare-const o96 Float32)
-
-(declare-const o97 Float32)
-
-(declare-const o98 Float32)
-
-(declare-const o99 Float32)
-
-(declare-const o100 Float32)
-
-(declare-const o101 Float32)
-
-(declare-const o102 Float32)
-
-(declare-const o103 Float32)
-
-(declare-const o104 Float32)
-
-(declare-const o105 Float32)
-
-(declare-const o106 Float32)
-
-(declare-const o107 Float32)
-
-(declare-const o108 Float32)
-
 (declare-const integral_fbx1 Float32)
 
 (declare-const integral_fby1 Float32)
@@ -1023,21 +997,11 @@
 
 (declare-const q3_tmp1 Float32)
 
-(declare-const result35 t__ref)
+(define-fun integral_fbz4 () t__ref (mk_t__ref integral_fbz))
 
-(declare-const recip_norm3 Float32)
+(define-fun integral_fby4 () t__ref (mk_t__ref integral_fby))
 
-(declare-const result36 t__ref)
-
-(declare-const q01 Float32)
-
-(declare-const result37 t__ref)
-
-(declare-const q11 Float32)
-
-(declare-const result38 t__ref)
-
-(declare-const q21 Float32)
+(define-fun integral_fbx4 () t__ref (mk_t__ref integral_fbx))
 
 ;; H
   (assert (in_range1 gx))
@@ -1706,7 +1670,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
-  (= result16 (mk_t__ref integral_fbx)))))
+  (= result16 integral_fbx4))))
 
 ;; H
   (assert
@@ -1777,7 +1741,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
-  (= result17 (mk_t__ref integral_fby)))))
+  (= result17 integral_fby4))))
 
 ;; H
   (assert
@@ -1848,7 +1812,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki)
-  (= result18 (mk_t__ref integral_fbz)))))
+  (= result18 integral_fbz4))))
 
 ;; H
   (assert
@@ -1961,7 +1925,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki))
-  (= result22 (mk_t__ref integral_fbx)))))
+  (= result22 integral_fbx4))))
 
 ;; H
   (assert
@@ -1981,7 +1945,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki))
-  (= result23 (mk_t__ref integral_fby)))))
+  (= result23 integral_fby4))))
 
 ;; H
   (assert
@@ -2001,7 +1965,7 @@
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
   (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000)))))
   (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) two_ki))
-  (= result24 (mk_t__ref integral_fbz)))))
+  (= result24 integral_fbz4))))
 
 ;; H
   (assert
@@ -2214,209 +2178,261 @@
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= (let ((subject half_ez)) (mk_t__ref half_ez2)) half_ez)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= (let ((subject half_ey)) (mk_t__ref half_ey2)) half_ey)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= half_ex2 half_ex)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= rad_gz3 rad_gz1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= rad_gy3 rad_gy1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= rad_gx3 rad_gx1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= norm_az2 norm_az)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= norm_ay2 norm_ay)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= norm_ax2 norm_ax)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= recip_norm2 recip_norm)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= integral_fbz2 integral_fbz)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= integral_fby2 integral_fby)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= integral_fbx2 integral_fbx)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= half_ez2 half_ez1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= half_ey2 half_ey1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= half_ex2 half_ex1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= rad_gz3 rad_gz1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= rad_gy3 rad_gy1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= rad_gx3 rad_gx1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= norm_az2 norm_az1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= norm_ay2 norm_ay1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= norm_ax2 norm_ax1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= recip_norm2 recip_norm1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= integral_fbz2 integral_fbz1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= integral_fby2 integral_fby1)))
 
 ;; H
   (assert
   (=>
+  (not
+  (not
   (and (fp.eq c6b (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.eq c7b (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))
+  (fp.eq c8b (fp #b0 #b00000000 #b00000000000000000000000))))))
   (= integral_fbx2 integral_fbx1)))
 
 ;; H

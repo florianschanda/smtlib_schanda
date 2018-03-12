@@ -1076,12 +1076,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_141 t) (temp___is_init_138 Bool)
-  (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 t) (temp___is_init_161 Bool)
+  (temp___skip_constant_162 Bool) (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_165)))
 
 (declare-fun oadd (t t) t)
 
@@ -1091,16 +1091,16 @@
   (assert
   (forall ((left t) (right t))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (oadd left right) true false true)) :pattern (
-  (oadd left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (oadd left right) true
+     false true true)) :pattern ((oadd left right)) )))
 
 ;; oadd__def_axiom
   (assert
   (forall ((left t) (right t))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (oadd left right) (add RNE1 left right))) :pattern (
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (= (oadd left right) (add RNE1 left right))) :pattern (
   (oadd left right)) )))
 
 (declare-fun osubtract (t t) t)
@@ -1111,17 +1111,18 @@
   (assert
   (forall ((left t) (right t))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (osubtract left right) true false
-     true)) :pattern ((osubtract left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (osubtract left right)
+     true false true true)) :pattern ((osubtract left right)) )))
 
 ;; osubtract__def_axiom
   (assert
   (forall ((left t) (right t))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (osubtract left right) (sub RNE1 left right))) :pattern (
-  (osubtract left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (osubtract left right) (sub RNE1 left right))) :pattern ((osubtract
+                                                                 left right)) )))
 
 (declare-fun omultiply (t t) t)
 
@@ -1131,17 +1132,18 @@
   (assert
   (forall ((left t) (right t))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (dynamic_invariant (omultiply left right) true false
-     true)) :pattern ((omultiply left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (dynamic_invariant (omultiply left right)
+     true false true true)) :pattern ((omultiply left right)) )))
 
 ;; omultiply__def_axiom
   (assert
   (forall ((left t) (right t))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (omultiply left right) (mul RNE1 left right))) :pattern (
-  (omultiply left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (omultiply left right) (mul RNE1 left right))) :pattern ((omultiply
+                                                                 left right)) )))
 
 (declare-fun odivide (t t) t)
 
@@ -1157,17 +1159,19 @@
   (forall ((left t) (right t))
   (! (=>
      (and
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (neq right fliteral2)) (dynamic_invariant
-     (odivide left right) true false true)) :pattern ((odivide left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true)) (neq right fliteral2)) (dynamic_invariant
+     (odivide left right) true false true true)) :pattern ((odivide left
+                                                           right)) )))
 
 ;; odivide__def_axiom
   (assert
   (forall ((left t) (right t))
   (! (=>
-     (and (dynamic_invariant left true true true) (dynamic_invariant right
-     true true true)) (= (odivide left right) (div1 RNE1 left right))) :pattern (
-  (odivide left right)) )))
+     (and (dynamic_invariant left true true true true) (dynamic_invariant
+     right true true true true))
+     (= (odivide left right) (div1 RNE1 left right))) :pattern ((odivide left
+                                                                right)) )))
 
 (declare-const x t)
 
@@ -1182,100 +1186,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
-
-(declare-const x1 t)
-
-(declare-const x2 t)
-
-(declare-const x3 t)
-
-(declare-const x4 t)
-
-(declare-const x5 t)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 t)
-
-(declare-const o4 t)
-
-(declare-const o5 t)
-
-(declare-const result t)
-
-(declare-const x11 t)
-
-(declare-const result1 t)
-
-(declare-const x12 t)
-
-(declare-const result2 t)
-
-(declare-const x21 t)
-
-(declare-const result3 t)
-
-(declare-const x22 t)
-
-(declare-const result4 t)
-
-(declare-const x31 t)
-
-(declare-const result5 t)
-
-(declare-const x32 t)
-
-(declare-const result6 t)
-
-(declare-const x41 t)
-
-(declare-const result7 t)
-
-(declare-const x42 t)
-
-;; H
-  (assert (tqtisFinite x))
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x1)))
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x2)))
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x3)))
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x4)))
-
-;; H
-  (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite x5)))
-
-;; H
-  (assert (= result x1))
-
-;; H
-  (assert (= x11 fliteral1))
-
-;; H
-  (assert
-  (and (= o (oadd x11 x11)) (and (tqtisFinite o) (= o (add RNE1 x11 x11)))))
-
-;; H
-  (assert (= result1 x11))
-
-;; H
-  (assert (= x12 o))
-
-;; H
-  (assert (= result2 x2))
-
-;; H
-  (assert (= x21 fliteral1))
 
 (assert
 ;; WP_parameter_def

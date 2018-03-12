@@ -96,11 +96,12 @@
 (define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
   (fibonacci_argument_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_185 Int)
-  (temp___is_init_182 Bool) (temp___skip_constant_183 Bool)
-  (temp___do_toplevel_184 Bool)) Bool (=>
-                                      (or (= temp___is_init_182 true)
-                                      (<= 0 46)) (in_range1 temp___expr_185)))
+(define-fun dynamic_invariant ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 46)) (in_range1 temp___expr_208)))
 
 (declare-fun fib (Int) Int)
 
@@ -195,17 +196,17 @@
   (=> (not (fp.isZero x))
   (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 3)))))))
 
-(define-fun dynamic_invariant1 ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range
-                                     temp___expr_33)))
+(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range
+                                    temp___expr_39)))
 
 ;; fib__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant n true true true)
+  (! (=> (dynamic_invariant n true true true true)
      (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))) :pattern (
   (fib n)) )))
 
@@ -232,29 +233,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int natural) Int Int (Array Int natural) Int
-  Int) (Array Int natural))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int natural)) (b (Array Int natural)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (natural Int) (Array Int natural))
-
-;; singleton_def
-  (assert
-  (forall ((v natural))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq ((a (Array Int natural)) (a__first Int) (a__last Int)
   (b (Array Int natural)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -262,12 +240,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (to_rep (select a temp___idx_132)) (to_rep
-                                                                 (select b (+ (- b__first a__first) temp___idx_132)))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (to_rep (select a temp___idx_154)) (to_rep
+                                                                 (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -279,49 +257,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (to_rep (select a temp___idx_132)) (to_rep
-                                        (select b (+ (- b__first a__first) temp___idx_132)))))))))))
-
-(declare-fun compare ((Array Int natural) Int Int (Array Int natural) Int
-  Int) Int)
-
-;; compare_def_eq
-  (assert
-  (forall ((a (Array Int natural)) (b (Array Int natural)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_lt
-  (assert
-  (forall ((a (Array Int natural)) (b (Array Int natural)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< (compare a a_first a_last b b_first b_last) 0)
-     (exists ((i Int) (j Int))
-     (and (<= i a_last)
-     (and (< j b_last)
-     (and (= (bool_eq a a_first i b b_first j) true)
-     (or (= i a_last)
-     (and (< i a_last)
-     (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_gt
-  (assert
-  (forall ((a (Array Int natural)) (b (Array Int natural)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< 0 (compare a a_first a_last b b_first b_last))
-     (exists ((i Int) (j Int))
-     (and (<= i b_last)
-     (and (< j a_last)
-     (and (= (bool_eq a a_first j b b_first i) true)
-     (or (= i b_last)
-     (and (< i b_last)
-     (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (to_rep (select a temp___idx_154)) (to_rep
+                                        (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
 (declare-const lookup_table (Array Int natural))
 
@@ -332,124 +271,6 @@
   Int Int Int Int Int Int Int Int Int Int Int Int Int Int Int Int Int Int Int
   Int Int Int Int Int Int Int) (Array Int natural))
 
-;; def_axiom
-  (assert
-  (forall ((temp___134 Int) (temp___135 Int) (temp___136 Int)
-  (temp___137 Int) (temp___138 Int) (temp___139 Int) (temp___140 Int)
-  (temp___141 Int) (temp___142 Int) (temp___143 Int) (temp___144 Int)
-  (temp___145 Int) (temp___146 Int) (temp___147 Int) (temp___148 Int)
-  (temp___149 Int) (temp___150 Int) (temp___151 Int) (temp___152 Int)
-  (temp___153 Int) (temp___154 Int) (temp___155 Int) (temp___156 Int)
-  (temp___157 Int) (temp___158 Int) (temp___159 Int) (temp___160 Int)
-  (temp___161 Int) (temp___162 Int) (temp___163 Int) (temp___164 Int)
-  (temp___165 Int) (temp___166 Int) (temp___167 Int) (temp___168 Int)
-  (temp___169 Int) (temp___170 Int) (temp___171 Int) (temp___172 Int)
-  (temp___173 Int) (temp___174 Int) (temp___175 Int) (temp___176 Int)
-  (temp___177 Int) (temp___178 Int) (temp___179 Int) (temp___180 Int))
-  (let ((temp___133 (number_theory__fibonacci2__lookup_table__aggregate_def
-                    temp___134 temp___135 temp___136 temp___137 temp___138
-                    temp___139 temp___140 temp___141 temp___142 temp___143
-                    temp___144 temp___145 temp___146 temp___147 temp___148
-                    temp___149 temp___150 temp___151 temp___152 temp___153
-                    temp___154 temp___155 temp___156 temp___157 temp___158
-                    temp___159 temp___160 temp___161 temp___162 temp___163
-                    temp___164 temp___165 temp___166 temp___167 temp___168
-                    temp___169 temp___170 temp___171 temp___172 temp___173
-                    temp___174 temp___175 temp___176 temp___177 temp___178
-                    temp___179 temp___180)))
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and (= (select temp___133 0) (of_rep temp___134))
-  (= (select temp___133 1) (of_rep temp___135)))
-  (= (select temp___133 2) (of_rep temp___136)))
-  (= (select temp___133 3) (of_rep temp___137)))
-  (= (select temp___133 4) (of_rep temp___138)))
-  (= (select temp___133 5) (of_rep temp___139)))
-  (= (select temp___133 6) (of_rep temp___140)))
-  (= (select temp___133 7) (of_rep temp___141)))
-  (= (select temp___133 8) (of_rep temp___142)))
-  (= (select temp___133 9) (of_rep temp___143)))
-  (= (select temp___133 10) (of_rep temp___144)))
-  (= (select temp___133 11) (of_rep temp___145)))
-  (= (select temp___133 12) (of_rep temp___146)))
-  (= (select temp___133 13) (of_rep temp___147)))
-  (= (select temp___133 14) (of_rep temp___148)))
-  (= (select temp___133 15) (of_rep temp___149)))
-  (= (select temp___133 16) (of_rep temp___150)))
-  (= (select temp___133 17) (of_rep temp___151)))
-  (= (select temp___133 18) (of_rep temp___152)))
-  (= (select temp___133 19) (of_rep temp___153)))
-  (= (select temp___133 20) (of_rep temp___154)))
-  (= (select temp___133 21) (of_rep temp___155)))
-  (= (select temp___133 22) (of_rep temp___156)))
-  (= (select temp___133 23) (of_rep temp___157)))
-  (= (select temp___133 24) (of_rep temp___158)))
-  (= (select temp___133 25) (of_rep temp___159)))
-  (= (select temp___133 26) (of_rep temp___160)))
-  (= (select temp___133 27) (of_rep temp___161)))
-  (= (select temp___133 28) (of_rep temp___162)))
-  (= (select temp___133 29) (of_rep temp___163)))
-  (= (select temp___133 30) (of_rep temp___164)))
-  (= (select temp___133 31) (of_rep temp___165)))
-  (= (select temp___133 32) (of_rep temp___166)))
-  (= (select temp___133 33) (of_rep temp___167)))
-  (= (select temp___133 34) (of_rep temp___168)))
-  (= (select temp___133 35) (of_rep temp___169)))
-  (= (select temp___133 36) (of_rep temp___170)))
-  (= (select temp___133 37) (of_rep temp___171)))
-  (= (select temp___133 38) (of_rep temp___172)))
-  (= (select temp___133 39) (of_rep temp___173)))
-  (= (select temp___133 40) (of_rep temp___174)))
-  (= (select temp___133 41) (of_rep temp___175)))
-  (= (select temp___133 42) (of_rep temp___176)))
-  (= (select temp___133 43) (of_rep temp___177)))
-  (= (select temp___133 44) (of_rep temp___178)))
-  (= (select temp___133 45) (of_rep temp___179)))
-  (= (select temp___133 46) (of_rep temp___180))))))
-
 ;; lookup_table__def_axiom
   (assert
   (= lookup_table (number_theory__fibonacci2__lookup_table__aggregate_def 0 1
@@ -458,6 +279,206 @@
                   514229 832040 1346269 2178309 3524578 5702887 9227465
                   14930352 24157817 39088169 63245986 102334155 165580141
                   267914296 433494437 701408733 1134903170 1836311903)))
+
+;; def_axiom
+  (assert
+  (forall ((temp___156 Int) (temp___157 Int) (temp___158 Int)
+  (temp___159 Int) (temp___160 Int) (temp___161 Int) (temp___162 Int)
+  (temp___163 Int) (temp___164 Int) (temp___165 Int) (temp___166 Int)
+  (temp___167 Int) (temp___168 Int) (temp___169 Int) (temp___170 Int)
+  (temp___171 Int) (temp___172 Int) (temp___173 Int) (temp___174 Int)
+  (temp___175 Int) (temp___176 Int) (temp___177 Int) (temp___178 Int)
+  (temp___179 Int) (temp___180 Int) (temp___181 Int) (temp___182 Int)
+  (temp___183 Int) (temp___184 Int) (temp___185 Int) (temp___186 Int)
+  (temp___187 Int) (temp___188 Int) (temp___189 Int) (temp___190 Int)
+  (temp___191 Int) (temp___192 Int) (temp___193 Int) (temp___194 Int)
+  (temp___195 Int) (temp___196 Int) (temp___197 Int) (temp___198 Int)
+  (temp___199 Int) (temp___200 Int) (temp___201 Int) (temp___202 Int))
+  (let ((temp___155 (number_theory__fibonacci2__lookup_table__aggregate_def
+                    temp___156 temp___157 temp___158 temp___159 temp___160
+                    temp___161 temp___162 temp___163 temp___164 temp___165
+                    temp___166 temp___167 temp___168 temp___169 temp___170
+                    temp___171 temp___172 temp___173 temp___174 temp___175
+                    temp___176 temp___177 temp___178 temp___179 temp___180
+                    temp___181 temp___182 temp___183 temp___184 temp___185
+                    temp___186 temp___187 temp___188 temp___189 temp___190
+                    temp___191 temp___192 temp___193 temp___194 temp___195
+                    temp___196 temp___197 temp___198 temp___199 temp___200
+                    temp___201 temp___202)))
+  (=>
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and (dynamic_invariant1 temp___156 true true true true)
+  (dynamic_invariant1 temp___157 true true true true)) (dynamic_invariant1
+  temp___158 true true true true)) (dynamic_invariant1 temp___159 true true
+  true true)) (dynamic_invariant1 temp___160 true true true true))
+  (dynamic_invariant1 temp___161 true true true true)) (dynamic_invariant1
+  temp___162 true true true true)) (dynamic_invariant1 temp___163 true true
+  true true)) (dynamic_invariant1 temp___164 true true true true))
+  (dynamic_invariant1 temp___165 true true true true)) (dynamic_invariant1
+  temp___166 true true true true)) (dynamic_invariant1 temp___167 true true
+  true true)) (dynamic_invariant1 temp___168 true true true true))
+  (dynamic_invariant1 temp___169 true true true true)) (dynamic_invariant1
+  temp___170 true true true true)) (dynamic_invariant1 temp___171 true true
+  true true)) (dynamic_invariant1 temp___172 true true true true))
+  (dynamic_invariant1 temp___173 true true true true)) (dynamic_invariant1
+  temp___174 true true true true)) (dynamic_invariant1 temp___175 true true
+  true true)) (dynamic_invariant1 temp___176 true true true true))
+  (dynamic_invariant1 temp___177 true true true true)) (dynamic_invariant1
+  temp___178 true true true true)) (dynamic_invariant1 temp___179 true true
+  true true)) (dynamic_invariant1 temp___180 true true true true))
+  (dynamic_invariant1 temp___181 true true true true)) (dynamic_invariant1
+  temp___182 true true true true)) (dynamic_invariant1 temp___183 true true
+  true true)) (dynamic_invariant1 temp___184 true true true true))
+  (dynamic_invariant1 temp___185 true true true true)) (dynamic_invariant1
+  temp___186 true true true true)) (dynamic_invariant1 temp___187 true true
+  true true)) (dynamic_invariant1 temp___188 true true true true))
+  (dynamic_invariant1 temp___189 true true true true)) (dynamic_invariant1
+  temp___190 true true true true)) (dynamic_invariant1 temp___191 true true
+  true true)) (dynamic_invariant1 temp___192 true true true true))
+  (dynamic_invariant1 temp___193 true true true true)) (dynamic_invariant1
+  temp___194 true true true true)) (dynamic_invariant1 temp___195 true true
+  true true)) (dynamic_invariant1 temp___196 true true true true))
+  (dynamic_invariant1 temp___197 true true true true)) (dynamic_invariant1
+  temp___198 true true true true)) (dynamic_invariant1 temp___199 true true
+  true true)) (dynamic_invariant1 temp___200 true true true true))
+  (dynamic_invariant1 temp___201 true true true true)) (dynamic_invariant1
+  temp___202 true true true true))
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and
+  (and (= (to_rep (select temp___155 0)) temp___156)
+  (= (to_rep (select temp___155 1)) temp___157))
+  (= (to_rep (select temp___155 2)) temp___158))
+  (= (to_rep (select temp___155 3)) temp___159))
+  (= (to_rep (select temp___155 4)) temp___160))
+  (= (to_rep (select temp___155 5)) temp___161))
+  (= (to_rep (select temp___155 6)) temp___162))
+  (= (to_rep (select temp___155 7)) temp___163))
+  (= (to_rep (select temp___155 8)) temp___164))
+  (= (to_rep (select temp___155 9)) temp___165))
+  (= (to_rep (select temp___155 10)) temp___166))
+  (= (to_rep (select temp___155 11)) temp___167))
+  (= (to_rep (select temp___155 12)) temp___168))
+  (= (to_rep (select temp___155 13)) temp___169))
+  (= (to_rep (select temp___155 14)) temp___170))
+  (= (to_rep (select temp___155 15)) temp___171))
+  (= (to_rep (select temp___155 16)) temp___172))
+  (= (to_rep (select temp___155 17)) temp___173))
+  (= (to_rep (select temp___155 18)) temp___174))
+  (= (to_rep (select temp___155 19)) temp___175))
+  (= (to_rep (select temp___155 20)) temp___176))
+  (= (to_rep (select temp___155 21)) temp___177))
+  (= (to_rep (select temp___155 22)) temp___178))
+  (= (to_rep (select temp___155 23)) temp___179))
+  (= (to_rep (select temp___155 24)) temp___180))
+  (= (to_rep (select temp___155 25)) temp___181))
+  (= (to_rep (select temp___155 26)) temp___182))
+  (= (to_rep (select temp___155 27)) temp___183))
+  (= (to_rep (select temp___155 28)) temp___184))
+  (= (to_rep (select temp___155 29)) temp___185))
+  (= (to_rep (select temp___155 30)) temp___186))
+  (= (to_rep (select temp___155 31)) temp___187))
+  (= (to_rep (select temp___155 32)) temp___188))
+  (= (to_rep (select temp___155 33)) temp___189))
+  (= (to_rep (select temp___155 34)) temp___190))
+  (= (to_rep (select temp___155 35)) temp___191))
+  (= (to_rep (select temp___155 36)) temp___192))
+  (= (to_rep (select temp___155 37)) temp___193))
+  (= (to_rep (select temp___155 38)) temp___194))
+  (= (to_rep (select temp___155 39)) temp___195))
+  (= (to_rep (select temp___155 40)) temp___196))
+  (= (to_rep (select temp___155 41)) temp___197))
+  (= (to_rep (select temp___155 42)) temp___198))
+  (= (to_rep (select temp___155 43)) temp___199))
+  (= (to_rep (select temp___155 44)) temp___200))
+  (= (to_rep (select temp___155 45)) temp___201))
+  (= (to_rep (select temp___155 46)) temp___202))))))
 
 (declare-const number_theory__fibonacci2__result Int)
 

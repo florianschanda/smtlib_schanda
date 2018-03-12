@@ -1095,10 +1095,6 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-axiom H : in_range1(i)
-
  (* File "interfac.ads", line 49, characters 0-0 *)
-goal WP_parameter_def : in_range1(to_int(NearestTiesToAway,
-  sqrt(NearestTiesToEven, of_int(NearestTiesToEven, i))))
+goal WP_parameter_def : (in_range1(i) -> in_range1(to_int(NearestTiesToAway,
+  sqrt(NearestTiesToEven, of_int(NearestTiesToEven, i)))))

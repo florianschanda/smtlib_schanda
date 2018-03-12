@@ -1485,12 +1485,6 @@ axiom to_float32_conv :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def :
@@ -1502,6 +1496,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -1565,31 +1565,20 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic res : t1
-
-logic result : t1
-
-logic res1 : t1
-
-axiom H : tqtisFinite(x)
-
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite1(fliteral2) and
   (tqtreal1(fliteral2) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
-
-axiom H1 : (le1(neg1(fliteral2), fliteral2) -> tqtisFinite1(res))
-
-axiom H2 : (le(neg(fliteral), x) and le(x, fliteral))
-
-axiom H3 : (result = res)
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.500000000000000000000000))
 
-axiom H4 : (res1 = to_float64(RNE, mul(RNE, x, fliteral3)))
-
  (* File "floating_point.adb", line 387, characters 0-0 *)
-goal WP_parameter_def : le1(neg1(fliteral1), res1)
+goal WP_parameter_def :
+  (forall res:t1. forall result:t1. forall res1:t1. (tqtisFinite(x) ->
+  ((le1(neg1(fliteral2), fliteral2) -> tqtisFinite1(res)) ->
+  ((le(neg(fliteral), x) and le(x, fliteral)) -> (((result = res) and
+  (res1 = to_float64(RNE, mul(RNE, x, fliteral3)))) -> le1(neg1(fliteral1),
+  res1))))))

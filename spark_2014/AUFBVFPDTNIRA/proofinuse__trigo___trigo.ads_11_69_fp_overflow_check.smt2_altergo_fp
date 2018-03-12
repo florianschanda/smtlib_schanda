@@ -1062,58 +1062,15 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : ((o = mul(NearestTiesToEven, x, x)) and
-  tqtisFinite(mul(NearestTiesToEven, x, x)))
-
-axiom H2 : (o1 = mul(NearestTiesToEven, o, x))
-
-axiom H3 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H4 : (o3 = mul(NearestTiesToEven, o2, x))
-
-axiom H5 : ((o4 = o3) and tqtisFinite(o3))
-
-axiom H6 : (o5 = mul(NearestTiesToEven, o4, x))
-
-axiom H7 : ((o6 = o5) and tqtisFinite(o5))
-
-axiom H8 : (o7 = mul(NearestTiesToEven, o6, x))
-
-axiom H9 : ((o8 = o7) and tqtisFinite(o7))
-
-axiom H10 : (o9 = mul(NearestTiesToEven, o8, x))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o9)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
+  forall o5:t. forall o6:t. forall o7:t. forall o8:t. forall o9:t.
+  (tqtisFinite(x) -> ((((((((((((o = mul(NearestTiesToEven, x, x)) and
+  tqtisFinite(mul(NearestTiesToEven, x, x))) and (o1 = mul(NearestTiesToEven,
+  o, x))) and ((o2 = o1) and tqtisFinite(o1))) and
+  (o3 = mul(NearestTiesToEven, o2, x))) and ((o4 = o3) and
+  tqtisFinite(o3))) and (o5 = mul(NearestTiesToEven, o4, x))) and
+  ((o6 = o5) and tqtisFinite(o5))) and (o7 = mul(NearestTiesToEven, o6,
+  x))) and ((o8 = o7) and tqtisFinite(o7))) and (o9 = mul(NearestTiesToEven,
+  o8, x))) -> tqtisFinite(o9))))

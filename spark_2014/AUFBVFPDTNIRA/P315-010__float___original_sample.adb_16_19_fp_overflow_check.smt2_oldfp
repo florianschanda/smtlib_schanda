@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1086,12 +1082,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-sort nb_type 0)
 
@@ -1112,12 +1108,12 @@
 (define-fun nb_type__ref___projection ((a nb_type__ref)) nb_type (nb_type__content
                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_135 Int)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (<= 0 100)) (in_range2
-                                      temp___expr_135)))
+(define-fun dynamic_invariant1 ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 0 100)) (in_range2 temp___expr_158)))
 
 (declare-sort d_time_type 0)
 
@@ -1151,12 +1147,12 @@
 (define-fun d_time_type__ref___projection ((a d_time_type__ref)) d_time_type
   (d_time_type__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_141 t) (temp___is_init_138 Bool)
-  (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true) (le
-                                      fliteral2 fliteral3)) (in_range3
-                                      temp___expr_141)))
+(define-fun dynamic_invariant2 ((temp___expr_165 t) (temp___is_init_161 Bool)
+  (temp___skip_constant_162 Bool) (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true) (le
+                                     fliteral2 fliteral3)) (in_range3
+                                     temp___expr_165)))
 
 (declare-sort delta_time_type 0)
 
@@ -1181,12 +1177,12 @@
 (define-fun delta_time_type__ref___projection ((a delta_time_type__ref)) delta_time_type
   (delta_time_type__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_147 t) (temp___is_init_144 Bool)
-  (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true) (le
-                                      fliteral2 fliteral)) (in_range4
-                                      temp___expr_147)))
+(define-fun dynamic_invariant3 ((temp___expr_172 t) (temp___is_init_168 Bool)
+  (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true) (le
+                                     fliteral2 fliteral)) (in_range4
+                                     temp___expr_172)))
 
 (declare-const nb_of_fp Int)
 
@@ -1208,6 +1204,18 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral4)
+  (= (tqtreal fliteral4) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
+
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 2.0)))
+
 (declare-const time t)
 
 (declare-const d t)
@@ -1218,12 +1226,6 @@
 
 (declare-const o t)
 
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 t)
-
 (declare-const result t)
 
 (declare-const d1 t)
@@ -1231,30 +1233,6 @@
 (declare-const result1 t)
 
 (declare-const t_fp1 t)
-
-(declare-const result2 t)
-
-(declare-const t_pp1 t)
-
-(declare-const result3 t)
-
-(declare-const time1 t)
-
-(declare-const time2 t)
-
-(declare-const d2 t)
-
-(declare-const t_fp2 t)
-
-(declare-const t_pp2 t)
-
-(declare-const time3 t)
-
-(declare-const d3 t)
-
-(declare-const t_fp3 t)
-
-(declare-const t_pp3 t)
 
 ;; H
   (assert (in_range2 nb_of_fp))
@@ -1267,13 +1245,6 @@
 
 ;; H
   (assert (tqtisFinite time))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 ;; H
   (assert
@@ -1299,21 +1270,16 @@
 ;; H
   (assert (= d1 (mul RNE1 (of_int RNE1 (+ nb_of_fp nb_of_pp)) delta_time)))
 
-(declare-const fliteral5 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral5) (= (tqtreal fliteral5) 2.0)))
-
 ;; H
   (assert
-  (and (= o1 (sub RNE1 time (div1 RNE1 d1 fliteral5))) (tqtisFinite
+  (and (= o (sub RNE1 time (div1 RNE1 d1 fliteral5))) (tqtisFinite
   (sub RNE1 time (div1 RNE1 d1 fliteral5)))))
 
 ;; H
   (assert (= (mk_t__ref result1) (mk_t__ref t_fp)))
 
 ;; H
-  (assert (= t_fp1 o1))
+  (assert (= t_fp1 o))
 
 (assert
 ;; WP_parameter_def

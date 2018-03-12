@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1096,30 +1096,6 @@ axiom add__post_axiom :
   (lt(neg(fliteral), r1) and lt(neg(fliteral), r2))))) -> (eq(add1(r1, r2),
   add(NearestTiesToEven, r1, r2)) and tqtisFinite(add1(r1, r2)))))
 
-logic pack__associativity_test__result : bool
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : bool
-
-logic result : bool
-
-logic pack__associativity_test__result1 : bool
-
-logic pack__associativity_test__result2 : bool
-
-logic pack__associativity_test__result3 : bool
-
-logic pack__associativity_test__result4 : bool
-
-logic pack__associativity_test__result5 : bool
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1130,13 +1106,13 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.3000000119209289550781250))
 
-axiom H : ((o1 = add1(fliteral1, fliteral2)) and (tqtisFinite(o1) and eq(o1,
-  add(NearestTiesToEven, fliteral1, fliteral2))))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.100000001490116119384765625))
 
  (* File "pack.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : lt(fliteral3, fliteral)
+goal WP_parameter_def :
+  (forall o:t. (((o = add1(fliteral1, fliteral2)) and (tqtisFinite(o) and
+  eq(o, add(NearestTiesToEven, fliteral1, fliteral2)))) -> lt(fliteral3,
+  fliteral)))

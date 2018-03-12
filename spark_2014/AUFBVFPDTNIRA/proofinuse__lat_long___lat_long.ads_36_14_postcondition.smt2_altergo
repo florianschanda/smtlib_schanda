@@ -1133,30 +1133,6 @@ logic destination1 : longitude
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic lat_long__delta_lat_in_meters__result : t
-
-logic result : t
-
-logic lat_long__delta_lat_in_meters__result1 : t
-
-logic lat_long__delta_lat_in_meters__result2 : t
-
-logic lat_long__delta_lat_in_meters__result3 : t
-
-logic lat_long__delta_lat_in_meters__result4 : t
-
-logic lat_long__delta_lat_in_meters__result5 : t
-
-logic result1 : t
-
-axiom H :
-  (lat_long__delta_lat_in_meters__result1 = lat_long__delta_lat_in_meters__result2)
-
-axiom H1 :
-  (lat_long__delta_lat_in_meters__result3 = lat_long__delta_lat_in_meters__result1)
-
-axiom H2 : (result = lat_long__delta_lat_in_meters__result)
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
@@ -1167,22 +1143,26 @@ logic fliteral6 : t
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 0.01745329238474369049072265625))
 
-axiom H3 : (lat_long__delta_lat_in_meters__result1 = mul(RNE, mul(RNE,
-  sub(RNE, to_rep(destination), to_rep(source)), fliteral5), fliteral6))
-
-axiom H4 :
-  (lat_long__delta_lat_in_meters__result4 = lat_long__delta_lat_in_meters__result2)
-
-axiom H5 :
-  (lat_long__delta_lat_in_meters__result5 = lat_long__delta_lat_in_meters__result3)
-
-axiom H6 : (result1 = lat_long__delta_lat_in_meters__result4)
-
 logic fliteral7 : t
 
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
   (tqtreal(fliteral7) = 20003916.0))
 
  (* File "lat_long.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : (olt(abs1(lat_long__delta_lat_in_meters__result4),
-  fliteral7) = true)
+goal WP_parameter_def :
+  (forall lat_long__delta_lat_in_meters__result:t. forall result:t.
+  forall lat_long__delta_lat_in_meters__result1:t.
+  forall lat_long__delta_lat_in_meters__result2:t.
+  forall lat_long__delta_lat_in_meters__result3:t.
+  forall lat_long__delta_lat_in_meters__result4:t.
+  forall lat_long__delta_lat_in_meters__result5:t.
+  (forall result1:t.
+  ((((((lat_long__delta_lat_in_meters__result1 = lat_long__delta_lat_in_meters__result2) and
+  (lat_long__delta_lat_in_meters__result3 = lat_long__delta_lat_in_meters__result1)) and
+  ((result = lat_long__delta_lat_in_meters__result) and
+  (lat_long__delta_lat_in_meters__result1 = mul(RNE, mul(RNE, sub(RNE,
+  to_rep(destination), to_rep(source)), fliteral5), fliteral6)))) and
+  ((lat_long__delta_lat_in_meters__result4 = lat_long__delta_lat_in_meters__result2) and
+  (lat_long__delta_lat_in_meters__result5 = lat_long__delta_lat_in_meters__result3))) and
+  (result1 = lat_long__delta_lat_in_meters__result4)) ->
+  (olt(abs1(lat_long__delta_lat_in_meters__result4), fliteral7) = true))))

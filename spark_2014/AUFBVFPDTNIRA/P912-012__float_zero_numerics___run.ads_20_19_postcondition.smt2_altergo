@@ -965,48 +965,21 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic y : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic y1 : t
-
-logic y2 : t
-
-logic y3 : t
-
-axiom H : in_range1(x1)
-
-axiom H1 : in_range1(x2)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
-
-axiom H2 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(y))
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0e-1))
 
-axiom H3 : lt(fliteral3, sub(RNE, x2, x1))
-
-axiom H4 : ((o1 = sub(RNE, x2, x1)) and (tqtisFinite(o1) and ((o1 = sub(RNE,
-  x2, x1)) and eq(o1, sub(RNE, x2, x1)))))
-
-axiom H5 : (result = y)
-
-axiom H6 : (y1 = o1)
-
-axiom H7 : (y1 = y2)
-
-axiom H8 : (y3 = y1)
-
  (* File "run.ads", line 15, characters 0-0 *)
-goal WP_parameter_def : neq(y2, fliteral3)
+goal WP_parameter_def :
+  (forall y:t. forall o:t. forall result:t. forall y1:t. forall y2:t.
+  forall y3:t. ((in_range1(x1) and (in_range1(x2) and ((le(neg(fliteral2),
+  fliteral2) -> tqtisFinite(y)) and (lt(fliteral3, sub(RNE, x2, x1)) and
+  ((((o = sub(RNE, x2, x1)) and (tqtisFinite(o) and ((o = sub(RNE, x2,
+  x1)) and eq(o, sub(RNE, x2, x1))))) and ((result = y) and (y1 = o))) and
+  ((y1 = y2) and (y3 = y1))))))) -> neq(y2, fliteral3)))

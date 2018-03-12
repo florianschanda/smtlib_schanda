@@ -1001,20 +1001,10 @@ logic i : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : in_range1(i)
-
-axiom H1 : ((o = sqrt2(of_int(RNE, i))) and (tqtisFinite(o) and
-  (le(fliteral1, o) and ((eq(of_int(RNE, i), fliteral1) -> eq(o,
-  fliteral1)) and ((eq(of_int(RNE, i), fliteral) -> eq(o, fliteral)) and
-  (le(fliteral2, of_int(RNE, i)) -> lt(fliteral1, o)))))))
-
-axiom H2 : (o1 = to_int(RNA, o))
-
  (* File "interfac.ads", line 52, characters 0-0 *)
-goal WP_parameter_def : in_range1(o1)
+goal WP_parameter_def :
+  (forall o:t. forall o1:int. (in_range1(i) -> ((((o = sqrt2(of_int(RNE,
+  i))) and (tqtisFinite(o) and (le(fliteral1, o) and ((eq(of_int(RNE, i),
+  fliteral1) -> eq(o, fliteral1)) and ((eq(of_int(RNE, i), fliteral) -> eq(o,
+  fliteral)) and (le(fliteral2, of_int(RNE, i)) -> lt(fliteral1, o))))))) and
+  (o1 = to_int(RNA, o))) -> in_range1(o1))))

@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -954,57 +954,21 @@ logic distance_to_target : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic f : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic f1 : t
-
-logic result : t
-
-logic f2 : t
-
-logic f3 : t
-
-logic f4 : t
-
-axiom H : tqtisFinite(f)
-
-axiom H1 : tqtisFinite(distance_to_target)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
 
-axiom H2 : (lt(distance_to_target, fliteral1) -> ((o = mul(RNE, f,
-  distance_to_target)) and tqtisFinite(mul(RNE, f, distance_to_target))))
-
-axiom H3 : (lt(distance_to_target, fliteral1) -> (o1 = div(RNE, o,
-  fliteral1)))
-
-axiom H4 : (lt(distance_to_target, fliteral1) -> (result = f))
-
-axiom H5 : (lt(distance_to_target, fliteral1) -> (f2 = o1))
-
-axiom H6 : ((not lt(distance_to_target, fliteral1)) -> (f2 = f))
-
-axiom H7 : ((not lt(distance_to_target, fliteral1)) -> (f2 = f1))
-
-axiom H8 : (f2 = f3)
-
-axiom H9 : (f4 = f2)
-
-axiom H10 : lt(distance_to_target, fliteral1)
-
-axiom H11 : ((o2 = mul(RNE, f, distance_to_target)) and tqtisFinite(mul(RNE,
-  f, distance_to_target)))
-
  (* File "flight_manager.ads", line 3, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral1))
+goal WP_parameter_def :
+  (forall f:t. forall o:t. forall o1:t. forall o2:t. forall f1:t.
+  forall result:t. forall f2:t. forall f3:t. forall f4:t. (tqtisFinite(f) ->
+  (tqtisFinite(distance_to_target) -> ((((lt(distance_to_target,
+  fliteral1) and ((((o = mul(RNE, f, distance_to_target)) and
+  tqtisFinite(mul(RNE, f, distance_to_target))) and (o1 = div(RNE, o,
+  fliteral1))) and (({ t__content = result } = { t__content = f }) and
+  (f2 = o1)))) or ((not lt(distance_to_target, fliteral1)) and ((f2 = f) and
+  (f2 = f1)))) and ((f2 = f3) and (f4 = f2))) -> (lt(distance_to_target,
+  fliteral1) -> (((o2 = mul(RNE, f, distance_to_target)) and
+  tqtisFinite(mul(RNE, f, distance_to_target))) ->
+  (not is_zero(fliteral1))))))))

@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1096,61 +1096,20 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic approx : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic result : t
-
-logic approx1 : t
-
-logic result1 : bool
-
-logic approx2 : t
-
-logic result2 : t
-
-logic approx3 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(tolerance)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(approx))
-
-axiom H3 : (result = approx)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
-axiom H4 : (approx1 = div(NearestTiesToEven, x, fliteral2))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(NearestTiesToEven, approx1, approx1))
+goal WP_parameter_def :
+  (forall approx:t. forall result:t. forall approx1:t. (tqtisFinite(x) ->
+  (tqtisFinite(tolerance) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(approx)) -> (((result = approx) and
+  (approx1 = div(NearestTiesToEven, x, fliteral2))) ->
+  tqtisFinite(mul(NearestTiesToEven, approx1, approx1)))))))

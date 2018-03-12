@@ -983,45 +983,8 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic y : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic o15 : t
-
-axiom H : in_range1(x)
-
-axiom H1 : tqtisFinite(y)
-
-axiom H2 : ((o8 = mul(RNE, x, x)) and tqtisFinite(mul(RNE, x, x)))
-
  (* File "float_expon.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul(RNE, x, mul(RNE, x, x)))
+goal WP_parameter_def :
+  (forall y:t. forall o:t. (in_range1(x) -> (tqtisFinite(y) ->
+  (((o = mul(RNE, x, x)) and tqtisFinite(mul(RNE, x, x))) ->
+  tqtisFinite(mul(RNE, x, mul(RNE, x, x)))))))

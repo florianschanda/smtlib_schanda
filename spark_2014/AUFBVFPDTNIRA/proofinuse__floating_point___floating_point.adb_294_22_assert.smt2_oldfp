@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-sort squarable_float 0)
 
@@ -1130,12 +1130,17 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_217 t) (temp___is_init_214 Bool)
-  (temp___skip_constant_215 Bool)
-  (temp___do_toplevel_216 Bool)) Bool (=>
-                                      (or (= temp___is_init_214 true) (le
-                                      (neg fliteral2) fliteral2)) (in_range1
-                                      temp___expr_217)))
+(define-fun dynamic_invariant1 ((temp___expr_253 t) (temp___is_init_249 Bool)
+  (temp___skip_constant_250 Bool) (temp___do_toplevel_251 Bool)
+  (temp___do_typ_inv_252 Bool)) Bool (=>
+                                     (or (= temp___is_init_249 true) (le
+                                     (neg fliteral2) fliteral2)) (in_range1
+                                     temp___expr_253)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 (declare-const res Bool)
 
@@ -1172,11 +1177,6 @@
 
 ;; H
   (assert (tqtisFinite d))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 ;; H
   (assert (le fliteral3 a))

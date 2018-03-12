@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun arctanh (Float32) Float32)
 
@@ -115,19 +116,17 @@
   (assert
   (forall ((x Float32))
   (! (=>
-     (and (dynamic_invariant x true true true)
-     (not (fp.eq (fp.abs x) (fp #b0 #b01111111 #b00000000000000000000000))))
+     (and (dynamic_invariant x true true true true)
+     (fp.lt (fp.abs x) (fp #b0 #b01111111 #b00000000000000000000000)))
      (let ((result (arctanh x)))
      (and
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (dynamic_invariant result true false true)))) :pattern ((arctanh x)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((arctanh x)) )))
 
 (declare-const f Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const o Float32)
 
 ;; H
   (assert (fp.isFinite32 f))
@@ -135,7 +134,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "system.ads", line 1, characters 0-0
-  (not
-  (not (fp.eq (fp.abs f) (fp #b0 #b01111111 #b00000000000000000000000)))))
+  (not (fp.lt (fp.abs f) (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

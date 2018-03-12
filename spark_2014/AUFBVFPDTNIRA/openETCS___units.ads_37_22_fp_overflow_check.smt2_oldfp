@@ -1098,12 +1098,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_141 t) (temp___is_init_138 Bool)
-  (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 t) (temp___is_init_161 Bool)
+  (temp___skip_constant_162 Bool) (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_165)))
 
 (declare-fun is_valid_speed_km_per_h (t) Bool)
 
@@ -1133,20 +1133,16 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const o t)
+(declare-const fliteral4 t)
 
-(declare-const o1 t)
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 1000.0)))
 
 ;; H
   (assert (tqtisFinite speed))
 
 ;; H
   (assert (= (is_valid_speed_km_per_h speed) true))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 1000.0)))
 
 (assert
 ;; WP_parameter_def

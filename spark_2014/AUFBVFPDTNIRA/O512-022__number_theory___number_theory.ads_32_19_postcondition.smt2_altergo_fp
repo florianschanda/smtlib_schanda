@@ -1189,24 +1189,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> (int,natural) farray
-
-axiom concat_def :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : natural, int -> (int,natural) farray
-
-axiom singleton_def :
-  (forall v:natural.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,natural) farray, int, int, (int,natural) farray, int,
   int -> bool
 
@@ -1217,17 +1199,17 @@ axiom bool_eq_def3 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1237,37 +1219,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
-
-logic compare : (int,natural) farray, int, int, (int,natural) farray, int,
-  int -> int
-
-axiom compare_def_eq :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) = 0) <-> (bool_eq4(a,
-  a_first, a_last, b, b_first, b_last) = true))))
-
-axiom compare_def_lt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((compare(a, a_first, a_last, b, b_first, b_last) <  0) <->
-  (exists i:int. exists j:int. ((i <= a_last) and ((j <  b_last) and
-  ((bool_eq4(a, a_first, i, b, b_first, j) = true) and ((i = a_last) or
-  ((i <  a_last) and (to_rep((a[(i + 1)])) <  to_rep((b[(j + 1)]))))))))))))
-
-axiom compare_def_gt :
-  (forall a:(int,natural) farray. forall b:(int,natural) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int [compare(a, a_first, a_last, b, b_first, b_last)].
-  ((0 <  compare(a, a_first, a_last, b, b_first, b_last)) <->
-  (exists i:int. exists j:int. ((i <= b_last) and ((j <  a_last) and
-  ((bool_eq4(a, a_first, j, b, b_first, i) = true) and ((i = b_last) or
-  ((i <  b_last) and (to_rep((b[(i + 1)])) <  to_rep((a[(j + 1)]))))))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic lookup_table : (int,natural) farray
 
@@ -1279,494 +1233,6 @@ logic number_theory__fibonacci2__lookup_table__aggregate_def : int, int, int,
   int, int, int, int, int, int, int, int, int, int, int, int, int,
   int -> (int,natural) farray
 
-axiom def_axiom :
-  (forall temp___134:int. forall temp___135:int. forall temp___136:int.
-  forall temp___137:int. forall temp___138:int. forall temp___139:int.
-  forall temp___140:int. forall temp___141:int. forall temp___142:int.
-  forall temp___143:int. forall temp___144:int. forall temp___145:int.
-  forall temp___146:int. forall temp___147:int. forall temp___148:int.
-  forall temp___149:int. forall temp___150:int. forall temp___151:int.
-  forall temp___152:int. forall temp___153:int. forall temp___154:int.
-  forall temp___155:int. forall temp___156:int. forall temp___157:int.
-  forall temp___158:int. forall temp___159:int. forall temp___160:int.
-  forall temp___161:int. forall temp___162:int. forall temp___163:int.
-  forall temp___164:int. forall temp___165:int. forall temp___166:int.
-  forall temp___167:int. forall temp___168:int. forall temp___169:int.
-  forall temp___170:int. forall temp___171:int. forall temp___172:int.
-  forall temp___173:int. forall temp___174:int. forall temp___175:int.
-  forall temp___176:int. forall temp___177:int. forall temp___178:int.
-  forall temp___179:int. forall temp___180:int.
-  ((((((((((((((((((((((((((((((((((((((((((((((((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[0]) = of_rep(temp___134)) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[1]) = of_rep(temp___135))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[2]) = of_rep(temp___136))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[3]) = of_rep(temp___137))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[4]) = of_rep(temp___138))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[5]) = of_rep(temp___139))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[6]) = of_rep(temp___140))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[7]) = of_rep(temp___141))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[8]) = of_rep(temp___142))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[9]) = of_rep(temp___143))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[10]) = of_rep(temp___144))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[11]) = of_rep(temp___145))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[12]) = of_rep(temp___146))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[13]) = of_rep(temp___147))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[14]) = of_rep(temp___148))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[15]) = of_rep(temp___149))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[16]) = of_rep(temp___150))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[17]) = of_rep(temp___151))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[18]) = of_rep(temp___152))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[19]) = of_rep(temp___153))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[20]) = of_rep(temp___154))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[21]) = of_rep(temp___155))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[22]) = of_rep(temp___156))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[23]) = of_rep(temp___157))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[24]) = of_rep(temp___158))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[25]) = of_rep(temp___159))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[26]) = of_rep(temp___160))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[27]) = of_rep(temp___161))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[28]) = of_rep(temp___162))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[29]) = of_rep(temp___163))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[30]) = of_rep(temp___164))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[31]) = of_rep(temp___165))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[32]) = of_rep(temp___166))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[33]) = of_rep(temp___167))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[34]) = of_rep(temp___168))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[35]) = of_rep(temp___169))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[36]) = of_rep(temp___170))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[37]) = of_rep(temp___171))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[38]) = of_rep(temp___172))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[39]) = of_rep(temp___173))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[40]) = of_rep(temp___174))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[41]) = of_rep(temp___175))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[42]) = of_rep(temp___176))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[43]) = of_rep(temp___177))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[44]) = of_rep(temp___178))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[45]) = of_rep(temp___179))) and
-  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___134,
-  temp___135, temp___136, temp___137, temp___138, temp___139, temp___140,
-  temp___141, temp___142, temp___143, temp___144, temp___145, temp___146,
-  temp___147, temp___148, temp___149, temp___150, temp___151, temp___152,
-  temp___153, temp___154, temp___155, temp___156, temp___157, temp___158,
-  temp___159, temp___160, temp___161, temp___162, temp___163, temp___164,
-  temp___165, temp___166, temp___167, temp___168, temp___169, temp___170,
-  temp___171, temp___172, temp___173, temp___174, temp___175, temp___176,
-  temp___177, temp___178, temp___179,
-  temp___180)[46]) = of_rep(temp___180))))
-
 axiom lookup_table__def_axiom :
   (lookup_table = number_theory__fibonacci2__lookup_table__aggregate_def(0,
   1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584,
@@ -1775,48 +1241,491 @@ axiom lookup_table__def_axiom :
   24157817, 39088169, 63245986, 102334155, 165580141, 267914296, 433494437,
   701408733, 1134903170, 1836311903))
 
-logic number_theory__fibonacci2__result : int
-
-logic result : int
-
-logic number_theory__fibonacci2__result1 : int
-
-logic number_theory__fibonacci2__result2 : int
-
-logic number_theory__fibonacci2__result3 : int
-
-logic number_theory__fibonacci2__result4 : int
-
-logic number_theory__fibonacci2__result5 : int
-
-logic result1 : int
-
-axiom H : in_range1(n)
-
-axiom H1 : (number_theory__fibonacci2__lookup_table__aggregate_def(0, 1, 1,
-  2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181,
-  6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229,
-  832040, 1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817,
-  39088169, 63245986, 102334155, 165580141, 267914296, 433494437, 701408733,
-  1134903170, 1836311903) = lookup_table)
-
-axiom H2 :
-  (number_theory__fibonacci2__result1 = number_theory__fibonacci2__result2)
-
-axiom H3 :
-  (number_theory__fibonacci2__result3 = number_theory__fibonacci2__result1)
-
-axiom H4 : (result = number_theory__fibonacci2__result)
-
-axiom H5 : (number_theory__fibonacci2__result1 = to_rep((lookup_table[n])))
-
-axiom H6 :
-  (number_theory__fibonacci2__result4 = number_theory__fibonacci2__result2)
-
-axiom H7 :
-  (number_theory__fibonacci2__result5 = number_theory__fibonacci2__result3)
-
-axiom H8 : (result1 = number_theory__fibonacci2__result4)
+axiom def_axiom :
+  (forall temp___156:int. forall temp___157:int. forall temp___158:int.
+  forall temp___159:int. forall temp___160:int. forall temp___161:int.
+  forall temp___162:int. forall temp___163:int. forall temp___164:int.
+  forall temp___165:int. forall temp___166:int. forall temp___167:int.
+  forall temp___168:int. forall temp___169:int. forall temp___170:int.
+  forall temp___171:int. forall temp___172:int. forall temp___173:int.
+  forall temp___174:int. forall temp___175:int. forall temp___176:int.
+  forall temp___177:int. forall temp___178:int. forall temp___179:int.
+  forall temp___180:int. forall temp___181:int. forall temp___182:int.
+  forall temp___183:int. forall temp___184:int. forall temp___185:int.
+  forall temp___186:int. forall temp___187:int. forall temp___188:int.
+  forall temp___189:int. forall temp___190:int. forall temp___191:int.
+  forall temp___192:int. forall temp___193:int. forall temp___194:int.
+  forall temp___195:int. forall temp___196:int. forall temp___197:int.
+  forall temp___198:int. forall temp___199:int. forall temp___200:int.
+  forall temp___201:int. forall temp___202:int.
+  (((((((((((((((((((((((((((((((((((((((((((((((in_range(temp___156) and
+  in_range(temp___157)) and in_range(temp___158)) and
+  in_range(temp___159)) and in_range(temp___160)) and
+  in_range(temp___161)) and in_range(temp___162)) and
+  in_range(temp___163)) and in_range(temp___164)) and
+  in_range(temp___165)) and in_range(temp___166)) and
+  in_range(temp___167)) and in_range(temp___168)) and
+  in_range(temp___169)) and in_range(temp___170)) and
+  in_range(temp___171)) and in_range(temp___172)) and
+  in_range(temp___173)) and in_range(temp___174)) and
+  in_range(temp___175)) and in_range(temp___176)) and
+  in_range(temp___177)) and in_range(temp___178)) and
+  in_range(temp___179)) and in_range(temp___180)) and
+  in_range(temp___181)) and in_range(temp___182)) and
+  in_range(temp___183)) and in_range(temp___184)) and
+  in_range(temp___185)) and in_range(temp___186)) and
+  in_range(temp___187)) and in_range(temp___188)) and
+  in_range(temp___189)) and in_range(temp___190)) and
+  in_range(temp___191)) and in_range(temp___192)) and
+  in_range(temp___193)) and in_range(temp___194)) and
+  in_range(temp___195)) and in_range(temp___196)) and
+  in_range(temp___197)) and in_range(temp___198)) and
+  in_range(temp___199)) and in_range(temp___200)) and
+  in_range(temp___201)) and in_range(temp___202)) ->
+  (((((((((((((((((((((((((((((((((((((((((((((((to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[0])) = temp___156) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[1])) = temp___157)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[2])) = temp___158)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[3])) = temp___159)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[4])) = temp___160)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[5])) = temp___161)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[6])) = temp___162)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[7])) = temp___163)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[8])) = temp___164)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[9])) = temp___165)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[10])) = temp___166)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[11])) = temp___167)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[12])) = temp___168)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[13])) = temp___169)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[14])) = temp___170)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[15])) = temp___171)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[16])) = temp___172)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[17])) = temp___173)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[18])) = temp___174)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[19])) = temp___175)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[20])) = temp___176)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[21])) = temp___177)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[22])) = temp___178)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[23])) = temp___179)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[24])) = temp___180)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[25])) = temp___181)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[26])) = temp___182)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[27])) = temp___183)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[28])) = temp___184)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[29])) = temp___185)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[30])) = temp___186)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[31])) = temp___187)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[32])) = temp___188)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[33])) = temp___189)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[34])) = temp___190)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[35])) = temp___191)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[36])) = temp___192)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[37])) = temp___193)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[38])) = temp___194)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[39])) = temp___195)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[40])) = temp___196)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[41])) = temp___197)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[42])) = temp___198)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[43])) = temp___199)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[44])) = temp___200)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[45])) = temp___201)) and
+  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
+  temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
+  temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
+  temp___175, temp___176, temp___177, temp___178, temp___179, temp___180,
+  temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
+  temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
+  temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
+  temp___199, temp___200, temp___201, temp___202)[46])) = temp___202))))
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (number_theory__fibonacci2__result4 = fib(n))
+goal WP_parameter_def :
+  (forall number_theory__fibonacci2__result:int. forall result:int.
+  forall number_theory__fibonacci2__result1:int.
+  forall number_theory__fibonacci2__result2:int.
+  forall number_theory__fibonacci2__result3:int.
+  forall number_theory__fibonacci2__result4:int.
+  forall number_theory__fibonacci2__result5:int.
+  (forall result1:int. ((in_range1(n) and
+  ((((number_theory__fibonacci2__lookup_table__aggregate_def(0, 1, 1, 2, 3,
+  5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765,
+  10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040,
+  1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169,
+  63245986, 102334155, 165580141, 267914296, 433494437, 701408733,
+  1134903170, 1836311903) = lookup_table) and
+  (((number_theory__fibonacci2__result1 = number_theory__fibonacci2__result2) and
+  (number_theory__fibonacci2__result3 = number_theory__fibonacci2__result1)) and
+  ((result = number_theory__fibonacci2__result) and
+  (number_theory__fibonacci2__result1 = to_rep((lookup_table[n])))))) and
+  ((number_theory__fibonacci2__result4 = number_theory__fibonacci2__result2) and
+  (number_theory__fibonacci2__result5 = number_theory__fibonacci2__result3))) and
+  (result1 = number_theory__fibonacci2__result4))) ->
+  (number_theory__fibonacci2__result4 = fib(n)))))

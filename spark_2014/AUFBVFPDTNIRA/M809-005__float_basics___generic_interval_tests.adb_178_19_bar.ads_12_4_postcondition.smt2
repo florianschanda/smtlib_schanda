@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -129,12 +125,13 @@
 (declare-datatypes () ((ft__ref (mk_ft__ref (ft__content ft)))))
 (define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float64)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float64)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_165)))
 
 (declare-const a Float64)
 
@@ -154,12 +151,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant1 ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (declare-const z Float64)
 
@@ -222,24 +220,45 @@
   (fp.lt a d)) (fp.lt d b)) (fp.leq c a)) (fp.leq b c)))
 
 ;; H
+  (assert (fp.lt a b))
+
+;; H
   (assert
-  (and
-  (and (fp.lt a b)
-  (and
-  (fp.eq c (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000))
-  (and
+  (fp.eq c (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000)))
+
+;; H
+  (assert
   (and
   (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
   d)
-  (fp.leq d (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
-  (and
-  (and
-  (and
-  (and
-  (and (and (= o (fp.add RNE a b)) (fp.isFinite64 (fp.add RNE a b)))
-  (= o1 (fp.add RNE o c))) (and (= o2 o1) (fp.isFinite64 o1)))
-  (= o3 (fp.add RNE o2 d))) (and (= o4 o3) (fp.isFinite64 o3)))
-  (and (= result z) (= z1 o4)))))) (and (= z1 z2) (= z3 z1))))
+  (fp.leq d (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000))))
+
+;; H
+  (assert (and (= o (fp.add RNE a b)) (fp.isFinite64 (fp.add RNE a b))))
+
+;; H
+  (assert (= o1 (fp.add RNE o c)))
+
+;; H
+  (assert (and (= o2 o1) (fp.isFinite64 o1)))
+
+;; H
+  (assert (= o3 (fp.add RNE o2 d)))
+
+;; H
+  (assert (and (= o4 o3) (fp.isFinite64 o3)))
+
+;; H
+  (assert (= result z))
+
+;; H
+  (assert (= z1 o4))
+
+;; H
+  (assert (= z1 z2))
+
+;; H
+  (assert (= z3 z1))
 
 (assert
 ;; WP_parameter_def

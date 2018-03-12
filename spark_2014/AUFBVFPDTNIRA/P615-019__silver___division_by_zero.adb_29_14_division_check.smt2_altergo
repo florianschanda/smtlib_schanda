@@ -930,20 +930,12 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic u : t
-
-logic o : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(u))
-
  (* File "division_by_zero.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(y))
+goal WP_parameter_def :
+  (forall u:t. (tqtisFinite(x) -> (tqtisFinite(y) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(u)) -> (not is_zero(y))))))

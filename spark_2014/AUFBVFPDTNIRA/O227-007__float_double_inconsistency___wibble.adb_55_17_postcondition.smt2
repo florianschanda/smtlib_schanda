@@ -427,10 +427,6 @@
   (= (eq_sub3 a b (bv2nat i) (bv2nat n)) (eq_sub_bv3 a b i n))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
-(define-fun to_int6 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -473,20 +469,20 @@
 (define-fun float64__ref___projection ((a float64__ref)) float64 (float64__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float64)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float64)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_165)))
 
 (declare-sort t 0)
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
-(define-fun in_range1 ((x (_ BitVec 32))) Bool (and
-                                               (bvule ((_ int2bv 32) 0) x)
-                                               (bvule x ((_ int2bv 32) 1000000))))
+(define-fun in_range1 ((x (_ BitVec 32))) Bool (and (bvule #x00000000 x)
+                                               (bvule x #x000F4240)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 1000000)))
 
@@ -503,12 +499,13 @@
 (declare-datatypes () ((t__ref2 (mk_t__ref2 (t__content2 t)))))
 (define-fun t__ref___projection ((a t__ref2)) t (t__content2 a))
 
-(define-fun dynamic_invariant1 ((temp___expr_153 (_ BitVec 32))
-  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
-  (temp___do_toplevel_152 Bool)) Bool (=>
-                                      (or (= temp___is_init_150 true)
-                                      (bvule ((_ int2bv 32) 0) ((_ int2bv 32) 1000000)))
-                                      (in_range1 temp___expr_153)))
+(define-fun dynamic_invariant1 ((temp___expr_179 (_ BitVec 32))
+  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
+  (temp___do_toplevel_177 Bool)
+  (temp___do_typ_inv_178 Bool)) Bool (=>
+                                     (or (= temp___is_init_175 true)
+                                     (bvule #x00000000 #x000F4240))
+                                     (in_range1 temp___expr_179)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -536,7 +533,7 @@
 
 ;; H
   (assert
-  (and (bvult x ((_ int2bv 32) 1000000))
+  (and (bvult x #x000F4240)
   (or
   (= state (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
   (and

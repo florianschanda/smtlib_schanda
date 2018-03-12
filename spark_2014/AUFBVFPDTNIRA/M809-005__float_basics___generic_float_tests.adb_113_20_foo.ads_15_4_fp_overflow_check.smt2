@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -129,12 +125,13 @@
 (declare-datatypes () ((ft__ref (mk_ft__ref (ft__content ft)))))
 (define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
-(define-fun dynamic_invariant ((temp___expr_167 Float64)
-  (temp___is_init_164 Bool) (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (fp.isFinite64 temp___expr_167)))
+(define-fun dynamic_invariant ((temp___expr_194 Float64)
+  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
+  (temp___do_toplevel_192 Bool)
+  (temp___do_typ_inv_193 Bool)) Bool (=>
+                                     (or (= temp___is_init_190 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (fp.isFinite64 temp___expr_194)))
 
 (declare-const a Float64)
 
@@ -148,32 +145,17 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
-
-(declare-const foo__double_tests__sqrt_comedy_1__result Bool)
+(define-fun dynamic_invariant1 ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (declare-const o Float64)
 
-(declare-const o1 Float64)
-
-(declare-const o2 Bool)
-
-(declare-const result Bool)
-
-(declare-const foo__double_tests__sqrt_comedy_1__result1 Bool)
-
-(declare-const foo__double_tests__sqrt_comedy_1__result2 Bool)
-
-(declare-const foo__double_tests__sqrt_comedy_1__result3 Bool)
-
-(declare-const foo__double_tests__sqrt_comedy_1__result4 Bool)
-
-(declare-const foo__double_tests__sqrt_comedy_1__result5 Bool)
+(declare-const o1 Bool)
 
 ;; H
   (assert (fp.isFinite64 a))
@@ -185,10 +167,10 @@
   (assert (fp.isFinite64 c))
 
 ;; H
-  (assert (and (= o1 (fp.mul RNE b b)) (fp.isFinite64 (fp.mul RNE b b))))
+  (assert (and (= o (fp.mul RNE b b)) (fp.isFinite64 (fp.mul RNE b b))))
 
 ;; H
-  (assert (= o2 (ite (fp.eq o1 c) true false)))
+  (assert (= o1 (ite (fp.eq o c) true false)))
 
 (assert
 ;; WP_parameter_def

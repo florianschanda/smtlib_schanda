@@ -1054,10 +1054,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1111,12 +1107,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant ((temp___expr_135 t) (temp___is_init_132 Bool)
-  (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 t) (temp___is_init_154 Bool)
+  (temp___skip_constant_155 Bool) (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_158)))
 
 (declare-sort frame 0)
 
@@ -1135,12 +1131,13 @@
 (declare-datatypes () ((frame__ref (mk_frame__ref (frame__content frame)))))
 (define-fun frame__ref___projection ((a frame__ref)) frame (frame__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_141 Int)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (<= 0 25000)) (in_range2
-                                      temp___expr_141)))
+(define-fun dynamic_invariant1 ((temp___expr_165 Int)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (<= 0 25000)) (in_range2
+                                     temp___expr_165)))
 
 (declare-sort ratio_t 0)
 
@@ -1165,12 +1162,12 @@
 (define-fun ratio_t__ref___projection ((a ratio_t__ref)) ratio_t (ratio_t__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_147 t) (temp___is_init_144 Bool)
-  (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true) (le
-                                      (neg fliteral) fliteral)) (in_range3
-                                      temp___expr_147)))
+(define-fun dynamic_invariant2 ((temp___expr_172 t) (temp___is_init_168 Bool)
+  (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true) (le
+                                     (neg fliteral) fliteral)) (in_range3
+                                     temp___expr_172)))
 
 (declare-fun low_bound (Int) t)
 
@@ -1179,8 +1176,8 @@
 ;; low_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
-     (low_bound n) true false true)) :pattern ((low_bound n)) )))
+  (! (=> (dynamic_invariant1 n true true true true) (dynamic_invariant
+     (low_bound n) true false true true)) :pattern ((low_bound n)) )))
 
 (declare-const fliteral2 t)
 
@@ -1190,7 +1187,7 @@
 ;; low_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true)
+  (! (=> (dynamic_invariant1 n true true true true)
      (= (low_bound n) (mul RNE1 (of_int RNE1 n) (neg fliteral2)))) :pattern (
   (low_bound n)) )))
 
@@ -1201,13 +1198,13 @@
 ;; high_bound__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true) (dynamic_invariant
-     (high_bound n) true false true)) :pattern ((high_bound n)) )))
+  (! (=> (dynamic_invariant1 n true true true true) (dynamic_invariant
+     (high_bound n) true false true true)) :pattern ((high_bound n)) )))
 
 ;; high_bound__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant1 n true true true)
+  (! (=> (dynamic_invariant1 n true true true true)
      (= (high_bound n) (mul RNE1 (of_int RNE1 n) fliteral2))) :pattern (
   (high_bound n)) )))
 
@@ -1280,74 +1277,6 @@
   (assert (= delta_speed (mul RNE1 (mul RNE1 factor fliteral4) fliteral5)))
 
 (declare-const new_speed t)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 t)
-
-(declare-const o4 t)
-
-(declare-const o5 t)
-
-(declare-const o6 t)
-
-(declare-const o7 t)
-
-(declare-const o8 t)
-
-(declare-const o9 t)
-
-(declare-const o10 t)
-
-(declare-const o11 Int)
-
-(declare-const o12 t)
-
-(declare-const o13 t)
-
-(declare-const o14 Int)
-
-(declare-const o15 t)
-
-(declare-const o16 t)
-
-(declare-const o17 t)
-
-(declare-const o18 t)
-
-(declare-const o19 t)
-
-(declare-const o20 t)
-
-(declare-const o21 t)
-
-(declare-const o22 t)
-
-(declare-const o23 t)
-
-(declare-const o24 t)
-
-(declare-const o25 Int)
-
-(declare-const o26 t)
-
-(declare-const o27 t)
-
-(declare-const o28 Int)
-
-(declare-const o29 Int)
-
-(declare-const result t)
-
-(declare-const new_speed1 t)
-
-(declare-const new_speed2 t)
-
-(declare-const new_speed3 t)
 
 ;; H
   (assert (in_range2 n))

@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1158,29 +1154,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int character) Int Int (Array Int character) Int
-  Int) (Array Int character))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int character)) (b (Array Int character)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (character Int) (Array Int character))
-
-;; singleton_def
-  (assert
-  (forall ((v character))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq1 ((a (Array Int character)) (a__first Int) (a__last Int)
   (b (Array Int character)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -1188,12 +1161,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_78 Int))
+                           (forall ((temp___idx_91 Int))
                            (=>
-                           (and (<= a__first temp___idx_78)
-                           (<= temp___idx_78 a__last))
-                           (= (to_rep (select a temp___idx_78)) (to_rep
-                                                                (select b (+ (- b__first a__first) temp___idx_78)))))))
+                           (and (<= a__first temp___idx_91)
+                           (<= temp___idx_91 a__last))
+                           (= (to_rep (select a temp___idx_91)) (to_rep
+                                                                (select b (+ (- b__first a__first) temp___idx_91)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -1205,49 +1178,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_78 Int))
-  (=> (and (<= a__first temp___idx_78) (<= temp___idx_78 a__last))
-  (= (to_rep (select a temp___idx_78)) (to_rep
-                                       (select b (+ (- b__first a__first) temp___idx_78)))))))))))
-
-(declare-fun compare ((Array Int character) Int Int (Array Int character) Int
-  Int) Int)
-
-;; compare_def_eq
-  (assert
-  (forall ((a (Array Int character)) (b (Array Int character)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq1 a a_first a_last b b_first b_last) true)) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_lt
-  (assert
-  (forall ((a (Array Int character)) (b (Array Int character)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< (compare a a_first a_last b b_first b_last) 0)
-     (exists ((i Int) (j Int))
-     (and (<= i a_last)
-     (and (< j b_last)
-     (and (= (bool_eq1 a a_first i b b_first j) true)
-     (or (= i a_last)
-     (and (< i a_last)
-     (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_gt
-  (assert
-  (forall ((a (Array Int character)) (b (Array Int character)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< 0 (compare a a_first a_last b b_first b_last))
-     (exists ((i Int) (j Int))
-     (and (<= i b_last)
-     (and (< j a_last)
-     (and (= (bool_eq1 a a_first j b b_first i) true)
-     (or (= i b_last)
-     (and (< i b_last)
-     (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
+  (forall ((temp___idx_91 Int))
+  (=> (and (<= a__first temp___idx_91) (<= temp___idx_91 a__last))
+  (= (to_rep (select a temp___idx_91)) (to_rep
+                                       (select b (+ (- b__first a__first) temp___idx_91)))))))))))
 
 (declare-fun to_rep1 (integer) Int)
 
@@ -1539,24 +1473,25 @@
 (define-fun angle__ref___projection ((a angle__ref)) us_rep (angle__content
                                                             a))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral2) fliteral2)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral2) fliteral2)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun ccwdiff (us_rep us_rep) t)
 
 (declare-fun ccwdiff__function_guard (t us_rep us_rep) Bool)
 
-(define-fun dynamic_invariant1 ((temp___expr_82 us_t)
-  (temp___is_init_79 Bool) (temp___skip_constant_80 Bool)
-  (temp___do_toplevel_81 Bool)) Bool (=>
-                                     (not (= temp___skip_constant_80 true))
-                                     (dynamic_property 1 2147483647
-                                     (first1 temp___expr_82)
-                                     (last1 temp___expr_82))))
+(define-fun dynamic_invariant1 ((temp___expr_96 us_t)
+  (temp___is_init_92 Bool) (temp___skip_constant_93 Bool)
+  (temp___do_toplevel_94 Bool)
+  (temp___do_typ_inv_95 Bool)) Bool (=>
+                                    (not (= temp___skip_constant_93 true))
+                                    (dynamic_property 1 2147483647
+                                    (first1 temp___expr_96)
+                                    (last1 temp___expr_96))))
 
 (declare-fun print (us_rep) us_t)
 
@@ -1722,31 +1657,6 @@
   (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
-(declare-fun concat2 ((Array Int nonnegative_float) Int Int
-  (Array Int nonnegative_float) Int Int) (Array Int nonnegative_float))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int nonnegative_float))
-  (b (Array Int nonnegative_float)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat2 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat2 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton2 (nonnegative_float
-  Int) (Array Int nonnegative_float))
-
-;; singleton_def
-  (assert
-  (forall ((v nonnegative_float))
-  (forall ((i Int))
-  (! (= (select (singleton2 v i) i) v) :pattern ((select (singleton2 v i) i)) ))))
-
 (define-fun bool_eq9 ((a (Array Int nonnegative_float)) (a__first Int)
   (a__last Int) (b (Array Int nonnegative_float)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -1754,12 +1664,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (to_rep6 (select a temp___idx_132)) (to_rep6
-                                                                  (select b (+ (- b__first a__first) temp___idx_132)))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (to_rep6 (select a temp___idx_154)) (to_rep6
+                                                                  (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -1772,10 +1682,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (to_rep6 (select a temp___idx_132)) (to_rep6
-                                         (select b (+ (- b__first a__first) temp___idx_132)))))))))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (to_rep6 (select a temp___idx_154)) (to_rep6
+                                         (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
 (declare-const dummy11 (Array Int nonnegative_float))
 
@@ -2822,11 +2732,11 @@
 (define-fun cursor__ref___projection ((a cursor__ref)) us_rep5 (cursor__content
                                                                a))
 
-(define-fun default_initial_assumption ((temp___expr_413 us_rep5)
-  (temp___skip_top_level_414 Bool)) Bool (= (to_rep10
+(define-fun default_initial_assumption ((temp___expr_466 us_rep5)
+  (temp___skip_top_level_467 Bool)) Bool (= (to_rep10
                                             (rec__algorithm__gap_vectors__cursor__node
                                             (us_split_fields11
-                                            temp___expr_413))) 0))
+                                            temp___expr_466))) 0))
 
 (declare-const no_element us_rep5)
 
@@ -2836,12 +2746,13 @@
 
 (declare-fun length__function_guard (Int us_rep4) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_324 Int)
-  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
-  (temp___do_toplevel_323 Bool)) Bool (=>
-                                      (or (= temp___is_init_321 true)
-                                      (<= 0 2147483647)) (in_range11
-                                      temp___expr_324)))
+(define-fun dynamic_invariant2 ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range11
+                                     temp___expr_365)))
 
 ;; length__post_axiom
   (assert
@@ -2851,8 +2762,8 @@
      (<= result (to_rep10
                 (rec__algorithm__gap_vectors__list__capacity
                 (us_split_discrs3 container))))
-     (dynamic_invariant2 result true false true))) :pattern ((length1
-                                                             container)) )))
+     (dynamic_invariant2 result true false true true))) :pattern ((length1
+                                                                  container)) )))
 
 (declare-sort us_main_type1 0)
 
@@ -3215,29 +3126,6 @@
   (! (= (select (slide2 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide2 a old_first new_first) i)) ))))))
 
-(declare-fun concat3 ((Array Int us_rep8) Int Int (Array Int us_rep8) Int
-  Int) (Array Int us_rep8))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int us_rep8)) (b (Array Int us_rep8)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat3 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat3 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat3 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton3 (us_rep8 Int) (Array Int us_rep8))
-
-;; singleton_def
-  (assert
-  (forall ((v us_rep8))
-  (forall ((i Int))
-  (! (= (select (singleton3 v i) i) v) :pattern ((select (singleton3 v i) i)) ))))
-
 (define-fun bool_eq18 ((a (Array Int us_rep8)) (a__first Int) (a__last Int)
   (b (Array Int us_rep8)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -3245,12 +3133,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_133 Int))
+                           (forall ((temp___idx_155 Int))
                            (=>
-                           (and (<= a__first temp___idx_133)
-                           (<= temp___idx_133 a__last))
-                           (= (bool_eq17 (select a temp___idx_133)
-                              (select b (+ (- b__first a__first) temp___idx_133))) true))))
+                           (and (<= a__first temp___idx_155)
+                           (<= temp___idx_155 a__last))
+                           (= (bool_eq17 (select a temp___idx_155)
+                              (select b (+ (- b__first a__first) temp___idx_155))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -3262,10 +3150,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_133 Int))
-  (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq17 (select a temp___idx_133)
-     (select b (+ (- b__first a__first) temp___idx_133))) true))))))))
+  (forall ((temp___idx_155 Int))
+  (=> (and (<= a__first temp___idx_155) (<= temp___idx_155 a__last))
+  (= (bool_eq17 (select a temp___idx_155)
+     (select b (+ (- b__first a__first) temp___idx_155))) true))))))))
 
 (declare-const dummy24 (Array Int us_rep8))
 
@@ -3561,42 +3449,31 @@
 (define-fun t252s__ref___projection ((a t252s__ref)) us_rep1 (t252s__content
                                                              a))
 
-(declare-fun temp___614 (t) (Array Int nonnegative_float))
+(declare-fun temp___680 (t) (Array Int nonnegative_float))
 
-;; def_axiom
-  (assert
-  (forall ((temp___616 t))
-  (forall ((temp___617 Int))
-  (= (select (temp___614 temp___616) temp___617) (of_rep6 temp___616)))))
+(declare-fun temp___684 (us_rep8) (Array Int us_rep8))
 
-(declare-fun temp___618 (us_rep8) (Array Int us_rep8))
+(define-fun dynamic_invariant3 ((temp___expr_673 us_rep9)
+  (temp___is_init_669 Bool) (temp___skip_constant_670 Bool)
+  (temp___do_toplevel_671 Bool)
+  (temp___do_typ_inv_672 Bool)) Bool (and
+                                     (= (attr__constrained
+                                        (rec__robot_iface__proxy__speed
+                                        (us_split_fields5
+                                        (rec__algorithm__controller__robot
+                                        (us_split_fields15 temp___expr_673))))) false)
+                                     (in_range12 1000
+                                     (rec__algorithm__controller__gapvec
+                                     (us_split_fields15 temp___expr_673)))))
 
-;; def_axiom
-  (assert
-  (forall ((temp___620 us_rep8))
-  (forall ((temp___621 Int))
-  (= (select (temp___618 temp___620) temp___621) temp___620))))
-
-(define-fun dynamic_invariant3 ((temp___expr_607 us_rep9)
-  (temp___is_init_604 Bool) (temp___skip_constant_605 Bool)
-  (temp___do_toplevel_606 Bool)) Bool (and
-                                      (= (attr__constrained
-                                         (rec__robot_iface__proxy__speed
-                                         (us_split_fields5
-                                         (rec__algorithm__controller__robot
-                                         (us_split_fields15 temp___expr_607))))) false)
-                                      (in_range12 1000
-                                      (rec__algorithm__controller__gapvec
-                                      (us_split_fields15 temp___expr_607)))))
-
-(define-fun default_initial_assumption1 ((temp___expr_612 us_rep9)
-  (temp___skip_top_level_613 Bool)) Bool (and
+(define-fun default_initial_assumption1 ((temp___expr_678 us_rep9)
+  (temp___skip_top_level_679 Bool)) Bool (and
                                          (and
                                          (and
                                          (and
                                          (= (rec__algorithm__controller__robot
                                             (us_split_fields15
-                                            temp___expr_612)) (mk___rep2
+                                            temp___expr_678)) (mk___rep2
                                                               (mk___split_fields2
                                                               (of_rep2
                                                               fliteral1)
@@ -3623,7 +3500,7 @@
                                                               fliteral1)
                                                               (of_rep2
                                                               fliteral1)
-                                                              (temp___614
+                                                              (temp___680
                                                               fliteral1)
                                                               (of_rep7
                                                               fliteral1)
@@ -3643,10 +3520,10 @@
                                                               usq_)
                                                               (us_split_fields3
                                                               usq_) false))
-                                                              (of_int1 0))))
+                                                              (distinct 0 0))))
                                          (= (rec__algorithm__controller__laserscan
                                             (us_split_fields15
-                                            temp___expr_612)) (temp___618
+                                            temp___expr_678)) (temp___684
                                                               (mk___rep6
                                                               (mk___split_fields6
                                                               (of_rep6
@@ -3658,18 +3535,18 @@
                                             (us_split_discrs3
                                             (rec__algorithm__controller__gapvec
                                             (us_split_fields15
-                                            temp___expr_612))))) 1000)
+                                            temp___expr_678))))) 1000)
                                          (= (is_empty
                                             (rec__algorithm__controller__gapvec
                                             (us_split_fields15
-                                            temp___expr_612))) true)))
+                                            temp___expr_678))) true)))
                                          (= (to_rep5
                                             (rec__algorithm__controller__obsavoiddelta
                                             (us_split_fields15
-                                            temp___expr_612))) fliteral1))
+                                            temp___expr_678))) fliteral1))
                                          (= (rec__algorithm__controller__driveangle
                                             (us_split_fields15
-                                            temp___expr_612)) null_angle)))
+                                            temp___expr_678)) null_angle)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -3677,9 +3554,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun temp___String_Literal_1021 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1090 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1021__def_axiom
+;; temp___String_Literal_1090__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -3710,40 +3587,40 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 3)) 32))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 5)) 82))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 6)) 101))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 7)) 109))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 8)) 111))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 9)) 118))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 10)) 101))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 11)) 100))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 12)) 32))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 13)) 100))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 14)) 117))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 15)) 112))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 16)) 108))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 17)) 105))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 18)) 99))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 19)) 97))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 20)) 116))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 21)) 101))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 22)) 32))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 23)) 103))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 24)) 97))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 25)) 112))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 26)) 32))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 27)) 97))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 28)) 116))
-     (= (to_rep (select (temp___String_Literal_1021 us_void_param) 29)) 32)) :pattern (
-  (temp___String_Literal_1021 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 3)) 32))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 5)) 82))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 6)) 101))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 7)) 109))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 8)) 111))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 9)) 118))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 10)) 101))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 11)) 100))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 12)) 32))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 13)) 100))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 14)) 117))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 15)) 112))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 16)) 108))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 17)) 105))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 18)) 99))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 19)) 97))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 20)) 116))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 21)) 101))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 22)) 32))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 23)) 103))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 24)) 97))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 25)) 112))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 26)) 32))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 27)) 97))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 28)) 116))
+     (= (to_rep (select (temp___String_Literal_1090 us_void_param) 29)) 32)) :pattern (
+  (temp___String_Literal_1090 us_void_param)) )))
 
-(declare-fun temp___String_Literal_1034 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_1103 (tuple0) (Array Int character))
 
-;; temp___String_Literal_1034__def_axiom
+;; temp___String_Literal_1103__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -3774,152 +3651,166 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 3)) 32))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 5)) 82))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 6)) 101))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 7)) 109))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 8)) 111))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 9)) 118))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 10)) 101))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 11)) 100))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 12)) 32))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 13)) 100))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 14)) 117))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 15)) 112))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 16)) 108))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 17)) 105))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 18)) 99))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 19)) 97))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 20)) 116))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 21)) 101))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 22)) 32))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 23)) 103))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 24)) 97))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 25)) 112))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 26)) 32))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 27)) 97))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 28)) 116))
-     (= (to_rep (select (temp___String_Literal_1034 us_void_param) 29)) 32)) :pattern (
-  (temp___String_Literal_1034 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 3)) 32))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 5)) 82))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 6)) 101))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 7)) 109))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 8)) 111))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 9)) 118))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 10)) 101))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 11)) 100))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 12)) 32))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 13)) 100))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 14)) 117))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 15)) 112))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 16)) 108))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 17)) 105))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 18)) 99))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 19)) 97))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 20)) 116))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 21)) 101))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 22)) 32))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 23)) 103))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 24)) 97))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 25)) 112))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 26)) 32))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 27)) 97))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 28)) 116))
+     (= (to_rep (select (temp___String_Literal_1103 us_void_param) 29)) 32)) :pattern (
+  (temp___String_Literal_1103 us_void_param)) )))
 
-(define-fun dynamic_invariant4 ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range7
-                                     temp___expr_33)))
+(define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range7
+                                    temp___expr_39)))
 
-(define-fun dynamic_invariant5 ((temp___expr_39 Int) (temp___is_init_36 Bool)
-  (temp___skip_constant_37 Bool)
-  (temp___do_toplevel_38 Bool)) Bool (=>
-                                     (or (= temp___is_init_36 true)
-                                     (<= 1 2147483647)) (in_range3
-                                     temp___expr_39)))
+(define-fun dynamic_invariant5 ((temp___expr_46 Int) (temp___is_init_42 Bool)
+  (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
+  (temp___do_typ_inv_45 Bool)) Bool (=>
+                                    (or (= temp___is_init_42 true)
+                                    (<= 1 2147483647)) (in_range3
+                                    temp___expr_46)))
 
-(define-fun dynamic_invariant6 ((temp___expr_63 Int) (temp___is_init_60 Bool)
-  (temp___skip_constant_61 Bool)
-  (temp___do_toplevel_62 Bool)) Bool (=>
-                                     (or (= temp___is_init_60 true)
-                                     (<= 0 255)) (in_range4 temp___expr_63)))
+(define-fun dynamic_invariant6 ((temp___expr_74 Int) (temp___is_init_70 Bool)
+  (temp___skip_constant_71 Bool) (temp___do_toplevel_72 Bool)
+  (temp___do_typ_inv_73 Bool)) Bool (=>
+                                    (or (= temp___is_init_70 true)
+                                    (<= 0 255)) (in_range4 temp___expr_74)))
 
-(define-fun dynamic_invariant7 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range2 temp___expr_15)))
+(define-fun dynamic_invariant7 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range2 temp___expr_18)))
 
-(define-fun dynamic_invariant8 ((temp___expr_577 us_rep4)
-  (temp___is_init_574 Bool) (temp___skip_constant_575 Bool)
-  (temp___do_toplevel_576 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_575 true))
-                                      (in_range12 1000 temp___expr_577)))
+(define-fun dynamic_invariant8 ((temp___expr_640 us_rep4)
+  (temp___is_init_636 Bool) (temp___skip_constant_637 Bool)
+  (temp___do_toplevel_638 Bool)
+  (temp___do_typ_inv_639 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_637 true))
+                                     (in_range12 1000 temp___expr_640)))
 
-(define-fun default_initial_assumption2 ((temp___expr_579 us_rep4)
-  (temp___skip_top_level_580 Bool)) Bool (and
+(define-fun default_initial_assumption2 ((temp___expr_642 us_rep4)
+  (temp___skip_top_level_643 Bool)) Bool (and
                                          (= (to_rep10
                                             (rec__algorithm__gap_vectors__list__capacity
                                             (us_split_discrs3
-                                            temp___expr_579))) 1000)
+                                            temp___expr_642))) 1000)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_580 true))
-                                         (= (is_empty temp___expr_579) true))))
+                                         (= temp___skip_top_level_643 true))
+                                         (= (is_empty temp___expr_642) true))))
 
-(define-fun dynamic_invariant9 ((temp___expr_220 Int)
-  (temp___is_init_217 Bool) (temp___skip_constant_218 Bool)
-  (temp___do_toplevel_219 Bool)) Bool (=>
-                                      (or (= temp___is_init_217 true)
-                                      (<= 0 1)) (in_range9 temp___expr_220)))
+;; def_axiom
+  (assert
+  (forall ((temp___686 us_rep8))
+  (forall ((temp___687 Int))
+  (= (select (temp___684 temp___686) temp___687) temp___686))))
 
-(define-fun default_initial_assumption3 ((temp___expr_228 us_rep1)
-  (temp___skip_top_level_229 Bool)) Bool (and
+(define-fun dynamic_invariant9 ((temp___expr_254 Int)
+  (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
+  (temp___do_toplevel_252 Bool)
+  (temp___do_typ_inv_253 Bool)) Bool (=>
+                                     (or (= temp___is_init_250 true)
+                                     (<= 0 1)) (in_range9 temp___expr_254)))
+
+(define-fun default_initial_assumption3 ((temp___expr_263 us_rep1)
+  (temp___skip_top_level_264 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_228) false)
+                                            temp___expr_263) false)
                                          (= (to_rep8
                                             (rec__robot_iface__speed_option__opt
                                             (us_split_discrs1
-                                            temp___expr_228))) 0)))
+                                            temp___expr_263))) 0)))
 
-(define-fun dynamic_invariant10 ((temp___expr_236 us_rep2)
-  (temp___is_init_233 Bool) (temp___skip_constant_234 Bool)
-  (temp___do_toplevel_235 Bool)) Bool (= (attr__constrained
-                                         (rec__robot_iface__proxy__speed
-                                         (us_split_fields5 temp___expr_236))) false))
+(define-fun dynamic_invariant10 ((temp___expr_272 us_rep2)
+  (temp___is_init_268 Bool) (temp___skip_constant_269 Bool)
+  (temp___do_toplevel_270 Bool)
+  (temp___do_typ_inv_271 Bool)) Bool (= (attr__constrained
+                                        (rec__robot_iface__proxy__speed
+                                        (us_split_fields5 temp___expr_272))) false))
 
-(define-fun default_initial_assumption4 ((temp___expr_239 us_rep2)
-  (temp___skip_top_level_240 Bool)) Bool (and
+(define-fun default_initial_assumption4 ((temp___expr_275 us_rep2)
+  (temp___skip_top_level_276 Bool)) Bool (and
                                          (= (attr__constrained
                                             (rec__robot_iface__proxy__speed
                                             (us_split_fields5
-                                            temp___expr_239))) false)
+                                            temp___expr_275))) false)
                                          (= (to_rep8
                                             (rec__robot_iface__speed_option__opt
                                             (us_split_discrs1
                                             (rec__robot_iface__proxy__speed
                                             (us_split_fields5
-                                            temp___expr_239))))) 0)))
+                                            temp___expr_275))))) 0)))
 
-(define-fun dynamic_invariant11 ((temp___expr_140 t)
-  (temp___is_init_137 Bool) (temp___skip_constant_138 Bool)
-  (temp___do_toplevel_139 Bool)) Bool (=>
-                                      (or (= temp___is_init_137 true) (le
-                                      fliteral1 fliteral2)) (in_range5
-                                      temp___expr_140)))
+(define-fun dynamic_invariant11 ((temp___expr_163 t)
+  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
+  (temp___do_toplevel_161 Bool)
+  (temp___do_typ_inv_162 Bool)) Bool (=>
+                                     (or (= temp___is_init_159 true) (le
+                                     fliteral1 fliteral2)) (in_range5
+                                     temp___expr_163)))
 
-(define-fun dynamic_invariant12 ((temp___expr_146 t)
-  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true) (le
-                                      fliteral1 fliteral2)) (in_range8
-                                      temp___expr_146)))
+(define-fun dynamic_invariant12 ((temp___expr_170 t)
+  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
+  (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true) (le
+                                     fliteral1 fliteral2)) (in_range8
+                                     temp___expr_170)))
 
-(define-fun dynamic_invariant13 ((temp___expr_158 t)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)) Bool (=>
-                                      (or (= temp___is_init_155 true) (le
-                                      (neg fliteral2) fliteral2))
-                                      (tqtisFinite temp___expr_158)))
+(define-fun dynamic_invariant13 ((temp___expr_184 t)
+  (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
+  (temp___do_toplevel_182 Bool)
+  (temp___do_typ_inv_183 Bool)) Bool (=>
+                                     (or (= temp___is_init_180 true) (le
+                                     (neg fliteral2) fliteral2)) (tqtisFinite
+                                     temp___expr_184)))
 
 ;; null_angle__def_axiom
   (assert (= null_angle (mk___rep (mk___split_fields (of_rep3 fliteral1)))))
 
-(define-fun dynamic_invariant14 ((temp___expr_170 t)
-  (temp___is_init_167 Bool) (temp___skip_constant_168 Bool)
-  (temp___do_toplevel_169 Bool)) Bool (=>
-                                      (or (= temp___is_init_167 true) (le
-                                      fliteral1 fliteral3)) (in_range6
-                                      temp___expr_170)))
+(define-fun dynamic_invariant14 ((temp___expr_198 t)
+  (temp___is_init_194 Bool) (temp___skip_constant_195 Bool)
+  (temp___do_toplevel_196 Bool)
+  (temp___do_typ_inv_197 Bool)) Bool (=>
+                                     (or (= temp___is_init_194 true) (le
+                                     fliteral1 fliteral3)) (in_range6
+                                     temp___expr_198)))
 
-(define-fun dynamic_invariant15 ((temp___expr_286 Int)
-  (temp___is_init_283 Bool) (temp___skip_constant_284 Bool)
-  (temp___do_toplevel_285 Bool)) Bool (=>
-                                      (or (= temp___is_init_283 true)
-                                      (<= (- 1) 1)) (in_range10
-                                      temp___expr_286)))
+(define-fun dynamic_invariant15 ((temp___expr_323 Int)
+  (temp___is_init_319 Bool) (temp___skip_constant_320 Bool)
+  (temp___do_toplevel_321 Bool)
+  (temp___do_typ_inv_322 Bool)) Bool (=>
+                                     (or (= temp___is_init_319 true)
+                                     (<= (- 1) 1)) (in_range10
+                                     temp___expr_323)))
 
 ;; no_element__def_axiom
   (assert (= no_element (mk___rep5 (mk___split_fields5 (of_rep10 0)))))
@@ -3945,12 +3836,13 @@
 (define-fun positive_count_type__ref___projection ((a positive_count_type__ref)) positive_count_type
   (positive_count_type__content a))
 
-(define-fun dynamic_invariant16 ((temp___expr_420 Int)
-  (temp___is_init_417 Bool) (temp___skip_constant_418 Bool)
-  (temp___do_toplevel_419 Bool)) Bool (=>
-                                      (or (= temp___is_init_417 true)
-                                      (<= 1 2147483647)) (in_range14
-                                      temp___expr_420)))
+(define-fun dynamic_invariant16 ((temp___expr_474 Int)
+  (temp___is_init_470 Bool) (temp___skip_constant_471 Bool)
+  (temp___do_toplevel_472 Bool)
+  (temp___do_typ_inv_473 Bool)) Bool (=>
+                                     (or (= temp___is_init_470 true)
+                                     (<= 1 2147483647)) (in_range14
+                                     temp___expr_474)))
 
 (declare-fun length2 (us_rep6) Int)
 
@@ -3960,31 +3852,31 @@
 
 (declare-fun is_empty__function_guard1 (Bool us_rep6) Bool)
 
-(define-fun default_initial_assumption5 ((temp___expr_468 us_rep6)
-  (temp___skip_top_level_469 Bool)) Bool (=>
+(define-fun default_initial_assumption5 ((temp___expr_529 us_rep6)
+  (temp___skip_top_level_530 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_469 true))
+                                         (= temp___skip_top_level_530 true))
                                          (and
-                                         (= (is_empty1 temp___expr_468) true)
-                                         (= (length2 temp___expr_468) 0))))
+                                         (= (is_empty1 temp___expr_529) true)
+                                         (= (length2 temp___expr_529) 0))))
 
 (declare-fun keys_included (us_rep6 us_rep6) Bool)
 
 (declare-fun keys_included__function_guard (Bool us_rep6 us_rep6) Bool)
 
-(define-fun default_initial_assumption6 ((temp___expr_456 us_rep5)
-  (temp___skip_top_level_457 Bool)) Bool (= (to_rep10
+(define-fun default_initial_assumption6 ((temp___expr_515 us_rep5)
+  (temp___skip_top_level_516 Bool)) Bool (= (to_rep10
                                             (rec__algorithm__gap_vectors__cursor__node
                                             (us_split_fields11
-                                            temp___expr_456))) 0))
+                                            temp___expr_515))) 0))
 
 ;; p_positions_shifted__post_axiom
   (assert
   (forall ((small us_rep6) (big us_rep6))
   (forall ((cut Int) (count Int))
   (! (=>
-     (and (dynamic_invariant16 cut true true true) (dynamic_invariant2 count
-     true true true))
+     (and (dynamic_invariant16 cut true true true true) (dynamic_invariant2
+     count true true true true))
      (= (= (p_positions_shifted small big cut count) true)
      (and
      (and (= (keys_included small big) true)
@@ -4030,11 +3922,11 @@
   (forall ((a us_rep7) (b us_rep7))
   (! (= (user_eq21 a b) (oeq a b)) :pattern ((user_eq21 a b)) )))
 
-(define-fun default_initial_assumption7 ((temp___expr_449 us_rep7)
-  (temp___skip_top_level_450 Bool)) Bool (=>
+(define-fun default_initial_assumption7 ((temp___expr_507 us_rep7)
+  (temp___skip_top_level_508 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_450 true))
-                                         (= (length3 temp___expr_449) 0)))
+                                         (= temp___skip_top_level_508 true))
+                                         (= (length3 temp___expr_507) 0)))
 
 ;; model____post_axiom
   (assert
@@ -4082,19 +3974,20 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
-(define-fun dynamic_invariant17 ((temp___expr_442 Int)
-  (temp___is_init_439 Bool) (temp___skip_constant_440 Bool)
-  (temp___do_toplevel_441 Bool)) Bool (=>
-                                      (or (= temp___is_init_439 true)
-                                      (<= 0 2147483647)) (in_range15
-                                      temp___expr_442)))
+(define-fun dynamic_invariant17 ((temp___expr_499 Int)
+  (temp___is_init_495 Bool) (temp___skip_constant_496 Bool)
+  (temp___do_toplevel_497 Bool)
+  (temp___do_typ_inv_498 Bool)) Bool (=>
+                                     (or (= temp___is_init_495 true)
+                                     (<= 0 2147483647)) (in_range15
+                                     temp___expr_499)))
 
 ;; length__post_axiom
   (assert
   (forall ((container us_rep7))
   (! (let ((result (length3 container)))
      (and (<= (+ 0 result) 2147483647) (dynamic_invariant2 result true false
-     true))) :pattern ((length3 container)) )))
+     true true))) :pattern ((length3 container)) )))
 
 ;; get__post_axiom
   (assert true)
@@ -4103,7 +3996,7 @@
   (assert
   (forall ((container us_rep6))
   (forall ((key us_rep5))
-  (! (=> (= (of_int1 0) true)
+  (! (=> (= (distinct 0 0) true)
      (=>
      (exists ((k us_rep5))
      (and (= (has_key container k) true) (= (bool_eq14 k key) true)))
@@ -4129,12 +4022,13 @@
 (define-fun element_type__ref___3__projection ((a element_type__ref2)) element_type
   (element_type__content2 a))
 
-(define-fun dynamic_invariant18 ((temp___expr_461 Int)
-  (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)
-  (temp___do_toplevel_460 Bool)) Bool (=>
-                                      (or (= temp___is_init_458 true)
-                                      (<= 1 2147483647)) (in_range16
-                                      temp___expr_461)))
+(define-fun dynamic_invariant18 ((temp___expr_521 Int)
+  (temp___is_init_517 Bool) (temp___skip_constant_518 Bool)
+  (temp___do_toplevel_519 Bool)
+  (temp___do_typ_inv_520 Bool)) Bool (=>
+                                     (or (= temp___is_init_517 true)
+                                     (<= 1 2147483647)) (in_range16
+                                     temp___expr_521)))
 
 (declare-fun witness (us_rep6 us_rep5) Int)
 
@@ -4151,19 +4045,20 @@
   (! (=> (= (has_key container key) true)
      (let ((result (get1 container key)))
      (and
-     (=> (= (of_int1 0) true)
+     (=> (= (distinct 0 0) true)
      (and (= result (w_get container (witness container key)))
      (forall ((k us_rep5))
      (=> (= (has_key container k) true)
      (= (= (bool_eq14 k key) true)
      (= (witness container key) (witness container k)))))))
-     (dynamic_invariant18 result true false true)))) :pattern ((get1
-                                                               container key)) ))))
+     (dynamic_invariant18 result true false true true)))) :pattern ((get1
+                                                                    container
+                                                                    key)) ))))
 
 ;; length__post_axiom
   (assert
   (forall ((container us_rep6)) (! (dynamic_invariant2 (length2 container)
-  true false true) :pattern ((length2 container)) )))
+  true false true true) :pattern ((length2 container)) )))
 
 ;; is_empty__post_axiom
   (assert
@@ -4194,17 +4089,30 @@
   (! (=> (= (has_key container key) true)
      (let ((result (witness container key)))
      (and (= (has_witness container result) true) (dynamic_invariant2 result
-     true false true)))) :pattern ((witness container key)) ))))
+     true false true true)))) :pattern ((witness container key)) ))))
 
 ;; w_get__post_axiom
   (assert
   (forall ((container us_rep6))
   (forall ((witness1 Int))
   (! (=>
-     (and (dynamic_invariant2 witness1 true true true)
+     (and (dynamic_invariant2 witness1 true true true true)
      (= (has_witness container witness1) true)) (dynamic_invariant18
-     (w_get container witness1) true false true)) :pattern ((w_get container
-                                                            witness1)) ))))
+     (w_get container witness1) true false true true)) :pattern ((w_get
+                                                                 container
+                                                                 witness1)) ))))
+
+;; def_axiom
+  (assert
+  (forall ((temp___682 t))
+  (=> (dynamic_invariant12 temp___682 true true true true)
+  (forall ((temp___683 Int))
+  (= (to_rep6 (select (temp___680 temp___682) temp___683)) temp___682)))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
 
 (declare-const this__split_fields us_split_fields__ref7)
 
@@ -4216,125 +4124,61 @@
 
 (declare-const o1 count_type)
 
-(declare-const temp___1038 count_type)
+(declare-const temp___1107 count_type)
 
-(declare-const temp___1019 count_type)
+(declare-const temp___1088 count_type)
 
 (declare-const o2 Int)
 
-(declare-const temp___1031 us_rep9)
+(declare-const o3 normalized2pi)
 
-(declare-const temp___1030 count_type)
+(declare-const o4 float)
 
-(declare-const temp___1029 count_type)
+(declare-const o5 idir_t)
 
-(declare-const temp___1032 t)
+(declare-const o6 normalized2pi)
 
-(declare-const o3 count_type)
+(declare-const o7 float)
 
-(declare-const o4 normalized2pi)
-
-(declare-const o5 float)
-
-(declare-const o6 idir_t)
-
-(declare-const o7 normalized2pi)
-
-(declare-const o8 float)
+(declare-const o8 idir_t)
 
 (declare-const o9 idir_t)
 
-(declare-const o10 idir_t)
+(declare-const o10 Int)
 
-(declare-const o11 Int)
+(declare-const o11 us_rep3)
 
-(declare-const o12 us_rep3)
+(declare-const o12 us_split_fields6)
 
-(declare-const o13 us_split_fields6)
+(declare-const o13 idir_t)
 
-(declare-const o14 idir_t)
+(declare-const o14 Int)
 
-(declare-const o15 Int)
+(declare-const o15 us_rep3)
 
-(declare-const o16 us_rep3)
+(declare-const o16 us_split_fields6)
 
-(declare-const o17 us_split_fields6)
+(declare-const o17 us_rep)
 
-(declare-const o18 us_rep)
+(declare-const o18 us_rep3)
 
-(declare-const o19 us_rep3)
+(declare-const o19 us_split_fields6)
 
-(declare-const o20 us_split_fields6)
+(declare-const o20 us_rep)
 
-(declare-const o21 us_rep)
+(declare-const o21 t)
 
 (declare-const o22 t)
 
-(declare-const o23 t)
+(declare-const o23 us_rep3)
 
-(declare-const o24 us_rep3)
+(declare-const o24 us_split_fields6)
 
-(declare-const o25 us_split_fields6)
+(declare-const o25 us_rep)
 
-(declare-const o26 us_rep)
+(declare-const o26 us_t)
 
-(declare-const o27 us_t)
-
-(declare-const o28 us_rep5)
-
-(declare-const temp___1027 us_rep5)
-
-(declare-const temp___1022 us_rep5)
-
-(declare-const o29 Int)
-
-(declare-const o30 Bool)
-
-(declare-const o31 Int)
-
-(declare-const temp___1033 us_rep5)
-
-(declare-const o32 us_rep3)
-
-(declare-const o33 us_split_fields6)
-
-(declare-const o34 idir_t)
-
-(declare-const o35 Int)
-
-(declare-const o36 us_rep3)
-
-(declare-const o37 us_split_fields6)
-
-(declare-const o38 idir_t)
-
-(declare-const o39 Int)
-
-(declare-const o40 us_rep3)
-
-(declare-const o41 us_split_fields6)
-
-(declare-const o42 us_rep)
-
-(declare-const o43 us_rep3)
-
-(declare-const o44 us_split_fields6)
-
-(declare-const o45 us_rep)
-
-(declare-const o46 t)
-
-(declare-const o47 t)
-
-(declare-const o48 us_rep3)
-
-(declare-const o49 us_split_fields6)
-
-(declare-const o50 us_rep)
-
-(declare-const o51 us_t)
-
-(declare-const this__split_fields1 us_split_fields14)
+(declare-const o27 us_rep5)
 
 (declare-const result us_split_fields__ref5)
 
@@ -4348,15 +4192,11 @@
 
 (declare-const result2 Bool)
 
-(declare-const this__split_fields2 us_split_fields14)
+(declare-const this__split_fields1 us_split_fields14)
 
 (declare-const iterr__split_fields2 us_split_fields10)
 
 (declare-const iterl__split_fields3 us_split_fields10)
-
-(declare-const rho us_split_fields8)
-
-(declare-const rho1 us_split_fields8)
 
 (declare-const result3 Bool)
 
@@ -4366,131 +4206,12 @@
 
 (declare-const result6 Bool)
 
-(declare-const result7 Bool)
+(define-fun o28 () us_rep3 (mk___rep3
+                           (mk___split_fields3
+                           (mk___rep (mk___split_fields o3)) o4 o5)))
 
-(declare-const result8 Bool)
-
-(declare-const iterr__split_fields3 us_split_fields10)
-
-(declare-const algorithm__gap_vectors__delete__container__fields us_split_fields8)
-
-(declare-const result9 us_split_fields__ref7)
-
-(declare-const this__split_fields3 us_split_fields14)
-
-(declare-const result10 us_split_fields__ref5)
-
-(declare-const iterl__split_fields4 us_split_fields10)
-
-(declare-const result11 us_split_fields__ref5)
-
-(declare-const iterl__split_fields5 us_split_fields10)
-
-(declare-const iterr__split_fields4 us_split_fields10)
-
-(declare-const algorithm__gap_vectors__delete__container__fields1 us_split_fields8)
-
-(declare-const result12 us_split_fields__ref7)
-
-(declare-const this__split_fields4 us_split_fields14)
-
-(declare-const iterl__split_fields6 us_split_fields10)
-
-(declare-const result13 us_split_fields__ref5)
-
-(declare-const iterr__split_fields5 us_split_fields10)
-
-(declare-const iterl__split_fields7 us_split_fields10)
-
-(declare-const result14 Bool)
-
-(declare-const this__split_fields5 us_split_fields__ref7)
-
-(declare-const iterr__split_fields6 us_split_fields__ref5)
-
-(declare-const iterl__split_fields8 us_split_fields__ref5)
-
-(declare-const this__split_fields6 us_split_fields14)
-
-(declare-const iterr__split_fields7 us_split_fields10)
-
-(declare-const iterl__split_fields9 us_split_fields10)
-
-(declare-const this__split_fields7 us_split_fields__ref7)
-
-(declare-const iterr__split_fields8 us_split_fields__ref5)
-
-(declare-const iterl__split_fields10 us_split_fields__ref5)
-
-(declare-const this__split_fields8 us_split_fields14)
-
-(declare-const iterr__split_fields9 us_split_fields10)
-
-(declare-const iterl__split_fields11 us_split_fields10)
-
-(declare-const this__split_fields9 us_split_fields__ref7)
-
-(declare-const iterr__split_fields10 us_split_fields__ref5)
-
-(declare-const iterl__split_fields12 us_split_fields__ref5)
-
-(declare-const this__split_fields10 us_split_fields14)
-
-(declare-const iterr__split_fields11 us_split_fields10)
-
-(declare-const iterl__split_fields13 us_split_fields10)
-
-(declare-const result15 Bool)
-
-(declare-const result16 us_split_fields__ref5)
-
-(declare-const iterl__split_fields14 us_split_fields10)
-
-(declare-const result17 Bool)
-
-(declare-const result18 Bool)
-
-(declare-const result19 Bool)
-
-(declare-const iterr__split_fields12 us_split_fields10)
-
-(declare-const algorithm__gap_vectors__delete__container__fields2 us_split_fields8)
-
-(declare-const result20 us_split_fields__ref7)
-
-(declare-const this__split_fields11 us_split_fields14)
-
-(declare-const this__split_fields12 us_split_fields__ref7)
-
-(declare-const iterr__split_fields13 us_split_fields__ref5)
-
-(declare-const this__split_fields13 us_split_fields14)
-
-(declare-const iterr__split_fields14 us_split_fields10)
-
-(declare-const this__split_fields14 us_split_fields__ref7)
-
-(declare-const iterr__split_fields15 us_split_fields__ref5)
-
-(declare-const iterl__split_fields15 us_split_fields__ref5)
-
-(declare-const this__split_fields15 us_split_fields14)
-
-(declare-const iterr__split_fields16 us_split_fields10)
-
-(declare-const iterl__split_fields16 us_split_fields10)
-
-(declare-const this__split_fields16 us_split_fields__ref7)
-
-(declare-const iterr__split_fields17 us_split_fields__ref5)
-
-(declare-const iterl__split_fields17 us_split_fields__ref5)
-
-(declare-const this__split_fields17 us_split_fields14)
-
-(declare-const iterr__split_fields18 us_split_fields10)
-
-(declare-const iterl__split_fields18 us_split_fields10)
+(define-fun temp___10881 () us_rep5 (mk___rep5
+                                    (mk___split_fields5 temp___1088)))
 
 ;; H
   (assert (= (to_rep10 o) 0))
@@ -4499,10 +4220,10 @@
   (assert (= o o1))
 
 ;; H
-  (assert (= temp___1038 o1))
+  (assert (= temp___1107 o1))
 
 ;; H
-  (assert (= (mk___rep5 (mk___split_fields5 temp___1038)) no_element))
+  (assert (= (mk___rep5 (mk___split_fields5 temp___1107)) no_element))
 
 ;; H
   (assert
@@ -4527,25 +4248,22 @@
 ;; H
   (assert
   (and
-  (= (mk___rep5 (mk___split_fields5 temp___1019)) (first2
-                                                  (rec__algorithm__controller__gapvec
-                                                  (us_split_fields__content7
-                                                  this__split_fields))))
+  (= temp___10881 (first2
+                  (rec__algorithm__controller__gapvec
+                  (us_split_fields__content7 this__split_fields))))
   (ite (= (= (length1
              (rec__algorithm__controller__gapvec
              (us_split_fields__content7 this__split_fields))) 0) true)
-  (= (bool_eq14 (mk___rep5 (mk___split_fields5 temp___1019)) no_element) true)
+  (= (bool_eq14 temp___10881 no_element) true)
   (and
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields)))
-     (mk___rep5 (mk___split_fields5 temp___1019))) true)
+     (us_split_fields__content7 this__split_fields))) temp___10881) true)
   (= (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (us_split_fields__content7 this__split_fields)))
-     (mk___rep5 (mk___split_fields5 temp___1019))) 1)))))
+     (us_split_fields__content7 this__split_fields))) temp___10881) 1)))))
 
 ;; H
   (assert
@@ -4553,7 +4271,7 @@
             (mk___split_fields5 iterl__split_fields))))
 
 ;; H
-  (assert (= iterl__split_fields1 (mk___split_fields5 temp___1019)))
+  (assert (= iterl__split_fields1 (mk___split_fields5 temp___1088)))
 
 ;; H
   (assert
@@ -4634,24 +4352,24 @@
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (mk___rep5 iterr__split_fields2)) true)
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (mk___rep5 iterl__split_fields3)) true))
   (= (bool_eq14 (mk___rep5 iterl__split_fields3)
      (next
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2))
+     (let ((subject this__split_fields)) this__split_fields1))
      (mk___rep5 iterr__split_fields2))) true))
   (eq
   (to_rep2
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields5
   (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields2)))))
+  (let ((subject this__split_fields)) this__split_fields1)))))
   (to_rep2
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields5
@@ -4667,29 +4385,29 @@
      (rec__robot_iface__proxy__speed
      (us_split_fields5
      (rec__algorithm__controller__robot
-     (let ((subject this__split_fields)) this__split_fields2))))) false)
+     (let ((subject this__split_fields)) this__split_fields1))))) false)
   (= 1000 (to_rep10
           (rec__algorithm__gap_vectors__list__capacity
           (us_split_discrs3
           (rec__algorithm__controller__gapvec
-          (let ((subject this__split_fields)) this__split_fields2)))))))
+          (let ((subject this__split_fields)) this__split_fields1)))))))
   (and
   (and
   (and
   (= (rec__algorithm__controller__robot
-     (let ((subject this__split_fields)) this__split_fields2)) (rec__algorithm__controller__robot
+     (let ((subject this__split_fields)) this__split_fields1)) (rec__algorithm__controller__robot
                                                                (us_split_fields__content7
                                                                this__split_fields)))
   (= (rec__algorithm__controller__laserscan
-     (let ((subject this__split_fields)) this__split_fields2)) (rec__algorithm__controller__laserscan
+     (let ((subject this__split_fields)) this__split_fields1)) (rec__algorithm__controller__laserscan
                                                                (us_split_fields__content7
                                                                this__split_fields))))
   (= (rec__algorithm__controller__obsavoiddelta
-     (let ((subject this__split_fields)) this__split_fields2)) (rec__algorithm__controller__obsavoiddelta
+     (let ((subject this__split_fields)) this__split_fields1)) (rec__algorithm__controller__obsavoiddelta
                                                                (us_split_fields__content7
                                                                this__split_fields))))
   (= (rec__algorithm__controller__driveangle
-     (let ((subject this__split_fields)) this__split_fields2)) (rec__algorithm__controller__driveangle
+     (let ((subject this__split_fields)) this__split_fields1)) (rec__algorithm__controller__driveangle
                                                                (us_split_fields__content7
                                                                this__split_fields)))))
   (and
@@ -4697,218 +4415,211 @@
   (not (= (bool_eq14 (mk___rep5 iterr__split_fields2) no_element) true)))
   (< 1 (length1
        (rec__algorithm__controller__gapvec
-       (let ((subject this__split_fields)) this__split_fields2)))))))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 2.0)))
+       (let ((subject this__split_fields)) this__split_fields1)))))))
 
 ;; H
   (assert
   (and
-  (= o22 (mul RNE1 fliteral4
+  (= o21 (mul RNE1 fliteral4
          (to_rep2
          (rec__robot_iface__proxy__scan_res
          (us_split_fields5
          (rec__algorithm__controller__robot
-         (let ((subject this__split_fields)) this__split_fields2)))))))
+         (let ((subject this__split_fields)) this__split_fields1)))))))
   (tqtisFinite
   (mul RNE1 fliteral4
   (to_rep2
   (rec__robot_iface__proxy__scan_res
   (us_split_fields5
   (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields2)))))))))
+  (let ((subject this__split_fields)) this__split_fields1)))))))))
 
 ;; H
   (assert
   (and
-  (= o19 (element
+  (= o18 (element
          (rec__algorithm__controller__gapvec
-         (let ((subject this__split_fields)) this__split_fields2))
+         (let ((subject this__split_fields)) this__split_fields1))
          (mk___rep5 iterl__split_fields3)))
-  (= (bool_eq12 o19
+  (= (bool_eq12 o18
      (get
      (model__
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (mk___rep5 iterl__split_fields3)))) true)))
 
 ;; H
-  (assert (= o20 (us_split_fields7 o19)))
+  (assert (= o19 (us_split_fields7 o18)))
 
 ;; H
-  (assert (= o21 (rec__gaps__gap__bearing o20)))
+  (assert (= o20 (rec__gaps__gap__bearing o19)))
 
 ;; H
   (assert
   (and
-  (= o16 (element
+  (= o15 (element
          (rec__algorithm__controller__gapvec
-         (let ((subject this__split_fields)) this__split_fields2))
+         (let ((subject this__split_fields)) this__split_fields1))
          (mk___rep5 iterr__split_fields2)))
-  (= (bool_eq12 o16
+  (= (bool_eq12 o15
      (get
      (model__
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (mk___rep5 iterr__split_fields2)))) true)))
 
 ;; H
-  (assert (= o17 (us_split_fields7 o16)))
+  (assert (= o16 (us_split_fields7 o15)))
 
 ;; H
-  (assert (= o18 (rec__gaps__gap__bearing o17)))
+  (assert (= o17 (rec__gaps__gap__bearing o16)))
 
 ;; H
-  (assert (and (= o23 (ccwdiff o18 o21)) (tqtisFinite o23)))
+  (assert (and (= o22 (ccwdiff o17 o20)) (tqtisFinite o22)))
 
 ;; H
-  (assert (= result7 (ite (lt o23 o22) true false)))
+  (assert (= result5 (ite (lt o22 o21) true false)))
 
 ;; H
   (assert
-  (=> (= result7 true)
+  (=> (= result5 true)
   (and
-  (= o12 (element
+  (= o11 (element
          (rec__algorithm__controller__gapvec
-         (let ((subject this__split_fields)) this__split_fields2))
+         (let ((subject this__split_fields)) this__split_fields1))
          (mk___rep5 iterl__split_fields3)))
-  (= (bool_eq12 o12
+  (= (bool_eq12 o11
      (get
      (model__
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (mk___rep5 iterl__split_fields3)))) true))))
 
 ;; H
-  (assert (=> (= result7 true) (= o13 (us_split_fields7 o12))))
+  (assert (=> (= result5 true) (= o12 (us_split_fields7 o11))))
 
 ;; H
-  (assert (=> (= result7 true) (= o14 (rec__gaps__gap__idir o13))))
+  (assert (=> (= result5 true) (= o13 (rec__gaps__gap__idir o12))))
 
 ;; H
-  (assert (=> (= result7 true) (= o15 (to_rep9 o14))))
+  (assert (=> (= result5 true) (= o14 (to_rep9 o13))))
 
 ;; H
-  (assert (=> (= result7 true) (= result6 (ite (= o15 1) true false))))
+  (assert (=> (= result5 true) (= result4 (ite (= o14 1) true false))))
 
 ;; H
-  (assert (=> (not (= result7 true)) (= result6 false)))
-
-;; H
-  (assert
-  (=> (= result6 true)
-  (and
-  (= (mk___rep3 (mk___split_fields3 (mk___rep (mk___split_fields o4)) o5 o6))
-  (element
-  (rec__algorithm__controller__gapvec
-  (let ((subject this__split_fields)) this__split_fields2))
-  (mk___rep5 iterr__split_fields2)))
-  (= (bool_eq12
-     (mk___rep3 (mk___split_fields3 (mk___rep (mk___split_fields o4)) o5 o6))
-     (get
-     (model__
-     (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
-     (get1
-     (positions
-     (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
-     (mk___rep5 iterr__split_fields2)))) true))))
-
-;; H
-  (assert (=> (= result6 true) (= o4 o7)))
-
-;; H
-  (assert (=> (= result6 true) (= o5 o8)))
-
-;; H
-  (assert (=> (= result6 true) (= o6 o9)))
-
-;; H
-  (assert (=> (= result6 true) (= o10 o9)))
-
-;; H
-  (assert (=> (= result6 true) (= o11 (to_rep9 o10))))
-
-;; H
-  (assert (=> (= result6 true) (= result5 (ite (= o11 1) true false))))
-
-;; H
-  (assert (=> (not (= result6 true)) (= result5 false)))
-
-;; H
-  (assert (= result5 true))
+  (assert (=> (not (= result5 true)) (= result4 false)))
 
 ;; H
   (assert
-  (=> (= (of_int1 0) true)
+  (=> (= result4 true)
   (and
-  (= o24 (element
+  (= o28 (element
          (rec__algorithm__controller__gapvec
-         (let ((subject this__split_fields)) this__split_fields2))
+         (let ((subject this__split_fields)) this__split_fields1))
          (mk___rep5 iterr__split_fields2)))
-  (= (bool_eq12 o24
+  (= (bool_eq12 o28
      (get
      (model__
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (mk___rep5 iterr__split_fields2)))) true))))
 
 ;; H
-  (assert (=> (= (of_int1 0) true) (= o25 (us_split_fields7 o24))))
+  (assert (=> (= result4 true) (= o3 o6)))
 
 ;; H
-  (assert (=> (= (of_int1 0) true) (= o26 (rec__gaps__gap__bearing o25))))
+  (assert (=> (= result4 true) (= o4 o7)))
+
+;; H
+  (assert (=> (= result4 true) (= o5 o8)))
+
+;; H
+  (assert (=> (= result4 true) (= o9 o8)))
+
+;; H
+  (assert (=> (= result4 true) (= o10 (to_rep9 o9))))
+
+;; H
+  (assert (=> (= result4 true) (= result3 (ite (= o10 1) true false))))
+
+;; H
+  (assert (=> (not (= result4 true)) (= result3 false)))
+
+;; H
+  (assert (= result3 true))
 
 ;; H
   (assert
-  (=> (= (of_int1 0) true)
-  (and (= o27 (print o26)) (dynamic_invariant1 o27 true false true))))
+  (=> (= (distinct 0 0) true)
+  (and
+  (= o23 (element
+         (rec__algorithm__controller__gapvec
+         (let ((subject this__split_fields)) this__split_fields1))
+         (mk___rep5 iterr__split_fields2)))
+  (= (bool_eq12 o23
+     (get
+     (model__
+     (rec__algorithm__controller__gapvec
+     (let ((subject this__split_fields)) this__split_fields1)))
+     (get1
+     (positions
+     (rec__algorithm__controller__gapvec
+     (let ((subject this__split_fields)) this__split_fields1)))
+     (mk___rep5 iterr__split_fields2)))) true))))
+
+;; H
+  (assert (=> (= (distinct 0 0) true) (= o24 (us_split_fields7 o23))))
+
+;; H
+  (assert (=> (= (distinct 0 0) true) (= o25 (rec__gaps__gap__bearing o24))))
+
+;; H
+  (assert
+  (=> (= (distinct 0 0) true)
+  (and (= o26 (print o25)) (dynamic_invariant1 o26 true false true true))))
 
 ;; H
   (assert
   (and
-  (= o28 (first2
+  (= o27 (first2
          (rec__algorithm__controller__gapvec
-         (let ((subject this__split_fields)) this__split_fields2))))
+         (let ((subject this__split_fields)) this__split_fields1))))
   (ite (= (= (length1
              (rec__algorithm__controller__gapvec
-             (let ((subject this__split_fields)) this__split_fields2))) 0) true)
-  (= (bool_eq14 o28 no_element) true)
+             (let ((subject this__split_fields)) this__split_fields1))) 0) true)
+  (= (bool_eq14 o27 no_element) true)
   (and
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2))) o28) true)
+     (let ((subject this__split_fields)) this__split_fields1))) o27) true)
   (= (get1
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2))) o28) 1)))))
+     (let ((subject this__split_fields)) this__split_fields1))) o27) 1)))))
 
 ;; H
-  (assert (= result8 (bool_eq14 (mk___rep5 iterr__split_fields2) o28)))
+  (assert (= result6 (bool_eq14 (mk___rep5 iterr__split_fields2) o27)))
 
 ;; H
-  (assert (not (= result8 true)))
+  (assert (not (= result6 true)))
 
 (assert
 ;; WP_parameter_def
@@ -4918,7 +4629,7 @@
   (= (has_key
      (positions
      (rec__algorithm__controller__gapvec
-     (let ((subject this__split_fields)) this__split_fields2)))
+     (let ((subject this__split_fields)) this__split_fields1)))
      (mk___rep5 iterr__split_fields2)) true)
   (= (bool_eq14 (mk___rep5 iterr__split_fields2) no_element) true))))
 (check-sat)

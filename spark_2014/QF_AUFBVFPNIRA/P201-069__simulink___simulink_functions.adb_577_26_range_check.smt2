@@ -166,9 +166,9 @@
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
-(define-fun dynamic_invariant ((temp___expr_171 (_ BitVec 8))
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_200 (_ BitVec 8))
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool) (temp___do_typ_inv_199 Bool)) Bool true)
 
 (declare-const i (_ BitVec 8))
 
@@ -176,13 +176,14 @@
 
 (declare-const o Float32)
 
-(declare-const abstr28 (_ BitVec 8))
+;; H
+  (assert true)
 
 (assert
 ;; WP_parameter_def
  ;; File "interfac.ads", line 63, characters 0-0
   (not
-  (fp.leq ((_ to_fp_unsigned 8 24) RTP abstr28) (fp.roundToIntegral RNA (fp.sqrt RNE ((_ to_fp_unsigned 8 24) RNE
+  (fp.leq ((_ to_fp_unsigned 8 24) RTP #x00) (fp.roundToIntegral RNA (fp.sqrt RNE ((_ to_fp_unsigned 8 24) RNE
   i))))))
 (check-sat)
 (exit)

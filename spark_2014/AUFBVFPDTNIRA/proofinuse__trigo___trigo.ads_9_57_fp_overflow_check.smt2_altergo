@@ -924,37 +924,9 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : ((o = mul(RNE, x, x)) and tqtisFinite(mul(RNE, x, x)))
-
-axiom H2 : (o1 = mul(RNE, o, x))
-
-axiom H3 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H4 : (o3 = mul(RNE, o2, x))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o3)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:t. forall o3:t. (tqtisFinite(x) ->
+  ((((((o = mul(RNE, x, x)) and tqtisFinite(mul(RNE, x, x))) and
+  (o1 = mul(RNE, o, x))) and ((o2 = o1) and tqtisFinite(o1))) and
+  (o3 = mul(RNE, o2, x))) -> tqtisFinite(o3))))

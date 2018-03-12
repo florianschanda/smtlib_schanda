@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1335,32 +1335,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:distance_t. forall v1:speed_t.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__deceleration_curve__braking_curve_entry__location = v;
-  rec__deceleration_curve__braking_curve_entry__speed = v1 } }, i)[i])].
-  ((singleton({ us_split_fields1 = {
-  rec__deceleration_curve__braking_curve_entry__location = v;
-  rec__deceleration_curve__braking_curve_entry__speed = v1 } }, i)[i]) = {
-  us_split_fields1 = {
-  rec__deceleration_curve__braking_curve_entry__location = v;
-  rec__deceleration_curve__braking_curve_entry__speed = v1 } })))
-
 logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -1371,17 +1345,17 @@ axiom bool_eq_def6 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq7(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1391,9 +1365,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq6((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic dummy5 : (int,us_rep) farray
 
@@ -1686,97 +1660,37 @@ axiom is_valid_speed_km_per_h__def_axiom :
 axiom maximum_valid_speed__def_axiom :
   (maximum_valid_speed = m_per_s_from_km_per_h(fliteral4))
 
-logic initial_speed : t
-
-logic target__split_fields : bool
-
-logic target__split_fields1 : distance_t
-
-logic target__split_fields2 : speed_t
-
-logic o : t
-
-logic o1 : speed_t
-
-logic o2 : distance_t
-
-logic o3 : bool
-
-logic o4 : distance_t
-
-logic o5 : speed_t
-
-logic deceleration_curve_test__target__assume : bool
-
-logic deceleration_curve_test__target__assume1 : distance_t
-
-logic deceleration_curve_test__target__assume2 : speed_t
-
-logic o6 : int
-
-logic result : t
-
-logic initial_speed1 : t
-
-logic result1 : bool
-
-logic result2 : distance_t
-
-logic result3 : speed_t
-
-logic target__split_fields3 : bool
-
-logic target__split_fields4 : distance_t
-
-logic target__split_fields5 : speed_t
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 160.0))
 
-axiom H : ((o = m_per_s_from_km_per_h(fliteral5)) and (tqtisFinite(o) and
-  (o = div(NearestTiesToEven, mul(NearestTiesToEven, fliteral5, fliteral1),
-  fliteral2))))
-
-axiom H1 : (result = initial_speed)
-
-axiom H2 : (initial_speed1 = o)
-
-axiom H3 : tqtisFinite(initial_speed1)
-
-axiom H4 : (to_rep(o1) = fliteral3)
-
-axiom H5 : (to_rep1(o2) = 2500)
-
-axiom H6 : (of_int1(1) = o3)
-
-axiom H7 : (o2 = o4)
-
-axiom H8 : (o1 = o5)
-
-axiom H9 : (deceleration_curve_test__target__assume = o3)
-
-axiom H10 : (deceleration_curve_test__target__assume1 = o4)
-
-axiom H11 : (deceleration_curve_test__target__assume2 = o5)
-
-axiom H12 : (result1 = target__split_fields)
-
-axiom H13 : (result2 = target__split_fields1)
-
-axiom H14 : (result3 = target__split_fields2)
-
-axiom H15 : (deceleration_curve_test__target__assume = target__split_fields3)
-
-axiom H16 :
-  (deceleration_curve_test__target__assume1 = target__split_fields4)
-
-axiom H17 :
-  (deceleration_curve_test__target__assume2 = target__split_fields5)
-
-axiom H18 : (distance_to_speed(initial_speed1, fliteral3,
-  neg(fliteral)) = 1000)
-
  (* File "deceleration_curve_test.adb", line 5, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(target__split_fields4) <= 5000)
+goal WP_parameter_def :
+  (forall initial_speed:t. forall target__split_fields:bool.
+  forall target__split_fields1:distance_t.
+  forall target__split_fields2:speed_t. forall o:t. forall o1:speed_t.
+  forall o2:distance_t. forall o3:bool. forall o4:distance_t.
+  forall o5:speed_t. forall deceleration_curve_test__target__assume:bool.
+  forall deceleration_curve_test__target__assume1:distance_t.
+  forall deceleration_curve_test__target__assume2:speed_t. forall result:t.
+  forall initial_speed1:t. forall result1:bool. forall result2:distance_t.
+  forall result3:speed_t. forall target__split_fields3:bool.
+  forall target__split_fields4:distance_t.
+  forall target__split_fields5:speed_t.
+  ((((o = m_per_s_from_km_per_h(fliteral5)) and (tqtisFinite(o) and
+  (o = div(NearestTiesToEven, mul(NearestTiesToEven, fliteral5, fliteral1),
+  fliteral2)))) and ((result = initial_speed) and (initial_speed1 = o))) ->
+  (tqtisFinite(initial_speed1) -> (((((to_rep(o1) = fliteral3) and
+  ((to_rep1(o2) = 2500) and ((of_int1(1) = o3) and ((o2 = o4) and
+  (o1 = o5))))) and ((deceleration_curve_test__target__assume = o3) and
+  ((deceleration_curve_test__target__assume1 = o4) and
+  (deceleration_curve_test__target__assume2 = o5)))) and
+  (((result1 = target__split_fields) and
+  ((result2 = target__split_fields1) and
+  (result3 = target__split_fields2))) and
+  ((deceleration_curve_test__target__assume = target__split_fields3) and
+  ((deceleration_curve_test__target__assume1 = target__split_fields4) and
+  (deceleration_curve_test__target__assume2 = target__split_fields5))))) ->
+  ((distance_to_speed(initial_speed1, fliteral3, neg(fliteral)) = 1000) ->
+  (to_rep1(target__split_fields4) <= 5000))))))

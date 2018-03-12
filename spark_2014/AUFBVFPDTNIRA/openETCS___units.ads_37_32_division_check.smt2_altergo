@@ -971,21 +971,10 @@ logic speed : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-logic o1 : t
-
-axiom H : tqtisFinite(speed)
-
-axiom H1 : (is_valid_speed_km_per_h(speed) = true)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 1000.0))
-
-axiom H2 : ((o = mul(RNE, speed, fliteral3)) and tqtisFinite(mul(RNE, speed,
-  fliteral3)))
 
 logic fliteral4 : t
 
@@ -993,4 +982,8 @@ axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 3600.0))
 
  (* File "units.ads", line 23, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral4))
+goal WP_parameter_def :
+  (forall o:t. (tqtisFinite(speed) ->
+  ((is_valid_speed_km_per_h(speed) = true) -> (((o = mul(RNE, speed,
+  fliteral3)) and tqtisFinite(mul(RNE, speed, fliteral3))) ->
+  (not is_zero(fliteral4))))))

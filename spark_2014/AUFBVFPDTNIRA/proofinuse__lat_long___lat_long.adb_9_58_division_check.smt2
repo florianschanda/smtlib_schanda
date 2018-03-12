@@ -122,12 +122,13 @@
 (define-fun float_with_approx__ref___projection ((a float_with_approx__ref)) float_with_approx
   (float_with_approx__content a))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float32)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float32)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_165)))
 
 (declare-fun sin1 (Float32) Float32)
 
@@ -140,19 +141,19 @@
 ;; cos__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (let ((result (cos1 x)))
      (and
      (=>
      (and (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
      (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))
      (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) result))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((cos1 x)) )))
 
 ;; cos__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (= (cos1 x) (sin1 x))) :pattern (
+  (! (=> (dynamic_invariant x true true true true) (= (cos1 x) (sin1 x))) :pattern (
   (cos1 x)) )))
 
 (declare-fun sqrt1 (Float32) Float32)
@@ -162,14 +163,14 @@
 ;; sqrt__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (sqrt1 x)
-     true false true)) :pattern ((sqrt1 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (sqrt1 x) true false true true)) :pattern ((sqrt1 x)) )))
 
 ;; sqrt__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (= (sqrt1 x) (fp.sqrt RNE x))) :pattern (
-  (sqrt1 x)) )))
+  (! (=> (dynamic_invariant x true true true true)
+     (= (sqrt1 x) (fp.sqrt RNE x))) :pattern ((sqrt1 x)) )))
 
 (declare-sort latitude 0)
 
@@ -367,9 +368,9 @@
   (! (let ((result (delta_lat_in_meters source1 destination1)))
      (and
      (= (olt (fp.abs result) (fp #b0 #b10010111 #b00110001001111000100110)) true)
-     (dynamic_invariant result true false true))) :pattern ((delta_lat_in_meters
-                                                            source1
-                                                            destination1)) )))
+     (dynamic_invariant result true false true true))) :pattern ((delta_lat_in_meters
+                                                                 source1
+                                                                 destination1)) )))
 
 ;; delta_lat_in_meters__def_axiom
   (assert
@@ -390,9 +391,9 @@
   (! (let ((result (delta_long_in_meters source1 destination1)))
      (and
      (= (olt (fp.abs result) (fp #b0 #b10011000 #b00110001001111000100110)) true)
-     (dynamic_invariant result true false true))) :pattern ((delta_long_in_meters
-                                                            source1
-                                                            destination1)) )))
+     (dynamic_invariant result true false true true))) :pattern ((delta_long_in_meters
+                                                                 source1
+                                                                 destination1)) )))
 
 ;; delta_long_in_meters__def_axiom
   (assert
@@ -424,12 +425,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 ;; olt__post_axiom
   (assert true)
@@ -441,24 +443,26 @@
      (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100)))) :pattern (
   (olt left right)) )))
 
-(define-fun dynamic_invariant2 ((temp___expr_147 Float32)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) (fp #b0 #b10000101 #b00101100000000000000000)))
-                                      (in_range temp___expr_147)))
+(define-fun dynamic_invariant2 ((temp___expr_172 Float32)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) (fp #b0 #b10000101 #b00101100000000000000000)))
+                                     (in_range temp___expr_172)))
 
-(define-fun dynamic_invariant3 ((temp___expr_153 Float32)
-  (temp___is_init_150 Bool) (temp___skip_constant_151 Bool)
-  (temp___do_toplevel_152 Bool)) Bool (=>
-                                      (or (= temp___is_init_150 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10000110 #b01100111111111111111111)) (fp #b0 #b10000110 #b01101000000000000000000)))
-                                      (in_range1 temp___expr_153)))
+(define-fun dynamic_invariant3 ((temp___expr_179 Float32)
+  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
+  (temp___do_toplevel_177 Bool)
+  (temp___do_typ_inv_178 Bool)) Bool (=>
+                                     (or (= temp___is_init_175 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000110 #b01100111111111111111111)) (fp #b0 #b10000110 #b01101000000000000000000)))
+                                     (in_range1 temp___expr_179)))
 
 ;; sin__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant1 x true true true)
+  (! (=> (dynamic_invariant1 x true true true true)
      (let ((result (sin1 x)))
      (and
      (and
@@ -467,77 +471,17 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))))
-     (dynamic_invariant1 result true false true)))) :pattern ((sin1 x)) )))
+     (dynamic_invariant1 result true false true true)))) :pattern ((sin1 x)) )))
 
 (declare-const delta_lat Float32)
 
 (declare-const delta_long Float32)
 
-(declare-const lat_long__distance__result Float32)
-
 (declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const o2 Float32)
-
-(declare-const o3 Float32)
-
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
-(declare-const o6 Float32)
-
-(declare-const o7 Float32)
-
-(declare-const o8 Float32)
-
-(declare-const o9 Float32)
-
-(declare-const o10 Float32)
-
-(declare-const o11 Float32)
-
-(declare-const o12 Float32)
-
-(declare-const o13 Float32)
-
-(declare-const o14 Float32)
-
-(declare-const o15 Float32)
-
-(declare-const o16 Float32)
-
-(declare-const o17 Float32)
 
 (declare-const result Float32)
 
 (declare-const delta_lat1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const delta_long1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const lat_long__distance__result1 Float32)
-
-(declare-const lat_long__distance__result2 Float32)
-
-(declare-const lat_long__distance__result3 Float32)
-
-(declare-const delta_lat2 Float32)
-
-(declare-const delta_long2 Float32)
-
-(declare-const lat_long__distance__result4 Float32)
-
-(declare-const delta_lat3 Float32)
-
-(declare-const delta_long3 Float32)
-
-(declare-const lat_long__distance__result5 Float32)
 
 ;; H
   (assert

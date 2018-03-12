@@ -1068,38 +1068,17 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : bool
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : bool
-
-logic result : bool
-
-logic res1 : bool
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 5800.0))
 
-axiom H2 : lt(abs(a), mul(NearestTiesToEven, fliteral1, abs(b)))
-
-axiom H3 : ((o1 = div(NearestTiesToEven, a, b)) and
-  tqtisFinite(div(NearestTiesToEven, a, b)))
-
-axiom H4 : ((le(neg(fliteral1), o1) -> (o2 = true)) and
-  ((not le(neg(fliteral1), o1)) -> (o2 = false)))
-
-axiom H5 : (result = res)
-
-axiom H6 : (res1 = o2)
-
  (* File "floating_point.adb", line 254, characters 0-0 *)
-goal WP_parameter_def : (res1 = true)
+goal WP_parameter_def :
+  (forall res:bool. forall o:t. forall o1:bool. forall result:bool.
+  forall res1:bool. (tqtisFinite(a) -> (tqtisFinite(b) -> (lt(abs(a),
+  mul(NearestTiesToEven, fliteral1, abs(b))) ->
+  (((((o = div(NearestTiesToEven, a, b)) and
+  tqtisFinite(div(NearestTiesToEven, a, b))) and ((le(neg(fliteral1), o) and
+  (o1 = true)) or ((not le(neg(fliteral1), o)) and (o1 = false)))) and
+  ((result = res) and (res1 = o1))) -> (res1 = true))))))

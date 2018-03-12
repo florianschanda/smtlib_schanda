@@ -1319,12 +1319,6 @@ type t__ref1 = { t__content1 : t1
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def1 :
@@ -1336,6 +1330,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1550,139 +1550,34 @@ axiom unsigned_32_to_float__post_axiom :
   (forall s:t [unsigned_32_to_float(s)].
   tqtisFinite(unsigned_32_to_float(s)))
 
-logic half_x : t1
-
-logic y : t1
-
-logic magic_num : t
-
-logic i : t
-
-logic maths_pack__inv_sqrt__result : t1
-
-logic o : t
-
-logic o1 : t1
-
-logic o2 : t1
-
-logic o3 : t1
-
-logic o4 : t1
-
-logic o5 : t1
-
-logic o6 : t1
-
-logic o7 : t1
-
-logic o8 : t1
-
-logic result : t1
-
-logic half_x1 : t1
-
-logic result1 : t1
-
-logic y1 : t1
-
-logic result2 : t
-
-logic magic_num1 : t
-
-logic result3 : t
-
-logic i1 : t
-
-logic result4 : t
-
-logic i2 : t
-
-logic result5 : t1
-
-logic y2 : t1
-
-logic result6 : t1
-
-logic y3 : t1
-
-logic result7 : t1
-
-logic maths_pack__inv_sqrt__result1 : t1
-
-logic maths_pack__inv_sqrt__result2 : t1
-
-logic maths_pack__inv_sqrt__result3 : t1
-
-logic half_x2 : t1
-
-logic y4 : t1
-
-logic magic_num2 : t
-
-logic i3 : t
-
-logic maths_pack__inv_sqrt__result4 : t1
-
-logic half_x3 : t1
-
-logic y5 : t1
-
-logic magic_num3 : t
-
-logic i4 : t
-
-logic maths_pack__inv_sqrt__result5 : t1
-
-axiom H : tqtisFinite(x)
-
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
-
-axiom H1 : le(fliteral1, x)
-
-axiom H2 : (result = half_x)
 
 logic fliteral2 : t1
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.500000000000000000000000))
 
-axiom H3 : (half_x1 = mul1(RNE, fliteral2, x))
+logic rliteral : t
 
-axiom H4 : tqtisFinite(half_x1)
-
-axiom H5 : (result1 = y)
-
-axiom H6 : (y1 = x)
-
-axiom H7 : tqtisFinite(y1)
-
-axiom H8 : (result2 = magic_num)
-
-axiom H9 : (magic_num1 = of_int(1597463007))
-
-axiom H10 : true
-
-axiom H11 : true
-
-axiom H12 : (o = float_to_unsigned_32(y1))
-
-axiom H13 : (result3 = i)
-
-axiom H14 : (i1 = o)
-
-axiom H15 : (i1 = result4)
-
-axiom H16 : (i2 = sub(magic_num1, lsr_bv(i1, of_int(1))))
-
-axiom H17 : ((o1 = unsigned_32_to_float(i2)) and tqtisFinite(o1))
-
-axiom H18 : (y1 = result5)
-
-axiom H19 : (y2 = o1)
+axiom rliteral_axiom : (tqtint(rliteral) = 1597463007)
 
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(mul1(RNE, half_x1, y2))
+goal WP_parameter_def :
+  (forall half_x:t1. forall y:t1. forall magic_num:t. forall i:t. forall o:t.
+  forall o1:t1. forall result:t1. forall half_x1:t1. forall result1:t1.
+  forall y1:t1. forall result2:t. forall magic_num1:t. forall result3:t.
+  forall i1:t. forall result4:t. forall i2:t. forall result5:t1.
+  forall y2:t1. (tqtisFinite(x) -> (le(fliteral1, x) -> ((({ t__content1 =
+  result } = { t__content1 = half_x }) and (half_x1 = mul1(RNE, fliteral2,
+  x))) -> (tqtisFinite(half_x1) -> ((({ t__content1 = result1 } = {
+  t__content1 = y }) and (y1 = x)) -> (tqtisFinite(y1) -> ((({ t__content =
+  result2 } = { t__content = magic_num }) and (magic_num1 = rliteral)) ->
+  (((o = float_to_unsigned_32(y1)) and (({ t__content = result3 } = {
+  t__content = i }) and (i1 = o))) -> (((i1 = result4) and
+  (i2 = sub(magic_num1, lsr_bv(i1, of_int(1))))) ->
+  ((((o1 = unsigned_32_to_float(i2)) and tqtisFinite(o1)) and
+  ((y1 = result5) and (y2 = o1))) -> tqtisFinite(mul1(RNE, half_x1,
+  y2)))))))))))))

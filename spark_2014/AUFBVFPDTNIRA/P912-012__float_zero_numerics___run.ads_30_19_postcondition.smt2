@@ -102,12 +102,13 @@
 (define-fun t_float__ref___projection ((a t_float__ref)) t_float (t_float__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_141 Float32)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_141)))
+(define-fun dynamic_invariant ((temp___expr_165 Float32)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_165)))
 
 (declare-fun osubtract__function_guard (Float32 Float32 Float32) Bool)
 
@@ -134,12 +135,13 @@
 (define-fun t_float_value__ref___projection ((a t_float_value__ref)) t_float_value
   (t_float_value__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_147 Float32)
-  (temp___is_init_144 Bool) (temp___skip_constant_145 Bool)
-  (temp___do_toplevel_146 Bool)) Bool (=>
-                                      (or (= temp___is_init_144 true)
-                                      (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                      (in_range temp___expr_147)))
+(define-fun dynamic_invariant1 ((temp___expr_172 Float32)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
+                                     (in_range temp___expr_172)))
 
 (declare-const x1 Float32)
 
@@ -154,8 +156,6 @@
 (declare-const y Float32)
 
 (declare-const o Float32)
-
-(declare-const o1 Float32)
 
 (declare-const result Float32)
 
@@ -183,15 +183,15 @@
 
 ;; H
   (assert
-  (and (= o1 (fp.sub RNE x2 x1))
-  (and (fp.isFinite32 o1)
-  (and (= o1 (fp.sub RNE x2 x1)) (fp.eq o1 (fp.sub RNE x2 x1))))))
+  (and (= o (fp.sub RNE x2 x1))
+  (and (fp.isFinite32 o)
+  (and (= o (fp.sub RNE x2 x1)) (fp.eq o (fp.sub RNE x2 x1))))))
 
 ;; H
   (assert (= result y))
 
 ;; H
-  (assert (= y1 o1))
+  (assert (= y1 o))
 
 ;; H
   (assert (= y1 y2))

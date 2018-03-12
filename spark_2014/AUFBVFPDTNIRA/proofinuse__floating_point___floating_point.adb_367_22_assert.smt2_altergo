@@ -955,32 +955,10 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
-
-logic o : t
-
-logic result : t
-
-logic res1 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(res))
-
-axiom H3 : lt(y, x)
-
-axiom H4 : ((o = sub(RNE, x, y)) and tqtisFinite(sub(RNE, x, y)))
-
-axiom H5 : (result = res)
-
-axiom H6 : (res1 = o)
 
 logic fliteral2 : t
 
@@ -988,4 +966,9 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
  (* File "floating_point.adb", line 356, characters 0-0 *)
-goal WP_parameter_def : lt(fliteral2, res1)
+goal WP_parameter_def :
+  (forall res:t. forall o:t. forall result:t. forall res1:t.
+  (tqtisFinite(x) -> (tqtisFinite(y) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(res)) -> (lt(y, x) -> ((((o = sub(RNE, x, y)) and
+  tqtisFinite(sub(RNE, x, y))) and ((result = res) and (res1 = o))) ->
+  lt(fliteral2, res1)))))))

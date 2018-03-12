@@ -105,12 +105,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
 (declare-sort float 0)
 
@@ -127,12 +127,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -148,25 +149,15 @@
 
 (declare-const o2 Int)
 
-(declare-const o3 Float32)
-
-(declare-const o4 Int)
-
-(declare-const o5 Int)
-
-(declare-const o6 Float32)
+(declare-const o3 Int)
 
 (declare-const result Bool)
 
-(declare-const result1 Int)
+(declare-const result1 Bool)
+
+(declare-const result2 Int)
 
 (declare-const x1 Int)
-
-(declare-const result2 Bool)
-
-(declare-const result3 Int)
-
-(declare-const x2 Int)
 
 ;; H
   (assert (in_range x))
@@ -190,22 +181,22 @@
   (assert (not (= result true)))
 
 ;; H
-  (assert (and (= o4 (* x x)) (in_range (* x x))))
+  (assert (and (= o2 (* x x)) (in_range (* x x))))
 
 ;; H
-  (assert (= result2 (ite (< 0 o4) true false)))
+  (assert (= result1 (ite (< 0 o2) true false)))
 
 ;; H
-  (assert (= result2 true))
+  (assert (= result1 true))
 
 ;; H
-  (assert (and (= o5 (* x x)) (in_range (* x x))))
+  (assert (and (= o3 (* x x)) (in_range (* x x))))
 
 ;; H
-  (assert (= result3 x))
+  (assert (= result2 x))
 
 ;; H
-  (assert (= x2 o5))
+  (assert (= x1 o3))
 
 (assert
 ;; WP_parameter_def

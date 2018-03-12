@@ -1045,22 +1045,13 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 axiom c__def_axiom : (c = d)
 
-logic x : t
-
-logic us : t
-
-axiom H : tqtisFinite(d)
-
-axiom H1 : in_range1(c)
-
-axiom H2 : (d = c)
-
-axiom H3 : dynamic_property(fliteral, last, x)
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
  (* File "test_dynamic_property.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : dynamic_property1(fliteral2, last1, x)
+goal WP_parameter_def :
+  (forall x:t. (tqtisFinite(d) -> (in_range1(c) -> ((d = c) ->
+  (dynamic_property(fliteral, last, x) -> dynamic_property1(fliteral2, last1,
+  x))))))

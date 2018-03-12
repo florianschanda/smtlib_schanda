@@ -1140,10 +1140,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t)))))
-(define-fun to_int3 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1363,12 +1359,12 @@
   (forall ((x (_ BitVec 8)))
   (! (= (to_rep2 (of_rep2 x)) x) :pattern ((to_rep2 (of_rep2 x))) )))
 
-(define-fun to_int4 ((x unsigned_8)) Int (bv2nat (to_rep2 x)))
+(define-fun to_int3 ((x unsigned_8)) Int (bv2nat (to_rep2 x)))
 
 ;; range_int_axiom
   (assert
   (forall ((x unsigned_8)) (! (uint_in_range
-  (to_int4 x)) :pattern ((to_int4 x)) )))
+  (to_int3 x)) :pattern ((to_int3 x)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int unsigned_8))))))
@@ -1389,29 +1385,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int unsigned_8) Int Int (Array Int unsigned_8)
-  Int Int) (Array Int unsigned_8))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int unsigned_8)) (b (Array Int unsigned_8)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (unsigned_8 Int) (Array Int unsigned_8))
-
-;; singleton_def
-  (assert
-  (forall ((v unsigned_8))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq3 ((a (Array Int unsigned_8)) (a__first Int) (a__last Int)
   (b (Array Int unsigned_8)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -1419,12 +1392,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (to_rep2 (select a temp___idx_132)) (to_rep2
-                                                                  (select b (+ (- b__first a__first) temp___idx_132)))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (to_rep2 (select a temp___idx_154)) (to_rep2
+                                                                  (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -1436,49 +1409,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (to_rep2 (select a temp___idx_132)) (to_rep2
-                                         (select b (+ (- b__first a__first) temp___idx_132)))))))))))
-
-(declare-fun compare ((Array Int unsigned_8) Int Int (Array Int unsigned_8)
-  Int Int) Int)
-
-;; compare_def_eq
-  (assert
-  (forall ((a (Array Int unsigned_8)) (b (Array Int unsigned_8)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq3 a a_first a_last b b_first b_last) true)) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_lt
-  (assert
-  (forall ((a (Array Int unsigned_8)) (b (Array Int unsigned_8)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< (compare a a_first a_last b b_first b_last) 0)
-     (exists ((i Int) (j Int))
-     (and (<= i a_last)
-     (and (< j b_last)
-     (and (= (bool_eq3 a a_first i b b_first j) true)
-     (or (= i a_last)
-     (and (< i a_last)
-     (bvult (to_rep2 (select a (+ i 1))) (to_rep2 (select b (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_gt
-  (assert
-  (forall ((a (Array Int unsigned_8)) (b (Array Int unsigned_8)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< 0 (compare a a_first a_last b b_first b_last))
-     (exists ((i Int) (j Int))
-     (and (<= i b_last)
-     (and (< j a_last)
-     (and (= (bool_eq3 a a_first j b b_first i) true)
-     (or (= i b_last)
-     (and (< i b_last)
-     (bvugt (to_rep2 (select a (+ j 1))) (to_rep2 (select b (+ i 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (to_rep2 (select a temp___idx_154)) (to_rep2
+                                         (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
 (declare-const null_r us_rep)
 
@@ -1490,23 +1424,16 @@
 
 (declare-fun p__null_raw_r__aggregate_def ((_ BitVec 8)) (Array Int unsigned_8))
 
-;; def_axiom
-  (assert
-  (forall ((temp___134 (_ BitVec 8)))
-  (forall ((temp___135 Int))
-  (= (select (p__null_raw_r__aggregate_def temp___134) temp___135) (of_rep2
-                                                                   temp___134)))))
-
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range2 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range2 temp___expr_18)))
 
 (declare-const fliteral1 t)
 
@@ -1515,18 +1442,19 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
-(define-fun dynamic_invariant2 ((temp___expr_249 Int)
-  (temp___is_init_246 Bool) (temp___skip_constant_247 Bool)
-  (temp___do_toplevel_248 Bool)) Bool (=>
-                                      (or (= temp___is_init_246 true)
-                                      (<= 1 8)) (in_range3 temp___expr_249)))
+(define-fun dynamic_invariant2 ((temp___expr_290 Int)
+  (temp___is_init_286 Bool) (temp___skip_constant_287 Bool)
+  (temp___do_toplevel_288 Bool)
+  (temp___do_typ_inv_289 Bool)) Bool (=>
+                                     (or (= temp___is_init_286 true)
+                                     (<= 1 8)) (in_range3 temp___expr_290)))
 
 (declare-const fliteral2 t)
 
@@ -1538,11 +1466,18 @@
   (= null_r (mk___rep (mk___split_fields (of_rep 0) (of_rep1 fliteral2)))))
 
 ;; null_raw_r__def_axiom
-  (assert (= null_raw_r (p__null_raw_r__aggregate_def ((_ int2bv 8) 0))))
+  (assert (= null_raw_r (p__null_raw_r__aggregate_def #x00)))
 
-(define-fun dynamic_invariant3 ((temp___expr_163 (_ BitVec 8))
-  (temp___is_init_160 Bool) (temp___skip_constant_161 Bool)
-  (temp___do_toplevel_162 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_190 (_ BitVec 8))
+  (temp___is_init_186 Bool) (temp___skip_constant_187 Bool)
+  (temp___do_toplevel_188 Bool) (temp___do_typ_inv_189 Bool)) Bool true)
+
+;; def_axiom
+  (assert
+  (forall ((temp___156 (_ BitVec 8)))
+  (=> (dynamic_invariant3 temp___156 true true true true)
+  (forall ((temp___157 Int))
+  (= (to_rep2 (select (p__null_raw_r__aggregate_def temp___156) temp___157)) temp___156)))))
 
 (declare-const full_s__split_fields integer)
 
@@ -1556,9 +1491,9 @@
 
 (declare-const o3 float)
 
-(declare-const temp___268 integer)
+(declare-const temp___310 integer)
 
-(declare-const temp___2681 float)
+(declare-const temp___3101 float)
 
 (declare-const result integer)
 
@@ -1595,16 +1530,16 @@
   (assert (= o o3))
 
 ;; H
-  (assert (= temp___268 o2))
+  (assert (= temp___310 o2))
 
 ;; H
-  (assert (= temp___2681 o3))
+  (assert (= temp___3101 o3))
 
 ;; H
-  (assert (= (mk___rep (mk___split_fields temp___268 temp___2681)) null_r))
+  (assert (= (mk___rep (mk___split_fields temp___310 temp___3101)) null_r))
 
 ;; H
-  (assert (= (p__null_raw_r__aggregate_def ((_ int2bv 8) 0)) null_raw_r))
+  (assert (= (p__null_raw_r__aggregate_def #x00) null_raw_r))
 
 ;; H
   (assert (= result full_s__split_fields))

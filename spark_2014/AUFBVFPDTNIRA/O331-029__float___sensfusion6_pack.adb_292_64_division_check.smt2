@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort t_degrees 0)
 
@@ -129,12 +130,13 @@
 (define-fun t_degrees__ref___projection ((a t_degrees__ref)) t_degrees
   (t_degrees__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_1306 Float32)
-  (temp___is_init_1303 Bool) (temp___skip_constant_1304 Bool)
-  (temp___do_toplevel_1305 Bool)) Bool (=>
-                                       (or (= temp___is_init_1303 true)
-                                       (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000)))
-                                       (in_range temp___expr_1306)))
+(define-fun dynamic_invariant1 ((temp___expr_1522 Float32)
+  (temp___is_init_1518 Bool) (temp___skip_constant_1519 Bool)
+  (temp___do_toplevel_1520 Bool)
+  (temp___do_typ_inv_1521 Bool)) Bool (=>
+                                      (or (= temp___is_init_1518 true)
+                                      (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000)))
+                                      (in_range temp___expr_1522)))
 
 (declare-sort t_quaternion 0)
 
@@ -159,12 +161,13 @@
 (define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
   (t_quaternion__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_1330 Float32)
-  (temp___is_init_1327 Bool) (temp___skip_constant_1328 Bool)
-  (temp___do_toplevel_1329 Bool)) Bool (=>
-                                       (or (= temp___is_init_1327 true)
-                                       (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                       (in_range1 temp___expr_1330)))
+(define-fun dynamic_invariant2 ((temp___expr_1550 Float32)
+  (temp___is_init_1546 Bool) (temp___skip_constant_1547 Bool)
+  (temp___do_toplevel_1548 Bool)
+  (temp___do_typ_inv_1549 Bool)) Bool (=>
+                                      (or (= temp___is_init_1546 true)
+                                      (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
+                                      (in_range1 temp___expr_1550)))
 
 (declare-sort t_radians 0)
 
@@ -188,12 +191,13 @@
 (define-fun t_radians__ref___projection ((a t_radians__ref)) t_radians
   (t_radians__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_1336 Float32)
-  (temp___is_init_1333 Bool) (temp___skip_constant_1334 Bool)
-  (temp___do_toplevel_1335 Bool)) Bool (=>
-                                       (or (= temp___is_init_1333 true)
-                                       (fp.leq (fp.neg (fp #b0 #b10000001 #b10010010000111111011011)) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                       (in_range2 temp___expr_1336)))
+(define-fun dynamic_invariant3 ((temp___expr_1557 Float32)
+  (temp___is_init_1553 Bool) (temp___skip_constant_1554 Bool)
+  (temp___do_toplevel_1555 Bool)
+  (temp___do_typ_inv_1556 Bool)) Bool (=>
+                                      (or (= temp___is_init_1553 true)
+                                      (fp.leq (fp.neg (fp #b0 #b10000001 #b10010010000111111011011)) (fp #b0 #b10000001 #b10010010000111111011011)))
+                                      (in_range2 temp___expr_1557)))
 
 (declare-fun atan_2 (Float32 Float32) Float32)
 
@@ -203,8 +207,8 @@
   (assert
   (forall ((x Float32) (y Float32))
   (! (=>
-     (and (dynamic_invariant x true true true) (dynamic_invariant y true true
-     true)) (dynamic_invariant3 (atan_2 x y) true false true)) :pattern (
+     (and (dynamic_invariant x true true true true) (dynamic_invariant y true
+     true true true)) (dynamic_invariant3 (atan_2 x y) true false true true)) :pattern (
   (atan_2 x y)) )))
 
 (declare-fun asin1 (Float32) Float32)
@@ -214,8 +218,8 @@
 ;; asin__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant3 (asin1 x)
-     true false true)) :pattern ((asin1 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant3
+     (asin1 x) true false true true)) :pattern ((asin1 x)) )))
 
 (declare-fun saturate (Float32 Float32 Float32) Float32)
 
@@ -226,13 +230,14 @@
   (forall ((value Float32) (min_value Float32) (max_value Float32))
   (! (=>
      (and
-     (and (dynamic_invariant value true true true) (dynamic_invariant
-     min_value true true true)) (dynamic_invariant max_value true true true))
+     (and (dynamic_invariant value true true true true) (dynamic_invariant
+     min_value true true true true)) (dynamic_invariant max_value true true
+     true true))
      (let ((result (saturate value min_value max_value)))
      (and
      (ite (fp.lt value min_value) (fp.eq result min_value)
      (ite (fp.lt max_value value) (fp.eq result max_value)
-     (fp.eq result value))) (dynamic_invariant result true false true)))) :pattern (
+     (fp.eq result value))) (dynamic_invariant result true false true true)))) :pattern (
   (saturate value min_value max_value)) )))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -281,20 +286,6 @@
 
 (declare-const o2 Float32)
 
-(declare-const o3 Float32)
-
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
-(declare-const o6 Float32)
-
-(declare-const o7 Float32)
-
-(declare-const o8 Float32)
-
-(declare-const o9 Float32)
-
 (declare-const result Float32)
 
 (declare-const grav_x1 Float32)
@@ -310,14 +301,6 @@
 (declare-const result3 Float32)
 
 (declare-const grav_x2 Float32)
-
-(declare-const result4 Float32)
-
-(declare-const euler_yaw_actual1 Float32)
-
-(declare-const result5 Float32)
-
-(declare-const euler_pitch_actual1 Float32)
 
 ;; H
   (assert

@@ -1559,24 +1559,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,float1) farray, int, int, (int,float1) farray, int,
-  int -> (int,float1) farray
-
-axiom concat_def :
-  (forall a:(int,float1) farray. forall b:(int,float1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : float1, int -> (int,float1) farray
-
-axiom singleton_def :
-  (forall v:float1.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq4 : (int,float1) farray, int, int, (int,float1) farray, int,
   int -> bool
 
@@ -1587,17 +1569,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1607,9 +1589,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1701,57 +1683,15 @@ logic f__function_guard : int, unit -> prop
 
 axiom f__post_axiom : in_range3(f(void))
 
-logic buf : (int,float1) farray
-
-logic temp___137 : int
-
-logic o : int
-
-logic o1 : float1
-
-logic o2 : t
-
-logic temp___1371 : int
-
-logic o3 : int
-
-logic o4 : float1
-
-logic o5 : t
-
-logic o6 : t1
-
-logic o7 : t1
-
-logic o8 : t1
-
-logic o9 : t1
-
-axiom H : ((temp___1371 = f(void)) and in_range3(temp___1371))
-
-axiom H1 : ((0 <= temp___1371) and (temp___1371 <= 3))
-
-axiom H2 : (o3 = temp___1371)
-
-axiom H3 : (o4 = (buf[o3]))
-
-axiom H4 : (o5 = to_rep(o4))
-
-axiom H5 : (o6 = to_float64(RNE, o5))
-
-axiom H6 : ((temp___137 = f(void)) and in_range3(temp___137))
-
-axiom H7 : ((0 <= temp___137) and (temp___137 <= 3))
-
-axiom H8 : (o = temp___137)
-
-axiom H9 : (o1 = (buf[o]))
-
-axiom H10 : (o2 = to_rep(o1))
-
-axiom H11 : (o7 = to_float64(RNE, o2))
-
-axiom H12 : (o8 = mul1(RNE, o7, o6))
-
  (* File "repr.adb", line 4, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite1(o8)
+goal WP_parameter_def :
+  (forall buf:(int,float1) farray. forall temp___159:int. forall o:int.
+  forall o1:float1. forall o2:t. forall temp___1591:int. forall o3:int.
+  forall o4:float1. forall o5:t. forall o6:t1. forall o7:t1. forall o8:t1.
+  ((((((((temp___1591 = f(void)) and in_range3(temp___1591)) and
+  (((0 <= temp___1591) and (temp___1591 <= 3)) and (o3 = temp___1591))) and
+  (o4 = (buf[o3]))) and (o5 = to_rep(o4))) and (o6 = to_float64(RNE,
+  o5))) and (((((((temp___159 = f(void)) and in_range3(temp___159)) and
+  (((0 <= temp___159) and (temp___159 <= 3)) and (o = temp___159))) and
+  (o1 = (buf[o]))) and (o2 = to_rep(o1))) and (o7 = to_float64(RNE, o2))) and
+  (o8 = mul1(RNE, o7, o6)))) -> tqtisFinite1(o8)))

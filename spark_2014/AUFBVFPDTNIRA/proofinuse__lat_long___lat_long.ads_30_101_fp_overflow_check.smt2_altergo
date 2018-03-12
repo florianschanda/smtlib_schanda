@@ -1338,180 +1338,78 @@ axiom sin__post_axiom :
   le(sin(x), fliteral)) and (eq(x, fliteral10) -> eq(sin(x),
   fliteral10))) and tqtisFinite(sin(x)))))
 
-logic delta_lat : t
-
-logic delta_long : t
-
-logic lat_long__distance__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic o15 : t
-
-logic o16 : t
-
-logic o17 : t
-
-logic result : t
-
-logic delta_lat1 : t
-
-logic result1 : t
-
-logic delta_long1 : t
-
-logic result2 : t
-
-logic lat_long__distance__result1 : t
-
-logic lat_long__distance__result2 : t
-
-logic lat_long__distance__result3 : t
-
-logic delta_lat2 : t
-
-logic delta_long2 : t
-
-logic lat_long__distance__result4 : t
-
-logic delta_lat3 : t
-
-logic delta_long3 : t
-
-logic lat_long__distance__result5 : t
-
 logic fliteral12 : t
 
 axiom fliteral_axiom12 : (tqtisFinite(fliteral12) and
   (tqtreal(fliteral12) = 340282346638528859811704183484516925440.0))
 
-axiom H : (le(neg(fliteral12), fliteral12) -> tqtisFinite(delta_lat))
-
-axiom H1 : (le(neg(fliteral12), fliteral12) -> tqtisFinite(delta_long))
-
-axiom H2 : (result = delta_lat)
-
-axiom H3 : (delta_lat1 = mul(RNE, mul(RNE, sub(RNE, to_rep(destination),
-  to_rep(source)), fliteral6), fliteral7))
-
-axiom H4 : ((o = cos(to_rep(source))) and (tqtisFinite(o) and
+ (* File "lat_long.ads", line 6, characters 0-0 *)
+goal WP_parameter_def :
+  (forall delta_lat:t. forall delta_long:t.
+  forall lat_long__distance__result:t. forall o:t. forall o1:t. forall o2:t.
+  forall o3:t. forall o4:t. forall o5:t. forall o6:t. forall o7:t.
+  forall o8:t. forall o9:t. forall o10:t. forall o11:t. forall o12:t.
+  forall o13:t. forall o14:t. forall o15:t. forall o16:t. forall result:t.
+  forall delta_lat1:t. forall result1:t. forall delta_long1:t.
+  forall result2:t. forall lat_long__distance__result1:t.
+  forall lat_long__distance__result2:t. forall lat_long__distance__result3:t.
+  forall delta_lat2:t. forall delta_long2:t.
+  forall lat_long__distance__result4:t. forall delta_lat3:t.
+  forall delta_long3:t. forall lat_long__distance__result5:t.
+  ((((le(neg(fliteral12), fliteral12) -> tqtisFinite(delta_lat)) and
+  ((le(neg(fliteral12), fliteral12) -> tqtisFinite(delta_long)) and ((({
+  t__content = result } = { t__content = delta_lat }) and
+  (delta_lat1 = mul(RNE, mul(RNE, sub(RNE, to_rep(destination),
+  to_rep(source)), fliteral6), fliteral7))) and
+  ((((((o = cos(to_rep(source))) and (tqtisFinite(o) and
   ((o = sin(to_rep(source))) and ((le(neg(fliteral1), to_rep(source)) and
-  le(to_rep(source), fliteral1)) -> le(fliteral2, o)))))
-
-axiom H5 : (o1 = div(RNE, mul(RNE, sub(RNE, to_rep1(destination1),
-  to_rep1(source1)), fliteral6), o))
-
-axiom H6 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H7 : (result1 = delta_long)
-
-axiom H8 : (delta_long1 = o2)
-
-axiom H9 : (lat_long__distance__result1 = lat_long__distance__result2)
-
-axiom H10 : (lat_long__distance__result3 = lat_long__distance__result1)
-
-axiom H11 : ((o3 = mul(RNE, delta_long1, delta_long1)) and
-  tqtisFinite(mul(RNE, delta_long1, delta_long1)))
-
-axiom H12 : ((o4 = mul(RNE, delta_lat1, delta_lat1)) and tqtisFinite(mul(RNE,
-  delta_lat1, delta_lat1)))
-
-axiom H13 : (o5 = add(RNE, o4, o3))
-
-axiom H14 : ((o6 = o5) and tqtisFinite(o5))
-
-axiom H15 : ((o7 = sqrt2(o6)) and (tqtisFinite(o7) and (o7 = sqrt3(o6))))
-
-axiom H16 : (result2 = lat_long__distance__result)
-
-axiom H17 : (lat_long__distance__result1 = o7)
-
-axiom H18 : (lat_long__distance__result4 = lat_long__distance__result2)
-
-axiom H19 : (delta_long1 = delta_long2)
-
-axiom H20 : (delta_lat1 = delta_lat2)
-
-axiom H21 : (lat_long__distance__result5 = lat_long__distance__result3)
-
-axiom H22 : (delta_long3 = delta_long1)
-
-axiom H23 : (delta_lat3 = delta_lat1)
-
-axiom H24 : ((o11 = delta_long_in_meters({ us_split_fields1 = {
+  le(to_rep(source), fliteral1)) -> le(fliteral2, o))))) and (o1 = div(RNE,
+  mul(RNE, sub(RNE, to_rep1(destination1), to_rep1(source1)), fliteral6),
+  o))) and ((o2 = o1) and tqtisFinite(o1))) and (({ t__content = result1
+  } = { t__content = delta_long }) and (delta_long1 = o2))) and
+  (((lat_long__distance__result1 = lat_long__distance__result2) and
+  (lat_long__distance__result3 = lat_long__distance__result1)) and
+  ((((((o3 = mul(RNE, delta_long1, delta_long1)) and tqtisFinite(mul(RNE,
+  delta_long1, delta_long1))) and (((o4 = mul(RNE, delta_lat1,
+  delta_lat1)) and tqtisFinite(mul(RNE, delta_lat1, delta_lat1))) and
+  (o5 = add(RNE, o4, o3)))) and ((o6 = o5) and tqtisFinite(o5))) and
+  ((o7 = sqrt2(o6)) and (tqtisFinite(o7) and (o7 = sqrt3(o6))))) and (({
+  t__content = result2 } = { t__content = lat_long__distance__result }) and
+  (lat_long__distance__result1 = o7)))))))) and ((({ t__content =
+  lat_long__distance__result4 } = { t__content = lat_long__distance__result2
+  }) and ((delta_long1 = delta_long2) and (delta_lat1 = delta_lat2))) and
+  ((lat_long__distance__result5 = lat_long__distance__result3) and
+  ((delta_long3 = delta_long1) and (delta_lat3 = delta_lat1))))) ->
+  ((((((o11 = delta_long_in_meters({ us_split_fields1 = {
   rec__lat_long__coordinates__lat = source;
   rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
   rec__lat_long__coordinates__lat = destination;
   rec__lat_long__coordinates__long = destination1 } })) and
   (tqtisFinite(o11) and ((o11 = div(RNE, mul(RNE, sub(RNE,
   to_rep1(destination1), to_rep1(source1)), fliteral6),
-  cos(to_rep(source)))) and (olt(abs1(o11), fliteral8) = true))))
-
-axiom H25 : ((o12 = delta_long_in_meters({ us_split_fields1 = {
+  cos(to_rep(source)))) and (olt(abs1(o11), fliteral8) = true)))) and
+  (((o12 = delta_long_in_meters({ us_split_fields1 = {
   rec__lat_long__coordinates__lat = source;
   rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
   rec__lat_long__coordinates__lat = destination;
   rec__lat_long__coordinates__long = destination1 } })) and
   (tqtisFinite(o12) and ((o12 = div(RNE, mul(RNE, sub(RNE,
   to_rep1(destination1), to_rep1(source1)), fliteral6),
-  cos(to_rep(source)))) and (olt(abs1(o12), fliteral8) = true))))
-
-axiom H26 : (o13 = mul(RNE, o12, o11))
-
-axiom H27 : ((o14 = o13) and tqtisFinite(o13))
-
-axiom H28 : ((o8 = delta_lat_in_meters({ us_split_fields1 = {
+  cos(to_rep(source)))) and (olt(abs1(o12), fliteral8) = true)))) and
+  (o13 = mul(RNE, o12, o11)))) and ((o14 = o13) and tqtisFinite(o13))) and
+  (((((o8 = delta_lat_in_meters({ us_split_fields1 = {
   rec__lat_long__coordinates__lat = source;
   rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
   rec__lat_long__coordinates__lat = destination;
   rec__lat_long__coordinates__long = destination1 } })) and
   (tqtisFinite(o8) and ((o8 = mul(RNE, mul(RNE, sub(RNE, to_rep(destination),
   to_rep(source)), fliteral6), fliteral7)) and (olt(abs1(o8),
-  fliteral5) = true))))
-
-axiom H29 : ((o9 = delta_lat_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source;
+  fliteral5) = true)))) and (((o9 = delta_lat_in_meters({ us_split_fields1 =
+  { rec__lat_long__coordinates__lat = source;
   rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
   rec__lat_long__coordinates__lat = destination;
   rec__lat_long__coordinates__long = destination1 } })) and
   (tqtisFinite(o9) and ((o9 = mul(RNE, mul(RNE, sub(RNE, to_rep(destination),
   to_rep(source)), fliteral6), fliteral7)) and (olt(abs1(o9),
-  fliteral5) = true))))
-
-axiom H30 : (o10 = mul(RNE, o9, o8))
-
-axiom H31 : ((o15 = o10) and tqtisFinite(o10))
-
-axiom H32 : (o16 = add(RNE, o15, o14))
-
- (* File "lat_long.ads", line 6, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o16)
+  fliteral5) = true)))) and (o10 = mul(RNE, o9, o8)))) and ((o15 = o10) and
+  tqtisFinite(o10))) and (o16 = add(RNE, o15, o14)))) -> tqtisFinite(o16))))

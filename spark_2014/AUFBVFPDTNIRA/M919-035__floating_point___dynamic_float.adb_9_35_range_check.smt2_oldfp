@@ -1153,14 +1153,15 @@
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
 
-(define-fun dynamic_invariant ((temp___expr_177 t) (temp___is_init_174 Bool)
-  (temp___skip_constant_175 Bool) (temp___do_toplevel_176 Bool)
+(define-fun dynamic_invariant ((temp___expr_207 t) (temp___is_init_203 Bool)
+  (temp___skip_constant_204 Bool) (temp___do_toplevel_205 Bool)
+  (temp___do_typ_inv_206 Bool)
   (dynamic_float__L_1__i Int)) Bool (=>
-                                    (or (= temp___is_init_174 true) (le
+                                    (or (= temp___is_init_203 true) (le
                                     fliteral1 (last dynamic_float__L_1__i)))
                                     (dynamic_property fliteral1
                                     (last dynamic_float__L_1__i)
-                                    temp___expr_177)))
+                                    temp___expr_207)))
 
 ;; last__def_axiom
   (assert
@@ -1170,12 +1171,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-const fliteral2 t)
 
@@ -1184,12 +1185,12 @@
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant2 ((temp___expr_171 t) (temp___is_init_168 Bool)
-  (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true) (le
-                                      (neg fliteral2) fliteral2))
-                                      (tqtisFinite temp___expr_171)))
+(define-fun dynamic_invariant2 ((temp___expr_200 t) (temp___is_init_196 Bool)
+  (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true) (le
+                                     (neg fliteral2) fliteral2)) (tqtisFinite
+                                     temp___expr_200)))
 
 (declare-const i Int)
 
@@ -1199,62 +1200,6 @@
 
 (declare-const o t)
 
-(declare-const o1 Int)
-
-(declare-const us1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 Int)
-
-(declare-const us2 t)
-
-(declare-const o4 t)
-
-(declare-const o5 Int)
-
-(declare-const us3 t)
-
-(declare-const o6 t)
-
-(declare-const o7 Int)
-
-(declare-const us4 t)
-
-(declare-const o8 t)
-
-(declare-const o9 Int)
-
-(declare-const us5 t)
-
-(declare-const o10 t)
-
-(declare-const o11 Int)
-
-(declare-const us6 t)
-
-(declare-const o12 t)
-
-(declare-const o13 Int)
-
-(declare-const us7 t)
-
-(declare-const o14 t)
-
-(declare-const o15 Int)
-
-(declare-const us8 t)
-
-(declare-const o16 t)
-
-(declare-const o17 Int)
-
-(declare-const us9 t)
-
-(declare-const o18 t)
-
-(declare-const o19 Int)
-
 (declare-const result Int)
 
 (declare-const i1 Int)
@@ -1262,78 +1207,6 @@
 (declare-const result1 t)
 
 (declare-const x1 t)
-
-(declare-const result2 Int)
-
-(declare-const i2 Int)
-
-(declare-const result3 t)
-
-(declare-const x2 t)
-
-(declare-const result4 Int)
-
-(declare-const i3 Int)
-
-(declare-const result5 t)
-
-(declare-const x3 t)
-
-(declare-const result6 Int)
-
-(declare-const i4 Int)
-
-(declare-const result7 t)
-
-(declare-const x4 t)
-
-(declare-const result8 Int)
-
-(declare-const i5 Int)
-
-(declare-const result9 t)
-
-(declare-const x5 t)
-
-(declare-const result10 Int)
-
-(declare-const i6 Int)
-
-(declare-const result11 t)
-
-(declare-const x6 t)
-
-(declare-const result12 Int)
-
-(declare-const i7 Int)
-
-(declare-const result13 t)
-
-(declare-const x7 t)
-
-(declare-const result14 Int)
-
-(declare-const i8 Int)
-
-(declare-const result15 t)
-
-(declare-const x8 t)
-
-(declare-const result16 Int)
-
-(declare-const i9 Int)
-
-(declare-const result17 t)
-
-(declare-const x9 t)
-
-(declare-const result18 Int)
-
-(declare-const i10 Int)
-
-(declare-const result19 t__ref)
-
-(declare-const x10 t)
 
 ;; H
   (assert (= result i))
@@ -1355,7 +1228,7 @@
   (assert (= x1 o))
 
 ;; H
-  (assert (dynamic_invariant x1 true false true i1))
+  (assert (dynamic_invariant x1 true false true true i1))
 
 (assert
 ;; WP_parameter_def

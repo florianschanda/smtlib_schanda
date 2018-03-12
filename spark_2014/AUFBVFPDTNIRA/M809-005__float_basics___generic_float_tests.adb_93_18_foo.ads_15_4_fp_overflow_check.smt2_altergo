@@ -950,34 +950,8 @@ logic a : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic foo__double_tests__inverse_reciprocal__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic foo__double_tests__inverse_reciprocal__result1 : t
-
-logic foo__double_tests__inverse_reciprocal__result2 : t
-
-logic foo__double_tests__inverse_reciprocal__result3 : t
-
-logic foo__double_tests__inverse_reciprocal__result4 : t
-
-logic foo__double_tests__inverse_reciprocal__result5 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : lt(fliteral, a)
-
-axiom H2 : ((o = div(RNE, fliteral, a)) and tqtisFinite(div(RNE, fliteral,
-  a)))
-
-axiom H3 : (o1 = div(RNE, fliteral, o))
-
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o1)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. (tqtisFinite(a) -> (lt(fliteral, a) ->
+  ((((o = div(RNE, fliteral, a)) and tqtisFinite(div(RNE, fliteral, a))) and
+  (o1 = div(RNE, fliteral, o))) -> tqtisFinite(o1)))))

@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1086,12 +1082,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun sqrt2 (t) t)
 
@@ -1112,14 +1108,14 @@
 ;; sqrt__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (and (dynamic_invariant x true true true) (le fliteral2 x))
+  (! (=> (and (dynamic_invariant x true true true true) (le fliteral2 x))
      (let ((result (sqrt2 x)))
      (and
      (and (le fliteral2 result)
      (and (=> (eq x fliteral2) (eq result fliteral2))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant result
-     true false true)))) :pattern ((sqrt2 x)) )))
+     true false true true)))) :pattern ((sqrt2 x)) )))
 
 (declare-const d t)
 
@@ -1167,6 +1163,9 @@
 
 (declare-const homothetical__adjust2triangle__result8 t)
 
+(define-fun homothetical__adjust2triangle__result9 () t__ref (mk_t__ref
+                                                             homothetical__adjust2triangle__result5))
+
 (declare-const result3 t)
 
 ;; H
@@ -1183,44 +1182,79 @@
 
 ;; H
   (assert
-  (and
-  (and
-  (= (mk_t__ref homothetical__adjust2triangle__result5) (mk_t__ref
-                                                        homothetical__adjust2triangle__result3))
+  (= homothetical__adjust2triangle__result9 (mk_t__ref
+                                            homothetical__adjust2triangle__result3)))
+
+;; H
+  (assert
   (= homothetical__adjust2triangle__result6 homothetical__adjust2triangle__result4))
-  (and
-  (and
-  (and
-  (and (and (= o (mul RNE1 kv kv)) (tqtisFinite (mul RNE1 kv kv)))
-  (= o1 (div1 RNE1 o ka))) (and (= o2 o1) (tqtisFinite o1)))
-  (= result (ite (lt (abs1 d) o2) true false)))
-  (ite (= result true)
-  (and
-  (and
-  (= homothetical__adjust2triangle__result1 homothetical__adjust2triangle__result3)
-  (= homothetical__adjust2triangle__result4 homothetical__adjust2triangle__result1))
-  (and
-  (and
-  (and (= o3 (mul RNE1 (abs1 d) ka)) (tqtisFinite (mul RNE1 (abs1 d) ka)))
+
+;; H
+  (assert (and (= o (mul RNE1 kv kv)) (tqtisFinite (mul RNE1 kv kv))))
+
+;; H
+  (assert (= o1 (div1 RNE1 o ka)))
+
+;; H
+  (assert (and (= o2 o1) (tqtisFinite o1)))
+
+;; H
+  (assert (= result (ite (lt (abs1 d) o2) true false)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (= homothetical__adjust2triangle__result1 homothetical__adjust2triangle__result3)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (= homothetical__adjust2triangle__result4 homothetical__adjust2triangle__result1)))
+
+;; H
+  (assert
+  (=> (= result true)
+  (and (= o3 (mul RNE1 (abs1 d) ka)) (tqtisFinite (mul RNE1 (abs1 d) ka)))))
+
+;; H
+  (assert
+  (=> (= result true)
   (and (= o4 (sqrt2 o3))
   (and (tqtisFinite o4)
   (and (le fliteral2 o4)
   (and (=> (eq o3 fliteral2) (eq o4 fliteral2))
   (and (=> (eq o3 fliteral) (eq o4 fliteral))
-  (=> (le fliteral3 o3) (lt fliteral2 o4))))))))
-  (and (= result1 homothetical__adjust2triangle__result)
-  (= homothetical__adjust2triangle__result1 o4))))
-  (and
-  (and
-  (= homothetical__adjust2triangle__result2 homothetical__adjust2triangle__result3)
-  (= homothetical__adjust2triangle__result4 homothetical__adjust2triangle__result2))
-  (and (= result2 homothetical__adjust2triangle__result)
-  (= homothetical__adjust2triangle__result2 kv)))))))
+  (=> (le fliteral3 o3) (lt fliteral2 o4)))))))))
 
 ;; H
   (assert
-  (= (mk_t__ref homothetical__adjust2triangle__result7) (mk_t__ref
-                                                        homothetical__adjust2triangle__result5)))
+  (=> (= result true) (= result1 homothetical__adjust2triangle__result)))
+
+;; H
+  (assert (=> (= result true) (= homothetical__adjust2triangle__result1 o4)))
+
+;; H
+  (assert
+  (=> (not (= result true))
+  (= homothetical__adjust2triangle__result2 homothetical__adjust2triangle__result3)))
+
+;; H
+  (assert
+  (=> (not (= result true))
+  (= homothetical__adjust2triangle__result4 homothetical__adjust2triangle__result2)))
+
+;; H
+  (assert
+  (=> (not (= result true))
+  (= result2 homothetical__adjust2triangle__result)))
+
+;; H
+  (assert
+  (=> (not (= result true)) (= homothetical__adjust2triangle__result2 kv)))
+
+;; H
+  (assert
+  (= (mk_t__ref homothetical__adjust2triangle__result7) homothetical__adjust2triangle__result9))
 
 ;; H
   (assert

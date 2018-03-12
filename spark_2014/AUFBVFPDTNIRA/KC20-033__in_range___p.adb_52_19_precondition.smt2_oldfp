@@ -1069,12 +1069,12 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_33 Int) (temp___is_init_30 Bool)
-  (temp___skip_constant_31 Bool)
-  (temp___do_toplevel_32 Bool)) Bool (=>
-                                     (or (= temp___is_init_30 true)
-                                     (<= 0 2147483647)) (in_range1
-                                     temp___expr_33)))
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range1
+                                    temp___expr_39)))
 
 (declare-sort float 0)
 
@@ -1100,12 +1100,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-sort color 0)
 
@@ -1124,11 +1124,12 @@
 (declare-datatypes () ((color__ref (mk_color__ref (color__content color)))))
 (define-fun color__ref___projection ((a color__ref)) color (color__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_171 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (<= 0 2)) (in_range2 temp___expr_171)))
+(define-fun dynamic_invariant2 ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 2)) (in_range2 temp___expr_200)))
 
 (declare-sort volt 0)
 
@@ -1446,8 +1447,9 @@
 ;; ident__post_axiom
   (assert
   (forall ((n Int))
-  (! (=> (and (dynamic_invariant n true true true) (and (<= 1 n) (<= n 10)))
-     (dynamic_invariant (ident n) true false true)) :pattern ((ident n)) )))
+  (! (=>
+     (and (dynamic_invariant n true true true true) (and (<= 1 n) (<= n 10)))
+     (dynamic_invariant (ident n) true false true true)) :pattern ((ident n)) )))
 
 (declare-fun ident__2 (Int) Int)
 
@@ -1456,9 +1458,10 @@
 ;; ident__2__post_axiom
   (assert
   (forall ((c Int))
-  (! (=> (and (dynamic_invariant2 c true true true) (and (<= 0 c) (<= c 1)))
-     (dynamic_invariant2 (ident__2 c) true false true)) :pattern ((ident__2
-                                                                  c)) )))
+  (! (=>
+     (and (dynamic_invariant2 c true true true true) (and (<= 0 c) (<= c 1)))
+     (dynamic_invariant2 (ident__2 c) true false true true)) :pattern (
+  (ident__2 c)) )))
 
 (declare-fun ident__3 (volt) volt)
 
@@ -1489,9 +1492,9 @@
   (assert
   (forall ((f t))
   (! (=>
-     (and (dynamic_invariant1 f true true true)
+     (and (dynamic_invariant1 f true true true true)
      (and (le (neg fliteral2) f) (le f fliteral2))) (dynamic_invariant1
-     (ident__5 f) true false true)) :pattern ((ident__5 f)) )))
+     (ident__5 f) true false true true)) :pattern ((ident__5 f)) )))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -1502,6 +1505,13 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 112000003457069396972656250.0 1000000000000000000000000000.0))))
 
 (declare-const n Int)
 
@@ -1522,8 +1532,6 @@
 (declare-const o4 money)
 
 (declare-const o5 money)
-
-(declare-const o6 t)
 
 (declare-const result Int)
 
@@ -1588,13 +1596,6 @@
 
 ;; H
   (assert (= m1 o5))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 112000003457069396972656250.0 1000000000000000000000000000.0))))
 
 (assert
 ;; WP_parameter_def

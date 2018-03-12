@@ -1086,35 +1086,14 @@ function ft__ref___2__projection(a: ft__ref) : ft = (a).ft__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic f : t
-
-logic o : t
-
-logic result : t
-
-logic f1 : t
-
-logic f2 : t
-
-logic f3 : t
-
-axiom H : tqtisFinite(f)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H1 : ((o = sub(NearestTiesToEven, f, fliteral1)) and
-  tqtisFinite(sub(NearestTiesToEven, f, fliteral1)))
-
-axiom H2 : (result = f)
-
-axiom H3 : (f1 = o)
-
-axiom H4 : (f1 = f2)
-
-axiom H5 : (f3 = f1)
-
  (* File "generic_float_tests.adb", line 241, characters 0-0 *)
-goal WP_parameter_def : eq(f2, f)
+goal WP_parameter_def :
+  (forall f:t. forall o:t. forall result:t. forall f1:t. forall f2:t.
+  forall f3:t. ((tqtisFinite(f) and ((((o = sub(NearestTiesToEven, f,
+  fliteral1)) and tqtisFinite(sub(NearestTiesToEven, f, fliteral1))) and
+  ((result = f) and (f1 = o))) and ((f1 = f2) and (f3 = f1)))) -> eq(f2, f)))

@@ -1074,25 +1074,14 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const time t)
-
-(declare-const result t)
-
-(declare-const time1 t)
-
-(declare-const time2 t)
-
-;; H
-  (assert (= result time))
 
 (declare-const fliteral2 t)
 
@@ -1100,6 +1089,15 @@
   (assert
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) 340282326356119256160033759537265639424.0)))
+
+(declare-const time t)
+
+(declare-const result t)
+
+(declare-const time1 t)
+
+;; H
+  (assert (= result time))
 
 ;; H
   (assert (= time1 fliteral2))

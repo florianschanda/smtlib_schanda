@@ -1122,9 +1122,5 @@ logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : int
-
-axiom H : in_range2(n)
-
  (* File "attempt_2.adb", line 3, characters 0-0 *)
-goal WP_parameter_def : in_range1((n * n))
+goal WP_parameter_def : (in_range2(n) -> in_range1((n * n)))

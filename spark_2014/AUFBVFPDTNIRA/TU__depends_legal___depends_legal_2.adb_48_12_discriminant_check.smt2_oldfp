@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1176,30 +1172,20 @@
 
 (define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 
-(define-fun depends_legal_2__dis_rec__a__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 1))
+(define-fun depends_legal_2__dis_rec__a__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 1))
 
-(define-fun depends_legal_2__dis_rec__b__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 1))
+(define-fun depends_legal_2__dis_rec__b__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 1))
 
-(define-fun depends_legal_2__dis_rec__x__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 0))
+(define-fun depends_legal_2__dis_rec__x__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 0))
 
-(define-fun depends_legal_2__dis_rec__y__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 0))
+(define-fun depends_legal_2__dis_rec__y__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 0))
 
-(define-fun depends_legal_2__dis_rec__z__pred ((a us_rep)) Bool (= (to_int2
-                                                                   (rec__depends_legal_2__dis_rec__d
-                                                                   (us_split_discrs1
-                                                                   a))) 0))
+(define-fun depends_legal_2__dis_rec__z__pred ((a us_rep)) Bool (= (ite
+  (rec__depends_legal_2__dis_rec__d (us_split_discrs1 a)) 1 0) 0))
 
 (define-fun bool_eq2 ((a us_rep)
   (b us_rep)) Bool (ite (and
@@ -1367,13 +1353,13 @@
 (define-fun dis_rec__ref___projection ((a dis_rec__ref)) us_rep (dis_rec__content
                                                                 a))
 
-(define-fun default_initial_assumption ((temp___expr_137 us_rep)
-  (temp___skip_top_level_138 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_160 us_rep)
+  (temp___skip_top_level_161 Bool)) Bool (and
                                          (= (attr__constrained
-                                            temp___expr_137) false)
+                                            temp___expr_160) false)
                                          (= (rec__depends_legal_2__dis_rec__d
                                             (us_split_discrs1
-                                            temp___expr_137)) (of_int1 1))))
+                                            temp___expr_160)) (distinct 1 0))))
 
 (declare-const rec1__attr__constrained Bool)
 
@@ -1649,12 +1635,12 @@
 (declare-datatypes () ((t8b__ref (mk_t8b__ref (t8b__content us_rep)))))
 (define-fun t8b__ref___projection ((a t8b__ref)) us_rep (t8b__content a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range2 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range2 temp___expr_18)))
 
 (declare-const fliteral1 t)
 
@@ -1663,12 +1649,17 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 (declare-const rec1__split_discrs Bool)
 
@@ -1698,19 +1689,19 @@
 
 (declare-const o6 float)
 
-(declare-const temp___164 Bool)
+(declare-const temp___188 Bool)
 
-(declare-const temp___1641 integer)
+(declare-const temp___1881 integer)
 
-(declare-const temp___1642 integer)
+(declare-const temp___1882 integer)
 
-(declare-const temp___1643 float)
+(declare-const temp___1883 float)
 
-(declare-const temp___1644 float)
+(declare-const temp___1884 float)
 
-(declare-const temp___1645 float)
+(declare-const temp___1885 float)
 
-(declare-const temp___1646 Bool)
+(declare-const temp___1886 Bool)
 
 (declare-const usq_ Bool)
 
@@ -1726,19 +1717,19 @@
 
 (declare-const usq_6 Bool)
 
-(declare-const temp___166 Bool)
+(declare-const temp___190 Bool)
 
-(declare-const temp___1661 integer)
+(declare-const temp___1901 integer)
 
-(declare-const temp___1662 integer)
+(declare-const temp___1902 integer)
 
-(declare-const temp___1663 float)
+(declare-const temp___1903 float)
 
-(declare-const temp___1664 float)
+(declare-const temp___1904 float)
 
-(declare-const temp___1665 float)
+(declare-const temp___1905 float)
 
-(declare-const temp___1666 Bool)
+(declare-const temp___1906 Bool)
 
 (declare-const o7 float)
 
@@ -1756,23 +1747,23 @@
 
 (declare-const o14 float)
 
-(declare-const temp___161 Bool)
+(declare-const temp___185 Bool)
 
-(declare-const temp___1611 integer)
+(declare-const temp___1851 integer)
 
-(declare-const temp___1612 integer)
+(declare-const temp___1852 integer)
 
-(declare-const temp___1613 float)
+(declare-const temp___1853 float)
 
-(declare-const temp___1614 float)
+(declare-const temp___1854 float)
 
-(declare-const temp___1615 float)
+(declare-const temp___1855 float)
 
-(declare-const temp___1616 Bool)
+(declare-const temp___1856 Bool)
 
 (declare-const usq_7 us_rep)
 
-(declare-const temp___163 us_rep)
+(declare-const temp___187 us_rep)
 
 (declare-const result us_split_fields__ref)
 
@@ -1789,6 +1780,18 @@
 (declare-const result3 us_split_discrs__ref)
 
 (declare-const par1__split_discrs2 us_split_discrs)
+
+(define-fun par1__split_discrs3 () us_split_discrs__ref (mk___split_discrs__ref
+                                                        (mk___split_discrs
+                                                        par1__split_discrs)))
+
+(define-fun par1__split_fields7 () us_split_fields__ref (mk___split_fields__ref
+                                                        (mk___split_fields
+                                                        par1__split_fields
+                                                        par1__split_fields1
+                                                        par1__split_fields2
+                                                        par1__split_fields3
+                                                        par1__split_fields4)))
 
 ;; H
   (assert (= rec1__attr__constrained false))
@@ -1818,30 +1821,30 @@
   (assert (=> (= par1__split_discrs true) (= dummy1 o6)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= (of_int1 1) temp___164)))
+  (assert (=> (= par1__split_discrs true) (= (distinct 1 0) temp___188)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= temp___1641 o2)))
+  (assert (=> (= par1__split_discrs true) (= temp___1881 o2)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= temp___1642 o3)))
+  (assert (=> (= par1__split_discrs true) (= temp___1882 o3)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= temp___1643 o4)))
+  (assert (=> (= par1__split_discrs true) (= temp___1883 o4)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= temp___1644 o5)))
+  (assert (=> (= par1__split_discrs true) (= temp___1884 o5)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= temp___1645 o6)))
+  (assert (=> (= par1__split_discrs true) (= temp___1885 o6)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= true temp___1646)))
+  (assert (=> (= par1__split_discrs true) (= true temp___1886)))
 
 ;; H
   (assert
   (=> (= par1__split_discrs true)
-  (=> (= par1__attr__constrained true) (= temp___164 par1__split_discrs))))
+  (=> (= par1__attr__constrained true) (= temp___188 par1__split_discrs))))
 
 ;; H
   (assert
@@ -1849,67 +1852,56 @@
   (= (mk___rep (mk___split_discrs usq_)
      (mk___split_fields usq_1 usq_2 usq_3 usq_4 usq_5) usq_6) (mk___rep
                                                               (mk___split_discrs
-                                                              temp___164)
+                                                              temp___188)
                                                               (mk___split_fields
-                                                              temp___1641
-                                                              temp___1642
-                                                              temp___1643
-                                                              temp___1644
-                                                              temp___1645)
-                                                              temp___1646))))
+                                                              temp___1881
+                                                              temp___1882
+                                                              temp___1883
+                                                              temp___1884
+                                                              temp___1885)
+                                                              temp___1886))))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= usq_ temp___166)))
+  (assert (=> (= par1__split_discrs true) (= usq_ temp___190)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= usq_1 temp___1661)))
+  (assert (=> (= par1__split_discrs true) (= usq_1 temp___1901)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= usq_2 temp___1662)))
+  (assert (=> (= par1__split_discrs true) (= usq_2 temp___1902)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= usq_3 temp___1663)))
+  (assert (=> (= par1__split_discrs true) (= usq_3 temp___1903)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= usq_4 temp___1664)))
+  (assert (=> (= par1__split_discrs true) (= usq_4 temp___1904)))
 
 ;; H
-  (assert (=> (= par1__split_discrs true) (= usq_5 temp___1665)))
-
-;; H
-  (assert
-  (=> (= par1__split_discrs true) (= par1__attr__constrained temp___1666)))
+  (assert (=> (= par1__split_discrs true) (= usq_5 temp___1905)))
 
 ;; H
   (assert
-  (=> (= par1__split_discrs true)
-  (= result (mk___split_fields__ref
-            (mk___split_fields par1__split_fields par1__split_fields1
-            par1__split_fields2 par1__split_fields3 par1__split_fields4)))))
+  (=> (= par1__split_discrs true) (= par1__attr__constrained temp___1906)))
+
+;; H
+  (assert (=> (= par1__split_discrs true) (= result par1__split_fields7)))
 
 ;; H
   (assert
   (=> (= par1__split_discrs true)
-  (= par1__split_fields5 (mk___split_fields temp___1661 temp___1662
-                         temp___1663 temp___1664 temp___1665))))
+  (= par1__split_fields5 (mk___split_fields temp___1901 temp___1902
+                         temp___1903 temp___1904 temp___1905))))
+
+;; H
+  (assert (=> (= par1__split_discrs true) (= result1 par1__split_discrs3)))
 
 ;; H
   (assert
   (=> (= par1__split_discrs true)
-  (= result1 (mk___split_discrs__ref (mk___split_discrs par1__split_discrs)))))
-
-;; H
-  (assert
-  (=> (= par1__split_discrs true)
-  (= par1__split_discrs1 (mk___split_discrs temp___166))))
+  (= par1__split_discrs1 (mk___split_discrs temp___190))))
 
 ;; H
   (assert (=> (not (= par1__split_discrs true)) (= par1__split_discrs r7b)))
-
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
 
 ;; H
   (assert (=> (not (= par1__split_discrs true)) (= (to_rep1 o7) fliteral2)))
@@ -1936,65 +1928,62 @@
   (assert (=> (not (= par1__split_discrs true)) (= o7 o14)))
 
 ;; H
-  (assert (=> (not (= par1__split_discrs true)) (= (of_int1 0) temp___161)))
+  (assert
+  (=> (not (= par1__split_discrs true)) (= (distinct 0 0) temp___185)))
 
 ;; H
-  (assert (=> (not (= par1__split_discrs true)) (= temp___1611 o10)))
+  (assert (=> (not (= par1__split_discrs true)) (= temp___1851 o10)))
 
 ;; H
-  (assert (=> (not (= par1__split_discrs true)) (= temp___1612 o11)))
+  (assert (=> (not (= par1__split_discrs true)) (= temp___1852 o11)))
 
 ;; H
-  (assert (=> (not (= par1__split_discrs true)) (= temp___1613 o12)))
+  (assert (=> (not (= par1__split_discrs true)) (= temp___1853 o12)))
 
 ;; H
-  (assert (=> (not (= par1__split_discrs true)) (= temp___1614 o13)))
+  (assert (=> (not (= par1__split_discrs true)) (= temp___1854 o13)))
 
 ;; H
-  (assert (=> (not (= par1__split_discrs true)) (= temp___1615 o14)))
+  (assert (=> (not (= par1__split_discrs true)) (= temp___1855 o14)))
 
 ;; H
-  (assert (=> (not (= par1__split_discrs true)) (= true temp___1616)))
+  (assert (=> (not (= par1__split_discrs true)) (= true temp___1856)))
 
 ;; H
   (assert
   (=> (not (= par1__split_discrs true))
-  (=> (= par1__attr__constrained true) (= temp___161 par1__split_discrs))))
+  (=> (= par1__attr__constrained true) (= temp___185 par1__split_discrs))))
 
 ;; H
   (assert
   (=> (not (= par1__split_discrs true))
-  (= usq_7 (mk___rep (mk___split_discrs temp___161)
-           (mk___split_fields temp___1611 temp___1612 temp___1613 temp___1614
-           temp___1615) temp___1616))))
+  (= usq_7 (mk___rep (mk___split_discrs temp___185)
+           (mk___split_fields temp___1851 temp___1852 temp___1853 temp___1854
+           temp___1855) temp___1856))))
 
 ;; H
   (assert
   (=> (not (= par1__split_discrs true))
-  (= temp___163 (mk___rep (us_split_discrs1 usq_7) (us_split_fields1 usq_7)
+  (= temp___187 (mk___rep (us_split_discrs1 usq_7) (us_split_fields1 usq_7)
                 par1__attr__constrained))))
 
 ;; H
   (assert
-  (=> (not (= par1__split_discrs true))
-  (= result2 (mk___split_fields__ref
-             (mk___split_fields par1__split_fields par1__split_fields1
-             par1__split_fields2 par1__split_fields3 par1__split_fields4)))))
+  (=> (not (= par1__split_discrs true)) (= result2 par1__split_fields7)))
 
 ;; H
   (assert
   (=> (not (= par1__split_discrs true))
-  (= par1__split_fields6 (us_split_fields1 temp___163))))
+  (= par1__split_fields6 (us_split_fields1 temp___187))))
+
+;; H
+  (assert
+  (=> (not (= par1__split_discrs true)) (= result3 par1__split_discrs3)))
 
 ;; H
   (assert
   (=> (not (= par1__split_discrs true))
-  (= result3 (mk___split_discrs__ref (mk___split_discrs par1__split_discrs)))))
-
-;; H
-  (assert
-  (=> (not (= par1__split_discrs true))
-  (= par1__split_discrs2 (us_split_discrs1 temp___163))))
+  (= par1__split_discrs2 (us_split_discrs1 temp___187))))
 
 ;; H
   (assert

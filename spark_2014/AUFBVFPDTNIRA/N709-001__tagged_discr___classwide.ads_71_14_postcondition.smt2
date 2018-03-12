@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -285,8 +281,8 @@
 (declare-datatypes () ((u1__ref (mk_u1__ref (u1__content us_rep)))))
 (define-fun u1__ref___projection ((a u1__ref)) us_rep (u1__content a))
 
-(define-fun default_initial_assumption ((temp___expr_165 us_rep)
-  (temp___skip_top_level_166 Bool)) Bool (= (attr__tag temp___expr_165)
+(define-fun default_initial_assumption ((temp___expr_192 us_rep)
+  (temp___skip_top_level_193 Bool)) Bool (= (attr__tag temp___expr_192)
   us_tag))
 
 (declare-fun is_zero__2 (us_rep) Bool)
@@ -306,7 +302,7 @@
 ;; classwide__u1__compat_axiom
   (assert
   (forall ((v us_rep))
-  (! (= (to_int2 (is_zero__2 v)) (to_int2 (is_zero__21 us_tag v))) :pattern (
+  (! (= (ite (is_zero__2 v) 1 0) (ite (is_zero__21 us_tag v) 1 0)) :pattern (
   (is_zero__21 us_tag v)) )))
 
 ;; is_zero__2__def_axiom
@@ -323,19 +319,20 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const v__split_fields Bool)
 
@@ -355,15 +352,15 @@
 
 (declare-const o4 us_private)
 
-(declare-const temp___209 Bool)
+(declare-const temp___235 Bool)
 
-(declare-const temp___2091 integer)
+(declare-const temp___2351 integer)
 
-(declare-const temp___2092 float)
+(declare-const temp___2352 float)
 
-(declare-const temp___2093 us_private)
+(declare-const temp___2353 us_private)
 
-(declare-const temp___2094 Int)
+(declare-const temp___2354 Int)
 
 (declare-const o5 float)
 
@@ -375,15 +372,15 @@
 
 (declare-const o9 us_private)
 
-(declare-const temp___211 Bool)
+(declare-const temp___237 Bool)
 
-(declare-const temp___2111 integer)
+(declare-const temp___2371 integer)
 
-(declare-const temp___2112 float)
+(declare-const temp___2372 float)
 
-(declare-const temp___2113 us_private)
+(declare-const temp___2373 us_private)
 
-(declare-const temp___2114 Int)
+(declare-const temp___2374 Int)
 
 (declare-const result Bool)
 
@@ -462,7 +459,7 @@
   (assert (= result3 v__split_fields3))
 
 ;; H
-  (assert (= (of_int1 0) v__split_fields4))
+  (assert (= (distinct 0 0) v__split_fields4))
 
 ;; H
   (assert (= v__split_fields1 v__split_fields5))
@@ -489,19 +486,19 @@
   (assert (= v__split_fields7 o4))
 
 ;; H
-  (assert (= temp___209 o1))
+  (assert (= temp___235 o1))
 
 ;; H
-  (assert (= temp___2091 o2))
+  (assert (= temp___2351 o2))
 
 ;; H
-  (assert (= temp___2092 o3))
+  (assert (= temp___2352 o3))
 
 ;; H
-  (assert (= temp___2093 o4))
+  (assert (= temp___2353 o4))
 
 ;; H
-  (assert (= v__attr__tag temp___2094))
+  (assert (= v__attr__tag temp___2354))
 
 ;; H
   (assert (= result4 v__split_fields4))
@@ -516,16 +513,16 @@
   (assert (= result7 v__split_fields7))
 
 ;; H
-  (assert (= temp___209 v__split_fields8))
+  (assert (= temp___235 v__split_fields8))
 
 ;; H
-  (assert (= temp___2091 v__split_fields9))
+  (assert (= temp___2351 v__split_fields9))
 
 ;; H
-  (assert (= temp___2092 v__split_fields10))
+  (assert (= temp___2352 v__split_fields10))
 
 ;; H
-  (assert (= temp___2093 v__split_fields11))
+  (assert (= temp___2353 v__split_fields11))
 
 ;; H
   (assert (= (to_rep1 o5) (fp #b0 #b00000000 #b00000000000000000000000)))
@@ -543,19 +540,19 @@
   (assert (= v__split_fields11 o9))
 
 ;; H
-  (assert (= temp___211 o6))
+  (assert (= temp___237 o6))
 
 ;; H
-  (assert (= temp___2111 o7))
+  (assert (= temp___2371 o7))
 
 ;; H
-  (assert (= temp___2112 o8))
+  (assert (= temp___2372 o8))
 
 ;; H
-  (assert (= temp___2113 o9))
+  (assert (= temp___2373 o9))
 
 ;; H
-  (assert (= v__attr__tag temp___2114))
+  (assert (= v__attr__tag temp___2374))
 
 ;; H
   (assert (= result8 v__split_fields8))
@@ -570,16 +567,16 @@
   (assert (= result11 v__split_fields11))
 
 ;; H
-  (assert (= temp___211 v__split_fields12))
+  (assert (= temp___237 v__split_fields12))
 
 ;; H
-  (assert (= temp___2111 v__split_fields13))
+  (assert (= temp___2371 v__split_fields13))
 
 ;; H
-  (assert (= temp___2112 v__split_fields14))
+  (assert (= temp___2372 v__split_fields14))
 
 ;; H
-  (assert (= temp___2113 v__split_fields15))
+  (assert (= temp___2373 v__split_fields15))
 
 ;; H
   (assert (= v__split_fields16 v__split_fields12))

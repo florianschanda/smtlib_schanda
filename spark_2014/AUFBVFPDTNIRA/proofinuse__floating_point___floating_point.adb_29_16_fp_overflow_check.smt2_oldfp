@@ -1095,12 +1095,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_178 t) (temp___is_init_175 Bool)
-  (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_178)))
+(define-fun dynamic_invariant ((temp___expr_208 t) (temp___is_init_204 Bool)
+  (temp___skip_constant_205 Bool) (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_208)))
 
 (declare-const x t)
 
@@ -1116,19 +1116,21 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 180.0)))
+
 (declare-const res t)
 
 (declare-const o t)
 
 (declare-const o1 t)
-
-(declare-const o2 t)
-
-(declare-const o3 t)
-
-(declare-const result t)
-
-(declare-const res1 t)
 
 ;; H
   (assert (tqtisFinite x))
@@ -1141,16 +1143,6 @@
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite res)))
-
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 180.0)))
 
 ;; H
   (assert (and (le fliteral2 x) (le x fliteral3)))
@@ -1165,14 +1157,14 @@
   (assert (le fliteral2 (add RNE1 x y)))
 
 ;; H
-  (assert (and (= o1 (mul RNE1 y z)) (tqtisFinite (mul RNE1 y z))))
+  (assert (and (= o (mul RNE1 y z)) (tqtisFinite (mul RNE1 y z))))
 
 ;; H
-  (assert (= o2 (add RNE1 x o1)))
+  (assert (= o1 (add RNE1 x o)))
 
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 15, characters 0-0
-  (not (tqtisFinite o2)))
+  (not (tqtisFinite o1)))
 (check-sat)
 (exit)

@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -981,20 +981,10 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic z : t
-
-logic o : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite(y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(z))
 
 logic fliteral2 : t
 
@@ -1006,7 +996,8 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0e-1))
 
-axiom H3 : (eq(x, fliteral2) and eq(y, fliteral3))
-
  (* File "generic_float_tests.adb", line 187, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(div(RNE, x, y))
+goal WP_parameter_def :
+  (forall z:t. (tqtisFinite(x) -> (tqtisFinite(y) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(z)) -> ((eq(x, fliteral2) and eq(y,
+  fliteral3)) -> tqtisFinite(div(RNE, x, y)))))))

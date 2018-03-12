@@ -2221,13 +2221,5 @@ logic i : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t1
-
-logic o1 : t1
-
-logic o2 : t1
-
-axiom H : true
-
  (* File "interfac.ads", line 74, characters 0-0 *)
 goal WP_parameter_def : le(fliteral1, of_ubv32(RNE, i))

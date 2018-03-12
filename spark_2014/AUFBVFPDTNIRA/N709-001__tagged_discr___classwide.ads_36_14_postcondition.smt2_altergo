@@ -1585,12 +1585,6 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq6 : bool, bool -> bool
-
-axiom bool_eq_def5 :
-  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1602,6 +1596,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq6 : bool, bool -> bool
+
+axiom bool_eq_def5 :
+  (forall x:bool. forall y:bool [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -1723,63 +1723,31 @@ axiom is_zero__3__def_axiom :
   hide_ext__(v, v1, v2, v6) }; attr__tag = v7 }) = true) and
   (to_rep(v) = 0)) and (to_rep(v1) = 0)) and eq(to_rep1(v2), fliteral1))))
 
-logic v__split_fields : bool
-
-logic v__split_fields1 : integer
-
-logic v__split_fields2 : float1
-
-logic v__split_fields3 : us_private
-
-logic v__split_fields4 : bool
-
-logic v__split_fields5 : integer
-
-logic v__split_fields6 : float1
-
-logic v__split_fields7 : us_private
-
-logic v__split_fields8 : bool
-
-logic v__split_fields9 : integer
-
-logic v__split_fields10 : float1
-
-logic v__split_fields11 : us_private
-
-logic v__split_fields12 : bool
-
-logic v__split_fields13 : integer
-
-logic v__split_fields14 : float1
-
-logic v__split_fields15 : us_private
-
-axiom H : init__specific_post(v__attr__tag, { rec__classwide__t__z =
+ (* File "classwide.ads", line 31, characters 0-0 *)
+goal WP_parameter_def :
+  (forall v__split_fields:bool. forall v__split_fields1:integer.
+  forall v__split_fields2:float1. forall v__split_fields3:us_private.
+  forall v__split_fields4:bool. forall v__split_fields5:integer.
+  forall v__split_fields6:float1. forall v__split_fields7:us_private.
+  forall v__split_fields8:bool. forall v__split_fields9:integer.
+  forall v__split_fields10:float1. forall v__split_fields11:us_private.
+  forall v__split_fields12:bool. forall v__split_fields13:integer.
+  forall v__split_fields14:float1. forall v__split_fields15:us_private.
+  ((init__specific_post(v__attr__tag, { rec__classwide__t__z =
   v__split_fields4; rec__classwide__t__x = v__split_fields5;
   rec__classwide__t__y = v__split_fields6; rec__ext__ = v__split_fields7 },
   v__attr__tag, { rec__classwide__t__z = v__split_fields;
   rec__classwide__t__x = v__split_fields1; rec__classwide__t__y =
-  v__split_fields2; rec__ext__ = v__split_fields3 })
-
-axiom H1 : (v__split_fields8 = v__split_fields4)
-
-axiom H2 : (v__split_fields9 = v__split_fields5)
-
-axiom H3 : (v__split_fields10 = v__split_fields6)
-
-axiom H4 : (v__split_fields11 = v__split_fields7)
-
-axiom H5 : (v__split_fields12 = v__split_fields4)
-
-axiom H6 : (v__split_fields13 = v__split_fields5)
-
-axiom H7 : (v__split_fields14 = v__split_fields6)
-
-axiom H8 : (v__split_fields15 = v__split_fields7)
-
- (* File "classwide.ads", line 31, characters 0-0 *)
-goal WP_parameter_def : (c_is_zero({ us_split_fields1 = {
-  rec__classwide__t__z = v__split_fields8; rec__classwide__t__x =
-  v__split_fields9; rec__classwide__t__y = v__split_fields10; rec__ext__ =
-  v__split_fields11 }; attr__tag = v__attr__tag }) = true)
+  v__split_fields2; rec__ext__ = v__split_fields3 }) and
+  (((v__split_fields8 = v__split_fields4) and
+  ((v__split_fields9 = v__split_fields5) and
+  ((v__split_fields10 = v__split_fields6) and
+  (v__split_fields11 = v__split_fields7)))) and
+  ((v__split_fields12 = v__split_fields4) and
+  ((v__split_fields13 = v__split_fields5) and
+  ((v__split_fields14 = v__split_fields6) and
+  (v__split_fields15 = v__split_fields7)))))) -> (c_is_zero({
+  us_split_fields1 = { rec__classwide__t__z = v__split_fields8;
+  rec__classwide__t__x = v__split_fields9; rec__classwide__t__y =
+  v__split_fields10; rec__ext__ = v__split_fields11 }; attr__tag =
+  v__attr__tag }) = true)))

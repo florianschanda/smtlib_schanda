@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -112,12 +108,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-sort positive_float 0)
 
@@ -142,12 +139,13 @@
 (define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_140 Float32)
-  (temp___is_init_137 Bool) (temp___skip_constant_138 Bool)
-  (temp___do_toplevel_139 Bool)) Bool (=>
-                                      (or (= temp___is_init_137 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (in_range1 temp___expr_140)))
+(define-fun dynamic_invariant1 ((temp___expr_163 Float32)
+  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
+  (temp___do_toplevel_161 Bool)
+  (temp___do_typ_inv_162 Bool)) Bool (=>
+                                     (or (= temp___is_init_159 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range1 temp___expr_163)))
 
 (declare-sort nonnegative_float 0)
 
@@ -199,7 +197,7 @@
 ;; cos__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (let ((result (cos1 x)))
      (and
      (and
@@ -208,7 +206,7 @@
      (fp.leq result (fp #b0 #b01111111 #b00000000000000000000000)))
      (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
      (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000))))
-     (dynamic_invariant result true false true)))) :pattern ((cos1 x)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((cos1 x)) )))
 
 (declare-sort normalized2pi 0)
 
@@ -632,12 +630,13 @@
 
 (declare-fun length__function_guard (Int us_rep2) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_324 Int)
-  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
-  (temp___do_toplevel_323 Bool)) Bool (=>
-                                      (or (= temp___is_init_321 true)
-                                      (<= 0 2147483647)) (in_range5
-                                      temp___expr_324)))
+(define-fun dynamic_invariant2 ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range5
+                                     temp___expr_365)))
 
 ;; length__post_axiom
   (assert
@@ -647,8 +646,8 @@
      (<= result (to_rep4
                 (rec__algorithm__gap_vectors__list__capacity
                 (us_split_discrs1 container))))
-     (dynamic_invariant2 result true false true))) :pattern ((length
-                                                             container)) )))
+     (dynamic_invariant2 result true false true true))) :pattern ((length
+                                                                  container)) )))
 
 (declare-datatypes ()
 ((element_type__ref (mk_element_type__ref (element_type__content us_rep1)))))
@@ -918,22 +917,23 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep2) Bool)
 
-(define-fun dynamic_invariant3 ((temp___expr_577 us_rep2)
-  (temp___is_init_574 Bool) (temp___skip_constant_575 Bool)
-  (temp___do_toplevel_576 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_575 true))
-                                      (in_range6 1000 temp___expr_577)))
+(define-fun dynamic_invariant3 ((temp___expr_640 us_rep2)
+  (temp___is_init_636 Bool) (temp___skip_constant_637 Bool)
+  (temp___do_toplevel_638 Bool)
+  (temp___do_typ_inv_639 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_637 true))
+                                     (in_range6 1000 temp___expr_640)))
 
-(define-fun default_initial_assumption ((temp___expr_579 us_rep2)
-  (temp___skip_top_level_580 Bool)) Bool (and
+(define-fun default_initial_assumption ((temp___expr_642 us_rep2)
+  (temp___skip_top_level_643 Bool)) Bool (and
                                          (= (to_rep4
                                             (rec__algorithm__gap_vectors__list__capacity
                                             (us_split_discrs1
-                                            temp___expr_579))) 1000)
+                                            temp___expr_642))) 1000)
                                          (=>
                                          (not
-                                         (= temp___skip_top_level_580 true))
-                                         (= (is_empty temp___expr_579) true))))
+                                         (= temp___skip_top_level_643 true))
+                                         (= (is_empty temp___expr_642) true))))
 
 (declare-datatypes ()
 ((us_split_fields8
@@ -1048,29 +1048,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int us_rep6) Int Int (Array Int us_rep6) Int
-  Int) (Array Int us_rep6))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int us_rep6)) (b (Array Int us_rep6)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (us_rep6 Int) (Array Int us_rep6))
-
-;; singleton_def
-  (assert
-  (forall ((v us_rep6))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq7 ((a (Array Int us_rep6)) (a__first Int) (a__last Int)
   (b (Array Int us_rep6)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -1078,12 +1055,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_133 Int))
+                           (forall ((temp___idx_155 Int))
                            (=>
-                           (and (<= a__first temp___idx_133)
-                           (<= temp___idx_133 a__last))
-                           (= (bool_eq6 (select a temp___idx_133)
-                              (select b (+ (- b__first a__first) temp___idx_133))) true))))
+                           (and (<= a__first temp___idx_155)
+                           (<= temp___idx_155 a__last))
+                           (= (bool_eq6 (select a temp___idx_155)
+                              (select b (+ (- b__first a__first) temp___idx_155))) true))))
                       true false))
 
 ;; bool_eq_rev
@@ -1095,10 +1072,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_133 Int))
-  (=> (and (<= a__first temp___idx_133) (<= temp___idx_133 a__last))
-  (= (bool_eq6 (select a temp___idx_133)
-     (select b (+ (- b__first a__first) temp___idx_133))) true))))))))
+  (forall ((temp___idx_155 Int))
+  (=> (and (<= a__first temp___idx_155) (<= temp___idx_155 a__last))
+  (= (bool_eq6 (select a temp___idx_155)
+     (select b (+ (- b__first a__first) temp___idx_155))) true))))))))
 
 (declare-const gapvec__split_discrs us_split_discrs)
 
@@ -1155,32 +1132,35 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(define-fun dynamic_invariant4 ((temp___expr_146 Float32)
-  (temp___is_init_143 Bool) (temp___skip_constant_144 Bool)
-  (temp___do_toplevel_145 Bool)) Bool (=>
-                                      (or (= temp___is_init_143 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (in_range2 temp___expr_146)))
+(define-fun dynamic_invariant4 ((temp___expr_170 Float32)
+  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
+  (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range2 temp___expr_170)))
 
-(define-fun dynamic_invariant5 ((temp___expr_170 Float32)
-  (temp___is_init_167 Bool) (temp___skip_constant_168 Bool)
-  (temp___do_toplevel_169 Bool)) Bool (=>
-                                      (or (= temp___is_init_167 true)
-                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                      (in_range3 temp___expr_170)))
+(define-fun dynamic_invariant5 ((temp___expr_198 Float32)
+  (temp___is_init_194 Bool) (temp___skip_constant_195 Bool)
+  (temp___do_toplevel_196 Bool)
+  (temp___do_typ_inv_197 Bool)) Bool (=>
+                                     (or (= temp___is_init_194 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
+                                     (in_range3 temp___expr_198)))
 
-(define-fun dynamic_invariant6 ((temp___expr_286 Int)
-  (temp___is_init_283 Bool) (temp___skip_constant_284 Bool)
-  (temp___do_toplevel_285 Bool)) Bool (=>
-                                      (or (= temp___is_init_283 true)
-                                      (<= (- 1) 1)) (in_range4
-                                      temp___expr_286)))
+(define-fun dynamic_invariant6 ((temp___expr_323 Int)
+  (temp___is_init_319 Bool) (temp___skip_constant_320 Bool)
+  (temp___do_toplevel_321 Bool)
+  (temp___do_typ_inv_322 Bool)) Bool (=>
+                                     (or (= temp___is_init_319 true)
+                                     (<= (- 1) 1)) (in_range4
+                                     temp___expr_323)))
 
-(define-fun default_initial_assumption1 ((temp___expr_413 us_rep3)
-  (temp___skip_top_level_414 Bool)) Bool (= (to_rep4
+(define-fun default_initial_assumption1 ((temp___expr_466 us_rep3)
+  (temp___skip_top_level_467 Bool)) Bool (= (to_rep4
                                             (rec__algorithm__gap_vectors__cursor__node
                                             (us_split_fields7
-                                            temp___expr_413))) 0))
+                                            temp___expr_466))) 0))
 
 (declare-const no_element us_rep3)
 
@@ -1211,11 +1191,11 @@
   (forall ((a us_rep4) (b us_rep4))
   (! (= (user_eq10 a b) (oeq a b)) :pattern ((user_eq10 a b)) )))
 
-(define-fun default_initial_assumption2 ((temp___expr_449 us_rep4)
-  (temp___skip_top_level_450 Bool)) Bool (=>
+(define-fun default_initial_assumption2 ((temp___expr_507 us_rep4)
+  (temp___skip_top_level_508 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_450 true))
-                                         (= (length1 temp___expr_449) 0)))
+                                         (= temp___skip_top_level_508 true))
+                                         (= (length1 temp___expr_507) 0)))
 
 ;; model____post_axiom
   (assert
@@ -1231,23 +1211,23 @@
 
 (declare-fun is_empty__function_guard1 (Bool us_rep5) Bool)
 
-(define-fun default_initial_assumption3 ((temp___expr_468 us_rep5)
-  (temp___skip_top_level_469 Bool)) Bool (=>
+(define-fun default_initial_assumption3 ((temp___expr_529 us_rep5)
+  (temp___skip_top_level_530 Bool)) Bool (=>
                                          (not
-                                         (= temp___skip_top_level_469 true))
+                                         (= temp___skip_top_level_530 true))
                                          (and
-                                         (= (is_empty1 temp___expr_468) true)
-                                         (= (length2 temp___expr_468) 0))))
+                                         (= (is_empty1 temp___expr_529) true)
+                                         (= (length2 temp___expr_529) 0))))
 
 (declare-fun has_key (us_rep5 us_rep3) Bool)
 
 (declare-fun has_key__function_guard (Bool us_rep5 us_rep3) Bool)
 
-(define-fun default_initial_assumption4 ((temp___expr_456 us_rep3)
-  (temp___skip_top_level_457 Bool)) Bool (= (to_rep4
+(define-fun default_initial_assumption4 ((temp___expr_515 us_rep3)
+  (temp___skip_top_level_516 Bool)) Bool (= (to_rep4
                                             (rec__algorithm__gap_vectors__cursor__node
                                             (us_split_fields7
-                                            temp___expr_456))) 0))
+                                            temp___expr_515))) 0))
 
 ;; positions__post_axiom
   (assert
@@ -1303,19 +1283,20 @@
 (define-fun extended_index__ref___projection ((a extended_index__ref)) extended_index
   (extended_index__content a))
 
-(define-fun dynamic_invariant7 ((temp___expr_442 Int)
-  (temp___is_init_439 Bool) (temp___skip_constant_440 Bool)
-  (temp___do_toplevel_441 Bool)) Bool (=>
-                                      (or (= temp___is_init_439 true)
-                                      (<= 0 2147483647)) (in_range8
-                                      temp___expr_442)))
+(define-fun dynamic_invariant7 ((temp___expr_499 Int)
+  (temp___is_init_495 Bool) (temp___skip_constant_496 Bool)
+  (temp___do_toplevel_497 Bool)
+  (temp___do_typ_inv_498 Bool)) Bool (=>
+                                     (or (= temp___is_init_495 true)
+                                     (<= 0 2147483647)) (in_range8
+                                     temp___expr_499)))
 
 ;; length__post_axiom
   (assert
   (forall ((container us_rep4))
   (! (let ((result (length1 container)))
      (and (<= (+ 0 result) 2147483647) (dynamic_invariant2 result true false
-     true))) :pattern ((length1 container)) )))
+     true true))) :pattern ((length1 container)) )))
 
 ;; get__post_axiom
   (assert true)
@@ -1324,7 +1305,7 @@
   (assert
   (forall ((container us_rep5))
   (forall ((key us_rep3))
-  (! (=> (= (of_int1 0) true)
+  (! (=> (= (distinct 0 0) true)
      (=>
      (exists ((k us_rep3))
      (and (= (has_key container k) true) (= (bool_eq3 k key) true)))
@@ -1350,12 +1331,13 @@
 (define-fun element_type__ref___3__projection ((a element_type__ref2)) element_type
   (element_type__content2 a))
 
-(define-fun dynamic_invariant8 ((temp___expr_461 Int)
-  (temp___is_init_458 Bool) (temp___skip_constant_459 Bool)
-  (temp___do_toplevel_460 Bool)) Bool (=>
-                                      (or (= temp___is_init_458 true)
-                                      (<= 1 2147483647)) (in_range9
-                                      temp___expr_461)))
+(define-fun dynamic_invariant8 ((temp___expr_521 Int)
+  (temp___is_init_517 Bool) (temp___skip_constant_518 Bool)
+  (temp___do_toplevel_519 Bool)
+  (temp___do_typ_inv_520 Bool)) Bool (=>
+                                     (or (= temp___is_init_517 true)
+                                     (<= 1 2147483647)) (in_range9
+                                     temp___expr_521)))
 
 (declare-fun witness (us_rep5 us_rep3) Int)
 
@@ -1372,19 +1354,20 @@
   (! (=> (= (has_key container key) true)
      (let ((result (get1 container key)))
      (and
-     (=> (= (of_int1 0) true)
+     (=> (= (distinct 0 0) true)
      (and (= result (w_get container (witness container key)))
      (forall ((k us_rep3))
      (=> (= (has_key container k) true)
      (= (= (bool_eq3 k key) true)
      (= (witness container key) (witness container k)))))))
-     (dynamic_invariant8 result true false true)))) :pattern ((get1 container
-                                                              key)) ))))
+     (dynamic_invariant8 result true false true true)))) :pattern ((get1
+                                                                   container
+                                                                   key)) ))))
 
 ;; length__post_axiom
   (assert
   (forall ((container us_rep5)) (! (dynamic_invariant2 (length2 container)
-  true false true) :pattern ((length2 container)) )))
+  true false true true) :pattern ((length2 container)) )))
 
 ;; ole__post_axiom
   (assert
@@ -1426,113 +1409,64 @@
   (! (=> (= (has_key container key) true)
      (let ((result (witness container key)))
      (and (= (has_witness container result) true) (dynamic_invariant2 result
-     true false true)))) :pattern ((witness container key)) ))))
+     true false true true)))) :pattern ((witness container key)) ))))
 
 ;; w_get__post_axiom
   (assert
   (forall ((container us_rep5))
   (forall ((witness1 Int))
   (! (=>
-     (and (dynamic_invariant2 witness1 true true true)
+     (and (dynamic_invariant2 witness1 true true true true)
      (= (has_witness container witness1) true)) (dynamic_invariant8
-     (w_get container witness1) true false true)) :pattern ((w_get container
-                                                            witness1)) ))))
-
-(declare-const gapvec__split_fields us_main_type)
-
-(declare-const rayr__split_fields nonnegative_float)
-
-(declare-const rayr__split_fields1 normalized2pi)
-
-(declare-const rayl__split_fields nonnegative_float)
-
-(declare-const rayl__split_fields1 normalized2pi)
+     (w_get container witness1) true false true true)) :pattern ((w_get
+                                                                 container
+                                                                 witness1)) ))))
 
 (declare-const i Int)
 
-(declare-const o Float32)
+(declare-const temp___889 nonnegative_float)
 
-(declare-const o1 Float32)
+(declare-const temp___8891 normalized2pi)
+
+(declare-const temp___888 nonnegative_float)
+
+(declare-const temp___8881 normalized2pi)
+
+(declare-const temp___887 us_rep2)
+
+(declare-const temp___886 Int)
+
+(declare-const algorithm__buildgapvector__B_9__dist__assume Float32)
+
+(declare-const o us_rep1)
+
+(declare-const o1 us_rep1)
 
 (declare-const o2 Float32)
 
 (declare-const o3 Float32)
 
-(declare-const o4 Float32)
+(declare-const rayr__split_fields us_split_fields8)
 
-(declare-const o5 Float32)
+(declare-const rayl__split_fields us_split_fields8)
 
-(declare-const o6 Float32)
+(declare-const gapvec__split_fields us_split_fields4)
 
-(declare-const o7 Float32)
+(declare-const result int__ref)
 
-(declare-const o8 Float32)
-
-(declare-const o9 Float32)
-
-(declare-const o10 Float32)
-
-(declare-const o11 Float32)
-
-(declare-const algorithm__buildgapvector__B_7__dist__assume Float32)
-
-(declare-const o12 normalized2pi)
-
-(declare-const o13 float)
-
-(declare-const o14 idir_t)
-
-(declare-const temp___820 nonnegative_float)
-
-(declare-const temp___8201 normalized2pi)
-
-(declare-const temp___819 nonnegative_float)
-
-(declare-const temp___8191 normalized2pi)
-
-(declare-const temp___818 us_rep2)
-
-(declare-const temp___817 Int)
-
-(declare-const algorithm__buildgapvector__B_9__dist__assume Float32)
-
-(declare-const o15 us_rep1)
-
-(declare-const o16 us_rep1)
-
-(declare-const o17 Float32)
-
-(declare-const o18 Float32)
-
-(declare-const o19 Float32)
-
-(declare-const o20 Float32)
-
-(declare-const o21 Float32)
-
-(declare-const o22 Float32)
-
-(declare-const o23 Float32)
-
-(declare-const o24 Float32)
-
-(declare-const o25 Float32)
-
-(declare-const o26 Float32)
-
-(declare-const o27 Float32)
-
-(declare-const o28 Float32)
-
-(declare-const algorithm__buildgapvector__B_10__dist__assume Float32)
-
-(declare-const o29 us_rep1)
-
-(declare-const algorithm__gap_vectors__clear__container__fields us_split_fields4)
-
-(declare-const result us_split_fields__ref2)
+(declare-const i1 Int)
 
 (declare-const gapvec__split_fields1 us_split_fields4)
+
+(declare-const rayr__split_fields1 us_split_fields8)
+
+(declare-const rayl__split_fields1 us_split_fields8)
+
+(declare-const i2 Int)
+
+(declare-const rho us_split_fields4)
+
+(declare-const rho1 us_split_fields4)
 
 (declare-const result1 us_split_fields__ref4)
 
@@ -1548,45 +1482,27 @@
 
 (declare-const gapvec__split_fields2 us_split_fields4)
 
-(declare-const result4 int__ref)
+(declare-const algorithm__gap_vectors__append__container__fields1 us_split_fields4)
 
-(declare-const i1 Int)
+(declare-const result4 us_split_fields__ref2)
 
 (declare-const gapvec__split_fields3 us_split_fields4)
 
-(declare-const rayr__split_fields3 us_split_fields8)
+(declare-const gapvec__split_fields4 us_split_fields__ref2)
 
-(declare-const rayl__split_fields3 us_split_fields8)
+(declare-const rayr__split_fields3 us_split_fields__ref4)
 
-(declare-const i2 Int)
+(declare-const rayl__split_fields3 us_split_fields__ref4)
 
-(declare-const rho us_split_fields4)
-
-(declare-const rho1 us_split_fields4)
-
-(declare-const result5 us_split_fields__ref4)
-
-(declare-const rayr__split_fields4 us_split_fields8)
-
-(declare-const result6 us_split_fields__ref4)
-
-(declare-const rayl__split_fields4 us_split_fields8)
-
-(declare-const algorithm__gap_vectors__append__container__fields1 us_split_fields4)
-
-(declare-const result7 us_split_fields__ref2)
-
-(declare-const gapvec__split_fields4 us_split_fields4)
-
-(declare-const algorithm__gap_vectors__append__container__fields2 us_split_fields4)
-
-(declare-const result8 us_split_fields__ref2)
+(declare-const i3 int__ref)
 
 (declare-const gapvec__split_fields5 us_split_fields4)
 
-(declare-const result9 int__ref)
+(declare-const rayr__split_fields4 us_split_fields8)
 
-(declare-const i3 Int)
+(declare-const rayl__split_fields4 us_split_fields8)
+
+(declare-const i4 Int)
 
 (declare-const gapvec__split_fields6 us_split_fields__ref2)
 
@@ -1594,7 +1510,7 @@
 
 (declare-const rayl__split_fields5 us_split_fields__ref4)
 
-(declare-const i4 int__ref)
+(declare-const i5 int__ref)
 
 (declare-const gapvec__split_fields7 us_split_fields4)
 
@@ -1602,49 +1518,15 @@
 
 (declare-const rayl__split_fields6 us_split_fields8)
 
-(declare-const i5 Int)
+(declare-const i6 Int)
 
-(declare-const gapvec__split_fields8 us_split_fields__ref2)
+(declare-const result5 us_split_fields__ref4)
 
-(declare-const rayr__split_fields7 us_split_fields__ref4)
+(declare-const rayr__split_fields7 us_split_fields8)
 
-(declare-const rayl__split_fields7 us_split_fields__ref4)
+(declare-const result6 us_split_fields__ref4)
 
-(declare-const i6 int__ref)
-
-(declare-const gapvec__split_fields9 us_split_fields4)
-
-(declare-const rayr__split_fields8 us_split_fields8)
-
-(declare-const rayl__split_fields8 us_split_fields8)
-
-(declare-const i7 Int)
-
-(declare-const gapvec__split_fields10 us_split_fields__ref2)
-
-(declare-const rayr__split_fields9 us_split_fields__ref4)
-
-(declare-const rayl__split_fields9 us_split_fields__ref4)
-
-(declare-const i8 int__ref)
-
-(declare-const gapvec__split_fields11 us_split_fields4)
-
-(declare-const rayr__split_fields10 us_split_fields8)
-
-(declare-const rayl__split_fields10 us_split_fields8)
-
-(declare-const i9 Int)
-
-(declare-const result10 us_split_fields__ref4)
-
-(declare-const rayr__split_fields11 us_split_fields8)
-
-(declare-const result11 us_split_fields__ref4)
-
-(declare-const rayl__split_fields11 us_split_fields8)
-
-(declare-const algorithm__gap_vectors__append__container__fields3 us_split_fields4)
+(declare-const rayl__split_fields7 us_split_fields8)
 
 ;; H
   (assert
@@ -1665,10 +1547,10 @@
   (and
   (= (to_rep4
      (rec__algorithm__gap_vectors__list__capacity gapvec__split_discrs)) 1000)
-  (<= (length (mk___rep2 gapvec__split_discrs gapvec__split_fields2)) 1)))
+  (<= (length (mk___rep2 gapvec__split_discrs gapvec__split_fields)) 1)))
 
 ;; H
-  (assert (= result4 (mk_int__ref i)))
+  (assert (= result (mk_int__ref i)))
 
 ;; H
   (assert (= i1 2))
@@ -1676,59 +1558,244 @@
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (and
-  (and
-  (= (mk___split_fields4 temp___820
-     (mk___rep (mk___split_fields temp___8201))) rayl__split_fields2)
-  (and
-  (= (mk___split_fields4 temp___819
-     (mk___rep (mk___split_fields temp___8191))) rayr__split_fields2)
-  (and (= temp___818 (mk___rep2 gapvec__split_discrs gapvec__split_fields2))
-  (and (= temp___817 i1)
-  (and
+  (= (mk___split_fields4 temp___889
+     (mk___rep (mk___split_fields temp___8891))) rayl__split_fields)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= (mk___split_fields4 temp___888
+     (mk___rep (mk___split_fields temp___8881))) rayr__split_fields)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= temp___887 (mk___rep2 gapvec__split_discrs gapvec__split_fields))))
+
+;; H
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (= temp___886 i1)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
   (and
   (= (to_rep4
      (rec__algorithm__gap_vectors__list__capacity gapvec__split_discrs)) 1000)
-  (< (length (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
-  i2))
-  (and (and (=> (<= 2 999) (in_range7 i2)) (and (<= 2 i2) (<= i2 999)))
-  (and
-  (and (= result5 (mk___split_fields__ref4 rayr__split_fields3))
-  (= rayr__split_fields4 rayl__split_fields3))
-  (and
-  (and (= result6 (mk___split_fields__ref4 rayl__split_fields3))
-  (= rayl__split_fields4 (us_split_fields9 (select laserscan i2))))
-  (and
-  (and
-  (and
+  (< (length (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
+  i2))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (and (=> (<= 2 999) (in_range7 i2)) (and (<= 2 i2) (<= i2 999)))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= result1 (mk___split_fields__ref4 rayr__split_fields1))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayr__split_fields2 rayl__split_fields1)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= result2 (mk___split_fields__ref4 rayl__split_fields1))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayl__split_fields2 (us_split_fields9 (select laserscan i2)))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
   (and
   (= algorithm__buildgapvector__B_9__dist__assume (fp.sub RNE (to_rep
                                                               (rec__algorithm__laser_scan_data__first
-                                                              rayl__split_fields4))
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields4))))
+                                                              rayl__split_fields2))
+  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields2))))
   (fp.isFinite32 (fp.sub RNE (to_rep
                              (rec__algorithm__laser_scan_data__first
-                             rayl__split_fields4)) (to_rep
+                             rayl__split_fields2)) (to_rep
                                                    (rec__algorithm__laser_scan_data__first
-                                                   rayr__split_fields4)))))
-  (= algorithm__buildgapvector__B_9__dist__assume dist1))
-  (fp.isFinite32 dist1))
+                                                   rayr__split_fields2)))))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= algorithm__buildgapvector__B_9__dist__assume dist1)))
+
+;; H
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (fp.isFinite32 dist1)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (or (fp.leq mingapwidth dist1)
   (and
-  (ite (or (fp.leq mingapwidth dist1)
-       (and
-       (fp.eq (to_rep
-              (rec__algorithm__laser_scan_data__first rayl__split_fields4))
-       fmaxrange)
-       (fp.lt (to_rep
-              (rec__algorithm__laser_scan_data__first rayr__split_fields4))
-       fmaxrange)))
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)))
+  (= o (create__2
+       (rec__algorithm__laser_scan_data__second rayr__split_fields2)
+       (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+       (- 1))))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)))
   (and
   (and
   (and
-  (= o15 (create__2
-         (rec__algorithm__laser_scan_data__second rayr__split_fields4)
-         (to_rep
-         (rec__algorithm__laser_scan_data__first rayr__split_fields4)) (- 1)))
+  (and
+  (and
+  (= (length
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields)) (+ (length
+                                                            (mk___rep2
+                                                            gapvec__split_discrs
+                                                            gapvec__split_fields1)) 1))
+  (= (get1
+     (positions
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields))
+     (last1
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields))) (length
+                                                          (mk___rep2
+                                                          gapvec__split_discrs
+                                                          algorithm__gap_vectors__append__container__fields))))
+  (= (keys_included_except
+     (positions
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields))
+     (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
+     (last1
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields))) true))
+  (= (ole1 (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
+     (positions
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields))) true))
+  (= (bool_eq1
+     (get
+     (model__
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields))
+     (length
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields))) o) true))
+  (= (ole (model__ (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
+     (model__
+     (mk___rep2 gapvec__split_discrs
+     algorithm__gap_vectors__append__container__fields))) true)))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))) (= result3 (mk___split_fields__ref2 gapvec__split_fields1)))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)))
+  (= gapvec__split_fields2 algorithm__gap_vectors__append__container__fields))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))) (= algorithm__gap_vectors__append__container__fields1
+  rho1))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))))
+  (=>
+  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)))
+  (= o1 (create__2
+        (rec__algorithm__laser_scan_data__second rayl__split_fields2)
+        (to_rep (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+        1))))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))))
+  (=>
+  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)))
   (and
   (and
   (and
@@ -1739,7 +1806,7 @@
      algorithm__gap_vectors__append__container__fields1)) (+ (length
                                                              (mk___rep2
                                                              gapvec__split_discrs
-                                                             gapvec__split_fields3)) 1))
+                                                             gapvec__split_fields1)) 1))
   (= (get1
      (positions
      (mk___rep2 gapvec__split_discrs
@@ -1754,11 +1821,11 @@
      (positions
      (mk___rep2 gapvec__split_discrs
      algorithm__gap_vectors__append__container__fields1))
-     (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
+     (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
      (last1
      (mk___rep2 gapvec__split_discrs
      algorithm__gap_vectors__append__container__fields1))) true))
-  (= (ole1 (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
+  (= (ole1 (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
      (positions
      (mk___rep2 gapvec__split_discrs
      algorithm__gap_vectors__append__container__fields1))) true))
@@ -1769,200 +1836,321 @@
      algorithm__gap_vectors__append__container__fields1))
      (length
      (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields1))) o15) true))
-  (= (ole (model__ (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
+     algorithm__gap_vectors__append__container__fields1))) o1) true))
+  (= (ole (model__ (mk___rep2 gapvec__split_discrs gapvec__split_fields1))
      (model__
      (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields1))) true)))
-  (and (= result7 (mk___split_fields__ref2 gapvec__split_fields3))
-  (= gapvec__split_fields4 algorithm__gap_vectors__append__container__fields1)))
-  (= algorithm__gap_vectors__append__container__fields2 rho1))
-  (and
-  (ite (or (fp.leq dist1 (fp.neg mingapwidth))
-       (and
-       (fp.eq (to_rep
-              (rec__algorithm__laser_scan_data__first rayr__split_fields4))
-       fmaxrange)
-       (fp.lt (to_rep
-              (rec__algorithm__laser_scan_data__first rayl__split_fields4))
-       fmaxrange)))
-  (and
-  (and
-  (= o16 (create__2
-         (rec__algorithm__laser_scan_data__second rayl__split_fields4)
-         (to_rep
-         (rec__algorithm__laser_scan_data__first rayl__split_fields4)) 1))
-  (and
-  (and
-  (and
-  (and
-  (and
-  (= (length
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2)) (+ (length
-                                                             (mk___rep2
-                                                             gapvec__split_discrs
-                                                             gapvec__split_fields3)) 1))
-  (= (get1
-     (positions
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2))
-     (last1
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2))) (length
-                                                           (mk___rep2
-                                                           gapvec__split_discrs
-                                                           algorithm__gap_vectors__append__container__fields2))))
-  (= (keys_included_except
-     (positions
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2))
-     (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
-     (last1
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2))) true))
-  (= (ole1 (positions (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
-     (positions
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2))) true))
-  (= (bool_eq1
-     (get
-     (model__
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2))
-     (length
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2))) o16) true))
-  (= (ole (model__ (mk___rep2 gapvec__split_discrs gapvec__split_fields3))
-     (model__
-     (mk___rep2 gapvec__split_discrs
-     algorithm__gap_vectors__append__container__fields2))) true)))
-  (and (= result8 (mk___split_fields__ref2 gapvec__split_fields3))
-  (= gapvec__split_fields5 algorithm__gap_vectors__append__container__fields2)))
-  (and (= gapvec__split_fields5 gapvec__split_fields3)
-  (and (= algorithm__gap_vectors__append__container__fields2 rho1)
-  (= gapvec__split_fields5 gapvec__split_fields3))))
-  (and (= gapvec__split_fields4 gapvec__split_fields5)
-  (and (= algorithm__gap_vectors__append__container__fields1 rho)
-  (= gapvec__split_fields4 gapvec__split_fields5))))) (= i2 999)))))))))))
-  (and
-  (and (= i6 (mk_int__ref i2))
-  (and (= rayl__split_fields7 (mk___split_fields__ref4 rayl__split_fields4))
-  (and (= rayr__split_fields7 (mk___split_fields__ref4 rayr__split_fields4))
-  (= gapvec__split_fields8 (mk___split_fields__ref2 gapvec__split_fields4)))))
-  (and (= i7 i2)
-  (and (= rayl__split_fields8 rayl__split_fields4)
-  (and (= rayr__split_fields8 rayr__split_fields4)
-  (= gapvec__split_fields9 gapvec__split_fields4))))))))
-
-;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i8 i6)))
+     algorithm__gap_vectors__append__container__fields1))) true))))))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= rayl__split_fields9 rayl__split_fields7)))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))))
+  (=>
+  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange))) (= result4 (mk___split_fields__ref2 gapvec__split_fields1))))))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= rayr__split_fields9 rayr__split_fields7)))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))))
+  (=>
+  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)))
+  (= gapvec__split_fields3 algorithm__gap_vectors__append__container__fields1)))))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= gapvec__split_fields10 gapvec__split_fields8)))
-
-;; H
-  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i9 i7)))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))))
+  (=>
+  (not
+  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)))) (= gapvec__split_fields3 gapvec__split_fields1)))))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= rayl__split_fields10 rayl__split_fields8)))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))))
+  (=>
+  (not
+  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)))) (= algorithm__gap_vectors__append__container__fields1
+  rho1)))))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= rayr__split_fields10 rayr__split_fields8)))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange))))
+  (=>
+  (not
+  (or (fp.leq dist1 (fp.neg mingapwidth))
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)))) (= gapvec__split_fields3 gapvec__split_fields1)))))
 
 ;; H
   (assert
   (=> (and (<= 2 i1) (<= i1 999))
-  (= gapvec__split_fields11 gapvec__split_fields9)))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)))) (= gapvec__split_fields2 gapvec__split_fields3))))
 
 ;; H
-  (assert (=> (not (and (<= 2 i1) (<= i1 999))) (= i8 (mk_int__ref i1))))
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)))) (= algorithm__gap_vectors__append__container__fields
+  rho))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (=>
+  (not
+  (or (fp.leq mingapwidth dist1)
+  (and
+  (fp.eq (to_rep
+         (rec__algorithm__laser_scan_data__first rayl__split_fields2))
+  fmaxrange)
+  (fp.lt (to_rep
+         (rec__algorithm__laser_scan_data__first rayr__split_fields2))
+  fmaxrange)))) (= gapvec__split_fields2 gapvec__split_fields3))))
+
+;; H
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i2 999)))
+
+;; H
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i3 (mk_int__ref i2))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayl__split_fields3 (mk___split_fields__ref4 rayl__split_fields2))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayr__split_fields3 (mk___split_fields__ref4 rayr__split_fields2))))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= gapvec__split_fields4 (mk___split_fields__ref2 gapvec__split_fields2))))
+
+;; H
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i4 i2)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayl__split_fields4 rayl__split_fields2)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayr__split_fields4 rayr__split_fields2)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= gapvec__split_fields5 gapvec__split_fields2)))
+
+;; H
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i5 i3)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayl__split_fields5 rayl__split_fields3)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayr__split_fields5 rayr__split_fields3)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= gapvec__split_fields6 gapvec__split_fields4)))
+
+;; H
+  (assert (=> (and (<= 2 i1) (<= i1 999)) (= i6 i4)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayl__split_fields6 rayl__split_fields4)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= rayr__split_fields6 rayr__split_fields4)))
+
+;; H
+  (assert
+  (=> (and (<= 2 i1) (<= i1 999))
+  (= gapvec__split_fields7 gapvec__split_fields5)))
+
+;; H
+  (assert (=> (not (and (<= 2 i1) (<= i1 999))) (= i5 (mk_int__ref i1))))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= rayl__split_fields9 (mk___split_fields__ref4 rayl__split_fields2))))
+  (= rayl__split_fields5 (mk___split_fields__ref4 rayl__split_fields))))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= rayr__split_fields9 (mk___split_fields__ref4 rayr__split_fields2))))
+  (= rayr__split_fields5 (mk___split_fields__ref4 rayr__split_fields))))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= gapvec__split_fields10 (mk___split_fields__ref2 gapvec__split_fields2))))
+  (= gapvec__split_fields6 (mk___split_fields__ref2 gapvec__split_fields))))
 
 ;; H
-  (assert (=> (not (and (<= 2 i1) (<= i1 999))) (= i9 i1)))
-
-;; H
-  (assert
-  (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= rayl__split_fields10 rayl__split_fields2)))
+  (assert (=> (not (and (<= 2 i1) (<= i1 999))) (= i6 i1)))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= rayr__split_fields10 rayr__split_fields2)))
+  (= rayl__split_fields6 rayl__split_fields)))
 
 ;; H
   (assert
   (=> (not (and (<= 2 i1) (<= i1 999)))
-  (= gapvec__split_fields11 gapvec__split_fields2)))
-
-;; H
-  (assert (= result10 rayr__split_fields9))
+  (= rayr__split_fields6 rayr__split_fields)))
 
 ;; H
   (assert
-  (= rayr__split_fields11 (us_split_fields9 (select laserscan 1000))))
+  (=> (not (and (<= 2 i1) (<= i1 999)))
+  (= gapvec__split_fields7 gapvec__split_fields)))
 
 ;; H
-  (assert (= result11 rayl__split_fields9))
+  (assert (= result5 rayr__split_fields5))
 
 ;; H
-  (assert (= rayl__split_fields11 (us_split_fields9 (select laserscan 1))))
+  (assert (= rayr__split_fields7 (us_split_fields9 (select laserscan 1000))))
+
+;; H
+  (assert (= result6 rayl__split_fields5))
+
+;; H
+  (assert (= rayl__split_fields7 (us_split_fields9 (select laserscan 1))))
 
 ;; H
   (assert
   (and
-  (= o22 (ccwdiff
-         (rec__algorithm__laser_scan_data__second rayr__split_fields11)
-         (rec__algorithm__laser_scan_data__second rayl__split_fields11)))
-  (fp.isFinite32 o22)))
+  (= o2 (ccwdiff
+        (rec__algorithm__laser_scan_data__second rayr__split_fields7)
+        (rec__algorithm__laser_scan_data__second rayl__split_fields7)))
+  (fp.isFinite32 o2)))
 
 ;; H
   (assert
-  (and (= o23 (cos1 o22))
-  (and (fp.isFinite32 o23)
+  (and (= o3 (cos1 o2))
+  (and (fp.isFinite32 o3)
   (and
   (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-  o23) (fp.leq o23 (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=> (fp.eq o22 (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o23 (fp #b0 #b01111111 #b00000000000000000000000)))))))
+  o3) (fp.leq o3 (fp #b0 #b01111111 #b00000000000000000000000)))
+  (=> (fp.eq o2 (fp #b0 #b00000000 #b00000000000000000000000))
+  (fp.eq o3 (fp #b0 #b01111111 #b00000000000000000000000)))))))
 
 (assert
 ;; WP_parameter_def
  ;; File "algorithm.adb", line 132, characters 0-0
   (not
   (fp.isFinite32 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000)
-  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields11))))))
+  (to_rep (rec__algorithm__laser_scan_data__first rayr__split_fields7))))))
 (check-sat)
 (exit)

@@ -968,14 +968,10 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-axiom H : in_range1(x)
-
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 360.0))
 
  (* File "normalize.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral4))
+goal WP_parameter_def : (in_range1(x) -> (not is_zero(fliteral4)))

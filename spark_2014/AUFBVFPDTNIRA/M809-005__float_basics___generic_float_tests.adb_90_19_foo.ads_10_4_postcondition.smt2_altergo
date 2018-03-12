@@ -947,56 +947,23 @@ logic a : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic foo__float_tests__inverse_reciprocal__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic result : t
-
-logic foo__float_tests__inverse_reciprocal__result1 : t
-
-logic foo__float_tests__inverse_reciprocal__result2 : t
-
-logic foo__float_tests__inverse_reciprocal__result3 : t
-
-logic foo__float_tests__inverse_reciprocal__result4 : t
-
-logic foo__float_tests__inverse_reciprocal__result5 : t
-
-logic result1 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : lt(fliteral, a)
-
-axiom H2 :
-  (foo__float_tests__inverse_reciprocal__result1 = foo__float_tests__inverse_reciprocal__result2)
-
-axiom H3 :
-  (foo__float_tests__inverse_reciprocal__result3 = foo__float_tests__inverse_reciprocal__result1)
-
-axiom H4 : ((o = div(RNE, fliteral, a)) and tqtisFinite(div(RNE, fliteral,
-  a)))
-
-axiom H5 : (o1 = div(RNE, fliteral, o))
-
-axiom H6 : ((o2 = o1) and tqtisFinite(o1))
-
-axiom H7 : (result = foo__float_tests__inverse_reciprocal__result)
-
-axiom H8 : (foo__float_tests__inverse_reciprocal__result1 = o2)
-
-axiom H9 :
-  (foo__float_tests__inverse_reciprocal__result4 = foo__float_tests__inverse_reciprocal__result2)
-
-axiom H10 :
-  (foo__float_tests__inverse_reciprocal__result5 = foo__float_tests__inverse_reciprocal__result3)
-
-axiom H11 : (result1 = foo__float_tests__inverse_reciprocal__result4)
-
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : eq(foo__float_tests__inverse_reciprocal__result4, a)
+goal WP_parameter_def :
+  (forall foo__float_tests__inverse_reciprocal__result:t. forall o:t.
+  forall o1:t. forall o2:t. forall result:t.
+  forall foo__float_tests__inverse_reciprocal__result1:t.
+  forall foo__float_tests__inverse_reciprocal__result2:t.
+  forall foo__float_tests__inverse_reciprocal__result3:t.
+  forall foo__float_tests__inverse_reciprocal__result4:t.
+  forall foo__float_tests__inverse_reciprocal__result5:t.
+  (forall result1:t. ((tqtisFinite(a) and (lt(fliteral, a) and
+  (((((foo__float_tests__inverse_reciprocal__result1 = foo__float_tests__inverse_reciprocal__result2) and
+  (foo__float_tests__inverse_reciprocal__result3 = foo__float_tests__inverse_reciprocal__result1)) and
+  (((((o = div(RNE, fliteral, a)) and tqtisFinite(div(RNE, fliteral, a))) and
+  (o1 = div(RNE, fliteral, o))) and ((o2 = o1) and tqtisFinite(o1))) and
+  ((result = foo__float_tests__inverse_reciprocal__result) and
+  (foo__float_tests__inverse_reciprocal__result1 = o2)))) and
+  ((foo__float_tests__inverse_reciprocal__result4 = foo__float_tests__inverse_reciprocal__result2) and
+  (foo__float_tests__inverse_reciprocal__result5 = foo__float_tests__inverse_reciprocal__result3))) and
+  (result1 = foo__float_tests__inverse_reciprocal__result4)))) ->
+  eq(foo__float_tests__inverse_reciprocal__result4, a))))

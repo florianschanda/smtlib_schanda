@@ -81,24 +81,21 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
-(define-fun dynamic_invariant1 ((temp___expr_182 (_ BitVec 32))
-  (temp___is_init_179 Bool) (temp___skip_constant_180 Bool)
-  (temp___do_toplevel_181 Bool)) Bool true)
+(define-fun dynamic_invariant1 ((temp___expr_212 (_ BitVec 32))
+  (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
+  (temp___do_toplevel_210 Bool) (temp___do_typ_inv_211 Bool)) Bool true)
 
 (declare-const x Float32)
 
@@ -112,31 +109,33 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(define-fun dynamic_invariant2 ((temp___expr_1342 Float32)
-  (temp___is_init_1339 Bool) (temp___skip_constant_1340 Bool)
-  (temp___do_toplevel_1341 Bool)) Bool (=>
-                                       (or (= temp___is_init_1339 true)
-                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (fp.isFinite32 temp___expr_1342)))
+(define-fun dynamic_invariant2 ((temp___expr_1564 Float32)
+  (temp___is_init_1560 Bool) (temp___skip_constant_1561 Bool)
+  (temp___do_toplevel_1562 Bool)
+  (temp___do_typ_inv_1563 Bool)) Bool (=>
+                                      (or (= temp___is_init_1560 true)
+                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                      (fp.isFinite32 temp___expr_1564)))
 
 (declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
 
-(define-fun dynamic_invariant3 ((temp___expr_1348 (_ BitVec 32))
-  (temp___is_init_1345 Bool) (temp___skip_constant_1346 Bool)
-  (temp___do_toplevel_1347 Bool)) Bool true)
+(define-fun dynamic_invariant3 ((temp___expr_1571 (_ BitVec 32))
+  (temp___is_init_1567 Bool) (temp___skip_constant_1568 Bool)
+  (temp___do_toplevel_1569 Bool) (temp___do_typ_inv_1570 Bool)) Bool true)
 
 (declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 32))
 
-(define-fun dynamic_invariant4 ((temp___expr_1354 (_ BitVec 32))
-  (temp___is_init_1351 Bool) (temp___skip_constant_1352 Bool)
-  (temp___do_toplevel_1353 Bool)) Bool true)
+(define-fun dynamic_invariant4 ((temp___expr_1578 (_ BitVec 32))
+  (temp___is_init_1574 Bool) (temp___skip_constant_1575 Bool)
+  (temp___do_toplevel_1576 Bool) (temp___do_typ_inv_1577 Bool)) Bool true)
 
-(define-fun dynamic_invariant5 ((temp___expr_1360 Float32)
-  (temp___is_init_1357 Bool) (temp___skip_constant_1358 Bool)
-  (temp___do_toplevel_1359 Bool)) Bool (=>
-                                       (or (= temp___is_init_1357 true)
-                                       (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                       (fp.isFinite32 temp___expr_1360)))
+(define-fun dynamic_invariant5 ((temp___expr_1585 Float32)
+  (temp___is_init_1581 Bool) (temp___skip_constant_1582 Bool)
+  (temp___do_toplevel_1583 Bool)
+  (temp___do_typ_inv_1584 Bool)) Bool (=>
+                                      (or (= temp___is_init_1581 true)
+                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                      (fp.isFinite32 temp___expr_1585)))
 
 (declare-const half_x Float32)
 
@@ -242,15 +241,19 @@
 ;; H
   (assert (fp.isFinite32 y1))
 
+;; H
+  (assert (= magic_num1 #x5F3759DF))
+
+;; H
+  (assert true)
+
+;; H
+  (assert true)
+
 (declare-const abstr7 (_ BitVec 32))
 
 ;; H
-  (assert (= magic_num1 abstr7))
-
-(declare-const abstr8 (_ BitVec 32))
-
-;; H
-  (assert (= o abstr8))
+  (assert (= o abstr7))
 
 ;; H
   (assert (= i1 o))
@@ -258,15 +261,15 @@
 ;; H
   (assert (= i1 result4))
 
-(declare-const abstr9 (_ BitVec 32))
+(declare-const abstr8 (_ BitVec 32))
 
 ;; H
-  (assert (= i2 (bvsub magic_num1 (bvlshr i1 abstr9))))
+  (assert (= i2 (bvsub magic_num1 (bvlshr i1 abstr8))))
 
-(declare-const abstr10 Float32)
+(declare-const abstr9 Float32)
 
 ;; H
-  (assert (and (= o1 abstr10) (fp.isFinite32 o1)))
+  (assert (and (= o1 abstr9) (fp.isFinite32 o1)))
 
 ;; H
   (assert (= y1 result5))

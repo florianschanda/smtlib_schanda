@@ -933,7 +933,7 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
 axiom arctanh__post_axiom :
-  (forall x:t [arctanh(x)]. ((tqtisFinite(x) and neq(abs1(x), fliteral)) ->
+  (forall x:t [arctanh(x)]. ((tqtisFinite(x) and lt(abs1(x), fliteral)) ->
   ((eq(x, fliteral1) -> eq(arctanh(x), fliteral1)) and
   tqtisFinite(arctanh(x)))))
 
@@ -941,9 +941,5 @@ logic lf : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t
-
-axiom H : tqtisFinite(lf)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : neq(abs1(lf), fliteral)
+goal WP_parameter_def : (tqtisFinite(lf) -> lt(abs1(lf), fliteral))

@@ -954,43 +954,13 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic foo__double_tests__bad_optimisation_1__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic foo__double_tests__bad_optimisation_1__result1 : t
-
-logic foo__double_tests__bad_optimisation_1__result2 : t
-
-logic foo__double_tests__bad_optimisation_1__result3 : t
-
-logic foo__double_tests__bad_optimisation_1__result4 : t
-
-logic foo__double_tests__bad_optimisation_1__result5 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H2 : neq(b, fliteral1)
-
-axiom H3 : ((o = div(RNE, fliteral, b)) and tqtisFinite(div(RNE, fliteral,
-  b)))
-
-axiom H4 : (o1 = mul(RNE, a, o))
-
  (* File "generic_float_tests.ads", line 2, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o1)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. (tqtisFinite(a) -> (tqtisFinite(b) -> (neq(b,
+  fliteral1) -> ((((o = div(RNE, fliteral, b)) and tqtisFinite(div(RNE,
+  fliteral, b))) and (o1 = mul(RNE, a, o))) -> tqtisFinite(o1))))))

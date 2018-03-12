@@ -963,13 +963,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic u : t
-
-logic o : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : (le(fliteral1, fliteral2) -> in_range1(u))
-
  (* File "range_check.adb", line 26, characters 0-0 *)
-goal WP_parameter_def : in_range1(x)
+goal WP_parameter_def :
+  (forall u:t. (tqtisFinite(x) -> ((le(fliteral1, fliteral2) ->
+  in_range1(u)) -> in_range1(x))))

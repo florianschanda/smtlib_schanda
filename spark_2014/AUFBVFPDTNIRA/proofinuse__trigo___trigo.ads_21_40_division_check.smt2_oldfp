@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun pow21 (t) t)
 
@@ -1088,14 +1088,14 @@
 ;; pow2__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow21 x)
-     true false true)) :pattern ((pow21 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (pow21 x) true false true true)) :pattern ((pow21 x)) )))
 
 ;; pow2__def_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true) (= (pow21 x) (mul RNE1 x x))) :pattern (
-  (pow21 x)) )))
+  (! (=> (dynamic_invariant x true true true true)
+     (= (pow21 x) (mul RNE1 x x))) :pattern ((pow21 x)) )))
 
 (declare-fun pow4 (t) t)
 
@@ -1104,13 +1104,13 @@
 ;; pow4__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow4 x)
-     true false true)) :pattern ((pow4 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (pow4 x) true false true true)) :pattern ((pow4 x)) )))
 
 ;; pow4__def_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (pow4 x) (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x))) :pattern (
   (pow4 x)) )))
 
@@ -1121,13 +1121,13 @@
 ;; pow6__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow6 x)
-     true false true)) :pattern ((pow6 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (pow6 x) true false true true)) :pattern ((pow6 x)) )))
 
 ;; pow6__def_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (pow6 x) (mul RNE1
                  (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x))) :pattern (
   (pow6 x)) )))
@@ -1139,13 +1139,13 @@
 ;; pow8__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (pow8 x)
-     true false true)) :pattern ((pow8 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (pow8 x) true false true true)) :pattern ((pow8 x)) )))
 
 ;; pow8__def_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (pow8 x) (mul RNE1
                  (mul RNE1
                  (mul RNE1
@@ -1155,6 +1155,21 @@
 (declare-const x t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 40320.0)))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 720.0)))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 24.0)))
 
 (declare-const o t)
 
@@ -1166,55 +1181,34 @@
 
 (declare-const o4 t)
 
-(declare-const o5 t)
-
-(declare-const o6 t)
-
-(declare-const o7 t)
-
 ;; H
   (assert (tqtisFinite x))
 
 ;; H
   (assert
-  (and (= o6 (pow8 x))
-  (and (tqtisFinite o6)
-  (= o6 (mul RNE1
+  (and (= o3 (pow8 x))
+  (and (tqtisFinite o3)
+  (= o3 (mul RNE1
         (mul RNE1
         (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x)
         x) x)))))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 40320.0)))
-
 ;; H
-  (assert (= o7 (div1 RNE1 o6 fliteral2)))
+  (assert (= o4 (div1 RNE1 o3 fliteral2)))
 
 ;; H
   (assert
-  (and (= o4 (pow6 x))
-  (and (tqtisFinite o4)
-  (= o4 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x)))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 720.0)))
+  (and (= o1 (pow6 x))
+  (and (tqtisFinite o1)
+  (= o1 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x) x) x)))))
 
 ;; H
-  (assert (= o5 (div1 RNE1 o4 fliteral3)))
+  (assert (= o2 (div1 RNE1 o1 fliteral3)))
 
 ;; H
   (assert
-  (and (= o2 (pow4 x))
-  (and (tqtisFinite o2) (= o2 (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x)))))
-
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 24.0)))
+  (and (= o (pow4 x))
+  (and (tqtisFinite o) (= o (mul RNE1 (mul RNE1 (mul RNE1 x x) x) x)))))
 
 (assert
 ;; WP_parameter_def

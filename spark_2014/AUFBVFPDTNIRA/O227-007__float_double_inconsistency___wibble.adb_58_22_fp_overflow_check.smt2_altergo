@@ -2121,12 +2121,6 @@ type t__ref1 = { t__content1 : t1
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int5 : bool -> int
 
 axiom to_int_def4 :
@@ -2138,6 +2132,12 @@ logic of_int5 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int5(i)]. (((i = 0) -> (of_int5(i) = false)) and
   ((not (i = 0)) -> (of_int5(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -2199,7 +2199,15 @@ type t5
 
 logic attr__ATTRIBUTE_MODULUS : t
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(1000000)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 1000000)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 1000000))
 
@@ -2260,22 +2268,6 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic state : t1
-
-logic o : t1
-
-logic result : t1
-
-logic state1 : t1
-
-logic state2 : t1
-
-logic state3 : t1
-
-axiom H : tqtisFinite(state)
-
-axiom H1 : in_range2(x)
-
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -2286,9 +2278,9 @@ logic fliteral2 : t1
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 10.0))
 
-axiom H2 : (ult(x, of_int(1000000)) and ((state = fliteral1) or
-  (le(fliteral2, state) and le(state, mul1(RNE, of_ubv32(RNE, x),
-  fliteral2)))))
-
  (* File "wibble.adb", line 45, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add1(RNE, state, fliteral2))
+goal WP_parameter_def :
+  (forall state:t1. (tqtisFinite(state) -> (in_range2(x) -> ((ult(x,
+  rliteral1) and ((state = fliteral1) or (le(fliteral2, state) and le(state,
+  mul1(RNE, of_ubv32(RNE, x), fliteral2))))) -> tqtisFinite(add1(RNE, state,
+  fliteral2))))))

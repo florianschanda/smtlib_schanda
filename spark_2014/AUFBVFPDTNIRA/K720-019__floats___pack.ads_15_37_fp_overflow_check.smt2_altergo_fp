@@ -1066,45 +1066,19 @@ logic r2 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic pack__add__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic pack__add__result1 : t
-
-logic pack__add__result2 : t
-
-logic pack__add__result3 : t
-
-logic pack__add__result4 : t
-
-logic pack__add__result5 : t
-
-axiom H : tqtisFinite(r1)
-
-axiom H1 : tqtisFinite(r2)
-
-axiom H2 : (lt(r1, fliteral) and (lt(r2, fliteral) and (lt(neg(fliteral),
-  r1) and lt(neg(fliteral), r2))))
-
-axiom H3 : (pack__add__result1 = pack__add__result2)
-
-axiom H4 : (pack__add__result3 = pack__add__result1)
-
-axiom H5 : ((o = add(NearestTiesToEven, r1, r2)) and
-  tqtisFinite(add(NearestTiesToEven, r1, r2)))
-
-axiom H6 : (result = pack__add__result)
-
-axiom H7 : (pack__add__result1 = o)
-
-axiom H8 : (pack__add__result4 = pack__add__result2)
-
-axiom H9 : (pack__add__result5 = pack__add__result3)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, r1, r2))
+goal WP_parameter_def :
+  (forall pack__add__result:t. forall o:t. forall result:t.
+  forall pack__add__result1:t. forall pack__add__result2:t.
+  forall pack__add__result3:t. forall pack__add__result4:t.
+  forall pack__add__result5:t. (tqtisFinite(r1) -> (tqtisFinite(r2) ->
+  ((lt(r1, fliteral) and (lt(r2, fliteral) and (lt(neg(fliteral), r1) and
+  lt(neg(fliteral), r2)))) ->
+  (((((pack__add__result1 = pack__add__result2) and
+  (pack__add__result3 = pack__add__result1)) and
+  (((o = add(NearestTiesToEven, r1, r2)) and
+  tqtisFinite(add(NearestTiesToEven, r1, r2))) and (({ t__content = result
+  } = { t__content = pack__add__result }) and (pack__add__result1 = o)))) and
+  (({ t__content = pack__add__result4 } = { t__content = pack__add__result2
+  }) and (pack__add__result5 = pack__add__result3))) ->
+  tqtisFinite(add(NearestTiesToEven, r1, r2)))))))

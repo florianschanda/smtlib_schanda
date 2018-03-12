@@ -935,24 +935,10 @@ function rt__ref___projection(a: rt__ref) : rt = (a).rt__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic x : t
-
-logic result : t
-
-logic x1 : t
-
-logic x2 : t
-
-axiom H : (result = x)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.100000001490116119384765625))
-
-axiom H1 : (x1 = fliteral3)
-
-axiom H2 : in_range1(x1)
 
 logic fliteral4 : t
 
@@ -960,4 +946,6 @@ axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 999.59997558593750))
 
  (* File "test_float.adb", line 6, characters 0-0 *)
-goal WP_parameter_def : le(x1, fliteral4)
+goal WP_parameter_def :
+  (forall x:t. forall result:t. forall x1:t. (((result = x) and
+  (x1 = fliteral3)) -> (in_range1(x1) -> le(x1, fliteral4))))

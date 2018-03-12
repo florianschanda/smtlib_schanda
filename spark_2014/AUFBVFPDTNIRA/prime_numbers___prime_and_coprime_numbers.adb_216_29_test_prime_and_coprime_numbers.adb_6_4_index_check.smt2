@@ -157,10 +157,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -189,12 +185,12 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 (declare-sort value_type 0)
 
@@ -215,12 +211,13 @@
 (define-fun value_type__ref___projection ((a value_type__ref)) value_type
   (value_type__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 Int)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true)
-                                      (<= 0 2147483647)) (in_range2
-                                      temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 2147483647)) (in_range2
+                                     temp___expr_208)))
 
 (declare-sort tnumber_list_typeD1 0)
 
@@ -262,29 +259,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int Bool) Int Int (Array Int Bool) Int
-  Int) (Array Int Bool))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (Bool Int) (Array Int Bool))
-
-;; singleton_def
-  (assert
-  (forall ((v Bool))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq ((a (Array Int Bool)) (a__first Int) (a__last Int)
   (b (Array Int Bool)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -292,11 +266,11 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (select a temp___idx_132) (select b (+ (- b__first a__first) temp___idx_132))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (select a temp___idx_154) (select b (+ (- b__first a__first) temp___idx_154))))))
                       true false))
 
 ;; bool_eq_rev
@@ -308,94 +282,9 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (select a temp___idx_132) (select b (+ (- b__first a__first) temp___idx_132))))))))))
-
-(declare-fun compare ((Array Int Bool) Int Int (Array Int Bool) Int Int) Int)
-
-;; compare_def_eq
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (= (compare a a_first a_last b b_first b_last) 0)
-     (= (bool_eq a a_first a_last b b_first b_last) true)) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_lt
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< (compare a a_first a_last b b_first b_last) 0)
-     (exists ((i Int) (j Int))
-     (and (<= i a_last)
-     (and (< j b_last)
-     (and (= (bool_eq a a_first i b b_first j) true)
-     (or (= i a_last)
-     (and (< i a_last)
-     (< (to_int2 (select a (+ i 1))) (to_int2 (select b (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-;; compare_def_gt
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (! (= (< 0 (compare a a_first a_last b b_first b_last))
-     (exists ((i Int) (j Int))
-     (and (<= i b_last)
-     (and (< j a_last)
-     (and (= (bool_eq a a_first j b b_first i) true)
-     (or (= i b_last)
-     (and (< i b_last)
-     (< (to_int2 (select b (+ i 1))) (to_int2 (select a (+ j 1))))))))))) :pattern (
-  (compare a a_first a_last b b_first b_last)) ))))
-
-(declare-fun xorb ((Array Int Bool) Int Int (Array Int Bool) Int
-  Int) (Array Int Bool))
-
-(declare-fun andb ((Array Int Bool) Int Int (Array Int Bool) Int
-  Int) (Array Int Bool))
-
-(declare-fun orb ((Array Int Bool) Int Int (Array Int Bool) Int
-  Int) (Array Int Bool))
-
-(declare-fun notb ((Array Int Bool) Int Int) (Array Int Bool))
-
-;; op_def
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (orb a a_first a_last b b_first b_last) i) (or (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
-  (orb a a_first a_last b b_first b_last) i)) )))))
-
-;; op_def
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (andb a a_first a_last b b_first b_last) i) (and (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
-  (andb a a_first a_last b b_first b_last) i)) )))))
-
-;; op_def
-  (assert
-  (forall ((a (Array Int Bool)) (b (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (xorb a a_first a_last b b_first b_last) i) (xor (select a i) (select b (+ (- i a_first) b_first))))) :pattern ((select
-  (xorb a a_first a_last b b_first b_last) i)) )))))
-
-;; notb_def
-  (assert
-  (forall ((a (Array Int Bool)))
-  (forall ((a_first Int) (a_last Int))
-  (forall ((i Int))
-  (! (=> (and (<= a_first i) (<= i a_last))
-     (= (select (notb a a_first a_last) i) (not (select a i)))) :pattern ((select
-  (notb a a_first a_last) i)) )))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (select a temp___idx_154) (select b (+ (- b__first a__first) temp___idx_154))))))))))
 
 (declare-fun is_prime (Int) Bool)
 
@@ -478,13 +367,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun temp___250 (Bool) (Array Int Bool))
+(declare-fun temp___285 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
-  (forall ((temp___252 Bool))
-  (forall ((temp___253 Int))
-  (= (select (temp___250 temp___252) temp___253) temp___252))))
+  (forall ((temp___287 Bool))
+  (forall ((temp___288 Int))
+  (= (select (temp___285 temp___287) temp___288) temp___287))))
 
 (declare-const is_prime1 (Array Int Bool))
 
@@ -496,71 +385,11 @@
 
 (declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
 
-(declare-const temp___260 (Array Int Bool))
-
-(declare-const temp___259 Int)
-
-(declare-const temp___258 Int)
-
-(declare-const temp___257 Int)
-
 (declare-const v Int)
 
 (declare-const o Bool)
 
 (declare-const o1 Int)
-
-(declare-const v1 Int)
-
-(declare-const div2 Int)
-
-(declare-const o2 Bool)
-
-(declare-const o3 Int)
-
-(declare-const o4 Int)
-
-(declare-const o5 Int)
-
-(declare-const temp___255 (Array Int Bool))
-
-(declare-const temp___254 Int)
-
-(declare-const o6 Int)
-
-(declare-const o7 (Array Int Bool))
-
-(declare-const v2 Int)
-
-(declare-const o8 Bool)
-
-(declare-const o9 Int)
-
-(declare-const v3 Int)
-
-(declare-const div3 Int)
-
-(declare-const o10 Int)
-
-(declare-const o11 Bool)
-
-(declare-const o12 Bool)
-
-(declare-const o13 Bool)
-
-(declare-const o14 Bool)
-
-(declare-const o15 Int)
-
-(declare-const o16 Int)
-
-(declare-const o17 Int)
-
-(declare-const o18 (Array Int Bool))
-
-(declare-const index_11 Int)
-
-(declare-const index_31 Int)
 
 (declare-const result (Array Int Bool))
 
@@ -580,135 +409,11 @@
 
 (declare-const is_prime5 (Array Int Bool))
 
-(declare-const index_12 Int)
+(declare-const index_11 Int)
 
-(declare-const index_32 Int)
+(declare-const index_31 Int)
 
 (declare-const index_22 Int)
-
-(declare-const result4 Bool)
-
-(declare-const result5 Int)
-
-(declare-const index_13 Int)
-
-(declare-const result6 Int)
-
-(declare-const index_33 Int)
-
-(declare-const result7 (Array Int Bool))
-
-(declare-const is_prime6 (Array Int Bool))
-
-(declare-const is_prime7 (Array Int Bool))
-
-(declare-const index_34 Int)
-
-(declare-const result8 Bool)
-
-(declare-const result9 Int)
-
-(declare-const index_35 Int)
-
-(declare-const result10 (Array Int Bool))
-
-(declare-const is_prime8 (Array Int Bool))
-
-(declare-const is_prime9 (Array Int Bool))
-
-(declare-const index_36 Int)
-
-(declare-const is_prime10 (Array Int Bool))
-
-(declare-const index_37 Int)
-
-(declare-const is_prime11 (Array Int Bool))
-
-(declare-const index_38 Int)
-
-(declare-const is_prime12 (Array Int Bool))
-
-(declare-const index_39 Int)
-
-(declare-const is_prime13 (Array Int Bool))
-
-(declare-const index_14 Int)
-
-(declare-const index_310 int__ref)
-
-(declare-const is_prime14 (Array Int Bool))
-
-(declare-const index_15 Int)
-
-(declare-const index_311 Int)
-
-(declare-const result11 int__ref)
-
-(declare-const index_23 Int)
-
-(declare-const is_prime15 map__ref)
-
-(declare-const index_16 int__ref)
-
-(declare-const index_312 int__ref)
-
-(declare-const index_24 int__ref)
-
-(declare-const is_prime16 (Array Int Bool))
-
-(declare-const index_17 Int)
-
-(declare-const index_313 Int)
-
-(declare-const index_25 Int)
-
-(declare-const is_prime17 map__ref)
-
-(declare-const index_18 int__ref)
-
-(declare-const index_314 int__ref)
-
-(declare-const index_26 int__ref)
-
-(declare-const is_prime18 (Array Int Bool))
-
-(declare-const index_19 Int)
-
-(declare-const index_315 Int)
-
-(declare-const index_27 Int)
-
-(declare-const is_prime19 map__ref)
-
-(declare-const index_110 int__ref)
-
-(declare-const index_316 int__ref)
-
-(declare-const index_28 int__ref)
-
-(declare-const is_prime20 (Array Int Bool))
-
-(declare-const index_111 Int)
-
-(declare-const index_317 Int)
-
-(declare-const index_29 Int)
-
-(declare-const is_prime21 map__ref)
-
-(declare-const index_112 int__ref)
-
-(declare-const index_318 int__ref)
-
-(declare-const index_210 int__ref)
-
-(declare-const is_prime22 (Array Int Bool))
-
-(declare-const index_113 Int)
-
-(declare-const index_319 Int)
-
-(declare-const index_211 Int)
 
 ;; H
   (assert (=> (<= 0 2147483647) (in_range2 index_1)))
@@ -720,19 +425,19 @@
   (assert (= (mk_map__ref result) (mk_map__ref is_prime1)))
 
 ;; H
-  (assert (= is_prime2 (temp___250 (of_int1 1))))
+  (assert (= is_prime2 (temp___285 (distinct 1 0))))
 
 ;; H
   (assert (= is_prime2 result1))
 
 ;; H
-  (assert (= is_prime3 (store is_prime2 0 (of_int1 0))))
+  (assert (= is_prime3 (store is_prime2 0 (distinct 0 0))))
 
 ;; H
   (assert (= is_prime3 result2))
 
 ;; H
-  (assert (= is_prime4 (store is_prime3 1 (of_int1 0))))
+  (assert (= is_prime4 (store is_prime3 1 (distinct 0 0))))
 
 ;; H
   (assert
@@ -767,45 +472,45 @@
 
 ;; H
   (assert
-  (forall ((v4 Int))
-  (=> (and (<= 0 v4) (<= v4 index_22))
-  (= (= (select is_prime5 v4) true) (= (is_prime v4) true)))))
+  (forall ((v1 Int))
+  (=> (and (<= 0 v1) (<= v1 index_22))
+  (= (= (select is_prime5 v1) true) (= (is_prime v1) true)))))
 
 ;; H
   (assert
-  (forall ((v4 Int))
-  (=> (and (<= index_22 v4) (<= v4 100000))
-  (= (= (select is_prime5 v4) true)
-  (forall ((div4 Int))
-  (=> (and (<= 2 div4) (<= div4 (- index_22 1))) (not (= (mod2 v4 div4) 0))))))))
+  (forall ((v1 Int))
+  (=> (and (<= index_22 v1) (<= v1 100000))
+  (= (= (select is_prime5 v1) true)
+  (forall ((div2 Int))
+  (=> (and (<= 2 div2) (<= div2 (- index_22 1))) (not (= (mod2 v1 div2) 0))))))))
 
 ;; H
   (assert
   (and
   (and
-  (and (=> (<= 2 r87b) (dynamic_property 2 r87b index_22))
-  (=> (<= 0 2147483647) (in_range2 index_12)))
-  (=> (<= (- 2147483648) 2147483647) (in_range1 index_32)))
+  (and (=> (<= (- 2147483648) 2147483647) (in_range1 index_31))
+  (=> (<= 2 r87b) (dynamic_property 2 r87b index_22)))
+  (=> (<= 0 2147483647) (in_range2 index_11)))
   (and (<= 2 index_22) (<= index_22 r87b))))
 
 ;; H
-  (assert (<= index_22 v1))
+  (assert (<= index_22 v))
 
 ;; H
-  (assert (<= v1 100000))
+  (assert (<= v 100000))
 
 ;; H
   (assert
-  (= (= o2 true)
-  (forall ((div4 Int))
-  (=> (and (<= 2 div4) (<= div4 (- index_22 1))) (not (= (mod2 v1 div4) 0))))))
+  (= (= o true)
+  (forall ((div2 Int))
+  (=> (and (<= 2 div2) (<= div2 (- index_22 1))) (not (= (mod2 v div2) 0))))))
 
 ;; H
-  (assert (= o3 (to_int2 o2)))
+  (assert (= o1 (ite o 1 0)))
 
 (assert
 ;; WP_parameter_def
- ;; File "prime_and_coprime_numbers.ads", line 3, characters 0-0
-  (not (<= 0 v1)))
+ ;; File "prime_and_coprime_numbers.adb", line 205, characters 0-0
+  (not (<= 0 v)))
 (check-sat)
 (exit)

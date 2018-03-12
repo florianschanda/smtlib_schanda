@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1010,52 +1010,28 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic i : int
-
-logic o : int
-
-logic result : int
-
-logic i1 : int
-
-logic i2 : int
-
-logic i3 : int
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(i))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 4096.0))
-
-axiom H2 : (le(neg(fliteral1), x) and le(x, fliteral1))
-
-axiom H3 : ((o = to_int(RNA, x)) and in_range2(to_int(RNA, x)))
-
-axiom H4 : (result = i)
-
-axiom H5 : (i1 = o)
-
-axiom H6 : (i1 = i2)
-
-axiom H7 : (i3 = i1)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 1.60000002384185791015625))
 
-axiom H8 : ((bool_eq(x, neg(fliteral2)) = true) -> (i2 = (- 2)))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 1.50000000000000000000000))
 
-axiom H9 : (bool_eq(x, neg(fliteral3)) = true)
-
  (* File "generic_float_tests.adb", line 351, characters 0-0 *)
-goal WP_parameter_def : (i2 = (- 2))
+goal WP_parameter_def :
+  (forall i:int. forall o:int. forall result:int. forall i1:int.
+  forall i2:int. forall i3:int. (tqtisFinite(x) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(i)) -> ((le(neg(fliteral1),
+  x) and le(x, fliteral1)) -> (((((o = to_int(RNA, x)) and
+  in_range2(to_int(RNA, x))) and ((result = i) and (i1 = o))) and
+  ((i1 = i2) and (i3 = i1))) -> ((((bool_eq(x, neg(fliteral2)) = true) and
+  (i2 = (- 2))) or (not (bool_eq(x, neg(fliteral2)) = true))) -> ((bool_eq(x,
+  neg(fliteral3)) = true) -> (i2 = (- 2)))))))))

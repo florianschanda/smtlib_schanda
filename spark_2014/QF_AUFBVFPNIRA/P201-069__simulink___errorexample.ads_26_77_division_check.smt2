@@ -165,27 +165,24 @@
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
-(define-fun dynamic_invariant ((temp___expr_177 (_ BitVec 32))
-  (temp___is_init_174 Bool) (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_207 (_ BitVec 32))
+  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
+  (temp___do_toplevel_205 Bool) (temp___do_typ_inv_206 Bool)) Bool true)
 
 (declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
 
-(declare-const abstr28 (_ BitVec 32))
-
-(declare-const abstr29 (_ BitVec 32))
-
-(define-fun in_range ((x (_ BitVec 32))) Bool (and (bvule abstr29 x)
-                                              (bvule x abstr28)))
+(define-fun in_range ((x (_ BitVec 32))) Bool (and (bvule #x00000001 x)
+                                              (bvule x #x00000064)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 1 x) (<= x 100)))
 
-(define-fun dynamic_invariant1 ((temp___expr_201 (_ BitVec 32))
-  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
-  (temp___do_toplevel_200 Bool)) Bool (=>
-                                      (or (= temp___is_init_198 true)
-                                      (bvule abstr29 abstr28)) (in_range
-                                      temp___expr_201)))
+(define-fun dynamic_invariant1 ((temp___expr_235 (_ BitVec 32))
+  (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
+  (temp___do_toplevel_233 Bool)
+  (temp___do_typ_inv_234 Bool)) Bool (=>
+                                     (or (= temp___is_init_231 true)
+                                     (bvule #x00000001 #x00000064)) (in_range
+                                     temp___expr_235)))
 
 (declare-const requested_force (_ BitVec 32))
 
@@ -220,12 +217,16 @@
 (declare-const abs_out13 (_ BitVec 32))
 
 ;; H
-  (assert (in_range calculated_force))
-
-(declare-const abstr30 (_ BitVec 32))
+  (assert true)
 
 ;; H
-  (assert (not (= requested_force abstr30)))
+  (assert (in_range calculated_force))
+
+;; H
+  (assert true)
+
+;; H
+  (assert (not (= requested_force #x00000000)))
 
 (assert
 ;; WP_parameter_def

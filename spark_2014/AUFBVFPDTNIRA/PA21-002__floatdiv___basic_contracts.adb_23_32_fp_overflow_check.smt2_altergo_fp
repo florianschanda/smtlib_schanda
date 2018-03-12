@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1152,55 +1152,21 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
-
-logic basic_contracts__average_orig__result : t
-
-logic o : t
-
-logic result : t
-
-logic res1 : t
-
-logic result1 : t
-
-logic basic_contracts__average_orig__result1 : t
-
-logic basic_contracts__average_orig__result2 : t
-
-logic basic_contracts__average_orig__result3 : t
-
-logic res2 : t
-
-logic basic_contracts__average_orig__result4 : t
-
-logic res3 : t
-
-logic basic_contracts__average_orig__result5 : t
-
-axiom H : in_range2(numerator)
-
-axiom H1 : in_range2(denominator)
-
-axiom H2 : ((0 <= numerator) and (0 <  denominator))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
-
-axiom H3 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(res))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
-axiom H4 : le(fliteral2, of_int(NearestTiesToEven, numerator))
-
-axiom H5 : le(fliteral, of_int(NearestTiesToEven, denominator))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(div(NearestTiesToEven,
-  of_int(NearestTiesToEven, numerator), of_int(NearestTiesToEven,
-  denominator)))
+goal WP_parameter_def :
+  (forall res:t. (in_range2(numerator) -> (in_range2(denominator) ->
+  (((0 <= numerator) and (0 <  denominator)) -> ((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(res)) -> (le(fliteral2, of_int(NearestTiesToEven,
+  numerator)) -> (le(fliteral, of_int(NearestTiesToEven, denominator)) ->
+  tqtisFinite(div(NearestTiesToEven, of_int(NearestTiesToEven, numerator),
+  of_int(NearestTiesToEven, denominator))))))))))

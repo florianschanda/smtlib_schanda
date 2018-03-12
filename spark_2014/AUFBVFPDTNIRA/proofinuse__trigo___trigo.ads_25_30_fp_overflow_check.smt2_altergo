@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1045,53 +1045,22 @@ axiom pow8__def_axiom :
   mul(RNE, mul(RNE, mul(RNE, mul(RNE, mul(RNE, x1, x1), x1), x1), x1), x1),
   x1), x1))))
 
-logic trigo__cos__result : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic result : t
-
-logic trigo__cos__result1 : t
-
-logic trigo__cos__result2 : t
-
-logic trigo__cos__result3 : t
-
-logic trigo__cos__result4 : t
-
-logic trigo__cos__result5 : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : (le(neg(fliteral), x) and le(x, fliteral))
-
-axiom H2 : (trigo__cos__result1 = trigo__cos__result2)
-
-axiom H3 : (trigo__cos__result3 = trigo__cos__result1)
-
-axiom H4 : ((o = cos(x)) and (tqtisFinite(o) and ((le(neg(fliteral), o) and
-  le(o, fliteral)) and (eq(x, fliteral1) -> eq(o, fliteral)))))
-
-axiom H5 : (result = trigo__cos__result)
-
-axiom H6 : (trigo__cos__result1 = o)
-
-axiom H7 : (trigo__cos__result4 = trigo__cos__result2)
-
-axiom H8 : (trigo__cos__result5 = trigo__cos__result3)
-
-axiom H9 : ((o1 = approx_cos(x)) and (tqtisFinite(o1) and (o1 = add(RNE,
-  sub(RNE, add(RNE, sub(RNE, fliteral, div(RNE, pow21(x), fliteral2)),
-  div(RNE, pow4(x), fliteral3)), div(RNE, pow6(x), fliteral4)), div(RNE,
-  pow8(x), fliteral5)))))
-
-axiom H10 : (o2 = sub(RNE, trigo__cos__result4, o1))
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o2)
+goal WP_parameter_def :
+  (forall trigo__cos__result:t. forall o:t. forall o1:t. forall o2:t.
+  forall result:t. forall trigo__cos__result1:t.
+  forall trigo__cos__result2:t. forall trigo__cos__result3:t.
+  forall trigo__cos__result4:t. forall trigo__cos__result5:t.
+  (tqtisFinite(x) -> ((le(neg(fliteral), x) and le(x, fliteral)) ->
+  (((((trigo__cos__result1 = trigo__cos__result2) and
+  (trigo__cos__result3 = trigo__cos__result1)) and (((o = cos(x)) and
+  (tqtisFinite(o) and ((le(neg(fliteral), o) and le(o, fliteral)) and (eq(x,
+  fliteral1) -> eq(o, fliteral))))) and (({ t__content = result } = {
+  t__content = trigo__cos__result }) and (trigo__cos__result1 = o)))) and (({
+  t__content = trigo__cos__result4 } = { t__content = trigo__cos__result2
+  }) and (trigo__cos__result5 = trigo__cos__result3))) ->
+  ((((o1 = approx_cos(x)) and (tqtisFinite(o1) and (o1 = add(RNE, sub(RNE,
+  add(RNE, sub(RNE, fliteral, div(RNE, pow21(x), fliteral2)), div(RNE,
+  pow4(x), fliteral3)), div(RNE, pow6(x), fliteral4)), div(RNE, pow8(x),
+  fliteral5))))) and (o2 = sub(RNE, trigo__cos__result4, o1))) ->
+  tqtisFinite(o2))))))

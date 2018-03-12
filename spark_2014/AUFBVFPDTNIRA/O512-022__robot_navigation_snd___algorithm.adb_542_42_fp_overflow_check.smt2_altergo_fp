@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1441,25 +1441,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,nonnegative_float) farray, int, int,
-  (int,nonnegative_float) farray, int, int -> (int,nonnegative_float) farray
-
-axiom concat_def :
-  (forall a:(int,nonnegative_float) farray.
-  forall b:(int,nonnegative_float) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : nonnegative_float, int -> (int,nonnegative_float) farray
-
-axiom singleton_def :
-  (forall v:nonnegative_float.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq10 : (int,nonnegative_float) farray, int, int,
   (int,nonnegative_float) farray, int, int -> bool
 
@@ -1471,17 +1452,17 @@ axiom bool_eq_def9 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1492,9 +1473,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep1((a[temp___idx_132])) = to_rep1((b[((b__first - a__first) + temp___idx_132)])))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep1((a[temp___idx_154])) = to_rep1((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic dummy7 : (int,nonnegative_float) farray
 
@@ -2274,33 +2255,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
-  int -> (int,us_rep3) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep3) farray. forall b:(int,us_rep3) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep3, int -> (int,us_rep3) farray
-
-axiom singleton_def1 :
-  (forall v:nonnegative_float. forall v1:normalized2pi.
-  (forall i:int [(singleton1({ us_split_fields7 = {
-  rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = v1 } } } }, i)[i])]. ((singleton1({
-  us_split_fields7 = { rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = v1 } } } }, i)[i]) = {
-  us_split_fields7 = { rec__algorithm__laser_scan_data__first = v;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = v1 } } } })))
-
 logic bool_eq15 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
   int -> bool
 
@@ -2311,17 +2265,17 @@ axiom bool_eq_def14 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_133:int. ((((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) and (bool_eq14((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)) or
-  (not ((a__first <= temp___idx_133) and (temp___idx_133 <= a__last)))))) ->
+  (forall temp___idx_155:int. ((((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) and (bool_eq14((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)) or
+  (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
   (bool_eq15(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq14((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true))))) -> (bool_eq15(a,
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq14((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true))))) -> (bool_eq15(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -2331,9 +2285,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_133:int. (((a__first <= temp___idx_133) and
-  (temp___idx_133 <= a__last)) -> (bool_eq14((a[temp___idx_133]),
-  (b[((b__first - a__first) + temp___idx_133)])) = true)))))))
+  (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
+  (temp___idx_155 <= a__last)) -> (bool_eq14((a[temp___idx_155]),
+  (b[((b__first - a__first) + temp___idx_155)])) = true)))))))
 
 type count_type
 
@@ -2869,24 +2823,9 @@ type t252s__ref = { t252s__content : us_rep1
 function t252s__ref___projection(a: t252s__ref) : us_rep1 =
   (a).t252s__content
 
-logic temp___614 : t -> (int,nonnegative_float) farray
+logic temp___680 : t -> (int,nonnegative_float) farray
 
-axiom def_axiom :
-  (forall temp___616:t.
-  (forall temp___617:int.
-  ((temp___614(temp___616)[temp___617]) = of_rep1(temp___616))))
-
-logic temp___618 : us_rep3 -> (int,us_rep3) farray
-
-axiom def_axiom1 :
-  (forall temp___620:nonnegative_float. forall temp___6201:normalized2pi.
-  (forall temp___621:int. ((temp___618({ us_split_fields7 = {
-  rec__algorithm__laser_scan_data__first = temp___620;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = temp___6201 } } } })[temp___621]) = {
-  us_split_fields7 = { rec__algorithm__laser_scan_data__first = temp___620;
-  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = temp___6201 } } } })))
+logic temp___684 : us_rep3 -> (int,us_rep3) farray
 
 logic this : positive_float
 
@@ -3052,6 +2991,16 @@ function t64b__ref___projection(a: t64b__ref) : integer = (a).t64b__content
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
+axiom def_axiom :
+  (forall temp___686:nonnegative_float. forall temp___6861:normalized2pi.
+  (forall temp___687:int. ((temp___684({ us_split_fields7 = {
+  rec__algorithm__laser_scan_data__first = temp___686;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = temp___6861 } } } })[temp___687]) = {
+  us_split_fields7 = { rec__algorithm__laser_scan_data__first = temp___686;
+  rec__algorithm__laser_scan_data__second = { us_split_fields1 = {
+  rec__spaces__angles__angle__theta = temp___6861 } } } })))
+
 axiom null_angle__def_axiom : (null_angle = of_rep2(fliteral1))
 
 logic length : us_rep4 -> int
@@ -3081,258 +3030,63 @@ axiom is_empty__post_axiom :
   us_split_fields9 = { rec__algorithm__gap_vectors__list = container1 }
   }) = 0)))
 
-logic deltamag : t
-
-logic deltaangle : t
-
-logic deltaareasum : t
-
-logic obstacleavoiddelta : t
-
-logic i : int
-
-logic temp___884 : t
-
-logic temp___883 : t
-
-logic temp___882 : t
-
-logic temp___881 : t
-
-logic temp___880 : int
-
-logic temp___879 : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : normalized2pi
-
-logic o9 : normalized2pi
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic deltamag1 : t
-
-logic deltaangle1 : t
-
-logic result : t
-
-logic deltaareasum1 : t
-
-logic result1 : t
-
-logic obstacleavoiddelta1 : t
-
-logic result2 : int
-
-logic i1 : int
-
-logic deltamag2 : t
-
-logic deltaangle2 : t
-
-logic deltaareasum2 : t
-
-logic obstacleavoiddelta2 : t
-
-logic i2 : int
-
-logic result3 : bool
-
-logic result4 : t
-
-logic deltamag3 : t
-
-logic result5 : t
-
-logic deltaangle3 : t
-
-logic result6 : t
-
-logic deltaareasum3 : t
-
-logic result7 : t
-
-logic obstacleavoiddelta3 : t
-
-logic result8 : int
-
-logic i3 : int
-
-logic deltamag4 : t
-
-logic deltaangle4 : t
-
-logic deltaareasum4 : t
-
-logic obstacleavoiddelta4 : t
-
-logic i4 : int
-
-logic deltamag5 : t
-
-logic deltaangle5 : t
-
-logic deltaareasum5 : t
-
-logic obstacleavoiddelta5 : t
-
-logic i5 : int
-
-logic deltamag6 : t
-
-logic deltaangle6 : t
-
-logic deltaareasum6 : t
-
-logic obstacleavoiddelta6 : t
-
-logic i6 : int
-
-logic deltamag7 : t
-
-logic deltaangle7 : t
-
-logic deltaareasum7 : t
-
-logic obstacleavoiddelta7 : t
-
-logic i7 : int
-
-logic deltamag8 : t
-
-logic deltaangle8 : t
-
-logic deltaareasum8 : t
-
-logic obstacleavoiddelta8 : t
-
-logic i8 : int
-
-logic deltamag9 : t
-
-logic deltaangle9 : t
-
-logic deltaareasum9 : t
-
-logic obstacleavoiddelta9 : t
-
-logic i9 : int
-
-axiom H : ((this20 = false) and (1000 = to_rep7(this23)))
-
-axiom H1 : tqtisFinite(safetydist)
-
-axiom H2 : neq(safetydist, fliteral1)
-
-axiom H3 : (le(fliteral1, fliteral) -> in_range10(deltamag))
-
-axiom H4 : (le(neg(fliteral2), fliteral2) -> tqtisFinite(deltaangle))
-
-axiom H5 : (result = deltaareasum)
-
-axiom H6 : (deltaareasum1 = fliteral1)
-
-axiom H7 : in_range3(deltaareasum1)
-
-axiom H8 : (result1 = obstacleavoiddelta)
-
-axiom H9 : (obstacleavoiddelta1 = fliteral1)
-
-axiom H10 : tqtisFinite(obstacleavoiddelta1)
-
-axiom H11 : (result2 = i)
-
-axiom H12 : (i1 = 1)
-
-axiom H13 : (1 <= i1)
-
-axiom H14 : (i1 <= 1000)
-
-axiom H15 : eq(to_rep(this), to_rep(this))
-
-axiom H16 : ((((((le(neg(fliteral2), fliteral2) ->
-  tqtisFinite(obstacleavoiddelta2)) and ((1 <= 1000) -> dynamic_property(1,
-  1000, i2))) and (le(fliteral1, fliteral) -> in_range10(deltamag2))) and
-  (le(neg(fliteral2), fliteral2) -> tqtisFinite(deltaangle2))) and
-  (le(fliteral1, fliteral2) -> in_range3(deltaareasum2))) and ((1 <= i2) and
-  (i2 <= 1000)))
-
-axiom H17 : ((o = add(NearestTiesToEven, safetydist, to_rep(this))) and
-  tqtisFinite(add(NearestTiesToEven, safetydist, to_rep(this))))
-
-axiom H18 :
-  ((le(to_rep1((((this22[i2])).us_split_fields7).rec__algorithm__laser_scan_data__first),
-  o) -> (result3 = true)) and
-  ((not le(to_rep1((((this22[i2])).us_split_fields7).rec__algorithm__laser_scan_data__first),
-  o)) -> (result3 = false)))
-
-axiom H19 : (result3 = true)
-
-axiom H20 : ((o1 = add(NearestTiesToEven, safetydist, to_rep(this))) and
-  tqtisFinite(add(NearestTiesToEven, safetydist, to_rep(this))))
-
-axiom H21 : (o2 = sub(NearestTiesToEven, o1,
-  to_rep1((((this22[i2])).us_split_fields7).rec__algorithm__laser_scan_data__first)))
-
-axiom H22 : ((o3 = o2) and tqtisFinite(o2))
-
-axiom H23 : (o4 = div(NearestTiesToEven, o3, safetydist))
-
-axiom H24 : ((o5 = o4) and tqtisFinite(o4))
-
-axiom H25 : ((o6 = limit(o5, fliteral1, fliteral)) and (tqtisFinite(o6) and
-  (le(fliteral1, o6) and le(o6, fliteral))))
-
-axiom H26 : ((o7 = o6) and tqtisFinite(o6))
-
-axiom H27 : (deltamag2 = result4)
-
-axiom H28 : (deltamag3 = o7)
+axiom def_axiom1 :
+  (forall temp___682:t. (in_range3(temp___682) ->
+  (forall temp___683:int.
+  (to_rep1((temp___680(temp___682)[temp___683])) = temp___682))))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 3.1415927410125732421875))
 
-axiom H29 : ({ us_split_fields1 = { rec__spaces__angles__angle__theta = o8 }
-  } = create__2(fliteral4))
-
-axiom H30 : ({ us_split_fields1 = { rec__spaces__angles__angle__theta = o9 }
-  } = oadd((((this22[i2])).us_split_fields7).rec__algorithm__laser_scan_data__second,
-  { us_split_fields1 = { rec__spaces__angles__angle__theta = o8 } }))
-
-axiom H31 : ((o10 = aldiff({ us_split_fields1 = {
-  rec__spaces__angles__angle__theta = this26 } }, { us_split_fields1 = {
-  rec__spaces__angles__angle__theta = o9 } })) and (tqtisFinite(o10) and
-  (lt(neg(fliteral4), o10) and le(o10, fliteral4))))
-
-axiom H32 : (deltaangle2 = result5)
-
-axiom H33 : (deltaangle3 = o10)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(NearestTiesToEven, deltaareasum2,
-  mul(NearestTiesToEven, deltamag3, deltamag3)))
+goal WP_parameter_def :
+  (forall deltamag:t. forall deltaangle:t. forall deltaareasum:t.
+  forall obstacleavoiddelta:t. forall i:int. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. forall o4:t. forall o5:t. forall o6:t.
+  forall o7:t. forall o8:normalized2pi. forall o9:normalized2pi.
+  forall o10:t. forall result:t. forall deltaareasum1:t. forall result1:t.
+  forall obstacleavoiddelta1:t. forall result2:int. forall i1:int.
+  forall deltamag1:t. forall deltaangle1:t. forall deltaareasum2:t.
+  forall obstacleavoiddelta2:t. forall i2:int. forall result3:bool.
+  forall result4:t. forall deltamag2:t. forall result5:t.
+  forall deltaangle2:t. (((this20 = false) and (1000 = to_rep7(this23))) ->
+  (tqtisFinite(safetydist) -> (neq(safetydist, fliteral1) -> ((le(fliteral1,
+  fliteral) -> in_range10(deltamag)) -> ((le(neg(fliteral2), fliteral2) ->
+  tqtisFinite(deltaangle)) -> (((result = deltaareasum) and
+  (deltaareasum1 = fliteral1)) -> (in_range3(deltaareasum1) ->
+  (((result1 = obstacleavoiddelta) and (obstacleavoiddelta1 = fliteral1)) ->
+  (tqtisFinite(obstacleavoiddelta1) -> ((({ int__content = result2 } = {
+  int__content = i }) and (i1 = 1)) -> (((1 <= i1) and (i1 <= 1000)) ->
+  (eq(to_rep(this), to_rep(this)) -> (((((((le(neg(fliteral2), fliteral2) ->
+  tqtisFinite(obstacleavoiddelta2)) and ((1 <= 1000) -> dynamic_property(1,
+  1000, i2))) and (le(fliteral1, fliteral) -> in_range10(deltamag1))) and
+  (le(neg(fliteral2), fliteral2) -> tqtisFinite(deltaangle1))) and
+  (le(fliteral1, fliteral2) -> in_range3(deltaareasum2))) and ((1 <= i2) and
+  (i2 <= 1000))) -> ((((o = add(NearestTiesToEven, safetydist,
+  to_rep(this))) and tqtisFinite(add(NearestTiesToEven, safetydist,
+  to_rep(this)))) and
+  ((le(to_rep1((((this22[i2])).us_split_fields7).rec__algorithm__laser_scan_data__first),
+  o) and (result3 = true)) or
+  ((not le(to_rep1((((this22[i2])).us_split_fields7).rec__algorithm__laser_scan_data__first),
+  o)) and (result3 = false)))) -> ((result3 = true) ->
+  ((((((((((o1 = add(NearestTiesToEven, safetydist, to_rep(this))) and
+  tqtisFinite(add(NearestTiesToEven, safetydist, to_rep(this)))) and
+  (o2 = sub(NearestTiesToEven, o1,
+  to_rep1((((this22[i2])).us_split_fields7).rec__algorithm__laser_scan_data__first)))) and
+  ((o3 = o2) and tqtisFinite(o2))) and (o4 = div(NearestTiesToEven, o3,
+  safetydist))) and ((o5 = o4) and tqtisFinite(o4))) and ((o6 = limit(o5,
+  fliteral1, fliteral)) and (tqtisFinite(o6) and (le(fliteral1, o6) and
+  le(o6, fliteral))))) and ((o7 = o6) and tqtisFinite(o6))) and
+  ((deltamag1 = result4) and (deltamag2 = o7))) -> ((((({ us_split_fields1 =
+  { rec__spaces__angles__angle__theta = o8 } } = create__2(fliteral4)) and ({
+  us_split_fields1 = { rec__spaces__angles__angle__theta = o9 }
+  } = oadd((((this22[i2])).us_split_fields7).rec__algorithm__laser_scan_data__second,
+  { us_split_fields1 = { rec__spaces__angles__angle__theta = o8 } }))) and
+  ((o10 = aldiff({ us_split_fields1 = { rec__spaces__angles__angle__theta =
+  this26 } }, { us_split_fields1 = { rec__spaces__angles__angle__theta = o9 }
+  })) and (tqtisFinite(o10) and (lt(neg(fliteral4), o10) and le(o10,
+  fliteral4))))) and ((deltaangle1 = result5) and (deltaangle2 = o10))) ->
+  tqtisFinite(add(NearestTiesToEven, deltaareasum2, mul(NearestTiesToEven,
+  deltamag2, deltamag2)))))))))))))))))))))

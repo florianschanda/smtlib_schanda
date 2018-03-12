@@ -38,10 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -119,9 +115,9 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int1 (RoundingMode Int) Float32)
+(declare-fun of_int (RoundingMode Int) Float32)
 
-(declare-fun to_int2 (RoundingMode Float32) Int)
+(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -481,20 +477,21 @@
 (declare-datatypes () ((tvS__ref (mk_tvS__ref (tvS__content us_rep)))))
 (define-fun tvS__ref___projection ((a tvS__ref)) us_rep (tvS__content a))
 
-(define-fun dynamic_invariant ((temp___expr_187 us_rep)
-  (temp___is_init_184 Bool) (temp___skip_constant_185 Bool)
-  (temp___do_toplevel_186 Bool)) Bool (=>
-                                      (not (= temp___skip_constant_185 true))
-                                      (in_range3 0 temp___expr_187)))
+(define-fun dynamic_invariant ((temp___expr_213 us_rep)
+  (temp___is_init_209 Bool) (temp___skip_constant_210 Bool)
+  (temp___do_toplevel_211 Bool)
+  (temp___do_typ_inv_212 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_210 true))
+                                     (in_range3 0 temp___expr_213)))
 
-(define-fun default_initial_assumption ((temp___expr_189 us_rep)
-  (temp___skip_top_level_190 Bool)) Bool (and
-                                         (= (attr__tag temp___expr_189)
+(define-fun default_initial_assumption ((temp___expr_215 us_rep)
+  (temp___skip_top_level_216 Bool)) Bool (and
+                                         (= (attr__tag temp___expr_215)
                                          us_tag1)
                                          (= (to_rep2
                                             (rec__useless_discr__t__discr
                                             (us_split_discrs1
-                                            temp___expr_189))) 0)))
+                                            temp___expr_215))) 0)))
 
 (declare-const v__split_discrs us_split_discrs)
 
@@ -502,25 +499,27 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant2 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant3 ((temp___expr_171 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (<= 0 3)) (in_range2 temp___expr_171)))
+(define-fun dynamic_invariant3 ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 3)) (in_range2 temp___expr_200)))
 
 (declare-const v__split_fields Bool)
 
@@ -572,7 +571,7 @@
   (assert (= result3 v__split_fields3))
 
 ;; H
-  (assert (= (of_int 1) v__split_fields4))
+  (assert (= (distinct 1 0) v__split_fields4))
 
 ;; H
   (assert (= v__split_fields1 v__split_fields5))

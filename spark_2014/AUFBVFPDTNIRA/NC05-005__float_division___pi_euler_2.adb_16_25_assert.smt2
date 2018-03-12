@@ -85,10 +85,6 @@
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -135,12 +131,13 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_57 Float64)
-  (temp___is_init_54 Bool) (temp___skip_constant_55 Bool)
-  (temp___do_toplevel_56 Bool)) Bool (=>
-                                     (or (= temp___is_init_54 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                     (fp.isFinite64 temp___expr_57)))
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
 (declare-sort tindexS 0)
 
@@ -162,12 +159,13 @@
 (define-fun tindexS__ref___projection ((a tindexS__ref)) tindexS (tindexS__content
                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_135 Int)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (<= 1 9223372036854775807)) (in_range2
-                                      temp___expr_135)))
+(define-fun dynamic_invariant1 ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 1 9223372036854775807)) (in_range2
+                                     temp___expr_158)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -198,21 +196,22 @@
 (define-fun tindex_floatS__ref___projection ((a tindex_floatS__ref)) tindex_floatS
   (tindex_floatS__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_141 Float64)
-  (temp___is_init_138 Bool) (temp___skip_constant_139 Bool)
-  (temp___do_toplevel_140 Bool)) Bool (=>
-                                      (or (= temp___is_init_138 true)
-                                      (fp.leq (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                      (in_range3 temp___expr_141)))
+(define-fun dynamic_invariant2 ((temp___expr_165 Float64)
+  (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
+  (temp___do_toplevel_163 Bool)
+  (temp___do_typ_inv_164 Bool)) Bool (=>
+                                     (or (= temp___is_init_161 true)
+                                     (fp.leq (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                     (in_range3 temp___expr_165)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(define-fun dynamic_invariant3 ((temp___expr_21 Int) (temp___is_init_18 Bool)
-  (temp___skip_constant_19 Bool)
-  (temp___do_toplevel_20 Bool)) Bool (=>
-                                     (or (= temp___is_init_18 true)
-                                     (<= (- 9223372036854775808) 9223372036854775807))
-                                     (in_range1 temp___expr_21)))
+(define-fun dynamic_invariant3 ((temp___expr_25 Int) (temp___is_init_21 Bool)
+  (temp___skip_constant_22 Bool) (temp___do_toplevel_23 Bool)
+  (temp___do_typ_inv_24 Bool)) Bool (=>
+                                    (or (= temp___is_init_21 true)
+                                    (<= (- 9223372036854775808) 9223372036854775807))
+                                    (in_range1 temp___expr_25)))
 
 (declare-const index Int)
 
@@ -221,12 +220,6 @@
 (declare-const erreur Float64)
 
 (declare-const index_float Float64)
-
-(declare-const o Float64)
-
-(declare-const o1 Int)
-
-(declare-const o2 Float64)
 
 (declare-const result Float64)
 
@@ -251,22 +244,6 @@
 (declare-const erreur2 Float64)
 
 (declare-const index_float2 Float64)
-
-(declare-const result4 Float64)
-
-(declare-const erreur3 Float64)
-
-(declare-const result5 Float64)
-
-(declare-const pi4 Float64)
-
-(declare-const result6 Int)
-
-(declare-const index3 Int)
-
-(declare-const result7 Float64)
-
-(declare-const index_float3 Float64)
 
 ;; H
   (assert (=> (<= 1 9223372036854775807) (in_range2 index)))

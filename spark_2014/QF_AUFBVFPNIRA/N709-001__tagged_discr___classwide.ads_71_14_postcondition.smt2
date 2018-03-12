@@ -48,10 +48,6 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun to_int1 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
@@ -118,33 +114,34 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const v__split_fields Bool)
 
 (declare-const o Bool)
 
-(declare-const temp___209 Bool)
+(declare-const temp___235 Bool)
 
-(declare-const temp___2091 Int)
+(declare-const temp___2351 Int)
 
 (declare-const o1 Bool)
 
-(declare-const temp___211 Bool)
+(declare-const temp___237 Bool)
 
-(declare-const temp___2111 Int)
+(declare-const temp___2371 Int)
 
 (declare-const result Bool)
 
@@ -166,37 +163,37 @@
   (assert (= result v__split_fields))
 
 ;; H
-  (assert (= (of_int 0) v__split_fields1))
+  (assert (= (distinct 0 0) v__split_fields1))
 
 ;; H
   (assert (= v__split_fields1 o))
 
 ;; H
-  (assert (= temp___209 o))
+  (assert (= temp___235 o))
 
 ;; H
-  (assert (= v__attr__tag temp___2091))
+  (assert (= v__attr__tag temp___2351))
 
 ;; H
   (assert (= result1 v__split_fields1))
 
 ;; H
-  (assert (= temp___209 v__split_fields2))
+  (assert (= temp___235 v__split_fields2))
 
 ;; H
   (assert (= v__split_fields2 o1))
 
 ;; H
-  (assert (= temp___211 o1))
+  (assert (= temp___237 o1))
 
 ;; H
-  (assert (= v__attr__tag temp___2111))
+  (assert (= v__attr__tag temp___2371))
 
 ;; H
   (assert (= result2 v__split_fields2))
 
 ;; H
-  (assert (= temp___211 v__split_fields3))
+  (assert (= temp___237 v__split_fields3))
 
 ;; H
   (assert (= v__split_fields4 v__split_fields3))

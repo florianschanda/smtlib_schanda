@@ -1050,10 +1050,6 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(define-fun to_int2 ((b Bool)) Int (ite (= b true) 1 0))
-
-(define-fun of_int1 ((i Int)) Bool (ite (= i 0) false true))
-
 (define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
@@ -1086,12 +1082,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_51 t) (temp___is_init_48 Bool)
-  (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true) (le
-                                     (neg fliteral1) fliteral1)) (tqtisFinite
-                                     temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
 
 (declare-fun sin1 (t) t)
 
@@ -1105,12 +1101,12 @@
 ;; sin__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (let ((result (sin1 x)))
      (and
      (and (and (le (neg fliteral) result) (le result fliteral))
      (=> (eq x fliteral2) (eq result fliteral2))) (dynamic_invariant result
-     true false true)))) :pattern ((sin1 x)) )))
+     true false true true)))) :pattern ((sin1 x)) )))
 
 (declare-fun approx_sin (t) t)
 
@@ -1131,8 +1127,8 @@
 ;; approx_sin__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant
-     (approx_sin x) true false true)) :pattern ((approx_sin x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (approx_sin x) true false true true)) :pattern ((approx_sin x)) )))
 
 (declare-const fliteral3 t)
 
@@ -1152,7 +1148,7 @@
 ;; approx_sin__def_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true)
+  (! (=> (dynamic_invariant x true true true true)
      (= (approx_sin x) (sub RNE1
                        (add RNE1 (sub RNE1 x (div1 RNE1 (pow3 x) fliteral3))
                        (div1 RNE1 (pow5 x) fliteral4))
@@ -1166,38 +1162,38 @@
 ;; pow3__post_axiom
   (assert
   (forall ((x1 t))
-  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow3 x1)
-     true false true)) :pattern ((pow3 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true true) (dynamic_invariant
+     (pow3 x1) true false true true)) :pattern ((pow3 x1)) )))
 
 ;; pow3__def_axiom
   (assert
   (forall ((x1 t))
-  (! (=> (dynamic_invariant x1 true true true)
+  (! (=> (dynamic_invariant x1 true true true true)
      (= (pow3 x1) (mul RNE1 (mul RNE1 x1 x1) x1))) :pattern ((pow3 x1)) )))
 
 ;; pow5__post_axiom
   (assert
   (forall ((x1 t))
-  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow5 x1)
-     true false true)) :pattern ((pow5 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true true) (dynamic_invariant
+     (pow5 x1) true false true true)) :pattern ((pow5 x1)) )))
 
 ;; pow5__def_axiom
   (assert
   (forall ((x1 t))
-  (! (=> (dynamic_invariant x1 true true true)
+  (! (=> (dynamic_invariant x1 true true true true)
      (= (pow5 x1) (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x1 x1) x1) x1) x1))) :pattern (
   (pow5 x1)) )))
 
 ;; pow7__post_axiom
   (assert
   (forall ((x1 t))
-  (! (=> (dynamic_invariant x1 true true true) (dynamic_invariant (pow7 x1)
-     true false true)) :pattern ((pow7 x1)) )))
+  (! (=> (dynamic_invariant x1 true true true true) (dynamic_invariant
+     (pow7 x1) true false true true)) :pattern ((pow7 x1)) )))
 
 ;; pow7__def_axiom
   (assert
   (forall ((x1 t))
-  (! (=> (dynamic_invariant x1 true true true)
+  (! (=> (dynamic_invariant x1 true true true true)
      (= (pow7 x1) (mul RNE1
                   (mul RNE1
                   (mul RNE1 (mul RNE1 (mul RNE1 (mul RNE1 x1 x1) x1) x1) x1)
@@ -1210,8 +1206,6 @@
 (declare-const o1 t)
 
 (declare-const o2 t)
-
-(declare-const o3 t)
 
 (declare-const result t)
 

@@ -477,25 +477,27 @@
 (declare-datatypes () ((t2b__ref (mk_t2b__ref (t2b__content us_rep)))))
 (define-fun t2b__ref___projection ((a t2b__ref)) us_rep (t2b__content a))
 
-(define-fun dynamic_invariant ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range temp___expr_15)))
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant2 ((temp___expr_135 Int)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (<= 0 1)) (in_range1 temp___expr_135)))
+(define-fun dynamic_invariant2 ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 0 1)) (in_range1 temp___expr_158)))
 
 (declare-const x__split_fields integer)
 
@@ -527,11 +529,11 @@
 
 (declare-const o9 enum)
 
-(declare-const temp___143 enum)
+(declare-const temp___167 enum)
 
-(declare-const temp___1431 integer)
+(declare-const temp___1671 integer)
 
-(declare-const temp___1432 float)
+(declare-const temp___1672 float)
 
 (declare-const result integer)
 
@@ -596,17 +598,17 @@
   (assert (= o5 o9))
 
 ;; H
-  (assert (= temp___143 o9))
+  (assert (= temp___167 o9))
 
 ;; H
-  (assert (= temp___1431 o7))
+  (assert (= temp___1671 o7))
 
 ;; H
-  (assert (= temp___1432 o8))
+  (assert (= temp___1672 o8))
 
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 5, characters 0-0
-  (not (= temp___143 (rec__types__r__i x__split_discrs))))
+  (not (= temp___167 (rec__types__r__i x__split_discrs))))
 (check-sat)
 (exit)

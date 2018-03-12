@@ -1078,12 +1078,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0)))
 
-(define-fun dynamic_invariant ((temp___expr_167 t) (temp___is_init_164 Bool)
-  (temp___skip_constant_165 Bool)
-  (temp___do_toplevel_166 Bool)) Bool (=>
-                                      (or (= temp___is_init_164 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_167)))
+(define-fun dynamic_invariant ((temp___expr_194 t) (temp___is_init_190 Bool)
+  (temp___skip_constant_191 Bool) (temp___do_toplevel_192 Bool)
+  (temp___do_typ_inv_193 Bool)) Bool (=>
+                                     (or (= temp___is_init_190 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_194)))
 
 (declare-fun magic (t) Int)
 
@@ -1109,18 +1109,18 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(define-fun dynamic_invariant1 ((temp___expr_15 Int) (temp___is_init_12 Bool)
-  (temp___skip_constant_13 Bool)
-  (temp___do_toplevel_14 Bool)) Bool (=>
-                                     (or (= temp___is_init_12 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range1 temp___expr_15)))
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range1 temp___expr_18)))
 
 ;; magic__post_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant1 (magic x)
-     true false true)) :pattern ((magic x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant1
+     (magic x) true false true true)) :pattern ((magic x)) )))
 
 (declare-const a t)
 

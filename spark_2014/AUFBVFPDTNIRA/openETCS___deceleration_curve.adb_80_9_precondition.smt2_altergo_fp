@@ -1037,12 +1037,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -1054,6 +1048,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1427,32 +1427,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
-  int -> (int,us_rep) farray
-
-axiom concat_def :
-  (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : us_rep, int -> (int,us_rep) farray
-
-axiom singleton_def :
-  (forall v:distance_t. forall v1:speed_t.
-  (forall i:int [(singleton({ us_split_fields1 = {
-  rec__deceleration_curve__braking_curve_entry__location = v;
-  rec__deceleration_curve__braking_curve_entry__speed = v1 } }, i)[i])].
-  ((singleton({ us_split_fields1 = {
-  rec__deceleration_curve__braking_curve_entry__location = v;
-  rec__deceleration_curve__braking_curve_entry__speed = v1 } }, i)[i]) = {
-  us_split_fields1 = {
-  rec__deceleration_curve__braking_curve_entry__location = v;
-  rec__deceleration_curve__braking_curve_entry__speed = v1 } })))
-
 logic bool_eq10 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
@@ -1463,17 +1437,17 @@ axiom bool_eq_def9 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_148:int. ((((a__first <= temp___idx_148) and
-  (temp___idx_148 <= a__last)) and (bool_eq9((a[temp___idx_148]),
-  (b[((b__first - a__first) + temp___idx_148)])) = true)) or
-  (not ((a__first <= temp___idx_148) and (temp___idx_148 <= a__last)))))) ->
+  (forall temp___idx_170:int. ((((a__first <= temp___idx_170) and
+  (temp___idx_170 <= a__last)) and (bool_eq9((a[temp___idx_170]),
+  (b[((b__first - a__first) + temp___idx_170)])) = true)) or
+  (not ((a__first <= temp___idx_170) and (temp___idx_170 <= a__last)))))) ->
   (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_148:int. (((a__first <= temp___idx_148) and
-  (temp___idx_148 <= a__last)) -> (bool_eq9((a[temp___idx_148]),
-  (b[((b__first - a__first) + temp___idx_148)])) = true))))) -> (bool_eq10(a,
+  (forall temp___idx_170:int. (((a__first <= temp___idx_170) and
+  (temp___idx_170 <= a__last)) -> (bool_eq9((a[temp___idx_170]),
+  (b[((b__first - a__first) + temp___idx_170)])) = true))))) -> (bool_eq10(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1483,9 +1457,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_148:int. (((a__first <= temp___idx_148) and
-  (temp___idx_148 <= a__last)) -> (bool_eq9((a[temp___idx_148]),
-  (b[((b__first - a__first) + temp___idx_148)])) = true)))))))
+  (forall temp___idx_170:int. (((a__first <= temp___idx_170) and
+  (temp___idx_170 <= a__last)) -> (bool_eq9((a[temp___idx_170]),
+  (b[((b__first - a__first) + temp___idx_170)])) = true)))))))
 
 logic dummy8 : (int,us_rep) farray
 
@@ -2053,31 +2027,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
-  int -> (int,us_rep3) farray
-
-axiom concat_def1 :
-  (forall a:(int,us_rep3) farray. forall b:(int,us_rep3) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : us_rep3, int -> (int,us_rep3) farray
-
-axiom singleton_def1 :
-  (forall v:function_range. forall v1:float1.
-  (forall i:int [(singleton1({ us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i])].
-  ((singleton1({ us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } }, i)[i]) = {
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter = v;
-  rec__step_function__delimiter_entry__value = v1 } })))
-
 logic bool_eq17 : (int,us_rep3) farray, int, int, (int,us_rep3) farray, int,
   int -> bool
 
@@ -2088,17 +2037,17 @@ axiom bool_eq_def16 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and (bool_eq16((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and (bool_eq16((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq17(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq16((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true))))) -> (bool_eq17(a,
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq16((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq17(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -2108,9 +2057,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) -> (bool_eq16((a[temp___idx_132]),
-  (b[((b__first - a__first) + temp___idx_132)])) = true)))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) -> (bool_eq16((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
 logic dummy19 : (int,us_rep3) farray
 
@@ -2380,31 +2329,11 @@ axiom is_valid_deceleration_model__def_axiom :
   rec__step_function__step_function_t__step = s1 } }) = true) and
   (to_rep2(s) <= 6))))
 
-logic temp___133 : us_rep3, us_rep3 -> (int,us_rep3) farray
-
-axiom def_axiom :
-  (forall temp___135:function_range. forall temp___1351:float1.
-  forall temp___136:function_range. forall temp___1361:float1.
-  (forall temp___137:int. (((temp___137 = 0) -> ((temp___133({
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___135; rec__step_function__delimiter_entry__value = temp___1351 } }, {
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___136; rec__step_function__delimiter_entry__value = temp___1361 }
-  })[temp___137]) = { us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___135;
-  rec__step_function__delimiter_entry__value = temp___1351 } })) and
-  ((not (temp___137 = 0)) -> ((temp___133({ us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___135;
-  rec__step_function__delimiter_entry__value = temp___1351 } }, {
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___136; rec__step_function__delimiter_entry__value = temp___1361 }
-  })[temp___137]) = { us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___136;
-  rec__step_function__delimiter_entry__value = temp___1361 } })))))
+logic temp___155 : us_rep3, us_rep3 -> (int,us_rep3) farray
 
 axiom a_brake_emergency_model__def_axiom :
   ((a_brake_emergency_model = of_rep2(0)) and
-  (a_brake_emergency_model1 = temp___133({ us_split_fields7 = {
+  (a_brake_emergency_model1 = temp___155({ us_split_fields7 = {
   rec__step_function__delimiter_entry__delimiter = of_rep4(0);
   rec__step_function__delimiter_entry__value = of_rep3(fliteral) } }, {
   us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
@@ -2417,30 +2346,10 @@ logic kdry_rst_model1 : (int,us_rep3) farray
 
 logic attr__ATTRIBUTE_ADDRESS8 : int
 
-logic temp___138 : us_rep3, us_rep3 -> (int,us_rep3) farray
-
-axiom def_axiom1 :
-  (forall temp___140:function_range. forall temp___1401:float1.
-  forall temp___141:function_range. forall temp___1411:float1.
-  (forall temp___142:int. (((temp___142 = 0) -> ((temp___138({
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___140; rec__step_function__delimiter_entry__value = temp___1401 } }, {
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___141; rec__step_function__delimiter_entry__value = temp___1411 }
-  })[temp___142]) = { us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___140;
-  rec__step_function__delimiter_entry__value = temp___1401 } })) and
-  ((not (temp___142 = 0)) -> ((temp___138({ us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___140;
-  rec__step_function__delimiter_entry__value = temp___1401 } }, {
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___141; rec__step_function__delimiter_entry__value = temp___1411 }
-  })[temp___142]) = { us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___141;
-  rec__step_function__delimiter_entry__value = temp___1411 } })))))
+logic temp___160 : us_rep3, us_rep3 -> (int,us_rep3) farray
 
 axiom kdry_rst_model__def_axiom : ((kdry_rst_model = of_rep2(0)) and
-  (kdry_rst_model1 = temp___138({ us_split_fields7 = {
+  (kdry_rst_model1 = temp___160({ us_split_fields7 = {
   rec__step_function__delimiter_entry__delimiter = of_rep4(0);
   rec__step_function__delimiter_entry__value = of_rep3(fliteral) } }, {
   us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
@@ -2453,30 +2362,10 @@ logic kwet_rst_model1 : (int,us_rep3) farray
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
-logic temp___143 : us_rep3, us_rep3 -> (int,us_rep3) farray
-
-axiom def_axiom2 :
-  (forall temp___145:function_range. forall temp___1451:float1.
-  forall temp___146:function_range. forall temp___1461:float1.
-  (forall temp___147:int. (((temp___147 = 0) -> ((temp___143({
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___145; rec__step_function__delimiter_entry__value = temp___1451 } }, {
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___146; rec__step_function__delimiter_entry__value = temp___1461 }
-  })[temp___147]) = { us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___145;
-  rec__step_function__delimiter_entry__value = temp___1451 } })) and
-  ((not (temp___147 = 0)) -> ((temp___143({ us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___145;
-  rec__step_function__delimiter_entry__value = temp___1451 } }, {
-  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
-  temp___146; rec__step_function__delimiter_entry__value = temp___1461 }
-  })[temp___147]) = { us_split_fields7 = {
-  rec__step_function__delimiter_entry__delimiter = temp___146;
-  rec__step_function__delimiter_entry__value = temp___1461 } })))))
+logic temp___165 : us_rep3, us_rep3 -> (int,us_rep3) farray
 
 axiom kwet_rst_model__def_axiom : ((kwet_rst_model = of_rep2(0)) and
-  (kwet_rst_model1 = temp___143({ us_split_fields7 = {
+  (kwet_rst_model1 = temp___165({ us_split_fields7 = {
   rec__step_function__delimiter_entry__delimiter = of_rep4(0);
   rec__step_function__delimiter_entry__value = of_rep3(fliteral) } }, {
   us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
@@ -2542,167 +2431,73 @@ axiom a_gradient__def_axiom :
   (forall d:int [a_gradient(d)]. (in_range3(d) ->
   (a_gradient(d) = fliteral1)))
 
-logic braking_curve__split_fields : (int,us_rep) farray
-
-logic braking_curve__split_fields1 : distance_t
-
-logic speed : t
-
-logic location : int
-
-logic i : int
-
-logic deceleration_curve__curve_from_target__end_point__assume : int
-
-logic o : distance_t
-
-logic o1 : (int,us_rep) farray
-
-logic o2 : distance_t
-
-logic temp___374 : (int,us_rep) farray
-
-logic temp___3741 : distance_t
-
-logic o3 : distance_t
-
-logic o4 : distance_t
-
-logic o5 : speed_t
-
-logic o6 : distance_t
-
-logic o7 : speed_t
-
-logic o8 : (int,us_rep) farray
-
-logic o9 : (int,us_rep) farray
-
-logic o10 : distance_t
-
-logic temp___379 : (int,us_rep) farray
-
-logic temp___3791 : distance_t
-
-logic o11 : speed_t
-
-logic o12 : distance_t
-
-logic o13 : speed_t
-
-logic o14 : distance_t
-
-logic o15 : speed_t
-
-logic o16 : (int,us_rep) farray
-
-logic o17 : (int,us_rep) farray
-
-logic o18 : distance_t
-
-logic temp___384 : (int,us_rep) farray
-
-logic temp___3841 : distance_t
-
-logic o19 : t
-
-logic o20 : t
-
-logic o21 : t
-
-logic o22 : t
-
-logic o23 : t
-
-logic o24 : t
-
-logic o25 : t
-
-logic o26 : t
-
-logic o27 : t
-
-logic o28 : t
-
-logic o29 : t
-
-logic o30 : t
-
-logic o31 : int
-
-logic o32 : int
-
-logic result : t
-
-logic speed1 : t
-
-logic result1 : int
-
-logic location1 : int
-
-logic result2 : (int,us_rep) farray
-
-logic result3 : distance_t
-
-logic braking_curve__split_fields2 : (int,us_rep) farray
-
-logic braking_curve__split_fields3 : distance_t
-
-logic result4 : (int,us_rep) farray
-
-logic result5 : distance_t
-
-logic braking_curve__split_fields4 : (int,us_rep) farray
-
-logic braking_curve__split_fields5 : distance_t
-
-logic result6 : (int,us_rep) farray
-
-logic result7 : distance_t
-
-logic braking_curve__split_fields6 : (int,us_rep) farray
-
-logic braking_curve__split_fields7 : distance_t
-
-logic result8 : int
-
-logic i1 : int
-
-logic braking_curve__split_fields8 : (int,us_rep) farray
-
-logic braking_curve__split_fields9 : distance_t
-
-logic speed2 : t
-
-logic location2 : int
-
-logic i2 : int
-
-logic result9 : t
-
-logic speed3 : t
-
-logic result10 : t
-
-logic speed4 : t
-
-axiom H : tqtisFinite(maximum_valid_speed)
-
-axiom H1 : (m_per_s_from_km_per_h(fliteral3) = maximum_valid_speed)
-
-axiom H2 : (to_rep1(target1) <= 5000)
-
-axiom H3 : (result = speed)
-
-axiom H4 : (speed1 = to_rep(target2))
-
-axiom H5 : tqtisFinite(speed1)
-
-axiom H6 : (result1 = location)
-
-axiom H7 : (location1 = to_rep1(target1))
-
-axiom H8 : in_range3(location1)
+axiom def_axiom :
+  (forall temp___157:function_range. forall temp___1571:float1.
+  forall temp___158:function_range. forall temp___1581:float1.
+  (forall temp___159:int. (((temp___159 = 0) -> ((temp___155({
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___157; rec__step_function__delimiter_entry__value = temp___1571 } }, {
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___158; rec__step_function__delimiter_entry__value = temp___1581 }
+  })[temp___159]) = { us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___157;
+  rec__step_function__delimiter_entry__value = temp___1571 } })) and
+  ((not (temp___159 = 0)) -> ((temp___155({ us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___157;
+  rec__step_function__delimiter_entry__value = temp___1571 } }, {
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___158; rec__step_function__delimiter_entry__value = temp___1581 }
+  })[temp___159]) = { us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___158;
+  rec__step_function__delimiter_entry__value = temp___1581 } })))))
+
+axiom def_axiom1 :
+  (forall temp___162:function_range. forall temp___1621:float1.
+  forall temp___163:function_range. forall temp___1631:float1.
+  (forall temp___164:int. (((temp___164 = 0) -> ((temp___160({
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___162; rec__step_function__delimiter_entry__value = temp___1621 } }, {
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___163; rec__step_function__delimiter_entry__value = temp___1631 }
+  })[temp___164]) = { us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___162;
+  rec__step_function__delimiter_entry__value = temp___1621 } })) and
+  ((not (temp___164 = 0)) -> ((temp___160({ us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___162;
+  rec__step_function__delimiter_entry__value = temp___1621 } }, {
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___163; rec__step_function__delimiter_entry__value = temp___1631 }
+  })[temp___164]) = { us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___163;
+  rec__step_function__delimiter_entry__value = temp___1631 } })))))
+
+axiom def_axiom2 :
+  (forall temp___167:function_range. forall temp___1671:float1.
+  forall temp___168:function_range. forall temp___1681:float1.
+  (forall temp___169:int. (((temp___169 = 0) -> ((temp___165({
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___167; rec__step_function__delimiter_entry__value = temp___1671 } }, {
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___168; rec__step_function__delimiter_entry__value = temp___1681 }
+  })[temp___169]) = { us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___167;
+  rec__step_function__delimiter_entry__value = temp___1671 } })) and
+  ((not (temp___169 = 0)) -> ((temp___165({ us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___167;
+  rec__step_function__delimiter_entry__value = temp___1671 } }, {
+  us_split_fields7 = { rec__step_function__delimiter_entry__delimiter =
+  temp___168; rec__step_function__delimiter_entry__value = temp___1681 }
+  })[temp___169]) = { us_split_fields7 = {
+  rec__step_function__delimiter_entry__delimiter = temp___168;
+  rec__step_function__delimiter_entry__value = temp___1681 } })))))
 
  (* File "deceleration_curve.ads", line 32, characters 0-0 *)
-goal WP_parameter_def : (to_rep1(target1) <= 5000)
+goal WP_parameter_def :
+  (forall speed:t. forall location:int. forall result:t. forall speed1:t.
+  forall result1:int. forall location1:int.
+  (tqtisFinite(maximum_valid_speed) ->
+  ((m_per_s_from_km_per_h(fliteral3) = maximum_valid_speed) ->
+  ((to_rep1(target1) <= 5000) -> (((result = speed) and
+  (speed1 = to_rep(target2))) -> (tqtisFinite(speed1) ->
+  (((result1 = location) and (location1 = to_rep1(target1))) ->
+  (in_range3(location1) -> (to_rep1(target1) <= 5000)))))))))

@@ -992,39 +992,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic x : int
-
-logic y : t
-
-logic o : int
-
-logic o1 : bool
-
-logic o2 : int
-
-logic o3 : t
-
-logic o4 : int
-
-logic o5 : int
-
-logic o6 : t
-
-logic result : bool
-
-logic result1 : int
-
-logic x1 : int
-
-logic result2 : bool
-
-logic result3 : int
-
-logic x2 : int
-
-axiom H : in_range1(x)
-
-axiom H1 : tqtisFinite(y)
-
  (* File "p.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : in_range1(abs(x))
+goal WP_parameter_def :
+  (forall x:int. forall y:t. (in_range1(x) -> (tqtisFinite(y) ->
+  in_range1(abs(x)))))

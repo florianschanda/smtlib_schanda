@@ -1314,12 +1314,6 @@ type t__ref1 = { t__content1 : t1
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def1 :
@@ -1331,6 +1325,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1381,7 +1381,15 @@ axiom coerce_axiom :
 
 type time_slot
 
-predicate in_range2(x: t) = (ule(of_int(0), x) and ule(x, of_int(49)))
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 49)
+
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int(x: int) = ((0 <= x) and (x <= 49))
 
@@ -1441,7 +1449,11 @@ type time_slot_length
 
 logic attr__ATTRIBUTE_MODULUS : t
 
-predicate in_range3(x: t) = (ule(of_int(0), x) and ule(x, of_int(50)))
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 50)
+
+predicate in_range3(x: t) = (ule(rliteral, x) and ule(x, rliteral2))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 50))
 
@@ -1484,25 +1496,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,battery_level_type) farray, t, t,
-  (t,battery_level_type) farray, t, t -> (t,battery_level_type) farray
-
-axiom concat_def :
-  (forall a:(t,battery_level_type) farray.
-  forall b:(t,battery_level_type) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : battery_level_type, t -> (t,battery_level_type) farray
-
-axiom singleton_def :
-  (forall v:battery_level_type.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq7 : (t,battery_level_type) farray, t, t,
   (t,battery_level_type) farray, t, t -> bool
 
@@ -1513,19 +1506,19 @@ axiom bool_eq_def6 :
   b__first, b__last)]. (((((ule(a__first, a__last) and (ule(b__first,
   b__last) and (sub(a__last, a__first) = sub(b__last, b__first)))) or
   ((not ule(a__first, a__last)) and ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. (((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)])))) or (not (ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)))))) -> (bool_eq7(a, a__first, a__last, b,
+  (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)])))) or (not (ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)))))) -> (bool_eq7(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)]))))))) -> (bool_eq7(a, a__first, a__last, b, b__first,
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)]))))))) -> (bool_eq7(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1536,10 +1529,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_132:t. ((ule(a__first, temp___idx_132) and
-  ule(temp___idx_132, a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[add(sub(b__first, a__first),
-  temp___idx_132)])))))))))
+  (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
+  ule(temp___idx_154, a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
+  temp___idx_154)])))))))))
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1549,206 +1542,28 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic battery_level_at : (t,battery_level_type) farray
-
-logic current_time : t
-
-logic res : t
-
-logic s : t
-
-logic failsafe__model__time_below_threshold__result : t
-
-logic temp___256 : t
-
-logic temp___255 : t
-
-logic o : t
-
-logic o1 : battery_level_type
-
-logic o2 : t1
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic temp___257 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic temp___259 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic o10 : battery_level_type
-
-logic o11 : t1
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic temp___266 : t
-
-logic o15 : t
-
-logic o16 : t
-
-logic temp___268 : t
-
-logic o17 : t
-
-logic o18 : t
-
-logic temp___265 : t
-
-logic o19 : t
-
-logic o20 : t
-
-logic o21 : battery_level_type
-
-logic o22 : t1
-
-logic result : t
-
-logic res1 : t
-
-logic result1 : t
-
-logic s1 : t
-
-logic result2 : bool
-
-logic result3 : t
-
-logic res2 : t
-
-logic res3 : t
-
-logic s2 : t
-
-logic result4 : bool
-
-logic result5 : bool
-
-logic result6 : t
-
-logic s3 : t
-
-logic result7 : bool
-
-logic result8 : t
-
-logic res4 : t
-
-logic s4 : t
-
-logic s5 : t
-
-logic res5 : t
-
-logic s6 : t
-
-logic res6 : t
-
-logic s7 : t
-
-logic res7 : t
-
-logic s8 : t
-
-logic res8 : t
-
-logic s9 : t
-
-logic res9 : t
-
-logic s10 : t
-
-logic res10 : t
-
-logic s11 : t
-
-logic res11 : t
-
-logic s12 : t
-
-logic res12 : t
-
-logic s13 : t
-
-logic result9 : t
-
-logic failsafe__model__time_below_threshold__result1 : t
-
-logic failsafe__model__time_below_threshold__result2 : t
-
-logic failsafe__model__time_below_threshold__result3 : t
-
-logic res13 : t
-
-logic s14 : t
-
-logic failsafe__model__time_below_threshold__result4 : t
-
-logic res14 : t
-
-logic s15 : t
-
-logic failsafe__model__time_below_threshold__result5 : t
-
-logic result10 : bool
-
-logic result11 : bool
-
-logic result12 : bool
-
-logic result13 : bool
-
-axiom H : in_range2(current_time)
-
-axiom H1 : (result = res)
-
-axiom H2 : (res1 = of_int(0))
-
-axiom H3 : in_range3(res1)
-
-axiom H4 : (result1 = s)
-
-axiom H5 : (s1 = of_int(0))
-
-axiom H6 : ule(of_int(0), s1)
-
-axiom H7 : ule(s1, of_int(49))
-
-axiom H8 : (ult(current_time, s1) -> (o = add(sub(current_time, s1),
-  of_int(50))))
-
-axiom H9 : ((not ult(current_time, s1)) -> (o = sub(current_time, s1)))
-
-axiom H10 : (o1 = (battery_level_at[o]))
-
-axiom H11 : (o2 = to_rep(o1))
-
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.20000000298023223876953125))
 
-axiom H12 : ((lt(o2, fliteral1) -> (result2 = true)) and ((not lt(o2,
-  fliteral1)) -> (result2 = false)))
+logic rliteral3 : t
 
-axiom H13 : (result2 = true)
+axiom rliteral_axiom3 : (tqtint(rliteral3) = 1)
 
  (* File "failsafe.ads", line 16, characters 0-0 *)
-goal WP_parameter_def : in_range3(add(res1, of_int(1)))
+goal WP_parameter_def :
+  (forall battery_level_at:(t,battery_level_type) farray.
+  forall current_time:t. forall res:t. forall s:t. forall o:t.
+  forall o1:battery_level_type. forall o2:t1. forall result:t. forall res1:t.
+  forall result1:t. forall s1:t. forall result2:bool.
+  (in_range2(current_time) -> ((({ t__content = result } = { t__content = res
+  }) and (res1 = rliteral)) -> (in_range3(res1) -> ((({ t__content = result1
+  } = { t__content = s }) and (s1 = rliteral)) -> ((ule(rliteral, s1) and
+  ule(s1, rliteral1)) -> ((((((ult(current_time, s1) and
+  (o = add(sub(current_time, s1), rliteral2))) or ((not ult(current_time,
+  s1)) and (o = sub(current_time, s1)))) and
+  (o1 = (battery_level_at[o]))) and (o2 = to_rep(o1))) and ((lt(o2,
+  fliteral1) and (result2 = true)) or ((not lt(o2, fliteral1)) and
+  (result2 = false)))) -> ((result2 = true) -> in_range3(add(res1,
+  rliteral3))))))))))

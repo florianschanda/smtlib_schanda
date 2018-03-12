@@ -166,15 +166,18 @@
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
-(define-fun dynamic_invariant ((temp___expr_171 (_ BitVec 8))
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool true)
+(define-fun dynamic_invariant ((temp___expr_200 (_ BitVec 8))
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool) (temp___do_typ_inv_199 Bool)) Bool true)
 
 (declare-const i (_ BitVec 8))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const o Float32)
+
+;; H
+  (assert true)
 
 (assert
 ;; WP_parameter_def

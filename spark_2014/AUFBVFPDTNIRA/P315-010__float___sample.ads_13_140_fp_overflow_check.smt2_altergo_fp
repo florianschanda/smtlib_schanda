@@ -1066,31 +1066,16 @@ logic float_ref : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-axiom H : tqtisFinite(float_tested)
-
-axiom H1 : tqtisFinite(float_ref)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
-axiom H2 : neq(float_ref, fliteral1)
-
-axiom H3 : ((o = sub(NearestTiesToEven, float_tested, float_ref)) and
-  tqtisFinite(sub(NearestTiesToEven, float_tested, float_ref)))
-
-axiom H4 : (o1 = abs(o))
-
-axiom H5 : (o2 = div(NearestTiesToEven, o1, float_ref))
-
  (* File "sample.ads", line 13, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(o2)
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:t. (tqtisFinite(float_tested) ->
+  (tqtisFinite(float_ref) -> (neq(float_ref, fliteral1) ->
+  (((((o = sub(NearestTiesToEven, float_tested, float_ref)) and
+  tqtisFinite(sub(NearestTiesToEven, float_tested, float_ref))) and
+  (o1 = abs(o))) and (o2 = div(NearestTiesToEven, o1, float_ref))) ->
+  tqtisFinite(o2))))))

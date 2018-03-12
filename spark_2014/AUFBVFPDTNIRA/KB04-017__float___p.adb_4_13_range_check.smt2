@@ -100,12 +100,13 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(define-fun dynamic_invariant ((temp___expr_51 Float32)
-  (temp___is_init_48 Bool) (temp___skip_constant_49 Bool)
-  (temp___do_toplevel_50 Bool)) Bool (=>
-                                     (or (= temp___is_init_48 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_51)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-fun id (Float32) Float32)
 
@@ -114,13 +115,13 @@
 ;; id__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (dynamic_invariant (id x) true
-     false true)) :pattern ((id x)) )))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (id x) true false true true)) :pattern ((id x)) )))
 
 ;; id__def_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true) (= (id x) x)) :pattern (
+  (! (=> (dynamic_invariant x true true true true) (= (id x) x)) :pattern (
   (id x)) )))
 
 (declare-const t_FIRST Float32)
@@ -189,12 +190,13 @@
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 ttB)))))
 (define-fun t__ref___projection ((a t__ref1)) ttB (t__content1 a))
 
-(define-fun dynamic_invariant1 ((temp___expr_171 Float32)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true)
-                                      (fp.leq first last)) (dynamic_property
-                                      first last temp___expr_171)))
+(define-fun dynamic_invariant1 ((temp___expr_200 Float32)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (fp.leq first last)) (dynamic_property
+                                     first last temp___expr_200)))
 
 ;; first__def_axiom
   (assert (= first t_FIRST))
@@ -207,8 +209,6 @@
 (declare-const p__t_FIRST__assume Float32)
 
 (declare-const p__t_LAST__assume Float32)
-
-(declare-const us Float32)
 
 ;; H
   (assert

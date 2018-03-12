@@ -954,28 +954,11 @@ logic f : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic p__ident__5__result : t
-
-logic result : t
-
-logic p__ident__5__result1 : t
-
-logic p__ident__5__result2 : t
-
-logic p__ident__5__result3 : t
-
-logic p__ident__5__result4 : t
-
-logic p__ident__5__result5 : t
-
-axiom H : tqtisFinite(f)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H1 : neq(f, fliteral1)
-
  (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (not (f = fliteral1))
+goal WP_parameter_def : (tqtisFinite(f) -> (neq(f, fliteral1) ->
+  (not (f = fliteral1))))

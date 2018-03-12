@@ -78,12 +78,13 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_324 Int)
-  (temp___is_init_321 Bool) (temp___skip_constant_322 Bool)
-  (temp___do_toplevel_323 Bool)) Bool (=>
-                                      (or (= temp___is_init_321 true)
-                                      (<= 0 2147483647)) (in_range1
-                                      temp___expr_324)))
+(define-fun dynamic_invariant ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range1
+                                     temp___expr_365)))
 
 (declare-fun to_rep (count_type) Int)
 
@@ -211,8 +212,8 @@
      (<= result (to_rep
                 (rec__algorithm__gap_vectors__list__capacity
                 (us_split_discrs1 container))))
-     (dynamic_invariant result true false true))) :pattern ((length
-                                                            container)) )))
+     (dynamic_invariant result true false true true))) :pattern ((length
+                                                                 container)) )))
 
 (declare-const container__split_discrs us_split_discrs)
 
@@ -569,8 +570,6 @@
 (declare-const count Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const o Int)
 
 ;; H
   (assert (in_range1 count))

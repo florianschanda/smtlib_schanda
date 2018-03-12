@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1033,24 +1033,6 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat : (int,float1) farray, int, int, (int,float1) farray, int,
-  int -> (int,float1) farray
-
-axiom concat_def :
-  (forall a:(int,float1) farray. forall b:(int,float1) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton : float1, int -> (int,float1) farray
-
-axiom singleton_def :
-  (forall v:float1.
-  (forall i:int [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq5 : (int,float1) farray, int, int, (int,float1) farray, int,
   int -> bool
 
@@ -1061,17 +1043,17 @@ axiom bool_eq_def4 :
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1081,9 +1063,9 @@ axiom bool_eq_rev :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep((a[temp___idx_132])) = to_rep((b[((b__first - a__first) + temp___idx_132)])))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 logic d : (int,float1) farray
 
@@ -1156,438 +1138,63 @@ logic attr__ATTRIBUTE_ADDRESS10 : int
 
 logic homothetical__homothetical__lambda__aggregate_def : t -> (int,float1) farray
 
-axiom def_axiom :
-  (forall temp___160:t.
-  (forall temp___161:int.
-  ((homothetical__homothetical__lambda__aggregate_def(temp___160)[temp___161]) = of_rep(temp___160))))
-
 logic homothetical__homothetical__upsilon__aggregate_def : t -> (int,float1) farray
-
-axiom def_axiom1 :
-  (forall temp___163:t.
-  (forall temp___164:int.
-  ((homothetical__homothetical__upsilon__aggregate_def(temp___163)[temp___164]) = of_rep(temp___163))))
 
 logic homothetical__homothetical__kvp__aggregate_def : t -> (int,float1) farray
 
-axiom def_axiom2 :
-  (forall temp___166:t.
-  (forall temp___167:int.
-  ((homothetical__homothetical__kvp__aggregate_def(temp___166)[temp___167]) = of_rep(temp___166))))
+logic temp___198 : t -> (int,float1) farray
 
-logic temp___173 : t -> (int,float1) farray
+logic temp___202 : t -> (int,float1) farray
+
+axiom def_axiom :
+  (forall temp___185:t. (tqtisFinite(temp___185) ->
+  (forall temp___186:int.
+  (to_rep((homothetical__homothetical__lambda__aggregate_def(temp___185)[temp___186])) = temp___185))))
+
+axiom def_axiom1 :
+  (forall temp___188:t. (tqtisFinite(temp___188) ->
+  (forall temp___189:int.
+  (to_rep((homothetical__homothetical__upsilon__aggregate_def(temp___188)[temp___189])) = temp___188))))
+
+axiom def_axiom2 :
+  (forall temp___191:t. (tqtisFinite(temp___191) ->
+  (forall temp___192:int.
+  (to_rep((homothetical__homothetical__kvp__aggregate_def(temp___191)[temp___192])) = temp___191))))
 
 axiom def_axiom3 :
-  (forall temp___175:t.
-  (forall temp___176:int.
-  ((temp___173(temp___175)[temp___176]) = of_rep(temp___175))))
-
-logic temp___177 : t -> (int,float1) farray
+  (forall temp___200:t. (tqtisFinite(temp___200) ->
+  (forall temp___201:int.
+  (to_rep((temp___198(temp___200)[temp___201])) = temp___200))))
 
 axiom def_axiom4 :
-  (forall temp___179:t.
-  (forall temp___180:int.
-  ((temp___177(temp___179)[temp___180]) = of_rep(temp___179))))
-
-logic kvmax : (int,float1) farray
-
-logic kamax : (int,float1) farray
-
-logic lambda : (int,float1) farray
-
-logic upsilon : (int,float1) farray
-
-logic kvp : (int,float1) farray
-
-logic i : int
-
-logic i1 : int
-
-logic j : int
-
-logic temp___169 : (int,float1) farray
-
-logic temp___168 : int
-
-logic j1 : int
-
-logic o : t
-
-logic o1 : float1
-
-logic o2 : (int,float1) farray
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : float1
-
-logic o9 : (int,float1) farray
-
-logic o10 : t
-
-logic o11 : t
-
-logic o12 : t
-
-logic o13 : t
-
-logic o14 : t
-
-logic o15 : float1
-
-logic o16 : (int,float1) farray
-
-logic o17 : t
-
-logic o18 : t
-
-logic o19 : t
-
-logic o20 : t
-
-logic o21 : t
-
-logic o22 : float1
-
-logic o23 : (int,float1) farray
-
-logic o24 : t
-
-logic o25 : t
-
-logic o26 : t
-
-logic o27 : t
-
-logic o28 : t
-
-logic o29 : float1
-
-logic o30 : (int,float1) farray
-
-logic o31 : t
-
-logic o32 : float1
-
-logic o33 : (int,float1) farray
-
-logic o34 : t
-
-logic o35 : float1
-
-logic o36 : (int,float1) farray
-
-logic o37 : t
-
-logic o38 : t
-
-logic o39 : t
-
-logic o40 : t
-
-logic o41 : t
-
-logic o42 : float1
-
-logic o43 : (int,float1) farray
-
-logic o44 : t
-
-logic o45 : t
-
-logic o46 : t
-
-logic o47 : t
-
-logic o48 : t
-
-logic o49 : float1
-
-logic o50 : (int,float1) farray
-
-logic o51 : t
-
-logic o52 : t
-
-logic o53 : t
-
-logic o54 : t
-
-logic o55 : t
-
-logic o56 : float1
-
-logic o57 : (int,float1) farray
-
-logic o58 : t
-
-logic o59 : t
-
-logic o60 : t
-
-logic o61 : t
-
-logic o62 : t
-
-logic o63 : float1
-
-logic o64 : (int,float1) farray
-
-logic o65 : t
-
-logic o66 : float1
-
-logic o67 : (int,float1) farray
-
-logic o68 : t
-
-logic o69 : float1
-
-logic o70 : (int,float1) farray
-
-logic result : (int,float1) farray
-
-logic lambda1 : (int,float1) farray
-
-logic result1 : (int,float1) farray
-
-logic upsilon1 : (int,float1) farray
-
-logic result2 : (int,float1) farray
-
-logic kvp1 : (int,float1) farray
-
-logic result3 : int
-
-logic i2 : int
-
-logic kvp2 : (int,float1) farray
-
-logic i3 : int
-
-logic result4 : (int,float1) farray
-
-logic kvp3 : (int,float1) farray
-
-logic result5 : int
-
-logic i4 : int
-
-logic kvp4 : (int,float1) farray
-
-logic i5 : int
-
-logic kvp5 : (int,float1) farray
-
-logic i6 : int
-
-logic kvp6 : (int,float1) farray
-
-logic i7 : int
-
-logic kvp7 : (int,float1) farray
-
-logic i8 : int
-
-logic kvp8 : (int,float1) farray
-
-logic i9 : int
-
-logic kvp9 : (int,float1) farray
-
-logic i10 : int
-
-logic result6 : (int,float1) farray
-
-logic kvmax1 : (int,float1) farray
-
-logic result7 : (int,float1) farray
-
-logic kamax1 : (int,float1) farray
-
-logic result8 : int
-
-logic i11 : int
-
-logic result9 : int
-
-logic j2 : int
-
-logic result10 : (int,float1) farray
-
-logic lambda2 : (int,float1) farray
-
-logic result11 : (int,float1) farray
-
-logic upsilon2 : (int,float1) farray
-
-logic lambda3 : (int,float1) farray
-
-logic upsilon3 : (int,float1) farray
-
-logic lambda4 : (int,float1) farray
-
-logic upsilon4 : (int,float1) farray
-
-logic result12 : int
-
-logic j3 : int
-
-logic result13 : (int,float1) farray
-
-logic lambda5 : (int,float1) farray
-
-logic result14 : (int,float1) farray
-
-logic upsilon5 : (int,float1) farray
-
-logic lambda6 : (int,float1) farray
-
-logic upsilon6 : (int,float1) farray
-
-logic lambda7 : (int,float1) farray
-
-logic upsilon7 : (int,float1) farray
-
-logic result15 : (int,float1) farray
-
-logic kvmax2 : (int,float1) farray
-
-logic result16 : (int,float1) farray
-
-logic kamax2 : (int,float1) farray
-
-logic result17 : int
-
-logic i12 : int
-
-logic result18 : int
-
-logic j4 : int
-
-logic result19 : (int,float1) farray
-
-logic lambda8 : (int,float1) farray
-
-logic result20 : (int,float1) farray
-
-logic upsilon8 : (int,float1) farray
-
-logic lambda9 : (int,float1) farray
-
-logic upsilon9 : (int,float1) farray
-
-logic lambda10 : (int,float1) farray
-
-logic upsilon10 : (int,float1) farray
-
-logic result21 : int
-
-logic j5 : int
-
-logic result22 : (int,float1) farray
-
-logic lambda11 : (int,float1) farray
-
-logic result23 : (int,float1) farray
-
-logic upsilon11 : (int,float1) farray
-
-logic lambda12 : (int,float1) farray
-
-logic upsilon12 : (int,float1) farray
-
-logic lambda13 : (int,float1) farray
-
-logic upsilon13 : (int,float1) farray
-
-logic result24 : (int,float1) farray
-
-logic kvmax3 : (int,float1) farray
-
-logic result25 : (int,float1) farray
-
-logic kamax3 : (int,float1) farray
-
-logic kvmax4 : (int,float1) farray
-
-logic kamax4 : (int,float1) farray
-
-logic lambda14 : (int,float1) farray
-
-logic upsilon14 : (int,float1) farray
-
-logic kvp10 : (int,float1) farray
-
-logic i13 : int
-
-logic i14 : int
-
-logic j6 : int
-
-logic kvmax5 : (int,float1) farray
-
-logic kamax5 : (int,float1) farray
-
-logic lambda15 : (int,float1) farray
-
-logic upsilon15 : (int,float1) farray
-
-logic kvp11 : (int,float1) farray
-
-logic i15 : int
-
-logic i16 : int
-
-logic j7 : int
-
-axiom H :
-  (forall j8:int. (((1 <= j8) and (j8 <= 2)) -> ((neq(to_rep((d[j8])),
-  fliteral1) and lt(fliteral1, to_rep((kv[j8])))) and lt(fliteral1,
-  to_rep((ka[j8]))))))
-
-axiom H1 : (result = lambda)
-
-axiom H2 :
-  (lambda1 = homothetical__homothetical__lambda__aggregate_def(fliteral))
-
-axiom H3 : (result1 = upsilon)
-
-axiom H4 :
-  (upsilon1 = homothetical__homothetical__upsilon__aggregate_def(fliteral))
-
-axiom H5 : (result2 = kvp)
-
-axiom H6 : (kvp1 = homothetical__homothetical__kvp__aggregate_def(fliteral1))
-
-axiom H7 :
-  (forall i17:int. (((1 <= i17) and (i17 <= 2)) -> ((lt(fliteral1,
-  to_rep((ka[i17]))) and neq(to_rep((kvp8[i17])), fliteral1)) and
-  neq(to_rep((d[i17])), fliteral1))))
-
-axiom H8 : (result8 = i1)
-
-axiom H9 : (i11 = 1)
-
-axiom H10 : (result9 = j)
-
-axiom H11 : (j2 = 1)
-
-axiom H12 : (not (i11 = j2))
-
-axiom H13 : ((o4 = mul(RNE, to_rep((kvp8[i11])), abs1(to_rep((d[j2]))))) and
-  tqtisFinite(mul(RNE, to_rep((kvp8[i11])), abs1(to_rep((d[j2]))))))
-
-axiom H14 : ((o3 = mul(RNE, to_rep((kvp8[j2])), abs1(to_rep((d[i11]))))) and
-  tqtisFinite(mul(RNE, to_rep((kvp8[j2])), abs1(to_rep((d[i11]))))))
-
- (* File "homothetical.ads", line 5, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(o4))
+  (forall temp___204:t. (tqtisFinite(temp___204) ->
+  (forall temp___205:int.
+  (to_rep((temp___202(temp___204)[temp___205])) = temp___204))))
+
+ (* File "homothetical.adb", line 48, characters 0-0 *)
+goal WP_parameter_def :
+  (forall lambda:(int,float1) farray. forall upsilon:(int,float1) farray.
+  forall kvp:(int,float1) farray. forall i:int. forall j:int. forall o:t.
+  forall o1:t. forall result:(int,float1) farray.
+  forall lambda1:(int,float1) farray. forall result1:(int,float1) farray.
+  forall upsilon1:(int,float1) farray. forall result2:(int,float1) farray.
+  forall kvp1:(int,float1) farray. forall kvp2:(int,float1) farray.
+  forall result3:int. forall i1:int. forall result4:int. forall j1:int.
+  ((forall j2:int. (((1 <= j2) and (j2 <= 2)) -> ((neq(to_rep((d[j2])),
+   fliteral1) and lt(fliteral1, to_rep((kv[j2])))) and lt(fliteral1,
+   to_rep((ka[j2])))))) ->
+  ((({ map__content = result } = { map__content = lambda }) and
+  (lambda1 = homothetical__homothetical__lambda__aggregate_def(fliteral))) ->
+  ((({ map__content = result1 } = { map__content = upsilon }) and
+  (upsilon1 = homothetical__homothetical__upsilon__aggregate_def(fliteral))) ->
+  ((({ map__content = result2 } = { map__content = kvp }) and
+  (kvp1 = homothetical__homothetical__kvp__aggregate_def(fliteral1))) ->
+  ((forall i2:int. (((1 <= i2) and (i2 <= 2)) -> ((lt(fliteral1,
+   to_rep((ka[i2]))) and neq(to_rep((kvp2[i2])), fliteral1)) and
+   neq(to_rep((d[i2])), fliteral1)))) ->
+  (((result3 = i) and (i1 = 1)) -> (((result4 = j) and (j1 = 1)) ->
+  ((not (i1 = j1)) -> (((o1 = mul(RNE, to_rep((kvp2[i1])),
+  abs1(to_rep((d[j1]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[i1])),
+  abs1(to_rep((d[j1])))))) -> (((o = mul(RNE, to_rep((kvp2[j1])),
+  abs1(to_rep((d[i1]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[j1])),
+  abs1(to_rep((d[i1])))))) -> (not is_zero(o1)))))))))))))

@@ -1086,12 +1086,12 @@
 (define-fun float1__ref___projection ((a float1__ref)) float1 (float1__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_171 t) (temp___is_init_168 Bool)
-  (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)) Bool (=>
-                                      (or (= temp___is_init_168 true) (le
-                                      fliteral1 fliteral2)) (in_range1
-                                      temp___expr_171)))
+(define-fun dynamic_invariant ((temp___expr_200 t) (temp___is_init_196 Bool)
+  (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true) (le
+                                     fliteral1 fliteral2)) (in_range1
+                                     temp___expr_200)))
 
 (declare-sort float2 0)
 
@@ -1127,83 +1127,18 @@
 (define-fun float2__ref___projection ((a float2__ref)) float2 (float2__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_177 t) (temp___is_init_174 Bool)
-  (temp___skip_constant_175 Bool)
-  (temp___do_toplevel_176 Bool)) Bool (=>
-                                      (or (= temp___is_init_174 true) (le
-                                      fliteral3 fliteral4)) (in_range2
-                                      temp___expr_177)))
+(define-fun dynamic_invariant1 ((temp___expr_207 t) (temp___is_init_203 Bool)
+  (temp___skip_constant_204 Bool) (temp___do_toplevel_205 Bool)
+  (temp___do_typ_inv_206 Bool)) Bool (=>
+                                     (or (= temp___is_init_203 true) (le
+                                     fliteral3 fliteral4)) (in_range2
+                                     temp___expr_207)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const x t)
-
-(declare-const y t)
-
-(declare-const z t)
-
-(declare-const result t)
-
-(declare-const x1 t)
-
-(declare-const result1 t)
-
-(declare-const y1 t)
-
-(declare-const result2 t)
-
-(declare-const z1 t)
-
-(declare-const z2 t)
-
-(declare-const result3 t)
-
-(declare-const x2 t)
-
-(declare-const z3 t)
-
-(declare-const result4 t)
-
-(declare-const x3 t)
-
-(declare-const z4 t)
-
-(declare-const result5 t)
-
-(declare-const y2 t)
-
-(declare-const z5 t)
-
-;; H
-  (assert (=> (le fliteral1 fliteral2) (in_range1 x)))
-
-;; H
-  (assert (=> (le fliteral1 fliteral2) (in_range1 y)))
-
-;; H
-  (assert (=> (le fliteral3 fliteral4) (in_range2 z)))
-
-;; H
-  (assert (= result x))
-
-;; H
-  (assert (= x1 fliteral2))
-
-;; H
-  (assert (= result1 y))
-
-;; H
-  (assert (= y1 fliteral2))
-
-;; H
-  (assert (= result2 z))
-
-;; H
-  (assert (= z1 fliteral3))
 
 (assert
 ;; WP_parameter_def

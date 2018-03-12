@@ -1485,12 +1485,6 @@ axiom to_float32_conv :
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq2 : bool, bool -> bool
-
-axiom bool_eq_def2 :
-  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
 logic to_int2 : bool -> int
 
 axiom to_int_def :
@@ -1502,6 +1496,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq2 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
 predicate in_range2(x: int) = ((x = 0) or (x = 1))
 
@@ -1566,11 +1566,6 @@ logic y : t1
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic o : t
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : tqtisFinite1(y)
-
  (* File "generic_float_tests.adb", line 444, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(to_float32(RNE, y))
+goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite1(y) ->
+  tqtisFinite(to_float32(RNE, y))))

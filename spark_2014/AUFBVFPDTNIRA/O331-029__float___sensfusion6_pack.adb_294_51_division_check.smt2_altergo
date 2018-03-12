@@ -1060,150 +1060,56 @@ logic attr__ATTRIBUTE_ADDRESS8 : int
 
 logic attr__ATTRIBUTE_ADDRESS9 : int
 
-logic euler_roll_actual : t
-
-logic euler_pitch_actual : t
-
-logic euler_yaw_actual : t
-
-logic q0 : t
-
-logic q1 : t
-
-logic q2 : t
-
-logic q3 : t
-
-logic grav_x : t
-
-logic grav_y : t
-
-logic grav_z : t
-
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-logic o3 : t
-
-logic o4 : t
-
-logic o5 : t
-
-logic o6 : t
-
-logic o7 : t
-
-logic o8 : t
-
-logic o9 : t
-
-logic result : t
-
-logic grav_x1 : t
-
-logic result1 : t
-
-logic grav_y1 : t
-
-logic result2 : t
-
-logic grav_z1 : t
-
-logic result3 : t
-
-logic grav_x2 : t
-
-logic result4 : t
-
-logic euler_yaw_actual1 : t
-
-logic result5 : t
-
-logic euler_pitch_actual1 : t
-
-axiom H : (le(neg(fliteral1), fliteral1) -> in_range1(euler_roll_actual))
-
-axiom H1 : (le(neg(fliteral1), fliteral1) -> in_range1(euler_pitch_actual))
-
-axiom H2 : (le(neg(fliteral1), fliteral1) -> in_range1(euler_yaw_actual))
-
-axiom H3 : in_range2(q0)
-
-axiom H4 : in_range2(q1)
-
-axiom H5 : in_range2(q2)
-
-axiom H6 : in_range2(q3)
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
-
-axiom H7 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(grav_x))
-
-axiom H8 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(grav_y))
-
-axiom H9 : (le(neg(fliteral3), fliteral3) -> tqtisFinite(grav_z))
-
-axiom H10 : (result = grav_x)
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 2.0))
 
-axiom H11 : (grav_x1 = mul(RNE, fliteral4, sub(RNE, mul(RNE, q1, q3),
-  mul(RNE, q0, q2))))
-
-axiom H12 : (result1 = grav_y)
-
-axiom H13 : (grav_y1 = mul(RNE, fliteral4, add(RNE, mul(RNE, q0, q1),
-  mul(RNE, q2, q3))))
-
-axiom H14 : (result2 = grav_z)
-
-axiom H15 : (grav_z1 = add(RNE, sub(RNE, sub(RNE, mul(RNE, q0, q0), mul(RNE,
-  q1, q1)), mul(RNE, q2, q2)), mul(RNE, q3, q3)))
-
-axiom H16 : ((o = saturate(grav_x1, neg(fliteral), fliteral)) and
-  (tqtisFinite(o) and ((lt(grav_x1, neg(fliteral)) -> eq(o,
-  neg(fliteral))) and ((not lt(grav_x1, neg(fliteral))) -> ((lt(fliteral,
-  grav_x1) -> eq(o, fliteral)) and ((not lt(fliteral, grav_x1)) -> eq(o,
-  grav_x1)))))))
-
-axiom H17 : (result3 = grav_x1)
-
-axiom H18 : (grav_x2 = o)
-
-axiom H19 : ((o1 = atan_2(mul(RNE, fliteral4, add(RNE, mul(RNE, q0, q3),
-  mul(RNE, q1, q2))), sub(RNE, sub(RNE, add(RNE, mul(RNE, q0, q0), mul(RNE,
-  q1, q1)), mul(RNE, q2, q2)), mul(RNE, q3, q3)))) and in_range3(o1))
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 180.0))
-
-axiom H20 : (o2 = mul(RNE, o1, fliteral5))
 
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 3.1415927410125732421875))
 
-axiom H21 : (o3 = div(RNE, o2, fliteral6))
-
-axiom H22 : (result4 = euler_yaw_actual)
-
-axiom H23 : (euler_yaw_actual1 = o3)
-
-axiom H24 : ((o4 = asin(grav_x2)) and in_range3(o4))
-
-axiom H25 : (o5 = mul(RNE, o4, fliteral5))
-
  (* File "sensfusion6_pack.adb", line 248, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral6))
+goal WP_parameter_def :
+  (forall euler_roll_actual:t. forall euler_pitch_actual:t.
+  forall euler_yaw_actual:t. forall q0:t. forall q1:t. forall q2:t.
+  forall q3:t. forall grav_x:t. forall grav_y:t. forall grav_z:t. forall o:t.
+  forall o1:t. forall o2:t. forall o3:t. forall o4:t. forall o5:t.
+  forall result:t. forall grav_x1:t. forall result1:t. forall grav_y1:t.
+  forall result2:t. forall grav_z1:t. forall result3:t. forall grav_x2:t.
+  forall result4:t. forall euler_yaw_actual1:t. ((le(neg(fliteral1),
+  fliteral1) -> in_range1(euler_roll_actual)) -> ((le(neg(fliteral1),
+  fliteral1) -> in_range1(euler_pitch_actual)) -> ((le(neg(fliteral1),
+  fliteral1) -> in_range1(euler_yaw_actual)) -> (in_range2(q0) ->
+  (in_range2(q1) -> (in_range2(q2) -> (in_range2(q3) -> ((le(neg(fliteral3),
+  fliteral3) -> tqtisFinite(grav_x)) -> ((le(neg(fliteral3), fliteral3) ->
+  tqtisFinite(grav_y)) -> ((le(neg(fliteral3), fliteral3) ->
+  tqtisFinite(grav_z)) -> (((result = grav_x) and (grav_x1 = mul(RNE,
+  fliteral4, sub(RNE, mul(RNE, q1, q3), mul(RNE, q0, q2))))) ->
+  (((result1 = grav_y) and (grav_y1 = mul(RNE, fliteral4, add(RNE, mul(RNE,
+  q0, q1), mul(RNE, q2, q3))))) -> (((result2 = grav_z) and
+  (grav_z1 = add(RNE, sub(RNE, sub(RNE, mul(RNE, q0, q0), mul(RNE, q1, q1)),
+  mul(RNE, q2, q2)), mul(RNE, q3, q3)))) -> ((((o = saturate(grav_x1,
+  neg(fliteral), fliteral)) and (tqtisFinite(o) and ((lt(grav_x1,
+  neg(fliteral)) and eq(o, neg(fliteral))) or ((not lt(grav_x1,
+  neg(fliteral))) and ((lt(fliteral, grav_x1) and eq(o, fliteral)) or
+  ((not lt(fliteral, grav_x1)) and eq(o, grav_x1))))))) and
+  ((result3 = grav_x1) and (grav_x2 = o))) -> ((((((o1 = atan_2(mul(RNE,
+  fliteral4, add(RNE, mul(RNE, q0, q3), mul(RNE, q1, q2))), sub(RNE, sub(RNE,
+  add(RNE, mul(RNE, q0, q0), mul(RNE, q1, q1)), mul(RNE, q2, q2)), mul(RNE,
+  q3, q3)))) and in_range3(o1)) and (o2 = mul(RNE, o1, fliteral5))) and
+  (o3 = div(RNE, o2, fliteral6))) and ((result4 = euler_yaw_actual) and
+  (euler_yaw_actual1 = o3))) -> ((((o4 = asin(grav_x2)) and
+  in_range3(o4)) and (o5 = mul(RNE, o4, fliteral5))) ->
+  (not is_zero(fliteral6)))))))))))))))))))

@@ -2128,12 +2128,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int5 : bool -> int
 
 axiom to_int_def4 :
@@ -2145,6 +2139,12 @@ logic of_int5 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int5(i)]. (((i = 0) -> (of_int5(i) = false)) and
   ((not (i = 0)) -> (of_int5(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -2381,37 +2381,15 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic res : t
-
-logic o : t
-
-logic o1 : t
-
-logic result : t
-
-logic res1 : t
-
-logic result1 : t
-
-logic res2 : t
-
-axiom H : true
-
-axiom H1 : tqtisFinite(y)
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-axiom H2 : (le(neg(fliteral1), fliteral1) -> tqtisFinite(res))
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.2500000000000000000000000))
-
-axiom H3 : (le(fliteral2, y) and le(y, fliteral))
 
 logic fliteral3 : t
 
@@ -2419,4 +2397,7 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 3276.800048828125))
 
  (* File "floating_point.adb", line 66, characters 0-0 *)
-goal WP_parameter_def : (not is_zero(fliteral3))
+goal WP_parameter_def :
+  (forall res:t. (tqtisFinite(y) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(res)) -> ((le(fliteral2, y) and le(y, fliteral)) ->
+  (not is_zero(fliteral3))))))

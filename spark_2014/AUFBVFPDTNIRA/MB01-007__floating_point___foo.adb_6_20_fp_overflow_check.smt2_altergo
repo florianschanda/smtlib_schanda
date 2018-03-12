@@ -935,17 +935,6 @@ logic c : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic o : t
-
-logic o1 : t
-
-logic o2 : t
-
-axiom H : tqtisFinite(a)
-
-axiom H1 : tqtisFinite(b)
-
-axiom H2 : tqtisFinite(c)
-
  (* File "foo.adb", line 1, characters 0-0 *)
-goal WP_parameter_def : tqtisFinite(add(RNE, a, b))
+goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) ->
+  (tqtisFinite(c) -> tqtisFinite(add(RNE, a, b)))))

@@ -1074,12 +1074,12 @@
   (and (tqtisFinite fliteral1)
   (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
 
-(define-fun dynamic_invariant ((temp___expr_137 t) (temp___is_init_134 Bool)
-  (temp___skip_constant_135 Bool)
-  (temp___do_toplevel_136 Bool)) Bool (=>
-                                      (or (= temp___is_init_134 true) (le
-                                      (neg fliteral1) fliteral1))
-                                      (tqtisFinite temp___expr_137)))
+(define-fun dynamic_invariant ((temp___expr_160 t) (temp___is_init_156 Bool)
+  (temp___skip_constant_157 Bool) (temp___do_toplevel_158 Bool)
+  (temp___do_typ_inv_159 Bool)) Bool (=>
+                                     (or (= temp___is_init_156 true) (le
+                                     (neg fliteral1) fliteral1)) (tqtisFinite
+                                     temp___expr_160)))
 
 (declare-fun to_rep (ft) t)
 
@@ -1218,6 +1218,11 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
 (declare-const y t)
 
 (declare-const r__split_fields ft)
@@ -1238,11 +1243,11 @@
 
 (declare-const o5 ft)
 
-(declare-const temp___206 ft)
+(declare-const temp___236 ft)
 
-(declare-const temp___2061 ft)
+(declare-const temp___2361 ft)
 
-(declare-const temp___2062 ft)
+(declare-const temp___2362 ft)
 
 (declare-const o6 ft)
 
@@ -1252,11 +1257,11 @@
 
 (declare-const o9 ft)
 
-(declare-const temp___208 ft)
+(declare-const temp___238 ft)
 
-(declare-const temp___2081 ft)
+(declare-const temp___2381 ft)
 
-(declare-const temp___2082 ft)
+(declare-const temp___2382 ft)
 
 (declare-const result ft)
 
@@ -1314,11 +1319,6 @@
 ;; H
   (assert (= (to_rep o1) x))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
 ;; H
   (assert (= (to_rep o2) fliteral2))
 
@@ -1332,13 +1332,13 @@
   (assert (= o o5))
 
 ;; H
-  (assert (= temp___206 o3))
+  (assert (= temp___236 o3))
 
 ;; H
-  (assert (= temp___2061 o4))
+  (assert (= temp___2361 o4))
 
 ;; H
-  (assert (= temp___2062 o5))
+  (assert (= temp___2362 o5))
 
 ;; H
   (assert (= result r__split_fields))
@@ -1350,13 +1350,13 @@
   (assert (= result2 r__split_fields2))
 
 ;; H
-  (assert (= temp___206 r__split_fields3))
+  (assert (= temp___236 r__split_fields3))
 
 ;; H
-  (assert (= temp___2061 r__split_fields4))
+  (assert (= temp___2361 r__split_fields4))
 
 ;; H
-  (assert (= temp___2062 r__split_fields5))
+  (assert (= temp___2362 r__split_fields5))
 
 ;; H
   (assert (= (to_rep o6) (to_rep r__split_fields4)))
@@ -1371,13 +1371,13 @@
   (assert (= r__split_fields5 o9))
 
 ;; H
-  (assert (= temp___208 o7))
+  (assert (= temp___238 o7))
 
 ;; H
-  (assert (= temp___2081 o8))
+  (assert (= temp___2381 o8))
 
 ;; H
-  (assert (= temp___2082 o9))
+  (assert (= temp___2382 o9))
 
 ;; H
   (assert (= result3 r__split_fields3))
@@ -1389,13 +1389,13 @@
   (assert (= result5 r__split_fields5))
 
 ;; H
-  (assert (= temp___208 r__split_fields6))
+  (assert (= temp___238 r__split_fields6))
 
 ;; H
-  (assert (= temp___2081 r__split_fields7))
+  (assert (= temp___2381 r__split_fields7))
 
 ;; H
-  (assert (= temp___2082 r__split_fields8))
+  (assert (= temp___2382 r__split_fields8))
 
 ;; H
   (assert (= result6 y))

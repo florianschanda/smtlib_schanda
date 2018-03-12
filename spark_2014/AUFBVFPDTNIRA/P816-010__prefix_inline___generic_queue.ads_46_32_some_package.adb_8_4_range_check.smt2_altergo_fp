@@ -1698,24 +1698,6 @@ axiom slide_def :
   (forall i:t [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[sub(i, sub(new_first, old_first))]))))))
 
-logic concat : (t,element_type) farray, t, t, (t,element_type) farray, t,
-  t -> (t,element_type) farray
-
-axiom concat_def :
-  (forall a:(t,element_type) farray. forall b:(t,element_type) farray.
-  (forall a_first:t. forall a_last:t. forall b_first:t. forall b_last:t.
-  (forall i:t [(concat(a, a_first, a_last, b, b_first, b_last)[i])].
-  (((ule(a_first, i) and ule(i, a_last)) -> ((concat(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and (ugt(i, a_last) -> ((concat(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[add(sub(i, a_last), sub(b_first,
-  one))])))))))
-
-logic singleton : element_type, t -> (t,element_type) farray
-
-axiom singleton_def :
-  (forall v:element_type.
-  (forall i:t [(singleton(v, i)[i])]. ((singleton(v, i)[i]) = v)))
-
 logic bool_eq8 : (t,element_type) farray, t, t, (t,element_type) farray, t,
   t -> bool
 
@@ -1726,19 +1708,19 @@ axiom bool_eq_def7 :
   a__last) and (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
-  (forall temp___idx_133:t. (((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) and
-  (to_rep4((a[temp___idx_133])) = to_rep4((b[add(sub(b__first, a__first),
-  temp___idx_133)])))) or (not (ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)))))) -> (bool_eq8(a, a__first, a__last, b,
+  (forall temp___idx_155:t. (((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) and
+  (to_rep4((a[temp___idx_155])) = to_rep4((b[add(sub(b__first, a__first),
+  temp___idx_155)])))) or (not (ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)))))) -> (bool_eq8(a, a__first, a__last, b,
   b__first, b__last) = true)) and ((not (((ule(a__first, a__last) ->
   (ule(b__first, b__last) and (sub(a__last, a__first) = sub(b__last,
   b__first)))) and ((not ule(a__first, a__last)) -> ugt(b__first,
   b__last))) and
-  (forall temp___idx_133:t. ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) ->
-  (to_rep4((a[temp___idx_133])) = to_rep4((b[add(sub(b__first, a__first),
-  temp___idx_133)]))))))) -> (bool_eq8(a, a__first, a__last, b, b__first,
+  (forall temp___idx_155:t. ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) ->
+  (to_rep4((a[temp___idx_155])) = to_rep4((b[add(sub(b__first, a__first),
+  temp___idx_155)]))))))) -> (bool_eq8(a, a__first, a__last, b, b__first,
   b__last) = false))))
 
 axiom bool_eq_rev :
@@ -1748,10 +1730,10 @@ axiom bool_eq_rev :
   (((ule(a__first, a__last) -> (ule(b__first, b__last) and (sub(a__last,
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
-  (forall temp___idx_133:t. ((ule(a__first, temp___idx_133) and
-  ule(temp___idx_133, a__last)) ->
-  (to_rep4((a[temp___idx_133])) = to_rep4((b[add(sub(b__first, a__first),
-  temp___idx_133)])))))))))
+  (forall temp___idx_155:t. ((ule(a__first, temp___idx_155) and
+  ule(temp___idx_155, a__last)) ->
+  (to_rep4((a[temp___idx_155])) = to_rep4((b[add(sub(b__first, a__first),
+  temp___idx_155)])))))))))
 
 logic dummy5 : (t,element_type) farray
 
@@ -1829,15 +1811,23 @@ function us_rep___projection(a: us_rep) : us_split_fields =
 
 function us_rep___2__projection(a: us_rep) : int = (a).attr__tag
 
+logic rliteral : t
+
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
+
+logic rliteral1 : t
+
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 255)
+
 logic bool_eq9 : us_rep, us_rep -> bool
 
 axiom bool_eq_def8 :
   (forall a:us_rep. forall b:us_rep [bool_eq9(a, b)].
   ((((((((to_rep3(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__mode) = to_rep3(((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__mode)) and
   (bool_eq8(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__buffer,
-  of_int(0), of_int(255),
+  rliteral, rliteral1,
   ((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__buffer,
-  of_int(0), of_int(255)) = true)) and
+  rliteral, rliteral1) = true)) and
   (to_rep2(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__index_head) = to_rep2(((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__index_head))) and
   (to_rep2(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__index_tail) = to_rep2(((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__index_tail))) and
   (((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__haselements = ((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__haselements)) and
@@ -1845,9 +1835,9 @@ axiom bool_eq_def8 :
   (bool_eq9(a, b) = true)) and
   ((not ((((((to_rep3(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__mode) = to_rep3(((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__mode)) and
   (bool_eq8(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__buffer,
-  of_int(0), of_int(255),
+  rliteral, rliteral1,
   ((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__buffer,
-  of_int(0), of_int(255)) = true)) and
+  rliteral, rliteral1) = true)) and
   (to_rep2(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__index_head) = to_rep2(((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__index_head))) and
   (to_rep2(((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__index_tail) = to_rep2(((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__index_tail))) and
   (((a).us_split_fields1).rec__some_package__float_buffer__buffer_tag__haselements = ((b).us_split_fields1).rec__some_package__float_buffer__buffer_tag__haselements)) and
@@ -2012,12 +2002,6 @@ function buffer_tag__ref___projection(a: buffer_tag__ref) : us_rep =
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq10 : bool, bool -> bool
-
-axiom bool_eq_def9 :
-  (forall x:bool. forall y:bool [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
-
 logic to_int3 : bool -> int
 
 axiom to_int_def1 :
@@ -2029,6 +2013,12 @@ logic of_int2 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
+
+logic bool_eq10 : bool, bool -> bool
+
+axiom bool_eq_def9 :
+  (forall x:bool. forall y:bool [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
 
 predicate in_range5(x: int) = ((x = 0) or (x = 1))
 
@@ -2081,24 +2071,6 @@ axiom slide_def1 :
   (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
   old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic concat1 : (int,element_type) farray, int, int,
-  (int,element_type) farray, int, int -> (int,element_type) farray
-
-axiom concat_def1 :
-  (forall a:(int,element_type) farray. forall b:(int,element_type) farray.
-  (forall a_first:int. forall a_last:int. forall b_first:int.
-  forall b_last:int.
-  (forall i:int [(concat1(a, a_first, a_last, b, b_first, b_last)[i])].
-  ((((a_first <= i) and (i <= a_last)) -> ((concat1(a, a_first, a_last, b,
-  b_first, b_last)[i]) = (a[i]))) and ((a_last <  i) -> ((concat1(a, a_first,
-  a_last, b, b_first, b_last)[i]) = (b[((i - a_last) + (b_first - 1))])))))))
-
-logic singleton1 : element_type, int -> (int,element_type) farray
-
-axiom singleton_def1 :
-  (forall v:element_type.
-  (forall i:int [(singleton1(v, i)[i])]. ((singleton1(v, i)[i]) = v)))
-
 logic bool_eq12 : (int,element_type) farray, int, int,
   (int,element_type) farray, int, int -> bool
 
@@ -2110,17 +2082,17 @@ axiom bool_eq_def11 :
   ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_132:int. ((((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) and
-  (to_rep4((a[temp___idx_132])) = to_rep4((b[((b__first - a__first) + temp___idx_132)])))) or
-  (not ((a__first <= temp___idx_132) and (temp___idx_132 <= a__last)))))) ->
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep4((a[temp___idx_154])) = to_rep4((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep4((a[temp___idx_132])) = to_rep4((b[((b__first - a__first) + temp___idx_132)]))))))) ->
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep4((a[temp___idx_154])) = to_rep4((b[((b__first - a__first) + temp___idx_154)]))))))) ->
   (bool_eq12(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev1 :
@@ -2130,9 +2102,9 @@ axiom bool_eq_rev1 :
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_132:int. (((a__first <= temp___idx_132) and
-  (temp___idx_132 <= a__last)) ->
-  (to_rep4((a[temp___idx_132])) = to_rep4((b[((b__first - a__first) + temp___idx_132)])))))))))
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep4((a[temp___idx_154])) = to_rep4((b[((b__first - a__first) + temp___idx_154)])))))))))
 
 type t2
 
@@ -2257,32 +2229,18 @@ axiom some_package__float_buffer__buffer_tag__compat_axiom :
   rec__some_package__float_buffer__buffer_tag__num_overflows = self5;
   rec__ext__ = self6 }; attr__tag = self7 })))
 
-logic self__split_fields : mode_type
-
-logic self__split_fields1 : (t,element_type) farray
-
-logic self__split_fields2 : index_type
-
-logic self__split_fields3 : index_type
-
-logic self__split_fields4 : bool
-
-logic self__split_fields5 : natural
-
-logic self__split_fields6 : us_private
-
-logic o : int
-
-logic o1 : int
-
-logic o2 : int
-
-axiom H : dynamic_property(0, 256, to_rep(elements__first),
-  to_rep(elements__last))
-
-axiom H1 : ((o1 = length1({ us_split_fields1 = {
-  rec__some_package__float_buffer__buffer_tag__mode = self__split_fields;
-  rec__some_package__float_buffer__buffer_tag__buffer = self__split_fields1;
+ (* File "generic_queue.ads", line 45, characters 0-0 *)
+goal WP_parameter_def :
+  (forall self__split_fields:mode_type.
+  forall self__split_fields1:(t,element_type) farray.
+  forall self__split_fields2:index_type.
+  forall self__split_fields3:index_type. forall self__split_fields4:bool.
+  forall self__split_fields5:natural. forall self__split_fields6:us_private.
+  forall o:int. forall o1:int. (dynamic_property(0, 256,
+  to_rep(elements__first), to_rep(elements__last)) -> (((o1 = length1({
+  us_split_fields1 = { rec__some_package__float_buffer__buffer_tag__mode =
+  self__split_fields; rec__some_package__float_buffer__buffer_tag__buffer =
+  self__split_fields1;
   rec__some_package__float_buffer__buffer_tag__index_head =
   self__split_fields2;
   rec__some_package__float_buffer__buffer_tag__index_tail =
@@ -2291,13 +2249,8 @@ axiom H1 : ((o1 = length1({ us_split_fields1 = {
   self__split_fields4;
   rec__some_package__float_buffer__buffer_tag__num_overflows =
   self__split_fields5; rec__ext__ = self__split_fields6 }; attr__tag =
-  self__attr__tag })) and in_range6(o1))
-
-axiom H2 : ((to_rep(elements__first) <= to_rep(elements__last)) ->
-  (o = ((to_rep(elements__last) - to_rep(elements__first)) + 1)))
-
-axiom H3 : ((not (to_rep(elements__first) <= to_rep(elements__last))) ->
-  (o = 0))
-
- (* File "generic_queue.ads", line 45, characters 0-0 *)
-goal WP_parameter_def : in_range(o)
+  self__attr__tag })) and in_range6(o1)) ->
+  ((((to_rep(elements__first) <= to_rep(elements__last)) and
+  (o = ((to_rep(elements__last) - to_rep(elements__first)) + 1))) or
+  ((not (to_rep(elements__first) <= to_rep(elements__last))) and (o = 0))) ->
+  in_range(o)))))

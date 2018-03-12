@@ -1099,12 +1099,12 @@
 (define-fun t_float32__ref___projection ((a t_float32__ref)) t_float32
   (t_float32__content a))
 
-(define-fun dynamic_invariant ((temp___expr_172 t) (temp___is_init_169 Bool)
-  (temp___skip_constant_170 Bool)
-  (temp___do_toplevel_171 Bool)) Bool (=>
-                                      (or (= temp___is_init_169 true) (le
-                                      (neg fliteral1) fliteral1)) (in_range1
-                                      temp___expr_172)))
+(define-fun dynamic_invariant ((temp___expr_201 t) (temp___is_init_197 Bool)
+  (temp___skip_constant_198 Bool) (temp___do_toplevel_199 Bool)
+  (temp___do_typ_inv_200 Bool)) Bool (=>
+                                     (or (= temp___is_init_197 true) (le
+                                     (neg fliteral1) fliteral1)) (in_range1
+                                     temp___expr_201)))
 
 (declare-const c_2pi_in_degrees t)
 
@@ -1181,29 +1181,6 @@
   (! (= (select (slide a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide a old_first new_first) i)) ))))))
 
-(declare-fun concat1 ((Array Int t_angle_360) Int Int (Array Int t_angle_360)
-  Int Int) (Array Int t_angle_360))
-
-;; concat_def
-  (assert
-  (forall ((a (Array Int t_angle_360)) (b (Array Int t_angle_360)))
-  (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int))
-  (forall ((i Int))
-  (! (and
-     (=> (and (<= a_first i) (<= i a_last))
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select a i)))
-     (=> (< a_last i)
-     (= (select (concat1 a a_first a_last b b_first b_last) i) (select b (+ (- i a_last) (- b_first 1)))))) :pattern ((select
-  (concat1 a a_first a_last b b_first b_last) i)) )))))
-
-(declare-fun singleton1 (t_angle_360 Int) (Array Int t_angle_360))
-
-;; singleton_def
-  (assert
-  (forall ((v t_angle_360))
-  (forall ((i Int))
-  (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
-
 (define-fun bool_eq4 ((a (Array Int t_angle_360)) (a__first Int)
   (a__last Int) (b (Array Int t_angle_360)) (b__first Int)
   (b__last Int)) Bool (ite (and
@@ -1211,12 +1188,12 @@
                            (and (<= b__first b__last)
                            (= (- a__last a__first) (- b__last b__first)))
                            (< b__last b__first))
-                           (forall ((temp___idx_132 Int))
+                           (forall ((temp___idx_154 Int))
                            (=>
-                           (and (<= a__first temp___idx_132)
-                           (<= temp___idx_132 a__last))
-                           (= (to_rep (select a temp___idx_132)) (to_rep
-                                                                 (select b (+ (- b__first a__first) temp___idx_132)))))))
+                           (and (<= a__first temp___idx_154)
+                           (<= temp___idx_154 a__last))
+                           (= (to_rep (select a temp___idx_154)) (to_rep
+                                                                 (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
 ;; bool_eq_rev
@@ -1228,10 +1205,10 @@
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
-  (forall ((temp___idx_132 Int))
-  (=> (and (<= a__first temp___idx_132) (<= temp___idx_132 a__last))
-  (= (to_rep (select a temp___idx_132)) (to_rep
-                                        (select b (+ (- b__first a__first) temp___idx_132)))))))))))
+  (forall ((temp___idx_154 Int))
+  (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
+  (= (to_rep (select a temp___idx_154)) (to_rep
+                                        (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
@@ -1241,30 +1218,29 @@
 
 (declare-fun access_inline__angle__aggregate_def (t) (Array Int t_angle_360))
 
-;; def_axiom
-  (assert
-  (forall ((temp___197 t))
-  (forall ((temp___198 Int))
-  (= (select (access_inline__angle__aggregate_def temp___197) temp___198)
-  (of_rep temp___197)))))
-
 ;; c_2pi_in_degrees__def_axiom
   (assert (= c_2pi_in_degrees fliteral3))
 
-(define-fun dynamic_invariant1 ((temp___expr_178 t) (temp___is_init_175 Bool)
-  (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)) Bool (=>
-                                      (or (= temp___is_init_175 true) (le
-                                      fliteral2 fliteral3)) (in_range2
-                                      temp___expr_178)))
+(define-fun dynamic_invariant1 ((temp___expr_208 t) (temp___is_init_204 Bool)
+  (temp___skip_constant_205 Bool) (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true) (le
+                                     fliteral2 fliteral3)) (in_range2
+                                     temp___expr_208)))
+
+;; def_axiom
+  (assert
+  (forall ((temp___229 t))
+  (=> (dynamic_invariant1 temp___229 true true true true)
+  (forall ((temp___230 Int))
+  (= (to_rep
+     (select (access_inline__angle__aggregate_def temp___229) temp___230)) temp___229)))))
 
 (declare-const angle (Array Int t_angle_360))
 
 (declare-const o t)
 
 (declare-const o1 t)
-
-(declare-const o2 t)
 
 (declare-const result (Array Int t_angle_360))
 
@@ -1296,7 +1272,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "access_inline.adb", line 1, characters 0-0
+ ;; File "access_inline.adb", line 11, characters 0-0
   (not (in_range2 o1)))
 (check-sat)
 (exit)

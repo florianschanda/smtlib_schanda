@@ -899,12 +899,6 @@ type t__ref = { t__content : t
 
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
-logic bool_eq1 : bool, bool -> bool
-
-axiom bool_eq_def1 :
-  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
-
 logic to_int1 : bool -> int
 
 axiom to_int_def :
@@ -916,6 +910,12 @@ logic of_int1 : int -> bool
 axiom of_int_def :
   (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
   ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq1 : bool, bool -> bool
+
+axiom bool_eq_def1 :
+  (forall x:bool. forall y:bool [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
 predicate in_range1(x: int) = ((x = 0) or (x = 1))
 
@@ -1010,28 +1010,10 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic i : int
-
-logic o : int
-
-logic result : int
-
-logic i1 : int
-
-logic i2 : int
-
-logic i3 : int
-
-axiom H : tqtisFinite(x)
-
-axiom H1 : (((- 2147483648) <= 2147483647) -> in_range2(i))
-
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 4096.0))
-
-axiom H2 : (le(neg(fliteral1), x) and le(x, fliteral1))
 
 logic fliteral2 : t
 
@@ -1054,12 +1036,14 @@ axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.0e-1))
 
  (* File "generic_float_tests.adb", line 351, characters 0-0 *)
-goal WP_parameter_def : (((bool_eq(x, neg(fliteral2)) = true) ->
-  (((bool_eq(x, neg(fliteral3)) = true) -> (((bool_eq(x,
-  neg(fliteral4)) = true) -> (((bool_eq(x, neg(fliteral)) = true) ->
-  (((bool_eq(x, fliteral5) = true) -> (((bool_eq(x, fliteral) = true) ->
-  (((bool_eq(x, fliteral4) = true) -> (((bool_eq(x, fliteral3) = true) ->
-  (((bool_eq(x, fliteral2) = true) ->
+goal WP_parameter_def :
+  (forall i:int. (tqtisFinite(x) -> ((((- 2147483648) <= 2147483647) ->
+  in_range2(i)) -> ((le(neg(fliteral1), x) and le(x, fliteral1)) ->
+  (((bool_eq(x, neg(fliteral2)) = true) -> (((bool_eq(x,
+  neg(fliteral3)) = true) -> (((bool_eq(x, neg(fliteral4)) = true) ->
+  (((bool_eq(x, neg(fliteral)) = true) -> (((bool_eq(x, fliteral5) = true) ->
+  (((bool_eq(x, fliteral) = true) -> (((bool_eq(x, fliteral4) = true) ->
+  (((bool_eq(x, fliteral3) = true) -> (((bool_eq(x, fliteral2) = true) ->
   (1 <= (((((((((0 + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1))) and
   ((not (bool_eq(x, fliteral2) = true)) ->
   (1 <= (((((((((0 + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 1) + 0))))) and
@@ -2386,4 +2370,4 @@ goal WP_parameter_def : (((bool_eq(x, neg(fliteral2)) = true) ->
   fliteral2) = true) ->
   (1 <= (((((((((0 + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 1))) and
   ((not (bool_eq(x, fliteral2) = true)) ->
-  (1 <= (((((((((0 + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0))))))))))))))))))))
+  (1 <= (((((((((0 + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0) + 0))))))))))))))))))))))))

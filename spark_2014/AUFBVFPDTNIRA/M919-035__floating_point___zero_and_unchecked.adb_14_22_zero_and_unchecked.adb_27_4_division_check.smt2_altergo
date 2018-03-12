@@ -1592,63 +1592,35 @@ axiom magic__post_axiom :
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-axiom zero_plus__def_axiom : (zero_plus = convert(of_int(0)))
+logic rliteral : t
 
-axiom zero_neg__def_axiom : (zero_neg = convert(of_int(2147483648)))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-logic x : int
+axiom zero_plus__def_axiom : (zero_plus = convert(rliteral))
 
-logic zero_and_unchecked__zero_plus__assume : t1
+logic rliteral1 : t
 
-logic zero_and_unchecked__zero_neg__assume : t1
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 2147483648)
 
-logic o : int
-
-logic o1 : bool
-
-logic o2 : int
-
-logic o3 : int
-
-logic result : bool
-
-axiom H : ((zero_and_unchecked__zero_plus__assume = convert(of_int(0))) and
-  tqtisFinite(zero_and_unchecked__zero_plus__assume))
-
-axiom H1 : (zero_and_unchecked__zero_plus__assume = zero_plus)
-
-axiom H2 : tqtisFinite(zero_plus)
-
-axiom H3 :
-  ((zero_and_unchecked__zero_neg__assume = convert(of_int(2147483648))) and
-  tqtisFinite(zero_and_unchecked__zero_neg__assume))
-
-axiom H4 : (zero_and_unchecked__zero_neg__assume = zero_neg)
-
-axiom H5 : tqtisFinite(zero_neg)
-
-axiom H6 : (zero_plus = c1b)
-
-axiom H7 : tqtisFinite(c1b)
-
-axiom H8 : (zero_neg = c2b)
-
-axiom H9 : tqtisFinite(c2b)
-
-axiom H10 : (((- 2147483648) <= 2147483647) -> in_range1(x))
-
-axiom H11 : eq(c1b, c2b)
-
-axiom H12 : ((o = magic(c2b)) and in_range2(o))
-
-axiom H13 : (((o = 0) -> (o1 = true)) and ((not (o = 0)) -> (o1 = false)))
-
-axiom H14 : (((not (o1 = true)) -> (result = true)) and ((o1 = true) ->
-  (result = false)))
-
-axiom H15 : (result = true)
-
-axiom H16 : ((o2 = magic(c1b)) and in_range2(o2))
+axiom zero_neg__def_axiom : (zero_neg = convert(rliteral1))
 
  (* File "a-unccon.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : (not (o2 = 0))
+goal WP_parameter_def :
+  (forall x:int. forall zero_and_unchecked__zero_plus__assume:t1.
+  forall zero_and_unchecked__zero_neg__assume:t1. forall o:int.
+  forall o1:bool. forall o2:int. forall result:bool.
+  ((((zero_and_unchecked__zero_plus__assume = convert(rliteral)) and
+  tqtisFinite(zero_and_unchecked__zero_plus__assume)) and
+  (zero_and_unchecked__zero_plus__assume = zero_plus)) ->
+  (tqtisFinite(zero_plus) ->
+  ((((zero_and_unchecked__zero_neg__assume = convert(rliteral1)) and
+  tqtisFinite(zero_and_unchecked__zero_neg__assume)) and
+  (zero_and_unchecked__zero_neg__assume = zero_neg)) ->
+  (tqtisFinite(zero_neg) -> (((zero_plus = c1b) and tqtisFinite(c1b)) ->
+  (((zero_neg = c2b) and tqtisFinite(c2b)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range1(x)) -> (eq(c1b, c2b) ->
+  (((((o = magic(c2b)) and in_range2(o)) and (((o = 0) and (o1 = true)) or
+  ((not (o = 0)) and (o1 = false)))) and (((not (o1 = true)) and
+  (result = true)) or ((o1 = true) and (result = false)))) ->
+  ((result = true) -> (((o2 = magic(c1b)) and in_range2(o2)) ->
+  (not (o2 = 0))))))))))))))

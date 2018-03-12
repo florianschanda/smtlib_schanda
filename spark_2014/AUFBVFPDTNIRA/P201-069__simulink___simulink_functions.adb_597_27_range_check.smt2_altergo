@@ -2221,20 +2221,15 @@ logic i : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic o : t1
+logic rliteral : t
 
-logic o1 : t1
-
-logic o2 : t1
-
-axiom H : true
-
-axiom H1 : ((o = sqrt2(of_ubv32(RNE, i))) and (tqtisFinite(o) and
-  (le(fliteral1, o) and ((eq(of_ubv32(RNE, i), fliteral1) -> eq(o,
-  fliteral1)) and ((eq(of_ubv32(RNE, i), fliteral) -> eq(o, fliteral)) and
-  (le(fliteral2, of_ubv32(RNE, i)) -> lt(fliteral1, o)))))))
-
-axiom H2 : (o1 = roundToIntegral(RNA, o))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
  (* File "interfac.ads", line 74, characters 0-0 *)
-goal WP_parameter_def : le(of_ubv32(RTP, of_int(0)), o1)
+goal WP_parameter_def :
+  (forall o:t1. forall o1:t1. ((((o = sqrt2(of_ubv32(RNE, i))) and
+  (tqtisFinite(o) and (le(fliteral1, o) and ((eq(of_ubv32(RNE, i),
+  fliteral1) -> eq(o, fliteral1)) and ((eq(of_ubv32(RNE, i), fliteral) ->
+  eq(o, fliteral)) and (le(fliteral2, of_ubv32(RNE, i)) -> lt(fliteral1,
+  o))))))) and (o1 = roundToIntegral(RNA, o))) -> le(of_ubv32(RTP, rliteral),
+  o1)))

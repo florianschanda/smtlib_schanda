@@ -107,32 +107,17 @@
 (define-fun t_float32__ref___projection ((a t_float32__ref)) t_float32
   (t_float32__content a))
 
-(define-fun dynamic_invariant ((temp___expr_135 Float32)
-  (temp___is_init_132 Bool) (temp___skip_constant_133 Bool)
-  (temp___do_toplevel_134 Bool)) Bool (=>
-                                      (or (= temp___is_init_132 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
-                                      (in_range temp___expr_135)))
+(define-fun dynamic_invariant ((temp___expr_158 Float32)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
+                                     (in_range temp___expr_158)))
 
 (declare-const x Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const normalize__r3__result Float32)
-
-(declare-const o Float32)
-
-(declare-const result Float32)
-
-(declare-const normalize__r3__result1 Float32)
-
-(declare-const normalize__r3__result2 Float32)
-
-(declare-const normalize__r3__result3 Float32)
-
-(declare-const normalize__r3__result4 Float32)
-
-(declare-const normalize__r3__result5 Float32)
 
 ;; H
   (assert (in_range x))
