@@ -1,0 +1,38 @@
+(Re-)generating the SPARK benchmarks filed here takes some effort and time.
+
+Tool requirements: a recent source build of SPARK of using the forks:
+- https://github.com/florianschanda/spark_2014
+- https://github.com/florianschanda/why3
+
+Make very sure you have a clean checkout with NO changes, as the diffs here
+become so large that git status becomes useless very fast.
+
+Float Benchmarks
+================
+
+cd spark_2014
+rm -rf AUFBVFPDTNIRA && mkdir AUFBVFPDTNIRA
+rm -rf QF_AUFBVFPNIRA && mkdir QF_AUFBVFPNIRA
+cd ..
+
+./generate_spark_2014_benchmarks.py --filter=float cvc4
+./generate_spark_2014_benchmarks.py cvc4_oldfp
+./generate_spark_2014_benchmarks.py alt-ergo
+./generate_spark_2014_benchmarks.py alt-ergo-fp
+
+(Please note we do not do this for Z3. We used to, but now Z3 supports the
+same int/bv conversions as CVC4.)
+
+cd spark_2014
+./set_unsat_from_nofail.py
+cd ..
+
+(This sets :status unsat on the VCs that correspond to tests where
+no_fail=True is found in test.py.)
+
+./generate_spark_2014_benchmarks.py --filter=float colibri
+
+Now we commit all benchmarks:
+
+git add spark_2014
+git commit -m "Re-generate SPARK benchmarks."
