@@ -40,7 +40,8 @@ Z3_SF_VERSION       = sorted(glob("z3_smallfloats_201*"))[-1]
 
 ALT_ERGO_VERSION    = sorted(glob("altergo_spark_*"))[-1]
 
-ALT_ERGO_FP_VERSION = "altergo_2_1_0"
+# TODO: Make use of the smt2 facility of alt-ergo
+ALT_ERGO_FP_VERSION = "altergo_2_2_0"
 ALT_ERGO_FP_AXIOMS  = sorted(glob("altergo_fp_*.why"))[-1]
 
 GOSAT_VERSION       = sorted(glob("gosat_*"))[-1]
