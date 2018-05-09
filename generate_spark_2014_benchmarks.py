@@ -52,7 +52,6 @@ FLOAT_ONLY_BENCHMARKS = set([
     'M422-023__from_int',
     'M603-018__float',
     'M809-005__float_basics',
-    'M823-017__fixed_points',
     'M919-035__floating_point',
     'MA16-036__flow_missing_globals',
     'MB01-007__floating_point',
@@ -246,6 +245,10 @@ def extract_benchmark(test):
     #    return None
     # if "O318-021__modular" not in test["dir"]:
     #    return None
+    # if "M809-005__float" not in test["dir"]:
+    #    return None
+    # if "N624-020__perm_rem" not in test["dir"]:
+    #    return None
 
     ROOT = os.getcwd()
     os.chdir(test["dir"])
@@ -288,9 +291,8 @@ def extract_benchmark(test):
         used_gpr = None
 
     if used_gpr is not None:
-        print multiprocessing.current_process().name,\
-            os.path.basename(test["dir"])
         cmd = ["gnatprove",
+               "-j", "2",
                "-P", used_gpr,
                "--why3-conf=bench_w3.conf",
                "--prover=benchmark",
@@ -324,6 +326,7 @@ def extract_benchmark(test):
                                os.path.basename(test["dir"]) + "___" + f)
             dst = dst.replace(" ", "_")
             dst = dst.replace(".why", ".smt2")
+            dst = dst.replace("_1.smt2", ".smt2")
             dst_root_exists = os.path.isfile(dst)
 
             # Filtering for Z3 requires looking at the reference VC
@@ -347,6 +350,10 @@ def extract_benchmark(test):
                             if stuff in line:
                                 interesting_float = True
                         data += line + "\n"
+                if len(data.strip()) == 0:
+                    print test["dir"]
+                    print stdout
+                    assert False
                 if not data.endswith("(exit)\n"):
                     data += "(exit)\n"
 
@@ -376,8 +383,14 @@ def extract_benchmark(test):
 
     os.chdir(ROOT)
 
-    return None
+    return os.path.basename(test["dir"])
 
+def extract_with_handler(test):
+    try:
+        return extract_benchmark(test)
+    except Exception as e:
+        print test["dir"]
+        raise e
 
 def main():
     ap = argparse.ArgumentParser()
@@ -418,7 +431,10 @@ def main():
         faker  = "fake_alt-ergo"
     else:
         prover = options.prover
-        driver = "%s_gnatprove.drv" % prover
+        if not options.all and prover == "cvc4":
+            driver = "%s_gnatprove_conversions.drv" % prover
+        else:
+            driver = "%s_gnatprove.drv" % prover
         faker  = "fake_%s" % prover
     if options.output is None:
         if options.all:
@@ -439,6 +455,8 @@ def main():
         "alt-ergo-fp" : "_altergo_fp"
     }.get(prover, "")
 
+    print "Using driver: %s" % driver
+
     tests = [{"dir"    : os.path.normpath(os.path.join(options.testsuite,
                                                        d)),
               "spark"  : os.path.normpath(options.install),
@@ -455,12 +473,16 @@ def main():
                 (options.all or d in FLOAT_ONLY_BENCHMARKS)]
 
     if options.single:
+        n = len(tests)
         for result in map(extract_benchmark, tests):
-            pass
+            n -= 1
+            print "(%u remaining) %s" % (n, result)
     else:
-        pool = multiprocessing.Pool()
-        for result in pool.imap_unordered(extract_benchmark, tests):
-            pass
+        pool = multiprocessing.Pool(8)
+        n = len(tests)
+        for result in pool.imap_unordered(extract_with_handler, tests):
+            n -= 1
+            print "(%u remaining) %s" % (n, result)
 
 if __name__ == "__main__":
     main()

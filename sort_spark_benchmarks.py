@@ -345,6 +345,13 @@ def process(task):
 
     return rv
 
+def process_with_handler(task):
+    try:
+        return process(task)
+    except Exception as e:
+        print task
+        raise e
+
 def main():
     sys.setrecursionlimit(4000)
 
@@ -360,7 +367,7 @@ def main():
 
         tasks = []
         for path, dirs, files in os.walk("spark_2014_all/ALL"):
-            for f in files:
+            for f in sorted(files):
                 if f.endswith(".smt2"):
                     tasks.append({
                         "file"   : os.path.join(path, f),
@@ -372,7 +379,7 @@ def main():
 
         os.nice(5)
         n = len(tasks)
-        for msg in p.imap_unordered(process, tasks):
+        for msg in p.imap_unordered(process_with_handler, tasks):
             for line in msg:
                 print "%6u: %s" % (n, line)
             n -= 1
