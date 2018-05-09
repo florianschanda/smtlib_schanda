@@ -106,6 +106,6 @@
 (assert (= x86__edi__result1 ((_ extract 31 0) (bvand rdi #x00000000FFFFFFFF))))
 (assert (= (mk_t__ref x86__edi__result4) (mk_t__ref x86__edi__result2)))
 (assert (= x86__edi__result5 x86__edi__result3))
-(assert (not (bvule ((_ zero_extend 32) #x00000000) (bvand rdi #x00000000FFFFFFFF))))
+(assert (not (bvule (bvand rdi #x00000000FFFFFFFF) ((_ zero_extend 32) #xFFFFFFFF))))
 (check-sat)
 (exit)

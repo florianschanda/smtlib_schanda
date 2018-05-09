@@ -35,7 +35,6 @@
 (declare-const dummy us_rep)
 (declare-datatypes () ((suspension_object__ref (mk_suspension_object__ref (suspension_object__content us_rep)))))
 (define-fun suspension_object__ref___2__projection ((a suspension_object__ref)) us_rep (suspension_object__content a))
-(declare-fun suspend_until_true__specific_post (Int us_rep us_rep) Bool)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (not false))
 (check-sat)

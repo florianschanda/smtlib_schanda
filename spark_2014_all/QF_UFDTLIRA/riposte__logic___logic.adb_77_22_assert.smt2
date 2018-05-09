@@ -30,6 +30,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (assert (not (= a true)))
 (assert (not (= b true)))
-(assert (not (= a true)))
+(assert (not (not (= b true))))
 (check-sat)
 (exit)

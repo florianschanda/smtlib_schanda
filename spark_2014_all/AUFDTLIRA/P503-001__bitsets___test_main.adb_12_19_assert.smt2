@@ -29,6 +29,8 @@
 (declare-fun mem ((Array Int Bool) Int) Bool)
 (declare-fun mem__function_guard (Bool (Array Int Bool) Int) Bool)
 (declare-sort element 0)
+(declare-fun elementqtint (element) Int)
+(assert (forall ((i element)) (and (<= 1 (elementqtint i)) (<= (elementqtint i) 10))))
 (define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

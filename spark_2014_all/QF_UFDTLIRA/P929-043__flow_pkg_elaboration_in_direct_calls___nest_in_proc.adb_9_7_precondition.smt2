@@ -24,6 +24,6 @@
 (declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
-(assert (not false))
+(assert (not true))
 (check-sat)
 (exit)

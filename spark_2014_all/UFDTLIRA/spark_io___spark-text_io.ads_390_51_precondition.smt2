@@ -55,7 +55,7 @@
 (declare-const dummy1 file_mode)
 (declare-datatypes () ((file_mode__ref (mk_file_mode__ref (file_mode__content file_mode)))))
 (define-fun file_mode__ref___3__projection ((a file_mode__ref)) file_mode (file_mode__content a))
-(define-fun dynamic_invariant ((temp___expr_732 Int) (temp___is_init_728 Bool) (temp___skip_constant_729 Bool) (temp___do_toplevel_730 Bool) (temp___do_typ_inv_731 Bool)) Bool (=> (or (= temp___is_init_728 true) (<= 0 2)) (in_range temp___expr_732)))
+(define-fun dynamic_invariant ((temp___expr_725 Int) (temp___is_init_721 Bool) (temp___skip_constant_722 Bool) (temp___do_toplevel_723 Bool) (temp___do_typ_inv_724 Bool)) Bool (=> (or (= temp___is_init_721 true) (<= 0 2)) (in_range temp___expr_725)))
 (declare-const file us_rep)
 (declare-const result Bool)
 (assert (and (= result (is_readable file)) (= (= result true) (and (= (is_open file) true) (= (mode__2 file) 0)))))

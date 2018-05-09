@@ -57,6 +57,8 @@
 (define-fun ta__ref___projection ((a ta__ref)) ta (ta__content a))
 (define-fun dynamic_invariant ((temp___expr_200 (_ BitVec 16)) (temp___is_init_196 Bool) (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool) (temp___do_typ_inv_199 Bool)) Bool true)
 (declare-sort tb 0)
+(declare-fun tbqtint (tb) Int)
+(assert (forall ((i tb)) (and (<= 0 (tbqtint i)) (<= (tbqtint i) 255))))
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 255)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

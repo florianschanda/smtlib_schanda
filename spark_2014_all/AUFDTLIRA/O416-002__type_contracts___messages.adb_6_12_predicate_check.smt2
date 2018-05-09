@@ -91,6 +91,8 @@
 (assert (forall ((a (Array Int character)) (b (Array Int character))) (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int)) (! (= (< (compare a a_first a_last b b_first b_last) 0) (exists ((i Int) (j Int)) (and (<= i a_last) (and (< j b_last) (and (= (bool_eq a a_first i b b_first j) true) (or (= i a_last) (and (< i a_last) (< (to_rep (select a (+ i 1))) (to_rep (select b (+ j 1))))))))))) :pattern ((compare a a_first a_last b b_first b_last))))))
 (assert (forall ((a (Array Int character)) (b (Array Int character))) (forall ((a_first Int) (a_last Int) (b_first Int) (b_last Int)) (! (= (< 0 (compare a a_first a_last b b_first b_last)) (exists ((i Int) (j Int)) (and (<= i b_last) (and (< j a_last) (and (= (bool_eq a a_first j b b_first i) true) (or (= i b_last) (and (< i b_last) (< (to_rep (select b (+ i 1))) (to_rep (select a (+ j 1))))))))))) :pattern ((compare a a_first a_last b b_first b_last))))))
 (declare-sort tdayP1 0)
+(declare-fun tdayP1qtint (tdayP1) Int)
+(assert (forall ((i tdayP1)) (and (<= 1 (tdayP1qtint i)) (<= (tdayP1qtint i) 10))))
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

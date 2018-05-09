@@ -101,6 +101,6 @@
 (assert (bvult i3 range_size))
 (assert (not (= matched3 true)))
 (assert (= matched3 true))
-(assert (not (bvugt i3 #x0000000000000000)))
+(assert (not (exists ((n (_ BitVec 64))) (and (and (bvule #x0000000000000000 n) (bvule n (bvsub i3 #x0000000000000001))) (= var (bvadd bottom n))))))
 (check-sat)
 (exit)

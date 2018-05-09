@@ -38,6 +38,8 @@
 (assert (forall ((x Int) (y Int) (z Int)) (! (=> (and (< 0 x) (and (<= 0 y) (<= 0 z))) (= (mod1 (+ (* x y) z) x) (mod1 z x))) :pattern ((mod1 (+ (* x y) z) x)))))
 (define-fun mod2 ((x Int) (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 (declare-sort natural 0)
+(declare-fun naturalqtint (natural) Int)
+(assert (forall ((i natural)) (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

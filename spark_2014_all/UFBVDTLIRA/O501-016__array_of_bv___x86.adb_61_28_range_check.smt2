@@ -93,6 +93,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (define-fun dynamic_invariant1 ((temp___expr_257 (_ BitVec 8)) (temp___is_init_253 Bool) (temp___skip_constant_254 Bool) (temp___do_toplevel_255 Bool) (temp___do_typ_inv_256 Bool)) Bool true)
 (declare-const rcx (_ BitVec 64))
-(assert (not (bvule ((_ zero_extend 56) #x00) (bvand rcx #x00000000000000FF))))
+(assert (not (bvule (bvand rcx #x00000000000000FF) ((_ zero_extend 56) #xFF))))
 (check-sat)
 (exit)

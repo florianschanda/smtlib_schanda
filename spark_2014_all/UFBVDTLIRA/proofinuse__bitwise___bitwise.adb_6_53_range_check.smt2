@@ -94,6 +94,6 @@
 (declare-const x (_ BitVec 32))
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-(assert (not (bvule ((_ zero_extend 24) #x00) (bvand (bvor (bvand x #xFFFFFF00) #x00000001) #x000000FF))))
+(assert (not (bvule (bvand (bvor (bvand x #xFFFFFF00) #x00000001) #x000000FF) ((_ zero_extend 24) #xFF))))
 (check-sat)
 (exit)

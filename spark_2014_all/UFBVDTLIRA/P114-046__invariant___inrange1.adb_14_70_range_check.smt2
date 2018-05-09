@@ -88,6 +88,6 @@
 (assert (and (bvult i2 range_size) (not (= matched2 true))))
 (assert (bvugt i2 #x0000000000000000))
 (assert (bvule #x0000000000000000 (bvsub i2 #x0000000000000001)))
-(assert (not (bvuge #x0000000000000000 #x0000000000000000)))
+(assert (not (bvule (bvsub i2 #x0000000000000001) #xFFFFFFFFFFFFFFFF)))
 (check-sat)
 (exit)

@@ -64,6 +64,8 @@
 (define-fun to_int2 ((x unsigned_64)) Int (bv2nat (to_rep x)))
 (assert (forall ((x unsigned_64)) (! (uint_in_range (to_int2 x)) :pattern ((to_int2 x)))))
 (declare-sort field_type 0)
+(declare-fun field_typeqtint (field_type) Int)
+(assert (forall ((i field_type)) (and (<= 0 (field_typeqtint i)) (<= (field_typeqtint i) 4))))
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 4)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

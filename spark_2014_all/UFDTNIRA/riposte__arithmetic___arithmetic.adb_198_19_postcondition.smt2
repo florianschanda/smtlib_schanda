@@ -38,6 +38,8 @@
 (assert (forall ((x Int) (y Int) (z Int)) (! (=> (and (< 0 x) (and (<= 0 y) (<= 0 z))) (= (mod1 (+ (* x y) z) x) (mod1 z x))) :pattern ((mod1 (+ (* x y) z) x)))))
 (define-fun mod2 ((x Int) (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 (declare-sort byte 0)
+(declare-fun byteqtint (byte) Int)
+(assert (forall ((i byte)) (and (<= (- 128) (byteqtint i)) (<= (byteqtint i) 127))))
 (define-fun in_range ((x Int)) Bool (and (<= (- 128) x) (<= x 127)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

@@ -42,6 +42,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-sort long_integer 0)
+(declare-fun long_integerqtint (long_integer) Int)
+(assert (forall ((i long_integer)) (and (<= (- 9223372036854775808) (long_integerqtint i)) (<= (long_integerqtint i) 9223372036854775807))))
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 9223372036854775808) x) (<= x 9223372036854775807)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

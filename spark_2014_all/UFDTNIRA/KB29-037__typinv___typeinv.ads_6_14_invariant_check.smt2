@@ -41,6 +41,8 @@
 (declare-fun is_valid__function_guard (Bool Int) Bool)
 (define-fun type_invariant ((temp___154 Int)) Bool (= (is_valid temp___154) true))
 (declare-sort t 0)
+(declare-fun tqtint (t) Int)
+(assert (forall ((i t)) (and (<= 0 (tqtint i)) (<= (tqtint i) 10000))))
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 10000)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

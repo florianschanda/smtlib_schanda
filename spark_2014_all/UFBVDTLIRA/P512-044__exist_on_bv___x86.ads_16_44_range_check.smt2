@@ -83,6 +83,6 @@
 (assert (= (mk_bool__ref x86__inrange64__result4) (mk_bool__ref x86__inrange64__result2)))
 (assert (= x86__inrange64__result5 x86__inrange64__result3))
 (assert (bvule #x0000000000000000 range_size))
-(assert (not (bvuge #x0000000000000000 #x0000000000000000)))
+(assert (not (bvule range_size #xFFFFFFFFFFFFFFFF)))
 (check-sat)
 (exit)

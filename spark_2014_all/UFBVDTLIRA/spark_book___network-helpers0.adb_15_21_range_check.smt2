@@ -103,6 +103,6 @@
 (assert (= msb1 ((_ extract 7 0) (bvand value #x00FF))))
 (assert (=> (< 8 16) (= o (bvlshr value ((_ int2bv 16) 8)))))
 (assert (=> (not (< 8 16)) (= o #x0000)))
-(assert (not (bvule ((_ zero_extend 8) #x00) o)))
+(assert (not (bvule o ((_ zero_extend 8) #xFF))))
 (check-sat)
 (exit)

@@ -165,6 +165,6 @@
 (assert (= o3 (store memory1 (bvadd addr #x0000000000000001) o2)))
 (assert (= memory1 result1))
 (assert (= memory2 o3))
-(assert (not (bvule ((_ zero_extend 24) #x00) (bvurem (bvudiv val__ #x00010000) #x00000100))))
+(assert (not (bvule (bvurem (bvudiv val__ #x00010000) #x00000100) ((_ zero_extend 24) #xFF))))
 (check-sat)
 (exit)

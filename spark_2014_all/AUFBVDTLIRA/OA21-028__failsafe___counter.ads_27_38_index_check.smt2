@@ -155,6 +155,6 @@
 (assert (= (= result6 true) (forall ((i (_ BitVec 8))) (=> (and (bvule (bvadd (bvsub #x0A counter__model__current_chain_length__result4) #x01) i) (bvule i #x0A)) (= (select inputs i) true)))))
 (assert (= result6 true))
 (assert (not (= counter__model__current_chain_length__result4 #x0A)))
-(assert (not (bvule #x01 (bvsub #x0A counter__model__current_chain_length__result4))))
+(assert (not (bvule (bvsub #x0A counter__model__current_chain_length__result4) #x0A)))
 (check-sat)
 (exit)

@@ -93,6 +93,6 @@
 (assert (= (= matched3 true) (exists ((n (_ BitVec 64))) (and (and (bvule #x0000000000000000 n) (bvule n (bvsub i3 #x0000000000000001))) (= var (bvadd bottom n))))))
 (assert (not (= matched3 true)))
 (assert (bvule #x0000000000000000 (bvsub i3 #x0000000000000001)))
-(assert (not (bvuge #x0000000000000000 #x0000000000000000)))
+(assert (not (bvule (bvsub i3 #x0000000000000001) #xFFFFFFFFFFFFFFFF)))
 (check-sat)
 (exit)

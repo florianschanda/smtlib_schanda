@@ -148,6 +148,6 @@
 (declare-const val__ (_ BitVec 32))
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 (define-fun dynamic_invariant2 ((temp___expr_257 (_ BitVec 8)) (temp___is_init_253 Bool) (temp___skip_constant_254 Bool) (temp___do_toplevel_255 Bool) (temp___do_typ_inv_256 Bool)) Bool true)
-(assert (not (bvule ((_ zero_extend 24) #x00) (bvurem val__ #x00000100))))
+(assert (not (bvule (bvurem val__ #x00000100) ((_ zero_extend 24) #xFF))))
 (check-sat)
 (exit)

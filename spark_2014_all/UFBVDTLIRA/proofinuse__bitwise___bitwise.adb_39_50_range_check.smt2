@@ -105,6 +105,6 @@
 (assert (=> (< 8 16) (= o (bvlshr val__ ((_ int2bv 16) 8)))))
 (assert (=> (not (< 8 16)) (= o #x0000)))
 (assert (= o1 (bvand o #x00FF)))
-(assert (not (bvule ((_ zero_extend 8) #x00) o1)))
+(assert (not (bvule o1 ((_ zero_extend 8) #xFF))))
 (check-sat)
 (exit)

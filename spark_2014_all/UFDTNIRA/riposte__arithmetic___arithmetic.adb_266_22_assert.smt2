@@ -42,6 +42,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-sort byte 0)
+(declare-fun byteqtint (byte) Int)
+(assert (forall ((i byte)) (and (<= (- 128) (byteqtint i)) (<= (byteqtint i) 127))))
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 128) x) (<= x 127)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

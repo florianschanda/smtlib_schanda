@@ -57,6 +57,6 @@
 (assert (<= 0 i))
 (assert (<= i 3))
 (assert (<= (+ i 1) 4))
-(assert (not (<= 0 (+ i 1))))
+(assert (not (<= 4 4)))
 (check-sat)
 (exit)

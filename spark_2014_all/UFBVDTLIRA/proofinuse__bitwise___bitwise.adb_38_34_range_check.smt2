@@ -95,6 +95,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-(assert (not (bvule ((_ zero_extend 8) #x00) (bvand val__ #x00FF))))
+(assert (not (bvule (bvand val__ #x00FF) ((_ zero_extend 8) #xFF))))
 (check-sat)
 (exit)

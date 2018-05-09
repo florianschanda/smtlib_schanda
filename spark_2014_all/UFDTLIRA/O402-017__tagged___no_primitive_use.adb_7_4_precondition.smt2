@@ -36,7 +36,6 @@
 (declare-const dummy us_rep)
 (declare-datatypes () ((root__ref (mk_root__ref (root__content us_rep)))))
 (define-fun root__ref___projection ((a root__ref)) us_rep (root__content a))
-(declare-fun init__specific_post (Int us_rep Int us_rep) Bool)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (not (< 0 0)))
 (check-sat)

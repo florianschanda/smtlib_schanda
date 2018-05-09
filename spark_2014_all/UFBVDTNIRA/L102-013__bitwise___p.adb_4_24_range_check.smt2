@@ -64,6 +64,8 @@
 (define-fun bv_min ((x (_ BitVec 8)) (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) x y))
 (define-fun bv_max ((x (_ BitVec 8)) (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
 (declare-sort natural 0)
+(declare-fun naturalqtint (natural) Int)
+(assert (forall ((i natural)) (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

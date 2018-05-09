@@ -128,6 +128,6 @@
 (assert (= o3 (store xsi1 1 o2)))
 (assert (= xsi1 result1))
 (assert (= xsi2 o3))
-(assert (not (bvule ((_ zero_extend 24) #x00) (bvurem (bvudiv val__ #x00010000) #x00000100))))
+(assert (not (bvule (bvurem (bvudiv val__ #x00010000) #x00000100) ((_ zero_extend 24) #xFF))))
 (check-sat)
 (exit)

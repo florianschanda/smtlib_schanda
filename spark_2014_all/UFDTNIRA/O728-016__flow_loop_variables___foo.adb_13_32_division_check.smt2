@@ -43,6 +43,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-sort t1b 0)
+(declare-fun t1bqtint (t1b) Int)
+(assert (forall ((i t1b)) (and (<= 1 (t1bqtint i)) (<= (t1bqtint i) 10))))
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

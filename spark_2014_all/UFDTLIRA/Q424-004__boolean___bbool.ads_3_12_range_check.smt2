@@ -39,6 +39,6 @@
 (assert (and (= bbool__b_LAST__assume (f (distinct 1 0))) (not (= bbool__b_LAST__assume true))))
 (assert (= bbool__b_LAST__assume b_LAST))
 (assert (<= (ite b_FIRST 1 0) (ite b_LAST 1 0)))
-(assert (not (<= 0 (ite b_FIRST 1 0))))
+(assert (not (<= (ite b_LAST 1 0) 1)))
 (check-sat)
 (exit)

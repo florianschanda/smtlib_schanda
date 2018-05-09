@@ -21,6 +21,8 @@
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private (us_private__content a))
 (declare-sort int__ 0)
+(declare-fun int__qtint (int__) Int)
+(assert (forall ((i int__)) (and (<= 1 (int__qtint i)) (<= (int__qtint i) 10))))
 (define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

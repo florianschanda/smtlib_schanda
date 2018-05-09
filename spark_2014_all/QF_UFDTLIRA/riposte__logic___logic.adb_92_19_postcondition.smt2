@@ -68,6 +68,6 @@
 (assert (= logic__xor_test_a__result5 logic__xor_test_a__result3))
 (assert (= r6 r1))
 (assert (= result5 logic__xor_test_a__result4))
-(assert (not (ite (= (ite (= (= (ite logic__xor_test_a__result4 1 0) (ite a 1 0)) false) b true) true) (ite (= (ite (= (= (ite logic__xor_test_a__result4 1 0) (ite a 1 0)) true) b false) false) true true) true)))
+(assert (not (ite (= (ite (= (= (ite logic__xor_test_a__result4 1 0) (ite a 1 0)) false) b true) true) (ite (= (ite (= (= (ite logic__xor_test_a__result4 1 0) (ite a 1 0)) true) b false) false) true false) true)))
 (check-sat)
 (exit)

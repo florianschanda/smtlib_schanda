@@ -100,6 +100,6 @@
 (declare-const msw1 (_ BitVec 32))
 (assert (= result msw))
 (assert (= msw1 ((_ extract 31 0) (bvlshr whole ((_ int2bv 64) 32)))))
-(assert (not (bvule ((_ zero_extend 32) #x00000000) (bvand whole #x00000000FFFFFFFF))))
+(assert (not (bvule (bvand whole #x00000000FFFFFFFF) ((_ zero_extend 32) #xFFFFFFFF))))
 (check-sat)
 (exit)

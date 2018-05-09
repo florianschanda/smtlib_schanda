@@ -106,6 +106,6 @@
 (assert (= x86__r11l__result1 ((_ extract 7 0) (bvand r11 #x00000000000000FF))))
 (assert (= (mk_t__ref x86__r11l__result4) (mk_t__ref x86__r11l__result2)))
 (assert (= x86__r11l__result5 x86__r11l__result3))
-(assert (not (bvule ((_ zero_extend 56) #x00) (bvand r11 #x00000000000000FF))))
+(assert (not (bvule (bvand r11 #x00000000000000FF) ((_ zero_extend 56) #xFF))))
 (check-sat)
 (exit)

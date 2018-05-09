@@ -66,6 +66,6 @@
 (assert (=> (= (= source 56) true) (= aida__conversion__convert_character_digit_to_integer__result4 8)))
 (assert (=> (= (= source 57) true) (= aida__conversion__convert_character_digit_to_integer__result4 9)))
 (assert (= result1 aida__conversion__convert_character_digit_to_integer__result4))
-(assert (not (<= 0 aida__conversion__convert_character_digit_to_integer__result4)))
+(assert (not (<= aida__conversion__convert_character_digit_to_integer__result4 9)))
 (check-sat)
 (exit)

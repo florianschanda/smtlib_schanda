@@ -30,6 +30,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 (assert (ite (= (ite (= a false) b true) true) (ite (= (ite (= a true) b false) false) true false) true))
 (assert (ite (= (ite (= a false) b true) true) true false))
-(assert (not (or (= a true) (= b true))))
+(assert (not (not (and (= a true) (= b true)))))
 (check-sat)
 (exit)

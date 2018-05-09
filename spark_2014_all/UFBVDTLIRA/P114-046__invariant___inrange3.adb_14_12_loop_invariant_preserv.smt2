@@ -91,6 +91,6 @@
 (assert (= i2 result2))
 (assert (= i3 (bvadd i2 #x0000000000000001)))
 (assert (bvult i3 range_size))
-(assert (not (bvule #x0000000000000000 i3)))
+(assert (not (bvule i3 (bvsub range_size #x0000000000000001))))
 (check-sat)
 (exit)

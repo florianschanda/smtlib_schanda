@@ -36,7 +36,7 @@
 (define-fun diff_sign ((x Float32) (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y)) (and (fp.isNegative x) (fp.isPositive y))))
 (define-fun product_sign ((z Float32) (x Float32) (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z)) (=> (diff_sign x y) (fp.isNegative z))))
 (define-fun sqr ((x Real)) Real (* x x))
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 (define-fun same_sign_real ((x Float32) (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r)) (and (fp.isNegative x) (< r 0.0))))
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (assert (= (* 33554430.0 10141204801825835211973625643008.0) (fp.to_real (fp #b0 #b11111110 #b11111111111111111111111))))

@@ -86,6 +86,7 @@
 (assert (= x86__inrange64__result5 x86__inrange64__result3))
 (assert (= result1 x86__inrange64__result4))
 (assert (= x86__inrange64__result4 true))
-(assert (not (not (= range_size #x0000000000000000))))
+(assert (bvule bottom (bvsub #xFFFFFFFFFFFFFFFF (bvsub range_size #x0000000000000001))))
+(assert (not (bvule bottom var)))
 (check-sat)
 (exit)

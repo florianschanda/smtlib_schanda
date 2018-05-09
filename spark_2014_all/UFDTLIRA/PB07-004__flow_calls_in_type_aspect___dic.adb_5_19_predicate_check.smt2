@@ -23,6 +23,8 @@
 (declare-fun blocking_true (tuple0) Bool)
 (declare-fun blocking_true__function_guard (Bool tuple0) Bool)
 (declare-sort t 0)
+(declare-fun tqtint (t) Int)
+(assert (forall ((i t)) (and (<= (- 2147483648) (tqtint i)) (<= (tqtint i) 2147483647))))
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x) (<= x 2147483647)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

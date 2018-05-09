@@ -25,6 +25,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-sort natural 0)
+(declare-fun naturalqtint (natural) Int)
+(assert (forall ((i natural)) (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

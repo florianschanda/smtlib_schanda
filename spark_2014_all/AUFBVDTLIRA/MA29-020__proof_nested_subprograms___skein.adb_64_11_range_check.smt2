@@ -458,6 +458,6 @@
 (define-fun dynamic_invariant7 ((temp___expr_614 (_ BitVec 8)) (temp___is_init_610 Bool) (temp___skip_constant_611 Bool) (temp___do_toplevel_612 Bool) (temp___do_typ_inv_613 Bool)) Bool (=> (or (= temp___is_init_610 true) (bvule #x00 #x7F)) (in_range3 temp___expr_614)))
 (assert (in_range1 start_index))
 (assert (bvule start_index #x000000000000003F))
-(assert (not (bvuge start_index #x0000000000000000)))
+(assert (not (bvule #x000000000000003F #x000000000000003F)))
 (check-sat)
 (exit)

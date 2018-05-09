@@ -89,6 +89,6 @@
 (assert (= res1 #x00))
 (assert (in_range1 res1))
 (assert (bvult res1 #x0A))
-(assert (not (bvule #x01 (bvsub #x0A res1))))
+(assert (not (bvule (bvsub #x0A res1) #x0A)))
 (check-sat)
 (exit)

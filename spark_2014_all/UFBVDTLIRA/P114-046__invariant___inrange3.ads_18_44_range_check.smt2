@@ -116,6 +116,6 @@
 (assert (= inrange3__inrange64__result14 inrange3__inrange64__result12))
 (assert (= i11 i9))
 (assert (bvule #x0000000000000000 (bvsub range_size #x0000000000000001)))
-(assert (not (bvuge #x0000000000000000 #x0000000000000000)))
+(assert (not (bvule (bvsub range_size #x0000000000000001) #xFFFFFFFFFFFFFFFF)))
 (check-sat)
 (exit)

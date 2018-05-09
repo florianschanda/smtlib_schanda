@@ -29,7 +29,7 @@
 (declare-const dummy day_type)
 (declare-datatypes () ((day_type__ref (mk_day_type__ref (day_type__content day_type)))))
 (define-fun day_type__ref___projection ((a day_type__ref)) day_type (day_type__content a))
-(define-fun dynamic_invariant ((temp___expr_589 Int) (temp___is_init_585 Bool) (temp___skip_constant_586 Bool) (temp___do_toplevel_587 Bool) (temp___do_typ_inv_588 Bool)) Bool (=> (or (= temp___is_init_585 true) (<= 0 6)) (in_range temp___expr_589)))
+(define-fun dynamic_invariant ((temp___expr_582 Int) (temp___is_init_578 Bool) (temp___skip_constant_579 Bool) (temp___do_toplevel_580 Bool) (temp___do_typ_inv_581 Bool)) Bool (=> (or (= temp___is_init_578 true) (<= 0 6)) (in_range temp___expr_582)))
 (declare-const day Int)
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (assert (in_range day))

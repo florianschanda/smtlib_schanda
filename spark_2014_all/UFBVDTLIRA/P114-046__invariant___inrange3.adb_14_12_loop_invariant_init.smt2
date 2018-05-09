@@ -74,6 +74,6 @@
 (assert (= (mk_t__ref result) (mk_t__ref i)))
 (assert (= i1 #x0000000000000000))
 (assert (bvult i1 range_size))
-(assert (not (bvule #x0000000000000000 i1)))
+(assert (not (bvule i1 (bvsub range_size #x0000000000000001))))
 (check-sat)
 (exit)

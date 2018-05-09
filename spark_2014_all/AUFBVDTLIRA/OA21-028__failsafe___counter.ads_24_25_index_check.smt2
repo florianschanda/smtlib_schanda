@@ -154,6 +154,6 @@
 (assert (= (select inputs #x0A) true))
 (assert (bvule (bvadd (bvsub #x0A counter__model__current_chain_length__result4) #x01) i))
 (assert (bvule i #x0A))
-(assert (not (bvule #x01 i)))
+(assert (not (bvule i #x0A)))
 (check-sat)
 (exit)

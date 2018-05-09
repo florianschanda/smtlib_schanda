@@ -21,6 +21,8 @@
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private (us_private__content a))
 (declare-sort positive 0)
+(declare-fun positiveqtint (positive) Int)
+(assert (forall ((i positive)) (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
 (define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

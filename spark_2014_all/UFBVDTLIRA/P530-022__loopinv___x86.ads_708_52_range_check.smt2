@@ -126,6 +126,6 @@
 (assert (= retval1 retval3))
 (assert (= x86__signextend32to64__result5 x86__signextend32to64__result3))
 (assert (= retval4 retval1))
-(assert (not (bvule ((_ zero_extend 32) #x00000000) (bvand x86__signextend32to64__result4 #x00000000FFFFFFFF))))
+(assert (not (bvule (bvand x86__signextend32to64__result4 #x00000000FFFFFFFF) ((_ zero_extend 32) #xFFFFFFFF))))
 (check-sat)
 (exit)

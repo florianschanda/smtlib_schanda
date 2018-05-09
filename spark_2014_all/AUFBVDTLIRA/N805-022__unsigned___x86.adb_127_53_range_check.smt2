@@ -157,6 +157,6 @@
 (assert (= o1 (store memory addr o)))
 (assert (= (mk_map__ref result) (mk_map__ref memory)))
 (assert (= memory1 o1))
-(assert (not (bvule ((_ zero_extend 24) #x00) (bvurem (bvudiv val__ #x00000100) #x00000100))))
+(assert (not (bvule (bvurem (bvudiv val__ #x00000100) #x00000100) ((_ zero_extend 24) #xFF))))
 (check-sat)
 (exit)

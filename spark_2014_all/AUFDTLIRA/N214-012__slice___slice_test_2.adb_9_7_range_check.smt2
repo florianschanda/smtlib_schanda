@@ -102,6 +102,6 @@
 (assert (= (slide temp___176 2 0) temp___177))
 (assert (= (mk 0 d) temp___1771))
 (assert (<= 0 d))
-(assert (not (<= 0 0)))
+(assert (not (<= 0 6)))
 (check-sat)
 (exit)

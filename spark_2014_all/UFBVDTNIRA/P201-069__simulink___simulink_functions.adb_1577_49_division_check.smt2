@@ -77,6 +77,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 (declare-const right (_ BitVec 8))
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(assert (< (mod2 (bv2nat right) 32) 8))
 (assert (not (not (= 32 0))))
 (check-sat)
 (exit)

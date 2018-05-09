@@ -102,6 +102,6 @@
 (assert (and (=> (bvule #x00 #x0A) (in_range1 res2)) (and (bvult res2 #x0A) (= (select inputs (bvsub #x0A res2)) true))))
 (assert (bvule (bvsub #x0A res2) i))
 (assert (bvule i #x0A))
-(assert (not (bvule #x01 i)))
+(assert (not (bvule i #x0A)))
 (check-sat)
 (exit)

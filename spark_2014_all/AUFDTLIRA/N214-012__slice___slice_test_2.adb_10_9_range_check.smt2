@@ -93,6 +93,6 @@
 (assert (in_range d))
 (assert (= d 2))
 (assert (<= 2 4))
-(assert (not (<= 0 2)))
+(assert (not (<= 2 6)))
 (check-sat)
 (exit)

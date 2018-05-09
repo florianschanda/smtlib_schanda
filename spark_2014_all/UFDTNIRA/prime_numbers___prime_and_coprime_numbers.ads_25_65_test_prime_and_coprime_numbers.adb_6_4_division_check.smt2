@@ -42,6 +42,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-sort value_type 0)
+(declare-fun value_typeqtint (value_type) Int)
+(assert (forall ((i value_type)) (and (<= 0 (value_typeqtint i)) (<= (value_typeqtint i) 2147483647))))
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

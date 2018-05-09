@@ -21,6 +21,8 @@
 (define-fun real__ref___projection ((a real__ref)) Real (real__content a))
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private (us_private__content a))
 (declare-sort interrupt_priority 0)
+(declare-fun interrupt_priorityqtint (interrupt_priority) Int)
+(assert (forall ((i interrupt_priority)) (and (<= 98 (interrupt_priorityqtint i)) (<= (interrupt_priorityqtint i) 98))))
 (define-fun in_range ((x Int)) Bool (and (<= 98 x) (<= x 98)))
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)

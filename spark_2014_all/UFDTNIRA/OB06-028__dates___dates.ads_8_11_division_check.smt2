@@ -42,6 +42,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-sort year_number 0)
+(declare-fun year_numberqtint (year_number) Int)
+(assert (forall ((i year_number)) (and (<= 1 (year_numberqtint i)) (<= (year_numberqtint i) 2399))))
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2399)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)

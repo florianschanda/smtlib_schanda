@@ -106,6 +106,6 @@
 (assert (= x86__sp__result1 ((_ extract 15 0) (bvand rsp #x000000000000FFFF))))
 (assert (= (mk_t__ref x86__sp__result4) (mk_t__ref x86__sp__result2)))
 (assert (= x86__sp__result5 x86__sp__result3))
-(assert (not (bvule ((_ zero_extend 48) #x0000) (bvand rsp #x000000000000FFFF))))
+(assert (not (bvule (bvand rsp #x000000000000FFFF) ((_ zero_extend 48) #xFFFF))))
 (check-sat)
 (exit)

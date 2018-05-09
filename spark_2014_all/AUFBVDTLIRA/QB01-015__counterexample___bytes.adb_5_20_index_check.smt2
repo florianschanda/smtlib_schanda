@@ -203,6 +203,6 @@
 (declare-const o uint8)
 (assert (dynamic_property #x0000 #xFFFF (to_rep1 output__first) (to_rep1 output__last)))
 (assert (= (to_rep o) (to_rep (rec__bytes__record_struct__length (us_split_fields1 a_record)))))
-(assert (not (bvule (to_rep1 output__first) (to_rep1 output__first))))
+(assert (not (bvule (to_rep1 output__first) (to_rep1 output__last))))
 (check-sat)
 (exit)

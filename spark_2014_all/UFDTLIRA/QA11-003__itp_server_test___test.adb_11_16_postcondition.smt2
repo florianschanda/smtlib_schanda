@@ -25,6 +25,8 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 (declare-sort unsigned_byte 0)
+(declare-fun unsigned_byteqtint (unsigned_byte) Int)
+(assert (forall ((i unsigned_byte)) (and (<= 0 (unsigned_byteqtint i)) (<= (unsigned_byteqtint i) 255))))
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
