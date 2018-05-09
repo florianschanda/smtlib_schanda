@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,13 +74,17 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
+(declare-fun r1 (Float32) Float32)
+
+(declare-fun r1__function_guard (Float32 Float32) Bool)
+
 (declare-sort t_float32 0)
 
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
@@ -114,6 +114,18 @@
                                      (or (= temp___is_init_154 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
                                      (in_range temp___expr_158)))
+
+;; r1__post_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
+     (r1 x) true false true true)) :pattern ((r1 x)) )))
+
+;; r1__def_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (dynamic_invariant x true true true true)
+     (= (r1 x) (fp.roundToIntegral RTN x))) :pattern ((r1 x)) )))
 
 (declare-sort t1 0)
 
@@ -167,22 +179,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun r1 (Float32) Float32)
-
-(declare-fun r1__function_guard (Float32 Float32) Bool)
-
-;; r1__post_axiom
-  (assert
-  (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true true) (dynamic_invariant
-     (r1 x1) true false true true)) :pattern ((r1 x1)) )))
-
-;; r1__def_axiom
-  (assert
-  (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true true)
-     (= (r1 x1) (fp.roundToIntegral RTN x1))) :pattern ((r1 x1)) )))
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
@@ -201,11 +197,7 @@
 
 (declare-const o Float32)
 
-(declare-const result Float32)
-
 (declare-const v11 Float32)
-
-(declare-const result1 Float32)
 
 (declare-const v21 Float32)
 
@@ -225,18 +217,17 @@
   (in_range v2)))
 
 ;; H
-  (assert (= result v1))
-
-;; H
   (assert
   (= v11 (fp.div RNE x (fp #b0 #b10000111 #b01101000000000000000000))))
 
 ;; H
-  (assert
-  (and (= o (r1 v11)) (and (in_range o) (= o (fp.roundToIntegral RTN v11)))))
+  (assert (= o (r1 v11)))
 
 ;; H
-  (assert (= result1 v2))
+  (assert (in_range o))
+
+;; H
+  (assert (= o (fp.roundToIntegral RTN v11)))
 
 ;; H
   (assert (= v21 o))

@@ -1063,48 +1063,17 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
-type speed_t
-
-logic bool_eq2 : t, t -> bool
-
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
-
-logic user_eq : speed_t, speed_t -> bool
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic dummy : speed_t
-
-type speed_t__ref = { speed_t__content : speed_t
-}
-
-function speed_t__ref___projection(a: speed_t__ref) : speed_t =
-  (a).speed_t__content
-
-logic to_rep : speed_t -> t
-
-logic of_rep : t -> speed_t
-
-axiom inversion_axiom :
-  (forall x:speed_t [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:speed_t [to_rep(x)]. tqtisFinite(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
-  (to_rep(of_rep(x)) = x)))
-
 type distance_t
+
+logic distance_tqtint : distance_t -> int
+
+axiom distance_tqtaxiom :
+  (forall i:distance_t. ((0 <= distance_tqtint(i)) and
+  (distance_tqtint(i) <= 2147483647)))
 
 predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
 
-logic bool_eq3 : int, int -> bool
+logic bool_eq2 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -1117,7 +1086,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -1134,21 +1103,21 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq4 : int, int -> bool
+logic bool_eq3 : int, int -> bool
 
-axiom bool_eq_def3 :
-  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
 
-logic user_eq1 : distance_t, distance_t -> bool
+logic user_eq : distance_t, distance_t -> bool
 
-logic dummy1 : distance_t
+logic dummy : distance_t
 
 type distance_t__ref = { distance_t__content : distance_t
 }
@@ -1156,18 +1125,54 @@ type distance_t__ref = { distance_t__content : distance_t
 function distance_t__ref___projection(a: distance_t__ref) : distance_t =
   (a).distance_t__content
 
-logic to_rep1 : distance_t -> int
+function to_rep(x: distance_t) : int = distance_tqtint(x)
 
-logic of_rep1 : int -> distance_t
+logic of_rep : int -> distance_t
+
+axiom inversion_axiom :
+  (forall x:distance_t [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:distance_t [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+type speed_t
+
+logic bool_eq4 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
+
+logic user_eq1 : speed_t, speed_t -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+
+logic dummy1 : speed_t
+
+type speed_t__ref = { speed_t__content : speed_t
+}
+
+function speed_t__ref___projection(a: speed_t__ref) : speed_t =
+  (a).speed_t__content
+
+logic to_rep1 : speed_t -> t
+
+logic of_rep1 : t -> speed_t
 
 axiom inversion_axiom1 :
-  (forall x:distance_t [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+  (forall x:speed_t [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
 
-axiom range_axiom1 :
-  (forall x:distance_t [to_rep1(x)]. in_range2(to_rep1(x)))
+axiom range_axiom1 : (forall x:speed_t [to_rep1(x)]. tqtisFinite(to_rep1(x)))
 
 axiom coerce_axiom1 :
-  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (forall x:t [to_rep1(of_rep1(x))]. (tqtisFinite(x) ->
   (to_rep1(of_rep1(x)) = x)))
 
 type us_split_fields = {
@@ -1177,6 +1182,9 @@ rec__deceleration_curve__braking_curve_entry__speed : speed_t
 
 function us_split_fields_location__projection(a: us_split_fields) : distance_t =
   (a).rec__deceleration_curve__braking_curve_entry__location
+
+function us_split_fields_speed__projection(a: us_split_fields) : speed_t =
+  (a).rec__deceleration_curve__braking_curve_entry__speed
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1194,11 +1202,11 @@ logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  ((((to_rep1(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location) = to_rep1(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location)) and
-  (to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed))) ->
+  ((((to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location)) and
+  (to_rep1(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep1(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed))) ->
   (bool_eq5(a, b) = true)) and
-  ((not ((to_rep1(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location) = to_rep1(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location)) and
-  (to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed)))) ->
+  ((not ((to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location)) and
+  (to_rep1(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep1(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed)))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int
@@ -1379,13 +1387,13 @@ axiom bool_eq_def6 :
   0, 1000,
   ((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__curve, 0,
   1000) = true) and
-  (to_rep1(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep1(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point))) ->
+  (to_rep(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point))) ->
   (bool_eq7(a, b) = true)) and
   ((not ((bool_eq6(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__curve,
   0, 1000,
   ((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__curve, 0,
   1000) = true) and
-  (to_rep1(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep1(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point)))) ->
+  (to_rep(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point)))) ->
   (bool_eq7(a, b) = false))))
 
 logic value__size2 : int
@@ -1464,6 +1472,9 @@ function us_split_fields_supervise__projection(a: us_split_fields4) : bool =
 function us_split_fields_location__2__projection(a: us_split_fields4) : distance_t =
   (a).rec__deceleration_curve__target_t__location
 
+function us_split_fields_speed__2__projection(a: us_split_fields4) : speed_t =
+  (a).rec__deceleration_curve__target_t__speed
+
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
@@ -1481,12 +1492,12 @@ logic bool_eq8 : us_rep2, us_rep2 -> bool
 axiom bool_eq_def7 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq8(a, b)].
   (((((((a).us_split_fields5).rec__deceleration_curve__target_t__supervise = ((b).us_split_fields5).rec__deceleration_curve__target_t__supervise) and
-  (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
-  (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__speed))) ->
+  (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
+  (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__speed))) ->
   (bool_eq8(a, b) = true)) and
   ((not (((((a).us_split_fields5).rec__deceleration_curve__target_t__supervise = ((b).us_split_fields5).rec__deceleration_curve__target_t__supervise) and
-  (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
-  (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__speed)))) ->
+  (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
+  (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__speed)))) ->
   (bool_eq8(a, b) = false))))
 
 logic value__size3 : int
@@ -1574,15 +1585,71 @@ type target_t__ref = { target_t__content : us_rep2
 function target_t__ref___projection(a: target_t__ref) : us_rep2 =
   (a).target_t__content
 
+type map__ref1 = { map__content1 : (int,us_rep2) farray
+}
+
+logic slide1 : (int,us_rep2) farray, int, int -> (int,us_rep2) farray
+
+axiom slide_eq1 :
+  (forall a:(int,us_rep2) farray.
+  (forall first:int [slide1(a, first, first)]. (slide1(a, first, first) = a)))
+
+axiom slide_def1 :
+  (forall a:(int,us_rep2) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
+  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic bool_eq9 : (int,us_rep2) farray, int, int, (int,us_rep2) farray, int,
+  int -> bool
+
+axiom bool_eq_def8 :
+  (forall a:(int,us_rep2) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,us_rep2) farray. forall b__first:int. forall b__last:int
+  [bool_eq9(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_171:int. ((((a__first <= temp___idx_171) and
+  (temp___idx_171 <= a__last)) and (bool_eq8((a[temp___idx_171]),
+  (b[((b__first - a__first) + temp___idx_171)])) = true)) or
+  (not ((a__first <= temp___idx_171) and (temp___idx_171 <= a__last)))))) ->
+  (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_171:int. (((a__first <= temp___idx_171) and
+  (temp___idx_171 <= a__last)) -> (bool_eq8((a[temp___idx_171]),
+  (b[((b__first - a__first) + temp___idx_171)])) = true))))) -> (bool_eq9(a,
+  a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev1 :
+  (forall a:(int,us_rep2) farray. forall b:(int,us_rep2) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq9(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_171:int. (((a__first <= temp___idx_171) and
+  (temp___idx_171 <= a__last)) -> (bool_eq8((a[temp___idx_171]),
+  (b[((b__first - a__first) + temp___idx_171)])) = true)))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic is_valid_target : (int,us_rep2) farray -> bool
+
+logic is_valid_target__function_guard : bool, (int,us_rep2) farray -> prop
+
 type target_type
 
 predicate in_range3(x: int) = ((0 <= x) and (x <= 4))
 
-logic bool_eq9 : int, int -> bool
+logic bool_eq10 : int, int -> bool
 
-axiom bool_eq_def8 :
-  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
 
 logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
 
@@ -1600,62 +1667,6 @@ type target_type__ref = { target_type__content : target_type
 function target_type__ref___projection(a: target_type__ref) : target_type =
   (a).target_type__content
 
-type map__ref1 = { map__content1 : (int,us_rep2) farray
-}
-
-logic slide1 : (int,us_rep2) farray, int, int -> (int,us_rep2) farray
-
-axiom slide_eq1 :
-  (forall a:(int,us_rep2) farray.
-  (forall first:int [slide1(a, first, first)]. (slide1(a, first, first) = a)))
-
-axiom slide_def1 :
-  (forall a:(int,us_rep2) farray.
-  (forall old_first:int.
-  (forall new_first:int.
-  (forall i:int [(slide1(a, old_first, new_first)[i])]. ((slide1(a,
-  old_first, new_first)[i]) = (a[(i - (new_first - old_first))]))))))
-
-logic bool_eq10 : (int,us_rep2) farray, int, int, (int,us_rep2) farray, int,
-  int -> bool
-
-axiom bool_eq_def9 :
-  (forall a:(int,us_rep2) farray. forall a__first:int. forall a__last:int.
-  forall b:(int,us_rep2) farray. forall b__first:int. forall b__last:int
-  [bool_eq10(a, a__first, a__last, b, b__first, b__last)].
-  ((((((a__first <= a__last) and ((b__first <= b__last) and
-  ((a__last - a__first) = (b__last - b__first)))) or
-  ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_171:int. ((((a__first <= temp___idx_171) and
-  (temp___idx_171 <= a__last)) and (bool_eq8((a[temp___idx_171]),
-  (b[((b__first - a__first) + temp___idx_171)])) = true)) or
-  (not ((a__first <= temp___idx_171) and (temp___idx_171 <= a__last)))))) ->
-  (bool_eq10(a, a__first, a__last, b, b__first, b__last) = true)) and
-  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
-  ((a__last - a__first) = (b__last - b__first)))) and
-  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_171:int. (((a__first <= temp___idx_171) and
-  (temp___idx_171 <= a__last)) -> (bool_eq8((a[temp___idx_171]),
-  (b[((b__first - a__first) + temp___idx_171)])) = true))))) -> (bool_eq10(a,
-  a__first, a__last, b, b__first, b__last) = false))))
-
-axiom bool_eq_rev1 :
-  (forall a:(int,us_rep2) farray. forall b:(int,us_rep2) farray.
-  (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq10(b, b__first, b__last, a, a__first,
-  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
-  ((a__last - a__first) = (b__last - b__first)))) and
-  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_171:int. (((a__first <= temp___idx_171) and
-  (temp___idx_171 <= a__last)) -> (bool_eq8((a[temp___idx_171]),
-  (b[((b__first - a__first) + temp___idx_171)])) = true)))))))
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic is_valid_target : (int,us_rep2) farray -> bool
-
-logic is_valid_target__function_guard : bool, (int,us_rep2) farray -> prop
-
 axiom is_valid_target__post_axiom : true
 
 logic fliteral1 : t
@@ -1668,13 +1679,13 @@ axiom is_valid_target__def_axiom :
   [is_valid_target(sec_3_13_8_targets_decel_curves__target)].
   ((is_valid_target(sec_3_13_8_targets_decel_curves__target) = true) <->
   (((lt(fliteral1,
-  to_rep((((sec_3_13_8_targets_decel_curves__target[2])).us_split_fields5).rec__deceleration_curve__target_t__speed)) ->
+  to_rep1((((sec_3_13_8_targets_decel_curves__target[2])).us_split_fields5).rec__deceleration_curve__target_t__speed)) ->
   ((((sec_3_13_8_targets_decel_curves__target[1])).us_split_fields5).rec__deceleration_curve__target_t__supervise = true)) and
-  (eq(to_rep((((sec_3_13_8_targets_decel_curves__target[2])).us_split_fields5).rec__deceleration_curve__target_t__speed),
+  (eq(to_rep1((((sec_3_13_8_targets_decel_curves__target[2])).us_split_fields5).rec__deceleration_curve__target_t__speed),
   fliteral1) ->
   (((((sec_3_13_8_targets_decel_curves__target[2])).us_split_fields5).rec__deceleration_curve__target_t__supervise = true) and
   ((((sec_3_13_8_targets_decel_curves__target[3])).us_split_fields5).rec__deceleration_curve__target_t__supervise = true)))) and
-  eq(to_rep((((sec_3_13_8_targets_decel_curves__target[4])).us_split_fields5).rec__deceleration_curve__target_t__speed),
+  eq(to_rep1((((sec_3_13_8_targets_decel_curves__target[4])).us_split_fields5).rec__deceleration_curve__target_t__speed),
   fliteral1))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
@@ -1682,6 +1693,6 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
  (* File "sec_3_13_8_targets_decel_curves.ads", line 48, characters 0-0 *)
 goal WP_parameter_def :
   (forall target:(int,us_rep2) farray. (((is_valid_target(target) = true) and
-  eq(to_rep((((target[3])).us_split_fields5).rec__deceleration_curve__target_t__speed),
+  eq(to_rep1((((target[3])).us_split_fields5).rec__deceleration_curve__target_t__speed),
   fliteral1)) ->
-  (to_rep1((((target[3])).us_split_fields5).rec__deceleration_curve__target_t__location) <= 5000)))
+  (to_rep((((target[3])).us_split_fields5).rec__deceleration_curve__target_t__location) <= 5000)))

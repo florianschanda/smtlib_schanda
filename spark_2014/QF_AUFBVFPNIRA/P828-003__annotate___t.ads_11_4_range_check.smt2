@@ -214,6 +214,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "t.ads", line 15, characters 0-0
-  (not (<= (- 2147483648) 0)))
+  (not (<= abstr 2147483647)))
 (check-sat)
 (exit)

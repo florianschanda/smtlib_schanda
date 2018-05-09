@@ -1173,6 +1173,15 @@ rec__message_tests__coordinate__y : float1; rec__message_tests__coordinate__w
 : float1; rec__message_tests__coordinate__flags : us_rep
 }
 
+function us_split_fields_X__projection(a: us_split_fields2) : float1 =
+  (a).rec__message_tests__coordinate__x
+
+function us_split_fields_Y__projection(a: us_split_fields2) : float1 =
+  (a).rec__message_tests__coordinate__y
+
+function us_split_fields_W__projection(a: us_split_fields2) : float1 =
+  (a).rec__message_tests__coordinate__w
+
 function us_split_fields_Flags__projection(a: us_split_fields2) : us_rep =
   (a).rec__message_tests__coordinate__flags
 

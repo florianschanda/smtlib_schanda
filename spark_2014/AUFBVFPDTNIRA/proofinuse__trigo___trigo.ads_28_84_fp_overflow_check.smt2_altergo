@@ -974,7 +974,7 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 62.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 5467, characters 5-8 *)
 goal WP_parameter_def :
   (forall o:t. forall o1:t. (tqtisFinite(x) -> ((((o = pow9(x)) and
   (tqtisFinite(o) and (o = mul(RNE, mul(RNE, mul(RNE, mul(RNE, mul(RNE,

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -113,7 +116,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -221,6 +224,9 @@
 
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__tagged_discr__t__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__tagged_discr__t__y a))
 
 (define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))

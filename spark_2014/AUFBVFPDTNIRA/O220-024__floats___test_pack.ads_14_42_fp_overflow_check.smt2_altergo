@@ -934,7 +934,14 @@ axiom coerce_axiom :
   (to_rep(of_rep(x)) = x)))
 
 type us_split_fields = { rec__test_pack__pid_obj__desired : float1;
-rec__test_pack__pid_obj__error : float1 }
+rec__test_pack__pid_obj__error : float1
+}
+
+function us_split_fields_Desired__projection(a: us_split_fields) : float1 =
+  (a).rec__test_pack__pid_obj__desired
+
+function us_split_fields_Error__projection(a: us_split_fields) : float1 =
+  (a).rec__test_pack__pid_obj__error
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }

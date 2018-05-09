@@ -964,4 +964,4 @@ goal WP_parameter_def :
   (forall x:t. forall o:t. forall result:t. forall x1:t. (tqtisFinite(x) ->
   ((le(neg(fliteral), x) and le(x, fliteral)) -> ((((o = add(RNE, x, x)) and
   tqtisFinite(add(RNE, x, x))) and (({ t__content = result } = { t__content =
-  x }) and (x1 = o))) -> le(neg(fliteral1), x1)))))
+  x }) and (x1 = o))) -> le(x1, fliteral1)))))

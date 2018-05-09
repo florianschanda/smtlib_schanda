@@ -1892,4 +1892,4 @@ goal WP_parameter_def :
   (eq(roundToIntegral(Down, y1), y1) -> (eq(roundToIntegral(Down, z1), x1) ->
   (eq(roundToIntegral(Down, t3), x1) -> (eq(roundToIntegral(Up, x1), x1) ->
   (eq(roundToIntegral(Up, y1), y1) -> (eq(roundToIntegral(Up, z1), y1) ->
-  (eq(roundToIntegral(Up, t3), y1) -> le(x1, z1))))))))))))))))))))
+  (eq(roundToIntegral(Up, t3), y1) -> le(z1, y1))))))))))))))))))))

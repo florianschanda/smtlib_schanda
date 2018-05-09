@@ -236,10 +236,41 @@
 ;; H
   (assert (= i1 1))
 
+;; H
+  (assert
+  (and (= us (fp #b0 #b01111111 #b00000000000000000000000)) (dynamic_property
+  (fp #b0 #b00000000 #b00000000000000000000000) (last i1)
+  (fp #b0 #b01111111 #b00000000000000000000000))))
+
+;; H
+  (assert (= o (fp #b0 #b01111111 #b00000000000000000000000)))
+
+;; H
+  (assert (= result1 x))
+
+;; H
+  (assert (= x1 o))
+
+;; H
+  (assert (dynamic_invariant x1 true false true true i1))
+
+;; H
+  (assert (= (to_int (fp.to_real (fp.roundToIntegral RNA (last i1)))) i1))
+
+;; H
+  (assert
+  (not (fp.eq (fp #b0 #b00000000 #b00000000000000000000000) (last i1))))
+
+;; H
+  (assert (= result2 i1))
+
+;; H
+  (assert (= i2 2))
+
 (assert
 ;; WP_parameter_def
  ;; File "dynamic_float.adb", line 1, characters 0-0
   (not (dynamic_property (fp #b0 #b00000000 #b00000000000000000000000)
-  (last i1) (fp #b0 #b01111111 #b00000000000000000000000))))
+  (last i2) (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

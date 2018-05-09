@@ -1035,7 +1035,17 @@ axiom one_of_int : (fliteral = of_int(NearestTiesToAway, 1))
 type t__ref = { t__content : t
 }
 
-type myint
+logic conv : int -> t
+
+logic conv__function_guard : t, int -> prop
+
+type source
+
+logic sourceqtint : source -> int
+
+axiom sourceqtaxiom :
+  (forall i:source. ((0 <= sourceqtint(i)) and
+  (sourceqtint(i) <= 4294967295)))
 
 predicate in_range1(x: int) = ((0 <= x) and (x <= 4294967295))
 
@@ -1081,9 +1091,67 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> int
 
-logic user_eq : myint, myint -> bool
+logic user_eq : source, source -> bool
 
-logic dummy : myint
+logic dummy : source
+
+type source__ref = { source__content : source
+}
+
+function source__ref___projection(a: source__ref) : source =
+  (a).source__content
+
+type target
+
+logic bool_eq3 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+
+logic user_eq1 : target, target -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic dummy1 : target
+
+type target__ref = { target__content : target
+}
+
+function target__ref___projection(a: target__ref) : target =
+  (a).target__content
+
+axiom conv__post_axiom :
+  (forall s:int [conv(s)]. (in_range1(s) -> tqtisFinite(conv(s))))
+
+type myint
+
+logic myintqtint : myint -> int
+
+axiom myintqtaxiom :
+  (forall i:myint. ((0 <= myintqtint(i)) and (myintqtint(i) <= 4294967295)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 4294967295))
+
+logic bool_eq4 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq2 : myint, myint -> bool
+
+logic dummy2 : myint
 
 type myint__ref = { myint__content : myint
 }
@@ -1098,64 +1166,6 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-type source
-
-predicate in_range2(x1: int) = ((0 <= x1) and (x1 <= 4294967295))
-
-logic bool_eq3 : int, int -> bool
-
-axiom bool_eq_def2 :
-  (forall x1:int. forall y1:int [bool_eq3(x1, y1)]. (((x1 = y1) ->
-  (bool_eq3(x1, y1) = true)) and ((not (x1 = y1)) -> (bool_eq3(x1,
-  y1) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
-
-logic user_eq1 : source, source -> bool
-
-logic dummy1 : source
-
-type source__ref = { source__content : source
-}
-
-function source__ref___projection(a: source__ref) : source =
-  (a).source__content
-
-type target
-
-logic bool_eq4 : t, t -> bool
-
-axiom bool_eq_def3 :
-  (forall x1:t. forall y1:t [bool_eq4(x1, y1)]. ((eq(x1, y1) -> (bool_eq4(x1,
-  y1) = true)) and ((not eq(x1, y1)) -> (bool_eq4(x1, y1) = false))))
-
-logic user_eq2 : target, target -> bool
-
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
-
-logic dummy2 : target
-
-type target__ref = { target__content : target
-}
-
-function target__ref___projection(a: target__ref) : target =
-  (a).target__content
-
-logic conv : int -> t
-
-logic conv__function_guard : t, int -> prop
-
-axiom conv__post_axiom :
-  (forall s:int [conv(s)]. (in_range2(s) -> tqtisFinite(conv(s))))
-
  (* File "prover_crash.ads", line 8, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> (in_range1(y) ->
-  in_range2((x + y))))
+goal WP_parameter_def : (in_range2(x) -> (in_range2(y) ->
+  in_range1((x + y))))

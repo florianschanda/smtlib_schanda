@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -126,7 +122,37 @@
   (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                                 (of_rep x))) )))
 
+(declare-fun min (Float32 Float32) Float32)
+
+(declare-fun min__function_guard (Float32 Float32 Float32) Bool)
+
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
+
+;; min__post_axiom
+  (assert
+  (forall ((x1 Float32) (x2 Float32))
+  (! (=>
+     (and (dynamic_invariant x1 true true true true) (dynamic_invariant x2
+     true true true true))
+     (let ((result (min x1 x2)))
+     (and (ite (fp.leq x1 x2) (fp.eq result x1) (fp.eq result x2))
+     (dynamic_invariant result true false true true)))) :pattern ((min x1 x2)) )))
+
 (declare-sort num_delimiters_range 0)
+
+(declare-fun num_delimiters_rangeqtint (num_delimiters_range) Int)
+
+;; num_delimiters_range'axiom
+  (assert
+  (forall ((i num_delimiters_range))
+  (and (<= 0 (num_delimiters_rangeqtint i))
+  (<= (num_delimiters_rangeqtint i) 10))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -147,14 +173,8 @@
 (define-fun num_delimiters_range__ref___projection ((a num_delimiters_range__ref)) num_delimiters_range
   (num_delimiters_range__content a))
 
-(define-fun dynamic_invariant ((temp___expr_159 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)
-  (temp___do_typ_inv_158 Bool)) Bool (=>
-                                     (or (= temp___is_init_155 true)
-                                     (<= 0 10)) (in_range1 temp___expr_159)))
-
-(declare-fun to_rep1 (num_delimiters_range) Int)
+(define-fun to_rep1 ((x num_delimiters_range)) Int (num_delimiters_rangeqtint
+                                                   x))
 
 (declare-fun of_rep1 (Int) num_delimiters_range)
 
@@ -176,6 +196,14 @@
 
 (declare-sort function_range 0)
 
+(declare-fun function_rangeqtint (function_range) Int)
+
+;; function_range'axiom
+  (assert
+  (forall ((i function_range))
+  (and (<= 0 (function_rangeqtint i))
+  (<= (function_rangeqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -194,7 +222,7 @@
 (define-fun function_range__ref___projection ((a function_range__ref)) function_range
   (function_range__content a))
 
-(declare-fun to_rep2 (function_range) Int)
+(define-fun to_rep2 ((x function_range)) Int (function_rangeqtint x))
 
 (declare-fun of_rep2 (Int) function_range)
 
@@ -220,6 +248,9 @@
  (rec__step_function__delimiter_entry__delimiter function_range)(rec__step_function__delimiter_entry__value float)))))
 (define-fun us_split_fields_Delimiter__projection ((a us_split_fields)) function_range
   (rec__step_function__delimiter_entry__delimiter a))
+
+(define-fun us_split_fields_Value__projection ((a us_split_fields)) float
+  (rec__step_function__delimiter_entry__value a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -491,29 +522,6 @@
 (define-fun step_function_t__ref___projection ((a step_function_t__ref)) us_rep1
   (step_function_t__content a))
 
-(declare-fun min (Float32 Float32) Float32)
-
-(declare-fun min__function_guard (Float32 Float32 Float32) Bool)
-
-(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
-  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
-  (temp___do_toplevel_58 Bool)
-  (temp___do_typ_inv_59 Bool)) Bool (=>
-                                    (or (= temp___is_init_56 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                    (fp.isFinite32 temp___expr_60)))
-
-;; min__post_axiom
-  (assert
-  (forall ((x1 Float32) (x2 Float32))
-  (! (=>
-     (and (dynamic_invariant1 x1 true true true true) (dynamic_invariant1 x2
-     true true true true))
-     (let ((result (min x1 x2)))
-     (and (ite (fp.leq x1 x2) (fp.eq result x1) (fp.eq result x2))
-     (dynamic_invariant1 result true false true true)))) :pattern ((min x1
-                                                                   x2)) )))
-
 (declare-fun is_valid (us_rep1) Bool)
 
 (declare-fun is_valid__function_guard (Bool us_rep1) Bool)
@@ -555,7 +563,7 @@
 
 (declare-fun get_value__function_guard (Float32 us_rep1 Int) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_166 Int)
+(define-fun dynamic_invariant1 ((temp___expr_166 Int)
   (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
   (temp___do_toplevel_164 Bool)
   (temp___do_typ_inv_165 Bool)) Bool (=>
@@ -568,7 +576,7 @@
   (forall ((sfun us_rep1))
   (forall ((x Int))
   (! (=>
-     (and (dynamic_invariant2 x true true true true)
+     (and (dynamic_invariant1 x true true true true)
      (= (is_valid sfun) true))
      (let ((result (get_value sfun x)))
      (and
@@ -616,8 +624,15 @@
                    (select temp___230 (to_rep1
                                       (rec__step_function__step_function_t__number_of_delimiters
                                       (us_split_fields3 sfun)))))))))))
-     (dynamic_invariant1 result true false true true)))) :pattern ((get_value
-                                                                   sfun x)) ))))
+     (dynamic_invariant result true false true true)))) :pattern ((get_value
+                                                                  sfun x)) ))))
+
+(define-fun dynamic_invariant2 ((temp___expr_159 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)
+  (temp___do_typ_inv_158 Bool)) Bool (=>
+                                     (or (= temp___is_init_155 true)
+                                     (<= 0 10)) (in_range1 temp___expr_159)))
 
 (declare-const sfun1 us_rep1)
 
@@ -638,6 +653,11 @@
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
+
+(declare-const rliteral function_range)
+
+;; rliteral_axiom
+  (assert (= (function_rangeqtint rliteral) 0))
 
 (declare-const merge__split_fields num_delimiters_range)
 
@@ -671,177 +691,175 @@
 
 (declare-const o1 function_range)
 
-(declare-const o2 function_range)
+(declare-const o2 float)
 
-(declare-const o3 float)
+(declare-const o3 function_range)
 
-(declare-const o4 function_range)
+(declare-const o4 float)
 
-(declare-const o5 float)
+(declare-const o5 (Array Int us_rep))
 
-(declare-const o6 (Array Int us_rep))
+(declare-const o6 num_delimiters_range)
 
-(declare-const o7 num_delimiters_range)
-
-(declare-const o8 (Array Int us_rep))
+(declare-const o7 (Array Int us_rep))
 
 (declare-const temp___340 num_delimiters_range)
 
 (declare-const temp___3401 (Array Int us_rep))
 
-(declare-const o9 function_range)
+(declare-const o8 function_range)
 
-(declare-const o10 us_split_fields)
+(declare-const o9 us_split_fields)
 
-(declare-const o11 us_rep)
+(declare-const o10 us_rep)
 
-(declare-const o12 (Array Int us_rep))
+(declare-const o11 (Array Int us_rep))
 
-(declare-const o13 us_split_fields2)
+(declare-const o12 us_split_fields2)
 
 (declare-const temp___402 us_rep1)
+
+(declare-const o13 Float32)
 
 (declare-const o14 Float32)
 
 (declare-const o15 Float32)
 
-(declare-const o16 Float32)
+(declare-const o16 float)
 
-(declare-const o17 float)
+(declare-const o17 us_split_fields)
 
-(declare-const o18 us_split_fields)
+(declare-const o18 us_rep)
 
-(declare-const o19 us_rep)
+(declare-const o19 (Array Int us_rep))
 
-(declare-const o20 (Array Int us_rep))
-
-(declare-const o21 us_split_fields2)
+(declare-const o20 us_split_fields2)
 
 (declare-const temp___409 us_rep1)
 
-(declare-const o22 function_range)
+(declare-const o21 function_range)
 
-(declare-const o23 us_split_fields)
+(declare-const o22 us_split_fields)
 
-(declare-const o24 us_rep)
+(declare-const o23 us_rep)
 
-(declare-const o25 (Array Int us_rep))
+(declare-const o24 (Array Int us_rep))
 
-(declare-const o26 us_split_fields2)
+(declare-const o25 us_split_fields2)
 
 (declare-const temp___387 us_rep1)
+
+(declare-const o26 Float32)
 
 (declare-const o27 Float32)
 
 (declare-const o28 Float32)
 
-(declare-const o29 Float32)
+(declare-const o29 float)
 
-(declare-const o30 float)
+(declare-const o30 us_split_fields)
 
-(declare-const o31 us_split_fields)
+(declare-const o31 us_rep)
 
-(declare-const o32 us_rep)
+(declare-const o32 (Array Int us_rep))
 
-(declare-const o33 (Array Int us_rep))
-
-(declare-const o34 us_split_fields2)
+(declare-const o33 us_split_fields2)
 
 (declare-const temp___394 us_rep1)
 
-(declare-const o35 function_range)
+(declare-const o34 function_range)
 
-(declare-const o36 us_split_fields)
+(declare-const o35 us_split_fields)
 
-(declare-const o37 us_rep)
+(declare-const o36 us_rep)
 
-(declare-const o38 (Array Int us_rep))
+(declare-const o37 (Array Int us_rep))
 
-(declare-const o39 us_split_fields2)
+(declare-const o38 us_split_fields2)
 
 (declare-const temp___372 us_rep1)
+
+(declare-const o39 Float32)
 
 (declare-const o40 Float32)
 
 (declare-const o41 Float32)
 
-(declare-const o42 Float32)
+(declare-const o42 float)
 
-(declare-const o43 float)
+(declare-const o43 us_split_fields)
 
-(declare-const o44 us_split_fields)
+(declare-const o44 us_rep)
 
-(declare-const o45 us_rep)
+(declare-const o45 (Array Int us_rep))
 
-(declare-const o46 (Array Int us_rep))
-
-(declare-const o47 us_split_fields2)
+(declare-const o46 us_split_fields2)
 
 (declare-const temp___379 us_rep1)
 
-(declare-const o48 function_range)
+(declare-const o47 function_range)
 
-(declare-const o49 us_split_fields)
+(declare-const o48 us_split_fields)
 
-(declare-const o50 us_rep)
+(declare-const o49 us_rep)
 
-(declare-const o51 (Array Int us_rep))
+(declare-const o50 (Array Int us_rep))
 
-(declare-const o52 us_split_fields2)
+(declare-const o51 us_split_fields2)
 
 (declare-const temp___359 us_rep1)
+
+(declare-const o52 Float32)
 
 (declare-const o53 Float32)
 
 (declare-const o54 Float32)
 
-(declare-const o55 Float32)
+(declare-const o55 float)
 
-(declare-const o56 float)
+(declare-const o56 us_split_fields)
 
-(declare-const o57 us_split_fields)
+(declare-const o57 us_rep)
 
-(declare-const o58 us_rep)
+(declare-const o58 (Array Int us_rep))
 
-(declare-const o59 (Array Int us_rep))
-
-(declare-const o60 us_split_fields2)
+(declare-const o59 us_split_fields2)
 
 (declare-const temp___366 us_rep1)
 
-(declare-const o61 function_range)
+(declare-const o60 function_range)
 
-(declare-const o62 us_split_fields)
+(declare-const o61 us_split_fields)
 
-(declare-const o63 us_rep)
+(declare-const o62 us_rep)
 
-(declare-const o64 (Array Int us_rep))
+(declare-const o63 (Array Int us_rep))
 
-(declare-const o65 us_split_fields2)
+(declare-const o64 us_split_fields2)
 
 (declare-const temp___346 us_rep1)
+
+(declare-const o65 Float32)
 
 (declare-const o66 Float32)
 
 (declare-const o67 Float32)
 
-(declare-const o68 Float32)
+(declare-const o68 float)
 
-(declare-const o69 float)
+(declare-const o69 us_split_fields)
 
-(declare-const o70 us_split_fields)
+(declare-const o70 us_rep)
 
-(declare-const o71 us_rep)
+(declare-const o71 (Array Int us_rep))
 
-(declare-const o72 (Array Int us_rep))
-
-(declare-const o73 us_split_fields2)
+(declare-const o72 us_split_fields2)
 
 (declare-const temp___353 us_rep1)
 
-(declare-const o74 num_delimiters_range)
+(declare-const o73 num_delimiters_range)
 
-(declare-const o75 us_split_fields2)
+(declare-const o74 us_split_fields2)
 
 (declare-const temp___478 us_rep1)
 
@@ -849,7 +867,7 @@
 
 (declare-const j Int)
 
-(declare-const o76 Bool)
+(declare-const o75 Bool)
 
 (declare-const result int__ref)
 
@@ -1103,35 +1121,32 @@
   (assert (= (to_rep o) (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (= (to_rep2 o1) 0))
+  (assert (= rliteral o1))
 
 ;; H
-  (assert (= o1 o2))
+  (assert (= o o2))
 
 ;; H
-  (assert (= o o3))
+  (assert (= o3 o1))
 
 ;; H
   (assert (= o4 o2))
 
 ;; H
-  (assert (= o5 o3))
-
-;; H
   (assert
-  (= o6 (store merge__split_fields1 im1 (mk___rep (mk___split_fields o4 o5)))))
+  (= o5 (store merge__split_fields1 im1 (mk___rep (mk___split_fields o3 o4)))))
 
 ;; H
-  (assert (= merge__split_fields o7))
+  (assert (= merge__split_fields o6))
 
 ;; H
-  (assert (= o6 o8))
+  (assert (= o5 o7))
 
 ;; H
-  (assert (= temp___340 o7))
+  (assert (= temp___340 o6))
 
 ;; H
-  (assert (= temp___3401 o8))
+  (assert (= temp___3401 o7))
 
 ;; H
   (assert
@@ -1346,7 +1361,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= (to_rep2 o9) (to_rep2
+  (= (to_rep2 o8) (to_rep2
                   (rec__step_function__delimiter_entry__delimiter
                   (us_split_fields1
                   (select (rec__step_function__step_function_t__step
@@ -1366,11 +1381,11 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= o10 (mk___split_fields o9
-         (rec__step_function__delimiter_entry__value
-         (us_split_fields1
-         (select (rec__step_function__step_function_t__step
-                 merge__split_fields3) im2))))))))
+  (= o9 (mk___split_fields o8
+        (rec__step_function__delimiter_entry__value
+        (us_split_fields1
+        (select (rec__step_function__step_function_t__step
+                merge__split_fields3) im2))))))))
 
 ;; H
   (assert
@@ -1386,7 +1401,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= o11 (mk___rep o10)))))
+  (= o10 (mk___rep o9)))))
 
 ;; H
   (assert
@@ -1402,8 +1417,8 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= o12 (store (rec__step_function__step_function_t__step
-                merge__split_fields3) im2 o11)))))
+  (= o11 (store (rec__step_function__step_function_t__step
+                merge__split_fields3) im2 o10)))))
 
 ;; H
   (assert
@@ -1419,9 +1434,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= o13 (mk___split_fields1
+  (= o12 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields3) o12)))))
+         merge__split_fields3) o11)))))
 
 ;; H
   (assert
@@ -1437,7 +1452,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= temp___402 (mk___rep1 o13)))))
+  (= temp___402 (mk___rep1 o12)))))
 
 ;; H
   (assert
@@ -1486,13 +1501,13 @@
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
   (and
-  (= o15 (get_value sfun2
+  (= o14 (get_value sfun2
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields4) im2))))))
-  (and (fp.isFinite32 o15)
+  (and (fp.isFinite32 o14)
   (or
   (exists ((i3 Int))
   (and
@@ -1521,7 +1536,7 @@
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
                      (us_split_fields3 sfun2)) (+ i3 1)))))))
-  (fp.eq o15 (to_rep
+  (fp.eq o14 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -1539,7 +1554,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields4)
   im2)))))
-  (fp.eq o15 (to_rep
+  (fp.eq o14 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -1562,13 +1577,13 @@
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
   (and
-  (= o14 (get_value sfun1
+  (= o13 (get_value sfun1
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields4) im2))))))
-  (and (fp.isFinite32 o14)
+  (and (fp.isFinite32 o13)
   (or
   (exists ((i3 Int))
   (and
@@ -1597,7 +1612,7 @@
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
                      (us_split_fields3 sfun1)) (+ i3 1)))))))
-  (fp.eq o14 (to_rep
+  (fp.eq o13 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -1615,7 +1630,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields4)
   im2)))))
-  (fp.eq o14 (to_rep
+  (fp.eq o13 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -1637,9 +1652,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (and (= o16 (min o14 o15))
-  (and (fp.isFinite32 o16)
-  (ite (fp.leq o14 o15) (fp.eq o16 o14) (fp.eq o16 o15)))))))
+  (and (= o15 (min o13 o14))
+  (and (fp.isFinite32 o15)
+  (ite (fp.leq o13 o14) (fp.eq o15 o13) (fp.eq o15 o14)))))))
 
 ;; H
   (assert
@@ -1655,7 +1670,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= (to_rep o17) o16))))
+  (= (to_rep o16) o15))))
 
 ;; H
   (assert
@@ -1671,12 +1686,12 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= o18 (mk___split_fields
+  (= o17 (mk___split_fields
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields4) im2)))
-         o17)))))
+         o16)))))
 
 ;; H
   (assert
@@ -1692,7 +1707,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= o19 (mk___rep o18)))))
+  (= o18 (mk___rep o17)))))
 
 ;; H
   (assert
@@ -1708,8 +1723,8 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= o20 (store (rec__step_function__step_function_t__step
-                merge__split_fields4) im2 o19)))))
+  (= o19 (store (rec__step_function__step_function_t__step
+                merge__split_fields4) im2 o18)))))
 
 ;; H
   (assert
@@ -1725,9 +1740,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= o21 (mk___split_fields1
+  (= o20 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields4) o20)))))
+         merge__split_fields4) o19)))))
 
 ;; H
   (assert
@@ -1743,7 +1758,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun2)) i22)))))
-  (= temp___409 (mk___rep1 o21)))))
+  (= temp___409 (mk___rep1 o20)))))
 
 ;; H
   (assert
@@ -1856,7 +1871,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= (to_rep2 o22) (to_rep2
+  (= (to_rep2 o21) (to_rep2
                    (rec__step_function__delimiter_entry__delimiter
                    (us_split_fields1
                    (select (rec__step_function__step_function_t__step
@@ -1888,7 +1903,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= o23 (mk___split_fields o22
+  (= o22 (mk___split_fields o21
          (rec__step_function__delimiter_entry__value
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
@@ -1920,7 +1935,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= o24 (mk___rep o23))))))
+  (= o23 (mk___rep o22))))))
 
 ;; H
   (assert
@@ -1948,8 +1963,8 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= o25 (store (rec__step_function__step_function_t__step
-                merge__split_fields3) im2 o24))))))
+  (= o24 (store (rec__step_function__step_function_t__step
+                merge__split_fields3) im2 o23))))))
 
 ;; H
   (assert
@@ -1977,9 +1992,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= o26 (mk___split_fields1
+  (= o25 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields3) o25))))))
+         merge__split_fields3) o24))))))
 
 ;; H
   (assert
@@ -2007,7 +2022,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= temp___387 (mk___rep1 o26))))))
+  (= temp___387 (mk___rep1 o25))))))
 
 ;; H
   (assert
@@ -2092,13 +2107,13 @@
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
   (and
-  (= o28 (get_value sfun2
+  (= o27 (get_value sfun2
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields6) im2))))))
-  (and (fp.isFinite32 o28)
+  (and (fp.isFinite32 o27)
   (or
   (exists ((i3 Int))
   (and
@@ -2127,7 +2142,7 @@
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
                      (us_split_fields3 sfun2)) (+ i3 1)))))))
-  (fp.eq o28 (to_rep
+  (fp.eq o27 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -2145,7 +2160,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields6)
   im2)))))
-  (fp.eq o28 (to_rep
+  (fp.eq o27 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -2180,13 +2195,13 @@
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
   (and
-  (= o27 (get_value sfun1
+  (= o26 (get_value sfun1
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields6) im2))))))
-  (and (fp.isFinite32 o27)
+  (and (fp.isFinite32 o26)
   (or
   (exists ((i3 Int))
   (and
@@ -2215,7 +2230,7 @@
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
                      (us_split_fields3 sfun1)) (+ i3 1)))))))
-  (fp.eq o27 (to_rep
+  (fp.eq o26 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -2233,7 +2248,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields6)
   im2)))))
-  (fp.eq o27 (to_rep
+  (fp.eq o26 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -2267,9 +2282,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (and (= o29 (min o27 o28))
-  (and (fp.isFinite32 o29)
-  (ite (fp.leq o27 o28) (fp.eq o29 o27) (fp.eq o29 o28))))))))
+  (and (= o28 (min o26 o27))
+  (and (fp.isFinite32 o28)
+  (ite (fp.leq o26 o27) (fp.eq o28 o26) (fp.eq o28 o27))))))))
 
 ;; H
   (assert
@@ -2297,7 +2312,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= (to_rep o30) o29)))))
+  (= (to_rep o29) o28)))))
 
 ;; H
   (assert
@@ -2325,12 +2340,12 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= o31 (mk___split_fields
+  (= o30 (mk___split_fields
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields6) im2)))
-         o30))))))
+         o29))))))
 
 ;; H
   (assert
@@ -2358,7 +2373,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= o32 (mk___rep o31))))))
+  (= o31 (mk___rep o30))))))
 
 ;; H
   (assert
@@ -2386,8 +2401,8 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= o33 (store (rec__step_function__step_function_t__step
-                merge__split_fields6) im2 o32))))))
+  (= o32 (store (rec__step_function__step_function_t__step
+                merge__split_fields6) im2 o31))))))
 
 ;; H
   (assert
@@ -2415,9 +2430,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= o34 (mk___split_fields1
+  (= o33 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields6) o33))))))
+         merge__split_fields6) o32))))))
 
 ;; H
   (assert
@@ -2445,7 +2460,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12)))))
-  (= temp___394 (mk___rep1 o34))))))
+  (= temp___394 (mk___rep1 o33))))))
 
 ;; H
   (assert
@@ -2619,7 +2634,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= (to_rep2 o35) (to_rep2
+  (= (to_rep2 o34) (to_rep2
                    (rec__step_function__delimiter_entry__delimiter
                    (us_split_fields1
                    (select (rec__step_function__step_function_t__step
@@ -2652,7 +2667,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= o36 (mk___split_fields o35
+  (= o35 (mk___split_fields o34
          (rec__step_function__delimiter_entry__value
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
@@ -2685,7 +2700,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= o37 (mk___rep o36))))))
+  (= o36 (mk___rep o35))))))
 
 ;; H
   (assert
@@ -2714,8 +2729,8 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= o38 (store (rec__step_function__step_function_t__step
-                merge__split_fields3) im2 o37))))))
+  (= o37 (store (rec__step_function__step_function_t__step
+                merge__split_fields3) im2 o36))))))
 
 ;; H
   (assert
@@ -2744,9 +2759,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= o39 (mk___split_fields1
+  (= o38 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields3) o38))))))
+         merge__split_fields3) o37))))))
 
 ;; H
   (assert
@@ -2775,7 +2790,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= temp___372 (mk___rep1 o39))))))
+  (= temp___372 (mk___rep1 o38))))))
 
 ;; H
   (assert
@@ -2863,13 +2878,13 @@
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
   (and
-  (= o41 (get_value sfun2
+  (= o40 (get_value sfun2
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields8) im2))))))
-  (and (fp.isFinite32 o41)
+  (and (fp.isFinite32 o40)
   (or
   (exists ((i3 Int))
   (and
@@ -2898,7 +2913,7 @@
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
                      (us_split_fields3 sfun2)) (+ i3 1)))))))
-  (fp.eq o41 (to_rep
+  (fp.eq o40 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -2916,7 +2931,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields8)
   im2)))))
-  (fp.eq o41 (to_rep
+  (fp.eq o40 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -2952,13 +2967,13 @@
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
   (and
-  (= o40 (get_value sfun1
+  (= o39 (get_value sfun1
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields8) im2))))))
-  (and (fp.isFinite32 o40)
+  (and (fp.isFinite32 o39)
   (or
   (exists ((i3 Int))
   (and
@@ -2987,7 +3002,7 @@
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
                      (us_split_fields3 sfun1)) (+ i3 1)))))))
-  (fp.eq o40 (to_rep
+  (fp.eq o39 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3005,7 +3020,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields8)
   im2)))))
-  (fp.eq o40 (to_rep
+  (fp.eq o39 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3040,9 +3055,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (and (= o42 (min o40 o41))
-  (and (fp.isFinite32 o42)
-  (ite (fp.leq o40 o41) (fp.eq o42 o40) (fp.eq o42 o41))))))))
+  (and (= o41 (min o39 o40))
+  (and (fp.isFinite32 o41)
+  (ite (fp.leq o39 o40) (fp.eq o41 o39) (fp.eq o41 o40))))))))
 
 ;; H
   (assert
@@ -3071,7 +3086,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= (to_rep o43) o42)))))
+  (= (to_rep o42) o41)))))
 
 ;; H
   (assert
@@ -3100,12 +3115,12 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= o44 (mk___split_fields
+  (= o43 (mk___split_fields
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields8) im2)))
-         o43))))))
+         o42))))))
 
 ;; H
   (assert
@@ -3134,7 +3149,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= o45 (mk___rep o44))))))
+  (= o44 (mk___rep o43))))))
 
 ;; H
   (assert
@@ -3163,8 +3178,8 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= o46 (store (rec__step_function__step_function_t__step
-                merge__split_fields8) im2 o45))))))
+  (= o45 (store (rec__step_function__step_function_t__step
+                merge__split_fields8) im2 o44))))))
 
 ;; H
   (assert
@@ -3193,9 +3208,9 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= o47 (mk___split_fields1
+  (= o46 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields8) o46))))))
+         merge__split_fields8) o45))))))
 
 ;; H
   (assert
@@ -3224,7 +3239,7 @@
                                                (select (rec__step_function__step_function_t__step
                                                        (us_split_fields3
                                                        sfun1)) i12))))))
-  (= temp___379 (mk___rep1 o47))))))
+  (= temp___379 (mk___rep1 o46))))))
 
 ;; H
   (assert
@@ -3494,7 +3509,7 @@
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
-  (= (to_rep2 o48) (to_rep2
+  (= (to_rep2 o47) (to_rep2
                    (rec__step_function__delimiter_entry__delimiter
                    (us_split_fields1
                    (select (rec__step_function__step_function_t__step
@@ -3504,7 +3519,7 @@
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
-  (= o49 (mk___split_fields o48
+  (= o48 (mk___split_fields o47
          (rec__step_function__delimiter_entry__value
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
@@ -3513,27 +3528,27 @@
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (= scan_sfun12 true) (= o50 (mk___rep o49)))))
+  (=> (= scan_sfun12 true) (= o49 (mk___rep o48)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
-  (= o51 (store (rec__step_function__step_function_t__step
-                merge__split_fields3) im2 o50)))))
+  (= o50 (store (rec__step_function__step_function_t__step
+                merge__split_fields3) im2 o49)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
-  (= o52 (mk___split_fields1
+  (= o51 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields3) o51)))))
+         merge__split_fields3) o50)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (= scan_sfun12 true) (= temp___359 (mk___rep1 o52)))))
+  (=> (= scan_sfun12 true) (= temp___359 (mk___rep1 o51)))))
 
 ;; H
   (assert
@@ -3552,13 +3567,13 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
   (and
-  (= o54 (get_value sfun2
+  (= o53 (get_value sfun2
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields10) im2))))))
-  (and (fp.isFinite32 o54)
+  (and (fp.isFinite32 o53)
   (or
   (exists ((i3 Int))
   (and
@@ -3587,7 +3602,7 @@
                                             (us_split_fields1
                                             (select (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun2)) (+ i3 1)))))))
-  (fp.eq o54 (to_rep
+  (fp.eq o53 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3605,7 +3620,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields10)
   im2)))))
-  (fp.eq o54 (to_rep
+  (fp.eq o53 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3618,13 +3633,13 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
   (and
-  (= o53 (get_value sfun1
+  (= o52 (get_value sfun1
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields10) im2))))))
-  (and (fp.isFinite32 o53)
+  (and (fp.isFinite32 o52)
   (or
   (exists ((i3 Int))
   (and
@@ -3653,7 +3668,7 @@
                                             (us_split_fields1
                                             (select (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun1)) (+ i3 1)))))))
-  (fp.eq o53 (to_rep
+  (fp.eq o52 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3671,7 +3686,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields10)
   im2)))))
-  (fp.eq o53 (to_rep
+  (fp.eq o52 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3683,50 +3698,50 @@
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
-  (and (= o55 (min o53 o54))
-  (and (fp.isFinite32 o55)
-  (ite (fp.leq o53 o54) (fp.eq o55 o53) (fp.eq o55 o54)))))))
+  (and (= o54 (min o52 o53))
+  (and (fp.isFinite32 o54)
+  (ite (fp.leq o52 o53) (fp.eq o54 o52) (fp.eq o54 o53)))))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (= scan_sfun12 true) (= (to_rep o56) o55))))
+  (=> (= scan_sfun12 true) (= (to_rep o55) o54))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
-  (= o57 (mk___split_fields
+  (= o56 (mk___split_fields
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields10) im2)))
-         o56)))))
+         o55)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (= scan_sfun12 true) (= o58 (mk___rep o57)))))
-
-;; H
-  (assert
-  (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (= scan_sfun12 true)
-  (= o59 (store (rec__step_function__step_function_t__step
-                merge__split_fields10) im2 o58)))))
+  (=> (= scan_sfun12 true) (= o57 (mk___rep o56)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (= scan_sfun12 true)
-  (= o60 (mk___split_fields1
+  (= o58 (store (rec__step_function__step_function_t__step
+                merge__split_fields10) im2 o57)))))
+
+;; H
+  (assert
+  (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
+  (=> (= scan_sfun12 true)
+  (= o59 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields10) o59)))))
+         merge__split_fields10) o58)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (= scan_sfun12 true) (= temp___366 (mk___rep1 o60)))))
+  (=> (= scan_sfun12 true) (= temp___366 (mk___rep1 o59)))))
 
 ;; H
   (assert
@@ -3765,7 +3780,7 @@
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
-  (= (to_rep2 o61) (to_rep2
+  (= (to_rep2 o60) (to_rep2
                    (rec__step_function__delimiter_entry__delimiter
                    (us_split_fields1
                    (select (rec__step_function__step_function_t__step
@@ -3775,7 +3790,7 @@
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
-  (= o62 (mk___split_fields o61
+  (= o61 (mk___split_fields o60
          (rec__step_function__delimiter_entry__value
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
@@ -3784,27 +3799,27 @@
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (not (= scan_sfun12 true)) (= o63 (mk___rep o62)))))
+  (=> (not (= scan_sfun12 true)) (= o62 (mk___rep o61)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
-  (= o64 (store (rec__step_function__step_function_t__step
-                merge__split_fields3) im2 o63)))))
+  (= o63 (store (rec__step_function__step_function_t__step
+                merge__split_fields3) im2 o62)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
-  (= o65 (mk___split_fields1
+  (= o64 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields3) o64)))))
+         merge__split_fields3) o63)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (not (= scan_sfun12 true)) (= temp___346 (mk___rep1 o65)))))
+  (=> (not (= scan_sfun12 true)) (= temp___346 (mk___rep1 o64)))))
 
 ;; H
   (assert
@@ -3823,13 +3838,13 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
   (and
-  (= o67 (get_value sfun2
+  (= o66 (get_value sfun2
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields12) im2))))))
-  (and (fp.isFinite32 o67)
+  (and (fp.isFinite32 o66)
   (or
   (exists ((i3 Int))
   (and
@@ -3858,7 +3873,7 @@
                                             (us_split_fields1
                                             (select (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun2)) (+ i3 1)))))))
-  (fp.eq o67 (to_rep
+  (fp.eq o66 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3876,7 +3891,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields12)
   im2)))))
-  (fp.eq o67 (to_rep
+  (fp.eq o66 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3889,13 +3904,13 @@
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
   (and
-  (= o66 (get_value sfun1
+  (= o65 (get_value sfun1
          (to_rep2
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields12) im2))))))
-  (and (fp.isFinite32 o66)
+  (and (fp.isFinite32 o65)
   (or
   (exists ((i3 Int))
   (and
@@ -3924,7 +3939,7 @@
                                             (us_split_fields1
                                             (select (rec__step_function__step_function_t__step
                                                     (us_split_fields3 sfun1)) (+ i3 1)))))))
-  (fp.eq o66 (to_rep
+  (fp.eq o65 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3942,7 +3957,7 @@
   (us_split_fields1
   (select (rec__step_function__step_function_t__step merge__split_fields12)
   im2)))))
-  (fp.eq o66 (to_rep
+  (fp.eq o65 (to_rep
              (rec__step_function__delimiter_entry__value
              (us_split_fields1
              (select (rec__step_function__step_function_t__step
@@ -3954,50 +3969,50 @@
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
-  (and (= o68 (min o66 o67))
-  (and (fp.isFinite32 o68)
-  (ite (fp.leq o66 o67) (fp.eq o68 o66) (fp.eq o68 o67)))))))
+  (and (= o67 (min o65 o66))
+  (and (fp.isFinite32 o67)
+  (ite (fp.leq o65 o66) (fp.eq o67 o65) (fp.eq o67 o66)))))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (not (= scan_sfun12 true)) (= (to_rep o69) o68))))
+  (=> (not (= scan_sfun12 true)) (= (to_rep o68) o67))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
-  (= o70 (mk___split_fields
+  (= o69 (mk___split_fields
          (rec__step_function__delimiter_entry__delimiter
          (us_split_fields1
          (select (rec__step_function__step_function_t__step
                  merge__split_fields12) im2)))
-         o69)))))
+         o68)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (not (= scan_sfun12 true)) (= o71 (mk___rep o70)))))
-
-;; H
-  (assert
-  (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (not (= scan_sfun12 true))
-  (= o72 (store (rec__step_function__step_function_t__step
-                merge__split_fields12) im2 o71)))))
+  (=> (not (= scan_sfun12 true)) (= o70 (mk___rep o69)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
   (=> (not (= scan_sfun12 true))
-  (= o73 (mk___split_fields1
+  (= o71 (store (rec__step_function__step_function_t__step
+                merge__split_fields12) im2 o70)))))
+
+;; H
+  (assert
+  (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
+  (=> (not (= scan_sfun12 true))
+  (= o72 (mk___split_fields1
          (rec__step_function__step_function_t__number_of_delimiters
-         merge__split_fields12) o72)))))
+         merge__split_fields12) o71)))))
 
 ;; H
   (assert
   (=> (not (and (= scan_sfun12 true) (= scan_sfun22 true)))
-  (=> (not (= scan_sfun12 true)) (= temp___353 (mk___rep1 o73)))))
+  (=> (not (= scan_sfun12 true)) (= temp___353 (mk___rep1 o72)))))
 
 ;; H
   (assert
@@ -4144,16 +4159,16 @@
   (assert (= merge__split_fields17 merge__split_fields15))
 
 ;; H
-  (assert (= (to_rep1 o74) (int__content im7)))
+  (assert (= (to_rep1 o73) (int__content im7)))
 
 ;; H
   (assert
-  (= o75 (mk___split_fields1 o74
+  (= o74 (mk___split_fields1 o73
          (rec__step_function__step_function_t__step
          (us_split_fields__content1 merge__split_fields16)))))
 
 ;; H
-  (assert (= temp___478 (mk___rep1 o75)))
+  (assert (= temp___478 (mk___rep1 o74)))
 
 ;; H
   (assert (= result16 merge__split_fields16))
@@ -4200,7 +4215,7 @@
 
 ;; H
   (assert
-  (= (= o76 true)
+  (= (= o75 true)
   (forall ((i3 Int))
   (=>
   (and (<= 0 i3)
@@ -4247,6 +4262,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "step_function.ads", line 89, characters 0-0
-  (not (<= 0 i)))
+  (not (<= i 10)))
 (check-sat)
 (exit)

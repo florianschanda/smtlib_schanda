@@ -922,6 +922,12 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type tinteger_8B
 
+logic tinteger_8Bqtint : tinteger_8B -> int
+
+axiom tinteger_8Bqtaxiom :
+  (forall i:tinteger_8B. (((- 128) <= tinteger_8Bqtint(i)) and
+  (tinteger_8Bqtint(i) <= 127)))
+
 predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq2 : int, int -> bool
@@ -977,6 +983,12 @@ function tinteger_8B__ref___projection(a: tinteger_8B__ref) : tinteger_8B =
   (a).tinteger_8B__content
 
 type integer_8
+
+logic integer_8qtint : integer_8 -> int
+
+axiom integer_8qtaxiom :
+  (forall i:integer_8. (((- 128) <= integer_8qtint(i)) and
+  (integer_8qtint(i) <= 127)))
 
 predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
 

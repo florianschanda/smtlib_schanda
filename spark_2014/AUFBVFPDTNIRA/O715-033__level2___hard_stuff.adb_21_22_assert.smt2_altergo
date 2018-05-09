@@ -964,11 +964,6 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 100000.0))
 
-logic fliteral3 : t
-
-axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 0.0e-1))
-
  (* File "hard_stuff.adb", line 1, characters 0-0 *)
 goal WP_parameter_def :
   (forall x:t. forall o:t. forall o1:t. forall o2:t. forall x1:t.
@@ -990,4 +985,4 @@ goal WP_parameter_def :
   (((result3 = true) <->
   (exists y:int. (((0 <= y) and (y <= 100000)) and eq(x4, mul(RNE, div(RNE,
   of_int(RNE, y), fliteral2), div(RNE, of_int(RNE, y), fliteral2)))))) ->
-  ((result3 = true) -> le(fliteral3, x4))))))))
+  ((result3 = true) -> le(x4, fliteral))))))))

@@ -2307,9 +2307,9 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic rliteral : t
 
-axiom rliteral_axiom : (tqtint(rliteral) = 0)
+axiom rliteral_axiom : (tqtint(rliteral) = 4294967295)
 
  (* File "interfac.ads", line 74, characters 0-0 *)
-goal WP_parameter_def : le(of_ubv32(Up, rliteral),
-  roundToIntegral(NearestTiesToAway, sqrt(NearestTiesToEven,
-  of_ubv32(NearestTiesToEven, i))))
+goal WP_parameter_def : le(roundToIntegral(NearestTiesToAway,
+  sqrt(NearestTiesToEven, of_ubv32(NearestTiesToEven, i))), of_ubv32(Down,
+  rliteral))

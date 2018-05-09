@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -130,6 +126,18 @@
 ((us_split_fields
  (mk___split_fields
  (rec__untangle_tests__coordinate__x float)(rec__untangle_tests__coordinate__y float)(rec__untangle_tests__coordinate__z float)(rec__untangle_tests__coordinate__w float)))))
+(define-fun us_split_fields_X__projection ((a us_split_fields)) float
+  (rec__untangle_tests__coordinate__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__untangle_tests__coordinate__y a))
+
+(define-fun us_split_fields_Z__projection ((a us_split_fields)) float
+  (rec__untangle_tests__coordinate__z a))
+
+(define-fun us_split_fields_W__projection ((a us_split_fields)) float
+  (rec__untangle_tests__coordinate__w a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -261,6 +269,13 @@
   (coordinate__content a))
 
 (declare-sort tcoordinate_listD1 0)
+
+(declare-fun tcoordinate_listD1qtint (tcoordinate_listD1) Int)
+
+;; tcoordinate_listD1'axiom
+  (assert
+  (forall ((i tcoordinate_listD1))
+  (and (<= 1 (tcoordinate_listD1qtint i)) (<= (tcoordinate_listD1qtint i) 3))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
@@ -462,6 +477,13 @@
 
 (declare-sort ttriangle_listD1 0)
 
+(declare-fun ttriangle_listD1qtint (ttriangle_listD1) Int)
+
+;; ttriangle_listD1'axiom
+  (assert
+  (forall ((i ttriangle_listD1))
+  (and (<= 1 (ttriangle_listD1qtint i)) (<= (ttriangle_listD1qtint i) 100))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -547,8 +569,6 @@
                                     (fp.isFinite32 temp___expr_60)))
 
 (declare-const tl (Array Int us_rep1))
-
-(declare-const t Int)
 
 (declare-const o1 Float32)
 
@@ -638,33 +658,115 @@
 
 (declare-const o44 (Array Int us_rep1))
 
-(declare-const result int__ref)
+(declare-const o45 Float32)
 
-(declare-const t1 Int)
+(declare-const o46 float)
+
+(declare-const o47 us_split_fields)
+
+(declare-const o48 us_rep)
+
+(declare-const o49 (Array Int us_rep))
+
+(declare-const o50 us_split_fields2)
+
+(declare-const o51 us_rep1)
+
+(declare-const o52 (Array Int us_rep1))
+
+(declare-const o53 Float32)
+
+(declare-const o54 float)
+
+(declare-const o55 us_split_fields)
+
+(declare-const o56 us_rep)
+
+(declare-const o57 (Array Int us_rep))
+
+(declare-const o58 us_split_fields2)
+
+(declare-const o59 us_rep1)
+
+(declare-const o60 (Array Int us_rep1))
+
+(declare-const o61 Float32)
+
+(declare-const o62 float)
+
+(declare-const o63 us_split_fields)
+
+(declare-const o64 us_rep)
+
+(declare-const o65 (Array Int us_rep))
+
+(declare-const o66 us_split_fields2)
+
+(declare-const o67 us_rep1)
+
+(declare-const o68 (Array Int us_rep1))
+
+(declare-const t Int)
 
 (declare-const tl1 (Array Int us_rep1))
 
-(declare-const t2 Int)
+(declare-const t1 Int)
 
 (declare-const v Int)
 
-(declare-const result1 int__ref)
-
-(declare-const v1 Int)
-
-(declare-const result2 map__ref1)
-
 (declare-const tl2 (Array Int us_rep1))
-
-(declare-const result3 map__ref1)
 
 (declare-const tl3 (Array Int us_rep1))
 
-;; H
-  (assert (= result (mk_int__ref t)))
+(declare-const tl4 (Array Int us_rep1))
+
+(declare-const v1 Int)
+
+(declare-const tl5 (Array Int us_rep1))
+
+(declare-const tl6 (Array Int us_rep1))
 
 ;; H
-  (assert (= t1 1))
+  (assert (= t 1))
+
+;; H
+  (assert (<= 1 t))
+
+;; H
+  (assert (<= t 100))
+
+;; H
+  (assert
+  (forall ((temp___281 Int))
+  (=> (and (<= 1 temp___281) (<= temp___281 100))
+  (=> (or (< 100 temp___281) (or (< temp___281 1) (<= t1 temp___281)))
+  (= (select tl1 temp___281) (select tl temp___281))))))
+
+;; H
+  (assert
+  (forall ((temp___281 Int))
+  (=> (and (<= 1 temp___281) (<= temp___281 100))
+  (=> (not (or (< 100 temp___281) (or (< temp___281 1) (<= t1 temp___281))))
+  (forall ((temp___282 Int))
+  (=> (and (<= 1 temp___282) (<= temp___282 3))
+  (= (rec__untangle_tests__coordinate__w
+     (us_split_fields1
+     (select (rec__untangle_tests__triangle__vertices
+             (us_split_fields3 (select tl1 temp___281))) temp___282)))
+  (rec__untangle_tests__coordinate__w
+  (us_split_fields1
+  (select (rec__untangle_tests__triangle__vertices
+          (us_split_fields3 (select tl temp___281))) temp___282))))))))))
+
+;; H
+  (assert
+  (forall ((temp___281 Int))
+  (=> (and (<= 1 temp___281) (<= temp___281 100))
+  (=> (not (or (< 100 temp___281) (or (< temp___281 1) (<= t1 temp___281))))
+  (= (rec__untangle_tests__triangle__normal
+     (us_split_fields3 (select tl1 temp___281))) (rec__untangle_tests__triangle__normal
+                                                 (us_split_fields3
+                                                 (select tl temp___281))))))))
 
 ;; H
   (assert (<= 1 t1))
@@ -673,87 +775,63 @@
   (assert (<= t1 100))
 
 ;; H
-  (assert
-  (and
-  (forall ((temp___279 Int))
-  (=> (and (<= 1 temp___279) (<= temp___279 100))
-  (ite (<= t2 temp___279) (= (select tl1 temp___279) (select tl temp___279))
-  (and
-  (forall ((temp___280 Int))
-  (=> (and (<= 1 temp___280) (<= temp___280 3))
-  (= (rec__untangle_tests__coordinate__w
-     (us_split_fields1
-     (select (rec__untangle_tests__triangle__vertices
-             (us_split_fields3 (select tl1 temp___279))) temp___280)))
-  (rec__untangle_tests__coordinate__w
-  (us_split_fields1
-  (select (rec__untangle_tests__triangle__vertices
-          (us_split_fields3 (select tl temp___279))) temp___280))))))
-  (= (rec__untangle_tests__triangle__normal
-     (us_split_fields3 (select tl1 temp___279))) (rec__untangle_tests__triangle__normal
-                                                 (us_split_fields3
-                                                 (select tl temp___279))))))))
-  (and (<= 1 t2) (<= t2 100))))
-
-;; H
-  (assert (= result1 (mk_int__ref v)))
-
-;; H
-  (assert (= v1 1))
+  (assert (= v 1))
 
 ;; H
   (assert
-  (and
   (= o1 (fp.add RNE (to_rep
                     (rec__untangle_tests__coordinate__x
                     (us_split_fields1
                     (select (rec__untangle_tests__triangle__vertices
-                            (us_split_fields3 (select tl1 t2))) v1))))
-  (to_rep (rec__untangle_tests__coordinate__x (us_split_fields1 o)))))
-  (fp.isFinite32 (fp.add RNE (to_rep
-                             (rec__untangle_tests__coordinate__x
-                             (us_split_fields1
-                             (select (rec__untangle_tests__triangle__vertices
-                                     (us_split_fields3 (select tl1 t2)))
-                             v1)))) (to_rep
-                                    (rec__untangle_tests__coordinate__x
-                                    (us_split_fields1 o)))))))
+                            (us_split_fields3 (select tl1 t1))) v))))
+  (to_rep (rec__untangle_tests__coordinate__x (us_split_fields1 o))))))
 
 ;; H
   (assert (= (to_rep o2) o1))
 
 ;; H
+  (assert
+  (fp.isFinite32 (fp.add RNE (to_rep
+                             (rec__untangle_tests__coordinate__x
+                             (us_split_fields1
+                             (select (rec__untangle_tests__triangle__vertices
+                                     (us_split_fields3 (select tl1 t1)))
+                             v)))) (to_rep
+                                   (rec__untangle_tests__coordinate__x
+                                   (us_split_fields1 o))))))
+
+;; H
   (assert (= o2 o3))
+
+;; H
+  (assert (= o7 o3))
 
 ;; H
   (assert
   (= (rec__untangle_tests__coordinate__y
      (us_split_fields1
      (select (rec__untangle_tests__triangle__vertices
-             (us_split_fields3 (select tl1 t2))) v1))) o4))
+             (us_split_fields3 (select tl1 t1))) v))) o4))
+
+;; H
+  (assert (= o8 o4))
 
 ;; H
   (assert
   (= (rec__untangle_tests__coordinate__z
      (us_split_fields1
      (select (rec__untangle_tests__triangle__vertices
-             (us_split_fields3 (select tl1 t2))) v1))) o5))
+             (us_split_fields3 (select tl1 t1))) v))) o5))
+
+;; H
+  (assert (= o9 o5))
 
 ;; H
   (assert
   (= (rec__untangle_tests__coordinate__w
      (us_split_fields1
      (select (rec__untangle_tests__triangle__vertices
-             (us_split_fields3 (select tl1 t2))) v1))) o6))
-
-;; H
-  (assert (= o7 o3))
-
-;; H
-  (assert (= o8 o4))
-
-;; H
-  (assert (= o9 o5))
+             (us_split_fields3 (select tl1 t1))) v))) o6))
 
 ;; H
   (assert (= o10 o6))
@@ -761,90 +839,75 @@
 ;; H
   (assert
   (= o11 (store (rec__untangle_tests__triangle__vertices
-                (us_split_fields3 (select tl1 t2))) v1 (mk___rep
-                                                       (mk___split_fields
-                                                       o7 o8 o9 o10)))))
+                (us_split_fields3 (select tl1 t1))) v (mk___rep
+                                                      (mk___split_fields
+                                                      o7 o8 o9 o10)))))
 
 ;; H
   (assert (= o11 o12))
 
 ;; H
-  (assert
-  (= (rec__untangle_tests__triangle__normal
-     (us_split_fields3 (select tl1 t2))) (mk___rep
-                                         (mk___split_fields o13 o14 o15 o16))))
-
-;; H
   (assert (= o17 o12))
 
 ;; H
-  (assert (= o18 o13))
+  (assert
+  (= (rec__untangle_tests__triangle__normal
+     (us_split_fields3 (select tl1 t1))) (mk___rep
+                                         (mk___split_fields o13 o14 o15 o16))))
 
 ;; H
   (assert (= o19 o14))
 
 ;; H
-  (assert (= o20 o15))
-
-;; H
   (assert (= o21 o16))
 
 ;; H
-  (assert
-  (= o22 (store tl1 t2 (mk___rep1
-                       (mk___split_fields1 o17
-                       (mk___rep (mk___split_fields o18 o19 o20 o21)))))))
+  (assert (= o20 o15))
 
 ;; H
-  (assert (= result2 (mk_map__ref1 tl1)))
+  (assert (= o18 o13))
+
+;; H
+  (assert
+  (= o22 (store tl1 t1 (mk___rep1
+                       (mk___split_fields1 o17
+                       (mk___rep (mk___split_fields o18 o19 o20 o21)))))))
 
 ;; H
   (assert (= tl2 o22))
 
 ;; H
   (assert
-  (and
   (= o23 (fp.add RNE (to_rep
                      (rec__untangle_tests__coordinate__y
                      (us_split_fields1
                      (select (rec__untangle_tests__triangle__vertices
-                             (us_split_fields3 (select tl2 t2))) v1))))
-  (to_rep (rec__untangle_tests__coordinate__y (us_split_fields1 o)))))
-  (fp.isFinite32 (fp.add RNE (to_rep
-                             (rec__untangle_tests__coordinate__y
-                             (us_split_fields1
-                             (select (rec__untangle_tests__triangle__vertices
-                                     (us_split_fields3 (select tl2 t2)))
-                             v1)))) (to_rep
-                                    (rec__untangle_tests__coordinate__y
-                                    (us_split_fields1 o)))))))
+                             (us_split_fields3 (select tl2 t1))) v))))
+  (to_rep (rec__untangle_tests__coordinate__y (us_split_fields1 o))))))
 
 ;; H
   (assert (= (to_rep o24) o23))
 
 ;; H
   (assert
-  (= (rec__untangle_tests__coordinate__x
-     (us_split_fields1
-     (select (rec__untangle_tests__triangle__vertices
-             (us_split_fields3 (select tl2 t2))) v1))) o25))
+  (fp.isFinite32 (fp.add RNE (to_rep
+                             (rec__untangle_tests__coordinate__y
+                             (us_split_fields1
+                             (select (rec__untangle_tests__triangle__vertices
+                                     (us_split_fields3 (select tl2 t1)))
+                             v)))) (to_rep
+                                   (rec__untangle_tests__coordinate__y
+                                   (us_split_fields1 o))))))
 
 ;; H
   (assert (= o24 o26))
 
 ;; H
   (assert
-  (= (rec__untangle_tests__coordinate__z
+  (= (rec__untangle_tests__coordinate__x
      (us_split_fields1
      (select (rec__untangle_tests__triangle__vertices
-             (us_split_fields3 (select tl2 t2))) v1))) o27))
-
-;; H
-  (assert
-  (= (rec__untangle_tests__coordinate__w
-     (us_split_fields1
-     (select (rec__untangle_tests__triangle__vertices
-             (us_split_fields3 (select tl2 t2))) v1))) o28))
+             (us_split_fields3 (select tl2 t1))) v))) o25))
 
 ;; H
   (assert (= o29 o25))
@@ -853,7 +916,21 @@
   (assert (= o30 o26))
 
 ;; H
+  (assert
+  (= (rec__untangle_tests__coordinate__z
+     (us_split_fields1
+     (select (rec__untangle_tests__triangle__vertices
+             (us_split_fields3 (select tl2 t1))) v))) o27))
+
+;; H
   (assert (= o31 o27))
+
+;; H
+  (assert
+  (= (rec__untangle_tests__coordinate__w
+     (us_split_fields1
+     (select (rec__untangle_tests__triangle__vertices
+             (us_split_fields3 (select tl2 t1))) v))) o28))
 
 ;; H
   (assert (= o32 o28))
@@ -861,45 +938,233 @@
 ;; H
   (assert
   (= o33 (store (rec__untangle_tests__triangle__vertices
-                (us_split_fields3 (select tl2 t2))) v1 (mk___rep
-                                                       (mk___split_fields
-                                                       o29 o30 o31 o32)))))
+                (us_split_fields3 (select tl2 t1))) v (mk___rep
+                                                      (mk___split_fields
+                                                      o29 o30 o31 o32)))))
 
 ;; H
   (assert (= o33 o34))
 
 ;; H
-  (assert
-  (= (rec__untangle_tests__triangle__normal
-     (us_split_fields3 (select tl2 t2))) (mk___rep
-                                         (mk___split_fields o35 o36 o37 o38))))
-
-;; H
   (assert (= o39 o34))
 
 ;; H
-  (assert (= o40 o35))
+  (assert
+  (= (rec__untangle_tests__triangle__normal
+     (us_split_fields3 (select tl2 t1))) (mk___rep
+                                         (mk___split_fields o35 o36 o37 o38))))
 
 ;; H
   (assert (= o41 o36))
 
 ;; H
-  (assert (= o42 o37))
-
-;; H
   (assert (= o43 o38))
 
 ;; H
+  (assert (= o42 o37))
+
+;; H
+  (assert (= o40 o35))
+
+;; H
   (assert
-  (= o44 (store tl2 t2 (mk___rep1
+  (= o44 (store tl2 t1 (mk___rep1
                        (mk___split_fields1 o39
                        (mk___rep (mk___split_fields o40 o41 o42 o43)))))))
 
 ;; H
-  (assert (= result3 (mk_map__ref1 tl2)))
+  (assert (= tl3 o44))
 
 ;; H
-  (assert (= tl3 o44))
+  (assert
+  (= o45 (fp.add RNE (to_rep
+                     (rec__untangle_tests__coordinate__z
+                     (us_split_fields1
+                     (select (rec__untangle_tests__triangle__vertices
+                             (us_split_fields3 (select tl3 t1))) v))))
+  (to_rep (rec__untangle_tests__coordinate__z (us_split_fields1 o))))))
+
+;; H
+  (assert (= (to_rep o46) o45))
+
+;; H
+  (assert
+  (fp.isFinite32 (fp.add RNE (to_rep
+                             (rec__untangle_tests__coordinate__z
+                             (us_split_fields1
+                             (select (rec__untangle_tests__triangle__vertices
+                                     (us_split_fields3 (select tl3 t1)))
+                             v)))) (to_rep
+                                   (rec__untangle_tests__coordinate__z
+                                   (us_split_fields1 o))))))
+
+;; H
+  (assert
+  (= o47 (mk___split_fields
+         (rec__untangle_tests__coordinate__x
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl3 t1))) v)))
+         (rec__untangle_tests__coordinate__y
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl3 t1))) v)))
+         o46
+         (rec__untangle_tests__coordinate__w
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl3 t1))) v))))))
+
+;; H
+  (assert (= o48 (mk___rep o47)))
+
+;; H
+  (assert
+  (= o49 (store (rec__untangle_tests__triangle__vertices
+                (us_split_fields3 (select tl3 t1))) v o48)))
+
+;; H
+  (assert
+  (= o50 (mk___split_fields1 o49
+         (rec__untangle_tests__triangle__normal
+         (us_split_fields3 (select tl3 t1))))))
+
+;; H
+  (assert (= o51 (mk___rep1 o50)))
+
+;; H
+  (assert (= o52 (store tl3 t1 o51)))
+
+;; H
+  (assert (= tl4 o52))
+
+;; H
+  (assert (= v1 2))
+
+;; H
+  (assert
+  (= o53 (fp.add RNE (to_rep
+                     (rec__untangle_tests__coordinate__x
+                     (us_split_fields1
+                     (select (rec__untangle_tests__triangle__vertices
+                             (us_split_fields3 (select tl4 t1))) v1))))
+  (to_rep (rec__untangle_tests__coordinate__x (us_split_fields1 o))))))
+
+;; H
+  (assert (= (to_rep o54) o53))
+
+;; H
+  (assert
+  (fp.isFinite32 (fp.add RNE (to_rep
+                             (rec__untangle_tests__coordinate__x
+                             (us_split_fields1
+                             (select (rec__untangle_tests__triangle__vertices
+                                     (us_split_fields3 (select tl4 t1)))
+                             v1)))) (to_rep
+                                    (rec__untangle_tests__coordinate__x
+                                    (us_split_fields1 o))))))
+
+;; H
+  (assert
+  (= o55 (mk___split_fields o54
+         (rec__untangle_tests__coordinate__y
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl4 t1))) v1)))
+         (rec__untangle_tests__coordinate__z
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl4 t1))) v1)))
+         (rec__untangle_tests__coordinate__w
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl4 t1))) v1))))))
+
+;; H
+  (assert (= o56 (mk___rep o55)))
+
+;; H
+  (assert
+  (= o57 (store (rec__untangle_tests__triangle__vertices
+                (us_split_fields3 (select tl4 t1))) v1 o56)))
+
+;; H
+  (assert
+  (= o58 (mk___split_fields1 o57
+         (rec__untangle_tests__triangle__normal
+         (us_split_fields3 (select tl4 t1))))))
+
+;; H
+  (assert (= o59 (mk___rep1 o58)))
+
+;; H
+  (assert (= o60 (store tl4 t1 o59)))
+
+;; H
+  (assert (= tl5 o60))
+
+;; H
+  (assert
+  (= o61 (fp.add RNE (to_rep
+                     (rec__untangle_tests__coordinate__y
+                     (us_split_fields1
+                     (select (rec__untangle_tests__triangle__vertices
+                             (us_split_fields3 (select tl5 t1))) v1))))
+  (to_rep (rec__untangle_tests__coordinate__y (us_split_fields1 o))))))
+
+;; H
+  (assert (= (to_rep o62) o61))
+
+;; H
+  (assert
+  (fp.isFinite32 (fp.add RNE (to_rep
+                             (rec__untangle_tests__coordinate__y
+                             (us_split_fields1
+                             (select (rec__untangle_tests__triangle__vertices
+                                     (us_split_fields3 (select tl5 t1)))
+                             v1)))) (to_rep
+                                    (rec__untangle_tests__coordinate__y
+                                    (us_split_fields1 o))))))
+
+;; H
+  (assert
+  (= o63 (mk___split_fields
+         (rec__untangle_tests__coordinate__x
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl5 t1))) v1)))
+         o62
+         (rec__untangle_tests__coordinate__z
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl5 t1))) v1)))
+         (rec__untangle_tests__coordinate__w
+         (us_split_fields1
+         (select (rec__untangle_tests__triangle__vertices
+                 (us_split_fields3 (select tl5 t1))) v1))))))
+
+;; H
+  (assert (= o64 (mk___rep o63)))
+
+;; H
+  (assert
+  (= o65 (store (rec__untangle_tests__triangle__vertices
+                (us_split_fields3 (select tl5 t1))) v1 o64)))
+
+;; H
+  (assert
+  (= o66 (mk___split_fields1 o65
+         (rec__untangle_tests__triangle__normal
+         (us_split_fields3 (select tl5 t1))))))
+
+;; H
+  (assert (= o67 (mk___rep1 o66)))
+
+;; H
+  (assert (= o68 (store tl5 t1 o67)))
+
+;; H
+  (assert (= tl6 o68))
 
 (assert
 ;; WP_parameter_def
@@ -909,7 +1174,7 @@
                              (rec__untangle_tests__coordinate__z
                              (us_split_fields1
                              (select (rec__untangle_tests__triangle__vertices
-                                     (us_split_fields3 (select tl3 t2)))
+                                     (us_split_fields3 (select tl6 t1)))
                              v1)))) (to_rep
                                     (rec__untangle_tests__coordinate__z
                                     (us_split_fields1 o)))))))

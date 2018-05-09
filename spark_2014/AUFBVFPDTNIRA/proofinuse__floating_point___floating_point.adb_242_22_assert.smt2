@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -126,8 +122,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const res Bool)
-
 (declare-const o Float32)
 
 (declare-const o1 Float32)
@@ -138,9 +132,7 @@
 
 (declare-const o4 Bool)
 
-(declare-const result Bool)
-
-(declare-const res1 Bool)
+(declare-const res Bool)
 
 ;; H
   (assert (fp.isFinite32 x))
@@ -170,29 +162,35 @@
   (assert (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) a))
 
 ;; H
-  (assert (and (= o1 (fp.sub RNE x z)) (fp.isFinite32 (fp.sub RNE x z))))
+  (assert (= o1 (fp.sub RNE x z)))
 
 ;; H
-  (assert (and (= o (fp.sub RNE x y)) (fp.isFinite32 (fp.sub RNE x y))))
+  (assert (fp.isFinite32 (fp.sub RNE x z)))
+
+;; H
+  (assert (= o (fp.sub RNE x y)))
+
+;; H
+  (assert (fp.isFinite32 (fp.sub RNE x y)))
 
 ;; H
   (assert (= o2 (fp.div RNE o o1)))
 
 ;; H
-  (assert (and (= o3 o2) (fp.isFinite32 o2)))
+  (assert (= o3 o2))
+
+;; H
+  (assert (fp.isFinite32 o2))
 
 ;; H
   (assert (= o4 (ite (fp.leq o3 a) true false)))
 
 ;; H
-  (assert (= result res))
-
-;; H
-  (assert (= res1 o4))
+  (assert (= res o4))
 
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 216, characters 0-0
-  (not (= res1 true)))
+  (not (= res true)))
 (check-sat)
 (exit)

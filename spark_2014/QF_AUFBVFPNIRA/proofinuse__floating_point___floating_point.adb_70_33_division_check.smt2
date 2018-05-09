@@ -132,12 +132,11 @@
   (fp.lt x (fp.add RNE (fp.div RNE abstr (fp #b0 #b10000000 #b00011110001101010100000)) (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
-  (assert (< (- n 1) 0))
+  (assert (not (< (- n 1) 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 55, characters 0-0
-  (not
-  (not (fp.eq (fp #b0 #b01111111 #b10011110001110111100111) ((_ to_fp 8 24) #x00000000)))))
+  (not true))
 (check-sat)
 (exit)

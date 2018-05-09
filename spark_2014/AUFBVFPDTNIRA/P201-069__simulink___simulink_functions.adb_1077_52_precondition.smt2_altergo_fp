@@ -1080,6 +1080,6 @@ logic lf : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 23380, characters 5-8 *)
 goal WP_parameter_def : (tqtisFinite(lf) -> (neq(fliteral, fliteral1) or
   neq(lf, fliteral1)))

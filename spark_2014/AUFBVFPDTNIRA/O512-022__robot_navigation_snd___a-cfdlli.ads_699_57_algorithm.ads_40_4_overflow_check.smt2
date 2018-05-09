@@ -38,10 +38,16 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(declare-sort tcount_typeB 0)
+(declare-sort count_type 0)
 
-(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
-                                    (<= x 2147483647)))
+(declare-fun count_typeqtint (count_type) Int)
+
+;; count_type'axiom
+  (assert
+  (forall ((i count_type))
+  (and (<= 0 (count_typeqtint i)) (<= (count_typeqtint i) 2147483647))))
+
+(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
@@ -49,44 +55,16 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
 
-(declare-fun user_eq (tcount_typeB tcount_typeB) Bool)
+(declare-fun user_eq (count_type count_type) Bool)
 
-(declare-const dummy tcount_typeB)
-
-(declare-datatypes ()
-((tcount_typeB__ref
- (mk_tcount_typeB__ref (tcount_typeB__content tcount_typeB)))))
-(define-fun tcount_typeB__ref___projection ((a tcount_typeB__ref)) tcount_typeB
-  (tcount_typeB__content a))
-
-(declare-sort count_type 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (count_type count_type) Bool)
-
-(declare-const dummy1 count_type)
+(declare-const dummy count_type)
 
 (declare-datatypes ()
 ((count_type__ref (mk_count_type__ref (count_type__content count_type)))))
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_365 Int)
-  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
-  (temp___do_toplevel_363 Bool)
-  (temp___do_typ_inv_364 Bool)) Bool (=>
-                                     (or (= temp___is_init_361 true)
-                                     (<= 0 2147483647)) (in_range1
-                                     temp___expr_365)))
-
-(declare-fun to_rep (count_type) Int)
+(define-fun to_rep ((x count_type)) Int (count_typeqtint x))
 
 (declare-fun of_rep (Int) count_type)
 
@@ -97,13 +75,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x count_type)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
+  (forall ((x count_type)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
 
 (declare-sort us_main_type 0)
 
@@ -193,9 +171,9 @@
 ;; algorithm__gap_vectors__list__capacity__position_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
 
-(declare-fun user_eq2 (us_rep us_rep) Bool)
+(declare-fun user_eq1 (us_rep us_rep) Bool)
 
-(declare-const dummy2 us_rep)
+(declare-const dummy1 us_rep)
 
 (declare-datatypes () ((list__ref (mk_list__ref (list__content us_rep)))))
 (define-fun list__ref___projection ((a list__ref)) us_rep (list__content a))
@@ -203,6 +181,14 @@
 (declare-fun length (us_rep) Int)
 
 (declare-fun length__function_guard (Int us_rep) Bool)
+
+(define-fun dynamic_invariant ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range
+                                     temp___expr_365)))
 
 ;; length__post_axiom
   (assert
@@ -214,6 +200,35 @@
                 (us_split_discrs1 container))))
      (dynamic_invariant result true false true true))) :pattern ((length
                                                                  container)) )))
+
+(declare-sort tcount_typeB 0)
+
+(declare-fun tcount_typeBqtint (tcount_typeB) Int)
+
+;; tcount_typeB'axiom
+  (assert
+  (forall ((i tcount_typeB))
+  (and (<= (- 2147483648) (tcount_typeBqtint i))
+  (<= (tcount_typeBqtint i) 2147483647))))
+
+(define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+
+(declare-fun user_eq2 (tcount_typeB tcount_typeB) Bool)
+
+(declare-const dummy2 tcount_typeB)
+
+(declare-datatypes ()
+((tcount_typeB__ref
+ (mk_tcount_typeB__ref (tcount_typeB__content tcount_typeB)))))
+(define-fun tcount_typeB__ref___projection ((a tcount_typeB__ref)) tcount_typeB
+  (tcount_typeB__content a))
 
 (declare-const container__split_discrs us_split_discrs)
 
@@ -232,10 +247,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -259,7 +270,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -347,6 +358,9 @@
 (declare-datatypes ()
 ((us_split_fields2
  (mk___split_fields1 (rec__spaces__angles__angle__theta normalized2pi)))))
+(define-fun us_split_fields_Theta__projection ((a us_split_fields2)) normalized2pi
+  (rec__spaces__angles__angle__theta a))
+
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
@@ -413,6 +427,13 @@
 
 (declare-sort idir_t 0)
 
+(declare-fun idir_tqtint (idir_t) Int)
+
+;; idir_t'axiom
+  (assert
+  (forall ((i idir_t))
+  (and (<= (- 1) (idir_tqtint i)) (<= (idir_tqtint i) 1))))
+
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
@@ -430,7 +451,7 @@
 (define-fun idir_t__ref___projection ((a idir_t__ref)) idir_t (idir_t__content
                                                               a))
 
-(declare-fun to_rep3 (idir_t) Int)
+(define-fun to_rep3 ((x idir_t)) Int (idir_tqtint x))
 
 (declare-fun of_rep3 (Int) idir_t)
 
@@ -455,6 +476,9 @@
  (rec__gaps__gap__bearing us_rep1)(rec__gaps__gap__distance float)(rec__gaps__gap__idir idir_t)))))
 (define-fun us_split_fields_bearing__projection ((a us_split_fields4)) us_rep1
   (rec__gaps__gap__bearing a))
+
+(define-fun us_split_fields_distance__projection ((a us_split_fields4)) float
+  (rec__gaps__gap__distance a))
 
 (define-fun us_split_fields_iDir__projection ((a us_split_fields4)) idir_t
   (rec__gaps__gap__idir a))
@@ -572,12 +596,12 @@
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 ;; H
-  (assert (in_range1 count))
+  (assert (in_range count))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-cfdlli.ads", line 667, characters 0-0
-  (not (in_range
+  (not (in_range1
   (- (to_rep
      (rec__algorithm__gap_vectors__list__capacity container__split_discrs))
   count))))

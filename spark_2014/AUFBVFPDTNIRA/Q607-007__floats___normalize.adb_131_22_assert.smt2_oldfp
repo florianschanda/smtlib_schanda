@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1058,6 +1058,10 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
+(declare-fun r3 (t) t)
+
+(declare-fun r3__function_guard (t t) Bool)
+
 (declare-sort t_float32 0)
 
 (declare-const fliteral1 t)
@@ -1094,6 +1098,21 @@
                                      (or (= temp___is_init_154 true) (le
                                      (neg fliteral1) fliteral1)) (in_range2
                                      temp___expr_158)))
+
+;; r3__post_axiom
+  (assert
+  (forall ((x t))
+  (! (=>
+     (and (dynamic_invariant x true true true true) (le (neg fliteral1) x))
+     (let ((result (r3 x)))
+     (and (and (le result x) (le (sub RNE1 x fliteral) result))
+     (dynamic_invariant result true false true true)))) :pattern ((r3 x)) )))
+
+;; r3__def_axiom
+  (assert
+  (forall ((x t))
+  (! (=> (dynamic_invariant x true true true true)
+     (= (r3 x) (roundToIntegral RTN1 x))) :pattern ((r3 x)) )))
 
 (declare-sort t1 0)
 
@@ -1163,25 +1182,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun r3 (t) t)
-
-(declare-fun r3__function_guard (t t) Bool)
-
-;; r3__post_axiom
-  (assert
-  (forall ((x1 t))
-  (! (=>
-     (and (dynamic_invariant x1 true true true true) (le (neg fliteral1) x1))
-     (let ((result (r3 x1)))
-     (and (and (le result x1) (le (sub RNE1 x1 fliteral) result))
-     (dynamic_invariant result true false true true)))) :pattern ((r3 x1)) )))
-
-;; r3__def_axiom
-  (assert
-  (forall ((x1 t))
-  (! (=> (dynamic_invariant x1 true true true true)
-     (= (r3 x1) (roundToIntegral RTN1 x1))) :pattern ((r3 x1)) )))
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
@@ -1224,6 +1224,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "normalize.ads", line 9, characters 0-0
-  (not (le (neg fliteral4) v11)))
+  (not (le v11 fliteral4)))
 (check-sat)
 (exit)

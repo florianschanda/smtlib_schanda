@@ -50,18 +50,31 @@
 
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
                                         (and
-                                        (fp.leq (fp.neg (fp #b0 #b10001000 #b01101000000000000000000)) x)
-                                        (fp.leq x (fp #b0 #b10001000 #b01101000000000000000000)))))
+                                        (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x)
+                                        (fp.leq x (fp #b0 #b11111110 #b11111111111111111101110)))))
 
-(define-fun dynamic_invariant ((temp___expr_165 Float32)
+(define-fun dynamic_invariant ((temp___expr_158 Float32)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
+                                     (in_range temp___expr_158)))
+
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp.neg (fp #b0 #b10001000 #b01101000000000000000000)) x)
+                                         (fp.leq x (fp #b0 #b10001000 #b01101000000000000000000)))))
+
+(define-fun dynamic_invariant1 ((temp___expr_165 Float32)
   (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
   (temp___do_toplevel_163 Bool)
   (temp___do_typ_inv_164 Bool)) Bool (=>
                                      (or (= temp___is_init_161 true)
                                      (fp.leq (fp.neg (fp #b0 #b10001000 #b01101000000000000000000)) (fp #b0 #b10001000 #b01101000000000000000000)))
-                                     (in_range temp___expr_165)))
+                                     (in_range1 temp___expr_165)))
 
-(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000000 #b10000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000000 #b00000000000000000000000)))))
@@ -70,45 +83,32 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun in_range2 ((x1 Float32)) Bool (and (fp.isFinite32 x1)
-                                          (and
-                                          (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x1)
-                                          (fp.leq x1 (fp #b0 #b11111110 #b11111111111111111101110)))))
-
-(define-fun dynamic_invariant1 ((temp___expr_158 Float32)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)
-  (temp___do_typ_inv_157 Bool)) Bool (=>
-                                     (or (= temp___is_init_154 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
-                                     (in_range2 temp___expr_158)))
-
 (define-fun dynamic_invariant2 ((temp___expr_172 Float32)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
   (temp___do_toplevel_170 Bool)
   (temp___do_typ_inv_171 Bool)) Bool (=>
                                      (or (= temp___is_init_168 true)
                                      (fp.leq (fp.neg (fp #b0 #b10000000 #b10000000000000000000000)) (fp #b0 #b10000000 #b00000000000000000000000)))
-                                     (in_range1 temp___expr_172)))
+                                     (in_range2 temp___expr_172)))
 
 (declare-const o Float32)
 
 (declare-const o1 Float32)
 
 ;; H
-  (assert (in_range x))
+  (assert (in_range1 x))
 
 (declare-const abstr Float32)
 
 ;; H
   (assert
   (and (= o abstr)
-  (and (in_range2 o)
+  (and (in_range o)
   (= o (fp.roundToIntegral RTN (fp.div RNE x (fp #b0 #b10000111 #b01101000000000000000000)))))))
 
 (assert
 ;; WP_parameter_def
  ;; File "normalize.ads", line 9, characters 0-0
-  (not (in_range1 o)))
+  (not (in_range2 o)))
 (check-sat)
 (exit)

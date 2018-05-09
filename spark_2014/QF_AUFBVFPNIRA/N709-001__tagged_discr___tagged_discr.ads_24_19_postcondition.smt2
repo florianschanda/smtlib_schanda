@@ -55,13 +55,6 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
 
-(define-fun dynamic_invariant ((temp___expr_158 Int)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)
-  (temp___do_typ_inv_157 Bool)) Bool (=>
-                                     (or (= temp___is_init_154 true)
-                                     (<= 0 3)) (in_range2 temp___expr_158)))
-
 (declare-const us_tag Int)
 
 (declare-const value__size Int)
@@ -772,6 +765,13 @@
 ;; tagged_discr__u2__yy__position_axiom
   (assert (<= 0 tagged_discr__u2__yy__position1))
 
+(define-fun dynamic_invariant ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 0 3)) (in_range2 temp___expr_158)))
+
 (declare-const v__attr__tag Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -797,8 +797,6 @@
 
 (declare-const v__split_fields Bool)
 
-(declare-const o Bool)
-
 (declare-const temp___226 Bool)
 
 (declare-const temp___2261 Int)
@@ -823,10 +821,7 @@
   (assert (in_range2 r2b))
 
 ;; H
-  (assert (= (distinct 0 0) o))
-
-;; H
-  (assert (= temp___226 o))
+  (assert (= (distinct 0 0) temp___226))
 
 ;; H
   (assert (= us_tag3 temp___2261))

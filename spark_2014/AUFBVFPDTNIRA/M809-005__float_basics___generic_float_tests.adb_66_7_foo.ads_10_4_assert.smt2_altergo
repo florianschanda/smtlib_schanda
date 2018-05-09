@@ -948,24 +948,31 @@ type ft__ref = { ft__content : ft
 
 function ft__ref___projection(a: ft__ref) : ft = (a).ft__content
 
-logic x : t
+logic nextup_one : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic y : t
+logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic z : t
+logic y : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic z : t
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 1.00000011920928955078125))
 
+axiom nextup_one__def_axiom : (nextup_one = fliteral1)
+
  (* File "generic_float_tests.adb", line 53, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (tqtisFinite(z) -> (not (((eq(x, fliteral) and eq(z, fliteral1)) and lt(x,
-  y)) and lt(y, z))))))
+goal WP_parameter_def : (tqtisFinite(nextup_one) ->
+  ((fliteral1 = nextup_one) -> (tqtisFinite(x) -> (tqtisFinite(y) ->
+  (tqtisFinite(z) -> (not (((eq(x, fliteral) and eq(z, nextup_one)) and lt(x,
+  y)) and lt(y, z))))))))

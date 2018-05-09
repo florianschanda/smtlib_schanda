@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -114,6 +117,13 @@
                                                                  a))
 
 (declare-sort positive 0)
+
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
@@ -183,39 +193,19 @@
 
 (declare-const erreur Float64)
 
-(declare-const o Float64)
-
-(declare-const o1 Int)
-
-(declare-const result Float64)
-
-(declare-const pi2 Float64)
-
-(declare-const result1 Int)
-
-(declare-const index1 Int)
-
-(declare-const result2 Float64)
+(declare-const o Int)
 
 (declare-const erreur1 Float64)
 
-(declare-const index2 Int)
+(declare-const index1 Int)
 
-(declare-const pi3 Float64)
+(declare-const pi2 Float64)
 
 (declare-const erreur2 Float64)
 
-(declare-const result3 Float64)
-
 (declare-const erreur3 Float64)
 
-(declare-const result4 Float64)
-
-(declare-const pi4 Float64)
-
-(declare-const result5 Int)
-
-(declare-const index3 Int)
+(declare-const index2 Int)
 
 ;; H
   (assert (=> (<= 1 2147483647) (in_range2 index)))
@@ -233,22 +223,6 @@
   (fp.isFinite64 erreur)))
 
 ;; H
-  (assert (= result pi1))
-
-;; H
-  (assert
-  (= pi2 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-
-;; H
-  (assert (= result1 index))
-
-;; H
-  (assert (= index1 1))
-
-;; H
-  (assert (= result2 erreur))
-
-;; H
   (assert
   (= erreur1 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
@@ -258,54 +232,49 @@
   (fp.lt erreur1 (fp #b0 #b01111100111 #b0101011110011000111011100010001100001000110000111010))))
 
 ;; H
-  (assert (<= 1 index2))
+  (assert (<= 1 index1))
+
+;; H
+  (assert (=> (<= 1 2147483647) (in_range2 index1)))
 
 ;; H
   (assert
-  (and
-  (and
-  (and (=> (<= 1 2147483647) (in_range2 index2))
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
-  (fp.isFinite64 pi3)))
+  (fp.isFinite64 pi2)))
+
+;; H
+  (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111))
   (fp.isFinite64 erreur2)))
+
+;; H
+  (assert
   (not
-  (fp.lt erreur2 (fp #b0 #b01111100111 #b0101011110011000111011100010001100001000110000111010)))))
+  (fp.lt erreur2 (fp #b0 #b01111100111 #b0101011110011000111011100010001100001000110000111010))))
 
 ;; H
   (assert
-  (fp.leq (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  (of_int RNE index2)))
-
-;; H
-  (assert (= erreur2 result3))
+  (fp.leq (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) ((_ to_fp 11 53) RNE (to_real
+  index1))))
 
 ;; H
   (assert
-  (= erreur3 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  (of_int RNE index2))))
+  (= erreur3 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) ((_ to_fp 11 53) RNE (to_real
+  index1)))))
 
 ;; H
-  (assert
-  (and (= o (fp.add RNE pi3 erreur3))
-  (fp.isFinite64 (fp.add RNE pi3 erreur3))))
+  (assert (fp.isFinite64 (fp.add RNE pi2 erreur3)))
 
 ;; H
-  (assert (= pi3 result4))
+  (assert (= o (+ index1 1)))
 
 ;; H
-  (assert (= pi4 o))
+  (assert (= index2 o))
 
 ;; H
-  (assert (and (= o1 (+ index2 1)) (in_range1 (+ index2 1))))
-
-;; H
-  (assert (= result5 index2))
-
-;; H
-  (assert (= index3 o1))
+  (assert (in_range1 (+ index1 1)))
 
 ;; H
   (assert
@@ -314,7 +283,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (<= 1 index3)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/NC05-005__float_division/gnatprove/pi_euler.mlw", line 2106, characters 5-8
+  (not (<= 1 index2)))
 (check-sat)
 (exit)

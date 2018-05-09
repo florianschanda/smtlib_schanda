@@ -95,14 +95,6 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-const left Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const right Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
 (define-fun dynamic_invariant1 ((temp___expr_67 Float64)
   (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
   (temp___do_toplevel_65 Bool)
@@ -110,6 +102,14 @@
                                     (or (= temp___is_init_63 true)
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
+
+(declare-const left Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const right Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const o Float64)
 
@@ -133,7 +133,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 23989, characters 5-8
   (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -184,6 +180,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -202,7 +205,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -334,28 +337,28 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun temp___241 (Float32 Float32 Float32 Float32 Float32 Float32
-  Float32 Float32 Float32 Float32) (Array Int float))
+(declare-fun temp_____aggregate_def_241 (Float32 Float32 Float32 Float32
+  Float32 Float32 Float32 Float32 Float32 Float32) (Array Int float))
 
-(declare-fun temp___254 (Float32) (Array Int float))
+(declare-fun temp_____aggregate_def_254 (Float32) (Array Int float))
 
-(declare-fun temp___258 (Float32 Float32) (Array Int float))
+(declare-fun temp_____aggregate_def_258 (Float32 Float32) (Array Int float))
 
-(declare-fun temp___263 (Float32 Float32) (Array Int float))
+(declare-fun temp_____aggregate_def_263 (Float32 Float32) (Array Int float))
 
-(declare-fun temp___269 (Float32) (Array Int float))
+(declare-fun temp_____aggregate_def_269 (Float32) (Array Int float))
 
-(declare-fun temp___273 (Int Int Int Int Int Int Int Int Int Int Int
-  Int) map1)
+(declare-fun temp_____aggregate_def_273 (Int Int Int Int Int Int Int Int Int
+  Int Int Int) map1)
 
-(declare-fun temp___289 (Int Int Int Int Int Int Int Int Int Int Int
-  Int) map1)
+(declare-fun temp_____aggregate_def_289 (Int Int Int Int Int Int Int Int Int
+  Int Int Int) map1)
 
-(declare-fun temp___305 (Int Int Int Int Int) map1)
+(declare-fun temp_____aggregate_def_305 (Int Int Int Int Int) map1)
 
-(declare-fun temp___314 (Int) map1)
+(declare-fun temp_____aggregate_def_314 (Int) map1)
 
-(declare-fun temp___319 (Int) map1)
+(declare-fun temp_____aggregate_def_319 (Int) map1)
 
 (define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
   (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
@@ -370,9 +373,9 @@
   (temp___246 Float32) (temp___247 Float32) (temp___248 Float32)
   (temp___249 Float32) (temp___250 Float32) (temp___251 Float32)
   (temp___252 Float32))
-  (let ((temp___242 (temp___241 temp___243 temp___244 temp___245 temp___246
-                    temp___247 temp___248 temp___249 temp___250 temp___251
-                    temp___252)))
+  (let ((temp___242 (temp_____aggregate_def_241 temp___243 temp___244
+                    temp___245 temp___246 temp___247 temp___248 temp___249
+                    temp___250 temp___251 temp___252)))
   (=>
   (and
   (and
@@ -414,12 +417,12 @@
   (forall ((temp___256 Float32))
   (=> (dynamic_invariant temp___256 true true true true)
   (forall ((temp___257 Int))
-  (= (to_rep (select (temp___254 temp___256) temp___257)) temp___256)))))
+  (= (to_rep (select (temp_____aggregate_def_254 temp___256) temp___257)) temp___256)))))
 
 ;; def_axiom
   (assert
   (forall ((temp___260 Float32) (temp___261 Float32))
-  (let ((temp___259 (temp___258 temp___260 temp___261)))
+  (let ((temp___259 (temp_____aggregate_def_258 temp___260 temp___261)))
   (=>
   (and (dynamic_invariant temp___260 true true true true) (dynamic_invariant
   temp___261 true true true true))
@@ -432,7 +435,7 @@
 ;; def_axiom
   (assert
   (forall ((temp___265 Float32) (temp___266 Float32))
-  (let ((temp___264 (temp___263 temp___265 temp___266)))
+  (let ((temp___264 (temp_____aggregate_def_263 temp___265 temp___266)))
   (=>
   (and (dynamic_invariant temp___265 true true true true) (dynamic_invariant
   temp___266 true true true true))
@@ -448,7 +451,52 @@
   (forall ((temp___271 Float32))
   (=> (dynamic_invariant temp___271 true true true true)
   (forall ((temp___272 Int))
-  (= (to_rep (select (temp___269 temp___271) temp___272)) temp___271)))))
+  (= (to_rep (select (temp_____aggregate_def_269 temp___271) temp___272)) temp___271)))))
+
+(declare-const rliteral integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral) 1))
+
+(declare-const rliteral1 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral1) 2))
+
+(declare-const rliteral2 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral2) 3))
+
+(declare-const rliteral3 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral3) 4))
+
+(declare-const rliteral4 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral4) 5))
+
+(declare-const rliteral5 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral5) 6))
+
+(declare-const rliteral6 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral6) 7))
+
+(declare-const rliteral7 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral7) 8))
+
+(declare-const rliteral8 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral8) 9))
 
 ;; def_axiom
   (assert
@@ -456,9 +504,9 @@
   (temp___278 Int) (temp___279 Int) (temp___280 Int) (temp___281 Int)
   (temp___282 Int) (temp___283 Int) (temp___284 Int) (temp___285 Int)
   (temp___286 Int))
-  (let ((temp___274 (temp___273 temp___275 temp___276 temp___277 temp___278
-                    temp___279 temp___280 temp___281 temp___282 temp___283
-                    temp___284 temp___285 temp___286)))
+  (let ((temp___274 (temp_____aggregate_def_273 temp___275 temp___276
+                    temp___277 temp___278 temp___279 temp___280 temp___281
+                    temp___282 temp___283 temp___284 temp___285 temp___286)))
   (=>
   (and
   (and
@@ -484,22 +532,18 @@
   (and
   (and
   (and
-  (and (= (to_rep1 (get temp___274 (- 1) 1)) temp___275)
-  (= (to_rep1 (get temp___274 (- 1) 2)) temp___276))
-  (= (to_rep1 (get temp___274 (- 1) 3)) temp___277))
-  (= (to_rep1 (get temp___274 (- 1) 4)) temp___278))
+  (and (= (get temp___274 (- 1) 1) rliteral)
+  (= (get temp___274 (- 1) 2) rliteral1))
+  (= (get temp___274 (- 1) 3) rliteral2))
+  (= (get temp___274 (- 1) 4) rliteral3))
   (and
   (and
-  (and (= (to_rep1 (get temp___274 0 1)) temp___279)
-  (= (to_rep1 (get temp___274 0 2)) temp___280))
-  (= (to_rep1 (get temp___274 0 3)) temp___281))
-  (= (to_rep1 (get temp___274 0 4)) temp___282)))
+  (and (= (get temp___274 0 1) rliteral4) (= (get temp___274 0 2) rliteral5))
+  (= (get temp___274 0 3) rliteral6)) (= (get temp___274 0 4) rliteral7)))
   (and
   (and
-  (and (= (to_rep1 (get temp___274 1 1)) temp___283)
-  (= (to_rep1 (get temp___274 1 2)) temp___284))
-  (= (to_rep1 (get temp___274 1 3)) temp___285))
-  (= (to_rep1 (get temp___274 1 4)) temp___286)))))))
+  (and (= (get temp___274 1 1) rliteral8) (= (get temp___274 1 2) rliteral7))
+  (= (get temp___274 1 3) rliteral6)) (= (get temp___274 1 4) rliteral5)))))))
 
 ;; def_axiom
   (assert
@@ -507,9 +551,9 @@
   (temp___294 Int) (temp___295 Int) (temp___296 Int) (temp___297 Int)
   (temp___298 Int) (temp___299 Int) (temp___300 Int) (temp___301 Int)
   (temp___302 Int))
-  (let ((temp___290 (temp___289 temp___291 temp___292 temp___293 temp___294
-                    temp___295 temp___296 temp___297 temp___298 temp___299
-                    temp___300 temp___301 temp___302)))
+  (let ((temp___290 (temp_____aggregate_def_289 temp___291 temp___292
+                    temp___293 temp___294 temp___295 temp___296 temp___297
+                    temp___298 temp___299 temp___300 temp___301 temp___302)))
   (=>
   (and
   (and
@@ -535,29 +579,25 @@
   (and
   (and
   (and
-  (and (= (to_rep1 (get temp___290 (- 1) 1)) temp___291)
-  (= (to_rep1 (get temp___290 (- 1) 2)) temp___292))
-  (= (to_rep1 (get temp___290 (- 1) 3)) temp___293))
-  (= (to_rep1 (get temp___290 (- 1) 4)) temp___294))
+  (and (= (get temp___290 (- 1) 1) rliteral)
+  (= (get temp___290 (- 1) 2) rliteral1))
+  (= (get temp___290 (- 1) 3) rliteral2))
+  (= (get temp___290 (- 1) 4) rliteral3))
   (and
   (and
-  (and (= (to_rep1 (get temp___290 0 1)) temp___295)
-  (= (to_rep1 (get temp___290 0 2)) temp___296))
-  (= (to_rep1 (get temp___290 0 3)) temp___297))
-  (= (to_rep1 (get temp___290 0 4)) temp___298)))
+  (and (= (get temp___290 0 1) rliteral4) (= (get temp___290 0 2) rliteral5))
+  (= (get temp___290 0 3) rliteral6)) (= (get temp___290 0 4) rliteral7)))
   (and
   (and
-  (and (= (to_rep1 (get temp___290 1 1)) temp___299)
-  (= (to_rep1 (get temp___290 1 2)) temp___300))
-  (= (to_rep1 (get temp___290 1 3)) temp___301))
-  (= (to_rep1 (get temp___290 1 4)) temp___302)))))))
+  (and (= (get temp___290 1 1) rliteral8) (= (get temp___290 1 2) rliteral7))
+  (= (get temp___290 1 3) rliteral6)) (= (get temp___290 1 4) rliteral5)))))))
 
 ;; def_axiom
   (assert
   (forall ((temp___307 Int) (temp___308 Int) (temp___309 Int)
   (temp___310 Int) (temp___311 Int))
-  (let ((temp___306 (temp___305 temp___307 temp___308 temp___309 temp___310
-                    temp___311)))
+  (let ((temp___306 (temp_____aggregate_def_305 temp___307 temp___308
+                    temp___309 temp___310 temp___311)))
   (=>
   (and
   (and
@@ -568,30 +608,35 @@
   true true)) (dynamic_invariant1 temp___311 true true true true))
   (forall ((temp___312 Int) (temp___313 Int))
   (ite (= temp___312 1)
-  (ite (= temp___313 2)
-  (= (to_rep1 (get temp___306 temp___312 temp___313)) temp___310)
-  (= (to_rep1 (get temp___306 temp___312 temp___313)) temp___311))
+  (ite (= temp___313 2) (= (get temp___306 temp___312 temp___313) rliteral4)
+  (= (get temp___306 temp___312 temp___313) rliteral6))
   (ite (= temp___312 0)
-  (ite (= temp___313 4)
-  (= (to_rep1 (get temp___306 temp___312 temp___313)) temp___309)
+  (ite (= temp___313 4) (= (get temp___306 temp___312 temp___313) rliteral5)
   (=> (and (<= 1 temp___313) (<= temp___313 3))
-  (= (to_rep1 (get temp___306 temp___312 temp___313)) temp___308)))
+  (= (get temp___306 temp___312 temp___313) rliteral2)))
   (=> (= temp___312 (- 1))
-  (= (to_rep1 (get temp___306 temp___312 temp___313)) temp___307)))))))))
+  (= (get temp___306 temp___312 temp___313) rliteral1)))))))))
+
+(declare-const rliteral9 integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral9) 0))
 
 ;; def_axiom
   (assert
   (forall ((temp___316 Int))
   (=> (dynamic_invariant1 temp___316 true true true true)
   (forall ((temp___317 Int) (temp___318 Int))
-  (= (to_rep1 (get (temp___314 temp___316) temp___317 temp___318)) temp___316)))))
+  (= (get (temp_____aggregate_def_314 temp___316) temp___317 temp___318)
+  rliteral9)))))
 
 ;; def_axiom
   (assert
   (forall ((temp___321 Int))
   (=> (dynamic_invariant1 temp___321 true true true true)
   (forall ((temp___322 Int) (temp___323 Int))
-  (= (to_rep1 (get (temp___319 temp___321) temp___322 temp___323)) temp___321)))))
+  (= (get (temp_____aggregate_def_319 temp___321) temp___322 temp___323)
+  rliteral9)))))
 
 (declare-const small (Array Int float))
 
@@ -650,7 +695,8 @@
 
 ;; H
   (assert
-  (= small1 (temp___241 (fp #b0 #b00000000 #b00000000000000000000000)
+  (= small1 (temp_____aggregate_def_241
+            (fp #b0 #b00000000 #b00000000000000000000000)
             (fp #b0 #b01111111 #b00000000000000000000000)
             (fp #b0 #b10000000 #b00000000000000000000000)
             (fp #b0 #b10000000 #b10000000000000000000000)
@@ -666,14 +712,16 @@
 
 ;; H
   (assert
-  (= small2 (temp___254 (fp #b0 #b00000000 #b00000000000000000000000))))
+  (= small2 (temp_____aggregate_def_254
+            (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
   (assert (= result4 small2))
 
 ;; H
   (assert
-  (= small3 (temp___258 (fp #b0 #b00000000 #b00000000000000000000000)
+  (= small3 (temp_____aggregate_def_258
+            (fp #b0 #b00000000 #b00000000000000000000000)
             (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
@@ -681,7 +729,8 @@
 
 ;; H
   (assert
-  (= small4 (temp___263 (fp #b0 #b00000000 #b00000000000000000000000)
+  (= small4 (temp_____aggregate_def_263
+            (fp #b0 #b00000000 #b00000000000000000000000)
             (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
@@ -712,7 +761,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "aggregates.adb", line 44, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/spark_book/Chapter-02/build/gnatprove/aggregates.mlw", line 6457, characters 5-8
   (not (not (fp.isZero (fp #b0 #b10000000 #b00000000000000000000000)))))
 (check-sat)
 (exit)

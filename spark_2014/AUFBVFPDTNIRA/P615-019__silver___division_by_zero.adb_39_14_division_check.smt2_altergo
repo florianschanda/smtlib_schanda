@@ -925,6 +925,12 @@ axiom Power_neg3 :
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -1018,6 +1024,4 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
  (* File "division_by_zero.adb", line 32, characters 0-0 *)
-goal WP_parameter_def :
-  (forall u:t. (tqtisFinite(x) -> (in_range1(y) -> ((le(neg(fliteral1),
-  fliteral1) -> tqtisFinite(u)) -> ((y <  0) -> (not (x = zeroF)))))))
+goal WP_parameter_def : true

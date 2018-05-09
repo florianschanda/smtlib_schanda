@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -105,24 +108,6 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
-
-(declare-fun of_rep (Int) integer)
-
-;; inversion_axiom
-  (assert
-  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                           (of_rep x))) )))
-
 (declare-sort float 0)
 
 (declare-fun user_eq1 (float float) Bool)
@@ -138,25 +123,42 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-fun to_rep1 (float) Float32)
+(declare-fun to_rep (float) Float32)
 
-(declare-fun of_rep1 (Float32) float)
+(declare-fun of_rep (Float32) float)
 
 ;; inversion_axiom
   (assert
-  (forall ((x float))
-  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+  (forall ((x float)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x float))
-  (! (fp.isFinite32 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (fp.isFinite32 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
-                                                                  (of_rep1 x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                                (of_rep x))) )))
+
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
+
+(declare-fun of_rep1 (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer))
+  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range (to_rep1 x)) :pattern ((to_rep1 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                             (of_rep1 x))) )))
 
 (declare-sort e 0)
 
@@ -214,6 +216,9 @@
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__tagged_discr__t__x a))
 
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__tagged_discr__t__y a))
+
 (define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))
 
@@ -267,14 +272,14 @@
                         (= (rec__tagged_discr__t__z (us_split_fields1 a))
                         (rec__tagged_discr__t__z (us_split_fields1 b)))
                         (=> (tagged_discr__t__x__pred a)
-                        (= (to_rep
+                        (= (to_rep1
                            (rec__tagged_discr__t__x (us_split_fields1 a)))
-                        (to_rep
+                        (to_rep1
                         (rec__tagged_discr__t__x (us_split_fields1 b))))))
                         (=> (tagged_discr__t__y__pred a)
-                        (= (to_rep1
+                        (= (to_rep
                            (rec__tagged_discr__t__y (us_split_fields1 a)))
-                        (to_rep1
+                        (to_rep
                         (rec__tagged_discr__t__y (us_split_fields1 b)))))))
                    true false))
 
@@ -391,6 +396,9 @@
 (define-fun us_split_fields_X__2__projection ((a us_split_fields2)) integer
   (rec__tagged_discr__t__x1 a))
 
+(define-fun us_split_fields_Y__2__projection ((a us_split_fields2)) float
+  (rec__tagged_discr__t__y1 a))
+
 (define-fun us_split_fields___2__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
@@ -483,21 +491,21 @@
                          (and
                          (and
                          (and
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__tagged_discr__u1__w (us_split_fields3 a)))
-                         (to_rep
+                         (to_rep1
                          (rec__tagged_discr__u1__w (us_split_fields3 b))))
                          (= (rec__tagged_discr__t__z1 (us_split_fields3 a))
                          (rec__tagged_discr__t__z1 (us_split_fields3 b))))
                          (=> (tagged_discr__t__x__pred1 a)
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__tagged_discr__t__x1 (us_split_fields3 a)))
-                         (to_rep
+                         (to_rep1
                          (rec__tagged_discr__t__x1 (us_split_fields3 b))))))
                          (=> (tagged_discr__t__y__pred1 a)
-                         (= (to_rep1
+                         (= (to_rep
                             (rec__tagged_discr__t__y1 (us_split_fields3 a)))
-                         (to_rep1
+                         (to_rep
                          (rec__tagged_discr__t__y1 (us_split_fields3 b)))))))
                     true false))
 
@@ -624,11 +632,17 @@
 (define-fun us_split_fields_XX__projection ((a us_split_fields4)) integer
   (rec__tagged_discr__u2__xx a))
 
+(define-fun us_split_fields_YY__projection ((a us_split_fields4)) float
+  (rec__tagged_discr__u2__yy a))
+
 (define-fun us_split_fields_Z__3__projection ((a us_split_fields4)) Bool
   (rec__tagged_discr__t__z2 a))
 
 (define-fun us_split_fields_X__3__projection ((a us_split_fields4)) integer
   (rec__tagged_discr__t__x2 a))
+
+(define-fun us_split_fields_Y__3__projection ((a us_split_fields4)) float
+  (rec__tagged_discr__t__y2 a))
 
 (define-fun us_split_fields___3__projection ((a us_split_fields4)) us_private
   (rec__ext__2 a))
@@ -751,29 +765,29 @@
                          (and
                          (and
                          (and
-                         (= (to_rep
-                            (rec__tagged_discr__u2__w (us_split_fields5 a)))
-                         (to_rep
-                         (rec__tagged_discr__u2__w (us_split_fields5 b))))
-                         (= (to_rep
-                            (rec__tagged_discr__u2__xx (us_split_fields5 a)))
-                         (to_rep
-                         (rec__tagged_discr__u2__xx (us_split_fields5 b)))))
                          (= (to_rep1
-                            (rec__tagged_discr__u2__yy (us_split_fields5 a)))
+                            (rec__tagged_discr__u2__w (us_split_fields5 a)))
                          (to_rep1
+                         (rec__tagged_discr__u2__w (us_split_fields5 b))))
+                         (= (to_rep1
+                            (rec__tagged_discr__u2__xx (us_split_fields5 a)))
+                         (to_rep1
+                         (rec__tagged_discr__u2__xx (us_split_fields5 b)))))
+                         (= (to_rep
+                            (rec__tagged_discr__u2__yy (us_split_fields5 a)))
+                         (to_rep
                          (rec__tagged_discr__u2__yy (us_split_fields5 b)))))
                          (= (rec__tagged_discr__t__z2 (us_split_fields5 a))
                          (rec__tagged_discr__t__z2 (us_split_fields5 b))))
                          (=> (tagged_discr__t__x__pred2 a)
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__tagged_discr__t__x2 (us_split_fields5 a)))
-                         (to_rep
+                         (to_rep1
                          (rec__tagged_discr__t__x2 (us_split_fields5 b))))))
                          (=> (tagged_discr__t__y__pred2 a)
-                         (= (to_rep1
+                         (= (to_rep
                             (rec__tagged_discr__t__y2 (us_split_fields5 a)))
-                         (to_rep1
+                         (to_rep
                          (rec__tagged_discr__t__y2 (us_split_fields5 b)))))))
                     true false))
 
@@ -1613,9 +1627,9 @@
      (and
      (and
      (and (= (is_zero (to_base1 v)) true)
-     (= (to_rep (rec__tagged_discr__u2__w (us_split_fields5 v))) 0))
-     (= (to_rep (rec__tagged_discr__u2__xx (us_split_fields5 v))) 0))
-     (fp.eq (to_rep1 (rec__tagged_discr__u2__yy (us_split_fields5 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
+     (= (to_rep1 (rec__tagged_discr__u2__w (us_split_fields5 v))) 0))
+     (= (to_rep1 (rec__tagged_discr__u2__xx (us_split_fields5 v))) 0))
+     (fp.eq (to_rep (rec__tagged_discr__u2__yy (us_split_fields5 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_zero__3 v)) )))
 
 (declare-const v__split_discrs us_split_discrs)
@@ -1708,8 +1722,8 @@
      (ite (or
           (= (to_rep2 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 0)
           (= (to_rep2 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 2))
-     (= (to_rep (rec__tagged_discr__t__x (us_split_fields1 v))) 0)
-     (fp.eq (to_rep1 (rec__tagged_discr__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000))))) :pattern (
+     (= (to_rep1 (rec__tagged_discr__t__x (us_split_fields1 v))) 0)
+     (fp.eq (to_rep (rec__tagged_discr__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000))))) :pattern (
   (is_zero v)) )))
 
 ;; is_zero__2__post_axiom
@@ -1739,10 +1753,15 @@
      (ite (or
           (= (to_rep2 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 0)
           (= (to_rep2 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 2))
-     (= (to_rep (rec__tagged_discr__t__x1 (us_split_fields3 v))) 0)
-     (fp.eq (to_rep1 (rec__tagged_discr__t__y1 (us_split_fields3 v))) (fp #b0 #b00000000 #b00000000000000000000000))))
-     (= (to_rep (rec__tagged_discr__u1__w (us_split_fields3 v))) 0))) :pattern (
+     (= (to_rep1 (rec__tagged_discr__t__x1 (us_split_fields3 v))) 0)
+     (fp.eq (to_rep (rec__tagged_discr__t__y1 (us_split_fields3 v))) (fp #b0 #b00000000 #b00000000000000000000000))))
+     (= (to_rep1 (rec__tagged_discr__u1__w (us_split_fields3 v))) 0))) :pattern (
   (is_zero__2 v)) )))
+
+(declare-const rliteral integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral) 0))
 
 (declare-const v__split_fields integer)
 
@@ -1758,7 +1777,7 @@
 
 (declare-const v__split_fields6 us_private)
 
-(declare-const o integer)
+(declare-const o float)
 
 (declare-const o1 integer)
 
@@ -1773,74 +1792,6 @@
 (declare-const o6 float)
 
 (declare-const o7 us_private)
-
-(declare-const temp___262 e)
-
-(declare-const temp___2621 integer)
-
-(declare-const temp___2622 integer)
-
-(declare-const temp___2623 float)
-
-(declare-const temp___2624 Bool)
-
-(declare-const temp___2625 integer)
-
-(declare-const temp___2626 float)
-
-(declare-const temp___2627 us_private)
-
-(declare-const temp___2628 Int)
-
-(declare-const o8 integer)
-
-(declare-const o9 integer)
-
-(declare-const o10 integer)
-
-(declare-const o11 float)
-
-(declare-const o12 Bool)
-
-(declare-const o13 integer)
-
-(declare-const o14 float)
-
-(declare-const o15 us_private)
-
-(declare-const temp___264 e)
-
-(declare-const temp___2641 integer)
-
-(declare-const temp___2642 integer)
-
-(declare-const temp___2643 float)
-
-(declare-const temp___2644 Bool)
-
-(declare-const temp___2645 integer)
-
-(declare-const temp___2646 float)
-
-(declare-const temp___2647 us_private)
-
-(declare-const temp___2648 Int)
-
-(declare-const o16 float)
-
-(declare-const o17 integer)
-
-(declare-const o18 integer)
-
-(declare-const o19 float)
-
-(declare-const o20 Bool)
-
-(declare-const o21 integer)
-
-(declare-const o22 float)
-
-(declare-const o23 us_private)
 
 (declare-const temp___266 e)
 
@@ -1924,17 +1875,77 @@
 
 (declare-const v__split_fields20 us_private)
 
-(declare-const result14 us_split_fields__ref2)
+(declare-const result14 integer)
 
-(declare-const v__split_fields21 us_split_fields4)
+(declare-const result15 integer)
 
-(declare-const result15 us_split_fields__ref2)
+(declare-const result16 float)
 
-(declare-const v__split_fields22 us_split_fields4)
+(declare-const result17 Bool)
 
-(declare-const v__split_fields23 us_split_fields__ref2)
+(declare-const result18 integer)
 
-(declare-const v__split_fields24 us_split_fields4)
+(declare-const result19 float)
+
+(declare-const result20 us_private)
+
+(declare-const v__split_fields21 integer)
+
+(declare-const v__split_fields22 integer)
+
+(declare-const v__split_fields23 float)
+
+(declare-const v__split_fields24 Bool)
+
+(declare-const v__split_fields25 integer)
+
+(declare-const v__split_fields26 float)
+
+(declare-const v__split_fields27 us_private)
+
+(declare-const result21 integer)
+
+(declare-const result22 integer)
+
+(declare-const result23 float)
+
+(declare-const result24 Bool)
+
+(declare-const result25 integer)
+
+(declare-const result26 float)
+
+(declare-const result27 us_private)
+
+(declare-const v__split_fields28 integer)
+
+(declare-const v__split_fields29 integer)
+
+(declare-const v__split_fields30 float)
+
+(declare-const v__split_fields31 Bool)
+
+(declare-const v__split_fields32 integer)
+
+(declare-const v__split_fields33 float)
+
+(declare-const v__split_fields34 us_private)
+
+(declare-const v__split_fields35 integer)
+
+(declare-const v__split_fields36 integer)
+
+(declare-const v__split_fields37 float)
+
+(declare-const v__split_fields38 Bool)
+
+(declare-const v__split_fields39 integer)
+
+(declare-const v__split_fields40 float)
+
+(declare-const v__split_fields41 us_private)
+
+(declare-const v__split_fields42 us_split_fields4)
 
 (define-fun tagged_discr__update__v__fields4 () us_split_fields (mk___split_fields
                                                                 tagged_discr__update__v__fields
@@ -1984,57 +1995,6 @@
                      tagged_discr__update__v__fields4 v__attr__tag)))))
 
 ;; H
-  (assert (= (to_rep o) 0))
-
-;; H
-  (assert (= o o1))
-
-;; H
-  (assert (= v__split_fields8 o2))
-
-;; H
-  (assert (= v__split_fields9 o3))
-
-;; H
-  (assert (= v__split_fields10 o4))
-
-;; H
-  (assert (= v__split_fields11 o5))
-
-;; H
-  (assert (= v__split_fields12 o6))
-
-;; H
-  (assert (= v__split_fields13 o7))
-
-;; H
-  (assert (= v__split_discrs (mk___split_discrs temp___262)))
-
-;; H
-  (assert (= temp___2621 o1))
-
-;; H
-  (assert (= temp___2622 o2))
-
-;; H
-  (assert (= temp___2623 o3))
-
-;; H
-  (assert (= temp___2624 o4))
-
-;; H
-  (assert (= temp___2625 o5))
-
-;; H
-  (assert (= temp___2626 o6))
-
-;; H
-  (assert (= temp___2627 o7))
-
-;; H
-  (assert (= v__attr__tag temp___2628))
-
-;; H
   (assert (= result7 v__split_fields7))
 
 ;; H
@@ -2056,171 +2016,199 @@
   (assert (= result13 v__split_fields13))
 
 ;; H
-  (assert (= temp___2621 v__split_fields14))
+  (assert (= rliteral v__split_fields14))
 
 ;; H
-  (assert (= temp___2622 v__split_fields15))
+  (assert (= v__split_fields8 v__split_fields15))
 
 ;; H
-  (assert (= temp___2623 v__split_fields16))
+  (assert (= v__split_fields9 v__split_fields16))
 
 ;; H
-  (assert (= temp___2624 v__split_fields17))
+  (assert (= v__split_fields10 v__split_fields17))
 
 ;; H
-  (assert (= temp___2625 v__split_fields18))
+  (assert (= v__split_fields11 v__split_fields18))
 
 ;; H
-  (assert (= temp___2626 v__split_fields19))
+  (assert (= v__split_fields12 v__split_fields19))
 
 ;; H
-  (assert (= temp___2627 v__split_fields20))
+  (assert (= v__split_fields13 v__split_fields20))
 
 ;; H
-  (assert (= v__split_discrs (mk___split_discrs temp___262)))
+  (assert (= result14 v__split_fields14))
 
 ;; H
-  (assert (= (to_rep o8) 0))
+  (assert (= result15 v__split_fields15))
 
 ;; H
-  (assert (= v__split_fields14 o9))
+  (assert (= result16 v__split_fields16))
 
 ;; H
-  (assert (= o8 o10))
+  (assert (= result17 v__split_fields17))
 
 ;; H
-  (assert (= v__split_fields16 o11))
+  (assert (= result18 v__split_fields18))
 
 ;; H
-  (assert (= v__split_fields17 o12))
+  (assert (= result19 v__split_fields19))
 
 ;; H
-  (assert (= v__split_fields18 o13))
+  (assert (= result20 v__split_fields20))
 
 ;; H
-  (assert (= v__split_fields19 o14))
+  (assert (= v__split_fields14 v__split_fields21))
 
 ;; H
-  (assert (= v__split_fields20 o15))
+  (assert (= rliteral v__split_fields22))
 
 ;; H
-  (assert (= v__split_discrs (mk___split_discrs temp___264)))
+  (assert (= v__split_fields16 v__split_fields23))
 
 ;; H
-  (assert (= temp___2641 o9))
+  (assert (= v__split_fields17 v__split_fields24))
 
 ;; H
-  (assert (= temp___2642 o10))
+  (assert (= v__split_fields18 v__split_fields25))
 
 ;; H
-  (assert (= temp___2643 o11))
+  (assert (= v__split_fields19 v__split_fields26))
 
 ;; H
-  (assert (= temp___2644 o12))
+  (assert (= v__split_fields20 v__split_fields27))
 
 ;; H
-  (assert (= temp___2645 o13))
+  (assert (= (to_rep o) (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (= temp___2646 o14))
+  (assert (= v__split_fields21 o1))
 
 ;; H
-  (assert (= temp___2647 o15))
+  (assert (= v__split_fields22 o2))
 
 ;; H
-  (assert (= v__attr__tag temp___2648))
+  (assert (= o o3))
 
 ;; H
-  (assert
-  (= result14 (mk___split_fields__ref2
-              (mk___split_fields2 v__split_fields14 v__split_fields15
-              v__split_fields16 v__split_fields17 v__split_fields18
-              v__split_fields19 v__split_fields20))))
+  (assert (= v__split_fields24 o4))
 
 ;; H
-  (assert
-  (= v__split_fields21 (mk___split_fields2 temp___2641 temp___2642
-                       temp___2643 temp___2644 temp___2645 temp___2646
-                       temp___2647)))
+  (assert (= v__split_fields25 o5))
 
 ;; H
-  (assert (= v__split_discrs (mk___split_discrs temp___264)))
+  (assert (= v__split_fields26 o6))
 
 ;; H
-  (assert (= (to_rep1 o16) (fp #b0 #b00000000 #b00000000000000000000000)))
-
-;; H
-  (assert (= (rec__tagged_discr__u2__w v__split_fields21) o17))
-
-;; H
-  (assert (= (rec__tagged_discr__u2__xx v__split_fields21) o18))
-
-;; H
-  (assert (= o16 o19))
-
-;; H
-  (assert (= (rec__tagged_discr__t__z2 v__split_fields21) o20))
-
-;; H
-  (assert (= (rec__tagged_discr__t__x2 v__split_fields21) o21))
-
-;; H
-  (assert (= (rec__tagged_discr__t__y2 v__split_fields21) o22))
-
-;; H
-  (assert (= (rec__ext__2 v__split_fields21) o23))
+  (assert (= v__split_fields27 o7))
 
 ;; H
   (assert (= v__split_discrs (mk___split_discrs temp___266)))
 
 ;; H
-  (assert (= temp___2661 o17))
+  (assert (= temp___2661 o1))
 
 ;; H
-  (assert (= temp___2662 o18))
+  (assert (= temp___2662 o2))
 
 ;; H
-  (assert (= temp___2663 o19))
+  (assert (= temp___2663 o3))
 
 ;; H
-  (assert (= temp___2664 o20))
+  (assert (= temp___2664 o4))
 
 ;; H
-  (assert (= temp___2665 o21))
+  (assert (= temp___2665 o5))
 
 ;; H
-  (assert (= temp___2666 o22))
+  (assert (= temp___2666 o6))
 
 ;; H
-  (assert (= temp___2667 o23))
+  (assert (= temp___2667 o7))
 
 ;; H
   (assert (= v__attr__tag temp___2668))
 
 ;; H
-  (assert (= result15 (mk___split_fields__ref2 v__split_fields21)))
+  (assert (= result21 v__split_fields21))
 
 ;; H
-  (assert
-  (= v__split_fields22 (mk___split_fields2 temp___2661 temp___2662
-                       temp___2663 temp___2664 temp___2665 temp___2666
-                       temp___2667)))
+  (assert (= result22 v__split_fields22))
+
+;; H
+  (assert (= result23 v__split_fields23))
+
+;; H
+  (assert (= result24 v__split_fields24))
+
+;; H
+  (assert (= result25 v__split_fields25))
+
+;; H
+  (assert (= result26 v__split_fields26))
+
+;; H
+  (assert (= result27 v__split_fields27))
+
+;; H
+  (assert (= temp___2661 v__split_fields28))
+
+;; H
+  (assert (= temp___2662 v__split_fields29))
+
+;; H
+  (assert (= temp___2663 v__split_fields30))
+
+;; H
+  (assert (= temp___2664 v__split_fields31))
+
+;; H
+  (assert (= temp___2665 v__split_fields32))
+
+;; H
+  (assert (= temp___2666 v__split_fields33))
+
+;; H
+  (assert (= temp___2667 v__split_fields34))
 
 ;; H
   (assert (= v__split_discrs (mk___split_discrs temp___266)))
 
 ;; H
-  (assert (= v__split_fields23 (mk___split_fields__ref2 v__split_fields22)))
+  (assert (= v__split_fields35 v__split_fields28))
 
 ;; H
-  (assert (= v__split_fields24 v__split_fields22))
+  (assert (= v__split_fields36 v__split_fields29))
+
+;; H
+  (assert (= v__split_fields37 v__split_fields30))
+
+;; H
+  (assert (= v__split_fields38 v__split_fields31))
+
+;; H
+  (assert (= v__split_fields39 v__split_fields32))
+
+;; H
+  (assert (= v__split_fields40 v__split_fields33))
+
+;; H
+  (assert (= v__split_fields41 v__split_fields34))
+
+;; H
+  (assert
+  (= v__split_fields42 (mk___split_fields2 v__split_fields28
+                       v__split_fields29 v__split_fields30 v__split_fields31
+                       v__split_fields32 v__split_fields33 v__split_fields34)))
 
 (assert
 ;; WP_parameter_def
  ;; File "tagged_discr.ads", line 58, characters 0-0
   (not
   (= (is_zero__3
-     (mk___rep2 v__split_discrs (us_split_fields__content2 v__split_fields23)
-     v__attr__tag)) true)))
+     (mk___rep2 v__split_discrs
+     (mk___split_fields2 v__split_fields35 v__split_fields36
+     v__split_fields37 v__split_fields38 v__split_fields39 v__split_fields40
+     v__split_fields41) v__attr__tag)) true)))
 (check-sat)
 (exit)

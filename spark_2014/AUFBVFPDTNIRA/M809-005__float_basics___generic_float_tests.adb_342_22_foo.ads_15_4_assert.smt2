@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -133,9 +129,13 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (fp.isFinite64 temp___expr_194)))
 
-(declare-const x Float64)
+(declare-const biggest_representable_int Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const x Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_67 Float64)
   (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
@@ -145,15 +145,28 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
+;; biggest_representable_int__def_axiom
+  (assert
+  (= biggest_representable_int (fp #b0 #b10000110100 #b0000000000000000000000000000000000000000000000000000)))
+
+;; H
+  (assert (fp.isFinite64 biggest_representable_int))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000110100 #b0000000000000000000000000000000000000000000000000000)
+  biggest_representable_int))
+
 ;; H
   (assert (fp.isFinite64 x))
 
 ;; H
   (assert
-  (and
   (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  x)
-  (fp.leq x (fp #b0 #b10000110100 #b0000000000000000000000000000000000000000000000000000))))
+  x))
+
+;; H
+  (assert (fp.leq x biggest_representable_int))
 
 (assert
 ;; WP_parameter_def

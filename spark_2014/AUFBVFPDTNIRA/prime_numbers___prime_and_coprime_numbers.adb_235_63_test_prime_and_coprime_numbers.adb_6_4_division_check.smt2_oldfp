@@ -142,7 +142,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -628,45 +628,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -839,14 +839,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1132,6 +1132,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -1188,7 +1195,7 @@
                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                     temp___expr_60)))
 
-(declare-fun sqrt2 (t) t)
+(declare-fun sqrt3 (t) t)
 
 (declare-fun sqrt__function_guard (t t) Bool)
 
@@ -1208,15 +1215,26 @@
   (assert
   (forall ((x t))
   (! (=> (and (dynamic_invariant1 x true true true true) (le fliteral2 x))
-     (let ((result (sqrt2 x)))
+     (let ((result (sqrt3 x)))
      (and
      (and (le fliteral2 result)
      (and (=> (eq x fliteral2) (eq result fliteral2))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant1
-     result true false true true)))) :pattern ((sqrt2 x)) )))
+     result true false true true)))) :pattern ((sqrt3 x)) )))
+
+(declare-fun is_prime (Int) Bool)
+
+(declare-fun is_prime__function_guard (Bool Int) Bool)
 
 (declare-sort value_type 0)
+
+(declare-fun value_typeqtint (value_type) Int)
+
+;; value_type'axiom
+  (assert
+  (forall ((i value_type))
+  (and (<= 0 (value_typeqtint i)) (<= (value_typeqtint i) 2147483647))))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -1243,26 +1261,17 @@
                                      (<= 0 2147483647)) (in_range3
                                      temp___expr_208)))
 
-(declare-sort tnumber_list_typeD1 0)
+;; is_prime__post_axiom
+  (assert true)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (tnumber_list_typeD1 tnumber_list_typeD1) Bool)
-
-(declare-const dummy3 tnumber_list_typeD1)
-
-(declare-datatypes ()
-((tnumber_list_typeD1__ref
- (mk_tnumber_list_typeD1__ref
- (tnumber_list_typeD1__content tnumber_list_typeD1)))))
-(define-fun tnumber_list_typeD1__ref___projection ((a tnumber_list_typeD1__ref)) tnumber_list_typeD1
-  (tnumber_list_typeD1__content a))
+;; is_prime__def_axiom
+  (assert
+  (forall ((value Int))
+  (! (= (= (is_prime value) true)
+     (and (<= 2 value)
+     (forall ((v Int))
+     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0)))))) :pattern (
+  (is_prime value)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int Bool))))))
@@ -1310,22 +1319,6 @@
   (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
   (= (select a temp___idx_154) (select b (+ (- b__first a__first) temp___idx_154))))))))))
 
-(declare-fun is_prime (Int) Bool)
-
-(declare-fun is_prime__function_guard (Bool Int) Bool)
-
-;; is_prime__post_axiom
-  (assert true)
-
-;; is_prime__def_axiom
-  (assert
-  (forall ((value Int))
-  (! (= (= (is_prime value) true)
-     (and (<= 2 value)
-     (forall ((v Int))
-     (=> (and (<= 2 v) (<= v (- value 1))) (not (= (mod2 value v) 0)))))) :pattern (
-  (is_prime value)) )))
-
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-fun valid_prime_data ((Array Int Bool)) Bool)
@@ -1347,6 +1340,35 @@
      (= (is_prime v) true))))) :pattern ((valid_prime_data
                                          test_prime_and_coprime_numbers__p__set__is_prime)) )))
 
+(declare-sort tnumber_list_typeD1 0)
+
+(declare-fun tnumber_list_typeD1qtint (tnumber_list_typeD1) Int)
+
+;; tnumber_list_typeD1'axiom
+  (assert
+  (forall ((i tnumber_list_typeD1))
+  (and (<= 0 (tnumber_list_typeD1qtint i))
+  (<= (tnumber_list_typeD1qtint i) 100000))))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+
+(declare-fun user_eq3 (tnumber_list_typeD1 tnumber_list_typeD1) Bool)
+
+(declare-const dummy3 tnumber_list_typeD1)
+
+(declare-datatypes ()
+((tnumber_list_typeD1__ref
+ (mk_tnumber_list_typeD1__ref
+ (tnumber_list_typeD1__content tnumber_list_typeD1)))))
+(define-fun tnumber_list_typeD1__ref___projection ((a tnumber_list_typeD1__ref)) tnumber_list_typeD1
+  (tnumber_list_typeD1__content a))
+
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
@@ -1355,7 +1377,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -1391,13 +1413,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun temp___285 (Bool) (Array Int Bool))
+(declare-fun temp_____aggregate_def_285 (Bool) (Array Int Bool))
 
 ;; def_axiom
   (assert
   (forall ((temp___287 Bool))
   (forall ((temp___288 Int))
-  (= (select (temp___285 temp___287) temp___288) temp___287))))
+  (= (select (temp_____aggregate_def_285 temp___287) temp___288) temp___287))))
 
 (declare-const fliteral4 t)
 
@@ -1486,7 +1508,7 @@
   (assert (= (mk_map__ref result) (mk_map__ref is_prime1)))
 
 ;; H
-  (assert (= is_prime2 (temp___285 (distinct 1 0))))
+  (assert (= is_prime2 (temp_____aggregate_def_285 (distinct 1 0))))
 
 ;; H
   (assert (= is_prime2 result1))
@@ -1502,7 +1524,7 @@
 
 ;; H
   (assert
-  (and (= o (sqrt2 fliteral4))
+  (and (= o (sqrt3 fliteral4))
   (and (tqtisFinite o)
   (and (le fliteral2 o)
   (and (=> (eq fliteral4 fliteral2) (eq o fliteral2))

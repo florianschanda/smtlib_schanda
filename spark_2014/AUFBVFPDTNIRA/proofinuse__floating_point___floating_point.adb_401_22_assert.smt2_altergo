@@ -1580,5 +1580,5 @@ goal WP_parameter_def :
   (forall res:t1. forall result:t1. forall res1:t1. (tqtisFinite(x) ->
   ((le1(neg1(fliteral2), fliteral2) -> tqtisFinite1(res)) ->
   ((le(neg(fliteral), x) and le(x, fliteral)) -> (((result = res) and
-  (res1 = to_float64(RNE, mul(RNE, x, fliteral3)))) -> le1(neg1(fliteral1),
-  res1))))))
+  (res1 = to_float64(RNE, mul(RNE, x, fliteral3)))) -> le1(res1,
+  fliteral1))))))

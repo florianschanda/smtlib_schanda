@@ -985,4 +985,4 @@ goal WP_parameter_def :
   (eq(roundToIntegral(RTN, z), x) -> (eq(roundToIntegral(RTN, t2), x) ->
   (eq(roundToIntegral(RTP, x), x) -> (eq(roundToIntegral(RTP, y), y) ->
   (eq(roundToIntegral(RTP, z), y) -> (eq(roundToIntegral(RTP, t2), y) ->
-  ((le(x, z) and le(z, y)) -> le(x, t2)))))))))))))))))
+  ((le(x, z) and le(z, y)) -> le(t2, y)))))))))))))))))

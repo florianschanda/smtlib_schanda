@@ -981,7 +981,7 @@ logic ka : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/M809-005__float_basics/proof/sessions/homothetical/../../../gnatprove/homothetical.mlw", line 6082, characters 5-8 *)
 goal WP_parameter_def :
   (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall result:bool.
   (tqtisFinite(d) -> (tqtisFinite(kv) -> (tqtisFinite(ka) -> (((neq(d,

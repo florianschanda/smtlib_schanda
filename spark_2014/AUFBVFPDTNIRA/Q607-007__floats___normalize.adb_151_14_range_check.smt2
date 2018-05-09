@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,13 +74,17 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
+(declare-fun r4 (Float32) Float32)
+
+(declare-fun r4__function_guard (Float32 Float32) Bool)
+
 (declare-sort t_float32 0)
 
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
@@ -114,6 +114,22 @@
                                      (or (= temp___is_init_154 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
                                      (in_range temp___expr_158)))
+
+;; r4__post_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=>
+     (and (dynamic_invariant x true true true true)
+     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x))
+     (let ((result (r4 x)))
+     (and (fp.eq result (fp.roundToIntegral RTN x)) (dynamic_invariant result
+     true false true true)))) :pattern ((r4 x)) )))
+
+;; r4__def_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (dynamic_invariant x true true true true)
+     (= (r4 x) (fp.roundToIntegral RTN x))) :pattern ((r4 x)) )))
 
 (declare-sort t1 0)
 
@@ -167,26 +183,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun r4 (Float32) Float32)
-
-(declare-fun r4__function_guard (Float32 Float32) Bool)
-
-;; r4__post_axiom
-  (assert
-  (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true true)
-     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x1))
-     (let ((result (r4 x1)))
-     (and (fp.eq result (fp.roundToIntegral RTN x1)) (dynamic_invariant
-     result true false true true)))) :pattern ((r4 x1)) )))
-
-;; r4__def_axiom
-  (assert
-  (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true true)
-     (= (r4 x1) (fp.roundToIntegral RTN x1))) :pattern ((r4 x1)) )))
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
@@ -205,11 +201,7 @@
 
 (declare-const o Float32)
 
-(declare-const result Float32)
-
 (declare-const v11 Float32)
-
-(declare-const result1 Float32)
 
 (declare-const v21 Float32)
 
@@ -229,21 +221,20 @@
   (in_range v2)))
 
 ;; H
-  (assert (= result v1))
-
-;; H
   (assert
   (= v11 (fp.div RNE x (fp #b0 #b10000111 #b01101000000000000000000))))
 
 ;; H
-  (assert
-  (and (= o (r4 v11))
-  (and (in_range o)
-  (and (= o (fp.roundToIntegral RTN v11))
-  (fp.eq o (fp.roundToIntegral RTN v11))))))
+  (assert (= o (r4 v11)))
 
 ;; H
-  (assert (= result1 v2))
+  (assert (in_range o))
+
+;; H
+  (assert (= o (fp.roundToIntegral RTN v11)))
+
+;; H
+  (assert (fp.eq o (fp.roundToIntegral RTN v11)))
 
 ;; H
   (assert (= v21 o))

@@ -58,17 +58,21 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_158)))
 
-(declare-const val1 Float32)
+(declare-const fl_last_sqrt Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const val2 Float32)
+(declare-const val1 Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const val3 Float32)
+(declare-const val2 Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const val3 Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -78,9 +82,18 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
+;; fl_last_sqrt__def_axiom
+  (assert (= fl_last_sqrt (fp #b0 #b10111110 #b00000000000000000000000)))
+
 (declare-const o Float32)
 
 (declare-const o1 Float32)
+
+;; H
+  (assert (fp.isFinite32 fl_last_sqrt))
+
+;; H
+  (assert (= (fp #b0 #b10111110 #b00000000000000000000000) fl_last_sqrt))
 
 ;; H
   (assert (fp.isFinite32 val1))
@@ -95,10 +108,10 @@
   (assert
   (and
   (and (fp.leq (fp.neg (fp #b0 #b10111110 #b00000000000000000000000))
-  val1) (fp.leq val1 (fp #b0 #b10111110 #b00000000000000000000000)))
+  val1) (fp.leq val1 fl_last_sqrt))
   (and
   (and (fp.leq (fp.neg (fp #b0 #b10111110 #b00000000000000000000000))
-  val2) (fp.leq val2 (fp #b0 #b10111110 #b00000000000000000000000)))
+  val2) (fp.leq val2 fl_last_sqrt))
   (and
   (and (fp.leq (fp #b0 #b01000000 #b00000000000000000000000) val3)
   (fp.leq val3 (fp #b0 #b11111110 #b11111111111111111111111)))

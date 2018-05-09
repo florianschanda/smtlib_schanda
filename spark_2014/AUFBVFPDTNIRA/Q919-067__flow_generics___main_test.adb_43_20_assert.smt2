@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -211,46 +207,6 @@
                                                     (+ (- b__first a__first) temp___idx_155)
                                                     (+ (- b__first_2 a__first_2) temp___idx_156)))))))))))
 
-(declare-sort tbxb_matrixP1 0)
-
-(define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (tbxb_matrixP1 tbxb_matrixP1) Bool)
-
-(declare-const dummy1 tbxb_matrixP1)
-
-(declare-datatypes ()
-((tbxb_matrixP1__ref
- (mk_tbxb_matrixP1__ref (tbxb_matrixP1__content tbxb_matrixP1)))))
-(define-fun tbxb_matrixP1__ref___projection ((a tbxb_matrixP1__ref)) tbxb_matrixP1
-  (tbxb_matrixP1__content a))
-
-(declare-sort tbxb_matrixP2 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (tbxb_matrixP2 tbxb_matrixP2) Bool)
-
-(declare-const dummy2 tbxb_matrixP2)
-
-(declare-datatypes ()
-((tbxb_matrixP2__ref
- (mk_tbxb_matrixP2__ref (tbxb_matrixP2__content tbxb_matrixP2)))))
-(define-fun tbxb_matrixP2__ref___projection ((a tbxb_matrixP2__ref)) tbxb_matrixP2
-  (tbxb_matrixP2__content a))
-
 (declare-fun manipulate (map1 map1) map1)
 
 (declare-fun manipulate__function_guard (map1 map1 map1) Bool)
@@ -258,67 +214,34 @@
 ;; manipulate__post_axiom
   (assert true)
 
-(declare-sort tbxb_matrixP11 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (tbxb_matrixP11 tbxb_matrixP11) Bool)
-
-(declare-const dummy3 tbxb_matrixP11)
-
-(declare-datatypes ()
-((tbxb_matrixP1__ref1
- (mk_tbxb_matrixP1__ref1 (tbxb_matrixP1__content1 tbxb_matrixP11)))))
-(define-fun tbxb_matrixP1__ref___2__projection ((a tbxb_matrixP1__ref1)) tbxb_matrixP11
-  (tbxb_matrixP1__content1 a))
-
-(declare-sort tbxb_matrixP21 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq4 (tbxb_matrixP21 tbxb_matrixP21) Bool)
-
-(declare-const dummy4 tbxb_matrixP21)
-
-(declare-datatypes ()
-((tbxb_matrixP2__ref1
- (mk_tbxb_matrixP2__ref1 (tbxb_matrixP2__content1 tbxb_matrixP21)))))
-(define-fun tbxb_matrixP2__ref___2__projection ((a tbxb_matrixP2__ref1)) tbxb_matrixP21
-  (tbxb_matrixP2__content1 a))
-
 (declare-sort integer 0)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
+(declare-fun integerqtint (integer) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
+                                    (<= x 2147483647)))
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
-(declare-fun user_eq5 (integer integer) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-const dummy5 integer)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+
+(declare-fun user_eq1 (integer integer) Bool)
+
+(declare-const dummy1 integer)
 
 (declare-datatypes ()
 ((integer__ref (mk_integer__ref (integer__content integer)))))
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -329,13 +252,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x integer)) (! (in_range4 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x integer)) (! (in_range (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range4 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
-                                                              (of_rep1 x))) )))
+  (! (=> (in_range x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                             (of_rep1 x))) )))
 
 (declare-sort t 0)
 
@@ -348,15 +271,15 @@
 ;; mk_def
   (assert
   (forall ((f Int) (l Int))
-  (! (=> (in_range4 f)
-     (=> (in_range4 l)
+  (! (=> (in_range f)
+     (=> (in_range l)
      (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property ((range_first Int) (range_last Int) (low Int)
-  (high Int)) Bool (and (in_range4 low)
-                   (and (in_range4 high)
-                   (=> (<= low high) (and (in_range4 low) (in_range4 high))))))
+  (high Int)) Bool (and (in_range low)
+                   (and (in_range high)
+                   (=> (<= low high) (and (in_range low) (in_range high))))))
 
 (declare-sort t1 0)
 
@@ -369,15 +292,15 @@
 ;; mk_def
   (assert
   (forall ((f Int) (l Int))
-  (! (=> (in_range4 f)
-     (=> (in_range4 l)
+  (! (=> (in_range f)
+     (=> (in_range l)
      (and (= (to_rep1 (first1 (mk1 f l))) f)
      (= (to_rep1 (last1 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
-  (high Int)) Bool (and (in_range4 low)
-                   (and (in_range4 high)
-                   (=> (<= low high) (and (in_range4 low) (in_range4 high))))))
+  (high Int)) Bool (and (in_range low)
+                   (and (in_range high)
+                   (=> (<= low high) (and (in_range low) (in_range high))))))
 
 (declare-datatypes () ((us_t (mk___t (elts map1)(rt t)(rt_2 t1)))))
 (define-fun to_array ((a us_t)) map1 (elts a))
@@ -441,16 +364,16 @@
                  (to_rep1 (last (rt y))) (to_rep1 (first1 (rt_2 y)))
                  (to_rep1 (last1 (rt_2 y)))))
 
-(declare-fun user_eq6 (us_t us_t) Bool)
+(declare-fun user_eq2 (us_t us_t) Bool)
 
-(declare-const dummy6 us_t)
+(declare-const dummy2 us_t)
 
 (declare-datatypes ()
 ((real_matrix__ref (mk_real_matrix__ref (real_matrix__content us_t)))))
 (define-fun real_matrix__ref___2__projection ((a real_matrix__ref)) us_t
   (real_matrix__content a))
 
-(declare-fun transpose (us_t) us_t)
+(declare-fun transpose1 (us_t) us_t)
 
 (declare-fun transpose__function_guard (us_t us_t) Bool)
 
@@ -458,19 +381,30 @@
 
 (declare-fun omultiply__4__function_guard (us_t us_t us_t) Bool)
 
+(declare-fun manipulate1 (map1 map1) map1)
+
+(declare-fun manipulate__function_guard1 (map1 map1 map1) Bool)
+
 (declare-sort taxa_matrixP1 0)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
+(declare-fun taxa_matrixP1qtint (taxa_matrixP1) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+;; taxa_matrixP1'axiom
+  (assert
+  (forall ((i taxa_matrixP1))
+  (and (<= 1 (taxa_matrixP1qtint i)) (<= (taxa_matrixP1qtint i) 3))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun user_eq7 (taxa_matrixP1 taxa_matrixP1) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-const dummy7 taxa_matrixP1)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq3 (taxa_matrixP1 taxa_matrixP1) Bool)
+
+(declare-const dummy3 taxa_matrixP1)
 
 (declare-datatypes ()
 ((taxa_matrixP1__ref
@@ -480,17 +414,24 @@
 
 (declare-sort taxa_matrixP2 0)
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
+(declare-fun taxa_matrixP2qtint (taxa_matrixP2) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
+;; taxa_matrixP2'axiom
+  (assert
+  (forall ((i taxa_matrixP2))
+  (and (<= 1 (taxa_matrixP2qtint i)) (<= (taxa_matrixP2qtint i) 3))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
+(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
-(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
-(declare-fun user_eq8 (taxa_matrixP2 taxa_matrixP2) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
 
-(declare-const dummy8 taxa_matrixP2)
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+
+(declare-fun user_eq4 (taxa_matrixP2 taxa_matrixP2) Bool)
+
+(declare-const dummy4 taxa_matrixP2)
 
 (declare-datatypes ()
 ((taxa_matrixP2__ref
@@ -500,17 +441,24 @@
 
 (declare-sort taxb_matrixP1 0)
 
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
+(declare-fun taxb_matrixP1qtint (taxb_matrixP1) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
+;; taxb_matrixP1'axiom
+  (assert
+  (forall ((i taxb_matrixP1))
+  (and (<= 1 (taxb_matrixP1qtint i)) (<= (taxb_matrixP1qtint i) 3))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
+(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
-(declare-fun user_eq9 (taxb_matrixP1 taxb_matrixP1) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-const dummy9 taxb_matrixP1)
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+
+(declare-fun user_eq5 (taxb_matrixP1 taxb_matrixP1) Bool)
+
+(declare-const dummy5 taxb_matrixP1)
 
 (declare-datatypes ()
 ((taxb_matrixP1__ref
@@ -520,17 +468,24 @@
 
 (declare-sort taxb_matrixP2 0)
 
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+(declare-fun taxb_matrixP2qtint (taxb_matrixP2) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
+;; taxb_matrixP2'axiom
+  (assert
+  (forall ((i taxb_matrixP2))
+  (and (<= 1 (taxb_matrixP2qtint i)) (<= (taxb_matrixP2qtint i) 2))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
 
-(declare-fun user_eq10 (taxb_matrixP2 taxb_matrixP2) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-const dummy10 taxb_matrixP2)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+
+(declare-fun user_eq6 (taxb_matrixP2 taxb_matrixP2) Bool)
+
+(declare-const dummy6 taxb_matrixP2)
 
 (declare-datatypes ()
 ((taxb_matrixP2__ref
@@ -538,9 +493,59 @@
 (define-fun taxb_matrixP2__ref___2__projection ((a taxb_matrixP2__ref)) taxb_matrixP2
   (taxb_matrixP2__content a))
 
-(declare-fun manipulate1 (map1 map1) map1)
+(declare-sort tbxb_matrixP1 0)
 
-(declare-fun manipulate__function_guard1 (map1 map1 map1) Bool)
+(declare-fun tbxb_matrixP1qtint (tbxb_matrixP1) Int)
+
+;; tbxb_matrixP1'axiom
+  (assert
+  (forall ((i tbxb_matrixP1))
+  (and (<= 1 (tbxb_matrixP1qtint i)) (<= (tbxb_matrixP1qtint i) 2))))
+
+(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+
+(declare-fun user_eq7 (tbxb_matrixP1 tbxb_matrixP1) Bool)
+
+(declare-const dummy7 tbxb_matrixP1)
+
+(declare-datatypes ()
+((tbxb_matrixP1__ref
+ (mk_tbxb_matrixP1__ref (tbxb_matrixP1__content tbxb_matrixP1)))))
+(define-fun tbxb_matrixP1__ref___2__projection ((a tbxb_matrixP1__ref)) tbxb_matrixP1
+  (tbxb_matrixP1__content a))
+
+(declare-sort tbxb_matrixP2 0)
+
+(declare-fun tbxb_matrixP2qtint (tbxb_matrixP2) Int)
+
+;; tbxb_matrixP2'axiom
+  (assert
+  (forall ((i tbxb_matrixP2))
+  (and (<= 1 (tbxb_matrixP2qtint i)) (<= (tbxb_matrixP2qtint i) 2))))
+
+(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check7 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE7 (us_image) Int)
+
+(declare-fun user_eq8 (tbxb_matrixP2 tbxb_matrixP2) Bool)
+
+(declare-const dummy8 tbxb_matrixP2)
+
+(declare-datatypes ()
+((tbxb_matrixP2__ref
+ (mk_tbxb_matrixP2__ref (tbxb_matrixP2__content tbxb_matrixP2)))))
+(define-fun tbxb_matrixP2__ref___2__projection ((a tbxb_matrixP2__ref)) tbxb_matrixP2
+  (tbxb_matrixP2__content a))
 
 ;; manipulate__post_axiom
   (assert true)
@@ -550,7 +555,7 @@
   (forall ((original map1) (map2 map1))
   (! (= (manipulate1 original map2) (let ((temp___1937 (omultiply__4
                                                        (omultiply__4
-                                                       (transpose
+                                                       (transpose1
                                                        (of_array map2 1 3 1
                                                        2))
                                                        (of_array original 1 3
@@ -561,6 +566,60 @@
                                     (first2 temp___1937) 1
                                     (first_2 temp___1937) 1))) :pattern (
   (manipulate1 original map2)) )))
+
+(declare-sort tbxb_matrixP11 0)
+
+(declare-fun tbxb_matrixP1qtint1 (tbxb_matrixP11) Int)
+
+;; tbxb_matrixP1'axiom
+  (assert
+  (forall ((i tbxb_matrixP11))
+  (and (<= 1 (tbxb_matrixP1qtint1 i)) (<= (tbxb_matrixP1qtint1 i) 2))))
+
+(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
+
+(declare-fun user_eq9 (tbxb_matrixP11 tbxb_matrixP11) Bool)
+
+(declare-const dummy9 tbxb_matrixP11)
+
+(declare-datatypes ()
+((tbxb_matrixP1__ref1
+ (mk_tbxb_matrixP1__ref1 (tbxb_matrixP1__content1 tbxb_matrixP11)))))
+(define-fun tbxb_matrixP1__ref___projection ((a tbxb_matrixP1__ref1)) tbxb_matrixP11
+  (tbxb_matrixP1__content1 a))
+
+(declare-sort tbxb_matrixP21 0)
+
+(declare-fun tbxb_matrixP2qtint1 (tbxb_matrixP21) Int)
+
+;; tbxb_matrixP2'axiom
+  (assert
+  (forall ((i tbxb_matrixP21))
+  (and (<= 1 (tbxb_matrixP2qtint1 i)) (<= (tbxb_matrixP2qtint1 i) 2))))
+
+(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
+
+(declare-fun user_eq10 (tbxb_matrixP21 tbxb_matrixP21) Bool)
+
+(declare-const dummy10 tbxb_matrixP21)
+
+(declare-datatypes ()
+((tbxb_matrixP2__ref1
+ (mk_tbxb_matrixP2__ref1 (tbxb_matrixP2__content1 tbxb_matrixP21)))))
+(define-fun tbxb_matrixP2__ref___projection ((a tbxb_matrixP2__ref1)) tbxb_matrixP21
+  (tbxb_matrixP2__content1 a))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -575,6 +634,13 @@
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (declare-sort t21b 0)
+
+(declare-fun t21bqtint (t21b) Int)
+
+;; t21b'axiom
+  (assert
+  (forall ((i t21b))
+  (and (<= (- 2147483648) (t21bqtint i)) (<= (t21bqtint i) (- 2147483647)))))
 
 (define-fun in_range9 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x (- 2147483647))))
@@ -594,6 +660,13 @@
 
 (declare-sort t22b 0)
 
+(declare-fun t22bqtint (t22b) Int)
+
+;; t22b'axiom
+  (assert
+  (forall ((i t22b))
+  (and (<= (- 2147483648) (t22bqtint i)) (<= (t22bqtint i) (- 2147483647)))))
+
 (define-fun in_range10 ((x Int)) Bool (and (<= (- 2147483648) x)
                                       (<= x (- 2147483647))))
 
@@ -612,6 +685,13 @@
 
 (declare-sort t24b 0)
 
+(declare-fun t24bqtint (t24b) Int)
+
+;; t24b'axiom
+  (assert
+  (forall ((i t24b))
+  (and (<= (- 2147483648) (t24bqtint i)) (<= (t24bqtint i) (- 2147483647)))))
+
 (define-fun in_range11 ((x Int)) Bool (and (<= (- 2147483648) x)
                                       (<= x (- 2147483647))))
 
@@ -629,6 +709,13 @@
 (define-fun t24b__ref___projection ((a t24b__ref)) t24b (t24b__content a))
 
 (declare-sort t25b 0)
+
+(declare-fun t25bqtint (t25b) Int)
+
+;; t25b'axiom
+  (assert
+  (forall ((i t25b))
+  (and (<= (- 2147483648) (t25bqtint i)) (<= (t25bqtint i) (- 2147483647)))))
 
 (define-fun in_range12 ((x Int)) Bool (and (<= (- 2147483648) x)
                                       (<= x (- 2147483647))))
@@ -662,16 +749,18 @@
 
 (declare-fun main_test__mat_out2__aggregate_def (Float32) map1)
 
-(declare-fun temp___1988 (Float32 Float32 Float32 Float32) map1)
+(declare-fun temp_____aggregate_def_1988 (Float32 Float32 Float32
+  Float32) map1)
 
-(declare-fun temp___1998 (Float32 Float32 Float32 Float32) map1)
+(declare-fun temp_____aggregate_def_1998 (Float32 Float32 Float32
+  Float32) map1)
 
 (define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
   (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
   (temp___do_typ_inv_17 Bool)) Bool (=>
                                     (or (= temp___is_init_14 true)
-                                    (<= (- 2147483648) 2147483647))
-                                    (in_range4 temp___expr_18)))
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
 (define-fun dynamic_invariant1 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -831,8 +920,8 @@
   (assert
   (forall ((temp___1990 Float32) (temp___1991 Float32) (temp___1992 Float32)
   (temp___1993 Float32))
-  (let ((temp___1989 (temp___1988 temp___1990 temp___1991 temp___1992
-                     temp___1993)))
+  (let ((temp___1989 (temp_____aggregate_def_1988 temp___1990 temp___1991
+                     temp___1992 temp___1993)))
   (=>
   (and
   (and
@@ -852,8 +941,8 @@
   (assert
   (forall ((temp___2000 Float32) (temp___2001 Float32) (temp___2002 Float32)
   (temp___2003 Float32))
-  (let ((temp___1999 (temp___1998 temp___2000 temp___2001 temp___2002
-                     temp___2003)))
+  (let ((temp___1999 (temp_____aggregate_def_1998 temp___2000 temp___2001
+                     temp___2002 temp___2003)))
   (=>
   (and
   (and
@@ -884,7 +973,7 @@
   (assert
   (forall ((x us_t))
   (! (=> (dynamic_invariant2 x true true true true) (dynamic_invariant2
-     (transpose x) true false true true)) :pattern ((transpose x)) )))
+     (transpose1 x) true false true true)) :pattern ((transpose1 x)) )))
 
 ;; omultiply__4__post_axiom
   (assert
@@ -895,60 +984,48 @@
      (omultiply__4 left right) true false true true)) :pattern ((omultiply__4
                                                                 left right)) )))
 
+(declare-const o map1)
+
+(declare-const o1 map1)
+
 (declare-const mat_in map1)
 
 (declare-const mat_map map1)
-
-(declare-const mat_out map1)
 
 (declare-const mat_in2 map1)
 
 (declare-const mat_map2 map1)
 
+(declare-const mat_out map1)
+
 (declare-const mat_out2 map1)
-
-(declare-const o map1)
-
-(declare-const o1 map1)
-
-(declare-const result map1)
-
-(declare-const mat_in1 map1)
-
-(declare-const result1 map1)
-
-(declare-const mat_map1 map1)
-
-(declare-const result2 map1)
-
-(declare-const mat_out1 map1)
-
-(declare-const result3 map1)
-
-(declare-const mat_in21 map1)
-
-(declare-const result4 map1)
-
-(declare-const mat_map21 map1)
-
-(declare-const result5 map1)
-
-(declare-const mat_out21 map1)
-
-(declare-const result6 map1)
-
-(declare-const mat_out3 map1)
-
-(declare-const result7 map1)
-
-(declare-const mat_out22 map1)
-
-;; H
-  (assert (= result mat_in))
 
 ;; H
   (assert
-  (= mat_in1 (main_test__mat_in__aggregate_def
+  (= mat_in (main_test__mat_in__aggregate_def
+            (fp #b0 #b01111111 #b00000000000000000000000)
+            (fp #b0 #b00000000 #b00000000000000000000000)
+            (fp #b0 #b00000000 #b00000000000000000000000)
+            (fp #b0 #b00000000 #b00000000000000000000000)
+            (fp #b0 #b01111111 #b00000000000000000000000)
+            (fp #b0 #b00000000 #b00000000000000000000000)
+            (fp #b0 #b00000000 #b00000000000000000000000)
+            (fp #b0 #b00000000 #b00000000000000000000000)
+            (fp #b0 #b01111111 #b00000000000000000000000))))
+
+;; H
+  (assert
+  (= mat_map (main_test__mat_map__aggregate_def
+             (fp #b0 #b10000000 #b00000000000000000000000)
+             (fp #b0 #b00000000 #b00000000000000000000000)
+             (fp #b0 #b00000000 #b00000000000000000000000)
+             (fp #b0 #b00000000 #b00000000000000000000000)
+             (fp #b0 #b00000000 #b00000000000000000000000)
+             (fp #b0 #b10000000 #b10000000000000000000000))))
+
+;; H
+  (assert
+  (= mat_in2 (main_test__mat_in2__aggregate_def
              (fp #b0 #b01111111 #b00000000000000000000000)
              (fp #b0 #b00000000 #b00000000000000000000000)
              (fp #b0 #b00000000 #b00000000000000000000000)
@@ -960,11 +1037,8 @@
              (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
-  (assert (= result1 mat_map))
-
-;; H
   (assert
-  (= mat_map1 (main_test__mat_map__aggregate_def
+  (= mat_map2 (main_test__mat_map2__aggregate_def
               (fp #b0 #b10000000 #b00000000000000000000000)
               (fp #b0 #b00000000 #b00000000000000000000000)
               (fp #b0 #b00000000 #b00000000000000000000000)
@@ -973,91 +1047,44 @@
               (fp #b0 #b10000000 #b10000000000000000000000))))
 
 ;; H
-  (assert (= result2 mat_out))
+  (assert (= o (manipulate1 mat_in mat_map)))
 
 ;; H
   (assert
-  (= mat_out1 (main_test__mat_out__aggregate_def
-              (fp #b0 #b00000000 #b00000000000000000000000))))
-
-;; H
-  (assert (= result3 mat_in2))
-
-;; H
-  (assert
-  (= mat_in21 (main_test__mat_in2__aggregate_def
-              (fp #b0 #b01111111 #b00000000000000000000000)
-              (fp #b0 #b00000000 #b00000000000000000000000)
-              (fp #b0 #b00000000 #b00000000000000000000000)
-              (fp #b0 #b00000000 #b00000000000000000000000)
-              (fp #b0 #b01111111 #b00000000000000000000000)
-              (fp #b0 #b00000000 #b00000000000000000000000)
-              (fp #b0 #b00000000 #b00000000000000000000000)
-              (fp #b0 #b00000000 #b00000000000000000000000)
-              (fp #b0 #b01111111 #b00000000000000000000000))))
-
-;; H
-  (assert (= result4 mat_map2))
-
-;; H
-  (assert
-  (= mat_map21 (main_test__mat_map2__aggregate_def
-               (fp #b0 #b10000000 #b00000000000000000000000)
-               (fp #b0 #b00000000 #b00000000000000000000000)
-               (fp #b0 #b00000000 #b00000000000000000000000)
-               (fp #b0 #b00000000 #b00000000000000000000000)
-               (fp #b0 #b00000000 #b00000000000000000000000)
-               (fp #b0 #b10000000 #b10000000000000000000000))))
-
-;; H
-  (assert (= result5 mat_out2))
-
-;; H
-  (assert
-  (= mat_out21 (main_test__mat_out2__aggregate_def
-               (fp #b0 #b00000000 #b00000000000000000000000))))
-
-;; H
-  (assert
-  (and (= o (manipulate1 mat_in1 mat_map1))
   (= o (let ((temp___1926 (omultiply__4
                           (omultiply__4
-                          (transpose (mk___t mat_map1 (mk 1 3) (mk1 1 2)))
-                          (mk___t mat_in1 (mk 1 3) (mk1 1 3)))
-                          (mk___t mat_map1 (mk 1 3) (mk1 1 2)))))
+                          (transpose1 (mk___t mat_map (mk 1 3) (mk1 1 2)))
+                          (mk___t mat_in (mk 1 3) (mk1 1 3)))
+                          (mk___t mat_map (mk 1 3) (mk1 1 2)))))
        (slide (elts temp___1926) (to_rep1 (first (rt temp___1926))) 1
-       (to_rep1 (first1 (rt_2 temp___1926))) 1)))))
+       (to_rep1 (first1 (rt_2 temp___1926))) 1))))
 
 ;; H
-  (assert (= result6 mat_out1))
-
-;; H
-  (assert (= mat_out3 o))
+  (assert (= mat_out o))
 
 ;; H
   (assert
-  (= (bool_eq mat_out3 1 2 1 2
-     (temp___1988 (fp #b0 #b10000001 #b00000000000000000000000)
+  (= (bool_eq mat_out 1 2 1 2
+     (temp_____aggregate_def_1988
+     (fp #b0 #b10000001 #b00000000000000000000000)
      (fp #b0 #b00000000 #b00000000000000000000000)
      (fp #b0 #b00000000 #b00000000000000000000000)
      (fp #b0 #b10000010 #b00100000000000000000000)) (- 2147483648)
      (- 2147483647) (- 2147483648) (- 2147483647)) true))
 
 ;; H
-  (assert (= o1 (manipulate mat_in21 mat_map21)))
+  (assert (= o1 (manipulate mat_in2 mat_map2)))
 
 ;; H
-  (assert (= result7 mat_out21))
-
-;; H
-  (assert (= mat_out22 o1))
+  (assert (= mat_out2 o1))
 
 (assert
 ;; WP_parameter_def
  ;; File "main_test.adb", line 43, characters 0-0
   (not
-  (= (bool_eq mat_out22 1 2 1 2
-     (temp___1998 (fp #b0 #b10000001 #b00000000000000000000000)
+  (= (bool_eq mat_out2 1 2 1 2
+     (temp_____aggregate_def_1998
+     (fp #b0 #b10000001 #b00000000000000000000000)
      (fp #b0 #b00000000 #b00000000000000000000000)
      (fp #b0 #b00000000 #b00000000000000000000000)
      (fp #b0 #b10000010 #b00100000000000000000000)) (- 2147483648)

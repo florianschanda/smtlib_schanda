@@ -166,6 +166,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "precise.adb", line 1, characters 0-0
-  (not (fp.leq (fp #b0 #b10000000 #b10110011001100101110000) z3)))
+  (not (fp.leq z3 (fp #b0 #b10000001 #b00000000000000000010101))))
 (check-sat)
 (exit)

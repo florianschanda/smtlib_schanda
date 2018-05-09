@@ -48,14 +48,6 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun dynamic_invariant ((temp___expr_174 Float32)
-  (temp___is_init_170 Bool) (temp___skip_constant_171 Bool)
-  (temp___do_toplevel_172 Bool)
-  (temp___do_typ_inv_173 Bool)) Bool (=>
-                                     (or (= temp___is_init_170 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_174)))
-
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
@@ -162,7 +154,7 @@
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
 
-(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
   (temp___do_toplevel_58 Bool)
   (temp___do_typ_inv_59 Bool)) Bool (=>
@@ -170,7 +162,7 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant2 ((temp___expr_223 Int)
+(define-fun dynamic_invariant1 ((temp___expr_223 Int)
   (temp___is_init_219 Bool) (temp___skip_constant_220 Bool)
   (temp___do_toplevel_221 Bool)
   (temp___do_typ_inv_222 Bool)) Bool (=>
@@ -181,6 +173,14 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(define-fun dynamic_invariant2 ((temp___expr_174 Float32)
+  (temp___is_init_170 Bool) (temp___skip_constant_171 Bool)
+  (temp___do_toplevel_172 Bool)
+  (temp___do_typ_inv_173 Bool)) Bool (=>
+                                     (or (= temp___is_init_170 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_174)))
 
 (declare-const v Float32)
 
@@ -225,7 +225,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/sec_3_13_2_monitoring_inputs.mlw", line 7130, characters 5-8
   (not false))
 (check-sat)
 (exit)

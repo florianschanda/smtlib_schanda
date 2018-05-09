@@ -977,13 +977,34 @@ logic fliteral5 : t
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 4.0))
 
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 5.0))
+
+logic fliteral7 : t
+
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 340282346638528859811704183484516925440.0))
+
  (* File "a-unccon.ads", line 20, characters 0-0 *)
 goal WP_parameter_def :
   (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
-  forall o5:t. forall o6:t. forall o7:t. (tqtisFinite(x) -> ((le(fliteral1,
-  x) and le(x, fliteral2)) -> ((((((((((o = add(RNE, x, fliteral3)) and
+  forall o5:t. forall o6:t. forall o7:t. forall o8:t. forall o9:t.
+  forall o10:t. forall o11:t. forall o12:t. forall o13:t. forall o14:t.
+  forall o15:t. forall o16:t. forall o17:t. forall o18:t. forall o19:bool.
+  (tqtisFinite(x) -> ((le(fliteral1, x) and le(x, fliteral2)) ->
+  ((((((((((((((o8 = add(RNE, x, fliteral3)) and tqtisFinite(add(RNE, x,
+  fliteral3))) and (o9 = mul(RNE, o8, x))) and ((o10 = o9) and
+  tqtisFinite(o9))) and (o11 = add(RNE, o10, fliteral4))) and
+  ((o12 = o11) and tqtisFinite(o11))) and (o13 = add(RNE, o12,
+  fliteral5))) and ((o14 = o13) and tqtisFinite(o13))) and (o15 = mul(RNE,
+  o14, x))) and ((o16 = o15) and tqtisFinite(o15))) and (o17 = add(RNE, o16,
+  fliteral6))) and ((o18 = o17) and tqtisFinite(o17))) and ((le(o18,
+  fliteral7) and (o19 = true)) or ((not le(o18, fliteral7)) and
+  (o19 = false)))) -> ((((((((((o = add(RNE, x, fliteral3)) and
   tqtisFinite(add(RNE, x, fliteral3))) and (o1 = mul(RNE, o, x))) and
   ((o2 = o1) and tqtisFinite(o1))) and (o3 = add(RNE, o2, fliteral4))) and
   ((o4 = o3) and tqtisFinite(o3))) and (o5 = add(RNE, o4, fliteral5))) and
   ((o6 = o5) and tqtisFinite(o5))) and (o7 = mul(RNE, o6, x))) ->
-  tqtisFinite(o7)))))
+  tqtisFinite(o7))))))

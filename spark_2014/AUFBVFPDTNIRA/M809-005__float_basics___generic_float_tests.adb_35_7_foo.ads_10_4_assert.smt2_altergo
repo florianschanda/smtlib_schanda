@@ -897,38 +897,21 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
-type ft
-
-logic bool_eq1 : t, t -> bool
-
-axiom bool_eq_def1 :
-  (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
-
-logic user_eq : ft, ft -> bool
-
-logic attr__ATTRIBUTE_IMAGE : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE : us_image -> t
-
-logic dummy : ft
-
-type ft__ref = { ft__content : ft
-}
-
-function ft__ref___projection(a: ft__ref) : ft = (a).ft__content
-
 logic magic : t -> int
 
 logic magic__function_guard : int, t -> prop
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
-logic bool_eq2 : int, int -> bool
+logic bool_eq1 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -941,7 +924,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -958,27 +941,50 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq3 : int, int -> bool
+logic bool_eq2 : int, int -> bool
 
-axiom bool_eq_def2 :
-  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+logic attr__ATTRIBUTE_VALUE : us_image -> int
 
-logic user_eq1 : integer, integer -> bool
+logic user_eq : integer, integer -> bool
 
-logic dummy1 : integer
+logic dummy : integer
 
 type integer__ref = { integer__content : integer
 }
 
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
+
+type ft
+
+logic bool_eq3 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+
+logic user_eq1 : ft, ft -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic dummy1 : ft
+
+type ft__ref = { ft__content : ft
+}
+
+function ft__ref___projection(a: ft__ref) : ft = (a).ft__content
 
 axiom magic__post_axiom :
   (forall x:t [magic(x)]. (tqtisFinite(x) -> in_range1(magic(x))))

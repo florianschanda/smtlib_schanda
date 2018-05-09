@@ -60,22 +60,7 @@
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
-(define-fun dynamic_invariant1 ((temp___expr_159 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)
-  (temp___do_typ_inv_158 Bool)) Bool (=>
-                                     (or (= temp___is_init_155 true)
-                                     (<= 0 10)) (in_range1 temp___expr_159)))
-
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant2 ((temp___expr_166 Int)
-  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
-  (temp___do_toplevel_164 Bool)
-  (temp___do_typ_inv_165 Bool)) Bool (=>
-                                     (or (= temp___is_init_162 true)
-                                     (<= 0 2147483647)) (in_range2
-                                     temp___expr_166)))
 
 (declare-const value__size Int)
 
@@ -179,6 +164,21 @@
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
 
+(define-fun dynamic_invariant1 ((temp___expr_159 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)
+  (temp___do_typ_inv_158 Bool)) Bool (=>
+                                     (or (= temp___is_init_155 true)
+                                     (<= 0 10)) (in_range1 temp___expr_159)))
+
+(define-fun dynamic_invariant2 ((temp___expr_166 Int)
+  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
+  (temp___do_toplevel_164 Bool)
+  (temp___do_typ_inv_165 Bool)) Bool (=>
+                                     (or (= temp___is_init_162 true)
+                                     (<= 0 2147483647)) (in_range2
+                                     temp___expr_166)))
+
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const x Int)
@@ -204,9 +204,9 @@
 
 (declare-const step_function__minimum_until_point__result Float32)
 
-(declare-const temp___304 Float32)
+(declare-const temp___306 Float32)
 
-(declare-const temp___303 Int)
+(declare-const temp___305 Int)
 
 (declare-const j Int)
 
@@ -318,7 +318,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 6154, characters 5-8
   (not false))
 (check-sat)
 (exit)

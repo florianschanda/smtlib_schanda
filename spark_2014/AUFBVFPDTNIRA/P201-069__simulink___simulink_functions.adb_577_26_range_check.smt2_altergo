@@ -2221,7 +2221,7 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic rliteral : t
 
-axiom rliteral_axiom : (tqtint(rliteral) = 0)
+axiom rliteral_axiom : (tqtint(rliteral) = 255)
 
  (* File "interfac.ads", line 63, characters 0-0 *)
 goal WP_parameter_def :
@@ -2229,5 +2229,5 @@ goal WP_parameter_def :
   (tqtisFinite(o) and (le(fliteral1, o) and ((eq(of_ubv8(RNE, i),
   fliteral1) -> eq(o, fliteral1)) and ((eq(of_ubv8(RNE, i), fliteral) ->
   eq(o, fliteral)) and (le(fliteral2, of_ubv8(RNE, i)) -> lt(fliteral1,
-  o))))))) and (o1 = roundToIntegral(RNA, o))) -> le(of_ubv8(RTP, rliteral),
-  o1)))
+  o))))))) and (o1 = roundToIntegral(RNA, o))) -> le(o1, of_ubv8(RTN,
+  rliteral))))

@@ -240,11 +240,11 @@
   (fp.eq safety_pack__dead_band__result4 (fp.sub RNE value threshold))))
 
 ;; H
-  (assert (= (fp.lt value (fp.neg threshold)) true))
+  (assert (not (= (fp.lt value (fp.neg threshold)) true)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.eq safety_pack__dead_band__result4 (fp.add RNE value threshold))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/safety_pack.mlw", line 30367, characters 5-8
+  (not true))
 (check-sat)
 (exit)

@@ -2147,11 +2147,44 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
-type unsigned_16
+logic low_bound : int -> t1
 
-logic attr__ATTRIBUTE_MODULUS : t
+logic low_bound__function_guard : t1, int -> prop
 
-logic bool_eq3 : int, int -> bool
+type float641
+
+logic bool_eq3 : t1, t1 -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t1. forall y:t1 [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+
+logic user_eq : float641, float641 -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t1
+
+logic dummy : float641
+
+type float64__ref = { float64__content : float641
+}
+
+function float64__ref___projection(a: float64__ref) : float641 =
+  (a).float64__content
+
+type frame
+
+logic frameqtint : frame -> int
+
+axiom frameqtaxiom :
+  (forall i:frame. ((0 <= frameqtint(i)) and (frameqtint(i) <= 25000)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 25000))
+
+logic bool_eq4 : int, int -> bool
 
 logic bool_ne1 : int, int -> bool
 
@@ -2164,7 +2197,7 @@ logic bool_gt2 : int, int -> bool
 logic bool_ge2 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq4(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne1(x, y) = true) <-> (not (x = y)))))
@@ -2181,179 +2214,46 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge2(x, y) = true) <-> (y <= x))))
 
-logic bool_eq4 : t, t -> bool
-
-axiom bool_eq_def3 :
-  (forall x:t. forall y:t [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic user_eq : unsigned_16, unsigned_16 -> bool
-
-logic dummy : unsigned_16
-
-type unsigned_16__ref = { unsigned_16__content : unsigned_16
-}
-
-function unsigned_16__ref___projection(a: unsigned_16__ref) : unsigned_16 =
-  (a).unsigned_16__content
-
-type tfloat64B
-
-logic bool_eq5 : t1, t1 -> bool
+logic bool_eq5 : int, int -> bool
 
 axiom bool_eq_def4 :
-  (forall x:t1. forall y:t1 [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
-logic user_eq1 : tfloat64B, tfloat64B -> bool
-
-logic attr__ATTRIBUTE_IMAGE2 : t1 -> us_image
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
 
 logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t1
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
-logic dummy1 : tfloat64B
+logic user_eq1 : frame, frame -> bool
 
-type tfloat64B__ref = { tfloat64B__content : tfloat64B
-}
-
-function tfloat64B__ref___projection(a: tfloat64B__ref) : tfloat64B =
-  (a).tfloat64B__content
-
-type float641
-
-logic bool_eq6 : t1, t1 -> bool
-
-axiom bool_eq_def5 :
-  (forall x:t1. forall y:t1 [bool_eq6(x, y)]. ((eq(x, y) -> (bool_eq6(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq6(x, y) = false))))
-
-logic user_eq2 : float641, float641 -> bool
-
-logic attr__ATTRIBUTE_IMAGE3 : t1 -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t1
-
-logic dummy2 : float641
-
-type float64__ref = { float64__content : float641
-}
-
-function float64__ref___projection(a: float64__ref) : float641 =
-  (a).float64__content
-
-type frame
-
-predicate in_range2(x: int) = ((0 <= x) and (x <= 25000))
-
-logic bool_eq7 : int, int -> bool
-
-axiom bool_eq_def6 :
-  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE4 : us_image -> int
-
-logic user_eq3 : frame, frame -> bool
-
-logic dummy3 : frame
+logic dummy1 : frame
 
 type frame__ref = { frame__content : frame
 }
 
 function frame__ref___projection(a: frame__ref) : frame = (a).frame__content
 
-type ratio_t
-
-predicate in_range3(x: t1) = (tqtisFinite(x) and (le(neg1(fliteral), x) and
-  le(x, fliteral)))
-
-logic bool_eq8 : t1, t1 -> bool
-
-axiom bool_eq_def7 :
-  (forall x:t1. forall y:t1 [bool_eq8(x, y)]. ((eq(x, y) -> (bool_eq8(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq8(x, y) = false))))
-
-logic user_eq4 : ratio_t, ratio_t -> bool
-
-logic attr__ATTRIBUTE_IMAGE5 : t1 -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE5 : us_image -> t1
-
-logic dummy4 : ratio_t
-
-type ratio_t__ref = { ratio_t__content : ratio_t
-}
-
-function ratio_t__ref___projection(a: ratio_t__ref) : ratio_t =
-  (a).ratio_t__content
-
-type drag_t
+axiom low_bound__post_axiom :
+  (forall n:int [low_bound(n)]. (in_range2(n) -> tqtisFinite(low_bound(n))))
 
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 64.0))
-
-predicate in_range4(x: t1) = (tqtisFinite(x) and (le(neg1(fliteral1), x) and
-  le(x, fliteral1)))
-
-logic bool_eq9 : t1, t1 -> bool
-
-axiom bool_eq_def8 :
-  (forall x:t1. forall y:t1 [bool_eq9(x, y)]. ((eq(x, y) -> (bool_eq9(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq9(x, y) = false))))
-
-logic user_eq5 : drag_t, drag_t -> bool
-
-logic attr__ATTRIBUTE_IMAGE6 : t1 -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE6 : us_image -> t1
-
-logic dummy5 : drag_t
-
-type drag_t__ref = { drag_t__content : drag_t
-}
-
-function drag_t__ref___projection(a: drag_t__ref) : drag_t =
-  (a).drag_t__content
-
-logic low_bound : int -> t1
-
-logic low_bound__function_guard : t1, int -> prop
-
-axiom low_bound__post_axiom :
-  (forall n:int [low_bound(n)]. (in_range2(n) -> tqtisFinite(low_bound(n))))
-
-logic fliteral2 : t1
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 65.0))
+  (tqtreal(fliteral1) = 65.0))
 
 axiom low_bound__def_axiom :
   (forall n:int [low_bound(n)]. (in_range2(n) -> (low_bound(n) = mul1(RNE,
-  of_int1(RNE, n), neg1(fliteral2)))))
+  of_int1(RNE, n), neg1(fliteral1)))))
 
 logic high_bound : int -> t1
 
 logic high_bound__function_guard : t1, int -> prop
+
+logic bound : t1
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom high_bound__post_axiom :
   (forall n:int [high_bound(n)]. (in_range2(n) ->
@@ -2361,7 +2261,7 @@ axiom high_bound__post_axiom :
 
 axiom high_bound__def_axiom :
   (forall n:int [high_bound(n)]. (in_range2(n) -> (high_bound(n) = mul1(RNE,
-  of_int1(RNE, n), fliteral2))))
+  of_int1(RNE, n), bound))))
 
 logic in_bounds : t1 -> bool
 
@@ -2369,14 +2269,14 @@ logic in_bounds__function_guard : bool, t1 -> prop
 
 axiom in_bounds__post_axiom : true
 
-logic fliteral3 : t1
+logic fliteral2 : t1
 
-axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 1625000.0))
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 1625000.0))
 
 axiom in_bounds__def_axiom :
   (forall v:t1 [in_bounds(v)]. ((in_bounds(v) = true) <->
-  (le(neg1(fliteral3), v) and le(v, fliteral3))))
+  (le(neg1(fliteral2), v) and le(v, fliteral2))))
 
 logic invariant__ : int, t1 -> bool
 
@@ -2389,51 +2289,35 @@ axiom invariant____def_axiom :
   (forall speed:t1 [invariant__(n, speed)]. ((invariant__(n,
   speed) = true) <-> (le(low_bound(n), speed) and le(speed, high_bound(n))))))
 
-logic n : int
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic factor : t1
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic drag : t1
-
-logic attr__ATTRIBUTE_ADDRESS2 : int
-
-logic old_speed : t1
-
-logic attr__ATTRIBUTE_ADDRESS3 : int
-
-logic attr__ATTRIBUTE_ADDRESS4 : int
-
-logic delta_speed : t1
-
-logic attr__ATTRIBUTE_ADDRESS5 : int
-
 logic t5 : int -> t1
 
 logic t__function_guard : t1, int -> prop
 
 type integer
 
-predicate in_range5(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+logic integerqtint : integer -> int
 
-logic bool_eq10 : int, int -> bool
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
 
-axiom bool_eq_def9 :
-  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
-logic attr__ATTRIBUTE_IMAGE7 : int -> us_image
+logic bool_eq6 : int, int -> bool
 
-logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
 
-logic attr__ATTRIBUTE_VALUE7 : us_image -> int
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
 
-logic user_eq6 : integer, integer -> bool
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
-logic dummy6 : integer
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : integer, integer -> bool
+
+logic dummy2 : integer
 
 type integer__ref = { integer__content : integer
 }
@@ -2442,14 +2326,145 @@ function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
 axiom t__post_axiom :
-  (forall n1:int [t5(n1)]. (in_range5(n1) -> tqtisFinite(t5(n1))))
+  (forall n:int [t5(n)]. (in_range3(n) -> tqtisFinite(t5(n))))
 
 axiom t__def_axiom :
-  (forall n1:int [t5(n1)]. (in_range5(n1) -> (t5(n1) = of_int1(RNE, n1))))
+  (forall n:int [t5(n)]. (in_range3(n) -> (t5(n) = of_int1(RNE, n))))
+
+type unsigned_16
+
+logic attr__ATTRIBUTE_MODULUS : t
+
+logic bool_eq7 : t, t -> bool
+
+axiom bool_eq_def6 :
+  (forall x:t. forall y:t [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+
+logic user_eq3 : unsigned_16, unsigned_16 -> bool
+
+logic dummy3 : unsigned_16
+
+type unsigned_16__ref = { unsigned_16__content : unsigned_16
+}
+
+function unsigned_16__ref___projection(a: unsigned_16__ref) : unsigned_16 =
+  (a).unsigned_16__content
+
+type tfloat64B
+
+logic bool_eq8 : t1, t1 -> bool
+
+axiom bool_eq_def7 :
+  (forall x:t1. forall y:t1 [bool_eq8(x, y)]. ((eq(x, y) -> (bool_eq8(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq8(x, y) = false))))
+
+logic user_eq4 : tfloat64B, tfloat64B -> bool
+
+logic attr__ATTRIBUTE_IMAGE5 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> t1
+
+logic dummy4 : tfloat64B
+
+type tfloat64B__ref = { tfloat64B__content : tfloat64B
+}
+
+function tfloat64B__ref___projection(a: tfloat64B__ref) : tfloat64B =
+  (a).tfloat64B__content
+
+type ratio_t
+
+predicate in_range4(x: t1) = (tqtisFinite(x) and (le(neg1(fliteral), x) and
+  le(x, fliteral)))
+
+logic bool_eq9 : t1, t1 -> bool
+
+axiom bool_eq_def8 :
+  (forall x:t1. forall y:t1 [bool_eq9(x, y)]. ((eq(x, y) -> (bool_eq9(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq9(x, y) = false))))
+
+logic user_eq5 : ratio_t, ratio_t -> bool
+
+logic attr__ATTRIBUTE_IMAGE6 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> t1
+
+logic dummy5 : ratio_t
+
+type ratio_t__ref = { ratio_t__content : ratio_t
+}
+
+function ratio_t__ref___projection(a: ratio_t__ref) : ratio_t =
+  (a).ratio_t__content
+
+type drag_t
+
+logic fliteral3 : t1
+
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 64.0))
+
+predicate in_range5(x: t1) = (tqtisFinite(x) and (le(neg1(fliteral3), x) and
+  le(x, fliteral3)))
+
+logic bool_eq10 : t1, t1 -> bool
+
+axiom bool_eq_def9 :
+  (forall x:t1. forall y:t1 [bool_eq10(x, y)]. ((eq(x, y) -> (bool_eq10(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq10(x, y) = false))))
+
+logic user_eq6 : drag_t, drag_t -> bool
+
+logic attr__ATTRIBUTE_IMAGE7 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE7 : us_image -> t1
+
+logic dummy6 : drag_t
+
+type drag_t__ref = { drag_t__content : drag_t
+}
+
+function drag_t__ref___projection(a: drag_t__ref) : drag_t =
+  (a).drag_t__content
+
+logic n : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic factor : t1
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic drag : t1
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic old_speed : t1
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
+logic delta_speed : t1
+
+logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic n_bv : t
 
-logic attr__ATTRIBUTE_ADDRESS6 : int
+logic attr__ATTRIBUTE_ADDRESS7 : int
 
 logic fliteral4 : t1
 
@@ -2466,6 +2481,8 @@ axiom delta_speed__def_axiom : (delta_speed = add1(RNE, drag, mul1(RNE,
 
 axiom n_bv__def_axiom : (n_bv = of_int(n))
 
+axiom bound__def_axiom : (bound = fliteral1)
+
 logic fliteral6 : t1
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
@@ -2474,29 +2491,28 @@ axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
  (* File "simple_trajectory.ads", line 29, characters 0-0 *)
 goal WP_parameter_def :
   (forall new_speed:t1. forall o:t1. forall result:t1. forall new_speed1:t1.
-  forall new_speed2:t1. forall new_speed3:t1. ((in_range2(n) and
-  (in_range3(factor) and (in_range4(drag) and (tqtisFinite(old_speed) and
-  ((le(neg1(fliteral6), fliteral6) -> tqtisFinite(new_speed)) and
-  (((n <  25000) and (invariant__(n, old_speed) = true)) and (((add1(RNE,
-  drag, mul1(RNE, mul1(RNE, factor, fliteral4),
-  fliteral5)) = delta_speed) and (tqtisFinite(delta_speed) and
-  ((of_int(n) = n_bv) and ((((o = add1(RNE, old_speed, delta_speed)) and
-  tqtisFinite(add1(RNE, old_speed, delta_speed))) and (({ t__content1 =
-  result } = { t__content1 = new_speed }) and (new_speed1 = o))) and
-  ((le(neg1(fliteral2), delta_speed) and le(delta_speed, fliteral2)) and
-  ((in_bounds(high_bound(n)) = true) and
+  forall new_speed2:t1. forall new_speed3:t1. ((tqtisFinite(bound) and
+  ((fliteral1 = bound) and (in_range2(n) and (in_range4(factor) and
+  (in_range5(drag) and (tqtisFinite(old_speed) and ((le(neg1(fliteral6),
+  fliteral6) -> tqtisFinite(new_speed)) and (((n <  25000) and
+  (invariant__(n, old_speed) = true)) and (((add1(RNE, drag, mul1(RNE,
+  mul1(RNE, factor, fliteral4), fliteral5)) = delta_speed) and
+  (tqtisFinite(delta_speed) and ((of_int(n) = n_bv) and ((((o = add1(RNE,
+  old_speed, delta_speed)) and tqtisFinite(add1(RNE, old_speed,
+  delta_speed))) and (({ t__content1 = result } = { t__content1 = new_speed
+  }) and (new_speed1 = o))) and ((le(neg1(fliteral1), delta_speed) and
+  le(delta_speed, bound)) and ((in_bounds(high_bound(n)) = true) and
   ((in_bounds(low_bound(n)) = true) and (eq(add1(RNE, mul1(RNE, of_ubv16(RNE,
-  n_bv), fliteral2), fliteral2), mul1(RNE, add1(RNE, of_ubv16(RNE, n_bv),
-  fliteral), fliteral2)) and (eq(add1(RNE, mul1(RNE, of_int1(RNE, n),
-  fliteral2), fliteral2), mul1(RNE, add1(RNE, of_int1(RNE, n), fliteral),
-  fliteral2)) and (eq(sub1(RNE, mul1(RNE, of_int1(RNE, n), neg1(fliteral2)),
-  fliteral2), mul1(RNE, add1(RNE, of_int1(RNE, n), fliteral),
-  neg1(fliteral2))) and (eq(t5(1), fliteral) and (eq(add1(RNE, of_int1(RNE,
-  n), fliteral), of_int1(RNE, (n + 1))) and (le(sub1(RNE, mul1(RNE,
-  of_int1(RNE, n), neg1(fliteral2)), fliteral2), new_speed1) and
-  (le(mul1(RNE, of_int1(RNE, (n + 1)), neg1(fliteral2)), new_speed1) and
-  (le(new_speed1, add1(RNE, mul1(RNE, of_int1(RNE, n), fliteral2),
-  fliteral2)) and le(new_speed1, mul1(RNE, of_int1(RNE, (n + 1)),
-  fliteral2))))))))))))))))) and ((new_speed1 = new_speed2) and
-  (new_speed3 = new_speed1))))))))) -> (invariant__((n + 1),
+  n_bv), bound), bound), mul1(RNE, add1(RNE, of_ubv16(RNE, n_bv), fliteral),
+  bound)) and (eq(add1(RNE, mul1(RNE, of_int1(RNE, n), bound), bound),
+  mul1(RNE, add1(RNE, of_int1(RNE, n), fliteral), bound)) and (eq(sub1(RNE,
+  mul1(RNE, of_int1(RNE, n), neg1(fliteral1)), bound), mul1(RNE, add1(RNE,
+  of_int1(RNE, n), fliteral), neg1(fliteral1))) and (eq(t5(1), fliteral) and
+  (eq(add1(RNE, of_int1(RNE, n), fliteral), of_int1(RNE, (n + 1))) and
+  (le(sub1(RNE, mul1(RNE, of_int1(RNE, n), neg1(fliteral1)), bound),
+  new_speed1) and (le(mul1(RNE, of_int1(RNE, (n + 1)), neg1(fliteral1)),
+  new_speed1) and (le(new_speed1, add1(RNE, mul1(RNE, of_int1(RNE, n),
+  bound), bound)) and le(new_speed1, mul1(RNE, of_int1(RNE, (n + 1)),
+  bound))))))))))))))))) and ((new_speed1 = new_speed2) and
+  (new_speed3 = new_speed1))))))))))) -> (invariant__((n + 1),
   new_speed2) = true)))

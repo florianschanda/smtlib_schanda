@@ -116,22 +116,6 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_228)))
 
-(declare-const zero_plus Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const zero_neg Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const c1b Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const c2b Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
-
 (define-fun dynamic_invariant4 ((temp___expr_235 Float32)
   (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
   (temp___do_toplevel_233 Bool)
@@ -150,6 +134,22 @@
                                      (or (= temp___is_init_238 true)
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_242)))
+
+(declare-const zero_plus Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const zero_neg Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const c1b Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const c2b Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 

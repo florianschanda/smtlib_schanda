@@ -1065,6 +1065,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1205,7 +1211,7 @@ axiom bool_eq_rev :
   (temp___idx_155 <= a__last)) ->
   (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
-logic to_rep1 : integer -> int
+function to_rep1(x: integer) : int = integerqtint(x)
 
 logic of_rep1 : int -> integer
 
@@ -1290,17 +1296,10 @@ logic dummy2 : (int,float1) farray
 
 logic dummy3 : t1
 
-type arr_float_unconstrained__ref = { arr_float_unconstrained__content : us_t
+type a__ref = { a__content : us_t
 }
 
-function arr_float_unconstrained__ref___projection(a: arr_float_unconstrained__ref) : us_t =
-  (a).arr_float_unconstrained__content
-
-logic arr : (int,float1) farray
-
-logic arr1 : t1
-
-logic attr__ATTRIBUTE_ADDRESS : int
+function a__ref___2__projection(a: a__ref) : us_t = (a).a__content
 
 type t2
 
@@ -1374,30 +1373,38 @@ logic dummy4 : (int,float1) farray
 
 logic dummy5 : t2
 
-type a__ref = { a__content : us_t1
+type arr_float_unconstrained__ref = { arr_float_unconstrained__content :
+us_t1
 }
 
-function a__ref___2__projection(a: a__ref) : us_t1 = (a).a__content
+function arr_float_unconstrained__ref___projection(a: arr_float_unconstrained__ref) : us_t1 =
+  (a).arr_float_unconstrained__content
 
- (* File "system.ads", line 1, characters 0-0 *)
+logic arr : (int,float1) farray
+
+logic arr1 : t2
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P405-006__coq_lemma_library/proof/sessions/spark-test_array_lemmas/../../../obj/gnatprove/spark-test_array_lemmas.mlw", line 5307, characters 5-8 *)
 goal WP_parameter_def :
-  (forall o:(int,float1) farray. forall o1:t2. forall i:int. forall j:int.
+  (forall o:(int,float1) farray. forall o1:t1. forall i:int. forall j:int.
   forall o2:int. forall o3:float1. forall o4:t.
-  (dynamic_property((- 2147483648), 2147483647, to_rep1(first(arr1)),
-  to_rep1(last(arr1))) ->
-  ((forall i1:int. ((((to_rep1(first(arr1)) + 1) <= i1) and
-   (i1 <= to_rep1(last(arr1)))) -> lt(to_rep((arr[(i1 - 1)])),
+  (dynamic_property1((- 2147483648), 2147483647, to_rep1(first2(arr1)),
+  to_rep1(last2(arr1))) ->
+  ((forall i1:int. ((((to_rep1(first2(arr1)) + 1) <= i1) and
+   (i1 <= to_rep1(last2(arr1)))) -> lt(to_rep((arr[(i1 - 1)])),
    to_rep((arr[i1]))))) ->
-  (((dynamic_property1((- 2147483648), 2147483647, to_rep1(first(arr1)),
-  to_rep1(last(arr1))) and ((arr = o) and (mk1(to_rep1(first(arr1)),
-  to_rep1(last(arr1))) = o1))) and
-  (forall i1:int. (((to_rep1(first2(o1)) <= i1) and
-  (i1 <= to_rep1(last2(o1)))) ->
-  (forall j1:int. (((to_rep1(first2(o1)) <= j1) and
-  (j1 <= to_rep1(last2(o1)))) -> ((i1 <  j1) -> lt(to_rep((o[i1])),
-  to_rep((o[j1]))))))))) -> (((to_rep1(first(arr1)) <= i) and
-  (i <= to_rep1(last(arr1)))) -> (((to_rep1(first(arr1)) <= j) and
-  (j <= to_rep1(last(arr1)))) -> ((i <  j) ->
-  ((((((to_rep1(first(arr1)) <= j) and (j <= to_rep1(last(arr1)))) and
+  (((dynamic_property((- 2147483648), 2147483647, to_rep1(first2(arr1)),
+  to_rep1(last2(arr1))) and ((arr = o) and (mk(to_rep1(first2(arr1)),
+  to_rep1(last2(arr1))) = o1))) and
+  (forall i1:int. (((to_rep1(first(o1)) <= i1) and
+  (i1 <= to_rep1(last(o1)))) ->
+  (forall j1:int. (((to_rep1(first(o1)) <= j1) and
+  (j1 <= to_rep1(last(o1)))) -> ((i1 <  j1) -> lt(to_rep((o[i1])),
+  to_rep((o[j1]))))))))) -> (((to_rep1(first2(arr1)) <= i) and
+  (i <= to_rep1(last2(arr1)))) -> (((to_rep1(first2(arr1)) <= j) and
+  (j <= to_rep1(last2(arr1)))) -> ((i <  j) ->
+  ((((((to_rep1(first2(arr1)) <= j) and (j <= to_rep1(last2(arr1)))) and
   (o2 = j)) and (o3 = (arr[o2]))) and (o4 = to_rep(o3))) ->
-  (to_rep1(first(arr1)) <= i)))))))))
+  (i <= to_rep1(last2(arr1)))))))))))

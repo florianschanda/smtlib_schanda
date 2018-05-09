@@ -978,4 +978,4 @@ goal WP_parameter_def :
   (forall o:t. forall o1:t. ((((o = add1(fliteral1, fliteral2)) and
   (tqtisFinite(o) and eq(o, add(RNE, fliteral1, fliteral2)))) and
   ((o1 = add1(fliteral3, o)) and (tqtisFinite(o1) and eq(o1, add(RNE,
-  fliteral3, o))))) -> lt(fliteral3, fliteral)))
+  fliteral3, o))))) -> lt(fliteral1, fliteral)))

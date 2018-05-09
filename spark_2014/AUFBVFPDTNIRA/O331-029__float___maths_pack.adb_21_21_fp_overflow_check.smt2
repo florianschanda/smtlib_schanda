@@ -38,8 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(declare-fun nth ((_ BitVec 32) Int) Bool)
-
 (declare-fun lsr ((_ BitVec 32) Int) (_ BitVec 32))
 
 (declare-fun asr ((_ BitVec 32) Int) (_ BitVec 32))
@@ -57,72 +55,6 @@
                                             (- (- 4294967296 (bv2nat x)))))
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvlshr x n) (lsr x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvashr x n) (asr x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvshl x n) (lsl x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
-  (rotate_left1 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
-  (rotate_right1 v (bv2nat n)))))
-
-(declare-fun nth_bv ((_ BitVec 32) (_ BitVec 32)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 32)) (i (_ BitVec 32)))
-  (= (= (nth_bv x i) true)
-  (not (= (bvand (bvlshr x i) #x00000001) #x00000000)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 32)) (i (_ BitVec 32)))
-  (= (nth x (bv2nat i)) (nth_bv x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 32)) (i Int))
-  (=> (and (<= 0 i) (< i 4294967296))
-  (= (nth_bv x ((_ int2bv 32) i)) (nth x i)))))
-
-(declare-fun eq_sub_bv ((_ BitVec 32) (_ BitVec 32) (_ BitVec 32)
-  (_ BitVec 32)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 32)) (b (_ BitVec 32)) (i (_ BitVec 32))
-  (n (_ BitVec 32)))
-  (let ((mask (bvshl (bvsub (bvshl #x00000001 n) #x00000001) i)))
-  (= (eq_sub_bv a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth a j) (nth b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 32)) (b (_ BitVec 32)) (i (_ BitVec 32))
-  (n (_ BitVec 32)))
-  (= (eq_sub a b (bv2nat i) (bv2nat n)) (eq_sub_bv a b i n))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content (_ BitVec 32))))))
 (declare-fun power ((_ BitVec 32) Int) (_ BitVec 32))
@@ -144,10 +76,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int2 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -171,7 +99,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -209,26 +137,146 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-sort unsigned_32 0)
+(declare-fun float_to_unsigned_32 (Float32) (_ BitVec 32))
 
-(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
+(declare-fun float_to_unsigned_32__function_guard ((_ BitVec 32)
+  Float32) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 ((_ BitVec 32)) us_image)
+(declare-sort source 0)
+
+(declare-fun user_eq1 (source source) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) (_ BitVec 32))
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
 
-(declare-fun user_eq1 (unsigned_32 unsigned_32) Bool)
+(declare-const dummy1 source)
 
-(declare-const dummy1 unsigned_32)
+(declare-datatypes ()
+((source__ref (mk_source__ref (source__content source)))))
+(define-fun source__ref___projection ((a source__ref)) source (source__content
+                                                              a))
+
+(define-fun dynamic_invariant1 ((temp___expr_1564 Float32)
+  (temp___is_init_1560 Bool) (temp___skip_constant_1561 Bool)
+  (temp___do_toplevel_1562 Bool)
+  (temp___do_typ_inv_1563 Bool)) Bool (=>
+                                      (or (= temp___is_init_1560 true)
+                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                      (fp.isFinite32 temp___expr_1564)))
+
+(declare-sort target 0)
+
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 32)) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) (_ BitVec 32))
+
+(declare-fun user_eq2 (target target) Bool)
+
+(declare-const dummy2 target)
+
+(declare-datatypes ()
+((target__ref (mk_target__ref (target__content target)))))
+(define-fun target__ref___projection ((a target__ref)) target (target__content
+                                                              a))
+
+(define-fun dynamic_invariant2 ((temp___expr_1571 (_ BitVec 32))
+  (temp___is_init_1567 Bool) (temp___skip_constant_1568 Bool)
+  (temp___do_toplevel_1569 Bool) (temp___do_typ_inv_1570 Bool)) Bool true)
+
+;; float_to_unsigned_32__post_axiom
+  (assert
+  (forall ((s Float32))
+  (! (=> (dynamic_invariant1 s true true true true) (dynamic_invariant2
+     (float_to_unsigned_32 s) true false true true)) :pattern ((float_to_unsigned_32
+                                                               s)) )))
+
+(declare-fun unsigned_32_to_float ((_ BitVec 32)) Float32)
+
+(declare-fun unsigned_32_to_float__function_guard (Float32
+  (_ BitVec 32)) Bool)
+
+(declare-sort source1 0)
+
+(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 32)) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) (_ BitVec 32))
+
+(declare-fun user_eq3 (source1 source1) Bool)
+
+(declare-const dummy3 source1)
+
+(declare-datatypes ()
+((source__ref1 (mk_source__ref1 (source__content1 source1)))))
+(define-fun source__ref___2__projection ((a source__ref1)) source1 (source__content1
+                                                                   a))
+
+(define-fun dynamic_invariant3 ((temp___expr_1578 (_ BitVec 32))
+  (temp___is_init_1574 Bool) (temp___skip_constant_1575 Bool)
+  (temp___do_toplevel_1576 Bool) (temp___do_typ_inv_1577 Bool)) Bool true)
+
+(declare-sort target1 0)
+
+(declare-fun user_eq4 (target1 target1) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Float32)
+
+(declare-const dummy4 target1)
+
+(declare-datatypes ()
+((target__ref1 (mk_target__ref1 (target__content1 target1)))))
+(define-fun target__ref___2__projection ((a target__ref1)) target1 (target__content1
+                                                                   a))
+
+(define-fun dynamic_invariant4 ((temp___expr_1585 Float32)
+  (temp___is_init_1581 Bool) (temp___skip_constant_1582 Bool)
+  (temp___do_toplevel_1583 Bool)
+  (temp___do_typ_inv_1584 Bool)) Bool (=>
+                                      (or (= temp___is_init_1581 true)
+                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                      (fp.isFinite32 temp___expr_1585)))
+
+;; unsigned_32_to_float__post_axiom
+  (assert
+  (forall ((s (_ BitVec 32)))
+  (! (=> (dynamic_invariant3 s true true true true) (dynamic_invariant4
+     (unsigned_32_to_float s) true false true true)) :pattern ((unsigned_32_to_float
+                                                               s)) )))
+
+(declare-sort unsigned_32 0)
+
+(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 32))
+
+(declare-fun attr__ATTRIBUTE_IMAGE6 ((_ BitVec 32)) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) (_ BitVec 32))
+
+(declare-fun user_eq5 (unsigned_32 unsigned_32) Bool)
+
+(declare-const dummy5 unsigned_32)
 
 (declare-datatypes ()
 ((unsigned_32__ref (mk_unsigned_32__ref (unsigned_32__content unsigned_32)))))
 (define-fun unsigned_32__ref___projection ((a unsigned_32__ref)) unsigned_32
   (unsigned_32__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_212 (_ BitVec 32))
+(define-fun dynamic_invariant5 ((temp___expr_212 (_ BitVec 32))
   (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
   (temp___do_toplevel_210 Bool) (temp___do_typ_inv_211 Bool)) Bool true)
 
@@ -243,126 +291,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
-
-(declare-sort source 0)
-
-(declare-fun user_eq2 (source source) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
-
-(declare-const dummy2 source)
-
-(declare-datatypes ()
-((source__ref (mk_source__ref (source__content source)))))
-(define-fun source__ref___projection ((a source__ref)) source (source__content
-                                                              a))
-
-(define-fun dynamic_invariant2 ((temp___expr_1564 Float32)
-  (temp___is_init_1560 Bool) (temp___skip_constant_1561 Bool)
-  (temp___do_toplevel_1562 Bool)
-  (temp___do_typ_inv_1563 Bool)) Bool (=>
-                                      (or (= temp___is_init_1560 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_1564)))
-
-(declare-sort target 0)
-
-(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 32)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) (_ BitVec 32))
-
-(declare-fun user_eq3 (target target) Bool)
-
-(declare-const dummy3 target)
-
-(declare-datatypes ()
-((target__ref (mk_target__ref (target__content target)))))
-(define-fun target__ref___projection ((a target__ref)) target (target__content
-                                                              a))
-
-(define-fun dynamic_invariant3 ((temp___expr_1571 (_ BitVec 32))
-  (temp___is_init_1567 Bool) (temp___skip_constant_1568 Bool)
-  (temp___do_toplevel_1569 Bool) (temp___do_typ_inv_1570 Bool)) Bool true)
-
-(declare-fun float_to_unsigned_32 (Float32) (_ BitVec 32))
-
-(declare-fun float_to_unsigned_32__function_guard ((_ BitVec 32)
-  Float32) Bool)
-
-;; float_to_unsigned_32__post_axiom
-  (assert
-  (forall ((s Float32))
-  (! (=> (dynamic_invariant2 s true true true true) (dynamic_invariant3
-     (float_to_unsigned_32 s) true false true true)) :pattern ((float_to_unsigned_32
-                                                               s)) )))
-
-(declare-sort source1 0)
-
-(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 32))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 ((_ BitVec 32)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 32))
-
-(declare-fun user_eq4 (source1 source1) Bool)
-
-(declare-const dummy4 source1)
-
-(declare-datatypes ()
-((source__ref1 (mk_source__ref1 (source__content1 source1)))))
-(define-fun source__ref___2__projection ((a source__ref1)) source1 (source__content1
-                                                                   a))
-
-(define-fun dynamic_invariant4 ((temp___expr_1578 (_ BitVec 32))
-  (temp___is_init_1574 Bool) (temp___skip_constant_1575 Bool)
-  (temp___do_toplevel_1576 Bool) (temp___do_typ_inv_1577 Bool)) Bool true)
-
-(declare-sort target1 0)
-
-(declare-fun user_eq5 (target1 target1) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Float32)
-
-(declare-const dummy5 target1)
-
-(declare-datatypes ()
-((target__ref1 (mk_target__ref1 (target__content1 target1)))))
-(define-fun target__ref___2__projection ((a target__ref1)) target1 (target__content1
-                                                                   a))
-
-(define-fun dynamic_invariant5 ((temp___expr_1585 Float32)
-  (temp___is_init_1581 Bool) (temp___skip_constant_1582 Bool)
-  (temp___do_toplevel_1583 Bool)
-  (temp___do_typ_inv_1584 Bool)) Bool (=>
-                                      (or (= temp___is_init_1581 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_1585)))
-
-(declare-fun unsigned_32_to_float ((_ BitVec 32)) Float32)
-
-(declare-fun unsigned_32_to_float__function_guard (Float32
-  (_ BitVec 32)) Bool)
-
-;; unsigned_32_to_float__post_axiom
-  (assert
-  (forall ((s (_ BitVec 32)))
-  (! (=> (dynamic_invariant4 s true true true true) (dynamic_invariant5
-     (unsigned_32_to_float s) true false true true)) :pattern ((unsigned_32_to_float
-                                                               s)) )))
 
 (declare-const half_x Float32)
 
@@ -481,7 +409,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/maths_pack.mlw", line 30671, characters 5-8
   (not (fp.isFinite32 o5)))
 (check-sat)
 (exit)

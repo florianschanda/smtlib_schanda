@@ -949,6 +949,12 @@ axiom coerce_axiom :
 
 type natural
 
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1003,7 +1009,7 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
-logic to_rep1 : natural -> int
+function to_rep1(x: natural) : int = naturalqtint(x)
 
 logic of_rep1 : int -> natural
 
@@ -1270,7 +1276,14 @@ function us_split_discrs__ref___projection(a: us_split_discrs__ref) : us_split_d
   (a).us_split_discrs__content
 
 type us_split_fields = { rec__robot_iface__speed_option__modulus : float1;
-rec__robot_iface__speed_option__angle : float1 }
+rec__robot_iface__speed_option__angle : float1
+}
+
+function us_split_fields_modulus__projection(a: us_split_fields) : float1 =
+  (a).rec__robot_iface__speed_option__modulus
+
+function us_split_fields_angle__projection(a: us_split_fields) : float1 =
+  (a).rec__robot_iface__speed_option__angle
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1419,11 +1432,56 @@ rec__robot_iface__proxy__speed : us_rep;
 rec__robot_iface__proxy__goal_reached : bool
 }
 
+function us_split_fields_robot_radius__projection(a: us_split_fields2) : positive_float =
+  (a).rec__robot_iface__proxy__robot_radius
+
+function us_split_fields_min_gap_width__projection(a: us_split_fields2) : positive_float =
+  (a).rec__robot_iface__proxy__min_gap_width
+
+function us_split_fields_obstacle_avoid_dist__projection(a: us_split_fields2) : positive_float =
+  (a).rec__robot_iface__proxy__obstacle_avoid_dist
+
+function us_split_fields_max_speed__projection(a: us_split_fields2) : positive_float =
+  (a).rec__robot_iface__proxy__max_speed
+
+function us_split_fields_max_turn_rate__projection(a: us_split_fields2) : positive_float =
+  (a).rec__robot_iface__proxy__max_turn_rate
+
+function us_split_fields_goal_position_tol__projection(a: us_split_fields2) : nonnegative_float =
+  (a).rec__robot_iface__proxy__goal_position_tol
+
+function us_split_fields_goal_angle_tol__projection(a: us_split_fields2) : nonnegative_float =
+  (a).rec__robot_iface__proxy__goal_angle_tol
+
+function us_split_fields_goalX__projection(a: us_split_fields2) : float1 =
+  (a).rec__robot_iface__proxy__goalx
+
+function us_split_fields_goalY__projection(a: us_split_fields2) : float1 =
+  (a).rec__robot_iface__proxy__goaly
+
+function us_split_fields_goalA__projection(a: us_split_fields2) : float1 =
+  (a).rec__robot_iface__proxy__goala
+
 function us_split_fields_scan_Count__projection(a: us_split_fields2) : natural =
   (a).rec__robot_iface__proxy__scan_count
 
+function us_split_fields_scan_Res__projection(a: us_split_fields2) : positive_float =
+  (a).rec__robot_iface__proxy__scan_res
+
+function us_split_fields_max_Range__projection(a: us_split_fields2) : positive_float =
+  (a).rec__robot_iface__proxy__max_range
+
 function us_split_fields_scans__projection(a: us_split_fields2) : (int,nonnegative_float) farray =
   (a).rec__robot_iface__proxy__scans
+
+function us_split_fields_X__projection(a: us_split_fields2) : unbounded_float =
+  (a).rec__robot_iface__proxy__x
+
+function us_split_fields_Y__projection(a: us_split_fields2) : unbounded_float =
+  (a).rec__robot_iface__proxy__y
+
+function us_split_fields_Yaw__projection(a: us_split_fields2) : unbounded_float =
+  (a).rec__robot_iface__proxy__yaw
 
 function us_split_fields_speed__projection(a: us_split_fields2) : us_rep =
   (a).rec__robot_iface__proxy__speed
@@ -1897,6 +1955,9 @@ axiom coerce_axiom6 :
 type us_split_fields4 = { rec__spaces__angles__angle__theta : normalized2pi
 }
 
+function us_split_fields_Theta__projection(a: us_split_fields4) : normalized2pi =
+  (a).rec__spaces__angles__angle__theta
+
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
@@ -1965,6 +2026,12 @@ function angle__ref___projection(a: angle__ref) : us_rep2 =
 
 type count_type
 
+logic count_typeqtint : count_type -> int
+
+axiom count_typeqtaxiom :
+  (forall i:count_type. ((0 <= count_typeqtint(i)) and
+  (count_typeqtint(i) <= 2147483647)))
+
 predicate in_range6(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq13 : int, int -> bool
@@ -1989,7 +2056,7 @@ type count_type__ref = { count_type__content : count_type
 function count_type__ref___projection(a: count_type__ref) : count_type =
   (a).count_type__content
 
-logic to_rep7 : count_type -> int
+function to_rep7(x: count_type) : int = count_typeqtint(x)
 
 logic of_rep7 : int -> count_type
 
@@ -2159,6 +2226,9 @@ function list__ref___2__projection(a: list__ref1) : us_rep3 =
 type us_split_fields8 = { rec__algorithm__laser_scan_data__first :
 nonnegative_float; rec__algorithm__laser_scan_data__second : us_rep2
 }
+
+function us_split_fields_first__projection(a: us_split_fields8) : nonnegative_float =
+  (a).rec__algorithm__laser_scan_data__first
 
 function us_split_fields_second__projection(a: us_split_fields8) : us_rep2 =
   (a).rec__algorithm__laser_scan_data__second
@@ -2351,6 +2421,9 @@ function us_split_fields_laserScan__projection(a: us_split_fields10) : (int,us_r
 
 function us_split_fields_gapVec__projection(a: us_split_fields10) : us_rep3 =
   (a).rec__algorithm__controller__gapvec
+
+function us_split_fields_obsAvoidDelta__projection(a: us_split_fields10) : float1 =
+  (a).rec__algorithm__controller__obsavoiddelta
 
 function us_split_fields_driveAngle__projection(a: us_split_fields10) : us_rep2 =
   (a).rec__algorithm__controller__driveangle
@@ -2576,13 +2649,13 @@ logic attr__ATTRIBUTE_VALUE__pre_check8 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE8 : us_image -> bool
 
-logic null_angle : normalized2pi
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
 logic is_empty : us_rep3 -> bool
 
 logic is_empty__function_guard : bool, us_rep3 -> prop
+
+logic null_angle : normalized2pi
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 predicate in_range9(rec__robot_iface__speed_option__opt1: int, a: us_rep) =
   (rec__robot_iface__speed_option__opt1 = to_rep5(((a).us_split_discrs1).rec__robot_iface__speed_option__opt))
@@ -2673,15 +2746,15 @@ type t252s__ref = { t252s__content : us_rep
 
 function t252s__ref___projection(a: t252s__ref) : us_rep = (a).t252s__content
 
-logic temp___680 : t -> (int,nonnegative_float) farray
+logic temp_____aggregate_def_680 : t -> (int,nonnegative_float) farray
 
-logic temp___684 : us_rep4 -> (int,us_rep4) farray
+logic temp_____aggregate_def_684 : us_rep4 -> (int,us_rep4) farray
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom def_axiom :
   (forall temp___686:nonnegative_float. forall temp___6861:normalized2pi.
-  (forall temp___687:int. ((temp___684({ us_split_fields9 = {
+  (forall temp___687:int. ((temp_____aggregate_def_684({ us_split_fields9 = {
   rec__algorithm__laser_scan_data__first = temp___686;
   rec__algorithm__laser_scan_data__second = { us_split_fields5 = {
   rec__spaces__angles__angle__theta = temp___6861 } } } })[temp___687]) = {
@@ -2721,7 +2794,7 @@ axiom is_empty__post_axiom :
 axiom def_axiom1 :
   (forall temp___682:t. (in_range3(temp___682) ->
   (forall temp___683:int.
-  (to_rep3((temp___680(temp___682)[temp___683])) = temp___682))))
+  (to_rep3((temp_____aggregate_def_680(temp___682)[temp___683])) = temp___682))))
 
  (* File "algorithm.adb", line 175, characters 0-0 *)
 goal WP_parameter_def :

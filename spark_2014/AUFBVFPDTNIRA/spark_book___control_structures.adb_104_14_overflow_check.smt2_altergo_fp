@@ -1175,6 +1175,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1278,9 +1284,15 @@ type character__ref = { character__content : character
 function character__ref___projection(a: character__ref) : character =
   (a).character__content
 
-type field
+type num
 
-predicate in_range4(x: int) = ((0 <= x) and (x <= 255))
+logic numqtint : num -> int
+
+axiom numqtaxiom :
+  (forall i:num. (((- 2147483648) <= numqtint(i)) and
+  (numqtint(i) <= 2147483647)))
+
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1294,18 +1306,23 @@ logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE4 : us_image -> int
 
-logic user_eq3 : field, field -> bool
+logic user_eq3 : num, num -> bool
 
-logic dummy3 : field
+logic dummy3 : num
 
-type field__ref = { field__content : field
+type num__ref = { num__content : num
 }
 
-function field__ref___projection(a: field__ref) : field = (a).field__content
+function num__ref___projection(a: num__ref) : num = (a).num__content
 
-type number_base
+type field
 
-predicate in_range5(x: int) = ((2 <= x) and (x <= 16))
+logic fieldqtint : field -> int
+
+axiom fieldqtaxiom :
+  (forall i:field. ((0 <= fieldqtint(i)) and (fieldqtint(i) <= 255)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 255))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1319,23 +1336,24 @@ logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE5 : us_image -> int
 
-logic user_eq4 : number_base, number_base -> bool
+logic user_eq4 : field, field -> bool
 
-logic dummy4 : number_base
+logic dummy4 : field
 
-type number_base__ref = { number_base__content : number_base
+type field__ref = { field__content : field
 }
 
-function number_base__ref___projection(a: number_base__ref) : number_base =
-  (a).number_base__content
+function field__ref___projection(a: field__ref) : field = (a).field__content
 
-logic attr__ATTRIBUTE_ADDRESS : int
+type number_base
 
-logic attr__ATTRIBUTE_ADDRESS1 : int
+logic number_baseqtint : number_base -> int
 
-type num
+axiom number_baseqtaxiom :
+  (forall i:number_base. ((2 <= number_baseqtint(i)) and
+  (number_baseqtint(i) <= 16)))
 
-predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+predicate in_range6(x: int) = ((2 <= x) and (x <= 16))
 
 logic bool_eq8 : int, int -> bool
 
@@ -1349,14 +1367,19 @@ logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE6 : us_image -> int
 
-logic user_eq5 : num, num -> bool
+logic user_eq5 : number_base, number_base -> bool
 
-logic dummy5 : num
+logic dummy5 : number_base
 
-type num__ref = { num__content : num
+type number_base__ref = { number_base__content : number_base
 }
 
-function num__ref___projection(a: num__ref) : num = (a).num__content
+function number_base__ref___projection(a: number_base__ref) : number_base =
+  (a).number_base__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type uppercase
 
@@ -1495,7 +1518,7 @@ goal WP_parameter_def :
   forall h5:int. forall result27:bool__ref. forall success2:bool.
   forall result28:int__ref. forall c2:int. forall result29:int__ref.
   forall c3:int. forall result30:int__ref. forall c4:int.
-  (in_range4(default_width) -> (in_range5(default_base) ->
+  (in_range5(default_width) -> (in_range6(default_base) ->
   ((((- 2147483648) <= 2147483647) -> in_range2(a)) ->
   ((((- 2147483648) <= 2147483647) -> in_range2(b)) ->
   ((((- 2147483648) <= 2147483647) -> in_range2(c)) ->

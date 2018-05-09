@@ -1074,7 +1074,7 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/OC30-005/gnatprove/crash.mlw", line 3788, characters 5-8 *)
 goal WP_parameter_def :
   (forall x_new:t. (tqtisFinite(x) -> ((le(neg(fliteral1), fliteral1) ->
   tqtisFinite(x_new)) -> tqtisFinite(mul(NearestTiesToEven, x, fliteral2)))))

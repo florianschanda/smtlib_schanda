@@ -948,45 +948,9 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-logic d : t
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-type pos_static_float
-
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 100.0))
-
-predicate in_range2(x: t) = (tqtisFinite(x) and (le(fliteral, x) and le(x,
-  fliteral1)))
-
-logic bool_eq3 : t, t -> bool
-
-axiom bool_eq_def3 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
-
-logic user_eq1 : pos_static_float, pos_static_float -> bool
-
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
-
-logic dummy1 : pos_static_float
-
-type pos_static_float__ref = { pos_static_float__content : pos_static_float
-}
-
-function pos_static_float__ref___projection(a: pos_static_float__ref) : pos_static_float =
-  (a).pos_static_float__content
-
 logic c : t
 
-logic attr__ATTRIBUTE_ADDRESS1 : int
+logic attr__ATTRIBUTE_ADDRESS : int
 
 logic to_rep : float1 -> t
 
@@ -1010,11 +974,48 @@ logic eq1 : t, t -> prop
 
 logic is_finite1 : t -> prop
 
+logic bool_eq3 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq1(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq1(x, y)) -> (bool_eq3(x, y) = false))))
+
+logic user_eq1 : float1, float1 -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+
+logic dummy1 : float1
+
+type dynamic_float__ref = { dynamic_float__content : float1
+}
+
+function dynamic_float__ref___projection(a: dynamic_float__ref) : float1 =
+  (a).dynamic_float__content
+
+axiom last__def_axiom : (last = c)
+
+logic dyn_return : t -> t
+
+logic dyn_return__function_guard : t, t -> prop
+
+logic last1 : t
+
+predicate dynamic_property1(first_int: t, last_int: t, x: t) =
+  (tqtisFinite(x) and (le(first_int, x) and le(x, last_int)))
+
+logic eq2 : t, t -> prop
+
+logic is_finite2 : t -> prop
+
 logic bool_eq4 : t, t -> bool
 
 axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq1(x, y) -> (bool_eq4(x,
-  y) = true)) and ((not eq1(x, y)) -> (bool_eq4(x, y) = false))))
+  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq2(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq2(x, y)) -> (bool_eq4(x, y) = false))))
 
 logic user_eq2 : float1, float1 -> bool
 
@@ -1032,26 +1033,33 @@ type pos_dynamic_float__ref = { pos_dynamic_float__content : float1
 function pos_dynamic_float__ref___projection(a: pos_dynamic_float__ref) : float1 =
   (a).pos_dynamic_float__content
 
-axiom last__def_axiom : (last = c)
+axiom last__def_axiom1 : (last1 = c)
 
-logic attr__ATTRIBUTE_ADDRESS2 : int
+axiom dyn_return__post_axiom :
+  (forall x:t [dyn_return(x)]. (tqtisFinite(x) -> dynamic_property1(fliteral,
+  last1, dyn_return(x))))
 
-logic last1 : t
+logic d : t
 
-predicate dynamic_property1(first_int: t, last_int: t, x: t) =
-  (tqtisFinite(x) and (le(first_int, x) and le(x, last_int)))
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic eq2 : t, t -> prop
+type pos_static_float
 
-logic is_finite2 : t -> prop
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 100.0))
+
+predicate in_range2(x: t) = (tqtisFinite(x) and (le(fliteral, x) and le(x,
+  fliteral1)))
 
 logic bool_eq5 : t, t -> bool
 
 axiom bool_eq_def5 :
-  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq2(x, y) -> (bool_eq5(x,
-  y) = true)) and ((not eq2(x, y)) -> (bool_eq5(x, y) = false))))
+  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
 
-logic user_eq3 : float1, float1 -> bool
+logic user_eq3 : pos_static_float, pos_static_float -> bool
 
 logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
 
@@ -1059,25 +1067,17 @@ logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE4 : us_image -> t
 
-logic dummy3 : float1
+logic dummy3 : pos_static_float
 
-type dynamic_float__ref = { dynamic_float__content : float1
+type pos_static_float__ref = { pos_static_float__content : pos_static_float
 }
 
-function dynamic_float__ref___projection(a: dynamic_float__ref) : float1 =
-  (a).dynamic_float__content
+function pos_static_float__ref___projection(a: pos_static_float__ref) : pos_static_float =
+  (a).pos_static_float__content
 
-axiom last__def_axiom1 : (last1 = c)
+logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
-
-logic dyn_return : t -> t
-
-logic dyn_return__function_guard : t, t -> prop
-
-axiom dyn_return__post_axiom :
-  (forall x:t [dyn_return(x)]. (tqtisFinite(x) -> dynamic_property(fliteral,
-  last, dyn_return(x))))
 
 axiom c__def_axiom : (c = d)
 
@@ -1092,4 +1092,4 @@ goal WP_parameter_def :
   ((le(fliteral, d) and le(d, fliteral1)) ->
   ((((test_dynamic_property__c__assume = d) and tqtisFinite(d)) and
   (test_dynamic_property__c__assume = c)) -> (in_range2(c) -> (le(fliteral,
-  c) -> le(neg(fliteral2), fliteral)))))))
+  c) -> le(c, fliteral2)))))))

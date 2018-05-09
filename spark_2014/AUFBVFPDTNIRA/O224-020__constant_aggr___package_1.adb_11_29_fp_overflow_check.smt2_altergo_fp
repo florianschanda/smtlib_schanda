@@ -1072,7 +1072,14 @@ axiom coerce_axiom :
   (to_rep(of_rep(x)) = x)))
 
 type us_split_fields = { rec__package_1__record_t__a : float1;
-rec__package_1__record_t__b : float1 }
+rec__package_1__record_t__b : float1
+}
+
+function us_split_fields_A__projection(a: us_split_fields) : float1 =
+  (a).rec__package_1__record_t__a
+
+function us_split_fields_B__projection(a: us_split_fields) : float1 =
+  (a).rec__package_1__record_t__b
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1160,11 +1167,13 @@ type record_t__ref = { record_t__content : us_rep
 function record_t__ref___projection(a: record_t__ref) : us_rep =
   (a).record_t__content
 
+logic scalar_const : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
 logic record_const : float1
 
 logic record_const1 : float1
-
-logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -1172,53 +1181,58 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
 logic temp : t
 
-logic attr__ATTRIBUTE_ADDRESS4 : int
+logic attr__ATTRIBUTE_ADDRESS5 : int
 
 axiom temp__def_axiom : (temp = to_rep(record_const))
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 7.0))
+  (tqtreal(fliteral1) = 0.009999999776482582092285156250))
+
+axiom scalar_const__def_axiom : (scalar_const = fliteral1)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 12.0))
-
-axiom record_const__def_axiom : ((record_const = of_rep(fliteral1)) and
-  (record_const1 = of_rep(fliteral2)))
+  (tqtreal(fliteral2) = 7.0))
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
+  (tqtreal(fliteral3) = 12.0))
+
+axiom record_const__def_axiom : ((record_const = of_rep(fliteral2)) and
+  (record_const1 = of_rep(fliteral3)))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 0.01999999955296516418457031250))
+  (tqtreal(fliteral4) = 340282346638528859811704183484516925440.0))
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
-  (tqtreal(fliteral5) = 0.009999999776482582092285156250))
+  (tqtreal(fliteral5) = 0.01999999955296516418457031250))
 
  (* File "package_1.ads", line 11, characters 0-0 *)
 goal WP_parameter_def :
   (forall res_1:t. forall res_2:t. forall res_3:t. forall o:float1.
   forall o1:float1. forall o2:float1. forall o3:float1.
-  forall temp___163:float1. forall temp___1631:float1. forall result:t.
-  forall res_11:t. (((((to_rep(o) = fliteral2) and
-  ((to_rep(o1) = fliteral1) and ((o1 = o2) and (o = o3)))) and
-  ((temp___163 = o2) and (temp___1631 = o3))) and
-  ((temp___163 = record_const) and (temp___1631 = record_const1))) ->
-  ((le(neg(fliteral3), fliteral3) -> tqtisFinite(res_1)) ->
-  ((le(neg(fliteral3), fliteral3) -> tqtisFinite(res_2)) ->
-  ((le(neg(fliteral3), fliteral3) -> tqtisFinite(res_3)) ->
+  forall temp___164:float1. forall temp___1641:float1. forall result:t.
+  forall res_11:t. (tqtisFinite(scalar_const) ->
+  ((fliteral1 = scalar_const) -> (((((to_rep(o) = fliteral3) and
+  ((to_rep(o1) = fliteral2) and ((o1 = o2) and (o = o3)))) and
+  ((temp___164 = o2) and (temp___1641 = o3))) and
+  ((temp___164 = record_const) and (temp___1641 = record_const1))) ->
+  ((le(neg(fliteral4), fliteral4) -> tqtisFinite(res_1)) ->
+  ((le(neg(fliteral4), fliteral4) -> tqtisFinite(res_2)) ->
+  ((le(neg(fliteral4), fliteral4) -> tqtisFinite(res_3)) ->
   ((to_rep(record_const) = temp) -> (tqtisFinite(temp) ->
-  (((result = res_1) and (res_11 = fliteral4)) ->
-  tqtisFinite(add(NearestTiesToEven, fliteral5,
-  to_rep(record_const)))))))))))
+  (((result = res_1) and (res_11 = fliteral5)) ->
+  tqtisFinite(add(NearestTiesToEven, scalar_const,
+  to_rep(record_const)))))))))))))

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -124,8 +120,6 @@
 
 (declare-const res Float32)
 
-(declare-const safety_pack__saturate__result Float32)
-
 (declare-const result Float32)
 
 (declare-const res1 Float32)
@@ -134,27 +128,11 @@
 
 (declare-const res2 Float32)
 
-(declare-const result2 Float32)
-
-(declare-const res3 Float32)
-
-(declare-const result3 Float32)
+(declare-const safety_pack__saturate__result Float32)
 
 (declare-const safety_pack__saturate__result1 Float32)
 
 (declare-const safety_pack__saturate__result2 Float32)
-
-(declare-const safety_pack__saturate__result3 Float32)
-
-(declare-const res4 Float32)
-
-(declare-const safety_pack__saturate__result4 Float32)
-
-(declare-const res5 Float32)
-
-(declare-const safety_pack__saturate__result5 Float32)
-
-(declare-const result4 Float32)
 
 ;; H
   (assert (fp.isFinite32 value))
@@ -166,73 +144,55 @@
   (assert (fp.isFinite32 max_value))
 
 ;; H
-  (assert (= result res))
+  (assert (= res value))
 
 ;; H
-  (assert (= res1 value))
+  (assert (fp.isFinite32 res))
 
 ;; H
-  (assert (fp.isFinite32 res1))
+  (assert (=> (fp.lt value min_value) (= result res)))
 
 ;; H
-  (assert (=> (fp.lt value min_value) (= result1 res1)))
-
-;; H
-  (assert (=> (fp.lt value min_value) (= res2 min_value)))
+  (assert (=> (fp.lt value min_value) (= res1 min_value)))
 
 ;; H
   (assert
   (=> (not (fp.lt value min_value))
-  (=> (fp.lt max_value value) (= result2 res1))))
+  (=> (fp.lt max_value value) (= result1 res))))
 
 ;; H
   (assert
   (=> (not (fp.lt value min_value))
-  (=> (fp.lt max_value value) (= res3 max_value))))
+  (=> (fp.lt max_value value) (= res2 max_value))))
 
 ;; H
   (assert
   (=> (not (fp.lt value min_value))
-  (=> (not (fp.lt max_value value)) (= res3 res1))))
+  (=> (not (fp.lt max_value value)) (= res2 res))))
 
 ;; H
-  (assert (=> (not (fp.lt value min_value)) (= res2 res3)))
+  (assert (=> (not (fp.lt value min_value)) (= res1 res2)))
 
 ;; H
-  (assert (= safety_pack__saturate__result1 safety_pack__saturate__result2))
+  (assert (= safety_pack__saturate__result safety_pack__saturate__result1))
 
 ;; H
-  (assert (= safety_pack__saturate__result3 safety_pack__saturate__result1))
-
-;; H
-  (assert (= result3 safety_pack__saturate__result))
-
-;; H
-  (assert (= safety_pack__saturate__result1 res2))
+  (assert (= safety_pack__saturate__result res1))
 
 ;; H
   (assert
-  (= (mk_t__ref safety_pack__saturate__result4) (mk_t__ref
-                                                safety_pack__saturate__result2)))
+  (= (mk_t__ref safety_pack__saturate__result2) (mk_t__ref
+                                                safety_pack__saturate__result1)))
 
 ;; H
-  (assert (= res4 res2))
+  (assert (not (fp.lt value min_value)))
 
 ;; H
-  (assert (= safety_pack__saturate__result5 safety_pack__saturate__result3))
-
-;; H
-  (assert (= res5 res2))
-
-;; H
-  (assert (= result4 safety_pack__saturate__result4))
-
-;; H
-  (assert (fp.lt value min_value))
+  (assert (fp.lt max_value value))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.eq safety_pack__saturate__result4 min_value)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O401-034__float_pred/gnatprove/safety_pack.mlw", line 30562, characters 5-8
+  (not (fp.eq safety_pack__saturate__result2 max_value)))
 (check-sat)
 (exit)

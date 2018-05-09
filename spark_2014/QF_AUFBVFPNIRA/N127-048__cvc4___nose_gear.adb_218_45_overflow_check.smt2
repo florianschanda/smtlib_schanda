@@ -174,6 +174,10 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
+(declare-const validity_period Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -194,23 +198,21 @@
   (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
   (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool true)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const ngrotations (_ BitVec 16))
-
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const ngclicktime (_ BitVec 16))
+(declare-const ngrotations (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const millisecs (_ BitVec 16))
+(declare-const ngclicktime (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+
+(declare-const millisecs (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
@@ -309,6 +311,12 @@
 (declare-const attr__ATTRIBUTE_ADDRESS53 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS54 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS55 Int)
+
+;; validity_period__def_axiom
+  (assert
+  (= validity_period (fp #b0 #b10000001010 #b0111011100000000000000000000000000000000000000000000)))
 
 (declare-const estimatedgroundvelocity Float64)
 
@@ -489,6 +497,14 @@
 (declare-const estimatedgroundvelocityisavailable1 Bool)
 
 (declare-const relational_operator_out1_1 Bool)
+
+;; H
+  (assert (fp.isFinite64 validity_period))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000001010 #b0111011100000000000000000000000000000000000000000000)
+  validity_period))
 
 ;; H
   (assert true)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -108,14 +104,18 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-sort t_degrees 0)
+(declare-fun atan_2 (Float32 Float32) Float32)
+
+(declare-fun atan_2__function_guard (Float32 Float32 Float32) Bool)
+
+(declare-sort t_radians 0)
 
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
                                         (and
-                                        (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) x)
-                                        (fp.leq x (fp #b0 #b10000111 #b01101000000000000000000)))))
+                                        (fp.leq (fp.neg (fp #b0 #b10000001 #b10010010000111111011011)) x)
+                                        (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-fun user_eq1 (t_degrees t_degrees) Bool)
+(declare-fun user_eq1 (t_radians t_radians) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
 
@@ -123,92 +123,27 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
 
-(declare-const dummy1 t_degrees)
-
-(declare-datatypes ()
-((t_degrees__ref (mk_t_degrees__ref (t_degrees__content t_degrees)))))
-(define-fun t_degrees__ref___projection ((a t_degrees__ref)) t_degrees
-  (t_degrees__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_1522 Float32)
-  (temp___is_init_1518 Bool) (temp___skip_constant_1519 Bool)
-  (temp___do_toplevel_1520 Bool)
-  (temp___do_typ_inv_1521 Bool)) Bool (=>
-                                      (or (= temp___is_init_1518 true)
-                                      (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000)))
-                                      (in_range temp___expr_1522)))
-
-(declare-sort t_quaternion 0)
-
-(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)
-                                         (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
-
-(declare-fun user_eq2 (t_quaternion t_quaternion) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
-
-(declare-const dummy2 t_quaternion)
-
-(declare-datatypes ()
-((t_quaternion__ref
- (mk_t_quaternion__ref (t_quaternion__content t_quaternion)))))
-(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
-  (t_quaternion__content a))
-
-(define-fun dynamic_invariant2 ((temp___expr_1550 Float32)
-  (temp___is_init_1546 Bool) (temp___skip_constant_1547 Bool)
-  (temp___do_toplevel_1548 Bool)
-  (temp___do_typ_inv_1549 Bool)) Bool (=>
-                                      (or (= temp___is_init_1546 true)
-                                      (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
-                                      (in_range1 temp___expr_1550)))
-
-(declare-sort t_radians 0)
-
-(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp.neg (fp #b0 #b10000001 #b10010010000111111011011)) x)
-                                         (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
-
-(declare-fun user_eq3 (t_radians t_radians) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
-
-(declare-const dummy3 t_radians)
+(declare-const dummy1 t_radians)
 
 (declare-datatypes ()
 ((t_radians__ref (mk_t_radians__ref (t_radians__content t_radians)))))
 (define-fun t_radians__ref___projection ((a t_radians__ref)) t_radians
   (t_radians__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_1557 Float32)
+(define-fun dynamic_invariant1 ((temp___expr_1557 Float32)
   (temp___is_init_1553 Bool) (temp___skip_constant_1554 Bool)
   (temp___do_toplevel_1555 Bool)
   (temp___do_typ_inv_1556 Bool)) Bool (=>
                                       (or (= temp___is_init_1553 true)
                                       (fp.leq (fp.neg (fp #b0 #b10000001 #b10010010000111111011011)) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                      (in_range2 temp___expr_1557)))
-
-(declare-fun atan_2 (Float32 Float32) Float32)
-
-(declare-fun atan_2__function_guard (Float32 Float32 Float32) Bool)
+                                      (in_range temp___expr_1557)))
 
 ;; atan_2__post_axiom
   (assert
   (forall ((x Float32) (y Float32))
   (! (=>
      (and (dynamic_invariant x true true true true) (dynamic_invariant y true
-     true true true)) (dynamic_invariant3 (atan_2 x y) true false true true)) :pattern (
+     true true true)) (dynamic_invariant1 (atan_2 x y) true false true true)) :pattern (
   (atan_2 x y)) )))
 
 (declare-fun asin1 (Float32) Float32)
@@ -218,7 +153,7 @@
 ;; asin__post_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant3
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant1
      (asin1 x) true false true true)) :pattern ((asin1 x)) )))
 
 (declare-fun saturate (Float32 Float32 Float32) Float32)
@@ -239,6 +174,67 @@
      (ite (fp.lt max_value value) (fp.eq result max_value)
      (fp.eq result value))) (dynamic_invariant result true false true true)))) :pattern (
   (saturate value min_value max_value)) )))
+
+(declare-sort t_degrees 0)
+
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) x)
+                                         (fp.leq x (fp #b0 #b10000111 #b01101000000000000000000)))))
+
+(declare-fun user_eq2 (t_degrees t_degrees) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
+
+(declare-const dummy2 t_degrees)
+
+(declare-datatypes ()
+((t_degrees__ref (mk_t_degrees__ref (t_degrees__content t_degrees)))))
+(define-fun t_degrees__ref___projection ((a t_degrees__ref)) t_degrees
+  (t_degrees__content a))
+
+(define-fun dynamic_invariant2 ((temp___expr_1522 Float32)
+  (temp___is_init_1518 Bool) (temp___skip_constant_1519 Bool)
+  (temp___do_toplevel_1520 Bool)
+  (temp___do_typ_inv_1521 Bool)) Bool (=>
+                                      (or (= temp___is_init_1518 true)
+                                      (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000)))
+                                      (in_range1 temp___expr_1522)))
+
+(declare-sort t_quaternion 0)
+
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)
+                                         (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))))
+
+(declare-fun user_eq3 (t_quaternion t_quaternion) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
+
+(declare-const dummy3 t_quaternion)
+
+(declare-datatypes ()
+((t_quaternion__ref
+ (mk_t_quaternion__ref (t_quaternion__content t_quaternion)))))
+(define-fun t_quaternion__ref___projection ((a t_quaternion__ref)) t_quaternion
+  (t_quaternion__content a))
+
+(define-fun dynamic_invariant3 ((temp___expr_1550 Float32)
+  (temp___is_init_1546 Bool) (temp___skip_constant_1547 Bool)
+  (temp___do_toplevel_1548 Bool)
+  (temp___do_typ_inv_1549 Bool)) Bool (=>
+                                      (or (= temp___is_init_1546 true)
+                                      (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
+                                      (in_range2 temp___expr_1550)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -286,61 +282,39 @@
 
 (declare-const o2 Float32)
 
-(declare-const o3 Float32)
-
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
-(declare-const result Float32)
-
 (declare-const grav_x1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const grav_y1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const grav_z1 Float32)
-
-(declare-const result3 Float32)
 
 (declare-const grav_x2 Float32)
 
-(declare-const result4 Float32)
-
-(declare-const euler_yaw_actual1 Float32)
+;; H
+  (assert
+  (=>
+  (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000))
+  (in_range1 euler_roll_actual)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000))
-  (in_range euler_roll_actual)))
+  (in_range1 euler_pitch_actual)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000))
-  (in_range euler_pitch_actual)))
+  (in_range1 euler_yaw_actual)))
 
 ;; H
-  (assert
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b10000111 #b01101000000000000000000)) (fp #b0 #b10000111 #b01101000000000000000000))
-  (in_range euler_yaw_actual)))
+  (assert (in_range2 q0))
 
 ;; H
-  (assert (in_range1 q0))
+  (assert (in_range2 q1))
 
 ;; H
-  (assert (in_range1 q1))
+  (assert (in_range2 q2))
 
 ;; H
-  (assert (in_range1 q2))
-
-;; H
-  (assert (in_range1 q3))
+  (assert (in_range2 q3))
 
 ;; H
   (assert
@@ -361,77 +335,59 @@
   (fp.isFinite32 grav_z)))
 
 ;; H
-  (assert (= result grav_x))
-
-;; H
   (assert
   (= grav_x1 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.sub RNE (fp.mul RNE
   q1 q3) (fp.mul RNE q0 q2)))))
 
 ;; H
-  (assert (= result1 grav_y))
-
-;; H
   (assert
-  (= grav_y1 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.add RNE (fp.mul RNE
-  q0 q1) (fp.mul RNE q2 q3)))))
-
-;; H
-  (assert (= result2 grav_z))
-
-;; H
-  (assert
-  (= grav_z1 (fp.add RNE (fp.sub RNE (fp.sub RNE (fp.mul RNE q0 q0) (fp.mul RNE
-  q1 q1)) (fp.mul RNE q2 q2)) (fp.mul RNE q3 q3))))
-
-;; H
-  (assert
-  (and
   (= o (saturate grav_x1
        (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-       (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (fp.isFinite32 o)
-  (ite (fp.lt grav_x1 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
-  (fp.eq o (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
-  (ite (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) grav_x1)
-  (fp.eq o (fp #b0 #b01111111 #b00000000000000000000000)) (fp.eq o grav_x1))))))
+       (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
-  (assert (= result3 grav_x1))
+  (assert (fp.isFinite32 o))
+
+;; H
+  (assert
+  (=> (fp.lt grav_x1 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))
+  (fp.eq o (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)))))
+
+;; H
+  (assert
+  (=>
+  (not
+  (fp.lt grav_x1 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))))
+  (=> (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) grav_x1)
+  (fp.eq o (fp #b0 #b01111111 #b00000000000000000000000)))))
+
+;; H
+  (assert
+  (=>
+  (not
+  (fp.lt grav_x1 (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))))
+  (=> (not (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) grav_x1))
+  (fp.eq o grav_x1))))
 
 ;; H
   (assert (= grav_x2 o))
 
 ;; H
   (assert
-  (and
   (= o1 (atan_2
         (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.add RNE (fp.mul RNE
         q0 q3) (fp.mul RNE q1 q2)))
         (fp.sub RNE (fp.sub RNE (fp.add RNE (fp.mul RNE q0 q0) (fp.mul RNE
-        q1 q1)) (fp.mul RNE q2 q2)) (fp.mul RNE q3 q3))))
-  (in_range2 o1)))
+        q1 q1)) (fp.mul RNE q2 q2)) (fp.mul RNE q3 q3)))))
 
 ;; H
-  (assert
-  (= o2 (fp.mul RNE o1 (fp #b0 #b10000110 #b01101000000000000000000))))
+  (assert (in_range o1))
 
 ;; H
-  (assert
-  (= o3 (fp.div RNE o2 (fp #b0 #b10000000 #b10010010000111111011011))))
+  (assert (= o2 (asin1 grav_x2)))
 
 ;; H
-  (assert (= result4 euler_yaw_actual))
-
-;; H
-  (assert (= euler_yaw_actual1 o3))
-
-;; H
-  (assert (and (= o4 (asin1 grav_x2)) (in_range2 o4)))
-
-;; H
-  (assert
-  (= o5 (fp.mul RNE o4 (fp #b0 #b10000110 #b01101000000000000000000))))
+  (assert (in_range o2))
 
 (assert
 ;; WP_parameter_def

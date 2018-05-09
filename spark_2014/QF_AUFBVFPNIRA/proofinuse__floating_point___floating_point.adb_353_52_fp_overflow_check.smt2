@@ -144,9 +144,52 @@
 ;; H
   (assert (= o18 (fp.mul RNE o17 x)))
 
+;; H
+  (assert (and (= o19 o18) (fp.isFinite32 o18)))
+
+;; H
+  (assert
+  (= o20 (fp.add RNE o19 (fp #b0 #b10000001 #b01000000000000000000000))))
+
+;; H
+  (assert (and (= o21 o20) (fp.isFinite32 o20)))
+
+;; H
+  (assert
+  (= o22 (ite (fp.leq o21 (fp #b0 #b11111110 #b11111111111111111111111)) true
+         false)))
+
+;; H
+  (assert
+  (and (= o (fp.add RNE x (fp #b0 #b10000000 #b00000000000000000000000)))
+  (fp.isFinite32 (fp.add RNE x (fp #b0 #b10000000 #b00000000000000000000000)))))
+
+;; H
+  (assert (= o1 (fp.mul RNE o x)))
+
+;; H
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
+
+;; H
+  (assert
+  (= o3 (fp.add RNE o2 (fp #b0 #b10000000 #b10000000000000000000000))))
+
+;; H
+  (assert (and (= o4 o3) (fp.isFinite32 o3)))
+
+;; H
+  (assert
+  (= o5 (fp.add RNE o4 (fp #b0 #b10000001 #b00000000000000000000000))))
+
+;; H
+  (assert (and (= o6 o5) (fp.isFinite32 o5)))
+
+;; H
+  (assert (= o7 (fp.mul RNE o6 x)))
+
 (assert
 ;; WP_parameter_def
  ;; File "a-unccon.ads", line 20, characters 0-0
-  (not (fp.isFinite32 o18)))
+  (not (fp.isFinite32 o7)))
 (check-sat)
 (exit)

@@ -1063,6 +1063,14 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
+logic is_valid_speed_km_per_h : t -> bool
+
+logic is_valid_speed_km_per_h__function_guard : bool, t -> prop
+
+logic m_per_s_from_km_per_h : t -> t
+
+logic m_per_s_from_km_per_h__function_guard : t, t -> prop
+
 type speed_t
 
 logic bool_eq2 : t, t -> bool
@@ -1087,120 +1095,29 @@ type speed_t__ref = { speed_t__content : speed_t
 function speed_t__ref___projection(a: speed_t__ref) : speed_t =
   (a).speed_t__content
 
-logic to_rep : speed_t -> t
+type speed_km_per_h_t
 
-logic of_rep : t -> speed_t
-
-axiom inversion_axiom :
-  (forall x:speed_t [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:speed_t [to_rep(x)]. tqtisFinite(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
-  (to_rep(of_rep(x)) = x)))
-
-type distance_t
-
-predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq3 : int, int -> bool
-
-logic bool_ne : int, int -> bool
-
-logic bool_lt1 : int, int -> bool
-
-logic bool_le1 : int, int -> bool
-
-logic bool_gt1 : int, int -> bool
-
-logic bool_ge1 : int, int -> bool
-
-axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
-
-axiom bool_ne_axiom :
-  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
-
-axiom bool_lt_axiom :
-  (forall x:int. (forall y:int. ((bool_lt1(x, y) = true) <-> (x <  y))))
-
-axiom bool_int__le_axiom :
-  (forall x:int. (forall y:int. ((bool_le1(x, y) = true) <-> (x <= y))))
-
-axiom bool_gt_axiom :
-  (forall x:int. (forall y:int. ((bool_gt1(x, y) = true) <-> (y <  x))))
-
-axiom bool_ge_axiom :
-  (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
-
-logic bool_eq4 : int, int -> bool
+logic bool_eq3 : t, t -> bool
 
 axiom bool_eq_def3 :
-  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+logic user_eq1 : speed_km_per_h_t, speed_km_per_h_t -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
 
 logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
 
-logic user_eq1 : distance_t, distance_t -> bool
-
-logic dummy1 : distance_t
-
-type distance_t__ref = { distance_t__content : distance_t
-}
-
-function distance_t__ref___projection(a: distance_t__ref) : distance_t =
-  (a).distance_t__content
-
-logic to_rep1 : distance_t -> int
-
-logic of_rep1 : int -> distance_t
-
-axiom inversion_axiom1 :
-  (forall x:distance_t [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
-
-axiom range_axiom1 :
-  (forall x:distance_t [to_rep1(x)]. in_range2(to_rep1(x)))
-
-axiom coerce_axiom1 :
-  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
-  (to_rep1(of_rep1(x)) = x)))
-
-type speed_km_per_h_t
-
-logic bool_eq5 : t, t -> bool
-
-axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
-
-logic user_eq2 : speed_km_per_h_t, speed_km_per_h_t -> bool
-
-logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t
-
-logic dummy2 : speed_km_per_h_t
+logic dummy1 : speed_km_per_h_t
 
 type speed_km_per_h_t__ref = { speed_km_per_h_t__content : speed_km_per_h_t
 }
 
 function speed_km_per_h_t__ref___projection(a: speed_km_per_h_t__ref) : speed_km_per_h_t =
   (a).speed_km_per_h_t__content
-
-logic is_valid_speed_km_per_h : t -> bool
-
-logic is_valid_speed_km_per_h__function_guard : bool, t -> prop
-
-logic m_per_s_from_km_per_h : t -> t
-
-logic m_per_s_from_km_per_h__function_guard : t, t -> prop
 
 axiom m_per_s_from_km_per_h__post_axiom :
   (forall speed:t [m_per_s_from_km_per_h(speed)]. ((tqtisFinite(speed) and
@@ -1222,6 +1139,106 @@ axiom m_per_s_from_km_per_h__def_axiom :
   (m_per_s_from_km_per_h(speed) = div(NearestTiesToEven,
   mul(NearestTiesToEven, speed, fliteral1), fliteral2))))
 
+logic distance_to_speed : t, t, t -> int
+
+logic distance_to_speed__function_guard : int, t, t, t -> prop
+
+type distance_t
+
+logic distance_tqtint : distance_t -> int
+
+axiom distance_tqtaxiom :
+  (forall i:distance_t. ((0 <= distance_tqtint(i)) and
+  (distance_tqtint(i) <= 2147483647)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq4 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt1 : int, int -> bool
+
+logic bool_le1 : int, int -> bool
+
+logic bool_gt1 : int, int -> bool
+
+logic bool_ge1 : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq4(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt1(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le1(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt1(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq2 : distance_t, distance_t -> bool
+
+logic dummy2 : distance_t
+
+type distance_t__ref = { distance_t__content : distance_t
+}
+
+function distance_t__ref___projection(a: distance_t__ref) : distance_t =
+  (a).distance_t__content
+
+logic maximum_valid_speed : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic minimum_valid_acceleration : t
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+function to_rep(x: distance_t) : int = distance_tqtint(x)
+
+logic of_rep : int -> distance_t
+
+axiom inversion_axiom :
+  (forall x:distance_t [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:distance_t [to_rep(x)]. in_range2(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic to_rep1 : speed_t -> t
+
+logic of_rep1 : t -> speed_t
+
+axiom inversion_axiom1 :
+  (forall x:speed_t [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:speed_t [to_rep1(x)]. tqtisFinite(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:t [to_rep1(of_rep1(x))]. (tqtisFinite(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
 type us_split_fields = {
 rec__deceleration_curve__braking_curve_entry__location : distance_t;
 rec__deceleration_curve__braking_curve_entry__speed : speed_t
@@ -1229,6 +1246,9 @@ rec__deceleration_curve__braking_curve_entry__speed : speed_t
 
 function us_split_fields_location__projection(a: us_split_fields) : distance_t =
   (a).rec__deceleration_curve__braking_curve_entry__location
+
+function us_split_fields_speed__projection(a: us_split_fields) : speed_t =
+  (a).rec__deceleration_curve__braking_curve_entry__speed
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1246,11 +1266,11 @@ logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  ((((to_rep1(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location) = to_rep1(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location)) and
-  (to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed))) ->
+  ((((to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location)) and
+  (to_rep1(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep1(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed))) ->
   (bool_eq6(a, b) = true)) and
-  ((not ((to_rep1(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location) = to_rep1(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location)) and
-  (to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed)))) ->
+  ((not ((to_rep(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location) = to_rep(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__location)) and
+  (to_rep1(((a).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed) = to_rep1(((b).us_split_fields1).rec__deceleration_curve__braking_curve_entry__speed)))) ->
   (bool_eq6(a, b) = false))))
 
 logic value__size : int
@@ -1431,13 +1451,13 @@ axiom bool_eq_def7 :
   0, 1000,
   ((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__curve, 0,
   1000) = true) and
-  (to_rep1(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep1(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point))) ->
+  (to_rep(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point))) ->
   (bool_eq8(a, b) = true)) and
   ((not ((bool_eq7(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__curve,
   0, 1000,
   ((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__curve, 0,
   1000) = true) and
-  (to_rep1(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep1(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point)))) ->
+  (to_rep(((a).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point) = to_rep(((b).us_split_fields3).rec__deceleration_curve__braking_curve_t__end_point)))) ->
   (bool_eq8(a, b) = false))))
 
 logic value__size2 : int
@@ -1516,6 +1536,9 @@ function us_split_fields_supervise__projection(a: us_split_fields4) : bool =
 function us_split_fields_location__2__projection(a: us_split_fields4) : distance_t =
   (a).rec__deceleration_curve__target_t__location
 
+function us_split_fields_speed__2__projection(a: us_split_fields4) : speed_t =
+  (a).rec__deceleration_curve__target_t__speed
+
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
@@ -1533,12 +1556,12 @@ logic bool_eq9 : us_rep2, us_rep2 -> bool
 axiom bool_eq_def8 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq9(a, b)].
   (((((((a).us_split_fields5).rec__deceleration_curve__target_t__supervise = ((b).us_split_fields5).rec__deceleration_curve__target_t__supervise) and
-  (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
-  (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__speed))) ->
+  (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
+  (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__speed))) ->
   (bool_eq9(a, b) = true)) and
   ((not (((((a).us_split_fields5).rec__deceleration_curve__target_t__supervise = ((b).us_split_fields5).rec__deceleration_curve__target_t__supervise) and
-  (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
-  (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__speed)))) ->
+  (to_rep(((a).us_split_fields5).rec__deceleration_curve__target_t__location) = to_rep(((b).us_split_fields5).rec__deceleration_curve__target_t__location))) and
+  (to_rep1(((a).us_split_fields5).rec__deceleration_curve__target_t__speed) = to_rep1(((b).us_split_fields5).rec__deceleration_curve__target_t__speed)))) ->
   (bool_eq9(a, b) = false))))
 
 logic value__size3 : int
@@ -1626,71 +1649,82 @@ type target_t__ref = { target_t__content : us_rep2
 function target_t__ref___projection(a: target_t__ref) : us_rep2 =
   (a).target_t__content
 
-logic distance_to_speed : t, t, t -> int
-
-logic distance_to_speed__function_guard : int, t, t, t -> prop
-
-logic maximum_valid_speed : t
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-axiom is_valid_speed_km_per_h__post_axiom : true
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic maximum_valid_speed_km_per_h : t
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 0.0e-1))
+  (tqtreal(fliteral3) = 500.0))
+
+axiom maximum_valid_speed_km_per_h__def_axiom :
+  (maximum_valid_speed_km_per_h = fliteral3)
+
+axiom is_valid_speed_km_per_h__post_axiom : true
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 500.0))
+  (tqtreal(fliteral4) = 0.0e-1))
 
 axiom is_valid_speed_km_per_h__def_axiom :
   (forall speed:t [is_valid_speed_km_per_h(speed)].
-  ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral3, speed) and
-  le(speed, fliteral4))))
+  ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral4, speed) and
+  le(speed, maximum_valid_speed_km_per_h))))
 
 axiom maximum_valid_speed__def_axiom :
-  (maximum_valid_speed = m_per_s_from_km_per_h(fliteral4))
+  (maximum_valid_speed = m_per_s_from_km_per_h(maximum_valid_speed_km_per_h))
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
-  (tqtreal(fliteral5) = 160.0))
+  (tqtreal(fliteral5) = 10.0))
+
+axiom minimum_valid_acceleration__def_axiom :
+  (minimum_valid_acceleration = neg(fliteral5))
+
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 160.0))
+
+logic rliteral : distance_t
+
+axiom rliteral_axiom : (distance_tqtint(rliteral) = 2500)
 
  (* File "deceleration_curve_test.adb", line 5, characters 0-0 *)
 goal WP_parameter_def :
   (forall initial_speed:t. forall target__split_fields:bool.
   forall target__split_fields1:distance_t.
   forall target__split_fields2:speed_t. forall o:t. forall o1:speed_t.
-  forall o2:distance_t. forall o3:bool. forall o4:distance_t.
-  forall o5:speed_t. forall deceleration_curve_test__target__assume:bool.
+  forall o2:bool. forall o3:distance_t. forall o4:speed_t.
+  forall deceleration_curve_test__target__assume:bool.
   forall deceleration_curve_test__target__assume1:distance_t.
   forall deceleration_curve_test__target__assume2:speed_t. forall result:t.
   forall initial_speed1:t. forall result1:bool. forall result2:distance_t.
   forall result3:speed_t. forall target__split_fields3:bool.
   forall target__split_fields4:distance_t.
   forall target__split_fields5:speed_t.
-  ((((o = m_per_s_from_km_per_h(fliteral5)) and (tqtisFinite(o) and
-  (o = div(NearestTiesToEven, mul(NearestTiesToEven, fliteral5, fliteral1),
+  ((((o = m_per_s_from_km_per_h(fliteral6)) and (tqtisFinite(o) and
+  (o = div(NearestTiesToEven, mul(NearestTiesToEven, fliteral6, fliteral1),
   fliteral2)))) and ((result = initial_speed) and (initial_speed1 = o))) ->
-  (tqtisFinite(initial_speed1) -> (((((to_rep(o1) = fliteral3) and
-  ((to_rep1(o2) = 2500) and ((of_int1(1) = o3) and ((o2 = o4) and
-  (o1 = o5))))) and ((deceleration_curve_test__target__assume = o3) and
-  ((deceleration_curve_test__target__assume1 = o4) and
-  (deceleration_curve_test__target__assume2 = o5)))) and
+  (tqtisFinite(initial_speed1) -> (((((to_rep1(o1) = fliteral4) and
+  ((of_int1(1) = o2) and ((rliteral = o3) and (o1 = o4)))) and
+  ((deceleration_curve_test__target__assume = o2) and
+  ((deceleration_curve_test__target__assume1 = o3) and
+  (deceleration_curve_test__target__assume2 = o4)))) and
   (((result1 = target__split_fields) and
   ((result2 = target__split_fields1) and
   (result3 = target__split_fields2))) and
   ((deceleration_curve_test__target__assume = target__split_fields3) and
   ((deceleration_curve_test__target__assume1 = target__split_fields4) and
   (deceleration_curve_test__target__assume2 = target__split_fields5))))) ->
-  ((distance_to_speed(initial_speed1, fliteral3, neg(fliteral)) = 1000) ->
-  (to_rep1(target__split_fields4) <= 5000))))))
+  ((distance_to_speed(initial_speed1, fliteral4, neg(fliteral)) = 1000) ->
+  (to_rep(target__split_fields4) <= 5000))))))

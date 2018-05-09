@@ -1130,7 +1130,7 @@ logic fliteral10 : t
 axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
   (tqtreal(fliteral10) = 340282346638528859811704183484516925440.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__pi/gnatprove/pi_compute.mlw", line 21202, characters 5-8 *)
 goal WP_parameter_def :
   (forall t1:t. forall t2:t. forall t3:t. forall t4:t. forall t5:t.
   forall t6:t. forall t7:t. forall t8:t. forall t9:t. forall t10:t.

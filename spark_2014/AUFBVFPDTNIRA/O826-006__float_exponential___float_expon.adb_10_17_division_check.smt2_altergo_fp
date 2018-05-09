@@ -1129,11 +1129,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 7.0))
 
  (* File "float_expon.adb", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall y:t. forall o:t. forall o1:t. forall o2:t. forall o3:t.
-  (in_range1(x) -> (tqtisFinite(y) -> (((o3 = mul(NearestTiesToEven, x,
-  x)) and tqtisFinite(mul(NearestTiesToEven, x, x))) ->
-  (((((o = mul(NearestTiesToEven, x, mul(NearestTiesToEven, x, x))) and
-  tqtisFinite(mul(NearestTiesToEven, x, mul(NearestTiesToEven, x, x)))) and
-  (o1 = mul(NearestTiesToEven, fliteral2, o))) and ((o2 = o1) and
-  tqtisFinite(o1))) -> ((4 <  0) -> (not (x = zeroF))))))))
+goal WP_parameter_def : true

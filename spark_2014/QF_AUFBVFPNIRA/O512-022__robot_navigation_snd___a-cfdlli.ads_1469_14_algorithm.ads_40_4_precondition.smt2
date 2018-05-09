@@ -40,34 +40,6 @@
 ;; algorithm__gap_vectors__list__capacity__position_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
 
-(declare-const value__size1 Int)
-
-(declare-const value__alignment1 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size1))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment1))
-
-(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
-
-(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
-
-(declare-const algorithm__gap_vectors__cursor__node__position Int)
-
-;; algorithm__gap_vectors__cursor__node__first__bit_axiom
-  (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
-
-;; algorithm__gap_vectors__cursor__node__last__bit_axiom
-  (assert
-  (< algorithm__gap_vectors__cursor__node__first__bit algorithm__gap_vectors__cursor__node__last__bit))
-
-;; algorithm__gap_vectors__cursor__node__position_axiom
-  (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (define-fun dynamic_invariant ((temp___expr_365 Int)
   (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
   (temp___do_toplevel_363 Bool)
@@ -75,16 +47,6 @@
                                      (or (= temp___is_init_361 true)
                                      (<= 0 2147483647)) (in_range1
                                      temp___expr_365)))
-
-(declare-const value__size2 Int)
-
-(declare-const value__alignment2 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size2))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment2))
 
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
                                                 (fp.isPositive x)))
@@ -129,15 +91,15 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-const value__size3 Int)
+(declare-const value__size1 Int)
 
-(declare-const value__alignment3 Int)
+(declare-const value__alignment1 Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size3))
+  (assert (<= 0 value__size1))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment3))
+  (assert (<= 0 value__alignment1))
 
 (declare-const spaces__angles__angle__theta__first__bit Int)
 
@@ -157,15 +119,15 @@
 
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
-(declare-const value__size4 Int)
+(declare-const value__size2 Int)
 
-(declare-const value__alignment4 Int)
+(declare-const value__alignment2 Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size4))
+  (assert (<= 0 value__size2))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment4))
+  (assert (<= 0 value__alignment2))
 
 (declare-const gaps__gap__bearing__first__bit Int)
 
@@ -212,6 +174,42 @@
 ;; gaps__gap__idir__position_axiom
   (assert (<= 0 gaps__gap__idir__position))
 
+(declare-const value__size3 Int)
+
+(declare-const value__alignment3 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size3))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment3))
+
+(declare-const value__size4 Int)
+
+(declare-const value__alignment4 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size4))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment4))
+
+(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
+
+(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
+
+(declare-const algorithm__gap_vectors__cursor__node__position Int)
+
+;; algorithm__gap_vectors__cursor__node__first__bit_axiom
+  (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
+
+;; algorithm__gap_vectors__cursor__node__last__bit_axiom
+  (assert
+  (< algorithm__gap_vectors__cursor__node__first__bit algorithm__gap_vectors__cursor__node__last__bit))
+
+;; algorithm__gap_vectors__cursor__node__position_axiom
+  (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
+
 (declare-const value__size5 Int)
 
 (declare-const value__alignment5 Int)
@@ -231,6 +229,8 @@
                                      (or (= temp___is_init_517 true)
                                      (<= 1 2147483647)) (in_range4
                                      temp___expr_521)))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 

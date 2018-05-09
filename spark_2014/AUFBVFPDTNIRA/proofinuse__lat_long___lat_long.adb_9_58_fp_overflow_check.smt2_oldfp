@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1050,11 +1050,19 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(declare-sort tfloat_with_approxB 0)
+(declare-fun sin1 (t) t)
+
+(declare-fun sin__function_guard (t t) Bool)
+
+(declare-fun cos1 (t) t)
+
+(declare-fun cos__function_guard (t t) Bool)
+
+(declare-sort float_with_approx 0)
 
 (define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq (tfloat_with_approxB tfloat_with_approxB) Bool)
+(declare-fun user_eq (float_with_approx float_with_approx) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (t) us_image)
 
@@ -1062,28 +1070,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) t)
 
-(declare-const dummy tfloat_with_approxB)
-
-(declare-datatypes ()
-((tfloat_with_approxB__ref
- (mk_tfloat_with_approxB__ref
- (tfloat_with_approxB__content tfloat_with_approxB)))))
-(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
-  (tfloat_with_approxB__content a))
-
-(declare-sort float_with_approx 0)
-
-(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
-
-(declare-fun user_eq1 (float_with_approx float_with_approx) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
-
-(declare-const dummy1 float_with_approx)
+(declare-const dummy float_with_approx)
 
 (declare-datatypes ()
 ((float_with_approx__ref
@@ -1104,14 +1091,6 @@
                                      (or (= temp___is_init_161 true) (le
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_165)))
-
-(declare-fun sin1 (t) t)
-
-(declare-fun sin__function_guard (t t) Bool)
-
-(declare-fun cos1 (t) t)
-
-(declare-fun cos__function_guard (t t) Bool)
 
 (declare-const fliteral2 t)
 
@@ -1140,11 +1119,11 @@
   (! (=> (dynamic_invariant x true true true true) (= (cos1 x) (sin1 x))) :pattern (
   (cos1 x)) )))
 
-(declare-fun sqrt2 (t) t)
+(declare-fun sqrt3 (t) t)
 
 (declare-fun sqrt__function_guard (t t) Bool)
 
-(declare-fun sqrt3 (t) t)
+(declare-fun sqrt4 (t) t)
 
 (declare-fun sqrt__function_guard1 (t t) Bool)
 
@@ -1152,13 +1131,13 @@
   (assert
   (forall ((x t))
   (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
-     (sqrt2 x) true false true true)) :pattern ((sqrt2 x)) )))
+     (sqrt3 x) true false true true)) :pattern ((sqrt3 x)) )))
 
 ;; sqrt__def_axiom
   (assert
   (forall ((x t))
-  (! (=> (dynamic_invariant x true true true true) (= (sqrt2 x) (sqrt3 x))) :pattern (
-  (sqrt2 x)) )))
+  (! (=> (dynamic_invariant x true true true true) (= (sqrt3 x) (sqrt4 x))) :pattern (
+  (sqrt3 x)) )))
 
 (declare-sort latitude 0)
 
@@ -1166,17 +1145,17 @@
                                    (and (le (neg fliteral2) x) (le x
                                    fliteral2))))
 
-(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq2 (latitude latitude) Bool)
+(declare-fun user_eq1 (latitude latitude) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) t)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
 
-(declare-const dummy2 latitude)
+(declare-const dummy1 latitude)
 
 (declare-datatypes ()
 ((latitude__ref (mk_latitude__ref (latitude__content latitude)))))
@@ -1220,17 +1199,17 @@
                                    (and (le (neg fliteral4) x) (le x
                                    fliteral5))))
 
-(define-fun bool_eq4 ((x t) (y t)) Bool (ite (eq x y) true false))
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq3 (longitude longitude) Bool)
+(declare-fun user_eq2 (longitude longitude) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 (t) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) t)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) t)
 
-(declare-const dummy3 longitude)
+(declare-const dummy2 longitude)
 
 (declare-datatypes ()
 ((longitude__ref (mk_longitude__ref (longitude__content longitude)))))
@@ -1261,6 +1240,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__lat_long__coordinates__lat latitude)(rec__lat_long__coordinates__long longitude)))))
+(define-fun us_split_fields_Lat__projection ((a us_split_fields)) latitude
+  (rec__lat_long__coordinates__lat a))
+
+(define-fun us_split_fields_Long__projection ((a us_split_fields)) longitude
+  (rec__lat_long__coordinates__long a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -1272,7 +1257,7 @@
 (define-fun us_rep___projection ((a us_rep)) us_split_fields (us_split_fields1
                                                              a))
 
-(define-fun bool_eq5 ((a us_rep)
+(define-fun bool_eq4 ((a us_rep)
   (b us_rep)) Bool (ite (and
                         (= (to_rep
                            (rec__lat_long__coordinates__lat
@@ -1338,22 +1323,14 @@
 ;; lat_long__coordinates__long__position_axiom
   (assert (<= 0 lat_long__coordinates__long__position))
 
-(declare-fun user_eq4 (us_rep us_rep) Bool)
+(declare-fun user_eq3 (us_rep us_rep) Bool)
 
-(declare-const dummy4 us_rep)
+(declare-const dummy3 us_rep)
 
 (declare-datatypes ()
 ((coordinates__ref (mk_coordinates__ref (coordinates__content us_rep)))))
 (define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep
   (coordinates__content a))
-
-(declare-const source us_rep)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const destination us_rep)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-fun delta_lat_in_meters (us_rep us_rep) t)
 
@@ -1363,6 +1340,14 @@
 
 (declare-fun olt__function_guard (Bool t t) Bool)
 
+(declare-const r t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const conv_deg_to_rad t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
 (declare-const fliteral6 t)
 
 ;; fliteral_axiom
@@ -1370,82 +1355,97 @@
 
 ;; delta_lat_in_meters__post_axiom
   (assert
-  (forall ((source1 us_rep) (destination1 us_rep))
-  (! (let ((result (delta_lat_in_meters source1 destination1)))
+  (forall ((source us_rep) (destination us_rep))
+  (! (let ((result (delta_lat_in_meters source destination)))
      (and (= (olt (abs1 result) fliteral6) true) (dynamic_invariant result
-     true false true true))) :pattern ((delta_lat_in_meters source1
-                                       destination1)) )))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) (/ 63674445.0 10.0))))
-
-(declare-const fliteral8 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral8)
-  (= (tqtreal fliteral8) (/ 1745329238474369049072265625.0 100000000000000000000000000000.0))))
+     true false true true))) :pattern ((delta_lat_in_meters source
+                                       destination)) )))
 
 ;; delta_lat_in_meters__def_axiom
   (assert
-  (forall ((source1 us_rep) (destination1 us_rep))
-  (! (= (delta_lat_in_meters source1 destination1) (mul RNE1
-                                                   (mul RNE1
-                                                   (sub RNE1
-                                                   (to_rep
-                                                   (rec__lat_long__coordinates__lat
-                                                   (us_split_fields1
-                                                   destination1)))
-                                                   (to_rep
-                                                   (rec__lat_long__coordinates__lat
-                                                   (us_split_fields1 source1))))
-                                                   fliteral7) fliteral8)) :pattern (
-  (delta_lat_in_meters source1 destination1)) )))
+  (forall ((source us_rep) (destination us_rep))
+  (! (= (delta_lat_in_meters source destination) (mul RNE1
+                                                 (mul RNE1
+                                                 (sub RNE1
+                                                 (to_rep
+                                                 (rec__lat_long__coordinates__lat
+                                                 (us_split_fields1
+                                                 destination)))
+                                                 (to_rep
+                                                 (rec__lat_long__coordinates__lat
+                                                 (us_split_fields1 source))))
+                                                 r) conv_deg_to_rad)) :pattern (
+  (delta_lat_in_meters source destination)) )))
 
 (declare-fun delta_long_in_meters (us_rep us_rep) t)
 
 (declare-fun delta_long_in_meters__function_guard (t us_rep us_rep) Bool)
 
-(declare-const fliteral9 t)
+(declare-const fliteral7 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) 40007832.0)))
+  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) 40007832.0)))
 
 ;; delta_long_in_meters__post_axiom
   (assert
-  (forall ((source1 us_rep) (destination1 us_rep))
-  (! (let ((result (delta_long_in_meters source1 destination1)))
-     (and (= (olt (abs1 result) fliteral9) true) (dynamic_invariant result
-     true false true true))) :pattern ((delta_long_in_meters source1
-                                       destination1)) )))
+  (forall ((source us_rep) (destination us_rep))
+  (! (let ((result (delta_long_in_meters source destination)))
+     (and (= (olt (abs1 result) fliteral7) true) (dynamic_invariant result
+     true false true true))) :pattern ((delta_long_in_meters source
+                                       destination)) )))
 
 ;; delta_long_in_meters__def_axiom
   (assert
-  (forall ((source1 us_rep) (destination1 us_rep))
-  (! (= (delta_long_in_meters source1 destination1) (div1 RNE1
-                                                    (mul RNE1
-                                                    (sub RNE1
-                                                    (to_rep1
-                                                    (rec__lat_long__coordinates__long
-                                                    (us_split_fields1
-                                                    destination1)))
-                                                    (to_rep1
-                                                    (rec__lat_long__coordinates__long
-                                                    (us_split_fields1
-                                                    source1)))) fliteral7)
-                                                    (cos1
-                                                    (to_rep
-                                                    (rec__lat_long__coordinates__lat
-                                                    (us_split_fields1
-                                                    source1)))))) :pattern (
-  (delta_long_in_meters source1 destination1)) )))
+  (forall ((source us_rep) (destination us_rep))
+  (! (= (delta_long_in_meters source destination) (div1 RNE1
+                                                  (mul RNE1
+                                                  (sub RNE1
+                                                  (to_rep1
+                                                  (rec__lat_long__coordinates__long
+                                                  (us_split_fields1
+                                                  destination)))
+                                                  (to_rep1
+                                                  (rec__lat_long__coordinates__long
+                                                  (us_split_fields1 source))))
+                                                  r)
+                                                  (cos1
+                                                  (to_rep
+                                                  (rec__lat_long__coordinates__lat
+                                                  (us_split_fields1 source)))))) :pattern (
+  (delta_long_in_meters source destination)) )))
+
+(declare-sort tfloat_with_approxB 0)
+
+(define-fun bool_eq5 ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(declare-fun user_eq4 (tfloat_with_approxB tfloat_with_approxB) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (t) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) t)
+
+(declare-const dummy4 tfloat_with_approxB)
+
+(declare-datatypes ()
+((tfloat_with_approxB__ref
+ (mk_tfloat_with_approxB__ref
+ (tfloat_with_approxB__content tfloat_with_approxB)))))
+(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
+  (tfloat_with_approxB__content a))
+
+(declare-const source us_rep)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const destination us_rep)
+
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (declare-sort float 0)
 
@@ -1474,18 +1474,37 @@
 ;; olt__post_axiom
   (assert true)
 
+(declare-const fliteral8 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral8)
+  (= (tqtreal fliteral8) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
+
+;; olt__def_axiom
+  (assert
+  (forall ((left t) (right t))
+  (! (= (= (olt left right) true) (lt left (add RNE1 right fliteral8))) :pattern (
+  (olt left right)) )))
+
+(declare-const fliteral9 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral9) (= (tqtreal fliteral9) (/ 63674445.0 10.0))))
+
+;; r__def_axiom
+  (assert (= r fliteral9))
+
 (declare-const fliteral10 t)
 
 ;; fliteral_axiom
   (assert
   (and (tqtisFinite fliteral10)
-  (= (tqtreal fliteral10) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
+  (= (tqtreal fliteral10) (/ 1745329238474369049072265625.0 100000000000000000000000000000.0))))
 
-;; olt__def_axiom
-  (assert
-  (forall ((left t) (right t))
-  (! (= (= (olt left right) true) (lt left (add RNE1 right fliteral10))) :pattern (
-  (olt left right)) )))
+;; conv_deg_to_rad__def_axiom
+  (assert (= conv_deg_to_rad fliteral10))
 
 (define-fun dynamic_invariant2 ((temp___expr_172 t) (temp___is_init_168 Bool)
   (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
@@ -1518,13 +1537,13 @@
   (assert
   (forall ((x t))
   (! (=> (and (dynamic_invariant1 x true true true true) (le fliteral11 x))
-     (let ((result (sqrt3 x)))
+     (let ((result (sqrt4 x)))
      (and
      (and (le fliteral11 result)
      (and (=> (eq x fliteral11) (eq result fliteral11))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral12 x) (lt fliteral11 result))))) (dynamic_invariant1
-     result true false true true)))) :pattern ((sqrt3 x)) )))
+     result true false true true)))) :pattern ((sqrt4 x)) )))
 
 ;; sin__post_axiom
   (assert
@@ -1549,6 +1568,18 @@
 (declare-const delta_lat1 t)
 
 ;; H
+  (assert (tqtisFinite r))
+
+;; H
+  (assert (= fliteral9 r))
+
+;; H
+  (assert (tqtisFinite conv_deg_to_rad))
+
+;; H
+  (assert (= fliteral10 conv_deg_to_rad))
+
+;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite delta_lat)))
 
 ;; H
@@ -1567,7 +1598,7 @@
                 (us_split_fields1 destination)))
                 (to_rep
                 (rec__lat_long__coordinates__lat (us_split_fields1 source))))
-                fliteral7) fliteral8)))
+                r) conv_deg_to_rad)))
 
 ;; H
   (assert
@@ -1593,7 +1624,7 @@
         (rec__lat_long__coordinates__long (us_split_fields1 destination)))
         (to_rep1
         (rec__lat_long__coordinates__long (us_split_fields1 source))))
-        fliteral7) o)))
+        r) o)))
 
 (assert
 ;; WP_parameter_def

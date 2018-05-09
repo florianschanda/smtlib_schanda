@@ -61,24 +61,6 @@
 (define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun dynamic_invariant1 ((temp___expr_163 Float32)
-  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
-  (temp___do_toplevel_161 Bool)
-  (temp___do_typ_inv_162 Bool)) Bool (=>
-                                     (or (= temp___is_init_159 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range1 temp___expr_163)))
-
-(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
 (declare-const value__size Int)
@@ -107,7 +89,7 @@
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
 
-(define-fun in_range4 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
+(define-fun in_range2 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
 (declare-const value__size1 Int)
 
@@ -164,7 +146,7 @@
 ;; gaps__gap__idir__position_axiom
   (assert (<= 0 gaps__gap__idir__position))
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-const value__size2 Int)
 
@@ -192,12 +174,12 @@
 ;; algorithm__gap_vectors__list__capacity__position_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
 
-(define-fun dynamic_invariant2 ((temp___expr_365 Int)
+(define-fun dynamic_invariant1 ((temp___expr_365 Int)
   (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
   (temp___do_toplevel_363 Bool)
   (temp___do_typ_inv_364 Bool)) Bool (=>
                                      (or (= temp___is_init_361 true)
-                                     (<= 0 2147483647)) (in_range5
+                                     (<= 0 2147483647)) (in_range3
                                      temp___expr_365)))
 
 (declare-const value__size3 Int)
@@ -209,6 +191,16 @@
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment3))
+
+(declare-const value__size4 Int)
+
+(declare-const value__alignment4 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size4))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment4))
 
 (declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
 
@@ -226,16 +218,6 @@
 ;; algorithm__gap_vectors__cursor__node__position_axiom
   (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
 
-(declare-const value__size4 Int)
-
-(declare-const value__alignment4 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size4))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment4))
-
 (declare-const value__size5 Int)
 
 (declare-const value__alignment5 Int)
@@ -245,6 +227,24 @@
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment5))
+
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(define-fun dynamic_invariant2 ((temp___expr_163 Float32)
+  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
+  (temp___do_toplevel_161 Bool)
+  (temp___do_typ_inv_162 Bool)) Bool (=>
+                                     (or (= temp___is_init_159 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range4 temp___expr_163)))
+
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
 
 (declare-const value__size6 Int)
 
@@ -356,7 +356,7 @@
   (temp___do_typ_inv_169 Bool)) Bool (=>
                                      (or (= temp___is_init_166 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range2 temp___expr_170)))
+                                     (in_range5 temp___expr_170)))
 
 (define-fun dynamic_invariant4 ((temp___expr_198 Float32)
   (temp___is_init_194 Bool) (temp___skip_constant_195 Bool)
@@ -364,14 +364,14 @@
   (temp___do_typ_inv_197 Bool)) Bool (=>
                                      (or (= temp___is_init_194 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                     (in_range3 temp___expr_198)))
+                                     (in_range1 temp___expr_198)))
 
 (define-fun dynamic_invariant5 ((temp___expr_323 Int)
   (temp___is_init_319 Bool) (temp___skip_constant_320 Bool)
   (temp___do_toplevel_321 Bool)
   (temp___do_typ_inv_322 Bool)) Bool (=>
                                      (or (= temp___is_init_319 true)
-                                     (<= (- 1) 1)) (in_range4
+                                     (<= (- 1) 1)) (in_range2
                                      temp___expr_323)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS11 Int)
@@ -424,7 +424,7 @@
 
 (declare-const algorithm__buildgapvector__B_7__dist__assume Float32)
 
-(declare-const temp___886 Int)
+(declare-const temp___888 Int)
 
 (declare-const algorithm__buildgapvector__B_9__dist__assume Float32)
 
@@ -467,13 +467,13 @@
 (declare-const i6 Int)
 
 ;; H
-  (assert (in_range1 robotradius))
+  (assert (in_range4 robotradius))
 
 ;; H
-  (assert (in_range1 mingapwidth))
+  (assert (in_range4 mingapwidth))
 
 ;; H
-  (assert (in_range1 fmaxrange))
+  (assert (in_range4 fmaxrange))
 
 (declare-const abstr Float32)
 

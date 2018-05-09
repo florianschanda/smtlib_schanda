@@ -1507,6 +1507,10 @@ axiom coerce_axiom :
   (forall x:t1 [to_rep(of_rep(x))]. (tqtisFinite(x) ->
   (to_rep(of_rep(x)) = x)))
 
+logic battery_threshold : t1
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
 type time_slot
 
 logic rliteral : t
@@ -1662,35 +1666,39 @@ axiom bool_eq_rev :
   (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
   temp___idx_154)])))))))))
 
-logic attr__ATTRIBUTE_ADDRESS : int
-
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.20000000298023223876953125))
 
+axiom battery_threshold__def_axiom : (battery_threshold = fliteral1)
+
  (* File "failsafe.ads", line 16, characters 0-0 *)
 goal WP_parameter_def :
   (forall battery_level_at:(t,battery_level_type) farray.
-  forall current_time:t. (in_range2(current_time) ->
-  (((bool_ge1(to_rep((battery_level_at[current_time])), fliteral1) = true) ->
+  forall current_time:t. (tqtisFinite(battery_threshold) ->
+  ((fliteral1 = battery_threshold) -> (in_range2(current_time) ->
+  (((bool_ge1(to_rep((battery_level_at[current_time])),
+  battery_threshold) = true) ->
   (((forall s:t. ((ule(rliteral, s) and ule(s, rliteral1)) ->
-    lt(to_rep((battery_level_at[s])), fliteral1))) ->
+    lt(to_rep((battery_level_at[s])), battery_threshold))) ->
   (((0 + 1) + 1) <= 1)) and
   ((not (forall s:t. ((ule(rliteral, s) and ule(s, rliteral1)) ->
-        lt(to_rep((battery_level_at[s])), fliteral1)))) ->
+        lt(to_rep((battery_level_at[s])), battery_threshold)))) ->
   (((0 + 1) + 0) <= 1)))) and
   ((not (bool_ge1(to_rep((battery_level_at[current_time])),
-  fliteral1) = true)) ->
+  battery_threshold) = true)) ->
   (((forall s:t. ((ule(rliteral, s) and ule(s, rliteral1)) ->
-    lt(to_rep((battery_level_at[s])), fliteral1))) ->
+    lt(to_rep((battery_level_at[s])), battery_threshold))) ->
   (((0 + 0) + 1) <= 1)) and
   ((not (forall s:t. ((ule(rliteral, s) and ule(s, rliteral1)) ->
-        lt(to_rep((battery_level_at[s])), fliteral1)))) ->
-  (((0 + 0) + 0) <= 1)))))))
+        lt(to_rep((battery_level_at[s])), battery_threshold)))) ->
+  (((0 + 0) + 0) <= 1)))))))))

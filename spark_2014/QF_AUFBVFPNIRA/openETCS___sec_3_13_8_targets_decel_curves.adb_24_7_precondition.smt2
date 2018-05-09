@@ -210,9 +210,9 @@
 ;; deceleration_curve__target_t__speed__position_axiom
   (assert (<= 0 deceleration_curve__target_t__speed__position))
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 4)))
-
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 4)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 

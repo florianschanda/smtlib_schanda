@@ -226,7 +226,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K210-006__anontype1/gnatprove/anon_type.mlw", line 3576, characters 5-8
   (not (= anon_type__increment__result4 (+ var_in 1))))
 (check-sat)
 (exit)

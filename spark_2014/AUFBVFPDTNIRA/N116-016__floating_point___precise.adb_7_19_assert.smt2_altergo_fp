@@ -1110,7 +1110,7 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 10.39999008178710937500))
+  (tqtreal(fliteral4) = 10.40001010894775390625))
 
  (* File "precise.adb", line 1, characters 0-0 *)
 goal WP_parameter_def :
@@ -1121,4 +1121,4 @@ goal WP_parameter_def :
   ((le(neg(fliteral3), fliteral3) -> tqtisFinite(z)) ->
   ((((o = add(NearestTiesToEven, x1, y1)) and
   tqtisFinite(add(NearestTiesToEven, x1, y1))) and ((result2 = z) and
-  (z1 = o))) -> le(fliteral4, z1))))))))
+  (z1 = o))) -> le(z1, fliteral4))))))))

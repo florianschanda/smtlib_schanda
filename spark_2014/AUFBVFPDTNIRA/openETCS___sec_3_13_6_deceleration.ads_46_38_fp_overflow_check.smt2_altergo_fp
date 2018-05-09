@@ -1058,72 +1058,17 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-type speed_t
+type num_delimiters_range
 
-logic bool_eq2 : t, t -> bool
+logic num_delimiters_rangeqtint : num_delimiters_range -> int
 
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+axiom num_delimiters_rangeqtaxiom :
+  (forall i:num_delimiters_range. ((0 <= num_delimiters_rangeqtint(i)) and
+  (num_delimiters_rangeqtint(i) <= 10)))
 
-logic user_eq1 : speed_t, speed_t -> bool
+predicate in_range1(x: int) = ((0 <= x) and (x <= 10))
 
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic dummy1 : speed_t
-
-type speed_t__ref = { speed_t__content : speed_t
-}
-
-function speed_t__ref___projection(a: speed_t__ref) : speed_t =
-  (a).speed_t__content
-
-type deceleration_t
-
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.0e-1))
-
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
-
-predicate in_range1(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
-  fliteral2)))
-
-logic bool_eq3 : t, t -> bool
-
-axiom bool_eq_def3 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
-
-logic user_eq2 : deceleration_t, deceleration_t -> bool
-
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
-
-logic dummy2 : deceleration_t
-
-type deceleration_t__ref = { deceleration_t__content : deceleration_t
-}
-
-function deceleration_t__ref___projection(a: deceleration_t__ref) : deceleration_t =
-  (a).deceleration_t__content
-
-type distance_t
-
-predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq4 : int, int -> bool
+logic bool_eq2 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -1136,7 +1081,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq4(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -1153,47 +1098,21 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq5 : int, int -> bool
+logic bool_eq3 : int, int -> bool
 
-axiom bool_eq_def4 :
-  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
 
-logic user_eq3 : distance_t, distance_t -> bool
+logic user_eq1 : num_delimiters_range, num_delimiters_range -> bool
 
-logic dummy3 : distance_t
-
-type distance_t__ref = { distance_t__content : distance_t
-}
-
-function distance_t__ref___projection(a: distance_t__ref) : distance_t =
-  (a).distance_t__content
-
-type num_delimiters_range
-
-predicate in_range3(x: int) = ((0 <= x) and (x <= 10))
-
-logic bool_eq6 : int, int -> bool
-
-axiom bool_eq_def5 :
-  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE4 : us_image -> int
-
-logic user_eq4 : num_delimiters_range, num_delimiters_range -> bool
-
-logic dummy4 : num_delimiters_range
+logic dummy1 : num_delimiters_range
 
 type num_delimiters_range__ref = { num_delimiters_range__content :
 num_delimiters_range
@@ -1202,7 +1121,7 @@ num_delimiters_range
 function num_delimiters_range__ref___projection(a: num_delimiters_range__ref) : num_delimiters_range =
   (a).num_delimiters_range__content
 
-logic to_rep : num_delimiters_range -> int
+function to_rep(x: num_delimiters_range) : int = num_delimiters_rangeqtint(x)
 
 logic of_rep : int -> num_delimiters_range
 
@@ -1210,10 +1129,10 @@ axiom inversion_axiom :
   (forall x:num_delimiters_range [to_rep(x)]. (of_rep(to_rep(x)) = x))
 
 axiom range_axiom :
-  (forall x:num_delimiters_range [to_rep(x)]. in_range3(to_rep(x)))
+  (forall x:num_delimiters_range [to_rep(x)]. in_range1(to_rep(x)))
 
 axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range3(x) ->
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
   (to_rep(of_rep(x)) = x)))
 
 logic to_rep1 : float1 -> t
@@ -1231,23 +1150,29 @@ axiom coerce_axiom1 :
 
 type function_range
 
-predicate in_range4(x: int) = ((0 <= x) and (x <= 2147483647))
+logic function_rangeqtint : function_range -> int
 
-logic bool_eq7 : int, int -> bool
+axiom function_rangeqtaxiom :
+  (forall i:function_range. ((0 <= function_rangeqtint(i)) and
+  (function_rangeqtint(i) <= 2147483647)))
 
-axiom bool_eq_def6 :
-  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
 
-logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+logic bool_eq4 : int, int -> bool
 
-logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
-logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
 
-logic user_eq5 : function_range, function_range -> bool
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic dummy5 : function_range
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+
+logic user_eq2 : function_range, function_range -> bool
+
+logic dummy2 : function_range
 
 type function_range__ref = { function_range__content : function_range
 }
@@ -1255,7 +1180,7 @@ type function_range__ref = { function_range__content : function_range
 function function_range__ref___projection(a: function_range__ref) : function_range =
   (a).function_range__content
 
-logic to_rep2 : function_range -> int
+function to_rep2(x: function_range) : int = function_rangeqtint(x)
 
 logic of_rep2 : int -> function_range
 
@@ -1263,10 +1188,10 @@ axiom inversion_axiom2 :
   (forall x:function_range [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
 
 axiom range_axiom2 :
-  (forall x:function_range [to_rep2(x)]. in_range4(to_rep2(x)))
+  (forall x:function_range [to_rep2(x)]. in_range2(to_rep2(x)))
 
 axiom coerce_axiom2 :
-  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range2(x) ->
   (to_rep2(of_rep2(x)) = x)))
 
 type us_split_fields = { rec__step_function__delimiter_entry__delimiter :
@@ -1275,6 +1200,9 @@ function_range; rec__step_function__delimiter_entry__value : float1
 
 function us_split_fields_Delimiter__projection(a: us_split_fields) : function_range =
   (a).rec__step_function__delimiter_entry__delimiter
+
+function us_split_fields_Value__projection(a: us_split_fields) : float1 =
+  (a).rec__step_function__delimiter_entry__value
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1288,16 +1216,16 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-logic bool_eq8 : us_rep, us_rep -> bool
+logic bool_eq5 : us_rep, us_rep -> bool
 
-axiom bool_eq_def7 :
-  (forall a:us_rep. forall b:us_rep [bool_eq8(a, b)].
+axiom bool_eq_def4 :
+  (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
   ((((to_rep2(((a).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((b).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
   (to_rep1(((a).us_split_fields1).rec__step_function__delimiter_entry__value) = to_rep1(((b).us_split_fields1).rec__step_function__delimiter_entry__value))) ->
-  (bool_eq8(a, b) = true)) and
+  (bool_eq5(a, b) = true)) and
   ((not ((to_rep2(((a).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((b).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
   (to_rep1(((a).us_split_fields1).rec__step_function__delimiter_entry__value) = to_rep1(((b).us_split_fields1).rec__step_function__delimiter_entry__value)))) ->
-  (bool_eq8(a, b) = false))))
+  (bool_eq5(a, b) = false))))
 
 logic value__size : int
 
@@ -1351,11 +1279,11 @@ axiom step_function__delimiter_entry__value__last__bit_axiom :
 axiom step_function__delimiter_entry__value__position_axiom :
   (0 <= step_function__delimiter_entry__value__position)
 
-logic user_eq6 : us_rep, us_rep -> bool
+logic user_eq3 : us_rep, us_rep -> bool
 
-logic dummy6 : function_range
+logic dummy3 : function_range
 
-logic dummy7 : float1
+logic dummy4 : float1
 
 type delimiter_entry__ref = { delimiter_entry__content : us_rep
 }
@@ -1379,41 +1307,41 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic bool_eq9 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+logic bool_eq6 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
-axiom bool_eq_def8 :
+axiom bool_eq_def5 :
   (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
   forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
-  [bool_eq9(a, a__first, a__last, b, b__first, b__last)].
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
   (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) and (bool_eq8((a[temp___idx_154]),
+  (temp___idx_154 <= a__last)) and (bool_eq5((a[temp___idx_154]),
   (b[((b__first - a__first) + temp___idx_154)])) = true)) or
   (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
-  (bool_eq9(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) -> (bool_eq8((a[temp___idx_154]),
-  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq9(a,
+  (temp___idx_154 <= a__last)) -> (bool_eq5((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq6(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq9(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) -> (bool_eq8((a[temp___idx_154]),
+  (temp___idx_154 <= a__last)) -> (bool_eq5((a[temp___idx_154]),
   (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
-logic dummy8 : (int,us_rep) farray
+logic dummy5 : (int,us_rep) farray
 
 logic value__size1 : int
 
@@ -1442,7 +1370,7 @@ axiom value__alignment_axiom1 : (0 <= value__alignment1)
 axiom object__alignment_axiom1 :
   (forall a:(int,us_rep) farray. (0 <= object__alignment1(a)))
 
-logic user_eq7 : (int,us_rep) farray, (int,us_rep) farray -> bool
+logic user_eq4 : (int,us_rep) farray, (int,us_rep) farray -> bool
 
 type us_split_fields2 = {
 rec__step_function__step_function_t__number_of_delimiters :
@@ -1468,18 +1396,18 @@ type us_rep1 = { us_split_fields3 : us_split_fields2
 function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
-logic bool_eq10 : us_rep1, us_rep1 -> bool
+logic bool_eq7 : us_rep1, us_rep1 -> bool
 
-axiom bool_eq_def9 :
-  (forall a:us_rep1. forall b:us_rep1 [bool_eq10(a, b)].
+axiom bool_eq_def6 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq7(a, b)].
   ((((to_rep(((a).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters) = to_rep(((b).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters)) and
-  (bool_eq9(((a).us_split_fields3).rec__step_function__step_function_t__step,
+  (bool_eq6(((a).us_split_fields3).rec__step_function__step_function_t__step,
   0, 10, ((b).us_split_fields3).rec__step_function__step_function_t__step, 0,
-  10) = true)) -> (bool_eq10(a, b) = true)) and
+  10) = true)) -> (bool_eq7(a, b) = true)) and
   ((not ((to_rep(((a).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters) = to_rep(((b).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters)) and
-  (bool_eq9(((a).us_split_fields3).rec__step_function__step_function_t__step,
+  (bool_eq6(((a).us_split_fields3).rec__step_function__step_function_t__step,
   0, 10, ((b).us_split_fields3).rec__step_function__step_function_t__step, 0,
-  10) = true))) -> (bool_eq10(a, b) = false))))
+  10) = true))) -> (bool_eq7(a, b) = false))))
 
 logic value__size2 : int
 
@@ -1535,11 +1463,11 @@ axiom step_function__step_function_t__step__last__bit_axiom :
 axiom step_function__step_function_t__step__position_axiom :
   (0 <= step_function__step_function_t__step__position)
 
-logic user_eq8 : us_rep1, us_rep1 -> bool
+logic user_eq5 : us_rep1, us_rep1 -> bool
 
-logic dummy9 : num_delimiters_range
+logic dummy6 : num_delimiters_range
 
-logic dummy10 : (int,us_rep) farray
+logic dummy7 : (int,us_rep) farray
 
 type step_function_t__ref = { step_function_t__content : us_rep1
 }
@@ -1551,12 +1479,6 @@ logic get_value : us_rep1, int -> t
 
 logic get_value__function_guard : t, us_rep1, int -> prop
 
-logic kdry_rst_model : num_delimiters_range
-
-logic kdry_rst_model1 : (int,us_rep) farray
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
 logic is_valid_kdry_rst : unit -> bool
 
 logic is_valid_kdry_rst__function_guard : bool, unit -> prop
@@ -1564,6 +1486,36 @@ logic is_valid_kdry_rst__function_guard : bool, unit -> prop
 logic kdry_rst : t -> t
 
 logic kdry_rst__function_guard : t, t -> prop
+
+type speed_t
+
+logic bool_eq8 : t, t -> bool
+
+axiom bool_eq_def7 :
+  (forall x:t. forall y:t [bool_eq8(x, y)]. ((eq(x, y) -> (bool_eq8(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq8(x, y) = false))))
+
+logic user_eq6 : speed_t, speed_t -> bool
+
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
+
+logic dummy8 : speed_t
+
+type speed_t__ref = { speed_t__content : speed_t
+}
+
+function speed_t__ref___projection(a: speed_t__ref) : speed_t =
+  (a).speed_t__content
+
+logic kdry_rst_model : num_delimiters_range
+
+logic kdry_rst_model1 : (int,us_rep) farray
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom kdry_rst__post_axiom :
   (forall v:t [kdry_rst(v)]. ((tqtisFinite(v) and
@@ -1573,12 +1525,6 @@ axiom kdry_rst__post_axiom :
   rec__step_function__step_function_t__step = kdry_rst_model1 } },
   to_int(NearestTiesToAway, v))) and tqtisFinite(kdry_rst(v)))))
 
-logic kwet_rst_model : num_delimiters_range
-
-logic kwet_rst_model1 : (int,us_rep) farray
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
 logic is_valid_kwet_rst : unit -> bool
 
 logic is_valid_kwet_rst__function_guard : bool, unit -> prop
@@ -1586,6 +1532,12 @@ logic is_valid_kwet_rst__function_guard : bool, unit -> prop
 logic kwet_rst : t -> t
 
 logic kwet_rst__function_guard : t, t -> prop
+
+logic kwet_rst_model : num_delimiters_range
+
+logic kwet_rst_model1 : (int,us_rep) farray
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
 axiom kwet_rst__post_axiom :
   (forall v:t [kwet_rst(v)]. ((tqtisFinite(v) and
@@ -1603,20 +1555,89 @@ logic is_valid_deceleration_model : us_rep1 -> bool
 
 logic is_valid_deceleration_model__function_guard : bool, us_rep1 -> prop
 
+logic a_brake_emergency : t, int -> t
+
+logic a_brake_emergency__function_guard : t, t, int -> prop
+
+type deceleration_t
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
+
+predicate in_range3(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
+  fliteral2)))
+
+logic bool_eq9 : t, t -> bool
+
+axiom bool_eq_def8 :
+  (forall x:t. forall y:t [bool_eq9(x, y)]. ((eq(x, y) -> (bool_eq9(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq9(x, y) = false))))
+
+logic user_eq7 : deceleration_t, deceleration_t -> bool
+
+logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+
+logic dummy9 : deceleration_t
+
+type deceleration_t__ref = { deceleration_t__content : deceleration_t
+}
+
+function deceleration_t__ref___projection(a: deceleration_t__ref) : deceleration_t =
+  (a).deceleration_t__content
+
+type distance_t
+
+logic distance_tqtint : distance_t -> int
+
+axiom distance_tqtaxiom :
+  (forall i:distance_t. ((0 <= distance_tqtint(i)) and
+  (distance_tqtint(i) <= 2147483647)))
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq8 : distance_t, distance_t -> bool
+
+logic dummy10 : distance_t
+
+type distance_t__ref = { distance_t__content : distance_t
+}
+
+function distance_t__ref___projection(a: distance_t__ref) : distance_t =
+  (a).distance_t__content
+
 logic a_brake_emergency_model : num_delimiters_range
 
 logic a_brake_emergency_model1 : (int,us_rep) farray
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic a_brake_emergency : t, int -> t
-
-logic a_brake_emergency__function_guard : t, t, int -> prop
-
 axiom a_brake_emergency__post_axiom :
   (forall v:t.
   (forall d:int [a_brake_emergency(v, d)]. (((tqtisFinite(v) and
-  in_range2(d)) and ((is_valid_deceleration_model({ us_split_fields3 = {
+  in_range4(d)) and ((is_valid_deceleration_model({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
   a_brake_emergency_model; rec__step_function__step_function_t__step =
   a_brake_emergency_model1 } }) = true) and (is_valid_speed(v) = true))) ->
@@ -1624,15 +1645,19 @@ axiom a_brake_emergency__post_axiom :
   rec__step_function__step_function_t__number_of_delimiters =
   a_brake_emergency_model; rec__step_function__step_function_t__step =
   a_brake_emergency_model1 } }, to_int(NearestTiesToAway, v))) and
-  in_range1(a_brake_emergency(v, d))))))
+  in_range3(a_brake_emergency(v, d))))))
 
-logic v : t
+logic m_nvavadh : t
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic d : int
+logic v : t
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic d : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
 
 type speed_km_per_h_t
 
@@ -1658,21 +1683,28 @@ type speed_km_per_h_t__ref = { speed_km_per_h_t__content : speed_km_per_h_t
 function speed_km_per_h_t__ref___projection(a: speed_km_per_h_t__ref) : speed_km_per_h_t =
   (a).speed_km_per_h_t__content
 
-logic is_valid_speed_km_per_h : t -> bool
+logic maximum_valid_speed_km_per_h : t
 
-logic is_valid_speed_km_per_h__function_guard : bool, t -> prop
-
-axiom is_valid_speed_km_per_h__post_axiom : true
+logic attr__ATTRIBUTE_ADDRESS6 : int
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 500.0))
 
+axiom maximum_valid_speed_km_per_h__def_axiom :
+  (maximum_valid_speed_km_per_h = fliteral3)
+
+logic is_valid_speed_km_per_h : t -> bool
+
+logic is_valid_speed_km_per_h__function_guard : bool, t -> prop
+
+axiom is_valid_speed_km_per_h__post_axiom : true
+
 axiom is_valid_speed_km_per_h__def_axiom :
   (forall speed:t [is_valid_speed_km_per_h(speed)].
   ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral1, speed) and
-  le(speed, fliteral3))))
+  le(speed, maximum_valid_speed_km_per_h))))
 
 logic m_per_s_from_km_per_h : t -> t
 
@@ -1703,7 +1735,7 @@ axiom is_valid_speed__post_axiom : true
 axiom is_valid_speed__def_axiom :
   (forall speed:t [is_valid_speed(speed)].
   ((is_valid_speed(speed) = true) <-> (le(fliteral1, speed) and le(speed,
-  m_per_s_from_km_per_h(fliteral3)))))
+  m_per_s_from_km_per_h(maximum_valid_speed_km_per_h)))))
 
 logic is_valid : us_rep1 -> bool
 
@@ -1753,7 +1785,7 @@ axiom get_value__post_axiom :
   (forall x:int [get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun;
   rec__step_function__step_function_t__step = sfun1 } }, x)].
-  ((in_range4(x) and (is_valid({ us_split_fields3 = {
+  ((in_range2(x) and (is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun;
   rec__step_function__step_function_t__step = sfun1 } }) = true)) ->
   (((exists i:int. (((0 <= i) and (i <= (to_rep(sfun) - 1))) and
@@ -1772,6 +1804,8 @@ axiom get_value__post_axiom :
   rec__step_function__step_function_t__number_of_delimiters = sfun;
   rec__step_function__step_function_t__step = sfun1 } }, x))))))
 
+axiom m_nvavadh__def_axiom : (m_nvavadh = fliteral1)
+
 axiom is_valid_deceleration_model__post_axiom : true
 
 axiom is_valid_deceleration_model__def_axiom :
@@ -1787,35 +1821,43 @@ axiom is_valid_deceleration_model__def_axiom :
   rec__step_function__step_function_t__step = s1 } }) = true) and
   (to_rep(s) <= 6))))
 
-logic temp___155 : us_rep, us_rep -> (int,us_rep) farray
+logic temp_____aggregate_def_155 : us_rep, us_rep -> (int,us_rep) farray
+
+logic rliteral : num_delimiters_range
+
+axiom rliteral_axiom : (num_delimiters_rangeqtint(rliteral) = 0)
+
+logic rliteral1 : function_range
+
+axiom rliteral_axiom1 : (function_rangeqtint(rliteral1) = 0)
 
 axiom a_brake_emergency_model__def_axiom :
-  ((a_brake_emergency_model = of_rep(0)) and
-  (a_brake_emergency_model1 = temp___155({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = of_rep2(0);
+  ((a_brake_emergency_model = rliteral) and
+  (a_brake_emergency_model1 = temp_____aggregate_def_155({ us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = rliteral1;
   rec__step_function__delimiter_entry__value = of_rep1(fliteral) } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  of_rep2(0); rec__step_function__delimiter_entry__value = of_rep1(fliteral1)
+  rliteral1; rec__step_function__delimiter_entry__value = of_rep1(fliteral1)
   } })))
 
-logic temp___160 : us_rep, us_rep -> (int,us_rep) farray
+logic temp_____aggregate_def_160 : us_rep, us_rep -> (int,us_rep) farray
 
-axiom kdry_rst_model__def_axiom : ((kdry_rst_model = of_rep(0)) and
-  (kdry_rst_model1 = temp___160({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = of_rep2(0);
+axiom kdry_rst_model__def_axiom : ((kdry_rst_model = rliteral) and
+  (kdry_rst_model1 = temp_____aggregate_def_160({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral1;
   rec__step_function__delimiter_entry__value = of_rep1(fliteral) } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  of_rep2(0); rec__step_function__delimiter_entry__value = of_rep1(fliteral1)
+  rliteral1; rec__step_function__delimiter_entry__value = of_rep1(fliteral1)
   } })))
 
-logic temp___165 : us_rep, us_rep -> (int,us_rep) farray
+logic temp_____aggregate_def_165 : us_rep, us_rep -> (int,us_rep) farray
 
-axiom kwet_rst_model__def_axiom : ((kwet_rst_model = of_rep(0)) and
-  (kwet_rst_model1 = temp___165({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = of_rep2(0);
+axiom kwet_rst_model__def_axiom : ((kwet_rst_model = rliteral) and
+  (kwet_rst_model1 = temp_____aggregate_def_165({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral1;
   rec__step_function__delimiter_entry__value = of_rep1(fliteral) } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  of_rep2(0); rec__step_function__delimiter_entry__value = of_rep1(fliteral1)
+  rliteral1; rec__step_function__delimiter_entry__value = of_rep1(fliteral1)
   } })))
 
 axiom is_valid_kdry_rst__post_axiom : true
@@ -1849,17 +1891,18 @@ axiom is_valid_kwet_rst__def_axiom : ((is_valid_kwet_rst(void) = true) <->
 axiom def_axiom :
   (forall temp___157:function_range. forall temp___1571:float1.
   forall temp___158:function_range. forall temp___1581:float1.
-  (forall temp___159:int. (((temp___159 = 0) -> ((temp___155({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___157; rec__step_function__delimiter_entry__value = temp___1571 } }, {
+  (forall temp___159:int. (((temp___159 = 0) ->
+  ((temp_____aggregate_def_155({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___157;
+  rec__step_function__delimiter_entry__value = temp___1571 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___158; rec__step_function__delimiter_entry__value = temp___1581 }
   })[temp___159]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___157;
   rec__step_function__delimiter_entry__value = temp___1571 } })) and
-  ((not (temp___159 = 0)) -> ((temp___155({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = temp___157;
-  rec__step_function__delimiter_entry__value = temp___1571 } }, {
+  ((not (temp___159 = 0)) -> ((temp_____aggregate_def_155({
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
+  temp___157; rec__step_function__delimiter_entry__value = temp___1571 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___158; rec__step_function__delimiter_entry__value = temp___1581 }
   })[temp___159]) = { us_split_fields1 = {
@@ -1869,17 +1912,18 @@ axiom def_axiom :
 axiom def_axiom1 :
   (forall temp___162:function_range. forall temp___1621:float1.
   forall temp___163:function_range. forall temp___1631:float1.
-  (forall temp___164:int. (((temp___164 = 0) -> ((temp___160({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___162; rec__step_function__delimiter_entry__value = temp___1621 } }, {
+  (forall temp___164:int. (((temp___164 = 0) ->
+  ((temp_____aggregate_def_160({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___162;
+  rec__step_function__delimiter_entry__value = temp___1621 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___163; rec__step_function__delimiter_entry__value = temp___1631 }
   })[temp___164]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___162;
   rec__step_function__delimiter_entry__value = temp___1621 } })) and
-  ((not (temp___164 = 0)) -> ((temp___160({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = temp___162;
-  rec__step_function__delimiter_entry__value = temp___1621 } }, {
+  ((not (temp___164 = 0)) -> ((temp_____aggregate_def_160({
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
+  temp___162; rec__step_function__delimiter_entry__value = temp___1621 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___163; rec__step_function__delimiter_entry__value = temp___1631 }
   })[temp___164]) = { us_split_fields1 = {
@@ -1889,17 +1933,18 @@ axiom def_axiom1 :
 axiom def_axiom2 :
   (forall temp___167:function_range. forall temp___1671:float1.
   forall temp___168:function_range. forall temp___1681:float1.
-  (forall temp___169:int. (((temp___169 = 0) -> ((temp___165({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___167; rec__step_function__delimiter_entry__value = temp___1671 } }, {
+  (forall temp___169:int. (((temp___169 = 0) ->
+  ((temp_____aggregate_def_165({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___167;
+  rec__step_function__delimiter_entry__value = temp___1671 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___168; rec__step_function__delimiter_entry__value = temp___1681 }
   })[temp___169]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___167;
   rec__step_function__delimiter_entry__value = temp___1671 } })) and
-  ((not (temp___169 = 0)) -> ((temp___165({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = temp___167;
-  rec__step_function__delimiter_entry__value = temp___1671 } }, {
+  ((not (temp___169 = 0)) -> ((temp_____aggregate_def_165({
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
+  temp___167; rec__step_function__delimiter_entry__value = temp___1671 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___168; rec__step_function__delimiter_entry__value = temp___1681 }
   })[temp___169]) = { us_split_fields1 = {
@@ -1909,8 +1954,9 @@ axiom def_axiom2 :
  (* File "units.ads", line 26, characters 0-0 *)
 goal WP_parameter_def :
   (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
-  forall o5:t. forall o6:t. (tqtisFinite(v) -> (in_range2(d) ->
-  (((o6 = a_brake_emergency(v, d)) and (in_range1(o6) and eq(o6, get_value({
+  forall o5:t. forall o6:t. (tqtisFinite(m_nvavadh) ->
+  ((fliteral1 = m_nvavadh) -> (tqtisFinite(v) -> (in_range4(d) ->
+  (((o6 = a_brake_emergency(v, d)) and (in_range3(o6) and eq(o6, get_value({
   us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters =
   a_brake_emergency_model; rec__step_function__step_function_t__step =
@@ -1921,9 +1967,9 @@ goal WP_parameter_def :
   rec__step_function__step_function_t__step = kwet_rst_model1 } },
   to_int(NearestTiesToAway, v))))) and (o1 = sub(NearestTiesToEven, fliteral,
   o))) and ((o2 = o1) and tqtisFinite(o1))) and (o3 = mul(NearestTiesToEven,
-  fliteral1, o2))) and (((o4 = kwet_rst(v)) and (tqtisFinite(o4) and eq(o4,
+  m_nvavadh, o2))) and (((o4 = kwet_rst(v)) and (tqtisFinite(o4) and eq(o4,
   get_value({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = kwet_rst_model;
   rec__step_function__step_function_t__step = kwet_rst_model1 } },
   to_int(NearestTiesToAway, v))))) and (o5 = add(NearestTiesToEven, o4,
-  o3)))) -> tqtisFinite(o5))))))
+  o3)))) -> tqtisFinite(o5))))))))

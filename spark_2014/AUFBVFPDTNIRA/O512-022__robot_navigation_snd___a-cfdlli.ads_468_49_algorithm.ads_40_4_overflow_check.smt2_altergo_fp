@@ -50,9 +50,15 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
-type tcount_typeB
+type count_type
 
-predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+logic count_typeqtint : count_type -> int
+
+axiom count_typeqtaxiom :
+  (forall i:count_type. ((0 <= count_typeqtint(i)) and
+  (count_typeqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -96,35 +102,9 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> int
 
-logic user_eq : tcount_typeB, tcount_typeB -> bool
+logic user_eq : count_type, count_type -> bool
 
-logic dummy : tcount_typeB
-
-type tcount_typeB__ref = { tcount_typeB__content : tcount_typeB
-}
-
-function tcount_typeB__ref___projection(a: tcount_typeB__ref) : tcount_typeB =
-  (a).tcount_typeB__content
-
-type count_type
-
-predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq2 : int, int -> bool
-
-axiom bool_eq_def1 :
-  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
-
-logic user_eq1 : count_type, count_type -> bool
-
-logic dummy1 : count_type
+logic dummy : count_type
 
 type count_type__ref = { count_type__content : count_type
 }
@@ -132,17 +112,17 @@ type count_type__ref = { count_type__content : count_type
 function count_type__ref___projection(a: count_type__ref) : count_type =
   (a).count_type__content
 
-logic to_rep : count_type -> int
+function to_rep(x: count_type) : int = count_typeqtint(x)
 
 logic of_rep : int -> count_type
 
 axiom inversion_axiom :
   (forall x:count_type [to_rep(x)]. (of_rep(to_rep(x)) = x))
 
-axiom range_axiom : (forall x:count_type [to_rep(x)]. in_range1(to_rep(x)))
+axiom range_axiom : (forall x:count_type [to_rep(x)]. in_range(to_rep(x)))
 
 axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
   (to_rep(of_rep(x)) = x)))
 
 type us_main_type
@@ -184,18 +164,18 @@ function us_rep___13__projection(a: us_rep) : us_split_discrs =
 function us_rep___14__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-logic bool_eq3 : us_rep, us_rep -> bool
+logic bool_eq2 : us_rep, us_rep -> bool
 
-axiom bool_eq_def2 :
-  (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
+axiom bool_eq_def1 :
+  (forall a:us_rep. forall b:us_rep [bool_eq2(a, b)].
   ((((to_rep(((a).us_split_discrs1).rec__algorithm__gap_vectors__list__capacity) = to_rep(((b).us_split_discrs1).rec__algorithm__gap_vectors__list__capacity)) and
   (us_main_eq(((a).us_split_fields1).rec__algorithm__gap_vectors__list,
   ((b).us_split_fields1).rec__algorithm__gap_vectors__list) = true)) ->
-  (bool_eq3(a, b) = true)) and
+  (bool_eq2(a, b) = true)) and
   ((not ((to_rep(((a).us_split_discrs1).rec__algorithm__gap_vectors__list__capacity) = to_rep(((b).us_split_discrs1).rec__algorithm__gap_vectors__list__capacity)) and
   (us_main_eq(((a).us_split_fields1).rec__algorithm__gap_vectors__list,
   ((b).us_split_fields1).rec__algorithm__gap_vectors__list) = true))) ->
-  (bool_eq3(a, b) = false))))
+  (bool_eq2(a, b) = false))))
 
 logic value__size : int
 
@@ -234,16 +214,31 @@ axiom algorithm__gap_vectors__list__capacity__last__bit_axiom :
 axiom algorithm__gap_vectors__list__capacity__position_axiom :
   (0 <= algorithm__gap_vectors__list__capacity__position)
 
-logic user_eq2 : us_rep, us_rep -> bool
+logic user_eq1 : us_rep, us_rep -> bool
 
-logic dummy2 : count_type
+logic dummy1 : count_type
 
-logic dummy3 : us_main_type
+logic dummy2 : us_main_type
 
 type list__ref = { list__content : us_rep
 }
 
 function list__ref___projection(a: list__ref) : us_rep = (a).list__content
+
+logic length : us_rep -> int
+
+logic length__function_guard : int, us_rep -> prop
+
+axiom length__post_axiom :
+  (forall container:count_type. forall container1:us_main_type [length({
+  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
+  container }; us_split_fields1 = { rec__algorithm__gap_vectors__list =
+  container1 } })]. ((length({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = container };
+  us_split_fields1 = { rec__algorithm__gap_vectors__list = container1 }
+  }) <= to_rep(container)) and in_range(length({ us_split_discrs1 = {
+  rec__algorithm__gap_vectors__list__capacity = container };
+  us_split_fields1 = { rec__algorithm__gap_vectors__list = container1 } }))))
 
 type us_split_fields2 = { rec__algorithm__gap_vectors__cursor__node :
 count_type
@@ -264,14 +259,14 @@ type us_rep1 = { us_split_fields3 : us_split_fields2
 function us_rep___15__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
-logic bool_eq4 : us_rep1, us_rep1 -> bool
+logic bool_eq3 : us_rep1, us_rep1 -> bool
 
-axiom bool_eq_def3 :
-  (forall a:us_rep1. forall b:us_rep1 [bool_eq4(a, b)].
+axiom bool_eq_def2 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq3(a, b)].
   (((to_rep(((a).us_split_fields3).rec__algorithm__gap_vectors__cursor__node) = to_rep(((b).us_split_fields3).rec__algorithm__gap_vectors__cursor__node)) ->
-  (bool_eq4(a, b) = true)) and
+  (bool_eq3(a, b) = true)) and
   ((not (to_rep(((a).us_split_fields3).rec__algorithm__gap_vectors__cursor__node) = to_rep(((b).us_split_fields3).rec__algorithm__gap_vectors__cursor__node))) ->
-  (bool_eq4(a, b) = false))))
+  (bool_eq3(a, b) = false))))
 
 logic value__size1 : int
 
@@ -308,9 +303,9 @@ axiom algorithm__gap_vectors__cursor__node__last__bit_axiom :
 axiom algorithm__gap_vectors__cursor__node__position_axiom :
   (0 <= algorithm__gap_vectors__cursor__node__position)
 
-logic user_eq3 : us_rep1, us_rep1 -> bool
+logic user_eq2 : us_rep1, us_rep1 -> bool
 
-logic dummy4 : count_type
+logic dummy3 : count_type
 
 type cursor__ref = { cursor__content : us_rep1
 }
@@ -318,24 +313,11 @@ type cursor__ref = { cursor__content : us_rep1
 function cursor__ref___projection(a: cursor__ref) : us_rep1 =
   (a).cursor__content
 
-logic no_element : count_type
+type key_type__ref = { key_type__content : us_rep1
+}
 
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic length : us_rep -> int
-
-logic length__function_guard : int, us_rep -> prop
-
-axiom length__post_axiom :
-  (forall container:count_type. forall container1:us_main_type [length({
-  us_split_discrs1 = { rec__algorithm__gap_vectors__list__capacity =
-  container }; us_split_fields1 = { rec__algorithm__gap_vectors__list =
-  container1 } })]. ((length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = container };
-  us_split_fields1 = { rec__algorithm__gap_vectors__list = container1 }
-  }) <= to_rep(container)) and in_range1(length({ us_split_discrs1 = {
-  rec__algorithm__gap_vectors__list__capacity = container };
-  us_split_fields1 = { rec__algorithm__gap_vectors__list = container1 } }))))
+function key_type__ref___projection(a: key_type__ref) : us_rep1 =
+  (a).key_type__content
 
 type us_main_type1
 
@@ -343,7 +325,7 @@ logic us_main_eq1 : us_main_type1, us_main_type1 -> bool
 
 type us_rep2
 
-logic bool_eq5 : us_rep2, us_rep2 -> bool
+logic bool_eq4 : us_rep2, us_rep2 -> bool
 
 logic value__size2 : int
 
@@ -362,20 +344,14 @@ axiom value__alignment_axiom2 : (0 <= value__alignment2)
 axiom object__alignment_axiom2 :
   (forall a:us_rep2. (0 <= object__alignment2(a)))
 
-logic user_eq4 : us_rep2, us_rep2 -> bool
+logic user_eq3 : us_rep2, us_rep2 -> bool
 
-logic dummy5 : us_rep2
+logic dummy4 : us_rep2
 
 type map__ref = { map__content : us_rep2
 }
 
 function map__ref___projection(a: map__ref) : us_rep2 = (a).map__content
-
-type key_type__ref = { key_type__content : us_rep1
-}
-
-function key_type__ref___projection(a: key_type__ref) : us_rep1 =
-  (a).key_type__content
 
 logic has_key : us_rep2, us_rep1 -> bool
 
@@ -386,6 +362,42 @@ logic positions : us_rep -> us_rep2
 logic positions__function_guard : us_rep2, us_rep -> prop
 
 logic has_element__function_guard : bool, us_rep, us_rep1 -> prop
+
+type tcount_typeB
+
+logic tcount_typeBqtint : tcount_typeB -> int
+
+axiom tcount_typeBqtaxiom :
+  (forall i:tcount_typeB. (((- 2147483648) <= tcount_typeBqtint(i)) and
+  (tcount_typeBqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq5 : int, int -> bool
+
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq4 : tcount_typeB, tcount_typeB -> bool
+
+logic dummy5 : tcount_typeB
+
+type tcount_typeB__ref = { tcount_typeB__content : tcount_typeB
+}
+
+function tcount_typeB__ref___projection(a: tcount_typeB__ref) : tcount_typeB =
+  (a).tcount_typeB__content
+
+logic no_element : count_type
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 logic container__split_discrs : count_type
 
@@ -1471,6 +1483,9 @@ axiom coerce_axiom2 :
 type us_split_fields4 = { rec__spaces__angles__angle__theta : normalized2pi
 }
 
+function us_split_fields_Theta__projection(a: us_split_fields4) : normalized2pi =
+  (a).rec__spaces__angles__angle__theta
+
 type us_split_fields__ref2 = { us_split_fields__content2 : us_split_fields4
 }
 
@@ -1539,6 +1554,11 @@ function angle__ref___projection(a: angle__ref) : us_rep3 =
 
 type idir_t
 
+logic idir_tqtint : idir_t -> int
+
+axiom idir_tqtaxiom :
+  (forall i:idir_t. (((- 1) <= idir_tqtint(i)) and (idir_tqtint(i) <= 1)))
+
 predicate in_range4(x: int) = (((- 1) <= x) and (x <= 1))
 
 logic bool_eq10 : int, int -> bool
@@ -1563,7 +1583,7 @@ type idir_t__ref = { idir_t__content : idir_t
 function idir_t__ref___projection(a: idir_t__ref) : idir_t =
   (a).idir_t__content
 
-logic to_rep3 : idir_t -> int
+function to_rep3(x: idir_t) : int = idir_tqtint(x)
 
 logic of_rep3 : int -> idir_t
 
@@ -1582,6 +1602,9 @@ rec__gaps__gap__distance : float1; rec__gaps__gap__idir : idir_t
 
 function us_split_fields_bearing__projection(a: us_split_fields6) : us_rep3 =
   (a).rec__gaps__gap__bearing
+
+function us_split_fields_distance__projection(a: us_split_fields6) : float1 =
+  (a).rec__gaps__gap__distance
 
 function us_split_fields_iDir__projection(a: us_split_fields6) : idir_t =
   (a).rec__gaps__gap__idir
@@ -1711,7 +1734,15 @@ logic count : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-axiom no_element__def_axiom : (no_element = of_rep(0))
+logic rliteral : count_type
+
+axiom rliteral_axiom : (count_typeqtint(rliteral) = 0)
+
+axiom no_element__def_axiom : (no_element = rliteral)
+
+logic get : us_rep2, us_rep1 -> int
+
+logic get__function_guard : int, us_rep2, us_rep1 -> prop
 
 logic length1 : us_rep2 -> int
 
@@ -1720,10 +1751,6 @@ logic length__function_guard1 : int, us_rep2 -> prop
 logic is_empty : us_rep2 -> bool
 
 logic is_empty__function_guard : bool, us_rep2 -> prop
-
-logic get : us_rep2, us_rep1 -> int
-
-logic get__function_guard : int, us_rep2, us_rep1 -> prop
 
 axiom positions__post_axiom :
   (forall container:count_type. forall container1:us_main_type [positions({
@@ -1762,7 +1789,7 @@ axiom positions__post_axiom :
   rec__algorithm__gap_vectors__list__capacity = container };
   us_split_fields1 = { rec__algorithm__gap_vectors__list = container1 } }), {
   us_split_fields3 = { rec__algorithm__gap_vectors__cursor__node = j } })) ->
-  (bool_eq4({ us_split_fields3 = {
+  (bool_eq3({ us_split_fields3 = {
   rec__algorithm__gap_vectors__cursor__node = i } }, { us_split_fields3 = {
   rec__algorithm__gap_vectors__cursor__node = j } }) = true)))))))))
 
@@ -1800,14 +1827,28 @@ axiom has_key__post_axiom :
   rec__algorithm__gap_vectors__cursor__node = key } })].
   ((of_int1(0) = true) ->
   ((exists k:count_type. ((has_key(container, { us_split_fields3 = {
-   rec__algorithm__gap_vectors__cursor__node = k } }) = true) and (bool_eq4({
+   rec__algorithm__gap_vectors__cursor__node = k } }) = true) and (bool_eq3({
    us_split_fields3 = { rec__algorithm__gap_vectors__cursor__node = k } }, {
    us_split_fields3 = { rec__algorithm__gap_vectors__cursor__node = key }
    }) = true))) ->
   (has_key(container, { us_split_fields3 = {
   rec__algorithm__gap_vectors__cursor__node = key } }) = true)))))
 
+logic witness : us_rep2, us_rep1 -> int
+
+logic witness__function_guard : int, us_rep2, us_rep1 -> prop
+
+logic w_get : us_rep2, int -> int
+
+logic w_get__function_guard : int, us_rep2, int -> prop
+
 type element_type
+
+logic element_typeqtint : element_type -> int
+
+axiom element_typeqtaxiom :
+  (forall i:element_type. ((1 <= element_typeqtint(i)) and
+  (element_typeqtint(i) <= 2147483647)))
 
 predicate in_range6(x: int) = ((1 <= x) and (x <= 2147483647))
 
@@ -1833,14 +1874,6 @@ type element_type__ref1 = { element_type__content1 : element_type
 function element_type__ref___3__projection(a: element_type__ref1) : element_type =
   (a).element_type__content1
 
-logic witness : us_rep2, us_rep1 -> int
-
-logic witness__function_guard : int, us_rep2, us_rep1 -> prop
-
-logic w_get : us_rep2, int -> int
-
-logic w_get__function_guard : int, us_rep2, int -> prop
-
 axiom get__post_axiom :
   (forall container:us_rep2.
   (forall key:count_type [get(container, { us_split_fields3 = {
@@ -1851,7 +1884,7 @@ axiom get__post_axiom :
   }) = w_get(container, witness(container, { us_split_fields3 = {
   rec__algorithm__gap_vectors__cursor__node = key } }))) and
   (forall k:count_type. ((has_key(container, { us_split_fields3 = {
-  rec__algorithm__gap_vectors__cursor__node = k } }) = true) -> ((bool_eq4({
+  rec__algorithm__gap_vectors__cursor__node = k } }) = true) -> ((bool_eq3({
   us_split_fields3 = { rec__algorithm__gap_vectors__cursor__node = k } }, {
   us_split_fields3 = { rec__algorithm__gap_vectors__cursor__node = key }
   }) = true) <-> (witness(container, { us_split_fields3 = {
@@ -1862,7 +1895,7 @@ axiom get__post_axiom :
 
 axiom length__post_axiom1 :
   (forall container:us_rep2 [length1(container)].
-  in_range1(length1(container)))
+  in_range(length1(container)))
 
 axiom is_empty__post_axiom :
   (forall container:us_rep2 [is_empty(container)].
@@ -1883,18 +1916,15 @@ axiom witness__post_axiom :
   { us_split_fields3 = { rec__algorithm__gap_vectors__cursor__node = key }
   }) = true) -> ((has_witness(container, witness(container, {
   us_split_fields3 = { rec__algorithm__gap_vectors__cursor__node = key }
-  })) = true) and in_range1(witness(container, { us_split_fields3 = {
+  })) = true) and in_range(witness(container, { us_split_fields3 = {
   rec__algorithm__gap_vectors__cursor__node = key } }))))))
 
 axiom w_get__post_axiom :
   (forall container:us_rep2.
-  (forall witness1:int [w_get(container, witness1)].
-  ((in_range1(witness1) and (has_witness(container, witness1) = true)) ->
-  in_range6(w_get(container, witness1)))))
+  (forall witness1:int [w_get(container, witness1)]. ((in_range(witness1) and
+  (has_witness(container, witness1) = true)) -> in_range6(w_get(container,
+  witness1)))))
 
  (* File "a-cfdlli.ads", line 55, characters 0-0 *)
-goal WP_parameter_def :
-  (forall o:count_type. forall o1:count_type. forall temp___783:count_type.
-  (((((to_rep(o) = 0) and (o = o1)) and (temp___783 = o1)) and
-  (temp___783 = no_element)) -> (in_range1(count) ->
-  in_range((to_rep(container__split_discrs) - count)))))
+goal WP_parameter_def : ((rliteral = no_element) -> (in_range(count) ->
+  in_range1((to_rep(container__split_discrs) - count))))

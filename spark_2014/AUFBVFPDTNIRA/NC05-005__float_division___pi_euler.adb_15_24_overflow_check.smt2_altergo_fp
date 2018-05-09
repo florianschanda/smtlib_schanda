@@ -1067,6 +1067,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1122,6 +1128,12 @@ function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
 type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
 
 predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483647))
 
@@ -1192,7 +1204,7 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0000000800000000000000016738048664102778140261307271430268883705139160156250))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/NC05-005__float_division/gnatprove/pi_euler.mlw", line 2106, characters 5-8 *)
 goal WP_parameter_def :
   (forall index:int. forall pi:t. forall erreur:t. forall o:t.
   forall result:t. forall pi1:t. forall result1:int. forall index1:int.

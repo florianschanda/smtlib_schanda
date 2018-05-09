@@ -190,7 +190,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K210-006__anontype1/gnatprove/anon_type.mlw", line 3576, characters 5-8
   (not (in_range (+ var_in (+ var_out1 1)))))
 (check-sat)
 (exit)

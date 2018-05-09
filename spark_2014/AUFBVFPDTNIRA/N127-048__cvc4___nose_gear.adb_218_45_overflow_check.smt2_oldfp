@@ -163,7 +163,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -650,45 +650,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -861,14 +861,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1504,7 +1504,19 @@
                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                     temp___expr_67)))
 
+(declare-const validity_period t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (declare-sort tinteger_32B 0)
+
+(declare-fun tinteger_32Bqtint (tinteger_32B) Int)
+
+;; tinteger_32B'axiom
+  (assert
+  (forall ((i tinteger_32B))
+  (and (<= (- 2147483648) (tinteger_32Bqtint i))
+  (<= (tinteger_32Bqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -1526,6 +1538,14 @@
   (tinteger_32B__content a))
 
 (declare-sort integer_32 0)
+
+(declare-fun integer_32qtint (integer_32) Int)
+
+;; integer_32'axiom
+  (assert
+  (forall ((i integer_32))
+  (and (<= (- 2147483648) (integer_32qtint i))
+  (<= (integer_32qtint i) 2147483647))))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -1576,23 +1596,21 @@
   (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
   (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool true)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const ngrotations (_ BitVec 16))
-
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const ngclicktime (_ BitVec 16))
+(declare-const ngrotations (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const millisecs (_ BitVec 16))
+(declare-const ngclicktime (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+
+(declare-const millisecs (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
@@ -1692,17 +1710,27 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS54 Int)
 
+(declare-const attr__ATTRIBUTE_ADDRESS55 Int)
+
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 175463200000000010998768562586747066234238445758819580078125.0 100000000000000000000000000000000000000000000000000000000000000.0))))
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 3000.0)))
+
+;; validity_period__def_axiom
+  (assert (= validity_period fliteral2))
 
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 3600000.0)))
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 175463200000000010998768562586747066234238445758819580078125.0 100000000000000000000000000000000000000000000000000000000000000.0))))
+
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 3600000.0)))
 
 (declare-const estimatedgroundvelocity t)
 
@@ -1923,6 +1951,12 @@
 (declare-const sum_out11 Int)
 
 ;; H
+  (assert (tqtisFinite validity_period))
+
+;; H
+  (assert (= fliteral2 validity_period))
+
+;; H
   (assert (tqtisFinite old_estimatedgroundvelocity_memory))
 
 ;; H
@@ -2126,13 +2160,13 @@
   (assert (= result9 (mk_t__ref1 wheel_circunference_out1)))
 
 ;; H
-  (assert (= wheel_circunference_out11 fliteral2))
+  (assert (= wheel_circunference_out11 fliteral3))
 
 ;; H
   (assert (= result10 (mk_t__ref1 ms_in_hour_out1)))
 
 ;; H
-  (assert (= ms_in_hour_out11 fliteral3))
+  (assert (= ms_in_hour_out11 fliteral4))
 
 ;; H
   (assert (= result11 (mk_t__ref1 ms_in_our1_out1)))

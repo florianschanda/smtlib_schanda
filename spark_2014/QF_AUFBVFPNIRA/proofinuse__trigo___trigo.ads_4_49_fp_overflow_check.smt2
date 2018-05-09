@@ -67,7 +67,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 4840, characters 5-8
   (not (fp.isFinite32 (fp.mul RNE x x))))
 (check-sat)
 (exit)

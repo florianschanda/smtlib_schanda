@@ -927,6 +927,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -981,19 +987,6 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
-
-logic of_rep : int -> integer
-
-axiom inversion_axiom :
-  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:integer [to_rep(x)]. in_range2(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
-  (to_rep(of_rep(x)) = x)))
-
 type float1
 
 logic bool_eq4 : t, t -> bool
@@ -1017,17 +1010,30 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-logic to_rep1 : float1 -> t
+logic to_rep : float1 -> t
 
-logic of_rep1 : t -> float1
+logic of_rep : t -> float1
+
+axiom inversion_axiom :
+  (forall x:float1 [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:float1 [to_rep(x)]. tqtisFinite(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
 
 axiom inversion_axiom1 :
-  (forall x:float1 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
 
-axiom range_axiom1 : (forall x:float1 [to_rep1(x)]. tqtisFinite(to_rep1(x)))
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range2(to_rep1(x)))
 
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (tqtisFinite(x) ->
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
   (to_rep1(of_rep1(x)) = x)))
 
 type us_split_discrs = { rec__depends_legal_2__dis_rec__d : bool
@@ -1053,6 +1059,15 @@ function us_split_fields_A__projection(a: us_split_fields) : integer =
 
 function us_split_fields_B__projection(a: us_split_fields) : integer =
   (a).rec__depends_legal_2__dis_rec__b
+
+function us_split_fields_X__projection(a: us_split_fields) : float1 =
+  (a).rec__depends_legal_2__dis_rec__x
+
+function us_split_fields_Y__projection(a: us_split_fields) : float1 =
+  (a).rec__depends_legal_2__dis_rec__y
+
+function us_split_fields_Z__projection(a: us_split_fields) : float1 =
+  (a).rec__depends_legal_2__dis_rec__z
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1093,27 +1108,27 @@ axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
   ((((((a).us_split_discrs1).rec__depends_legal_2__dis_rec__d = ((b).us_split_discrs1).rec__depends_legal_2__dis_rec__d) and
   (((((depends_legal_2__dis_rec__a__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__a) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__a))) and
+  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__a) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__a))) and
   (depends_legal_2__dis_rec__b__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__b) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__b)))) and
+  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__b) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__b)))) and
   (depends_legal_2__dis_rec__x__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__x) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__x)))) and
+  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__x) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__x)))) and
   (depends_legal_2__dis_rec__y__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__y) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__y)))) and
+  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__y) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__y)))) and
   (depends_legal_2__dis_rec__z__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__z) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__z))))) ->
+  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__z) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__z))))) ->
   (bool_eq5(a, b) = true)) and
   ((not ((((a).us_split_discrs1).rec__depends_legal_2__dis_rec__d = ((b).us_split_discrs1).rec__depends_legal_2__dis_rec__d) and
   (((((depends_legal_2__dis_rec__a__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__a) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__a))) and
+  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__a) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__a))) and
   (depends_legal_2__dis_rec__b__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__b) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__b)))) and
+  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__b) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__b)))) and
   (depends_legal_2__dis_rec__x__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__x) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__x)))) and
+  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__x) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__x)))) and
   (depends_legal_2__dis_rec__y__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__y) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__y)))) and
+  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__y) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__y)))) and
   (depends_legal_2__dis_rec__z__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__depends_legal_2__dis_rec__z) = to_rep1(((b).us_split_fields1).rec__depends_legal_2__dis_rec__z)))))) ->
+  (to_rep(((a).us_split_fields1).rec__depends_legal_2__dis_rec__z) = to_rep(((b).us_split_fields1).rec__depends_legal_2__dis_rec__z)))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int
@@ -1581,112 +1596,14 @@ type t8b__ref = { t8b__content : us_rep
 
 function t8b__ref___projection(a: t8b__ref) : us_rep = (a).t8b__content
 
+logic rliteral : integer
+
+axiom rliteral_axiom : (integerqtint(rliteral) = 0)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
  (* File "depends_legal_2.adb", line 14, characters 0-0 *)
-goal WP_parameter_def :
-  (forall rec1__split_discrs:bool. forall par1__split_fields:integer.
-  forall par1__split_fields1:integer. forall par1__split_fields2:float1.
-  forall par1__split_fields3:float1. forall par1__split_fields4:float1.
-  forall par1__split_discrs:bool. forall o:integer. forall o1:integer.
-  forall o2:integer. forall o3:integer. forall o4:float1. forall o5:float1.
-  forall o6:float1. forall temp___188:bool. forall temp___1881:integer.
-  forall temp___1882:integer. forall temp___1883:float1.
-  forall temp___1884:float1. forall temp___1885:float1.
-  forall temp___1886:bool. forall usq_:bool. forall usq_1:integer.
-  forall usq_2:integer. forall usq_3:float1. forall usq_4:float1.
-  forall usq_5:float1. forall usq_6:bool. forall temp___190:bool.
-  forall temp___1901:integer. forall temp___1902:integer.
-  forall temp___1903:float1. forall temp___1904:float1.
-  forall temp___1905:float1. forall temp___1906:bool. forall o7:float1.
-  forall o8:float1. forall o9:float1. forall o10:integer. forall o11:integer.
-  forall o12:float1. forall o13:float1. forall o14:float1.
-  forall temp___185:bool. forall temp___1851:integer.
-  forall temp___1852:integer. forall temp___1853:float1.
-  forall temp___1854:float1. forall temp___1855:float1.
-  forall temp___1856:bool. forall usq_7:bool. forall usq_8:integer.
-  forall usq_9:integer. forall usq_10:float1. forall usq_11:float1.
-  forall usq_12:float1. forall usq_13:bool. forall temp___187:bool.
-  forall temp___1871:integer. forall temp___1872:integer.
-  forall temp___1873:float1. forall temp___1874:float1.
-  forall temp___1875:float1. forall temp___1876:bool. forall result:integer.
-  forall result1:integer. forall result2:float1. forall result3:float1.
-  forall result4:float1. forall par1__split_fields5:integer.
-  forall par1__split_fields6:integer. forall par1__split_fields7:float1.
-  forall par1__split_fields8:float1. forall par1__split_fields9:float1.
-  forall result5:bool. forall par1__split_discrs1:bool.
-  forall result6:integer. forall result7:integer. forall result8:float1.
-  forall result9:float1. forall result10:float1.
-  forall par1__split_fields10:integer. forall par1__split_fields11:integer.
-  forall par1__split_fields12:float1. forall par1__split_fields13:float1.
-  forall par1__split_fields14:float1. forall result11:bool.
-  forall par1__split_discrs2:bool. ((rec1__attr__constrained = false) ->
-  ((((par1__split_discrs = true) and ((par1__split_discrs = r4b) and
-  ((((((to_rep(o) = 0) and ((to_rep(o1) = 0) and ((o1 = o2) and ((o = o3) and
-  ((dummy1 = o4) and ((dummy1 = o5) and (dummy1 = o6))))))) and
-  ((of_int1(1) = temp___188) and (((temp___1881 = o2) and
-  ((temp___1882 = o3) and ((temp___1883 = o4) and ((temp___1884 = o5) and
-  (temp___1885 = o6))))) and (true = temp___1886)))) and
-  ((((par1__attr__constrained = true) and
-  (temp___188 = par1__split_discrs)) or
-  (not (par1__attr__constrained = true))) and ((usq_ = temp___188) and
-  (((usq_1 = temp___1881) and ((usq_2 = temp___1882) and
-  ((usq_3 = temp___1883) and ((usq_4 = temp___1884) and
-  (usq_5 = temp___1885))))) and (usq_6 = temp___1886))))) and
-  ((usq_ = temp___190) and (((usq_1 = temp___1901) and
-  ((usq_2 = temp___1902) and ((usq_3 = temp___1903) and
-  ((usq_4 = temp___1904) and (usq_5 = temp___1905))))) and
-  (par1__attr__constrained = temp___1906)))) and
-  ((((result = par1__split_fields) and ((result1 = par1__split_fields1) and
-  ((result2 = par1__split_fields2) and ((result3 = par1__split_fields3) and
-  (result4 = par1__split_fields4))))) and
-  ((temp___1901 = par1__split_fields5) and
-  ((temp___1902 = par1__split_fields6) and
-  ((temp___1903 = par1__split_fields7) and
-  ((temp___1904 = par1__split_fields8) and
-  (temp___1905 = par1__split_fields9)))))) and
-  ((result5 = par1__split_discrs) and
-  (temp___190 = par1__split_discrs1)))))) or
-  ((not (par1__split_discrs = true)) and (((par1__split_discrs = r7b) and
-  ((((((to_rep1(o7) = fliteral1) and ((to_rep1(o8) = fliteral1) and
-  ((to_rep1(o9) = fliteral1) and ((dummy = o10) and ((dummy = o11) and
-  ((o9 = o12) and ((o8 = o13) and (o7 = o14)))))))) and
-  ((of_int1(0) = temp___185) and (((temp___1851 = o10) and
-  ((temp___1852 = o11) and ((temp___1853 = o12) and ((temp___1854 = o13) and
-  (temp___1855 = o14))))) and (true = temp___1856)))) and
-  ((((par1__attr__constrained = true) and
-  (temp___185 = par1__split_discrs)) or
-  (not (par1__attr__constrained = true))) and ((temp___185 = usq_7) and
-  (((temp___1851 = usq_8) and ((temp___1852 = usq_9) and
-  ((temp___1853 = usq_10) and ((temp___1854 = usq_11) and
-  (temp___1855 = usq_12))))) and (temp___1856 = usq_13))))) and
-  ((usq_7 = temp___187) and (((usq_8 = temp___1871) and
-  ((usq_9 = temp___1872) and ((usq_10 = temp___1873) and
-  ((usq_11 = temp___1874) and (usq_12 = temp___1875))))) and
-  (par1__attr__constrained = temp___1876)))) and
-  ((((result6 = par1__split_fields) and ((result7 = par1__split_fields1) and
-  ((result8 = par1__split_fields2) and ((result9 = par1__split_fields3) and
-  (result10 = par1__split_fields4))))) and
-  ((temp___1871 = par1__split_fields10) and
-  ((temp___1872 = par1__split_fields11) and
-  ((temp___1873 = par1__split_fields12) and
-  ((temp___1874 = par1__split_fields13) and
-  (temp___1875 = par1__split_fields14)))))) and
-  ((result11 = par1__split_discrs) and
-  (temp___187 = par1__split_discrs2))))) and (({
-  rec__depends_legal_2__dis_rec__d = par1__split_discrs1 } = {
-  rec__depends_legal_2__dis_rec__d = par1__split_discrs2 }) and ({
-  rec__depends_legal_2__dis_rec__a = par1__split_fields5;
-  rec__depends_legal_2__dis_rec__b = par1__split_fields6;
-  rec__depends_legal_2__dis_rec__x = par1__split_fields7;
-  rec__depends_legal_2__dis_rec__y = par1__split_fields8;
-  rec__depends_legal_2__dis_rec__z = par1__split_fields9 } = {
-  rec__depends_legal_2__dis_rec__a = par1__split_fields10;
-  rec__depends_legal_2__dis_rec__b = par1__split_fields11;
-  rec__depends_legal_2__dis_rec__x = par1__split_fields12;
-  rec__depends_legal_2__dis_rec__y = par1__split_fields13;
-  rec__depends_legal_2__dis_rec__z = par1__split_fields14 }))))) ->
-  ((rec1__attr__constrained = true) -> (par2 = rec1__split_discrs)))))
+goal WP_parameter_def : true

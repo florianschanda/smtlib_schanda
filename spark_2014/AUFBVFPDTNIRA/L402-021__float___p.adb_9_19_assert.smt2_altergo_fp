@@ -1070,7 +1070,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/L402-021__float/gnatprove/p.mlw", line 2117, characters 5-8 *)
 goal WP_parameter_def :
   (forall c:t. forall f:t. forall r:t. forall t1:t. forall result:t.
   forall c1:t. forall result1:t. forall f1:t. forall result2:t. forall r1:t.

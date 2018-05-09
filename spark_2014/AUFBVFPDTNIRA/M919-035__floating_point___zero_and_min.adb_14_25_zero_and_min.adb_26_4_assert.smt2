@@ -38,8 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(declare-fun nth ((_ BitVec 32) Int) Bool)
-
 (declare-fun lsr ((_ BitVec 32) Int) (_ BitVec 32))
 
 (declare-fun asr ((_ BitVec 32) Int) (_ BitVec 32))
@@ -57,72 +55,6 @@
                                             (- (- 4294967296 (bv2nat x)))))
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvlshr x n) (lsr x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvashr x n) (asr x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvshl x n) (lsl x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
-  (rotate_left1 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
-  (rotate_right1 v (bv2nat n)))))
-
-(declare-fun nth_bv ((_ BitVec 32) (_ BitVec 32)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 32)) (i (_ BitVec 32)))
-  (= (= (nth_bv x i) true)
-  (not (= (bvand (bvlshr x i) #x00000001) #x00000000)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 32)) (i (_ BitVec 32)))
-  (= (nth x (bv2nat i)) (nth_bv x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 32)) (i Int))
-  (=> (and (<= 0 i) (< i 4294967296))
-  (= (nth_bv x ((_ int2bv 32) i)) (nth x i)))))
-
-(declare-fun eq_sub_bv ((_ BitVec 32) (_ BitVec 32) (_ BitVec 32)
-  (_ BitVec 32)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 32)) (b (_ BitVec 32)) (i (_ BitVec 32))
-  (n (_ BitVec 32)))
-  (let ((mask (bvshl (bvsub (bvshl #x00000001 n) #x00000001) i)))
-  (= (eq_sub_bv a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth a j) (nth b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 32)) (b (_ BitVec 32)) (i (_ BitVec 32))
-  (n (_ BitVec 32)))
-  (= (eq_sub a b (bv2nat i) (bv2nat n)) (eq_sub_bv a b i n))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content (_ BitVec 32))))))
 (declare-fun power ((_ BitVec 32) Int) (_ BitVec 32))
@@ -144,10 +76,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int2 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -171,7 +99,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -179,6 +107,13 @@
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -228,6 +163,10 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
+(declare-fun convert ((_ BitVec 32)) Float32)
+
+(declare-fun convert__function_guard (Float32 (_ BitVec 32)) Bool)
+
 (declare-sort source 0)
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
@@ -276,31 +215,15 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_228)))
 
-(declare-fun convert ((_ BitVec 32)) Float32)
-
-(declare-fun convert__function_guard (Float32 (_ BitVec 32)) Bool)
-
 ;; convert__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
   (! (=> (dynamic_invariant2 s true true true true) (dynamic_invariant3
      (convert s) true false true true)) :pattern ((convert s)) )))
 
-(declare-const zero_plus Float32)
+(declare-fun magic (Float32) Int)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const zero_neg Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const c1b Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const c2b Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+(declare-fun magic__function_guard (Int Float32) Bool)
 
 (declare-sort source1 0)
 
@@ -329,6 +252,13 @@
 
 (declare-sort target1 0)
 
+(declare-fun targetqtint (target1) Int)
+
+;; target'axiom
+  (assert
+  (forall ((i target1))
+  (and (<= (- 2147483648) (targetqtint i)) (<= (targetqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -355,15 +285,27 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range1 temp___expr_242)))
 
-(declare-fun magic (Float32) Int)
-
-(declare-fun magic__function_guard (Int Float32) Bool)
-
 ;; magic__post_axiom
   (assert
   (forall ((s Float32))
   (! (=> (dynamic_invariant4 s true true true true) (dynamic_invariant5
      (magic s) true false true true)) :pattern ((magic s)) )))
+
+(declare-const zero_plus Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const zero_neg Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const c1b Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const c2b Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const x Int)
 
@@ -388,9 +330,10 @@
 (declare-const zero_and_min__B3b__y__assume Int)
 
 ;; H
-  (assert
-  (and (= zero_and_min__zero_plus__assume (convert #x00000000))
-  (fp.isFinite32 zero_and_min__zero_plus__assume)))
+  (assert (= zero_and_min__zero_plus__assume (convert #x00000000)))
+
+;; H
+  (assert (fp.isFinite32 zero_and_min__zero_plus__assume))
 
 ;; H
   (assert (= zero_and_min__zero_plus__assume zero_plus))
@@ -399,9 +342,10 @@
   (assert (fp.isFinite32 zero_plus))
 
 ;; H
-  (assert
-  (and (= zero_and_min__zero_neg__assume (convert #x80000000))
-  (fp.isFinite32 zero_and_min__zero_neg__assume)))
+  (assert (= zero_and_min__zero_neg__assume (convert #x80000000)))
+
+;; H
+  (assert (fp.isFinite32 zero_and_min__zero_neg__assume))
 
 ;; H
   (assert (= zero_and_min__zero_neg__assume zero_neg))
@@ -422,9 +366,10 @@
   (assert (fp.isFinite32 c2b))
 
 ;; H
-  (assert
-  (and (= zero_and_min__B3b__x__assume (magic (fp.min c1b c2b))) (in_range1
-  zero_and_min__B3b__x__assume)))
+  (assert (= zero_and_min__B3b__x__assume (magic (fp.min c1b c2b))))
+
+;; H
+  (assert (in_range1 zero_and_min__B3b__x__assume))
 
 ;; H
   (assert (= zero_and_min__B3b__x__assume x))
@@ -433,9 +378,10 @@
   (assert (in_range x))
 
 ;; H
-  (assert
-  (and (= zero_and_min__B3b__y__assume (magic (fp.min c2b c1b))) (in_range1
-  zero_and_min__B3b__y__assume)))
+  (assert (= zero_and_min__B3b__y__assume (magic (fp.min c2b c1b))))
+
+;; H
+  (assert (in_range1 zero_and_min__B3b__y__assume))
 
 ;; H
   (assert (= zero_and_min__B3b__y__assume y))

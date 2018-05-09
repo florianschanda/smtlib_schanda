@@ -38,8 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(declare-fun nth ((_ BitVec 8) Int) Bool)
-
 (declare-fun lsr ((_ BitVec 8) Int) (_ BitVec 8))
 
 (declare-fun asr ((_ BitVec 8) Int) (_ BitVec 8))
@@ -56,70 +54,6 @@
                                            (bv2nat x) (- (- 256 (bv2nat x)))))
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 255)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvlshr x n) (lsr x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvashr x n) (asr x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvshl x n) (lsl x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
-  (rotate_left1 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
-  (rotate_right1 v (bv2nat n)))))
-
-(declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 8)) (i (_ BitVec 8)))
-  (= (= (nth_bv x i) true) (not (= (bvand (bvlshr x i) #x01) #x00)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 8)) (i (_ BitVec 8)))
-  (= (nth x (bv2nat i)) (nth_bv x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 8)) (i Int))
-  (=> (and (<= 0 i) (< i 256)) (= (nth_bv x ((_ int2bv 8) i)) (nth x i)))))
-
-(declare-fun eq_sub_bv ((_ BitVec 8) (_ BitVec 8) (_ BitVec 8)
-  (_ BitVec 8)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 8)) (b (_ BitVec 8)) (i (_ BitVec 8))
-  (n (_ BitVec 8)))
-  (let ((mask (bvshl (bvsub (bvshl #x01 n) #x01) i)))
-  (= (eq_sub_bv a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth a j) (nth b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 8)) (b (_ BitVec 8)) (i (_ BitVec 8))
-  (n (_ BitVec 8)))
-  (= (eq_sub a b (bv2nat i) (bv2nat n)) (eq_sub_bv a b i n))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content (_ BitVec 8))))))
 (declare-fun power ((_ BitVec 8) Int) (_ BitVec 8))
@@ -141,10 +75,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int2 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -168,7 +98,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -183,40 +113,17 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
-(declare-sort unsigned_8 0)
+(declare-sort battery_level_type 0)
 
-(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
+(declare-fun user_eq (battery_level_type battery_level_type) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
 
-(declare-fun user_eq (unsigned_8 unsigned_8) Bool)
-
-(declare-const dummy unsigned_8)
-
-(declare-datatypes ()
-((unsigned_8__ref (mk_unsigned_8__ref (unsigned_8__content unsigned_8)))))
-(define-fun unsigned_8__ref___projection ((a unsigned_8__ref)) unsigned_8
-  (unsigned_8__content a))
-
-(define-fun dynamic_invariant ((temp___expr_187 (_ BitVec 8))
-  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
-  (temp___do_toplevel_185 Bool) (temp___do_typ_inv_186 Bool)) Bool true)
-
-(declare-sort battery_level_type 0)
-
-(declare-fun user_eq1 (battery_level_type battery_level_type) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
-
-(declare-const dummy1 battery_level_type)
+(declare-const dummy battery_level_type)
 
 (declare-datatypes ()
 ((battery_level_type__ref
@@ -224,14 +131,6 @@
  (battery_level_type__content battery_level_type)))))
 (define-fun battery_level_type__ref___projection ((a battery_level_type__ref)) battery_level_type
   (battery_level_type__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_236 Float32)
-  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
-  (temp___do_toplevel_234 Bool)
-  (temp___do_typ_inv_235 Bool)) Bool (=>
-                                     (or (= temp___is_init_232 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_236)))
 
 (declare-fun to_rep (battery_level_type) Float32)
 
@@ -252,36 +151,6 @@
   (forall ((x Float32))
   (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                                 (of_rep x))) )))
-
-(declare-sort time_slot 0)
-
-(define-fun in_range1 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
-                                              (bvule x #x31)))
-
-(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 8)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) (_ BitVec 8))
-
-(declare-fun user_eq2 (time_slot time_slot) Bool)
-
-(declare-const dummy2 time_slot)
-
-(declare-datatypes ()
-((time_slot__ref (mk_time_slot__ref (time_slot__content time_slot)))))
-(define-fun time_slot__ref___projection ((a time_slot__ref)) time_slot
-  (time_slot__content a))
-
-(define-fun dynamic_invariant2 ((temp___expr_243 (_ BitVec 8))
-  (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
-  (temp___do_toplevel_241 Bool)
-  (temp___do_typ_inv_242 Bool)) Bool (=>
-                                     (or (= temp___is_init_239 true)
-                                     (bvule #x00 #x31)) (in_range1
-                                     temp___expr_243)))
 
 (declare-datatypes ()
 ((map__ref
@@ -348,24 +217,58 @@
 (declare-fun time_below_threshold__function_guard ((_ BitVec 8)
   (Array (_ BitVec 8) battery_level_type) (_ BitVec 8)) Bool)
 
+(declare-const battery_threshold Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-sort time_slot 0)
+
+(define-fun in_range1 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
+                                              (bvule x #x31)))
+
+(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 ((_ BitVec 8)) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) (_ BitVec 8))
+
+(declare-fun user_eq1 (time_slot time_slot) Bool)
+
+(declare-const dummy1 time_slot)
+
+(declare-datatypes ()
+((time_slot__ref (mk_time_slot__ref (time_slot__content time_slot)))))
+(define-fun time_slot__ref___projection ((a time_slot__ref)) time_slot
+  (time_slot__content a))
+
+(define-fun dynamic_invariant ((temp___expr_243 (_ BitVec 8))
+  (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
+  (temp___do_toplevel_241 Bool)
+  (temp___do_typ_inv_242 Bool)) Bool (=>
+                                     (or (= temp___is_init_239 true)
+                                     (bvule #x00 #x31)) (in_range1
+                                     temp___expr_243)))
+
 (declare-sort time_slot_length 0)
 
-(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
 (define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
                                               (bvule x #x32)))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) (_ BitVec 8))
 
-(declare-fun user_eq3 (time_slot_length time_slot_length) Bool)
+(declare-fun user_eq2 (time_slot_length time_slot_length) Bool)
 
-(declare-const dummy3 time_slot_length)
+(declare-const dummy2 time_slot_length)
 
 (declare-datatypes ()
 ((time_slot_length__ref
@@ -373,7 +276,7 @@
 (define-fun time_slot_length__ref___projection ((a time_slot_length__ref)) time_slot_length
   (time_slot_length__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_250 (_ BitVec 8))
+(define-fun dynamic_invariant1 ((temp___expr_250 (_ BitVec 8))
   (temp___is_init_246 Bool) (temp___skip_constant_247 Bool)
   (temp___do_toplevel_248 Bool)
   (temp___do_typ_inv_249 Bool)) Bool (=>
@@ -386,26 +289,26 @@
   (forall
   ((failsafe__model__battery_level_at (Array (_ BitVec 8) battery_level_type)))
   (forall ((failsafe__model__current_time (_ BitVec 8)))
-  (! (=> (dynamic_invariant2 failsafe__model__current_time true true true
+  (! (=> (dynamic_invariant failsafe__model__current_time true true true
      true)
      (let ((result (time_below_threshold failsafe__model__battery_level_at
                    failsafe__model__current_time)))
      (and
-     (ite (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) (to_rep
-                                                                (select failsafe__model__battery_level_at failsafe__model__current_time)))
+     (ite (fp.leq battery_threshold (to_rep
+                                    (select failsafe__model__battery_level_at failsafe__model__current_time)))
      (= result #x00)
      (ite (forall ((s (_ BitVec 8)))
           (=> (and (bvule #x00 s) (bvule s #x31))
-          (fp.lt (to_rep (select failsafe__model__battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101))))
+          (fp.lt (to_rep (select failsafe__model__battery_level_at s))
+          battery_threshold)))
      (= result #x32)
      (and
      (and (bvult result #x32)
-     (fp.leq (fp #b0 #b01111100 #b10011001100110011001101) (to_rep
-                                                           (select failsafe__model__battery_level_at
-                                                           (let ((temp___267 (bvsub failsafe__model__current_time result)))
-                                                           (ite (bvult failsafe__model__current_time result)
-                                                           (bvadd temp___267 #x32)
-                                                           temp___267))))))
+     (fp.leq battery_threshold (to_rep
+                               (select failsafe__model__battery_level_at
+                               (let ((temp___267 (bvsub failsafe__model__current_time result)))
+                               (ite (bvult failsafe__model__current_time result)
+                               (bvadd temp___267 #x32) temp___267))))))
      (ite (bvuge failsafe__model__current_time (bvsub result #x01))
      (forall ((s (_ BitVec 8)))
      (=>
@@ -414,11 +317,11 @@
             (ite (bvult failsafe__model__current_time (bvsub result #x01))
             (bvadd temp___268 #x32) temp___268)) s)
      (bvule s failsafe__model__current_time))
-     (fp.lt (to_rep (select failsafe__model__battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101))))
+     (fp.lt (to_rep (select failsafe__model__battery_level_at s)) battery_threshold)))
      (and
      (forall ((s (_ BitVec 8)))
      (=> (and (bvule #x00 s) (bvule s failsafe__model__current_time))
-     (fp.lt (to_rep (select failsafe__model__battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101))))
+     (fp.lt (to_rep (select failsafe__model__battery_level_at s)) battery_threshold)))
      (forall ((s (_ BitVec 8)))
      (=>
      (and
@@ -426,12 +329,12 @@
             (ite (bvult failsafe__model__current_time (bvsub result #x01))
             (bvadd temp___269 #x32) temp___269)) s)
      (bvule s #x31))
-     (fp.lt (to_rep (select failsafe__model__battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101)))))))))
-     (dynamic_invariant3 result true false true true)))) :pattern ((time_below_threshold
+     (fp.lt (to_rep (select failsafe__model__battery_level_at s)) battery_threshold))))))))
+     (dynamic_invariant1 result true false true true)))) :pattern ((time_below_threshold
                                                                    failsafe__model__battery_level_at
                                                                    failsafe__model__current_time)) ))))
 
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-fun is_valid ((Array (_ BitVec 8) battery_level_type) (_ BitVec 8)
   (_ BitVec 8)) Bool)
@@ -441,29 +344,29 @@
 
 (declare-sort tcounterS 0)
 
-(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 8))
 
 (define-fun in_range3 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
                                               (bvule x #x32)))
 
 (define-fun in_range_int2 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) (_ BitVec 8))
 
-(declare-fun user_eq4 (tcounterS tcounterS) Bool)
+(declare-fun user_eq3 (tcounterS tcounterS) Bool)
 
-(declare-const dummy4 tcounterS)
+(declare-const dummy3 tcounterS)
 
 (declare-datatypes ()
 ((tcounterS__ref (mk_tcounterS__ref (tcounterS__content tcounterS)))))
 (define-fun tcounterS__ref___projection ((a tcounterS__ref)) tcounterS
   (tcounterS__content a))
 
-(define-fun dynamic_invariant4 ((temp___expr_282 (_ BitVec 8))
+(define-fun dynamic_invariant2 ((temp___expr_282 (_ BitVec 8))
   (temp___is_init_278 Bool) (temp___skip_constant_279 Bool)
   (temp___do_toplevel_280 Bool)
   (temp___do_typ_inv_281 Bool)) Bool (=>
@@ -489,60 +392,52 @@
   (is_valid failsafe__model__battery_level_at failsafe__model__current_time
   failsafe__counter)) ))))
 
+(declare-sort unsigned_8 0)
+
+(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 8))
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 ((_ BitVec 8)) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 8))
+
+(declare-fun user_eq4 (unsigned_8 unsigned_8) Bool)
+
+(declare-const dummy4 unsigned_8)
+
+(declare-datatypes ()
+((unsigned_8__ref (mk_unsigned_8__ref (unsigned_8__content unsigned_8)))))
+(define-fun unsigned_8__ref___projection ((a unsigned_8__ref)) unsigned_8
+  (unsigned_8__content a))
+
+(define-fun dynamic_invariant3 ((temp___expr_187 (_ BitVec 8))
+  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
+  (temp___do_toplevel_185 Bool) (temp___do_typ_inv_186 Bool)) Bool true)
+
+(define-fun dynamic_invariant4 ((temp___expr_236 Float32)
+  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
+  (temp___do_toplevel_234 Bool)
+  (temp___do_typ_inv_235 Bool)) Bool (=>
+                                     (or (= temp___is_init_232 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_236)))
+
 (declare-const battery_level Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
-
-(declare-const c (_ BitVec 8))
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const battery_level_at (Array (_ BitVec 8) battery_level_type))
+(declare-const c (_ BitVec 8))
 
-(declare-const current_time (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-const counter (_ BitVec 8))
-
-;; H
-  (assert (in_range3 counter))
-
-;; H
-  (assert (in_range1 current_time))
-
-;; H
-  (assert (fp.isFinite32 battery_level))
-
-;; H
-  (assert (= (is_valid battery_level_at current_time counter) true))
-
-;; H
-  (assert (= counter c))
-
-;; H
-  (assert (= counter (time_below_threshold battery_level_at current_time)))
-
-;; H
+;; battery_threshold__def_axiom
   (assert
-  (=>
-  (forall ((s (_ BitVec 8)))
-  (=> (and (bvule #x00 s) (bvule s #x31))
-  (fp.lt (to_rep (select battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101))))
-  (= counter #x32)))
-
-;; H
-  (assert
-  (forall ((s (_ BitVec 8)))
-  (=> (and (bvule #x00 s) (bvule s #x31))
-  (=>
-  (not
-  (= s (let ((temp___315 (bvadd current_time #x01)))
-       (ite (bvule (bvsub #x32 current_time) #x01) (bvsub temp___315 #x32)
-       temp___315))))
-  (fp.lt (to_rep (select battery_level_at s)) (fp #b0 #b01111100 #b10011001100110011001101))))))
+  (= battery_threshold (fp #b0 #b01111100 #b10011001100110011001101)))
 
 (assert
 ;; WP_parameter_def
  ;; File "failsafe.adb", line 31, characters 0-0
-  (not (bvuge counter #x31)))
+  (not true))
 (check-sat)
 (exit)

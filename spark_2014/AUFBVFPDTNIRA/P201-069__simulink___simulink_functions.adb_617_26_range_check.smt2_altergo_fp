@@ -1037,6 +1037,12 @@ type t__ref = { t__content : t
 
 type integer_16
 
+logic integer_16qtint : integer_16 -> int
+
+axiom integer_16qtaxiom :
+  (forall i:integer_16. (((- 32768) <= integer_16qtint(i)) and
+  (integer_16qtint(i) <= 32767)))
+
 predicate in_range1(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq1 : int, int -> bool

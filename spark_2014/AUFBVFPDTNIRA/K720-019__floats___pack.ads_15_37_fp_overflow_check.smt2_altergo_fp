@@ -1066,7 +1066,7 @@ logic r2 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K720-019__floats/gnatprove/pack.mlw", line 2609, characters 5-8 *)
 goal WP_parameter_def :
   (forall pack__add__result:t. forall o:t. forall result:t.
   forall pack__add__result1:t. forall pack__add__result2:t.

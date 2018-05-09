@@ -48,26 +48,18 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
-
-(define-fun in_range4 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
+(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
+                                    (<= x 2147483647)))
 
 (define-fun dynamic_property ((range_first Int) (range_last Int) (low Int)
-  (high Int)) Bool (and (in_range4 low)
-                   (and (in_range4 high)
-                   (=> (<= low high) (and (in_range4 low) (in_range4 high))))))
+  (high Int)) Bool (and (in_range low)
+                   (and (in_range high)
+                   (=> (<= low high) (and (in_range low) (in_range high))))))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
-  (high Int)) Bool (and (in_range4 low)
-                   (and (in_range4 high)
-                   (=> (<= low high) (and (in_range4 low) (in_range4 high))))))
+  (high Int)) Bool (and (in_range low)
+                   (and (in_range high)
+                   (=> (<= low high) (and (in_range low) (in_range high))))))
 
 (define-fun dynamic_property2 ((range_first1 Int) (range_last1 Int) (f1 Int)
   (l1 Int) (range_first2 Int) (range_last2 Int) (f2 Int)
@@ -89,11 +81,19 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
+(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
-(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
+(define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
+
+(define-fun in_range7 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
 (define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -125,8 +125,8 @@
   (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
   (temp___do_typ_inv_17 Bool)) Bool (=>
                                     (or (= temp___is_init_14 true)
-                                    (<= (- 2147483648) 2147483647))
-                                    (in_range4 temp___expr_18)))
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
 (define-fun dynamic_invariant1 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)

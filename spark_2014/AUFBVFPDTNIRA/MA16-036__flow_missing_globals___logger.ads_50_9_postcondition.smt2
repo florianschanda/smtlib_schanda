@@ -38,8 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(declare-fun nth ((_ BitVec 16) Int) Bool)
-
 (declare-fun lsr ((_ BitVec 16) Int) (_ BitVec 16))
 
 (declare-fun asr ((_ BitVec 16) Int) (_ BitVec 16))
@@ -57,70 +55,6 @@
                                             (- (- 65536 (bv2nat x)))))
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvlshr x n) (lsr x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvashr x n) (asr x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvshl x n) (lsl x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
-  (rotate_left1 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
-  (rotate_right1 v (bv2nat n)))))
-
-(declare-fun nth_bv ((_ BitVec 16) (_ BitVec 16)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 16)) (i (_ BitVec 16)))
-  (= (= (nth_bv x i) true) (not (= (bvand (bvlshr x i) #x0001) #x0000)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 16)) (i (_ BitVec 16)))
-  (= (nth x (bv2nat i)) (nth_bv x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 16)) (i Int))
-  (=> (and (<= 0 i) (< i 65536)) (= (nth_bv x ((_ int2bv 16) i)) (nth x i)))))
-
-(declare-fun eq_sub_bv ((_ BitVec 16) (_ BitVec 16) (_ BitVec 16)
-  (_ BitVec 16)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 16)) (b (_ BitVec 16)) (i (_ BitVec 16))
-  (n (_ BitVec 16)))
-  (let ((mask (bvshl (bvsub (bvshl #x0001 n) #x0001) i)))
-  (= (eq_sub_bv a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth a j) (nth b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 16)) (b (_ BitVec 16)) (i (_ BitVec 16))
-  (n (_ BitVec 16)))
-  (= (eq_sub a b (bv2nat i) (bv2nat n)) (eq_sub_bv a b i n))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content (_ BitVec 16))))))
 (declare-fun power ((_ BitVec 16) Int) (_ BitVec 16))
@@ -142,10 +76,6 @@
 
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int2 (RoundingMode Float64) Int)
 
 (declare-const max_int Int)
 
@@ -169,7 +99,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -184,70 +114,119 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
-(declare-sort long_float 0)
+(declare-sort log_index 0)
 
-(declare-fun user_eq (long_float long_float) Bool)
+(define-fun in_range1 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
+                                               (bvule x #x0257)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Float64) us_image)
+(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 599)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 16)) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float64)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) (_ BitVec 16))
 
-(declare-const dummy long_float)
+(declare-fun user_eq (log_index log_index) Bool)
+
+(declare-const dummy log_index)
+
+(declare-datatypes ()
+((log_index__ref (mk_log_index__ref (log_index__content log_index)))))
+(define-fun log_index__ref___projection ((a log_index__ref)) log_index
+  (log_index__content a))
+
+(declare-fun to_rep (log_index) (_ BitVec 16))
+
+(declare-fun of_rep ((_ BitVec 16)) log_index)
+
+;; inversion_axiom
+  (assert
+  (forall ((x log_index))
+  (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x log_index)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x (_ BitVec 16)))
+  (! (let ((y (bvurem x #x0258)))
+     (=> (in_range1 y) (= (to_rep (of_rep x)) y))) :pattern ((to_rep
+                                                             (of_rep x))) )))
+
+(define-fun to_int2 ((x log_index)) Int (bv2nat (to_rep x)))
+
+;; range_int_axiom
+  (assert
+  (forall ((x log_index)) (! (in_range_int
+  (to_int2 x)) :pattern ((to_int2 x)) )))
+
+(declare-sort long_float 0)
+
+(declare-fun user_eq1 (long_float long_float) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Float64) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float64)
+
+(declare-const dummy1 long_float)
 
 (declare-datatypes ()
 ((long_float__ref (mk_long_float__ref (long_float__content long_float)))))
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
-(declare-fun to_rep (long_float) Float64)
+(declare-fun to_rep1 (long_float) Float64)
 
-(declare-fun of_rep (Float64) long_float)
+(declare-fun of_rep1 (Float64) long_float)
 
 ;; inversion_axiom
   (assert
   (forall ((x long_float))
-  (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
 
 ;; range_axiom
   (assert
   (forall ((x long_float))
-  (! (fp.isFinite64 (to_rep x)) :pattern ((to_rep x)) )))
+  (! (fp.isFinite64 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float64))
-  (! (=> (fp.isFinite64 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                                (of_rep x))) )))
+  (! (=> (fp.isFinite64 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                                  (of_rep1 x))) )))
 
 (declare-sort unsigned_16 0)
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 ((_ BitVec 16)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 16)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) (_ BitVec 16))
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) (_ BitVec 16))
 
-(declare-fun user_eq1 (unsigned_16 unsigned_16) Bool)
+(declare-fun user_eq2 (unsigned_16 unsigned_16) Bool)
 
-(declare-const dummy1 unsigned_16)
+(declare-const dummy2 unsigned_16)
 
 (declare-datatypes ()
 ((unsigned_16__ref (mk_unsigned_16__ref (unsigned_16__content unsigned_16)))))
 (define-fun unsigned_16__ref___projection ((a unsigned_16__ref)) unsigned_16
   (unsigned_16__content a))
 
-(declare-fun to_rep1 (unsigned_16) (_ BitVec 16))
+(declare-fun to_rep2 (unsigned_16) (_ BitVec 16))
 
-(declare-fun of_rep1 ((_ BitVec 16)) unsigned_16)
+(declare-fun of_rep2 ((_ BitVec 16)) unsigned_16)
 
 ;; inversion_axiom
   (assert
   (forall ((x unsigned_16))
-  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+  (! (= (of_rep2 (to_rep2 x)) x) :pattern ((to_rep2 x)) )))
 
 ;; range_axiom
   (assert true)
@@ -255,9 +234,9 @@
 ;; coerce_axiom
   (assert
   (forall ((x (_ BitVec 16)))
-  (! (= (to_rep1 (of_rep1 x)) x) :pattern ((to_rep1 (of_rep1 x))) )))
+  (! (= (to_rep2 (of_rep2 x)) x) :pattern ((to_rep2 (of_rep2 x))) )))
 
-(define-fun to_int3 ((x unsigned_16)) Int (bv2nat (to_rep1 x)))
+(define-fun to_int3 ((x unsigned_16)) Int (bv2nat (to_rep2 x)))
 
 ;; range_int_axiom
   (assert
@@ -276,6 +255,9 @@
 
 (define-fun us_split_fields_Millisecs__projection ((a us_split_fields)) unsigned_16
   (rec__logger__log_entry__millisecs a))
+
+(define-fun us_split_fields_EstimatedGroundVelocity__projection ((a us_split_fields)) long_float
+  (rec__logger__log_entry__estimatedgroundvelocity a))
 
 (define-fun us_split_fields_EstimatedGroundVelocityIsAvailable__projection ((a us_split_fields)) Bool
   (rec__logger__log_entry__estimatedgroundvelocityisavailable a))
@@ -296,24 +278,24 @@
                         (and
                         (and
                         (and
-                        (= (to_rep1
+                        (= (to_rep2
                            (rec__logger__log_entry__ngrotations
-                           (us_split_fields1 a))) (to_rep1
+                           (us_split_fields1 a))) (to_rep2
                                                   (rec__logger__log_entry__ngrotations
                                                   (us_split_fields1 b))))
-                        (= (to_rep1
+                        (= (to_rep2
                            (rec__logger__log_entry__ngclicktime
-                           (us_split_fields1 a))) (to_rep1
+                           (us_split_fields1 a))) (to_rep2
                                                   (rec__logger__log_entry__ngclicktime
                                                   (us_split_fields1 b)))))
-                        (= (to_rep1
+                        (= (to_rep2
                            (rec__logger__log_entry__millisecs
-                           (us_split_fields1 a))) (to_rep1
+                           (us_split_fields1 a))) (to_rep2
                                                   (rec__logger__log_entry__millisecs
                                                   (us_split_fields1 b)))))
-                        (= (to_rep
+                        (= (to_rep1
                            (rec__logger__log_entry__estimatedgroundvelocity
-                           (us_split_fields1 a))) (to_rep
+                           (us_split_fields1 a))) (to_rep1
                                                   (rec__logger__log_entry__estimatedgroundvelocity
                                                   (us_split_fields1 b)))))
                         (= (rec__logger__log_entry__estimatedgroundvelocityisavailable
@@ -424,72 +406,14 @@
   (assert
   (<= 0 logger__log_entry__estimatedgroundvelocityisavailable__position))
 
-(declare-fun user_eq2 (us_rep us_rep) Bool)
+(declare-fun user_eq3 (us_rep us_rep) Bool)
 
-(declare-const dummy2 us_rep)
+(declare-const dummy3 us_rep)
 
 (declare-datatypes ()
 ((log_entry__ref (mk_log_entry__ref (log_entry__content us_rep)))))
 (define-fun log_entry__ref___projection ((a log_entry__ref)) us_rep (log_entry__content
                                                                     a))
-
-(declare-sort log_index 0)
-
-(define-fun in_range1 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
-                                               (bvule x #x0257)))
-
-(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 599)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 16)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) (_ BitVec 16))
-
-(declare-fun user_eq3 (log_index log_index) Bool)
-
-(declare-const dummy3 log_index)
-
-(declare-datatypes ()
-((log_index__ref (mk_log_index__ref (log_index__content log_index)))))
-(define-fun log_index__ref___projection ((a log_index__ref)) log_index
-  (log_index__content a))
-
-(define-fun dynamic_invariant ((temp___expr_248 (_ BitVec 16))
-  (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
-  (temp___do_toplevel_246 Bool)
-  (temp___do_typ_inv_247 Bool)) Bool (=>
-                                     (or (= temp___is_init_244 true)
-                                     (bvule #x0000 #x0257)) (in_range1
-                                     temp___expr_248)))
-
-(declare-fun to_rep2 (log_index) (_ BitVec 16))
-
-(declare-fun of_rep2 ((_ BitVec 16)) log_index)
-
-;; inversion_axiom
-  (assert
-  (forall ((x log_index))
-  (! (= (of_rep2 (to_rep2 x)) x) :pattern ((to_rep2 x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x log_index)) (! (in_range1
-  (to_rep2 x)) :pattern ((to_rep2 x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x (_ BitVec 16)))
-  (! (let ((y (bvurem x #x0258)))
-     (=> (in_range1 y) (= (to_rep2 (of_rep2 x)) y))) :pattern ((to_rep2
-                                                               (of_rep2 x))) )))
-
-(define-fun to_int4 ((x log_index)) Int (bv2nat (to_rep2 x)))
-
-;; range_int_axiom
-  (assert
-  (forall ((x log_index)) (! (in_range_int
-  (to_int4 x)) :pattern ((to_int4 x)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array (_ BitVec 16) us_rep))))))
@@ -542,6 +466,406 @@
   (=> (and (bvule a__first temp___idx_154) (bvule temp___idx_154 a__last))
   (= (bool_eq (select a temp___idx_154)
      (select b (bvadd (bvsub b__first a__first) temp___idx_154))) true))))))))
+
+(declare-const dummy4 (Array (_ BitVec 16) us_rep))
+
+(declare-const value__size1 Int)
+
+(declare-fun object__size1 ((Array (_ BitVec 16) us_rep)) Int)
+
+(declare-const value__component__size Int)
+
+(declare-fun object__component__size ((Array (_ BitVec 16) us_rep)) Int)
+
+(declare-const value__alignment1 Int)
+
+(declare-fun object__alignment1 ((Array (_ BitVec 16) us_rep)) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size1))
+
+;; object__size_axiom
+  (assert
+  (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__size1 a))))
+
+;; value__component__size_axiom
+  (assert (<= 0 value__component__size))
+
+;; object__component__size_axiom
+  (assert
+  (forall ((a (Array (_ BitVec 16) us_rep)))
+  (<= 0 (object__component__size a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment1))
+
+;; object__alignment_axiom
+  (assert
+  (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment1 a))))
+
+(declare-fun user_eq4 ((Array (_ BitVec 16) us_rep)
+  (Array (_ BitVec 16) us_rep)) Bool)
+
+(declare-datatypes ()
+((us_split_fields2
+ (mk___split_fields1
+ (rec__logger__log_database__data (Array (_ BitVec 16) us_rep))(rec__logger__log_database__first log_index)(rec__logger__log_database__last log_index)(rec__logger__log_database__empty Bool)))))
+(define-fun us_split_fields_Data__projection ((a us_split_fields2)) (Array (_ BitVec 16) us_rep)
+  (rec__logger__log_database__data a))
+
+(define-fun us_split_fields_First__projection ((a us_split_fields2)) log_index
+  (rec__logger__log_database__first a))
+
+(define-fun us_split_fields_Last__projection ((a us_split_fields2)) log_index
+  (rec__logger__log_database__last a))
+
+(define-fun us_split_fields_Empty__projection ((a us_split_fields2)) Bool
+  (rec__logger__log_database__empty a))
+
+(declare-datatypes ()
+((us_split_fields__ref1
+ (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
+(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
+  (us_split_fields__content1 a))
+
+(declare-datatypes ()
+((us_rep1 (mk___rep1 (us_split_fields3 us_split_fields2)))))
+(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
+                                                                  a))
+
+(define-fun bool_eq2 ((a us_rep1)
+  (b us_rep1)) Bool (ite (and
+                         (and
+                         (and
+                         (= (bool_eq1
+                            (rec__logger__log_database__data
+                            (us_split_fields3 a)) #x0000 #x0257
+                            (rec__logger__log_database__data
+                            (us_split_fields3 b)) #x0000 #x0257) true)
+                         (= (to_rep
+                            (rec__logger__log_database__first
+                            (us_split_fields3 a))) (to_rep
+                                                   (rec__logger__log_database__first
+                                                   (us_split_fields3 b)))))
+                         (= (to_rep
+                            (rec__logger__log_database__last
+                            (us_split_fields3 a))) (to_rep
+                                                   (rec__logger__log_database__last
+                                                   (us_split_fields3 b)))))
+                         (= (rec__logger__log_database__empty
+                            (us_split_fields3 a)) (rec__logger__log_database__empty
+                                                  (us_split_fields3 b))))
+                    true false))
+
+(declare-const value__size2 Int)
+
+(declare-fun object__size2 (us_rep1) Int)
+
+(declare-const value__alignment2 Int)
+
+(declare-fun object__alignment2 (us_rep1) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size2))
+
+;; object__size_axiom
+  (assert (forall ((a us_rep1)) (<= 0 (object__size2 a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment2))
+
+;; object__alignment_axiom
+  (assert (forall ((a us_rep1)) (<= 0 (object__alignment2 a))))
+
+(declare-const logger__log_database__data__first__bit Int)
+
+(declare-const logger__log_database__data__last__bit Int)
+
+(declare-const logger__log_database__data__position Int)
+
+;; logger__log_database__data__first__bit_axiom
+  (assert (<= 0 logger__log_database__data__first__bit))
+
+;; logger__log_database__data__last__bit_axiom
+  (assert
+  (< logger__log_database__data__first__bit logger__log_database__data__last__bit))
+
+;; logger__log_database__data__position_axiom
+  (assert (<= 0 logger__log_database__data__position))
+
+(declare-const logger__log_database__first__first__bit Int)
+
+(declare-const logger__log_database__first__last__bit Int)
+
+(declare-const logger__log_database__first__position Int)
+
+;; logger__log_database__first__first__bit_axiom
+  (assert (<= 0 logger__log_database__first__first__bit))
+
+;; logger__log_database__first__last__bit_axiom
+  (assert
+  (< logger__log_database__first__first__bit logger__log_database__first__last__bit))
+
+;; logger__log_database__first__position_axiom
+  (assert (<= 0 logger__log_database__first__position))
+
+(declare-const logger__log_database__last__first__bit Int)
+
+(declare-const logger__log_database__last__last__bit Int)
+
+(declare-const logger__log_database__last__position Int)
+
+;; logger__log_database__last__first__bit_axiom
+  (assert (<= 0 logger__log_database__last__first__bit))
+
+;; logger__log_database__last__last__bit_axiom
+  (assert
+  (< logger__log_database__last__first__bit logger__log_database__last__last__bit))
+
+;; logger__log_database__last__position_axiom
+  (assert (<= 0 logger__log_database__last__position))
+
+(declare-const logger__log_database__empty__first__bit Int)
+
+(declare-const logger__log_database__empty__last__bit Int)
+
+(declare-const logger__log_database__empty__position Int)
+
+;; logger__log_database__empty__first__bit_axiom
+  (assert (<= 0 logger__log_database__empty__first__bit))
+
+;; logger__log_database__empty__last__bit_axiom
+  (assert
+  (< logger__log_database__empty__first__bit logger__log_database__empty__last__bit))
+
+;; logger__log_database__empty__position_axiom
+  (assert (<= 0 logger__log_database__empty__position))
+
+(declare-fun user_eq5 (us_rep1 us_rep1) Bool)
+
+(declare-const dummy5 us_rep1)
+
+(declare-datatypes ()
+((log_database__ref (mk_log_database__ref (log_database__content us_rep1)))))
+(define-fun log_database__ref___projection ((a log_database__ref)) us_rep1
+  (log_database__content a))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-fun log_size (us_split_fields2) Int)
+
+(declare-fun log_size__function_guard (Int us_split_fields2) Bool)
+
+(declare-sort natural 0)
+
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
+
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+
+(declare-fun user_eq6 (natural natural) Bool)
+
+(declare-const dummy6 natural)
+
+(declare-datatypes ()
+((natural__ref (mk_natural__ref (natural__content natural)))))
+(define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
+                                                                 a))
+
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range2
+                                    temp___expr_39)))
+
+;; log_size__post_axiom
+  (assert
+  (forall ((logger__event_log__fields us_split_fields2))
+  (! (dynamic_invariant (log_size logger__event_log__fields) true false true
+  true) :pattern ((log_size logger__event_log__fields)) )))
+
+;; log_size__def_axiom
+  (assert
+  (forall ((logger__event_log__fields us_split_fields2))
+  (! (= (log_size logger__event_log__fields) (ite (= (rec__logger__log_database__empty
+                                                     (us_split_fields3
+                                                     (mk___rep1
+                                                     logger__event_log__fields))) true)
+                                             0
+                                             (+ (bv2nat (let ((temp___279 (bvsub
+                                                        (to_rep
+                                                        (rec__logger__log_database__last
+                                                        (us_split_fields3
+                                                        (mk___rep1
+                                                        logger__event_log__fields))))
+                                                        (to_rep
+                                                        (rec__logger__log_database__first
+                                                        (us_split_fields3
+                                                        (mk___rep1
+                                                        logger__event_log__fields)))))))
+                                                        (ite (bvult (to_rep
+                                                                    (rec__logger__log_database__last
+                                                                    (us_split_fields3
+                                                                    (mk___rep1
+                                                                    logger__event_log__fields))))
+                                                        (to_rep
+                                                        (rec__logger__log_database__first
+                                                        (us_split_fields3
+                                                        (mk___rep1
+                                                        logger__event_log__fields)))))
+                                                        (bvadd temp___279 #x0258)
+                                                        temp___279))) 1))) :pattern (
+  (log_size logger__event_log__fields)) )))
+
+(define-fun dynamic_invariant1 ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
+
+(declare-fun make_entry ((_ BitVec 16) (_ BitVec 16) (_ BitVec 16) Float64
+  Bool) us_rep)
+
+(declare-fun make_entry__function_guard (us_rep (_ BitVec 16) (_ BitVec 16)
+  (_ BitVec 16) Float64 Bool) Bool)
+
+(define-fun dynamic_invariant2 ((temp___expr_194 (_ BitVec 16))
+  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
+  (temp___do_toplevel_192 Bool) (temp___do_typ_inv_193 Bool)) Bool true)
+
+;; make_entry__post_axiom
+  (assert true)
+
+;; make_entry__def_axiom
+  (assert
+  (forall ((ngrotations (_ BitVec 16)) (ngclicktime (_ BitVec 16))
+  (millisecs (_ BitVec 16)))
+  (forall ((estimatedgroundvelocity Float64))
+  (forall ((estimatedgroundvelocityisavailable Bool))
+  (! (=>
+     (and
+     (and
+     (and (dynamic_invariant2 ngrotations true true true true)
+     (dynamic_invariant2 ngclicktime true true true true))
+     (dynamic_invariant2 millisecs true true true true)) (dynamic_invariant1
+     estimatedgroundvelocity true true true true))
+     (= (make_entry ngrotations ngclicktime millisecs estimatedgroundvelocity
+        estimatedgroundvelocityisavailable) (mk___rep
+                                            (mk___split_fields
+                                            (of_rep2 ngrotations)
+                                            (of_rep2 ngclicktime)
+                                            (of_rep2 millisecs)
+                                            (of_rep1 estimatedgroundvelocity)
+                                            estimatedgroundvelocityisavailable)))) :pattern (
+  (make_entry ngrotations ngclicktime millisecs estimatedgroundvelocity
+  estimatedgroundvelocityisavailable)) )))))
+
+(declare-sort t 0)
+
+(declare-fun first (t) log_index)
+
+(declare-fun last (t) log_index)
+
+(declare-fun mk ((_ BitVec 16) (_ BitVec 16)) t)
+
+;; mk_def
+  (assert
+  (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
+  (! (=> (in_range1 f)
+     (=> (in_range1 l)
+     (and (= (to_rep (first (mk f l))) f) (= (to_rep (last (mk f l))) l)))) :pattern (
+  (mk f l)) )))
+
+(define-fun dynamic_property ((range_first (_ BitVec 16))
+  (range_last (_ BitVec 16)) (low (_ BitVec 16))
+  (high (_ BitVec 16))) Bool (and (in_range1 low)
+                             (and (in_range1 high)
+                             (=> (bvule low high)
+                             (and (in_range1 low) (in_range1 high))))))
+
+(declare-datatypes ()
+((us_t (mk___t (elts (Array (_ BitVec 16) us_rep))(rt t)))))
+(define-fun to_array ((a us_t)) (Array (_ BitVec 16) us_rep) (elts a))
+
+(define-fun of_array ((a (Array (_ BitVec 16) us_rep)) (f (_ BitVec 16))
+  (l (_ BitVec 16))) us_t (mk___t a (mk f l)))
+
+(define-fun first1 ((a us_t)) (_ BitVec 16) (to_rep (first (rt a))))
+
+(define-fun last1 ((a us_t)) (_ BitVec 16) (to_rep (last (rt a))))
+
+(define-fun length ((a us_t)) Int (ite (bvule (first1 a) (last1 a))
+                                  (+ (- (bv2nat (last1 a)) (bv2nat (first1 a))) 1)
+                                  0))
+
+(declare-const value__size3 Int)
+
+(declare-fun object__size3 ((Array (_ BitVec 16) us_rep)) Int)
+
+(declare-const value__component__size1 Int)
+
+(declare-fun object__component__size1 ((Array (_ BitVec 16) us_rep)) Int)
+
+(declare-const value__alignment3 Int)
+
+(declare-fun object__alignment3 ((Array (_ BitVec 16) us_rep)) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size3))
+
+;; object__size_axiom
+  (assert
+  (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__size3 a))))
+
+;; value__component__size_axiom
+  (assert (<= 0 value__component__size1))
+
+;; object__component__size_axiom
+  (assert
+  (forall ((a (Array (_ BitVec 16) us_rep)))
+  (<= 0 (object__component__size1 a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment3))
+
+;; object__alignment_axiom
+  (assert
+  (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment3 a))))
+
+(define-fun bool_eq3 ((x us_t)
+  (y us_t)) Bool (bool_eq1 (elts x) (to_rep (first (rt x)))
+                 (to_rep (last (rt x))) (elts y) (to_rep (first (rt y)))
+                 (to_rep (last (rt y)))))
+
+(declare-fun user_eq7 (us_t us_t) Bool)
+
+(declare-const dummy7 us_t)
+
+(declare-datatypes ()
+((log_array__ref (mk_log_array__ref (log_array__content us_t)))))
+(define-fun log_array__ref___projection ((a log_array__ref)) us_t (log_array__content
+                                                                  a))
+
+(define-fun dynamic_invariant3 ((temp___expr_248 (_ BitVec 16))
+  (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
+  (temp___do_toplevel_246 Bool)
+  (temp___do_typ_inv_247 Bool)) Bool (=>
+                                     (or (= temp___is_init_244 true)
+                                     (bvule #x0000 #x0257)) (in_range1
+                                     temp___expr_248)))
 
 (declare-fun concat1 ((Array (_ BitVec 16) us_rep) (_ BitVec 16)
   (_ BitVec 16) (Array (_ BitVec 16) us_rep) (_ BitVec 16)
@@ -613,410 +937,25 @@
   (forall ((i (_ BitVec 16)))
   (! (= (select (singleton1 v i) i) v) :pattern ((select (singleton1 v i) i)) ))))
 
-(declare-sort t 0)
-
-(declare-fun first (t) log_index)
-
-(declare-fun last (t) log_index)
-
-(declare-fun mk ((_ BitVec 16) (_ BitVec 16)) t)
-
-;; mk_def
-  (assert
-  (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
-  (! (=> (in_range1 f)
-     (=> (in_range1 l)
-     (and (= (to_rep2 (first (mk f l))) f) (= (to_rep2 (last (mk f l))) l)))) :pattern (
-  (mk f l)) )))
-
-(define-fun dynamic_property ((range_first (_ BitVec 16))
-  (range_last (_ BitVec 16)) (low (_ BitVec 16))
-  (high (_ BitVec 16))) Bool (and (in_range1 low)
-                             (and (in_range1 high)
-                             (=> (bvule low high)
-                             (and (in_range1 low) (in_range1 high))))))
-
-(declare-datatypes ()
-((us_t (mk___t (elts (Array (_ BitVec 16) us_rep))(rt t)))))
-(define-fun to_array ((a us_t)) (Array (_ BitVec 16) us_rep) (elts a))
-
-(define-fun of_array ((a (Array (_ BitVec 16) us_rep)) (f (_ BitVec 16))
-  (l (_ BitVec 16))) us_t (mk___t a (mk f l)))
-
-(define-fun first1 ((a us_t)) (_ BitVec 16) (to_rep2 (first (rt a))))
-
-(define-fun last1 ((a us_t)) (_ BitVec 16) (to_rep2 (last (rt a))))
-
-(define-fun length ((a us_t)) Int (ite (bvule (first1 a) (last1 a))
-                                  (+ (- (bv2nat (last1 a)) (bv2nat (first1 a))) 1)
-                                  0))
-
-(declare-const value__size1 Int)
-
-(declare-fun object__size1 ((Array (_ BitVec 16) us_rep)) Int)
-
-(declare-const value__component__size Int)
-
-(declare-fun object__component__size ((Array (_ BitVec 16) us_rep)) Int)
-
-(declare-const value__alignment1 Int)
-
-(declare-fun object__alignment1 ((Array (_ BitVec 16) us_rep)) Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size1))
-
-;; object__size_axiom
-  (assert
-  (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__size1 a))))
-
-;; value__component__size_axiom
-  (assert (<= 0 value__component__size))
-
-;; object__component__size_axiom
-  (assert
-  (forall ((a (Array (_ BitVec 16) us_rep)))
-  (<= 0 (object__component__size a))))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment1))
-
-;; object__alignment_axiom
-  (assert
-  (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment1 a))))
-
-(define-fun bool_eq2 ((x us_t)
-  (y us_t)) Bool (bool_eq1 (elts x) (to_rep2 (first (rt x)))
-                 (to_rep2 (last (rt x))) (elts y) (to_rep2 (first (rt y)))
-                 (to_rep2 (last (rt y)))))
-
-(declare-fun user_eq4 (us_t us_t) Bool)
-
-(declare-const dummy4 us_t)
-
-(declare-datatypes ()
-((log_array__ref (mk_log_array__ref (log_array__content us_t)))))
-(define-fun log_array__ref___projection ((a log_array__ref)) us_t (log_array__content
-                                                                  a))
-
 (declare-sort t4s 0)
 
-(define-fun in_range2 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
+(define-fun in_range3 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
                                                (bvule x #x0257)))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 599)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 ((_ BitVec 16)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) (_ BitVec 16))
-
-(declare-fun user_eq5 (t4s t4s) Bool)
-
-(declare-const dummy5 t4s)
-
-(declare-datatypes () ((t4s__ref (mk_t4s__ref (t4s__content t4s)))))
-(define-fun t4s__ref___projection ((a t4s__ref)) t4s (t4s__content a))
-
-(declare-const dummy6 (Array (_ BitVec 16) us_rep))
-
-(declare-const value__size2 Int)
-
-(declare-fun object__size2 ((Array (_ BitVec 16) us_rep)) Int)
-
-(declare-const value__component__size1 Int)
-
-(declare-fun object__component__size1 ((Array (_ BitVec 16) us_rep)) Int)
-
-(declare-const value__alignment2 Int)
-
-(declare-fun object__alignment2 ((Array (_ BitVec 16) us_rep)) Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size2))
-
-;; object__size_axiom
-  (assert
-  (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__size2 a))))
-
-;; value__component__size_axiom
-  (assert (<= 0 value__component__size1))
-
-;; object__component__size_axiom
-  (assert
-  (forall ((a (Array (_ BitVec 16) us_rep)))
-  (<= 0 (object__component__size1 a))))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment2))
-
-;; object__alignment_axiom
-  (assert
-  (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment2 a))))
-
-(declare-fun user_eq6 ((Array (_ BitVec 16) us_rep)
-  (Array (_ BitVec 16) us_rep)) Bool)
-
-(declare-datatypes ()
-((us_split_fields2
- (mk___split_fields1
- (rec__logger__log_database__data (Array (_ BitVec 16) us_rep))(rec__logger__log_database__first log_index)(rec__logger__log_database__last log_index)(rec__logger__log_database__empty Bool)))))
-(define-fun us_split_fields_Data__projection ((a us_split_fields2)) (Array (_ BitVec 16) us_rep)
-  (rec__logger__log_database__data a))
-
-(define-fun us_split_fields_First__projection ((a us_split_fields2)) log_index
-  (rec__logger__log_database__first a))
-
-(define-fun us_split_fields_Last__projection ((a us_split_fields2)) log_index
-  (rec__logger__log_database__last a))
-
-(define-fun us_split_fields_Empty__projection ((a us_split_fields2)) Bool
-  (rec__logger__log_database__empty a))
-
-(declare-datatypes ()
-((us_split_fields__ref1
- (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref___2__projection ((a us_split_fields__ref1)) us_split_fields2
-  (us_split_fields__content1 a))
-
-(declare-datatypes ()
-((us_rep1 (mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep___2__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                  a))
-
-(define-fun bool_eq3 ((a us_rep1)
-  (b us_rep1)) Bool (ite (and
-                         (and
-                         (and
-                         (= (bool_eq1
-                            (rec__logger__log_database__data
-                            (us_split_fields3 a)) #x0000 #x0257
-                            (rec__logger__log_database__data
-                            (us_split_fields3 b)) #x0000 #x0257) true)
-                         (= (to_rep2
-                            (rec__logger__log_database__first
-                            (us_split_fields3 a))) (to_rep2
-                                                   (rec__logger__log_database__first
-                                                   (us_split_fields3 b)))))
-                         (= (to_rep2
-                            (rec__logger__log_database__last
-                            (us_split_fields3 a))) (to_rep2
-                                                   (rec__logger__log_database__last
-                                                   (us_split_fields3 b)))))
-                         (= (rec__logger__log_database__empty
-                            (us_split_fields3 a)) (rec__logger__log_database__empty
-                                                  (us_split_fields3 b))))
-                    true false))
-
-(declare-const value__size3 Int)
-
-(declare-fun object__size3 (us_rep1) Int)
-
-(declare-const value__alignment3 Int)
-
-(declare-fun object__alignment3 (us_rep1) Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size3))
-
-;; object__size_axiom
-  (assert (forall ((a us_rep1)) (<= 0 (object__size3 a))))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment3))
-
-;; object__alignment_axiom
-  (assert (forall ((a us_rep1)) (<= 0 (object__alignment3 a))))
-
-(declare-const logger__log_database__data__first__bit Int)
-
-(declare-const logger__log_database__data__last__bit Int)
-
-(declare-const logger__log_database__data__position Int)
-
-;; logger__log_database__data__first__bit_axiom
-  (assert (<= 0 logger__log_database__data__first__bit))
-
-;; logger__log_database__data__last__bit_axiom
-  (assert
-  (< logger__log_database__data__first__bit logger__log_database__data__last__bit))
-
-;; logger__log_database__data__position_axiom
-  (assert (<= 0 logger__log_database__data__position))
-
-(declare-const logger__log_database__first__first__bit Int)
-
-(declare-const logger__log_database__first__last__bit Int)
-
-(declare-const logger__log_database__first__position Int)
-
-;; logger__log_database__first__first__bit_axiom
-  (assert (<= 0 logger__log_database__first__first__bit))
-
-;; logger__log_database__first__last__bit_axiom
-  (assert
-  (< logger__log_database__first__first__bit logger__log_database__first__last__bit))
-
-;; logger__log_database__first__position_axiom
-  (assert (<= 0 logger__log_database__first__position))
-
-(declare-const logger__log_database__last__first__bit Int)
-
-(declare-const logger__log_database__last__last__bit Int)
-
-(declare-const logger__log_database__last__position Int)
-
-;; logger__log_database__last__first__bit_axiom
-  (assert (<= 0 logger__log_database__last__first__bit))
-
-;; logger__log_database__last__last__bit_axiom
-  (assert
-  (< logger__log_database__last__first__bit logger__log_database__last__last__bit))
-
-;; logger__log_database__last__position_axiom
-  (assert (<= 0 logger__log_database__last__position))
-
-(declare-const logger__log_database__empty__first__bit Int)
-
-(declare-const logger__log_database__empty__last__bit Int)
-
-(declare-const logger__log_database__empty__position Int)
-
-;; logger__log_database__empty__first__bit_axiom
-  (assert (<= 0 logger__log_database__empty__first__bit))
-
-;; logger__log_database__empty__last__bit_axiom
-  (assert
-  (< logger__log_database__empty__first__bit logger__log_database__empty__last__bit))
-
-;; logger__log_database__empty__position_axiom
-  (assert (<= 0 logger__log_database__empty__position))
-
-(declare-fun user_eq7 (us_rep1 us_rep1) Bool)
-
-(declare-const dummy7 us_rep1)
-
-(declare-datatypes ()
-((log_database__ref (mk_log_database__ref (log_database__content us_rep1)))))
-(define-fun log_database__ref___projection ((a log_database__ref)) us_rep1
-  (log_database__content a))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-fun log_size (us_split_fields2) Int)
-
-(declare-fun log_size__function_guard (Int us_split_fields2) Bool)
-
-(declare-sort natural 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 ((_ BitVec 16)) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) (_ BitVec 16))
 
-(declare-fun user_eq8 (natural natural) Bool)
+(declare-fun user_eq8 (t4s t4s) Bool)
 
-(declare-const dummy8 natural)
+(declare-const dummy8 t4s)
 
-(declare-datatypes ()
-((natural__ref (mk_natural__ref (natural__content natural)))))
-(define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
-                                                                 a))
-
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
-  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
-  (temp___do_typ_inv_38 Bool)) Bool (=>
-                                    (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range3
-                                    temp___expr_39)))
-
-;; log_size__post_axiom
-  (assert
-  (forall ((logger__event_log__fields us_split_fields2))
-  (! (dynamic_invariant1 (log_size logger__event_log__fields) true false true
-  true) :pattern ((log_size logger__event_log__fields)) )))
-
-;; log_size__def_axiom
-  (assert
-  (forall ((logger__event_log__fields us_split_fields2))
-  (! (= (log_size logger__event_log__fields) (ite (= (rec__logger__log_database__empty
-                                                     (us_split_fields3
-                                                     (mk___rep1
-                                                     logger__event_log__fields))) true)
-                                             0
-                                             (+ (bv2nat (let ((temp___279 (bvsub
-                                                        (to_rep2
-                                                        (rec__logger__log_database__last
-                                                        (us_split_fields3
-                                                        (mk___rep1
-                                                        logger__event_log__fields))))
-                                                        (to_rep2
-                                                        (rec__logger__log_database__first
-                                                        (us_split_fields3
-                                                        (mk___rep1
-                                                        logger__event_log__fields)))))))
-                                                        (ite (bvult (to_rep2
-                                                                    (rec__logger__log_database__last
-                                                                    (us_split_fields3
-                                                                    (mk___rep1
-                                                                    logger__event_log__fields))))
-                                                        (to_rep2
-                                                        (rec__logger__log_database__first
-                                                        (us_split_fields3
-                                                        (mk___rep1
-                                                        logger__event_log__fields)))))
-                                                        (bvadd temp___279 #x0258)
-                                                        temp___279))) 1))) :pattern (
-  (log_size logger__event_log__fields)) )))
-
-(define-fun dynamic_invariant2 ((temp___expr_67 Float64)
-  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
-  (temp___do_toplevel_65 Bool)
-  (temp___do_typ_inv_66 Bool)) Bool (=>
-                                    (or (= temp___is_init_63 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                    (fp.isFinite64 temp___expr_67)))
-
-(define-fun dynamic_invariant3 ((temp___expr_194 (_ BitVec 16))
-  (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
-  (temp___do_toplevel_192 Bool) (temp___do_typ_inv_193 Bool)) Bool true)
-
-(declare-fun make_entry ((_ BitVec 16) (_ BitVec 16) (_ BitVec 16) Float64
-  Bool) us_rep)
-
-(declare-fun make_entry__function_guard (us_rep (_ BitVec 16) (_ BitVec 16)
-  (_ BitVec 16) Float64 Bool) Bool)
-
-;; make_entry__post_axiom
-  (assert true)
-
-;; make_entry__def_axiom
-  (assert
-  (forall ((ngrotations (_ BitVec 16)) (ngclicktime (_ BitVec 16))
-  (millisecs (_ BitVec 16)))
-  (forall ((estimatedgroundvelocity Float64))
-  (forall ((estimatedgroundvelocityisavailable Bool))
-  (! (=>
-     (and
-     (and
-     (and (dynamic_invariant3 ngrotations true true true true)
-     (dynamic_invariant3 ngclicktime true true true true))
-     (dynamic_invariant3 millisecs true true true true)) (dynamic_invariant2
-     estimatedgroundvelocity true true true true))
-     (= (make_entry ngrotations ngclicktime millisecs estimatedgroundvelocity
-        estimatedgroundvelocityisavailable) (mk___rep
-                                            (mk___split_fields
-                                            (of_rep1 ngrotations)
-                                            (of_rep1 ngclicktime)
-                                            (of_rep1 millisecs)
-                                            (of_rep estimatedgroundvelocity)
-                                            estimatedgroundvelocityisavailable)))) :pattern (
-  (make_entry ngrotations ngclicktime millisecs estimatedgroundvelocity
-  estimatedgroundvelocityisavailable)) )))))
+(declare-datatypes () ((t4s__ref (mk_t4s__ref (t4s__content t4s)))))
+(define-fun t4s__ref___projection ((a t4s__ref)) t4s (t4s__content a))
 
 (declare-const tmp (_ BitVec 16))
 
@@ -1057,8 +996,8 @@
   (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep2 (first2 (mk1 f l))) f)
-     (= (to_rep2 (last2 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (and (= (to_rep (first2 (mk1 f l))) f) (= (to_rep (last2 (mk1 f l))) l)))) :pattern (
+  (mk1 f l)) )))
 
 (define-fun dynamic_property2 ((range_first (_ BitVec 16))
   (range_last (_ BitVec 16)) (low (_ BitVec 16))
@@ -1076,9 +1015,9 @@
 (define-fun of_array1 ((a (Array (_ BitVec 16) us_rep)) (f (_ BitVec 16))
   (l (_ BitVec 16))) us_t1 (mk___t1 a (mk1 f l)))
 
-(define-fun first3 ((a us_t1)) (_ BitVec 16) (to_rep2 (first2 (rt1 a))))
+(define-fun first3 ((a us_t1)) (_ BitVec 16) (to_rep (first2 (rt1 a))))
 
-(define-fun last3 ((a us_t1)) (_ BitVec 16) (to_rep2 (last2 (rt1 a))))
+(define-fun last3 ((a us_t1)) (_ BitVec 16) (to_rep (last2 (rt1 a))))
 
 (define-fun length1 ((a us_t1)) Int (ite (bvule (first3 a) (last3 a))
                                     (+ (- (bv2nat (last3 a)) (bv2nat
@@ -1119,9 +1058,9 @@
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment4 a))))
 
 (define-fun bool_eq4 ((x us_t1)
-  (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep2 (first2 (rt1 x)))
-                  (to_rep2 (last2 (rt1 x))) (elts1 y)
-                  (to_rep2 (first2 (rt1 y))) (to_rep2 (last2 (rt1 y)))))
+  (y us_t1)) Bool (bool_eq1 (elts1 x) (to_rep (first2 (rt1 x)))
+                  (to_rep (last2 (rt1 x))) (elts1 y)
+                  (to_rep (first2 (rt1 y))) (to_rep (last2 (rt1 y)))))
 
 (declare-fun user_eq10 (us_t1 us_t1) Bool)
 
@@ -1190,8 +1129,8 @@
   (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep2 (first4 (mk2 f l))) f)
-     (= (to_rep2 (last4 (mk2 f l))) l)))) :pattern ((mk2 f l)) )))
+     (and (= (to_rep (first4 (mk2 f l))) f) (= (to_rep (last4 (mk2 f l))) l)))) :pattern (
+  (mk2 f l)) )))
 
 (define-fun dynamic_property4 ((range_first (_ BitVec 16))
   (range_last (_ BitVec 16)) (low (_ BitVec 16))
@@ -1209,9 +1148,9 @@
 (define-fun of_array2 ((a (Array (_ BitVec 16) us_rep)) (f (_ BitVec 16))
   (l (_ BitVec 16))) us_t2 (mk___t2 a (mk2 f l)))
 
-(define-fun first5 ((a us_t2)) (_ BitVec 16) (to_rep2 (first4 (rt2 a))))
+(define-fun first5 ((a us_t2)) (_ BitVec 16) (to_rep (first4 (rt2 a))))
 
-(define-fun last5 ((a us_t2)) (_ BitVec 16) (to_rep2 (last4 (rt2 a))))
+(define-fun last5 ((a us_t2)) (_ BitVec 16) (to_rep (last4 (rt2 a))))
 
 (define-fun length2 ((a us_t2)) Int (ite (bvule (first5 a) (last5 a))
                                     (+ (- (bv2nat (last5 a)) (bv2nat
@@ -1252,9 +1191,9 @@
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment5 a))))
 
 (define-fun bool_eq5 ((x us_t2)
-  (y us_t2)) Bool (bool_eq1 (elts2 x) (to_rep2 (first4 (rt2 x)))
-                  (to_rep2 (last4 (rt2 x))) (elts2 y)
-                  (to_rep2 (first4 (rt2 y))) (to_rep2 (last4 (rt2 y)))))
+  (y us_t2)) Bool (bool_eq1 (elts2 x) (to_rep (first4 (rt2 x)))
+                  (to_rep (last4 (rt2 x))) (elts2 y)
+                  (to_rep (first4 (rt2 y))) (to_rep (last4 (rt2 y)))))
 
 (declare-fun user_eq12 (us_t2 us_t2) Bool)
 
@@ -1304,8 +1243,8 @@
   (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep2 (first6 (mk3 f l))) f)
-     (= (to_rep2 (last6 (mk3 f l))) l)))) :pattern ((mk3 f l)) )))
+     (and (= (to_rep (first6 (mk3 f l))) f) (= (to_rep (last6 (mk3 f l))) l)))) :pattern (
+  (mk3 f l)) )))
 
 (define-fun dynamic_property6 ((range_first (_ BitVec 16))
   (range_last (_ BitVec 16)) (low (_ BitVec 16))
@@ -1323,9 +1262,9 @@
 (define-fun of_array3 ((a (Array (_ BitVec 16) us_rep)) (f (_ BitVec 16))
   (l (_ BitVec 16))) us_t3 (mk___t3 a (mk3 f l)))
 
-(define-fun first7 ((a us_t3)) (_ BitVec 16) (to_rep2 (first6 (rt3 a))))
+(define-fun first7 ((a us_t3)) (_ BitVec 16) (to_rep (first6 (rt3 a))))
 
-(define-fun last7 ((a us_t3)) (_ BitVec 16) (to_rep2 (last6 (rt3 a))))
+(define-fun last7 ((a us_t3)) (_ BitVec 16) (to_rep (last6 (rt3 a))))
 
 (define-fun length3 ((a us_t3)) Int (ite (bvule (first7 a) (last7 a))
                                     (+ (- (bv2nat (last7 a)) (bv2nat
@@ -1366,9 +1305,9 @@
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment6 a))))
 
 (define-fun bool_eq6 ((x us_t3)
-  (y us_t3)) Bool (bool_eq1 (elts3 x) (to_rep2 (first6 (rt3 x)))
-                  (to_rep2 (last6 (rt3 x))) (elts3 y)
-                  (to_rep2 (first6 (rt3 y))) (to_rep2 (last6 (rt3 y)))))
+  (y us_t3)) Bool (bool_eq1 (elts3 x) (to_rep (first6 (rt3 x)))
+                  (to_rep (last6 (rt3 x))) (elts3 y)
+                  (to_rep (first6 (rt3 y))) (to_rep (last6 (rt3 y)))))
 
 (declare-fun user_eq14 (us_t3 us_t3) Bool)
 
@@ -1411,8 +1350,8 @@
   (forall ((f (_ BitVec 16)) (l (_ BitVec 16)))
   (! (=> (in_range1 f)
      (=> (in_range1 l)
-     (and (= (to_rep2 (first8 (mk4 f l))) f)
-     (= (to_rep2 (last8 (mk4 f l))) l)))) :pattern ((mk4 f l)) )))
+     (and (= (to_rep (first8 (mk4 f l))) f) (= (to_rep (last8 (mk4 f l))) l)))) :pattern (
+  (mk4 f l)) )))
 
 (define-fun dynamic_property8 ((range_first (_ BitVec 16))
   (range_last (_ BitVec 16)) (low (_ BitVec 16))
@@ -1430,9 +1369,9 @@
 (define-fun of_array4 ((a (Array (_ BitVec 16) us_rep)) (f (_ BitVec 16))
   (l (_ BitVec 16))) us_t4 (mk___t4 a (mk4 f l)))
 
-(define-fun first9 ((a us_t4)) (_ BitVec 16) (to_rep2 (first8 (rt4 a))))
+(define-fun first9 ((a us_t4)) (_ BitVec 16) (to_rep (first8 (rt4 a))))
 
-(define-fun last9 ((a us_t4)) (_ BitVec 16) (to_rep2 (last8 (rt4 a))))
+(define-fun last9 ((a us_t4)) (_ BitVec 16) (to_rep (last8 (rt4 a))))
 
 (define-fun length4 ((a us_t4)) Int (ite (bvule (first9 a) (last9 a))
                                     (+ (- (bv2nat (last9 a)) (bv2nat
@@ -1473,9 +1412,9 @@
   (forall ((a (Array (_ BitVec 16) us_rep))) (<= 0 (object__alignment7 a))))
 
 (define-fun bool_eq7 ((x us_t4)
-  (y us_t4)) Bool (bool_eq1 (elts4 x) (to_rep2 (first8 (rt4 x)))
-                  (to_rep2 (last8 (rt4 x))) (elts4 y)
-                  (to_rep2 (first8 (rt4 y))) (to_rep2 (last8 (rt4 y)))))
+  (y us_t4)) Bool (bool_eq1 (elts4 x) (to_rep (first8 (rt4 x)))
+                  (to_rep (last8 (rt4 x))) (elts4 y)
+                  (to_rep (first8 (rt4 y))) (to_rep (last8 (rt4 y)))))
 
 (declare-fun user_eq16 (us_t4 us_t4) Bool)
 
@@ -1484,13 +1423,13 @@
 (declare-datatypes () ((t13b__ref (mk_t13b__ref (t13b__content us_t4)))))
 (define-fun t13b__ref___projection ((a t13b__ref)) us_t4 (t13b__content a))
 
-(declare-fun temp___322 (us_rep) (Array (_ BitVec 16) us_rep))
+(declare-fun temp_____aggregate_def_322 (us_rep) (Array (_ BitVec 16) us_rep))
 
 ;; def_axiom
   (assert
   (forall ((temp___324 us_rep))
   (forall ((temp___325 (_ BitVec 16)))
-  (= (select (temp___322 temp___324) temp___325) temp___324))))
+  (= (select (temp_____aggregate_def_322 temp___324) temp___325) temp___324))))
 
 (define-fun dynamic_invariant5 ((temp___expr_255 us_t)
   (temp___is_init_251 Bool) (temp___skip_constant_252 Bool)
@@ -1694,16 +1633,18 @@
   (= o27 (make_entry #x0000 #x0000 #x0000
          (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
          (distinct 0 0)))
-  (and (= (of_rep1 #x0000) o)
-  (and (= (of_rep1 #x0000) o1)
-  (and (= (of_rep1 #x0000) o2)
+  (and (= (of_rep2 #x0000) o)
+  (and (= (of_rep2 #x0000) o1)
+  (and (= (of_rep2 #x0000) o2)
   (and
-  (= (of_rep
+  (= (of_rep1
      (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
   o3) (= (distinct 0 0) o4))))))))
 
 ;; H
-  (assert (=> (= event_log__split_fields3 true) (= o5 (temp___322 o27))))
+  (assert
+  (=> (= event_log__split_fields3 true)
+  (= o5 (temp_____aggregate_def_322 o27))))
 
 ;; H
   (assert (=> (= event_log__split_fields3 true) (= o5 o6)))
@@ -1748,13 +1689,12 @@
   (= o8 (log_size
         (mk___split_fields1 event_log__split_fields event_log__split_fields1
         event_log__split_fields2 event_log__split_fields3)))
-  (and (in_range3 o8)
+  (and (in_range2 o8)
   (= o8 (ite (= event_log__split_fields3 true) 0
-        (+ (bv2nat (let ((temp___276 (bvsub (to_rep2
-                                            event_log__split_fields2)
-                   (to_rep2 event_log__split_fields1))))
-                   (ite (bvult (to_rep2 event_log__split_fields2) (to_rep2
-                                                                  event_log__split_fields1))
+        (+ (bv2nat (let ((temp___276 (bvsub (to_rep event_log__split_fields2)
+                   (to_rep event_log__split_fields1))))
+                   (ite (bvult (to_rep event_log__split_fields2) (to_rep
+                                                                 event_log__split_fields1))
                    (bvadd temp___276 #x0258) temp___276))) 1)))))))
 
 ;; H
@@ -1781,48 +1721,43 @@
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
-  (and (dynamic_property2 #x0000 tmp (to_rep2 result____first)
-  (to_rep2 result____last))
-  (and (= (to_rep2 result____first) #x0000) (= (to_rep2 result____last) tmp)))))
+  (and (dynamic_property2 #x0000 tmp (to_rep result____first)
+  (to_rep result____last))
+  (and (= (to_rep result____first) #x0000) (= (to_rep result____last) tmp)))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
-  (= (to_rep2 event_log__split_fields1) r4b))))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
+  (= (to_rep event_log__split_fields1) r4b))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (in_range1 r4b))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
-  (= (to_rep2 event_log__split_fields2) r5b))))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
+  (= (to_rep event_log__split_fields2) r5b))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (in_range1 r5b))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (=> (bvule r4b r5b)
   (and (and (bvule #x0000 r4b) (bvule r4b #x0257))
   (and (bvule #x0000 r5b) (bvule r5b #x0257)))))))
@@ -1831,38 +1766,33 @@
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (= o11 event_log__split_fields))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (= o11 temp___317))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (= (mk2 r4b r5b) temp___3171))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
-  (= (ite (<= (bv2nat (to_rep2 (first4 temp___3171))) (bv2nat (to_rep2
-                                                              (last4
-                                                              temp___3171))))
-     (+ (- (bv2nat (to_rep2 (last4 temp___3171))) (bv2nat (to_rep2
-                                                          (first4
-                                                          temp___3171)))) 1)
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
+  (= (ite (<= (bv2nat (to_rep (first4 temp___3171))) (bv2nat (to_rep
+                                                             (last4
+                                                             temp___3171))))
+     (+ (- (bv2nat (to_rep (last4 temp___3171))) (bv2nat (to_rep
+                                                         (first4 temp___3171)))) 1)
      0) (ite (<= (bv2nat #x0000) (bv2nat tmp))
         (+ (- (bv2nat tmp) (bv2nat #x0000)) 1) 0)))))
 
@@ -1870,66 +1800,58 @@
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
-  (= (slide temp___317 (to_rep2 (first4 temp___3171)) #x0000) temp___318))))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
+  (= (slide temp___317 (to_rep (first4 temp___3171)) #x0000) temp___318))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (= (mk1 #x0000 tmp) temp___3181))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
-  (= (ite (<= (bv2nat (to_rep2 (first2 temp___3181))) (bv2nat (to_rep2
-                                                              (last2
-                                                              temp___3181))))
-     (+ (- (bv2nat (to_rep2 (last2 temp___3181))) (bv2nat (to_rep2
-                                                          (first2
-                                                          temp___3181)))) 1)
-     0) (ite (<= (bv2nat (to_rep2 result____first)) (bv2nat (to_rep2
-                                                            result____last)))
-        (+ (- (bv2nat (to_rep2 result____last)) (bv2nat (to_rep2
-                                                        result____first))) 1)
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
+  (= (ite (<= (bv2nat (to_rep (first2 temp___3181))) (bv2nat (to_rep
+                                                             (last2
+                                                             temp___3181))))
+     (+ (- (bv2nat (to_rep (last2 temp___3181))) (bv2nat (to_rep
+                                                         (first2 temp___3181)))) 1)
+     0) (ite (<= (bv2nat (to_rep result____first)) (bv2nat (to_rep
+                                                           result____last)))
+        (+ (- (bv2nat (to_rep result____last)) (bv2nat (to_rep
+                                                       result____first))) 1)
         0)))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (= (mk___t1 o12 o13) (mk___t1 temp___318 temp___3181)))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (= o14 o12))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (= (mk_map__ref result2) result__10))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2))
   (= result__2 o14))))
 
 ;; H
@@ -1937,17 +1859,15 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
-  (= (to_rep2 event_log__split_fields1) r8b))))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
+  (= (to_rep event_log__split_fields1) r8b))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (in_range1 r8b))))
 
 ;; H
@@ -1955,17 +1875,15 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
-  (= (to_rep2 event_log__split_fields2) r11b))))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
+  (= (to_rep event_log__split_fields2) r11b))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (in_range1 r11b))))
 
 ;; H
@@ -1973,8 +1891,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (bvule #x0000 r11b)
   (and (and (bvule #x0000 #x0000) (bvule #x0000 #x0257))
   (and (bvule #x0000 r11b) (bvule r11b #x0257)))))))
@@ -1984,8 +1901,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= o15 event_log__split_fields))))
 
 ;; H
@@ -1993,8 +1909,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= o15 temp___313))))
 
 ;; H
@@ -2002,8 +1917,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= (mk4 #x0000 r11b) temp___3131))))
 
 ;; H
@@ -2011,8 +1925,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (bvule r8b #x0257)
   (and (and (bvule #x0000 r8b) (bvule r8b #x0257))
   (and (bvule #x0000 #x0257) (bvule #x0257 #x0257)))))))
@@ -2022,8 +1935,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= o16 event_log__split_fields))))
 
 ;; H
@@ -2031,8 +1943,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= o16 temp___312))))
 
 ;; H
@@ -2040,8 +1951,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= (mk3 r8b #x0257) temp___3121))))
 
 ;; H
@@ -2049,8 +1959,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (= (length3 (mk___t3 temp___312 temp___3121)) 0)
   (= temp___313 temp___314)))))
 
@@ -2059,10 +1968,9 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (= (length3 (mk___t3 temp___312 temp___3121)) 0)
-  (= (mk (to_rep2 (first8 temp___3131)) (to_rep2 (last8 temp___3131)))
+  (= (mk (to_rep (first8 temp___3131)) (to_rep (last8 temp___3131)))
   temp___3141)))))
 
 ;; H
@@ -2070,28 +1978,26 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
   (=>
-  (<= (bv2nat (to_rep2 (first8 temp___3131))) (bv2nat (to_rep2
-                                                      (last8 temp___3131))))
-  (= o17 (+ (- (bv2nat (to_rep2 (last8 temp___3131))) (bv2nat (to_rep2
-                                                              (first8
-                                                              temp___3131)))) 1)))))))
+  (<= (bv2nat (to_rep (first8 temp___3131))) (bv2nat (to_rep
+                                                     (last8 temp___3131))))
+  (= o17 (+ (- (bv2nat (to_rep (last8 temp___3131))) (bv2nat (to_rep
+                                                             (first8
+                                                             temp___3131)))) 1)))))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
   (=>
   (not
-  (<= (bv2nat (to_rep2 (first8 temp___3131))) (bv2nat (to_rep2
-                                                      (last8 temp___3131)))))
+  (<= (bv2nat (to_rep (first8 temp___3131))) (bv2nat (to_rep
+                                                     (last8 temp___3131)))))
   (= o17 0))))))
 
 ;; H
@@ -2099,28 +2005,26 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
   (=>
-  (<= (bv2nat (to_rep2 (first6 temp___3121))) (bv2nat (to_rep2
-                                                      (last6 temp___3121))))
-  (= o18 (+ (- (bv2nat (to_rep2 (last6 temp___3121))) (bv2nat (to_rep2
-                                                              (first6
-                                                              temp___3121)))) 1)))))))
+  (<= (bv2nat (to_rep (first6 temp___3121))) (bv2nat (to_rep
+                                                     (last6 temp___3121))))
+  (= o18 (+ (- (bv2nat (to_rep (last6 temp___3121))) (bv2nat (to_rep
+                                                             (first6
+                                                             temp___3121)))) 1)))))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
   (=>
   (not
-  (<= (bv2nat (to_rep2 (first6 temp___3121))) (bv2nat (to_rep2
-                                                      (last6 temp___3121)))))
+  (<= (bv2nat (to_rep (first6 temp___3121))) (bv2nat (to_rep
+                                                     (last6 temp___3121)))))
   (= o18 0))))))
 
 ;; H
@@ -2128,8 +2032,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
   (= o19 (+ o18 o17))))))
 
@@ -2138,18 +2041,16 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
-  (= o20 (+ (bv2nat (to_rep2 (first6 temp___3121))) o19))))))
+  (= o20 (+ (bv2nat (to_rep (first6 temp___3121))) o19))))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
   (= o21 (- o20 1))))))
 
@@ -2158,8 +2059,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
   (and (= o22 o21) (in_range_int o21))))))
 
@@ -2168,8 +2068,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
   (= o23 ((_ int2bv 16) o22))))))
 
@@ -2178,35 +2077,32 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
-  (= (concat1 temp___312 (to_rep2 (first6 temp___3121))
-     (to_rep2 (last6 temp___3121)) temp___313 (to_rep2 (first8 temp___3131))
-     (to_rep2 (last8 temp___3131))) temp___314)))))
+  (= (concat1 temp___312 (to_rep (first6 temp___3121))
+     (to_rep (last6 temp___3121)) temp___313 (to_rep (first8 temp___3131))
+     (to_rep (last8 temp___3131))) temp___314)))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (=> (not (= (length3 (mk___t3 temp___312 temp___3121)) 0))
-  (= (mk (to_rep2 (first6 temp___3121)) o23) temp___3141)))))
+  (= (mk (to_rep (first6 temp___3121)) o23) temp___3141)))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
-  (= (ite (<= (bv2nat (to_rep2 (first temp___3141))) (bv2nat (to_rep2
-                                                             (last
-                                                             temp___3141))))
-     (+ (- (bv2nat (to_rep2 (last temp___3141))) (bv2nat (to_rep2
-                                                         (first temp___3141)))) 1)
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
+  (= (ite (<= (bv2nat (to_rep (first temp___3141))) (bv2nat (to_rep
+                                                            (last
+                                                            temp___3141))))
+     (+ (- (bv2nat (to_rep (last temp___3141))) (bv2nat (to_rep
+                                                        (first temp___3141)))) 1)
      0) (ite (<= (bv2nat #x0000) (bv2nat tmp))
         (+ (- (bv2nat tmp) (bv2nat #x0000)) 1) 0)))))
 
@@ -2215,17 +2111,15 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
-  (= (slide temp___314 (to_rep2 (first temp___3141)) #x0000) temp___315))))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
+  (= (slide temp___314 (to_rep (first temp___3141)) #x0000) temp___315))))
 
 ;; H
   (assert
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= (mk1 #x0000 tmp) temp___3151))))
 
 ;; H
@@ -2233,18 +2127,16 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
-  (= (ite (<= (bv2nat (to_rep2 (first2 temp___3151))) (bv2nat (to_rep2
-                                                              (last2
-                                                              temp___3151))))
-     (+ (- (bv2nat (to_rep2 (last2 temp___3151))) (bv2nat (to_rep2
-                                                          (first2
-                                                          temp___3151)))) 1)
-     0) (ite (<= (bv2nat (to_rep2 result____first)) (bv2nat (to_rep2
-                                                            result____last)))
-        (+ (- (bv2nat (to_rep2 result____last)) (bv2nat (to_rep2
-                                                        result____first))) 1)
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
+  (= (ite (<= (bv2nat (to_rep (first2 temp___3151))) (bv2nat (to_rep
+                                                             (last2
+                                                             temp___3151))))
+     (+ (- (bv2nat (to_rep (last2 temp___3151))) (bv2nat (to_rep
+                                                         (first2 temp___3151)))) 1)
+     0) (ite (<= (bv2nat (to_rep result____first)) (bv2nat (to_rep
+                                                           result____last)))
+        (+ (- (bv2nat (to_rep result____last)) (bv2nat (to_rep
+                                                       result____first))) 1)
         0)))))
 
 ;; H
@@ -2252,8 +2144,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= (mk___t1 o24 o25) (mk___t1 temp___315 temp___3151)))))
 
 ;; H
@@ -2261,8 +2152,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= o26 o24))))
 
 ;; H
@@ -2270,8 +2160,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= (mk_map__ref result3) result__10))))
 
 ;; H
@@ -2279,8 +2168,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= result__3 o26))))
 
 ;; H
@@ -2288,8 +2176,7 @@
   (=> (not (= event_log__split_fields3 true))
   (=>
   (not
-  (bvule (to_rep2 event_log__split_fields1) (to_rep2
-                                            event_log__split_fields2)))
+  (bvule (to_rep event_log__split_fields1) (to_rep event_log__split_fields2)))
   (= result__2 result__3))))
 
 ;; H
@@ -2301,8 +2188,8 @@
   (assert
   (=> (not (= event_log__split_fields3 true))
   (= logger__log_content__result4 (mk___t result__2
-                                  (mk (to_rep2 result____first)
-                                  (to_rep2 result____last))))))
+                                  (mk (to_rep result____first)
+                                  (to_rep result____last))))))
 
 ;; H
   (assert (= logger__log_content__result9 logger__log_content__result7))
@@ -2325,7 +2212,7 @@
 ;; WP_parameter_def
  ;; File "logger.ads", line 23, characters 0-0
   (not
-  (= (to_rep2 (last (rt (log_array__content logger__log_content__result9)))) ((_ int2bv 16) (-
+  (= (to_rep (last (rt (log_array__content logger__log_content__result9)))) ((_ int2bv 16) (-
   (log_size
   (mk___split_fields1 event_log__split_fields event_log__split_fields1
   event_log__split_fields2 event_log__split_fields3)) 1)))))

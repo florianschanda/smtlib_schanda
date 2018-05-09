@@ -80,6 +80,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -136,6 +142,12 @@ function integer__ref___projection(a: integer__ref) : integer =
 
 type natural
 
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
@@ -162,6 +174,12 @@ function natural__ref___projection(a: natural__ref) : natural =
 
 type positive
 
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
 predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
@@ -185,33 +203,6 @@ type positive__ref = { positive__content : positive
 
 function positive__ref___projection(a: positive__ref) : positive =
   (a).positive__content
-
-type fibonacci_argument_type
-
-predicate in_range4(x: int) = ((0 <= x) and (x <= 46))
-
-logic bool_eq5 : int, int -> bool
-
-axiom bool_eq_def4 :
-  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE4 : us_image -> int
-
-logic user_eq3 : fibonacci_argument_type, fibonacci_argument_type -> bool
-
-logic dummy3 : fibonacci_argument_type
-
-type fibonacci_argument_type__ref = { fibonacci_argument_type__content :
-fibonacci_argument_type
-}
-
-function fibonacci_argument_type__ref___projection(a: fibonacci_argument_type__ref) : fibonacci_argument_type =
-  (a).fibonacci_argument_type__content
 
 logic fib : int -> int
 
@@ -568,19 +559,19 @@ logic max_int1 : int
 
 axiom max_real_int : (0x1.FFFFFEp127 = real_of_int(max_int1))
 
-predicate in_range5(x: real) = (((-0x1.FFFFFEp127) <= x) and
+predicate in_range4(x: real) = (((-0x1.FFFFFEp127) <= x) and
   (x <= 0x1.FFFFFEp127))
 
 predicate in_int_range(i: int) = (((-max_int1) <= i) and (i <= max_int1))
 
-axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range5(tqtreal(x))))
+axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range4(tqtreal(x))))
 
 predicate no_overflow(m: fpa_rounding_mode, x: real) =
-  in_range5(float32(m,x))
+  in_range4(float32(m,x))
 
 axiom Bounded_real_no_overflow :
-  (forall m:fpa_rounding_mode. forall x:real. (in_range5(x) ->
-  in_range5(float32(m,x))))
+  (forall m:fpa_rounding_mode. forall x:real. (in_range4(x) ->
+  in_range4(float32(m,x))))
 
 axiom Round_to_real :
   (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
@@ -732,7 +723,7 @@ predicate sign_zero_result(m: fpa_rounding_mode, x: t) = (is_zero(x) ->
 axiom add_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range5(float32(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
+  (in_range4(float32(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
   y)) and (tqtreal(add(m, x, y)) = float32(m,(tqtreal(x) + tqtreal(y)))))))))
 
 axiom add_finite_rev :
@@ -742,13 +733,13 @@ axiom add_finite_rev :
 axiom add_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(add(m, x, y)) ->
-  (in_range5(float32(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
+  (in_range4(float32(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
   y)) = float32(m,(tqtreal(x) + tqtreal(y))))))))
 
 axiom sub_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range5(float32(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
+  (in_range4(float32(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
   y)) and (tqtreal(sub(m, x, y)) = float32(m,(tqtreal(x) - tqtreal(y)))))))))
 
 axiom sub_finite_rev :
@@ -758,13 +749,13 @@ axiom sub_finite_rev :
 axiom sub_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(sub(m, x, y)) ->
-  (in_range5(float32(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
+  (in_range4(float32(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
   y)) = float32(m,(tqtreal(x) - tqtreal(y))))))))
 
 axiom mul_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range5(float32(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
+  (in_range4(float32(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
   y)) and (tqtreal(mul(m, x, y)) = float32(m,(tqtreal(x) * tqtreal(y)))))))))
 
 axiom mul_finite_rev :
@@ -774,13 +765,13 @@ axiom mul_finite_rev :
 axiom mul_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(mul(m, x, y)) ->
-  (in_range5(float32(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
+  (in_range4(float32(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
   y)) = float32(m,(tqtreal(x) * tqtreal(y))))))))
 
 axiom div_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) -> ((not is_zero(y)) ->
-  (in_range5(float32(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
+  (in_range4(float32(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
   y)) and (tqtreal(div(m, x,
   y)) = float32(m,(tqtreal(x) / tqtreal(y))))))))))
 
@@ -793,7 +784,7 @@ axiom div_finite_rev :
 axiom div_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(div(m, x, y)) -> (tqtisFinite(y) ->
-  (in_range5(float32(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
+  (in_range4(float32(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
   y)) = float32(m,(tqtreal(x) / tqtreal(y)))))))))
 
 axiom neg_finite :
@@ -817,7 +808,7 @@ axiom abs_universal : (forall x:t [abs(x)]. (not is_negative(abs(x))))
 axiom fma_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
   y, z)]. (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) ->
-  (in_range5(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
+  (in_range4(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
   (tqtisFinite(fma(m, x, y, z)) and (tqtreal(fma(m, x, y,
   z)) = float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))))
 
@@ -829,7 +820,7 @@ axiom fma_finite_rev :
 axiom fma_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
   y, z)]. (to_nearest(m) -> (tqtisFinite(fma(m, x, y, z)) ->
-  (in_range5(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
+  (in_range4(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
   (tqtreal(fma(m, x, y,
   z)) = float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))
 
@@ -872,7 +863,7 @@ axiom add_special :
   (is_infinite(add(m, x, y)) and same_sign(add(m, x, y), x))) and
   (((is_infinite(x) and (is_infinite(y) and diff_sign(x, y))) ->
   is_nan(add(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range5(float32(m,(tqtreal(x) + tqtreal(y))))))) ->
+  (not in_range4(float32(m,(tqtreal(x) + tqtreal(y))))))) ->
   (same_sign_real(add(m, x, y), (tqtreal(x) + tqtreal(y))) and
   overflow_value(m, add(m, x, y)))) and ((tqtisFinite(x) and
   tqtisFinite(y)) -> ((same_sign(x, y) -> same_sign(add(m, x, y), x)) and
@@ -888,7 +879,7 @@ axiom sub_special :
   is_nan(sub(m, x, y))) and (((is_infinite(x) and (is_infinite(y) and
   diff_sign(x, y))) -> (is_infinite(sub(m, x, y)) and same_sign(sub(m, x, y),
   x))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range5(float32(m,(tqtreal(x) - tqtreal(y))))))) ->
+  (not in_range4(float32(m,(tqtreal(x) - tqtreal(y))))))) ->
   (same_sign_real(sub(m, x, y), (tqtreal(x) - tqtreal(y))) and
   overflow_value(m, sub(m, x, y)))) and ((tqtisFinite(x) and
   tqtisFinite(y)) -> ((diff_sign(x, y) -> same_sign(sub(m, x, y), x)) and
@@ -903,7 +894,7 @@ axiom mul_special :
   (((is_infinite(x) and (tqtisFinite(y) and (not is_zero(y)))) ->
   is_infinite(mul(m, x, y))) and (((is_infinite(x) and is_infinite(y)) ->
   is_infinite(mul(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range5(float32(m,(tqtreal(x) * tqtreal(y))))))) ->
+  (not in_range4(float32(m,(tqtreal(x) * tqtreal(y))))))) ->
   overflow_value(m, mul(m, x, y))) and ((not is_nan(mul(m, x, y))) ->
   product_sign(mul(m, x, y), x, y))))))))))
 
@@ -914,7 +905,7 @@ axiom div_special :
   (((is_infinite(x) and tqtisFinite(y)) -> is_infinite(div(m, x, y))) and
   (((is_infinite(x) and is_infinite(y)) -> is_nan(div(m, x, y))) and
   (((tqtisFinite(x) and (tqtisFinite(y) and ((not is_zero(y)) and
-  (not in_range5(float32(m,(tqtreal(x) / tqtreal(y)))))))) ->
+  (not in_range4(float32(m,(tqtreal(x) / tqtreal(y)))))))) ->
   overflow_value(m, div(m, x, y))) and (((tqtisFinite(x) and (is_zero(y) and
   (not is_zero(x)))) -> is_infinite(div(m, x, y))) and (((is_zero(x) and
   is_zero(y)) -> is_nan(div(m, x, y))) and ((not is_nan(div(m, x, y))) ->
@@ -956,7 +947,7 @@ axiom fma_special :
   same_sign(fma(m, x, y, z), z))) and ((not product_sign(z, x, y)) ->
   is_nan(fma(m, x, y, z))))) and (((tqtisFinite(x) and (tqtisFinite(y) and
   (tqtisFinite(z) and
-  (not in_range5(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
+  (not in_range4(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
   (same_sign_real(fma(m, x, y, z),
   ((tqtreal(x) * tqtreal(y)) + tqtreal(z))) and overflow_value(m, fma(m, x,
   y, z)))) and ((tqtisFinite(x) and (tqtisFinite(y) and tqtisFinite(z))) ->
@@ -1142,13 +1133,13 @@ axiom roundToIntegral_is_finite :
 
 axiom round_bound_ne :
   (forall x:real [float32(NearestTiesToEven,x)].
-  (in_range5(float32(NearestTiesToEven,x)) ->
+  (in_range4(float32(NearestTiesToEven,x)) ->
   ((((x - (0x1.0p-24 * abs_real(x))) - 0x1.0p-150) <= float32(NearestTiesToEven,x)) and
   (float32(NearestTiesToEven,x) <= ((x + (0x1.0p-24 * abs_real(x))) + 0x1.0p-150)))))
 
 axiom round_bound :
   (forall m:fpa_rounding_mode. forall x:real [float32(m,x)].
-  (in_range5(float32(m,x)) ->
+  (in_range4(float32(m,x)) ->
   ((((x - (0x1.0p-23 * abs_real(x))) - 0x1.0p-149) <= float32(m,x)) and
   (float32(m,x) <= ((x + (0x1.0p-23 * abs_real(x))) + 0x1.0p-149)))))
 
@@ -1178,11 +1169,11 @@ axiom bool_ge_def :
   (forall x:t. forall y:t [bool_ge1(x, y)]. ((le(y, x) -> (bool_ge1(x,
   y) = true)) and ((not le(y, x)) -> (bool_ge1(x, y) = false))))
 
-logic bool_eq6 : t, t -> bool
+logic bool_eq5 : t, t -> bool
 
-axiom bool_eq_def5 :
-  (forall x:t. forall y:t [bool_eq6(x, y)]. ((eq(x, y) -> (bool_eq6(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq6(x, y) = false))))
+axiom bool_eq_def4 :
+  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
 
 logic bool_neq : t, t -> bool
 
@@ -1231,8 +1222,42 @@ axiom Power_neg3 :
   (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int1(NearestTiesToEven, 1), power(x, 3))))))
 
+type fibonacci_argument_type
+
+logic fibonacci_argument_typeqtint : fibonacci_argument_type -> int
+
+axiom fibonacci_argument_typeqtaxiom :
+  (forall i:fibonacci_argument_type.
+  ((0 <= fibonacci_argument_typeqtint(i)) and
+  (fibonacci_argument_typeqtint(i) <= 46)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 46))
+
+logic bool_eq6 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq3 : fibonacci_argument_type, fibonacci_argument_type -> bool
+
+logic dummy3 : fibonacci_argument_type
+
+type fibonacci_argument_type__ref = { fibonacci_argument_type__content :
+fibonacci_argument_type
+}
+
+function fibonacci_argument_type__ref___projection(a: fibonacci_argument_type__ref) : fibonacci_argument_type =
+  (a).fibonacci_argument_type__content
+
 axiom fib__def_axiom :
-  (forall n:int [fib(n)]. (in_range4(n) -> ((((n = 0) or (n = 1)) ->
+  (forall n:int [fib(n)]. (in_range5(n) -> ((((n = 0) or (n = 1)) ->
   (fib(n) = n)) and ((not ((n = 0) or (n = 1))) ->
   (fib(n) = (fib((n - 1)) + fib((n - 2))))))))
 
@@ -1248,7 +1273,7 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic to_rep : integer -> int
+function to_rep(x: integer) : int = integerqtint(x)
 
 logic of_rep : int -> integer
 
@@ -1297,13 +1322,13 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.2360000610351562500000))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 2849, characters 5-8 *)
 goal WP_parameter_def :
   (forall result__:int. forall old__:int. forall oldest:int. forall temp:int.
   forall i:int. forall o:int. forall o1:int. forall o2:bool.
   forall result:int. forall oldest1:int. forall result1:int.
   forall old__1:int. forall result2:int. forall i1:int. forall old__2:int.
-  forall oldest2:int. forall temp1:int. forall i2:int. (in_range4(n) ->
+  forall oldest2:int. forall temp1:int. forall i2:int. (in_range5(n) ->
   (((0 <= 2147483647) -> in_range2(result__)) -> (((1 <= 2147483647) ->
   in_range3(old__)) -> (((0 <= 2147483647) -> in_range2(oldest)) ->
   (((0 <= 2147483647) -> in_range2(temp)) -> ((not ((not (n = 0)) ->
@@ -1315,10 +1340,10 @@ goal WP_parameter_def :
   (((((((2 <= n) -> dynamic_property(2, n, i2)) and ((1 <= 2147483647) ->
   in_range3(old__2))) and ((0 <= 2147483647) -> in_range2(oldest2))) and
   ((0 <= 2147483647) -> in_range2(temp1))) and ((2 <= i2) and (i2 <= n))) ->
-  (((((o = (i2 - 2)) and in_range4((i2 - 2))) and ((o1 = fib(o)) and
+  (((((o = (i2 - 2)) and in_range5((i2 - 2))) and ((o1 = fib(o)) and
   (in_range2(o1) and (((((o = 0) or (o = 1)) and (o1 = o)) or
   ((not ((o = 0) or (o = 1))) and (o1 = (fib((o - 1)) + fib((o - 2)))))) and
   lt(of_int1(NearestTiesToEven, o1), add(NearestTiesToEven,
   div(NearestTiesToEven, power(fliteral1, o), fliteral2), fliteral)))))) and
   (((oldest2 = o1) and (o2 = true)) or ((not (oldest2 = o1)) and
-  (o2 = false)))) -> in_range4((i2 - 1))))))))))))))))
+  (o2 = false)))) -> in_range5((i2 - 1))))))))))))))))

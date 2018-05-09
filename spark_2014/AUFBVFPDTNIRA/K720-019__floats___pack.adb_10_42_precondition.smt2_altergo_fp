@@ -1106,13 +1106,7 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.3000000119209289550781250))
 
-logic fliteral3 : t
-
-axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 0.100000001490116119384765625))
-
  (* File "pack.ads", line 17, characters 0-0 *)
 goal WP_parameter_def :
   (forall o:t. (((o = add1(fliteral1, fliteral2)) and (tqtisFinite(o) and
-  eq(o, add(NearestTiesToEven, fliteral1, fliteral2)))) -> lt(fliteral3,
-  fliteral)))
+  eq(o, add(NearestTiesToEven, fliteral1, fliteral2)))) -> lt(o, fliteral)))

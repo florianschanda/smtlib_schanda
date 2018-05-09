@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -135,9 +131,85 @@
      (and (fp.eq result (fp.add RNE r1 r2)) (dynamic_invariant result true
      false true true)))) :pattern ((add r1 r2)) )))
 
+(declare-const o Float32)
+
+(declare-const o1 Float32)
+
+(declare-const o2 Float32)
+
+(declare-const o3 Float32)
+
+(declare-const o4 Bool)
+
+(declare-const pack__associativity_test__result Bool)
+
+(declare-const pack__associativity_test__result1 Bool)
+
+(declare-const pack__associativity_test__result2 Bool)
+
+;; H
+  (assert
+  (= pack__associativity_test__result pack__associativity_test__result1))
+
+;; H
+  (assert (= o4 (ite (fp.eq o3 o2) true false)))
+
+;; H
+  (assert (= pack__associativity_test__result o4))
+
+;; H
+  (assert
+  (= o1 (add (fp #b0 #b01111100 #b10011001100110011001101)
+        (fp #b0 #b01111101 #b00110011001100110011010))))
+
+;; H
+  (assert (fp.isFinite32 o1))
+
+;; H
+  (assert
+  (fp.eq o1 (fp.add RNE (fp #b0 #b01111100 #b10011001100110011001101) (fp #b0 #b01111101 #b00110011001100110011010))))
+
+;; H
+  (assert (= o2 (add (fp #b0 #b01111011 #b10011001100110011001101) o1)))
+
+;; H
+  (assert (fp.isFinite32 o2))
+
+;; H
+  (assert
+  (fp.eq o2 (fp.add RNE (fp #b0 #b01111011 #b10011001100110011001101)
+  o1)))
+
+;; H
+  (assert
+  (= o (add (fp #b0 #b01111011 #b10011001100110011001101)
+       (fp #b0 #b01111100 #b10011001100110011001101))))
+
+;; H
+  (assert (fp.isFinite32 o))
+
+;; H
+  (assert
+  (fp.eq o (fp.add RNE (fp #b0 #b01111011 #b10011001100110011001101) (fp #b0 #b01111100 #b10011001100110011001101))))
+
+;; H
+  (assert (= o3 (add o (fp #b0 #b01111101 #b00110011001100110011010))))
+
+;; H
+  (assert (fp.isFinite32 o3))
+
+;; H
+  (assert
+  (fp.eq o3 (fp.add RNE o (fp #b0 #b01111101 #b00110011001100110011010))))
+
+;; H
+  (assert
+  (= (mk_bool__ref pack__associativity_test__result2) (mk_bool__ref
+                                                      pack__associativity_test__result1)))
+
 (assert
 ;; WP_parameter_def
  ;; File "pack.ads", line 17, characters 0-0
-  (not true))
+  (not (= pack__associativity_test__result2 true)))
 (check-sat)
 (exit)

@@ -961,7 +961,29 @@ axiom coerce_axiom :
   (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
   (to_rep(of_rep(x)) = x)))
 
+logic adjust2triangle : t, t, t -> t
+
+logic adjust2triangle__function_guard : t, t, t, t -> prop
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+axiom adjust2triangle__post_axiom :
+  (forall d:t. forall kv:t. forall ka:t [adjust2triangle(d, kv, ka)].
+  ((((tqtisFinite(d) and tqtisFinite(kv)) and tqtisFinite(ka)) and ((neq(d,
+  fliteral1) and lt(fliteral1, kv)) and lt(fliteral1, ka))) ->
+  ((lt(fliteral1, adjust2triangle(d, kv, ka)) and le(adjust2triangle(d, kv,
+  ka), kv)) and tqtisFinite(adjust2triangle(d, kv, ka)))))
+
 type joint_index
+
+logic joint_indexqtint : joint_index -> int
+
+axiom joint_indexqtaxiom :
+  (forall i:joint_index. ((1 <= joint_indexqtint(i)) and
+  (joint_indexqtint(i) <= 2)))
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2))
 
@@ -1083,22 +1105,6 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic adjust2triangle : t, t, t -> t
-
-logic adjust2triangle__function_guard : t, t, t, t -> prop
-
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.0e-1))
-
-axiom adjust2triangle__post_axiom :
-  (forall d1:t. forall kv1:t. forall ka1:t [adjust2triangle(d1, kv1, ka1)].
-  ((((tqtisFinite(d1) and tqtisFinite(kv1)) and tqtisFinite(ka1)) and
-  ((neq(d1, fliteral1) and lt(fliteral1, kv1)) and lt(fliteral1, ka1))) ->
-  ((lt(fliteral1, adjust2triangle(d1, kv1, ka1)) and le(adjust2triangle(d1,
-  kv1, ka1), kv1)) and tqtisFinite(adjust2triangle(d1, kv1, ka1)))))
-
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
@@ -1106,6 +1112,11 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
 type t11b
+
+logic t11bqtint : t11b -> int
+
+axiom t11bqtaxiom :
+  (forall i:t11b. ((1 <= t11bqtint(i)) and (t11bqtint(i) <= 2)))
 
 predicate in_range3(x: int) = ((1 <= x) and (x <= 2))
 
@@ -1142,9 +1153,9 @@ logic homothetical__homothetical__upsilon__aggregate_def : t -> (int,float1) far
 
 logic homothetical__homothetical__kvp__aggregate_def : t -> (int,float1) farray
 
-logic temp___198 : t -> (int,float1) farray
+logic temp_____aggregate_def_198 : t -> (int,float1) farray
 
-logic temp___202 : t -> (int,float1) farray
+logic temp_____aggregate_def_202 : t -> (int,float1) farray
 
 axiom def_axiom :
   (forall temp___185:t. (tqtisFinite(temp___185) ->
@@ -1164,12 +1175,12 @@ axiom def_axiom2 :
 axiom def_axiom3 :
   (forall temp___200:t. (tqtisFinite(temp___200) ->
   (forall temp___201:int.
-  (to_rep((temp___198(temp___200)[temp___201])) = temp___200))))
+  (to_rep((temp_____aggregate_def_198(temp___200)[temp___201])) = temp___200))))
 
 axiom def_axiom4 :
   (forall temp___204:t. (tqtisFinite(temp___204) ->
   (forall temp___205:int.
-  (to_rep((temp___202(temp___204)[temp___205])) = temp___204))))
+  (to_rep((temp_____aggregate_def_202(temp___204)[temp___205])) = temp___204))))
 
  (* File "homothetical.adb", line 48, characters 0-0 *)
 goal WP_parameter_def :
@@ -1183,33 +1194,55 @@ goal WP_parameter_def :
   forall o20:(int,float1) farray. forall o21:t. forall o22:t. forall o23:t.
   forall o24:t. forall o25:t. forall o26:float1.
   forall o27:(int,float1) farray. forall o28:t. forall o29:float1.
-  forall o30:(int,float1) farray. forall result:(int,float1) farray.
+  forall o30:(int,float1) farray. forall o31:t. forall o32:float1.
+  forall o33:(int,float1) farray. forall o34:t. forall o35:t. forall o36:t.
+  forall o37:t. forall o38:t. forall o39:float1.
+  forall o40:(int,float1) farray. forall o41:t. forall o42:t. forall o43:t.
+  forall o44:t. forall o45:t. forall o46:float1.
+  forall o47:(int,float1) farray. forall o48:t. forall o49:t. forall o50:t.
+  forall o51:t. forall o52:t. forall o53:float1.
+  forall o54:(int,float1) farray. forall o55:t. forall o56:t. forall o57:t.
+  forall o58:t. forall o59:t. forall o60:float1.
+  forall o61:(int,float1) farray. forall o62:t. forall o63:float1.
+  forall o64:(int,float1) farray. forall result:(int,float1) farray.
   forall lambda1:(int,float1) farray. forall result1:(int,float1) farray.
   forall upsilon1:(int,float1) farray. forall result2:(int,float1) farray.
   forall kvp1:(int,float1) farray. forall kvp2:(int,float1) farray.
-  forall kvmax:(int,float1) farray. forall result3:int. forall i1:int.
-  forall result4:int. forall j1:int. forall result5:(int,float1) farray.
-  forall lambda2:(int,float1) farray. forall result6:(int,float1) farray.
-  forall upsilon2:(int,float1) farray. forall lambda3:(int,float1) farray.
-  forall upsilon3:(int,float1) farray. forall lambda4:(int,float1) farray.
-  forall upsilon4:(int,float1) farray. forall result7:int. forall j2:int.
-  forall result8:(int,float1) farray. forall lambda5:(int,float1) farray.
-  forall result9:(int,float1) farray. forall upsilon5:(int,float1) farray.
-  forall lambda6:(int,float1) farray. forall upsilon6:(int,float1) farray.
-  forall lambda7:(int,float1) farray. forall upsilon7:(int,float1) farray.
-  forall result10:(int,float1) farray. forall kvmax1:(int,float1) farray.
-  ((forall j3:int. (((1 <= j3) and (j3 <= 2)) -> ((neq(to_rep((d[j3])),
-   fliteral1) and lt(fliteral1, to_rep((kv[j3])))) and lt(fliteral1,
-   to_rep((ka[j3])))))) ->
+  forall kvmax:(int,float1) farray. forall kamax:(int,float1) farray.
+  forall result3:int. forall i1:int. forall result4:int. forall j1:int.
+  forall result5:(int,float1) farray. forall lambda2:(int,float1) farray.
+  forall result6:(int,float1) farray. forall upsilon2:(int,float1) farray.
+  forall lambda3:(int,float1) farray. forall upsilon3:(int,float1) farray.
+  forall lambda4:(int,float1) farray. forall upsilon4:(int,float1) farray.
+  forall result7:int. forall j2:int. forall result8:(int,float1) farray.
+  forall lambda5:(int,float1) farray. forall result9:(int,float1) farray.
+  forall upsilon5:(int,float1) farray. forall lambda6:(int,float1) farray.
+  forall upsilon6:(int,float1) farray. forall lambda7:(int,float1) farray.
+  forall upsilon7:(int,float1) farray. forall result10:(int,float1) farray.
+  forall kvmax1:(int,float1) farray. forall result11:(int,float1) farray.
+  forall kamax1:(int,float1) farray. forall result12:int. forall i2:int.
+  forall result13:int. forall j3:int. forall result14:(int,float1) farray.
+  forall lambda8:(int,float1) farray. forall result15:(int,float1) farray.
+  forall upsilon8:(int,float1) farray. forall lambda9:(int,float1) farray.
+  forall upsilon9:(int,float1) farray. forall lambda10:(int,float1) farray.
+  forall upsilon10:(int,float1) farray. forall result16:int. forall j4:int.
+  forall result17:map__ref. forall lambda11:(int,float1) farray.
+  forall result18:map__ref. forall upsilon11:(int,float1) farray.
+  forall lambda12:map__ref. forall upsilon12:map__ref.
+  forall lambda13:(int,float1) farray. forall upsilon13:(int,float1) farray.
+  forall result19:map__ref. forall kvmax2:(int,float1) farray.
+  ((forall j5:int. (((1 <= j5) and (j5 <= 2)) -> ((neq(to_rep((d[j5])),
+   fliteral1) and lt(fliteral1, to_rep((kv[j5])))) and lt(fliteral1,
+   to_rep((ka[j5])))))) ->
   ((({ map__content = result } = { map__content = lambda }) and
   (lambda1 = homothetical__homothetical__lambda__aggregate_def(fliteral))) ->
   ((({ map__content = result1 } = { map__content = upsilon }) and
   (upsilon1 = homothetical__homothetical__upsilon__aggregate_def(fliteral))) ->
   ((({ map__content = result2 } = { map__content = kvp }) and
   (kvp1 = homothetical__homothetical__kvp__aggregate_def(fliteral1))) ->
-  ((forall i2:int. (((1 <= i2) and (i2 <= 2)) -> ((lt(fliteral1,
-   to_rep((ka[i2]))) and neq(to_rep((kvp2[i2])), fliteral1)) and
-   neq(to_rep((d[i2])), fliteral1)))) ->
+  ((forall i3:int. (((1 <= i3) and (i3 <= 2)) -> ((lt(fliteral1,
+   to_rep((ka[i3]))) and neq(to_rep((kvp2[i3])), fliteral1)) and
+   neq(to_rep((d[i3])), fliteral1)))) ->
   (((result3 = i) and (i1 = 1)) -> ((((result4 = j) and (j1 = 1)) and
   ((((not (i1 = j1)) and ((((((((((o1 = mul(RNE, to_rep((kvp2[i1])),
   abs1(to_rep((d[j1]))))) and tqtisFinite(mul(RNE, to_rep((kvp2[i1])),
@@ -1255,4 +1288,55 @@ goal WP_parameter_def :
   to_rep((kvp2[i1])))) and tqtisFinite(mul(RNE, to_rep((lambda6[i1])),
   to_rep((kvp2[i1]))))) and (to_rep(o29) = o28)) and
   (o30 = (kvmax[i1 <- o29]))) and ((result10 = kvmax) and (kvmax1 = o30))) ->
-  tqtisFinite(mul(RNE, to_rep((upsilon6[i1])), to_rep((ka[i1])))))))))))))
+  ((((((o31 = mul(RNE, to_rep((upsilon6[i1])), to_rep((ka[i1])))) and
+  tqtisFinite(mul(RNE, to_rep((upsilon6[i1])), to_rep((ka[i1]))))) and
+  (to_rep(o32) = o31)) and (o33 = (kamax[i1 <- o32]))) and
+  ((result11 = kamax) and (kamax1 = o33))) -> (((result12 = i1) and
+  (i2 = 2)) -> ((((result13 = j2) and (j3 = 1)) and ((((not (i2 = j3)) and
+  ((((((((((o35 = mul(RNE, to_rep((kvp2[i2])), abs1(to_rep((d[j3]))))) and
+  tqtisFinite(mul(RNE, to_rep((kvp2[i2])), abs1(to_rep((d[j3])))))) and
+  (((o34 = mul(RNE, to_rep((kvp2[j3])), abs1(to_rep((d[i2]))))) and
+  tqtisFinite(mul(RNE, to_rep((kvp2[j3])), abs1(to_rep((d[i2])))))) and
+  (o36 = div(RNE, o34, o35)))) and ((o37 = o36) and tqtisFinite(o36))) and
+  (o38 = min(to_rep((lambda6[i2])), o37))) and (to_rep(o39) = o38)) and
+  (o40 = (lambda6[i2 <- o39]))) and ((result14 = lambda6) and
+  (lambda8 = o40))) and ((((((((o42 = mul(RNE, to_rep((ka[i2])),
+  abs1(to_rep((d[j3]))))) and tqtisFinite(mul(RNE, to_rep((ka[i2])),
+  abs1(to_rep((d[j3])))))) and (((o41 = mul(RNE, to_rep((ka[j3])),
+  abs1(to_rep((d[i2]))))) and tqtisFinite(mul(RNE, to_rep((ka[j3])),
+  abs1(to_rep((d[i2])))))) and (o43 = div(RNE, o41, o42)))) and
+  ((o44 = o43) and tqtisFinite(o43))) and (o45 = min(to_rep((upsilon6[i2])),
+  o44))) and (to_rep(o46) = o45)) and (o47 = (upsilon6[i2 <- o46]))) and
+  ((result15 = upsilon6) and (upsilon8 = o47)))) and
+  (((upsilon8 = upsilon9) and (lambda8 = lambda9)) and
+  ((upsilon10 = upsilon8) and (lambda10 = lambda8))))) or ((i2 = j3) and ((({
+  map__content = upsilon9 } = { map__content = upsilon6 }) and ({
+  map__content = lambda9 } = { map__content = lambda6 })) and
+  ((upsilon10 = upsilon7) and (lambda10 = lambda7))))) and
+  (((result16 = j3) and (j4 = 2)) and (((not (i2 = j4)) and
+  ((((((((((o49 = mul(RNE, to_rep((kvp2[i2])), abs1(to_rep((d[j4]))))) and
+  tqtisFinite(mul(RNE, to_rep((kvp2[i2])), abs1(to_rep((d[j4])))))) and
+  (((o48 = mul(RNE, to_rep((kvp2[j4])), abs1(to_rep((d[i2]))))) and
+  tqtisFinite(mul(RNE, to_rep((kvp2[j4])), abs1(to_rep((d[i2])))))) and
+  (o50 = div(RNE, o48, o49)))) and ((o51 = o50) and tqtisFinite(o50))) and
+  (o52 = min(to_rep((lambda9[i2])), o51))) and (to_rep(o53) = o52)) and
+  (o54 = (lambda9[i2 <- o53]))) and ((result17 = { map__content = lambda9
+  }) and (lambda11 = o54))) and ((((((((o56 = mul(RNE, to_rep((ka[i2])),
+  abs1(to_rep((d[j4]))))) and tqtisFinite(mul(RNE, to_rep((ka[i2])),
+  abs1(to_rep((d[j4])))))) and (((o55 = mul(RNE, to_rep((ka[j4])),
+  abs1(to_rep((d[i2]))))) and tqtisFinite(mul(RNE, to_rep((ka[j4])),
+  abs1(to_rep((d[i2])))))) and (o57 = div(RNE, o55, o56)))) and
+  ((o58 = o57) and tqtisFinite(o57))) and (o59 = min(to_rep((upsilon9[i2])),
+  o58))) and (to_rep(o60) = o59)) and (o61 = (upsilon9[i2 <- o60]))) and
+  ((result18 = { map__content = upsilon9 }) and (upsilon11 = o61)))) and
+  (((upsilon12 = { map__content = upsilon11 }) and (lambda12 = {
+  map__content = lambda11 })) and ((upsilon13 = upsilon11) and
+  (lambda13 = lambda11))))) or ((i2 = j4) and (((upsilon12 = { map__content =
+  upsilon9 }) and (lambda12 = { map__content = lambda9 })) and
+  ((upsilon13 = upsilon10) and (lambda13 = lambda10)))))))) ->
+  ((((((o62 = mul(RNE, to_rep(((lambda12).map__content[i2])),
+  to_rep((kvp2[i2])))) and tqtisFinite(mul(RNE,
+  to_rep(((lambda12).map__content[i2])), to_rep((kvp2[i2]))))) and
+  (to_rep(o63) = o62)) and (o64 = (kvmax1[i2 <- o63]))) and ((result19 = {
+  map__content = kvmax1 }) and (kvmax2 = o64))) -> tqtisFinite(mul(RNE,
+  to_rep(((upsilon12).map__content[i2])), to_rep((ka[i2])))))))))))))))))

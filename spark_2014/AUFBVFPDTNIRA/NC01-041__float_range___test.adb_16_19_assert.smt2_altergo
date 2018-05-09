@@ -1384,4 +1384,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
  (* File "test.adb", line 7, characters 0-0 *)
 goal WP_parameter_def :
   (forall value:t1. forall value1:t1. ((le(neg1(fliteral1), fliteral1) ->
-  in_range2(value)) -> (in_range2(value1) -> le(neg1(fliteral2), value1))))
+  in_range2(value)) -> (in_range2(value1) -> le(value1, fliteral2))))

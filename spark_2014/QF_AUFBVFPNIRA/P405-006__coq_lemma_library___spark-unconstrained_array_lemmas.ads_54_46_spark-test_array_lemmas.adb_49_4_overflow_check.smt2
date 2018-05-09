@@ -113,7 +113,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P405-006__coq_lemma_library/proof/sessions/spark-test_array_lemmas/../../../obj/gnatprove/spark-test_array_lemmas.mlw", line 5617, characters 5-8
   (not (not (= i (- 2147483648)))))
 (check-sat)
 (exit)

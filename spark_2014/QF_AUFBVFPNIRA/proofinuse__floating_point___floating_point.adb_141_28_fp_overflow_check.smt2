@@ -71,12 +71,8 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-const x Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(define-fun in_range2 ((x1 Int)) Bool (and (<= (- 2147483648) x1)
-                                      (<= x1 2147483647)))
+(define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
 
 (define-fun dynamic_invariant2 ((temp___expr_260 Int)
   (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
@@ -102,8 +98,8 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_274)))
 
-(define-fun in_range3 ((x1 Int)) Bool (and (<= (- 2147483648) x1)
-                                      (<= x1 2147483647)))
+(define-fun in_range3 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
 
 (define-fun dynamic_invariant5 ((temp___expr_281 Int)
   (temp___is_init_277 Bool) (temp___skip_constant_278 Bool)
@@ -112,6 +108,10 @@
                                      (or (= temp___is_init_277 true)
                                      (<= (- 2147483648) 2147483647))
                                      (in_range3 temp___expr_281)))
+
+(declare-const x Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
@@ -255,12 +255,11 @@
   (assert (and (= o5 o4) (fp.isFinite32 o4)))
 
 ;; H
-  (assert
-  (= o6 (fp.sub RNE (fp #b0 #b01111111 #b10000000000000000000000) o5)))
+  (assert (= o6 (fp.sub RNE threehalfs o5)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10253, characters 5-8
   (not (fp.isFinite32 o6)))
 (check-sat)
 (exit)

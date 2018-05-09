@@ -927,6 +927,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1012,6 +1018,5 @@ logic y : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> (in_range2(y) -> le(neg(fliteral),
-  x)))
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/OB16-021__float_range/gnatprove/test_float.mlw", line 2058, characters 5-8 *)
+goal WP_parameter_def : (tqtisFinite(x) -> (in_range2(y) -> le(x, fliteral)))

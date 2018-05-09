@@ -233,6 +233,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "call_sample2.adb", line 4, characters 0-0
-  (not (< 0 nb_of_pp3)))
+  (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) delta_time3)))
 (check-sat)
 (exit)

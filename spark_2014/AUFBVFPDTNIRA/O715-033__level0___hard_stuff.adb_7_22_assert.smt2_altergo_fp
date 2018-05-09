@@ -1103,4 +1103,4 @@ goal WP_parameter_def :
   ((le(neg(fliteral), x) and le(x, fliteral)) ->
   ((((o = add(NearestTiesToEven, x, x)) and
   tqtisFinite(add(NearestTiesToEven, x, x))) and (({ t__content = result
-  } = { t__content = x }) and (x1 = o))) -> le(neg(fliteral1), x1)))))
+  } = { t__content = x }) and (x1 = o))) -> le(x1, fliteral1)))))

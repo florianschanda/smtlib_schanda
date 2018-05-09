@@ -1180,5 +1180,4 @@ goal WP_parameter_def :
   (forall v1:t. forall v2:t. forall result:t. forall v11:t. (in_range3(x) ->
   ((le(neg(fliteral1), fliteral1) -> in_range2(v1)) -> ((le(neg(fliteral1),
   fliteral1) -> in_range2(v2)) -> (((result = v1) and
-  (v11 = div(NearestTiesToEven, x, fliteral5))) -> le(neg(fliteral4),
-  v11))))))
+  (v11 = div(NearestTiesToEven, x, fliteral5))) -> le(v11, fliteral4))))))

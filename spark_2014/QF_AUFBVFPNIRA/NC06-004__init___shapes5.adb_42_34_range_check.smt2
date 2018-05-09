@@ -58,18 +58,12 @@
                                     (<= (- 2147483648) 2147483647)) (in_range
                                     temp___expr_18)))
 
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (define-fun in_range1 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))))
-
-(define-fun dynamic_invariant1 ((temp___expr_158 Float64)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)
-  (temp___do_typ_inv_157 Bool)) Bool (=>
-                                     (or (= temp___is_init_154 true)
-                                     (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
-                                     (in_range1 temp___expr_158)))
 
 (define-fun in_range2 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
@@ -134,7 +128,13 @@
 ;; shapes5__circle__radius__position_axiom
   (assert (<= 0 shapes5__circle__radius__position))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(define-fun dynamic_invariant1 ((temp___expr_158 Float64)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
+                                     (in_range1 temp___expr_158)))
 
 (declare-const x Float64)
 

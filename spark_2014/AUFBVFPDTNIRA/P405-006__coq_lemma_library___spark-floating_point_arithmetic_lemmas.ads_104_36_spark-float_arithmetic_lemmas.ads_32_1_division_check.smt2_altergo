@@ -971,22 +971,28 @@ type fl__ref = { fl__content : fl
 
 function fl__ref___projection(a: fl__ref) : fl = (a).fl__content
 
-logic val1 : t
+logic fl_last_sqrt : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic val2 : t
+logic val1 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic val3 : t
+logic val2 : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic val3 : t
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 9223372036854775808.0))
+
+axiom fl_last_sqrt__def_axiom : (fl_last_sqrt = fliteral1)
 
 logic fliteral2 : t
 
@@ -999,8 +1005,9 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
 
  (* File "spark-floating_point_arithmetic_lemmas.ads", line 83, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(val1) -> (tqtisFinite(val2) ->
+goal WP_parameter_def : (tqtisFinite(fl_last_sqrt) ->
+  ((fliteral1 = fl_last_sqrt) -> (tqtisFinite(val1) -> (tqtisFinite(val2) ->
   (tqtisFinite(val3) -> (((le(neg(fliteral1), val1) and le(val1,
-  fliteral1)) and ((le(neg(fliteral1), val2) and le(val2, fliteral1)) and
-  ((le(fliteral2, val3) and le(val3, fliteral3)) and le(val1, val2)))) ->
-  (not is_zero(val3))))))
+  fl_last_sqrt)) and ((le(neg(fliteral1), val2) and le(val2,
+  fl_last_sqrt)) and ((le(fliteral2, val3) and le(val3, fliteral3)) and
+  le(val1, val2)))) -> (not is_zero(val3))))))))

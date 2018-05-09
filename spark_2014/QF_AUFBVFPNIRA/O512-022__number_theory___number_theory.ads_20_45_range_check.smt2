@@ -53,27 +53,27 @@
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant ((temp___expr_208 Int)
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range2
+                                    temp___expr_39)))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
   (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
   (temp___do_toplevel_206 Bool)
   (temp___do_typ_inv_207 Bool)) Bool (=>
                                      (or (= temp___is_init_204 true)
-                                     (<= 0 46)) (in_range2 temp___expr_208)))
+                                     (<= 0 46)) (in_range3 temp___expr_208)))
 
 (declare-const n Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
-  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
-  (temp___do_typ_inv_38 Bool)) Bool (=>
-                                    (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range3
-                                    temp___expr_39)))
 
 (define-fun dynamic_invariant2 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -123,7 +123,7 @@
 (declare-const number_theory__fib__result5 Int)
 
 ;; H
-  (assert (in_range2 n))
+  (assert (in_range3 n))
 
 ;; H
   (assert (not (= n 0)))
@@ -133,7 +133,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (in_range2 (- n 2))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 2765, characters 5-8
+  (not (in_range3 (- n 2))))
 (check-sat)
 (exit)

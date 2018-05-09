@@ -953,6 +953,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type positive
 
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1074,13 +1080,5 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 1.61810004711151123046875))
-
  (* File "floating_point.adb", line 55, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. (in_range2(n) -> (tqtisFinite(x) -> (tqtisFinite(y) ->
-  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(res)) -> (((2 <= n) and
-  (n <= 46)) -> (((n - 2) <  0) -> neq(fliteral2, zeroF))))))))
+goal WP_parameter_def : true

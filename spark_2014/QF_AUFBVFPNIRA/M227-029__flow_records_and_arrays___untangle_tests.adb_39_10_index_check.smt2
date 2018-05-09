@@ -237,6 +237,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "untangle_tests.adb", line 3, characters 0-0
-  (not (<= 1 a)))
+  (not (<= a 100)))
 (check-sat)
 (exit)

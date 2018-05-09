@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -161,19 +157,9 @@
 
 (declare-const p__ident__5__result Float32)
 
-(declare-const result Float32)
-
 (declare-const p__ident__5__result1 Float32)
 
 (declare-const p__ident__5__result2 Float32)
-
-(declare-const p__ident__5__result3 Float32)
-
-(declare-const p__ident__5__result4 Float32)
-
-(declare-const p__ident__5__result5 Float32)
-
-(declare-const result1 Float32)
 
 ;; H
   (assert (fp.isFinite32 f))
@@ -182,31 +168,19 @@
   (assert (not (fp.eq f (fp #b0 #b11111110 #b11111111111111111111111))))
 
 ;; H
-  (assert (= p__ident__5__result1 p__ident__5__result2))
-
-;; H
-  (assert (= p__ident__5__result3 p__ident__5__result1))
-
-;; H
-  (assert (= result p__ident__5__result))
+  (assert (= p__ident__5__result p__ident__5__result1))
 
 ;; H
   (assert
-  (= p__ident__5__result1 (prev_representable (next_representable f))))
+  (= p__ident__5__result (prev_representable (next_representable f))))
 
 ;; H
   (assert
-  (= (mk_t__ref p__ident__5__result4) (mk_t__ref p__ident__5__result2)))
-
-;; H
-  (assert (= p__ident__5__result5 p__ident__5__result3))
-
-;; H
-  (assert (= result1 p__ident__5__result4))
+  (= (mk_t__ref p__ident__5__result2) (mk_t__ref p__ident__5__result1)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.eq p__ident__5__result4 f)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/KC20-032__succ_pred/gnatprove/p.mlw", line 4452, characters 5-8
+  (not (fp.eq p__ident__5__result2 f)))
 (check-sat)
 (exit)

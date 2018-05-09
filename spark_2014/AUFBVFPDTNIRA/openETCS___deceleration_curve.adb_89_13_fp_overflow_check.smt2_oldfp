@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1075,6 +1075,64 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
+(declare-fun m_per_s_from_km_per_h (t) t)
+
+(declare-fun m_per_s_from_km_per_h__function_guard (t t) Bool)
+
+(declare-const fliteral1 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral1)
+  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
+
+(define-fun dynamic_invariant ((temp___expr_60 t) (temp___is_init_56 Bool)
+  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true) (le
+                                    (neg fliteral1) fliteral1)) (tqtisFinite
+                                    temp___expr_60)))
+
+(declare-fun sqrt3 (t) t)
+
+(declare-fun sqrt__function_guard (t t) Bool)
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+
+(declare-const fliteral3 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
+
+;; sqrt__post_axiom
+  (assert
+  (forall ((x t))
+  (! (=> (and (dynamic_invariant x true true true true) (le fliteral2 x))
+     (let ((result (sqrt3 x)))
+     (and
+     (and (le fliteral2 result)
+     (and (=> (eq x fliteral2) (eq result fliteral2))
+     (and (=> (eq x fliteral) (eq result fliteral))
+     (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant result
+     true false true true)))) :pattern ((sqrt3 x)) )))
+
+(declare-fun a_gradient (Int) t)
+
+(declare-fun a_gradient__function_guard (t Int) Bool)
+
+(declare-fun a_brake_safe (t Int) t)
+
+(declare-fun a_brake_safe__function_guard (t t Int) Bool)
+
+(declare-fun a_safe (t Int) t)
+
+(declare-fun a_safe__function_guard (t t Int) Bool)
+
 (declare-sort speed_t 0)
 
 (define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
@@ -1094,19 +1152,143 @@
 (define-fun speed_t__ref___projection ((a speed_t__ref)) speed_t (speed_t__content
                                                                  a))
 
-(declare-const fliteral1 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) 340282346638528859811704183484516925440.0)))
-
-(define-fun dynamic_invariant ((temp___expr_175 t) (temp___is_init_171 Bool)
+(define-fun dynamic_invariant1 ((temp___expr_175 t) (temp___is_init_171 Bool)
   (temp___skip_constant_172 Bool) (temp___do_toplevel_173 Bool)
   (temp___do_typ_inv_174 Bool)) Bool (=>
                                      (or (= temp___is_init_171 true) (le
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_175)))
+
+(declare-sort deceleration_t 0)
+
+(define-fun in_range2 ((x t)) Bool (and (tqtisFinite x)
+                                   (and (le fliteral2 x) (le x fliteral1))))
+
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(declare-fun user_eq2 (deceleration_t deceleration_t) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (t) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) t)
+
+(declare-const dummy2 deceleration_t)
+
+(declare-datatypes ()
+((deceleration_t__ref
+ (mk_deceleration_t__ref (deceleration_t__content deceleration_t)))))
+(define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t
+  (deceleration_t__content a))
+
+(define-fun dynamic_invariant2 ((temp___expr_196 t) (temp___is_init_192 Bool)
+  (temp___skip_constant_193 Bool) (temp___do_toplevel_194 Bool)
+  (temp___do_typ_inv_195 Bool)) Bool (=>
+                                     (or (= temp___is_init_192 true) (le
+                                     fliteral2 fliteral1)) (in_range2
+                                     temp___expr_196)))
+
+(declare-sort distance_t 0)
+
+(declare-fun distance_tqtint (distance_t) Int)
+
+;; distance_t'axiom
+  (assert
+  (forall ((i distance_t))
+  (and (<= 0 (distance_tqtint i)) (<= (distance_tqtint i) 2147483647))))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+
+(declare-fun user_eq3 (distance_t distance_t) Bool)
+
+(declare-const dummy3 distance_t)
+
+(declare-datatypes ()
+((distance_t__ref (mk_distance_t__ref (distance_t__content distance_t)))))
+(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
+  (distance_t__content a))
+
+(define-fun dynamic_invariant3 ((temp___expr_203 Int)
+  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
+  (temp___do_toplevel_201 Bool)
+  (temp___do_typ_inv_202 Bool)) Bool (=>
+                                     (or (= temp___is_init_199 true)
+                                     (<= 0 2147483647)) (in_range3
+                                     temp___expr_203)))
+
+;; a_safe__post_axiom
+  (assert
+  (forall ((v t))
+  (forall ((d Int))
+  (! (=>
+     (and (dynamic_invariant1 v true true true true) (dynamic_invariant3 d
+     true true true true)) (dynamic_invariant2 (a_safe v d) true false true
+     true)) :pattern ((a_safe v d)) ))))
+
+;; a_safe__def_axiom
+  (assert
+  (forall ((v t))
+  (forall ((d Int))
+  (! (=>
+     (and (dynamic_invariant1 v true true true true) (dynamic_invariant3 d
+     true true true true))
+     (= (a_safe v d) (add RNE1 (a_brake_safe v d) (a_gradient d)))) :pattern (
+  (a_safe v d)) ))))
+
+(declare-fun curve_index_from_location (Int) Int)
+
+(declare-fun curve_index_from_location__function_guard (Int Int) Bool)
+
+(declare-sort braking_curve_range 0)
+
+(declare-fun braking_curve_rangeqtint (braking_curve_range) Int)
+
+;; braking_curve_range'axiom
+  (assert
+  (forall ((i braking_curve_range))
+  (and (<= 0 (braking_curve_rangeqtint i))
+  (<= (braking_curve_rangeqtint i) 1000))))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 1000)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+
+(declare-fun user_eq4 (braking_curve_range braking_curve_range) Bool)
+
+(declare-const dummy4 braking_curve_range)
+
+(declare-datatypes ()
+((braking_curve_range__ref
+ (mk_braking_curve_range__ref
+ (braking_curve_range__content braking_curve_range)))))
+(define-fun braking_curve_range__ref___projection ((a braking_curve_range__ref)) braking_curve_range
+  (braking_curve_range__content a))
+
+(define-fun dynamic_invariant4 ((temp___expr_362 Int)
+  (temp___is_init_358 Bool) (temp___skip_constant_359 Bool)
+  (temp___do_toplevel_360 Bool)
+  (temp___do_typ_inv_361 Bool)) Bool (=>
+                                     (or (= temp___is_init_358 true)
+                                     (<= 0 1000)) (in_range4
+                                     temp___expr_362)))
+
+;; curve_index_from_location__post_axiom
+  (assert
+  (forall ((d Int))
+  (! (=> (and (dynamic_invariant3 d true true true true) (<= d 5000))
+     (dynamic_invariant4 (curve_index_from_location d) true false true true)) :pattern (
+  (curve_index_from_location d)) )))
 
 (declare-fun to_rep (speed_t) t)
 
@@ -1128,18 +1310,26 @@
 
 (declare-sort tdistance_tB 0)
 
-(define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
+(declare-fun tdistance_tBqtint (tdistance_tB) Int)
+
+;; tdistance_tB'axiom
+  (assert
+  (forall ((i tdistance_tB))
+  (and (<= (- 2147483648) (tdistance_tBqtint i))
+  (<= (tdistance_tBqtint i) 2147483647))))
+
+(define-fun in_range5 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
 
-(declare-fun user_eq2 (tdistance_tB tdistance_tB) Bool)
+(declare-fun user_eq5 (tdistance_tB tdistance_tB) Bool)
 
-(declare-const dummy2 tdistance_tB)
+(declare-const dummy5 tdistance_tB)
 
 (declare-datatypes ()
 ((tdistance_tB__ref
@@ -1147,34 +1337,7 @@
 (define-fun tdistance_tB__ref___projection ((a tdistance_tB__ref)) tdistance_tB
   (tdistance_tB__content a))
 
-(declare-sort distance_t 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (distance_t distance_t) Bool)
-
-(declare-const dummy3 distance_t)
-
-(declare-datatypes ()
-((distance_t__ref (mk_distance_t__ref (distance_t__content distance_t)))))
-(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
-  (distance_t__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_203 Int)
-  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
-  (temp___do_toplevel_201 Bool)
-  (temp___do_typ_inv_202 Bool)) Bool (=>
-                                     (or (= temp___is_init_199 true)
-                                     (<= 0 2147483647)) (in_range3
-                                     temp___expr_203)))
-
-(declare-fun to_rep1 (distance_t) Int)
+(define-fun to_rep1 ((x distance_t)) Int (distance_tqtint x))
 
 (declare-fun of_rep1 (Int) distance_t)
 
@@ -1194,138 +1357,13 @@
   (! (=> (in_range3 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
-(declare-fun m_per_s_from_km_per_h (t) t)
-
-(declare-fun m_per_s_from_km_per_h__function_guard (t t) Bool)
-
-(define-fun dynamic_invariant2 ((temp___expr_60 t) (temp___is_init_56 Bool)
-  (temp___skip_constant_57 Bool) (temp___do_toplevel_58 Bool)
-  (temp___do_typ_inv_59 Bool)) Bool (=>
-                                    (or (= temp___is_init_56 true) (le
-                                    (neg fliteral1) fliteral1)) (tqtisFinite
-                                    temp___expr_60)))
-
-(declare-fun sqrt2 (t) t)
-
-(declare-fun sqrt__function_guard (t t) Bool)
-
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
-
-(declare-const fliteral3 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3)
-  (= (tqtreal fliteral3) (/ 14012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000.0 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0))))
-
-;; sqrt__post_axiom
-  (assert
-  (forall ((x t))
-  (! (=> (and (dynamic_invariant2 x true true true true) (le fliteral2 x))
-     (let ((result (sqrt2 x)))
-     (and
-     (and (le fliteral2 result)
-     (and (=> (eq x fliteral2) (eq result fliteral2))
-     (and (=> (eq x fliteral) (eq result fliteral))
-     (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant2
-     result true false true true)))) :pattern ((sqrt2 x)) )))
-
-(declare-sort deceleration_t 0)
-
-(define-fun in_range4 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le fliteral2 x) (le x fliteral1))))
-
-(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
-
-(declare-fun user_eq4 (deceleration_t deceleration_t) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (t) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) t)
-
-(declare-const dummy4 deceleration_t)
-
-(declare-datatypes ()
-((deceleration_t__ref
- (mk_deceleration_t__ref (deceleration_t__content deceleration_t)))))
-(define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t
-  (deceleration_t__content a))
-
-(define-fun dynamic_invariant3 ((temp___expr_196 t) (temp___is_init_192 Bool)
-  (temp___skip_constant_193 Bool) (temp___do_toplevel_194 Bool)
-  (temp___do_typ_inv_195 Bool)) Bool (=>
-                                     (or (= temp___is_init_192 true) (le
-                                     fliteral2 fliteral1)) (in_range4
-                                     temp___expr_196)))
-
-(declare-fun a_gradient (Int) t)
-
-(declare-fun a_gradient__function_guard (t Int) Bool)
-
-(declare-fun a_brake_safe (t Int) t)
-
-(declare-fun a_brake_safe__function_guard (t t Int) Bool)
-
-(declare-fun a_safe (t Int) t)
-
-(declare-fun a_safe__function_guard (t t Int) Bool)
-
-;; a_safe__post_axiom
-  (assert
-  (forall ((v t))
-  (forall ((d Int))
-  (! (=>
-     (and (dynamic_invariant v true true true true) (dynamic_invariant1 d
-     true true true true)) (dynamic_invariant3 (a_safe v d) true false true
-     true)) :pattern ((a_safe v d)) ))))
-
-;; a_safe__def_axiom
-  (assert
-  (forall ((v t))
-  (forall ((d Int))
-  (! (=>
-     (and (dynamic_invariant v true true true true) (dynamic_invariant1 d
-     true true true true))
-     (= (a_safe v d) (add RNE1 (a_brake_safe v d) (a_gradient d)))) :pattern (
-  (a_safe v d)) ))))
-
-(declare-const maximum_valid_speed t)
+(declare-const maximum_valid_speed_km_per_h t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-sort braking_curve_range 0)
+(declare-const maximum_valid_speed t)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 1000)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq5 (braking_curve_range braking_curve_range) Bool)
-
-(declare-const dummy5 braking_curve_range)
-
-(declare-datatypes ()
-((braking_curve_range__ref
- (mk_braking_curve_range__ref
- (braking_curve_range__content braking_curve_range)))))
-(define-fun braking_curve_range__ref___projection ((a braking_curve_range__ref)) braking_curve_range
-  (braking_curve_range__content a))
-
-(define-fun dynamic_invariant4 ((temp___expr_362 Int)
-  (temp___is_init_358 Bool) (temp___skip_constant_359 Bool)
-  (temp___do_toplevel_360 Bool)
-  (temp___do_typ_inv_361 Bool)) Bool (=>
-                                     (or (= temp___is_init_358 true)
-                                     (<= 0 1000)) (in_range5
-                                     temp___expr_362)))
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-datatypes ()
 ((us_split_fields
@@ -1333,6 +1371,9 @@
  (rec__deceleration_curve__braking_curve_entry__location distance_t)(rec__deceleration_curve__braking_curve_entry__speed speed_t)))))
 (define-fun us_split_fields_location__projection ((a us_split_fields)) distance_t
   (rec__deceleration_curve__braking_curve_entry__location a))
+
+(define-fun us_split_fields_speed__projection ((a us_split_fields)) speed_t
+  (rec__deceleration_curve__braking_curve_entry__speed a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -1612,6 +1653,9 @@
 (define-fun us_split_fields_location__2__projection ((a us_split_fields4)) distance_t
   (rec__deceleration_curve__target_t__location a))
 
+(define-fun us_split_fields_speed__2__projection ((a us_split_fields4)) speed_t
+  (rec__deceleration_curve__target_t__speed a))
+
 (declare-datatypes ()
 ((us_split_fields__ref2
  (mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
@@ -1718,20 +1762,7 @@
 (define-fun target_t__ref___projection ((a target_t__ref)) us_rep2 (target_t__content
                                                                    a))
 
-(declare-fun curve_index_from_location (Int) Int)
-
-(declare-fun curve_index_from_location__function_guard (Int Int) Bool)
-
-;; curve_index_from_location__post_axiom
-  (assert
-  (forall ((d Int))
-  (! (=> (and (dynamic_invariant1 d true true true true) (<= d 5000))
-     (dynamic_invariant4 (curve_index_from_location d) true false true true)) :pattern (
-  (curve_index_from_location d)) )))
-
 (declare-const target us_rep2)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -1739,11 +1770,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const end_point Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
+(declare-const end_point Int)
+
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
 ;; end_point__def_axiom
   (assert
@@ -1752,13 +1785,9 @@
                (rec__deceleration_curve__target_t__location
                (us_split_fields5 target))))))
 
-(declare-const fliteral4 t)
-
-;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 500.0)))
-
 ;; maximum_valid_speed__def_axiom
-  (assert (= maximum_valid_speed (m_per_s_from_km_per_h fliteral4)))
+  (assert
+  (= maximum_valid_speed (m_per_s_from_km_per_h maximum_valid_speed_km_per_h)))
 
 (declare-sort speed_km_per_h_t 0)
 
@@ -1787,6 +1816,14 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_182)))
 
+(declare-const fliteral4 t)
+
+;; fliteral_axiom
+  (assert (and (tqtisFinite fliteral4) (= (tqtreal fliteral4) 500.0)))
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert (= maximum_valid_speed_km_per_h fliteral4))
+
 (declare-fun is_valid_speed_km_per_h (t) Bool)
 
 (declare-fun is_valid_speed_km_per_h__function_guard (Bool t) Bool)
@@ -1798,15 +1835,15 @@
   (assert
   (forall ((speed t))
   (! (= (= (is_valid_speed_km_per_h speed) true)
-     (and (le fliteral2 speed) (le speed fliteral4))) :pattern ((is_valid_speed_km_per_h
-                                                                speed)) )))
+     (and (le fliteral2 speed) (le speed maximum_valid_speed_km_per_h))) :pattern (
+  (is_valid_speed_km_per_h speed)) )))
 
 ;; m_per_s_from_km_per_h__post_axiom
   (assert
   (forall ((speed t))
   (! (=>
      (and (dynamic_invariant5 speed true true true true)
-     (= (is_valid_speed_km_per_h speed) true)) (dynamic_invariant
+     (= (is_valid_speed_km_per_h speed) true)) (dynamic_invariant1
      (m_per_s_from_km_per_h speed) true false true true)) :pattern ((m_per_s_from_km_per_h
                                                                     speed)) )))
 
@@ -1839,10 +1876,19 @@
   (assert
   (forall ((speed t))
   (! (= (= (is_valid_speed speed) true)
-     (and (le fliteral2 speed) (le speed (m_per_s_from_km_per_h fliteral4)))) :pattern (
+     (and (le fliteral2 speed) (le speed
+     (m_per_s_from_km_per_h maximum_valid_speed_km_per_h)))) :pattern (
   (is_valid_speed speed)) )))
 
 (declare-sort num_delimiters_range 0)
+
+(declare-fun num_delimiters_rangeqtint (num_delimiters_range) Int)
+
+;; num_delimiters_range'axiom
+  (assert
+  (forall ((i num_delimiters_range))
+  (and (<= 0 (num_delimiters_rangeqtint i))
+  (<= (num_delimiters_rangeqtint i) 10))))
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -1863,7 +1909,8 @@
 (define-fun num_delimiters_range__ref___projection ((a num_delimiters_range__ref)) num_delimiters_range
   (num_delimiters_range__content a))
 
-(declare-fun to_rep2 (num_delimiters_range) Int)
+(define-fun to_rep2 ((x num_delimiters_range)) Int (num_delimiters_rangeqtint
+                                                   x))
 
 (declare-fun of_rep2 (Int) num_delimiters_range)
 
@@ -1904,6 +1951,14 @@
 
 (declare-sort function_range 0)
 
+(declare-fun function_rangeqtint (function_range) Int)
+
+;; function_range'axiom
+  (assert
+  (forall ((i function_range))
+  (and (<= 0 (function_rangeqtint i))
+  (<= (function_rangeqtint i) 2147483647))))
+
 (define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
@@ -1922,7 +1977,7 @@
 (define-fun function_range__ref___projection ((a function_range__ref)) function_range
   (function_range__content a))
 
-(declare-fun to_rep4 (function_range) Int)
+(define-fun to_rep4 ((x function_range)) Int (function_rangeqtint x))
 
 (declare-fun of_rep4 (Int) function_range)
 
@@ -1948,6 +2003,9 @@
  (rec__step_function__delimiter_entry__delimiter function_range)(rec__step_function__delimiter_entry__value float)))))
 (define-fun us_split_fields_Delimiter__projection ((a us_split_fields6)) function_range
   (rec__step_function__delimiter_entry__delimiter a))
+
+(define-fun us_split_fields_Value__projection ((a us_split_fields6)) float
+  (rec__step_function__delimiter_entry__value a))
 
 (declare-datatypes ()
 ((us_split_fields__ref3
@@ -2227,13 +2285,13 @@
 
 (declare-fun is_valid_deceleration_model__function_guard (Bool us_rep4) Bool)
 
-(declare-const a_brake_emergency_model us_rep4)
-
-(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
-
 (declare-fun a_brake_emergency (t Int) t)
 
 (declare-fun a_brake_emergency__function_guard (t t Int) Bool)
+
+(declare-const a_brake_emergency_model us_rep4)
+
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
 ;; a_brake_emergency__post_axiom
   (assert
@@ -2241,13 +2299,13 @@
   (forall ((d Int))
   (! (=>
      (and
-     (and (dynamic_invariant v true true true true) (dynamic_invariant1 d
+     (and (dynamic_invariant1 v true true true true) (dynamic_invariant3 d
      true true true true))
      (and (= (is_valid_deceleration_model a_brake_emergency_model) true)
      (= (is_valid_speed v) true)))
      (let ((result (a_brake_emergency v d)))
      (and (eq result (get_value a_brake_emergency_model (to_int1 RNA1 v)))
-     (dynamic_invariant3 result true false true true)))) :pattern ((a_brake_emergency
+     (dynamic_invariant2 result true false true true)))) :pattern ((a_brake_emergency
                                                                    v d)) ))))
 
 (declare-fun kdry_rst (t) t)
@@ -2258,13 +2316,17 @@
 
 (declare-fun kwet_rst__function_guard (t t) Bool)
 
+(declare-const m_nvavadh t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
+
 ;; a_brake_safe__post_axiom
   (assert
   (forall ((v t))
   (forall ((d Int))
   (! (=>
-     (and (dynamic_invariant v true true true true) (dynamic_invariant1 d
-     true true true true)) (dynamic_invariant3 (a_brake_safe v d) true false
+     (and (dynamic_invariant1 v true true true true) (dynamic_invariant3 d
+     true true true true)) (dynamic_invariant2 (a_brake_safe v d) true false
      true true)) :pattern ((a_brake_safe v d)) ))))
 
 ;; a_brake_safe__def_axiom
@@ -2272,12 +2334,12 @@
   (forall ((v t))
   (forall ((d Int))
   (! (=>
-     (and (dynamic_invariant v true true true true) (dynamic_invariant1 d
+     (and (dynamic_invariant1 v true true true true) (dynamic_invariant3 d
      true true true true))
      (= (a_brake_safe v d) (mul RNE1
                            (mul RNE1 (kdry_rst v)
                            (add RNE1 (kwet_rst v)
-                           (mul RNE1 fliteral2
+                           (mul RNE1 m_nvavadh
                            (sub RNE1 fliteral (kwet_rst v)))))
                            (a_brake_emergency v d)))) :pattern ((a_brake_safe
                                                                 v d)) ))))
@@ -2425,8 +2487,11 @@
      (select temp___308 (to_rep2
                         (rec__step_function__step_function_t__number_of_delimiters
                         (us_split_fields9 sfun)))))))))))
-     (dynamic_invariant2 result true false true true)))) :pattern ((get_value
-                                                                   sfun x)) ))))
+     (dynamic_invariant result true false true true)))) :pattern ((get_value
+                                                                  sfun x)) ))))
+
+;; m_nvavadh__def_axiom
+  (assert (= m_nvavadh fliteral2))
 
 ;; is_valid_deceleration_model__post_axiom
   (assert true)
@@ -2441,51 +2506,64 @@
          (us_split_fields9 s))) 6))) :pattern ((is_valid_deceleration_model
                                                s)) )))
 
-(declare-fun temp___155 (us_rep3 us_rep3) (Array Int us_rep3))
+(declare-fun temp_____aggregate_def_155 (us_rep3
+  us_rep3) (Array Int us_rep3))
+
+(declare-const rliteral num_delimiters_range)
+
+;; rliteral_axiom
+  (assert (= (num_delimiters_rangeqtint rliteral) 0))
+
+(declare-const rliteral1 function_range)
+
+;; rliteral_axiom
+  (assert (= (function_rangeqtint rliteral1) 0))
 
 ;; a_brake_emergency_model__def_axiom
   (assert
   (= a_brake_emergency_model (mk___rep4
-                             (mk___split_fields4 (of_rep2 0)
-                             (temp___155
+                             (mk___split_fields4 rliteral
+                             (temp_____aggregate_def_155
                              (mk___rep3
-                             (mk___split_fields3 (of_rep4 0)
+                             (mk___split_fields3 rliteral1
                              (of_rep3 fliteral)))
                              (mk___rep3
-                             (mk___split_fields3 (of_rep4 0)
+                             (mk___split_fields3 rliteral1
                              (of_rep3 fliteral2))))))))
 
 (declare-const kdry_rst_model us_rep4)
 
-(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS10 Int)
 
-(declare-fun temp___160 (us_rep3 us_rep3) (Array Int us_rep3))
+(declare-fun temp_____aggregate_def_160 (us_rep3
+  us_rep3) (Array Int us_rep3))
 
 ;; kdry_rst_model__def_axiom
   (assert
   (= kdry_rst_model (mk___rep4
-                    (mk___split_fields4 (of_rep2 0)
-                    (temp___160
+                    (mk___split_fields4 rliteral
+                    (temp_____aggregate_def_160
                     (mk___rep3
-                    (mk___split_fields3 (of_rep4 0) (of_rep3 fliteral)))
+                    (mk___split_fields3 rliteral1 (of_rep3 fliteral)))
                     (mk___rep3
-                    (mk___split_fields3 (of_rep4 0) (of_rep3 fliteral2))))))))
+                    (mk___split_fields3 rliteral1 (of_rep3 fliteral2))))))))
 
 (declare-const kwet_rst_model us_rep4)
 
-(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS11 Int)
 
-(declare-fun temp___165 (us_rep3 us_rep3) (Array Int us_rep3))
+(declare-fun temp_____aggregate_def_165 (us_rep3
+  us_rep3) (Array Int us_rep3))
 
 ;; kwet_rst_model__def_axiom
   (assert
   (= kwet_rst_model (mk___rep4
-                    (mk___split_fields4 (of_rep2 0)
-                    (temp___165
+                    (mk___split_fields4 rliteral
+                    (temp_____aggregate_def_165
                     (mk___rep3
-                    (mk___split_fields3 (of_rep4 0) (of_rep3 fliteral)))
+                    (mk___split_fields3 rliteral1 (of_rep3 fliteral)))
                     (mk___rep3
-                    (mk___split_fields3 (of_rep4 0) (of_rep3 fliteral2))))))))
+                    (mk___split_fields3 rliteral1 (of_rep3 fliteral2))))))))
 
 (declare-fun is_valid_kdry_rst (tuple0) Bool)
 
@@ -2506,12 +2584,12 @@
   (assert
   (forall ((v t))
   (! (=>
-     (and (dynamic_invariant v true true true true)
+     (and (dynamic_invariant1 v true true true true)
      (= (is_valid_kdry_rst Tuple0) true))
      (let ((result (kdry_rst v)))
      (and (eq result (get_value kdry_rst_model (to_int1 RNA1 v)))
-     (dynamic_invariant2 result true false true true)))) :pattern ((kdry_rst
-                                                                   v)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((kdry_rst
+                                                                  v)) )))
 
 (declare-fun is_valid_kwet_rst (tuple0) Bool)
 
@@ -2532,29 +2610,29 @@
   (assert
   (forall ((v t))
   (! (=>
-     (and (dynamic_invariant v true true true true)
+     (and (dynamic_invariant1 v true true true true)
      (= (is_valid_kwet_rst Tuple0) true))
      (let ((result (kwet_rst v)))
      (and (eq result (get_value kwet_rst_model (to_int1 RNA1 v)))
-     (dynamic_invariant2 result true false true true)))) :pattern ((kwet_rst
-                                                                   v)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((kwet_rst
+                                                                  v)) )))
 
 ;; a_gradient__post_axiom
   (assert
   (forall ((d Int))
-  (! (=> (dynamic_invariant1 d true true true true) (dynamic_invariant3
+  (! (=> (dynamic_invariant3 d true true true true) (dynamic_invariant2
      (a_gradient d) true false true true)) :pattern ((a_gradient d)) )))
 
 ;; a_gradient__def_axiom
   (assert
   (forall ((d Int))
-  (! (=> (dynamic_invariant1 d true true true true)
+  (! (=> (dynamic_invariant3 d true true true true)
      (= (a_gradient d) fliteral2)) :pattern ((a_gradient d)) )))
 
 ;; def_axiom
   (assert
   (forall ((temp___157 us_rep3) (temp___158 us_rep3))
-  (let ((temp___156 (temp___155 temp___157 temp___158)))
+  (let ((temp___156 (temp_____aggregate_def_155 temp___157 temp___158)))
   (forall ((temp___159 Int))
   (ite (= temp___159 0) (= (select temp___156 temp___159) temp___157)
   (= (select temp___156 temp___159) temp___158))))))
@@ -2562,7 +2640,7 @@
 ;; def_axiom
   (assert
   (forall ((temp___162 us_rep3) (temp___163 us_rep3))
-  (let ((temp___161 (temp___160 temp___162 temp___163)))
+  (let ((temp___161 (temp_____aggregate_def_160 temp___162 temp___163)))
   (forall ((temp___164 Int))
   (ite (= temp___164 0) (= (select temp___161 temp___164) temp___162)
   (= (select temp___161 temp___164) temp___163))))))
@@ -2570,7 +2648,7 @@
 ;; def_axiom
   (assert
   (forall ((temp___167 us_rep3) (temp___168 us_rep3))
-  (let ((temp___166 (temp___165 temp___167 temp___168)))
+  (let ((temp___166 (temp_____aggregate_def_165 temp___167 temp___168)))
   (forall ((temp___169 Int))
   (ite (= temp___169 0) (= (select temp___166 temp___169) temp___167)
   (= (select temp___166 temp___169) temp___168))))))
@@ -2603,9 +2681,9 @@
 
 (declare-const o2 distance_t)
 
-(declare-const temp___417 (Array Int us_rep))
+(declare-const temp___420 (Array Int us_rep))
 
-(declare-const temp___4171 distance_t)
+(declare-const temp___4201 distance_t)
 
 (declare-const o3 distance_t)
 
@@ -2623,9 +2701,9 @@
 
 (declare-const o10 distance_t)
 
-(declare-const temp___422 (Array Int us_rep))
+(declare-const temp___425 (Array Int us_rep))
 
-(declare-const temp___4221 distance_t)
+(declare-const temp___4251 distance_t)
 
 (declare-const o11 speed_t)
 
@@ -2643,9 +2721,9 @@
 
 (declare-const o18 distance_t)
 
-(declare-const temp___427 (Array Int us_rep))
+(declare-const temp___430 (Array Int us_rep))
 
-(declare-const temp___4271 distance_t)
+(declare-const temp___4301 distance_t)
 
 (declare-const o19 t)
 
@@ -2697,7 +2775,8 @@
   (assert (tqtisFinite maximum_valid_speed))
 
 ;; H
-  (assert (= (m_per_s_from_km_per_h fliteral4) maximum_valid_speed))
+  (assert
+  (= (m_per_s_from_km_per_h maximum_valid_speed_km_per_h) maximum_valid_speed))
 
 ;; H
   (assert
@@ -2736,14 +2815,14 @@
                                                               (rec__deceleration_curve__target_t__location
                                                               (us_split_fields5
                                                               target)))))
-  (in_range5 deceleration_curve__curve_from_target__end_point__assume)))
+  (in_range4 deceleration_curve__curve_from_target__end_point__assume)))
 
 ;; H
   (assert
   (= deceleration_curve__curve_from_target__end_point__assume end_point))
 
 ;; H
-  (assert (in_range5 end_point))
+  (assert (in_range4 end_point))
 
 ;; H
   (assert
@@ -2758,10 +2837,10 @@
   (assert (= o o2))
 
 ;; H
-  (assert (= temp___417 o1))
+  (assert (= temp___420 o1))
 
 ;; H
-  (assert (= temp___4171 o2))
+  (assert (= temp___4201 o2))
 
 ;; H
   (assert
@@ -2771,7 +2850,7 @@
 
 ;; H
   (assert
-  (= braking_curve__split_fields2 (mk___split_fields1 temp___417 temp___4171)))
+  (= braking_curve__split_fields2 (mk___split_fields1 temp___420 temp___4201)))
 
 ;; H
   (assert (= (to_rep1 o3) location1))
@@ -2808,17 +2887,17 @@
      braking_curve__split_fields2) o10))
 
 ;; H
-  (assert (= temp___422 o9))
+  (assert (= temp___425 o9))
 
 ;; H
-  (assert (= temp___4221 o10))
+  (assert (= temp___4251 o10))
 
 ;; H
   (assert (= result3 (mk___split_fields__ref1 braking_curve__split_fields2)))
 
 ;; H
   (assert
-  (= braking_curve__split_fields3 (mk___split_fields1 temp___422 temp___4221)))
+  (= braking_curve__split_fields3 (mk___split_fields1 temp___425 temp___4251)))
 
 ;; H
   (assert (= (to_rep o11) speed1))
@@ -2855,17 +2934,17 @@
      braking_curve__split_fields3) o18))
 
 ;; H
-  (assert (= temp___427 o17))
+  (assert (= temp___430 o17))
 
 ;; H
-  (assert (= temp___4271 o18))
+  (assert (= temp___4301 o18))
 
 ;; H
   (assert (= result4 (mk___split_fields__ref1 braking_curve__split_fields3)))
 
 ;; H
   (assert
-  (= braking_curve__split_fields4 (mk___split_fields1 temp___427 temp___4271)))
+  (= braking_curve__split_fields4 (mk___split_fields1 temp___430 temp___4301)))
 
 ;; H
   (assert (= result5 (mk_int__ref i)))
@@ -2885,12 +2964,14 @@
   (and
   (and (=> (<= 0 2147483647) (in_range3 location2))
   (and
-  (forall ((temp___440 Int))
-  (=> (and (<= 0 temp___440) (<= temp___440 1000))
-  (=> (<= temp___440 i2)
+  (forall ((temp___445 Int))
+  (=> (and (<= 0 temp___445) (<= temp___445 1000))
+  (=>
+  (or (< (- end_point 1) temp___445)
+  (or (< temp___445 0) (<= temp___445 i2)))
   (= (select (rec__deceleration_curve__braking_curve_t__curve
-             braking_curve__split_fields5) temp___440) (select (rec__deceleration_curve__braking_curve_t__curve
-                                                               braking_curve__split_fields4) temp___440)))))
+             braking_curve__split_fields5) temp___445) (select (rec__deceleration_curve__braking_curve_t__curve
+                                                               braking_curve__split_fields4) temp___445)))))
   (= (rec__deceleration_curve__braking_curve_t__end_point
      braking_curve__split_fields5) (rec__deceleration_curve__braking_curve_t__end_point
                                    braking_curve__split_fields4))))
@@ -2900,7 +2981,7 @@
 ;; H
   (assert
   (and (= o19 (a_safe speed2 location2))
-  (and (in_range4 o19)
+  (and (in_range2 o19)
   (= o19 (add RNE1 (a_brake_safe speed2 location2) (a_gradient location2))))))
 
 ;; H

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -136,8 +132,6 @@
 
 (declare-const abs_delta_out1 Float64)
 
-(declare-const compare_to_zero_out1 Bool)
-
 (declare-const smoother_value_out1 Float64)
 
 (declare-const abs_new_delta_out1 Float64)
@@ -151,20 +145,6 @@
 (declare-const o3 Float64)
 
 (declare-const o4 Float64)
-
-(declare-const o5 Float64)
-
-(declare-const o6 Float64)
-
-(declare-const result Float64)
-
-(declare-const abs_delta_out11 Float64)
-
-(declare-const result1 Bool)
-
-(declare-const compare_to_zero_out11 Bool)
-
-(declare-const result2 Float64)
 
 (declare-const smoother_value_out11 Float64)
 
@@ -185,14 +165,18 @@
 
 ;; H
   (assert
-  (and
   (fp.lt (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  smoothing_factor)
-  (and
+  smoothing_factor))
+
+;; H
+  (assert
   (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  new_value)
+  new_value))
+
+;; H
+  (assert
   (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  prior_value))))
+  prior_value))
 
 ;; H
   (assert
@@ -213,26 +197,7 @@
   (fp.isFinite64 abs_new_delta_out1)))
 
 ;; H
-  (assert
-  (and (= o (fp.sub RNE new_value prior_value))
-  (fp.isFinite64 (fp.sub RNE new_value prior_value))))
-
-;; H
-  (assert (= o1 (fp.abs o)))
-
-;; H
-  (assert (= result abs_delta_out1))
-
-;; H
-  (assert (= abs_delta_out11 o1))
-
-;; H
-  (assert (= result1 compare_to_zero_out1))
-
-;; H
-  (assert
-  (= compare_to_zero_out11 (ite (fp.eq abs_delta_out11 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
-                           true false)))
+  (assert (fp.isFinite64 (fp.sub RNE new_value prior_value)))
 
 ;; H
   (assert
@@ -244,27 +209,31 @@
   (not (fp.eq smoothing_factor (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
-  (assert
-  (and (= o2 (fp.sub RNE new_value prior_value))
-  (fp.isFinite64 (fp.sub RNE new_value prior_value))))
+  (assert (= o (fp.sub RNE new_value prior_value)))
 
 ;; H
-  (assert (= o3 (fp.div RNE o2 smoothing_factor)))
+  (assert (fp.isFinite64 (fp.sub RNE new_value prior_value)))
 
 ;; H
-  (assert (and (= o4 o3) (fp.isFinite64 o3)))
+  (assert (= o1 (fp.div RNE o smoothing_factor)))
 
 ;; H
-  (assert (= o5 (fp.add RNE prior_value o4)))
+  (assert (= o2 o1))
 
 ;; H
-  (assert (and (= o6 o5) (fp.isFinite64 o5)))
+  (assert (fp.isFinite64 o1))
 
 ;; H
-  (assert (= result2 smoother_value_out1))
+  (assert (= o3 (fp.add RNE prior_value o2)))
 
 ;; H
-  (assert (= smoother_value_out11 o6))
+  (assert (= o4 o3))
+
+;; H
+  (assert (= smoother_value_out11 o4))
+
+;; H
+  (assert (fp.isFinite64 o3))
 
 (assert
 ;; WP_parameter_def

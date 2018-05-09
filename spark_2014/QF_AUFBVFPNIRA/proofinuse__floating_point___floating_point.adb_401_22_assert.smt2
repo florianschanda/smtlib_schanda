@@ -142,7 +142,6 @@
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 387, characters 0-0
   (not
-  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  res1)))
+  (fp.leq res1 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 (check-sat)
 (exit)

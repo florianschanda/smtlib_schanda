@@ -72,7 +72,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -559,45 +559,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -770,14 +770,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1062,11 +1062,15 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
-(declare-sort tfloat64B 0)
+(declare-fun low_bound (Int) t)
+
+(declare-fun low_bound__function_guard (t Int) Bool)
+
+(declare-sort float64 0)
 
 (define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq (tfloat64B tfloat64B) Bool)
+(declare-fun user_eq (float64 float64) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
 
@@ -1074,26 +1078,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
 
-(declare-const dummy tfloat64B)
-
-(declare-datatypes ()
-((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
-  (tfloat64B__content a))
-
-(declare-sort float64 0)
-
-(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
-
-(declare-fun user_eq1 (float64 float64) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) t)
-
-(declare-const dummy1 float64)
+(declare-const dummy float64)
 
 (declare-datatypes ()
 ((float64__ref (mk_float64__ref (float64__content float64)))))
@@ -1114,38 +1099,25 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_158)))
 
-(declare-sort tframeB 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (tframeB tframeB) Bool)
-
-(declare-const dummy2 tframeB)
-
-(declare-datatypes ()
-((tframeB__ref (mk_tframeB__ref (tframeB__content tframeB)))))
-(define-fun tframeB__ref___projection ((a tframeB__ref)) tframeB (tframeB__content
-                                                                 a))
-
 (declare-sort frame 0)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
+(declare-fun frameqtint (frame) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+;; frame'axiom
+  (assert
+  (forall ((i frame)) (and (<= 0 (frameqtint i)) (<= (frameqtint i) 25000))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun user_eq3 (frame frame) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-const dummy3 frame)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq1 (frame frame) Bool)
+
+(declare-const dummy1 frame)
 
 (declare-datatypes () ((frame__ref (mk_frame__ref (frame__content frame)))))
 (define-fun frame__ref___projection ((a frame__ref)) frame (frame__content a))
@@ -1155,42 +1127,8 @@
   (temp___do_toplevel_163 Bool)
   (temp___do_typ_inv_164 Bool)) Bool (=>
                                      (or (= temp___is_init_161 true)
-                                     (<= 0 25000)) (in_range3
+                                     (<= 0 25000)) (in_range2
                                      temp___expr_165)))
-
-(declare-sort ratio_t 0)
-
-(define-fun in_range4 ((x t)) Bool (and (tqtisFinite x)
-                                   (and (le (neg fliteral) x) (le x
-                                   fliteral))))
-
-(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
-
-(declare-fun user_eq4 (ratio_t ratio_t) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (t) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) t)
-
-(declare-const dummy4 ratio_t)
-
-(declare-datatypes ()
-((ratio_t__ref (mk_ratio_t__ref (ratio_t__content ratio_t)))))
-(define-fun ratio_t__ref___projection ((a ratio_t__ref)) ratio_t (ratio_t__content
-                                                                 a))
-
-(define-fun dynamic_invariant2 ((temp___expr_172 t) (temp___is_init_168 Bool)
-  (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
-  (temp___do_typ_inv_171 Bool)) Bool (=>
-                                     (or (= temp___is_init_168 true) (le
-                                     (neg fliteral) fliteral)) (in_range4
-                                     temp___expr_172)))
-
-(declare-fun low_bound (Int) t)
-
-(declare-fun low_bound__function_guard (t Int) Bool)
 
 ;; low_bound__post_axiom
   (assert
@@ -1259,6 +1197,81 @@
   (forall ((v t))
   (! (= (= (in_bounds v) true) (and (le (neg fliteral3) v) (le v fliteral3))) :pattern (
   (in_bounds v)) )))
+
+(declare-sort tfloat64B 0)
+
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(declare-fun user_eq2 (tfloat64B tfloat64B) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (t) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) t)
+
+(declare-const dummy2 tfloat64B)
+
+(declare-datatypes ()
+((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
+  (tfloat64B__content a))
+
+(declare-sort tframeB 0)
+
+(declare-fun tframeBqtint (tframeB) Int)
+
+;; tframeB'axiom
+  (assert
+  (forall ((i tframeB))
+  (and (<= (- 32768) (tframeBqtint i)) (<= (tframeBqtint i) 32767))))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+
+(declare-fun user_eq3 (tframeB tframeB) Bool)
+
+(declare-const dummy3 tframeB)
+
+(declare-datatypes ()
+((tframeB__ref (mk_tframeB__ref (tframeB__content tframeB)))))
+(define-fun tframeB__ref___projection ((a tframeB__ref)) tframeB (tframeB__content
+                                                                 a))
+
+(declare-sort ratio_t 0)
+
+(define-fun in_range4 ((x t)) Bool (and (tqtisFinite x)
+                                   (and (le (neg fliteral) x) (le x
+                                   fliteral))))
+
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(declare-fun user_eq4 (ratio_t ratio_t) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 (t) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) t)
+
+(declare-const dummy4 ratio_t)
+
+(declare-datatypes ()
+((ratio_t__ref (mk_ratio_t__ref (ratio_t__content ratio_t)))))
+(define-fun ratio_t__ref___projection ((a ratio_t__ref)) ratio_t (ratio_t__content
+                                                                 a))
+
+(define-fun dynamic_invariant2 ((temp___expr_172 t) (temp___is_init_168 Bool)
+  (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true) (le
+                                     (neg fliteral) fliteral)) (in_range4
+                                     temp___expr_172)))
 
 (declare-const n Int)
 
@@ -1339,7 +1352,7 @@
 (declare-const average1 t)
 
 ;; H
-  (assert (in_range3 n))
+  (assert (in_range2 n))
 
 ;; H
   (assert (in_range4 factor))

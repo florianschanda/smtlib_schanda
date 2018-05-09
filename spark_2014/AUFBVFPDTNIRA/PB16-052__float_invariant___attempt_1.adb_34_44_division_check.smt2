@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,16 +74,28 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
-(declare-sort tfloat64B 0)
+(declare-fun invariant__ (Int Float64) Bool)
 
-(declare-fun user_eq (tfloat64B tfloat64B) Bool)
+(declare-fun invariant____function_guard (Bool Int Float64) Bool)
+
+(declare-fun low_bound (Int) Float64)
+
+(declare-fun low_bound__function_guard (Float64 Int) Bool)
+
+(declare-fun high_bound (Int) Float64)
+
+(declare-fun high_bound__function_guard (Float64 Int) Bool)
+
+(declare-sort float64 0)
+
+(declare-fun user_eq (float64 float64) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Float64) us_image)
 
@@ -95,24 +103,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Float64)
 
-(declare-const dummy tfloat64B)
-
-(declare-datatypes ()
-((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
-  (tfloat64B__content a))
-
-(declare-sort float64 0)
-
-(declare-fun user_eq1 (float64 float64) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Float64) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float64)
-
-(declare-const dummy1 float64)
+(declare-const dummy float64)
 
 (declare-datatypes ()
 ((float64__ref (mk_float64__ref (float64__content float64)))))
@@ -129,17 +120,23 @@
 
 (declare-sort frame 0)
 
+(declare-fun frameqtint (frame) Int)
+
+;; frame'axiom
+  (assert
+  (forall ((i frame)) (and (<= 0 (frameqtint i)) (<= (frameqtint i) 25000))))
+
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
 
-(declare-fun user_eq2 (frame frame) Bool)
+(declare-fun user_eq1 (frame frame) Bool)
 
-(declare-const dummy2 frame)
+(declare-const dummy1 frame)
 
 (declare-datatypes () ((frame__ref (mk_frame__ref (frame__content frame)))))
 (define-fun frame__ref___projection ((a frame__ref)) frame (frame__content a))
@@ -151,6 +148,34 @@
                                      (or (= temp___is_init_161 true)
                                      (<= 0 25000)) (in_range
                                      temp___expr_165)))
+
+;; invariant____post_axiom
+  (assert true)
+
+;; invariant____def_axiom
+  (assert
+  (forall ((n Int))
+  (forall ((speed Float64))
+  (! (= (= (invariant__ n speed) true)
+     (and (fp.leq (low_bound n) speed) (fp.leq speed (high_bound n)))) :pattern (
+  (invariant__ n speed)) ))))
+
+(declare-sort tfloat64B 0)
+
+(declare-fun user_eq2 (tfloat64B tfloat64B) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Float64) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float64)
+
+(declare-const dummy2 tfloat64B)
+
+(declare-datatypes ()
+((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
+  (tfloat64B__content a))
 
 (declare-sort ratio_t 0)
 
@@ -182,29 +207,6 @@
                                      (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
                                      (in_range1 temp___expr_172)))
 
-(declare-fun invariant__ (Int Float64) Bool)
-
-(declare-fun invariant____function_guard (Bool Int Float64) Bool)
-
-(declare-fun low_bound (Int) Float64)
-
-(declare-fun low_bound__function_guard (Float64 Int) Bool)
-
-(declare-fun high_bound (Int) Float64)
-
-(declare-fun high_bound__function_guard (Float64 Int) Bool)
-
-;; invariant____post_axiom
-  (assert true)
-
-;; invariant____def_axiom
-  (assert
-  (forall ((n Int))
-  (forall ((speed Float64))
-  (! (= (= (invariant__ n speed) true)
-     (and (fp.leq (low_bound n) speed) (fp.leq speed (high_bound n)))) :pattern (
-  (invariant__ n speed)) ))))
-
 (declare-const n Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -231,7 +233,7 @@
   (assert
   (forall ((n1 Int))
   (! (=> (dynamic_invariant1 n1 true true true true)
-     (= (low_bound n1) (fp.mul RNE (fp.mul RNE (of_int RNE n1) (fp.neg (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011))) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) :pattern (
+     (= (low_bound n1) (fp.mul RNE (fp.mul RNE ((_ to_fp 11 53) RNE (to_real n1)) (fp.neg (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011))) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) :pattern (
   (low_bound n1)) )))
 
 ;; high_bound__post_axiom
@@ -244,7 +246,7 @@
   (assert
   (forall ((n1 Int))
   (! (=> (dynamic_invariant1 n1 true true true true)
-     (= (high_bound n1) (fp.mul RNE (fp.mul RNE (of_int RNE n1) (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) :pattern (
+     (= (high_bound n1) (fp.mul RNE (fp.mul RNE ((_ to_fp 11 53) RNE (to_real n1)) (fp #b0 #b10000000000 #b1101101100000010000011000100100110111010010111100011)) (fp #b0 #b01111111001 #b0001000100010001000100010001000100010001000100010001)))) :pattern (
   (high_bound n1)) )))
 
 (declare-const new_speed Float64)

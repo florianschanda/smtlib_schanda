@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -138,6 +134,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__flight_manager__engine_values__x_speed float)(rec__flight_manager__engine_values__y_speed float)))))
+(define-fun us_split_fields_X_Speed__projection ((a us_split_fields)) float
+  (rec__flight_manager__engine_values__x_speed a))
+
+(define-fun us_split_fields_Y_Speed__projection ((a us_split_fields)) float
+  (rec__flight_manager__engine_values__y_speed a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -117,6 +113,13 @@
                                     (fp.isFinite32 temp___expr_60)))
 
 (declare-sort nb_type 0)
+
+(declare-fun nb_typeqtint (nb_type) Int)
+
+;; nb_type'axiom
+  (assert
+  (forall ((i nb_type))
+  (and (<= 0 (nb_typeqtint i)) (<= (nb_typeqtint i) 100))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 100)))
 
@@ -265,10 +268,10 @@
   (and
   (and (< 0 nb_of_pp)
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) delta_time))
-  (fp.leq (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
-  (of_int RNE (+ nb_of_fp nb_of_pp))) delta_time) time))
-  (fp.lt time (fp.sub RNE (fp #b0 #b11111110 #b11111111111111111111111) (fp.mul RNE
-  (of_int RNE (+ nb_of_fp nb_of_pp)) delta_time)))))
+  (fp.leq (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) ((_ to_fp 8 24) RNE (to_real (+
+  nb_of_fp nb_of_pp)))) delta_time) time))
+  (fp.lt time (fp.sub RNE (fp #b0 #b11111110 #b11111111111111111111111) (fp.mul RNE ((_ to_fp 8 24) RNE (to_real (+
+  nb_of_fp nb_of_pp))) delta_time)))))
 
 ;; H
   (assert
@@ -292,7 +295,9 @@
   (assert (= (mk_t__ref result) (mk_t__ref d)))
 
 ;; H
-  (assert (= d1 (fp.mul RNE (of_int RNE (+ nb_of_fp nb_of_pp)) delta_time)))
+  (assert
+  (= d1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real (+ nb_of_fp nb_of_pp)))
+  delta_time)))
 
 ;; H
   (assert
@@ -309,9 +314,10 @@
 ;; H
   (assert
   (and
-  (= o1 (fp.add RNE t_fp1 (fp.mul RNE (of_int RNE nb_of_fp) delta_time)))
-  (fp.isFinite32 (fp.add RNE t_fp1 (fp.mul RNE (of_int RNE nb_of_fp)
-  delta_time)))))
+  (= o1 (fp.add RNE t_fp1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real nb_of_fp))
+  delta_time)))
+  (fp.isFinite32 (fp.add RNE t_fp1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real
+  nb_of_fp)) delta_time)))))
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref t_pp)))
@@ -323,7 +329,7 @@
 ;; WP_parameter_def
  ;; File "original_sample.ads", line 15, characters 0-0
   (not
-  (fp.isFinite32 (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
-  (of_int RNE nb_of_fp)) delta_time)))))
+  (fp.isFinite32 (fp.add RNE t_pp1 (fp.mul RNE (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) ((_ to_fp 8 24) RNE (to_real
+  nb_of_fp))) delta_time)))))
 (check-sat)
 (exit)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -222,6 +218,15 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__message_tests__coordinate__x float)(rec__message_tests__coordinate__y float)(rec__message_tests__coordinate__w float)(rec__message_tests__coordinate__flags us_rep)))))
+(define-fun us_split_fields_X__projection ((a us_split_fields2)) float
+  (rec__message_tests__coordinate__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields2)) float
+  (rec__message_tests__coordinate__y a))
+
+(define-fun us_split_fields_W__projection ((a us_split_fields2)) float
+  (rec__message_tests__coordinate__w a))
+
 (define-fun us_split_fields_Flags__projection ((a us_split_fields2)) us_rep
   (rec__message_tests__coordinate__flags a))
 

@@ -924,7 +924,7 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 4978, characters 5-8 *)
 goal WP_parameter_def :
   (forall o:t. forall o1:t. forall o2:t. forall o3:t. (tqtisFinite(x) ->
   ((((((o = mul(RNE, x, x)) and tqtisFinite(mul(RNE, x, x))) and

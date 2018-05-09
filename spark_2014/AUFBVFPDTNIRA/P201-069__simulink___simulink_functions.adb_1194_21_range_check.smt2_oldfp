@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1081,7 +1081,7 @@
 
 (declare-fun fma1 (mode t1 t1 t1) t1)
 
-(declare-fun sqrt2 (mode t1) t1)
+(declare-fun sqrt3 (mode t1) t1)
 
 (declare-fun roundToIntegral1 (mode t1) t1)
 
@@ -1582,18 +1582,18 @@
   (forall ((m mode) (x t1))
   (! (=> (tqtisFinite1 x)
      (=> (<= 0.0 (tqtreal1 x))
-     (and (tqtisFinite1 (sqrt2 m x))
-     (= (tqtreal1 (sqrt2 m x)) (round1 m (sqrt1 (tqtreal1 x))))))) :pattern (
-  (sqrt2 m x)) )))
+     (and (tqtisFinite1 (sqrt3 m x))
+     (= (tqtreal1 (sqrt3 m x)) (round1 m (sqrt2 (tqtreal1 x))))))) :pattern (
+  (sqrt3 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t1))
-  (! (=> (tqtisFinite1 (sqrt2 m x))
+  (! (=> (tqtisFinite1 (sqrt3 m x))
      (and (tqtisFinite1 x)
      (and (<= 0.0 (tqtreal1 x))
-     (= (tqtreal1 (sqrt2 m x)) (round1 m (sqrt1 (tqtreal1 x))))))) :pattern (
-  (sqrt2 m x)) )))
+     (= (tqtreal1 (sqrt3 m x)) (round1 m (sqrt2 (tqtreal1 x))))))) :pattern (
+  (sqrt3 m x)) )))
 
 (define-fun same_sign_real1 ((x t1)
   (r Real)) Bool (or (and (is_positive1 x) (< 0.0 r))
@@ -1769,14 +1769,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t1))
-  (! (let ((r (sqrt2 m x)))
+  (! (let ((r (sqrt3 m x)))
      (and (=> (is_nan1 x) (is_nan1 r))
      (and (=> (is_plus_infinity1 x) (is_plus_infinity1 r))
      (and (=> (is_minus_infinity1 x) (is_nan1 r))
      (and (=> (and (tqtisFinite1 x) (< (tqtreal1 x) 0.0)) (is_nan1 r))
      (and (=> (is_zero1 x) (same_sign1 r x))
      (=> (and (tqtisFinite1 x) (< 0.0 (tqtreal1 x))) (is_positive1 r)))))))) :pattern (
-  (sqrt2 m x)) )))
+  (sqrt3 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -2114,14 +2114,6 @@
                                     (neg fliteral2) fliteral2)) (tqtisFinite
                                     temp___expr_60)))
 
-(declare-const left t)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const right t)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
 (declare-sort long_float 0)
 
 (define-fun bool_eq3 ((x t1) (y t1)) Bool (ite (eq1 x y) true false))
@@ -2161,11 +2153,19 @@
 
 ;; atan2__2__post_axiom
   (assert
-  (forall ((left1 t1) (right1 t1))
+  (forall ((left t1) (right t1))
   (! (=>
-     (and (dynamic_invariant1 left1 true true true true) (dynamic_invariant1
-     right1 true true true true)) (dynamic_invariant1 (atan2__2 left1 right1)
-     true false true true)) :pattern ((atan2__2 left1 right1)) )))
+     (and (dynamic_invariant1 left true true true true) (dynamic_invariant1
+     right true true true true)) (dynamic_invariant1 (atan2__2 left right)
+     true false true true)) :pattern ((atan2__2 left right)) )))
+
+(declare-const left t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const right t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const o t1)
 
@@ -2187,7 +2187,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 24012, characters 5-8
   (not (tqtisFinite o1)))
 (check-sat)
 (exit)

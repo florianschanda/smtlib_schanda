@@ -1060,6 +1060,11 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type nb_type
 
+logic nb_typeqtint : nb_type -> int
+
+axiom nb_typeqtaxiom :
+  (forall i:nb_type. ((0 <= nb_typeqtint(i)) and (nb_typeqtint(i) <= 100)))
+
 predicate in_range1(x: int) = ((0 <= x) and (x <= 100))
 
 logic bool_eq2 : int, int -> bool
@@ -1147,6 +1152,12 @@ function delta_time_type__ref___projection(a: delta_time_type__ref) : delta_time
   (a).delta_time_type__content
 
 type nb_type1
+
+logic nb_typeqtint1 : nb_type1 -> int
+
+axiom nb_typeqtaxiom1 :
+  (forall i:nb_type1. ((0 <= nb_typeqtint1(i)) and
+  (nb_typeqtint1(i) <= 100)))
 
 predicate in_range3(x: int) = ((0 <= x) and (x <= 100))
 
@@ -1236,5 +1247,5 @@ goal WP_parameter_def :
   (nb_of_pp1 = 46)) -> (in_range1(nb_of_pp1) -> ((({ t__content = result2
   } = { t__content = delta_time }) and (delta_time1 = fliteral2)) ->
   (in_range2(delta_time1) -> ((({ t__content = result3 } = { t__content =
-  time }) and (time1 = fliteral3)) -> (tqtisFinite(time1) ->
-  (0 <  nb_of_pp1))))))))))
+  time }) and (time1 = fliteral3)) -> (tqtisFinite(time1) -> lt(fliteral1,
+  delta_time1))))))))))

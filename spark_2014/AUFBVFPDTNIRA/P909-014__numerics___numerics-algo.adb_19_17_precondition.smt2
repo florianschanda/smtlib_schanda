@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,13 +74,17 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
+(declare-fun oadd (Float32 Float32) Float32)
+
+(declare-fun oadd__function_guard (Float32 Float32 Float32) Bool)
+
 (declare-sort t_float 0)
 
 (declare-fun user_eq (t_float t_float) Bool)
@@ -109,10 +109,6 @@
                                      (or (= temp___is_init_161 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_165)))
-
-(declare-fun oadd (Float32 Float32) Float32)
-
-(declare-fun oadd__function_guard (Float32 Float32 Float32) Bool)
 
 ;; oadd__post_axiom
   (assert
@@ -231,31 +227,11 @@
 
 (declare-const o3 Float32)
 
-(declare-const result Float32)
-
 (declare-const x11 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const x12 Float32)
-
-(declare-const result2 Float32)
 
 (declare-const x21 Float32)
 
-(declare-const result3 Float32)
-
-(declare-const x22 Float32)
-
-(declare-const result4 Float32)
-
 (declare-const x31 Float32)
-
-(declare-const result5 Float32)
-
-(declare-const x32 Float32)
-
-(declare-const result6 Float32)
 
 (declare-const x41 Float32)
 
@@ -293,66 +269,52 @@
   (fp.isFinite32 x5)))
 
 ;; H
-  (assert (= result x1))
-
-;; H
   (assert (= x11 (fp #b0 #b11111110 #b11111111111111111111111)))
 
 ;; H
-  (assert
-  (and (= o (oadd x11 x11))
-  (and (fp.isFinite32 o) (= o (fp.add RNE x11 x11)))))
+  (assert (= o (oadd x11 x11)))
 
 ;; H
-  (assert (= result1 x11))
+  (assert (fp.isFinite32 o))
 
 ;; H
-  (assert (= x12 o))
-
-;; H
-  (assert (= result2 x2))
+  (assert (= o (fp.add RNE x11 x11)))
 
 ;; H
   (assert (= x21 (fp #b0 #b11111110 #b11111111111111111111111)))
 
 ;; H
-  (assert
-  (and (= o1 (osubtract (fp.neg x21) x21))
-  (and (fp.isFinite32 o1) (= o1 (fp.sub RNE (fp.neg x21) x21)))))
+  (assert (= o1 (osubtract (fp.neg x21) x21)))
 
 ;; H
-  (assert (= result3 x21))
+  (assert (fp.isFinite32 o1))
 
 ;; H
-  (assert (= x22 o1))
-
-;; H
-  (assert (= result4 x3))
+  (assert (= o1 (fp.sub RNE (fp.neg x21) x21)))
 
 ;; H
   (assert (= x31 (fp #b0 #b11111110 #b11111111111111111111111)))
 
 ;; H
-  (assert
-  (and (= o2 (omultiply x31 x31))
-  (and (fp.isFinite32 o2) (= o2 (fp.mul RNE x31 x31)))))
+  (assert (= o2 (omultiply x31 x31)))
 
 ;; H
-  (assert (= result5 x31))
+  (assert (fp.isFinite32 o2))
 
 ;; H
-  (assert (= x32 o2))
-
-;; H
-  (assert (= result6 x4))
+  (assert (= o2 (fp.mul RNE x31 x31)))
 
 ;; H
   (assert (= x41 (fp #b0 #b10000000 #b10000000000000000000000)))
 
 ;; H
-  (assert
-  (and (= o3 (osubtract x41 x41))
-  (and (fp.isFinite32 o3) (= o3 (fp.sub RNE x41 x41)))))
+  (assert (= o3 (osubtract x41 x41)))
+
+;; H
+  (assert (fp.isFinite32 o3))
+
+;; H
+  (assert (= o3 (fp.sub RNE x41 x41)))
 
 (assert
 ;; WP_parameter_def

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,13 +74,21 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
+(declare-fun a (Int) Float32)
+
+(declare-fun a__function_guard (Float32 Int) Bool)
+
+(declare-fun c (Int) Float32)
+
+(declare-fun c__function_guard (Float32 Int) Bool)
+
 (declare-sort float 0)
 
 (declare-fun user_eq (float float) Bool)
@@ -98,8 +102,8 @@
 (declare-const dummy float)
 
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
-(define-fun float__ref___2__projection ((a float__ref)) float (float__content
-                                                              a))
+(define-fun float__ref___2__projection ((a1 float__ref)) float (float__content
+                                                               a1))
 
 (define-fun dynamic_invariant ((temp___expr_158 Float32)
   (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
@@ -110,6 +114,11 @@
                                      (fp.isFinite32 temp___expr_158)))
 
 (declare-sort t 0)
+
+(declare-fun tqtint (t) Int)
+
+;; t'axiom
+  (assert (forall ((i t)) (and (<= 0 (tqtint i)) (<= (tqtint i) 14))))
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 14)))
 
@@ -124,7 +133,7 @@
 (declare-const dummy1 t)
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t)))))
-(define-fun t__ref___projection ((a t__ref1)) t (t__content1 a))
+(define-fun t__ref___projection ((a1 t__ref1)) t (t__content1 a1))
 
 (define-fun dynamic_invariant1 ((temp___expr_165 Int)
   (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
@@ -132,6 +141,22 @@
   (temp___do_typ_inv_164 Bool)) Bool (=>
                                      (or (= temp___is_init_161 true)
                                      (<= 0 14)) (in_range temp___expr_165)))
+
+;; a__post_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (dynamic_invariant1 x true true true true)
+     (let ((result (a x)))
+     (and
+     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
+     (fp.leq result (fp #b0 #b10000010 #b11000000000000000000000)))
+     (dynamic_invariant result true false true true)))) :pattern ((a x)) )))
+
+;; a__def_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (dynamic_invariant1 x true true true true) (= (a x) (c x))) :pattern (
+  (a x)) )))
 
 (declare-sort u 0)
 
@@ -151,7 +176,7 @@
 (declare-const dummy2 u)
 
 (declare-datatypes () ((u__ref (mk_u__ref (u__content u)))))
-(define-fun u__ref___projection ((a u__ref)) u (u__content a))
+(define-fun u__ref___projection ((a1 u__ref)) u (u__content a1))
 
 (define-fun dynamic_invariant2 ((temp___expr_172 Float32)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
@@ -177,35 +202,18 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-fun a (Int) Float32)
-
-(declare-fun a__function_guard (Float32 Int) Bool)
-
-(declare-fun c (Int) Float32)
-
-(declare-fun c__function_guard (Float32 Int) Bool)
-
-;; a__post_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true true)
-     (let ((result (a x)))
-     (and
-     (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (fp.leq result (fp #b0 #b10000010 #b11000000000000000000000)))
-     (dynamic_invariant result true false true true)))) :pattern ((a x)) )))
-
-;; a__def_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (dynamic_invariant1 x true true true true) (= (a x) (c x))) :pattern (
-  (a x)) )))
-
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -241,8 +249,8 @@
 ;; c__def_axiom
   (assert
   (forall ((x Int))
-  (! (=> (dynamic_invariant3 x true true true true) (= (c x) (of_int RNE x))) :pattern (
-  (c x)) )))
+  (! (=> (dynamic_invariant3 x true true true true)
+     (= (c x) ((_ to_fp 8 24) RNE (to_real x)))) :pattern ((c x)) )))
 
 (declare-const r1 Float32)
 

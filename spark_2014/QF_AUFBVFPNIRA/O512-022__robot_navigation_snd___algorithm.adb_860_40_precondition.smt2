@@ -100,32 +100,6 @@
 (define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun dynamic_invariant2 ((temp___expr_163 Float32)
-  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
-  (temp___do_toplevel_161 Bool)
-  (temp___do_typ_inv_162 Bool)) Bool (=>
-                                     (or (= temp___is_init_159 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range5 temp___expr_163)))
-
-(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun dynamic_invariant3 ((temp___expr_170 Float32)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)
-  (temp___do_typ_inv_169 Bool)) Bool (=>
-                                     (or (= temp___is_init_166 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range6 temp___expr_170)))
-
-(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
 (declare-const value__size1 Int)
@@ -240,7 +214,15 @@
 ;; spaces__poses__pose__ori__position_axiom
   (assert (<= 0 spaces__poses__pose__ori__position))
 
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
+(define-fun in_range6 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
 
 (declare-const value__size4 Int)
 
@@ -257,7 +239,7 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment4))
 
-(define-fun in_range9 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
 (declare-const value__size5 Int)
 
@@ -631,7 +613,15 @@
 ;; robot_iface__proxy__goal_reached__position_axiom
   (assert (<= 0 robot_iface__proxy__goal_reached__position))
 
-(define-fun in_range10 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
+(define-fun dynamic_invariant2 ((temp___expr_170 Float32)
+  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
+  (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range7 temp___expr_170)))
+
+(define-fun in_range9 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
 (declare-const value__size7 Int)
 
@@ -730,8 +720,6 @@
 ;; valleys__valley__othergap__position_axiom
   (assert (<= 0 valleys__valley__othergap__position))
 
-(define-fun in_range11 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
-
 (declare-const value__size9 Int)
 
 (declare-const value__alignment9 Int)
@@ -742,39 +730,39 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment9))
 
-(declare-const algorithm__valley_option__opt__first__bit Int)
+(declare-const algorithm__laser_scan_data__first__first__bit Int)
 
-(declare-const algorithm__valley_option__opt__last__bit Int)
+(declare-const algorithm__laser_scan_data__first__last__bit Int)
 
-(declare-const algorithm__valley_option__opt__position Int)
+(declare-const algorithm__laser_scan_data__first__position Int)
 
-;; algorithm__valley_option__opt__first__bit_axiom
-  (assert (<= 0 algorithm__valley_option__opt__first__bit))
+;; algorithm__laser_scan_data__first__first__bit_axiom
+  (assert (<= 0 algorithm__laser_scan_data__first__first__bit))
 
-;; algorithm__valley_option__opt__last__bit_axiom
+;; algorithm__laser_scan_data__first__last__bit_axiom
   (assert
-  (< algorithm__valley_option__opt__first__bit algorithm__valley_option__opt__last__bit))
+  (< algorithm__laser_scan_data__first__first__bit algorithm__laser_scan_data__first__last__bit))
 
-;; algorithm__valley_option__opt__position_axiom
-  (assert (<= 0 algorithm__valley_option__opt__position))
+;; algorithm__laser_scan_data__first__position_axiom
+  (assert (<= 0 algorithm__laser_scan_data__first__position))
 
-(declare-const algorithm__valley_option__value__first__bit Int)
+(declare-const algorithm__laser_scan_data__second__first__bit Int)
 
-(declare-const algorithm__valley_option__value__last__bit Int)
+(declare-const algorithm__laser_scan_data__second__last__bit Int)
 
-(declare-const algorithm__valley_option__value__position Int)
+(declare-const algorithm__laser_scan_data__second__position Int)
 
-;; algorithm__valley_option__value__first__bit_axiom
-  (assert (<= 0 algorithm__valley_option__value__first__bit))
+;; algorithm__laser_scan_data__second__first__bit_axiom
+  (assert (<= 0 algorithm__laser_scan_data__second__first__bit))
 
-;; algorithm__valley_option__value__last__bit_axiom
+;; algorithm__laser_scan_data__second__last__bit_axiom
   (assert
-  (< algorithm__valley_option__value__first__bit algorithm__valley_option__value__last__bit))
+  (< algorithm__laser_scan_data__second__first__bit algorithm__laser_scan_data__second__last__bit))
 
-;; algorithm__valley_option__value__position_axiom
-  (assert (<= 0 algorithm__valley_option__value__position))
+;; algorithm__laser_scan_data__second__position_axiom
+  (assert (<= 0 algorithm__laser_scan_data__second__position))
 
-(define-fun in_range12 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-const value__size10 Int)
 
@@ -830,70 +818,28 @@
 
 (declare-const value__size12 Int)
 
+(declare-const value__component__size2 Int)
+
 (declare-const value__alignment12 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size12))
 
+;; value__component__size_axiom
+  (assert (<= 0 value__component__size2))
+
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment12))
 
-(declare-const algorithm__laser_scan_data__first__first__bit Int)
-
-(declare-const algorithm__laser_scan_data__first__last__bit Int)
-
-(declare-const algorithm__laser_scan_data__first__position Int)
-
-;; algorithm__laser_scan_data__first__first__bit_axiom
-  (assert (<= 0 algorithm__laser_scan_data__first__first__bit))
-
-;; algorithm__laser_scan_data__first__last__bit_axiom
-  (assert
-  (< algorithm__laser_scan_data__first__first__bit algorithm__laser_scan_data__first__last__bit))
-
-;; algorithm__laser_scan_data__first__position_axiom
-  (assert (<= 0 algorithm__laser_scan_data__first__position))
-
-(declare-const algorithm__laser_scan_data__second__first__bit Int)
-
-(declare-const algorithm__laser_scan_data__second__last__bit Int)
-
-(declare-const algorithm__laser_scan_data__second__position Int)
-
-;; algorithm__laser_scan_data__second__first__bit_axiom
-  (assert (<= 0 algorithm__laser_scan_data__second__first__bit))
-
-;; algorithm__laser_scan_data__second__last__bit_axiom
-  (assert
-  (< algorithm__laser_scan_data__second__first__bit algorithm__laser_scan_data__second__last__bit))
-
-;; algorithm__laser_scan_data__second__position_axiom
-  (assert (<= 0 algorithm__laser_scan_data__second__position))
-
 (declare-const value__size13 Int)
-
-(declare-const value__component__size2 Int)
 
 (declare-const value__alignment13 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size13))
 
-;; value__component__size_axiom
-  (assert (<= 0 value__component__size2))
-
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment13))
-
-(declare-const value__size14 Int)
-
-(declare-const value__alignment14 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size14))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment14))
 
 (declare-const algorithm__controller__robot__first__bit Int)
 
@@ -977,15 +923,15 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const value__size15 Int)
+(declare-const value__size14 Int)
 
-(declare-const value__alignment15 Int)
+(declare-const value__alignment14 Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size15))
+  (assert (<= 0 value__size14))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment15))
+  (assert (<= 0 value__alignment14))
 
 (declare-const robot_iface__speed_option__opt__first__bit1 Int)
 
@@ -1034,6 +980,60 @@
 
 ;; robot_iface__speed_option__angle__position_axiom
   (assert (<= 0 robot_iface__speed_option__angle__position1))
+
+(define-fun in_range11 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+
+(declare-const value__size15 Int)
+
+(declare-const value__alignment15 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size15))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment15))
+
+(declare-const algorithm__valley_option__opt__first__bit Int)
+
+(declare-const algorithm__valley_option__opt__last__bit Int)
+
+(declare-const algorithm__valley_option__opt__position Int)
+
+;; algorithm__valley_option__opt__first__bit_axiom
+  (assert (<= 0 algorithm__valley_option__opt__first__bit))
+
+;; algorithm__valley_option__opt__last__bit_axiom
+  (assert
+  (< algorithm__valley_option__opt__first__bit algorithm__valley_option__opt__last__bit))
+
+;; algorithm__valley_option__opt__position_axiom
+  (assert (<= 0 algorithm__valley_option__opt__position))
+
+(declare-const algorithm__valley_option__value__first__bit Int)
+
+(declare-const algorithm__valley_option__value__last__bit Int)
+
+(declare-const algorithm__valley_option__value__position Int)
+
+;; algorithm__valley_option__value__first__bit_axiom
+  (assert (<= 0 algorithm__valley_option__value__first__bit))
+
+;; algorithm__valley_option__value__last__bit_axiom
+  (assert
+  (< algorithm__valley_option__value__first__bit algorithm__valley_option__value__last__bit))
+
+;; algorithm__valley_option__value__position_axiom
+  (assert (<= 0 algorithm__valley_option__value__position))
+
+(define-fun dynamic_invariant3 ((temp___expr_163 Float32)
+  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
+  (temp___do_toplevel_161 Bool)
+  (temp___do_typ_inv_162 Bool)) Bool (=>
+                                     (or (= temp___is_init_159 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range6 temp___expr_163)))
+
+(define-fun in_range12 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -1106,7 +1106,7 @@
   (temp___do_toplevel_235 Bool)
   (temp___do_typ_inv_236 Bool)) Bool (=>
                                      (or (= temp___is_init_233 true)
-                                     (<= 1 1000)) (in_range8
+                                     (<= 1 1000)) (in_range12
                                      temp___expr_237)))
 
 (define-fun dynamic_invariant9 ((temp___expr_254 Int)
@@ -1114,7 +1114,7 @@
   (temp___do_toplevel_252 Bool)
   (temp___do_typ_inv_253 Bool)) Bool (=>
                                      (or (= temp___is_init_250 true)
-                                     (<= 0 1)) (in_range9 temp___expr_254)))
+                                     (<= 0 1)) (in_range8 temp___expr_254)))
 
 (define-fun dynamic_invariant10 ((temp___expr_184 Float32)
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
@@ -1130,14 +1130,14 @@
   (temp___do_typ_inv_197 Bool)) Bool (=>
                                      (or (= temp___is_init_194 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                     (in_range7 temp___expr_198)))
+                                     (in_range5 temp___expr_198)))
 
 (define-fun dynamic_invariant12 ((temp___expr_323 Int)
   (temp___is_init_319 Bool) (temp___skip_constant_320 Bool)
   (temp___do_toplevel_321 Bool)
   (temp___do_typ_inv_322 Bool)) Bool (=>
                                      (or (= temp___is_init_319 true)
-                                     (<= (- 1) 1)) (in_range10
+                                     (<= (- 1) 1)) (in_range9
                                      temp___expr_323)))
 
 (define-fun dynamic_invariant13 ((temp___expr_365 Int)
@@ -1145,7 +1145,7 @@
   (temp___do_toplevel_363 Bool)
   (temp___do_typ_inv_364 Bool)) Bool (=>
                                      (or (= temp___is_init_361 true)
-                                     (<= 0 2147483647)) (in_range12
+                                     (<= 0 2147483647)) (in_range10
                                      temp___expr_365)))
 
 (declare-const drivespeed Float32)
@@ -1176,9 +1176,9 @@
 
 (declare-const o8 Float32)
 
-(declare-const temp___1023 Float32)
+(declare-const temp___1025 Float32)
 
-(declare-const temp___1022 Int)
+(declare-const temp___1024 Int)
 
 (declare-const o9 Float32)
 
@@ -1442,13 +1442,13 @@
   (assert
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111))
-  (in_range6 disttoclosestobstacle)))
+  (in_range7 disttoclosestobstacle)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111))
-  (in_range5 safetydist)))
+  (in_range6 safetydist)))
 
 ;; H
   (assert

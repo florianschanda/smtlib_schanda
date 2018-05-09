@@ -54,10 +54,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -80,7 +76,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -98,10 +94,6 @@
 
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero x)
                                               (fp.isNegative x)))
-
-(declare-fun of_int1 (RoundingMode Int) Float64)
-
-(declare-fun to_int2 (RoundingMode Float64) Int)
 
 (declare-const max_int1 Int)
 
@@ -179,6 +171,57 @@
 (define-fun long_float__ref___projection ((a long_float__ref)) long_float
   (long_float__content a))
 
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
+
+(declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
+(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
+                                    (<= x 2147483647)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq2 (integer integer) Bool)
+
+(declare-const dummy2 integer)
+
+(declare-datatypes ()
+((integer__ref (mk_integer__ref (integer__content integer)))))
+(define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
+                                                                 a))
+
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
+
+(declare-fun f (tuple0) Int)
+
+(declare-fun f__function_guard (Int tuple0) Bool)
+
+;; f__post_axiom
+  (assert
+  (forall ((us_void_param tuple0)) (! (dynamic_invariant1 (f us_void_param)
+  true false true true) :pattern ((f us_void_param)) )))
+
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int float))))))
 (declare-fun slide ((Array Int float) Int Int) (Array Int float))
@@ -229,29 +272,19 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const limit Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
 (declare-sort tbufD1 0)
 
-(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 3)))
+(declare-fun tbufD1qtint (tbufD1) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+;; tbufD1'axiom
+  (assert
+  (forall ((i tbufD1)) (and (<= 0 (tbufD1qtint i)) (<= (tbufD1qtint i) 3))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
-
-(declare-fun user_eq2 (tbufD1 tbufD1) Bool)
-
-(declare-const dummy2 tbufD1)
-
-(declare-datatypes ()
-((tbufD1__ref (mk_tbufD1__ref (tbufD1__content tbufD1)))))
-(define-fun tbufD1__ref___projection ((a tbufD1__ref)) tbufD1 (tbufD1__content
-                                                              a))
-
-(declare-sort integer 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
@@ -259,32 +292,16 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq3 (integer integer) Bool)
+(declare-fun user_eq3 (tbufD1 tbufD1) Bool)
 
-(declare-const dummy3 integer)
+(declare-const dummy3 tbufD1)
 
 (declare-datatypes ()
-((integer__ref (mk_integer__ref (integer__content integer)))))
-(define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
-                                                                 a))
+((tbufD1__ref (mk_tbufD1__ref (tbufD1__content tbufD1)))))
+(define-fun tbufD1__ref___projection ((a tbufD1__ref)) tbufD1 (tbufD1__content
+                                                              a))
 
-(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
-  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
-  (temp___do_typ_inv_17 Bool)) Bool (=>
-                                    (or (= temp___is_init_14 true)
-                                    (<= (- 2147483648) 2147483647))
-                                    (in_range1 temp___expr_18)))
-
-(declare-fun f (tuple0) Int)
-
-(declare-fun f__function_guard (Int tuple0) Bool)
-
-;; f__post_axiom
-  (assert
-  (forall ((us_void_param tuple0)) (! (dynamic_invariant (f us_void_param)
-  true false true true) :pattern ((f us_void_param)) )))
-
-(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
   (temp___do_toplevel_58 Bool)
   (temp___do_typ_inv_59 Bool)) Bool (=>
@@ -292,22 +309,29 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant2 ((temp___expr_67 Float64)
-  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
-  (temp___do_toplevel_65 Bool)
-  (temp___do_typ_inv_66 Bool)) Bool (=>
-                                    (or (= temp___is_init_63 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                    (fp.isFinite64 temp___expr_67)))
+;; limit__def_axiom
+  (assert
+  (= limit (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
 
 (declare-const temp___159 Int)
 
 ;; H
-  (assert (and (= temp___159 (f Tuple0)) (in_range1 temp___159)))
+  (assert (fp.isFinite64 limit))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)
+  limit))
+
+;; H
+  (assert (= temp___159 (f Tuple0)))
+
+;; H
+  (assert (in_range temp___159))
 
 (assert
 ;; WP_parameter_def
  ;; File "repr.adb", line 4, characters 0-0
-  (not (<= 0 temp___159)))
+  (not (<= temp___159 3)))
 (check-sat)
 (exit)

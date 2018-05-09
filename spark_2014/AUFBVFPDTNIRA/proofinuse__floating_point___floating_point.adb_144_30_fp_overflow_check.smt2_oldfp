@@ -142,7 +142,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -628,45 +628,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -839,14 +839,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1132,6 +1132,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -1188,14 +1195,21 @@
                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                     temp___expr_60)))
 
-(declare-const x t)
+(declare-fun to_float (Int) t)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-fun to_float__function_guard (t Int) Bool)
 
 (declare-sort source 0)
 
-(define-fun in_range3 ((x1 Int)) Bool (and (<= (- 2147483648) x1)
-                                      (<= x1 2147483647)))
+(declare-fun sourceqtint (source) Int)
+
+;; source'axiom
+  (assert
+  (forall ((i source))
+  (and (<= (- 2147483648) (sourceqtint i)) (<= (sourceqtint i) 2147483647))))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
@@ -1222,7 +1236,7 @@
 
 (declare-sort target 0)
 
-(define-fun bool_eq2 ((x1 t) (y t)) Bool (ite (eq x1 y) true false))
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq3 (target target) Bool)
 
@@ -1246,19 +1260,19 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_267)))
 
-(declare-fun to_float (Int) t)
-
-(declare-fun to_float__function_guard (t Int) Bool)
-
 ;; to_float__post_axiom
   (assert
   (forall ((s Int))
   (! (=> (dynamic_invariant2 s true true true true) (dynamic_invariant3
      (to_float s) true false true true)) :pattern ((to_float s)) )))
 
+(declare-fun to_int2 (t) Int)
+
+(declare-fun to_int__function_guard (Int t) Bool)
+
 (declare-sort source1 0)
 
-(define-fun bool_eq3 ((x1 t) (y t)) Bool (ite (eq x1 y) true false))
+(define-fun bool_eq3 ((x t) (y t)) Bool (ite (eq x y) true false))
 
 (declare-fun user_eq4 (source1 source1) Bool)
 
@@ -1284,8 +1298,15 @@
 
 (declare-sort target1 0)
 
-(define-fun in_range4 ((x1 Int)) Bool (and (<= (- 2147483648) x1)
-                                      (<= x1 2147483647)))
+(declare-fun targetqtint (target1) Int)
+
+;; target'axiom
+  (assert
+  (forall ((i target1))
+  (and (<= (- 2147483648) (targetqtint i)) (<= (targetqtint i) 2147483647))))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
 
@@ -1310,15 +1331,15 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range4 temp___expr_281)))
 
-(declare-fun to_int2 (t) Int)
-
-(declare-fun to_int__function_guard (Int t) Bool)
-
 ;; to_int__post_axiom
   (assert
   (forall ((s t))
   (! (=> (dynamic_invariant4 s true true true true) (dynamic_invariant5
      (to_int2 s) true false true true)) :pattern ((to_int2 s)) )))
+
+(declare-const x t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
@@ -1359,6 +1380,13 @@
   (and (tqtisFinite fliteral4)
   (= (tqtreal fliteral4) (/ 99999997473787516355514526367187500.0 10000000000000000000000000000000000000000.0))))
 
+(declare-const fliteral5 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral5)
+  (= (tqtreal fliteral5) (/ 100499999523162841796875.0 100000000000000000000000.0))))
+
 (declare-const i Int)
 
 (declare-const y t)
@@ -1386,6 +1414,14 @@
 (declare-const o10 t)
 
 (declare-const o11 t)
+
+(declare-const o12 t)
+
+(declare-const o13 t)
+
+(declare-const o14 t)
+
+(declare-const o15 Bool)
 
 (declare-const result Int)
 
@@ -1463,7 +1499,7 @@
   (assert (and (= o5 o4) (tqtisFinite o4)))
 
 ;; H
-  (assert (= o6 (sub RNE1 fliteral3 o5)))
+  (assert (= o6 (sub RNE1 threehalfs o5)))
 
 ;; H
   (assert (and (= o7 o6) (tqtisFinite o6)))
@@ -1481,6 +1517,18 @@
   (assert (= y2 o9))
 
 ;; H
+  (assert (and (= o12 (mul RNE1 y2 y2)) (tqtisFinite (mul RNE1 y2 y2))))
+
+;; H
+  (assert (= o13 (mul RNE1 o12 x)))
+
+;; H
+  (assert (and (= o14 o13) (tqtisFinite o13)))
+
+;; H
+  (assert (= o15 (ite (le o14 fliteral5) true false)))
+
+;; H
   (assert (and (= o10 (mul RNE1 y2 y2)) (tqtisFinite (mul RNE1 y2 y2))))
 
 ;; H
@@ -1488,7 +1536,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10255, characters 5-8
   (not (tqtisFinite o11)))
 (check-sat)
 (exit)

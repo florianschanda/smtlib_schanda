@@ -97,7 +97,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K720-019__floats/gnatprove/pack.mlw", line 2609, characters 5-8
   (not (fp.isFinite32 (fp.add RNE r1 r2))))
 (check-sat)
 (exit)

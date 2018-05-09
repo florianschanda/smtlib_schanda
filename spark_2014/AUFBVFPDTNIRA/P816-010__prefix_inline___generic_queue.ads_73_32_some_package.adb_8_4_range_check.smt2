@@ -40,6 +40,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
 
@@ -58,7 +65,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -75,8 +82,6 @@
   (forall ((x Int))
   (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                            (of_rep x))) )))
-
-(declare-fun nth ((_ BitVec 8) Int) Bool)
 
 (declare-fun lsr ((_ BitVec 8) Int) (_ BitVec 8))
 
@@ -95,70 +100,6 @@
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 255)))
 
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvlshr x n) (lsr x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvashr x n) (asr x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvshl x n) (lsl x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
-  (rotate_left1 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
-  (rotate_right1 v (bv2nat n)))))
-
-(declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 8)) (i (_ BitVec 8)))
-  (= (= (nth_bv x i) true) (not (= (bvand (bvlshr x i) #x01) #x00)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 8)) (i (_ BitVec 8)))
-  (= (nth x (bv2nat i)) (nth_bv x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 8)) (i Int))
-  (=> (and (<= 0 i) (< i 256)) (= (nth_bv x ((_ int2bv 8) i)) (nth x i)))))
-
-(declare-fun eq_sub_bv ((_ BitVec 8) (_ BitVec 8) (_ BitVec 8)
-  (_ BitVec 8)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 8)) (b (_ BitVec 8)) (i (_ BitVec 8))
-  (n (_ BitVec 8)))
-  (let ((mask (bvshl (bvsub (bvshl #x01 n) #x01) i)))
-  (= (eq_sub_bv a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth a j) (nth b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 8)) (b (_ BitVec 8)) (i (_ BitVec 8))
-  (n (_ BitVec 8)))
-  (= (eq_sub a b (bv2nat i) (bv2nat n)) (eq_sub_bv a b i n))))
-
 (declare-datatypes () ((t__ref (mk_t__ref (t__content (_ BitVec 8))))))
 (declare-fun power ((_ BitVec 8) Int) (_ BitVec 8))
 
@@ -168,68 +109,22 @@
 (define-fun bv_max ((x (_ BitVec 8))
   (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
 
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
-                                                (fp.isPositive x)))
+(declare-sort natural 0)
 
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
-                                                 (fp.isNegative x)))
+(declare-fun naturalqtint (natural) Int)
 
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
-                                            (fp.isPositive x)))
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
-                                             (fp.isNegative x)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int2 (RoundingMode Float32) Int)
-
-(declare-const max_int Int)
-
-(define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
-                                        (<= i max_int)))
-
-(define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
-                                             (<= i 16777216)))
-
-(define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
-                    (and (fp.isNegative x) (fp.isNegative y))))
-
-(define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
-                    (and (fp.isNegative x) (fp.isPositive y))))
-
-(define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
-                    (=> (diff_sign x y) (fp.isNegative z))))
-
-(define-fun sqr ((x Real)) Real (* x x))
-
-(declare-fun sqrt (Real) Real)
-
-(define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
-                 (and (fp.isNegative x) (< r 0.0))))
-
-(declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
-(define-fun in_range1 ((x Int)) Bool (or (= x 0) (= x 1)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Bool) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Bool)
-
-(declare-sort natural 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
 
 (declare-fun user_eq1 (natural natural) Bool)
 
@@ -240,7 +135,7 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(declare-fun to_rep1 (natural) Int)
+(define-fun to_rep1 ((x natural)) Int (naturalqtint x))
 
 (declare-fun of_rep1 (Int) natural)
 
@@ -251,23 +146,23 @@
 
 ;; range_axiom
   (assert
-  (forall ((x natural)) (! (in_range2 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x natural)) (! (in_range1 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range2 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+  (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
                                                               (of_rep1 x))) )))
 
 (declare-sort index_type 0)
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 ((_ BitVec 8)) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 ((_ BitVec 8)) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) (_ BitVec 8))
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) (_ BitVec 8))
 
 (declare-fun user_eq2 (index_type index_type) Bool)
 
@@ -295,22 +190,22 @@
   (forall ((x (_ BitVec 8)))
   (! (= (to_rep2 (of_rep2 x)) x) :pattern ((to_rep2 (of_rep2 x))) )))
 
-(define-fun to_int3 ((x index_type)) Int (bv2nat (to_rep2 x)))
+(define-fun to_int2 ((x index_type)) Int (bv2nat (to_rep2 x)))
 
 ;; range_int_axiom
   (assert
   (forall ((x index_type)) (! (uint_in_range
-  (to_int3 x)) :pattern ((to_int3 x)) )))
+  (to_int2 x)) :pattern ((to_int2 x)) )))
 
 (declare-sort mode_type 0)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
 (declare-fun user_eq3 (mode_type mode_type) Bool)
 
@@ -332,29 +227,70 @@
 
 ;; range_axiom
   (assert
-  (forall ((x mode_type)) (! (in_range3
+  (forall ((x mode_type)) (! (in_range2
   (to_rep3 x)) :pattern ((to_rep3 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range3 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
+  (! (=> (in_range2 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
                                                               (of_rep3 x))) )))
 
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
+
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
+
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
+
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
+
+(declare-const max_int Int)
+
+(define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
+                                        (<= i max_int)))
+
+(define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
+                                             (<= i 16777216)))
+
+(define-fun same_sign ((x Float32)
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
+
+(define-fun diff_sign ((x Float32)
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
+
+(define-fun product_sign ((z Float32) (x Float32)
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
+
+(define-fun sqr ((x Real)) Real (* x x))
+
+(declare-fun sqrt1 (Real) Real)
+
+(define-fun same_sign_real ((x Float32)
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
+
+(declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float32)))))
 (declare-sort element_type 0)
 
-(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b01000000000000000000000)))))
 
 (declare-fun user_eq4 (element_type element_type) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Float32) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Float32)
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float32)
 
 (declare-const dummy4 element_type)
 
@@ -375,13 +311,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x element_type)) (! (in_range4
+  (forall ((x element_type)) (! (in_range3
   (to_rep4 x)) :pattern ((to_rep4 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (in_range4 x) (= (to_rep4 (of_rep4 x)) x)) :pattern ((to_rep4
+  (! (=> (in_range3 x) (= (to_rep4 (of_rep4 x)) x)) :pattern ((to_rep4
                                                               (of_rep4 x))) )))
 
 (declare-datatypes ()
@@ -691,6 +627,60 @@
 (define-fun buffer_tag__ref___projection ((a buffer_tag__ref)) us_rep
   (buffer_tag__content a))
 
+(declare-fun length (us_rep) Int)
+
+(declare-fun length__function_guard (Int us_rep) Bool)
+
+(declare-fun length1 (Int us_rep) Int)
+
+(declare-fun length__function_guard1 (Int Int us_rep) Bool)
+
+(declare-sort length_type 0)
+
+(declare-fun length_typeqtint (length_type) Int)
+
+;; length_type'axiom
+  (assert
+  (forall ((i length_type))
+  (and (<= 0 (length_typeqtint i)) (<= (length_typeqtint i) 256))))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 256)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+
+(declare-fun user_eq7 (length_type length_type) Bool)
+
+(declare-const dummy7 length_type)
+
+(declare-datatypes ()
+((length_type__ref (mk_length_type__ref (length_type__content length_type)))))
+(define-fun length_type__ref___projection ((a length_type__ref)) length_type
+  (length_type__content a))
+
+(define-fun dynamic_invariant ((temp___expr_260 Int)
+  (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
+  (temp___do_toplevel_258 Bool)
+  (temp___do_typ_inv_259 Bool)) Bool (=>
+                                     (or (= temp___is_init_256 true)
+                                     (<= 0 256)) (in_range4 temp___expr_260)))
+
+;; some_package__float_buffer__buffer_tag__compat_axiom
+  (assert
+  (forall ((self us_rep))
+  (! (= (length self) (length1 us_tag self)) :pattern ((length1 us_tag self)) )))
+
+(define-fun in_range5 ((x Int)) Bool (or (= x 0) (= x 1)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Bool) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Bool)
+
 (define-fun default_initial_assumption ((temp___expr_292 us_rep)
   (temp___skip_top_level_293 Bool)) Bool (and
                                          (= (attr__tag temp___expr_292)
@@ -727,25 +717,6 @@
                                             (rec__some_package__float_buffer__buffer_tag__num_overflows
                                             (us_split_fields1
                                             temp___expr_292))) 0))))
-
-(declare-sort length_type 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 256)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq7 (length_type length_type) Bool)
-
-(declare-const dummy7 length_type)
-
-(declare-datatypes ()
-((length_type__ref (mk_length_type__ref (length_type__content length_type)))))
-(define-fun length_type__ref___projection ((a length_type__ref)) length_type
-  (length_type__content a))
 
 (declare-datatypes ()
 ((map__ref1 (mk_map__ref1 (map__content1 (Array Int element_type))))))
@@ -815,7 +786,7 @@
 (define-fun dynamic_property ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range low)
                    (and (in_range high)
-                   (=> (<= low high) (and (in_range5 low) (in_range5 high))))))
+                   (=> (<= low high) (and (in_range4 low) (in_range4 high))))))
 
 (declare-datatypes ()
 ((us_t (mk___t (elts (Array Int element_type))(rt t)))))
@@ -828,8 +799,8 @@
 
 (define-fun last1 ((a us_t)) Int (to_rep (last (rt a))))
 
-(define-fun length ((a us_t)) Int (ite (<= (first1 a) (last1 a))
-                                  (+ (- (last1 a) (first1 a)) 1) 0))
+(define-fun length2 ((a us_t)) Int (ite (<= (first1 a) (last1 a))
+                                   (+ (- (last1 a) (first1 a)) 1) 0))
 
 (declare-const value__size2 Int)
 
@@ -877,26 +848,6 @@
 (define-fun element_array__ref___projection ((a element_array__ref)) us_t
   (element_array__content a))
 
-(define-fun dynamic_invariant ((temp___expr_260 Int)
-  (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
-  (temp___do_toplevel_258 Bool)
-  (temp___do_typ_inv_259 Bool)) Bool (=>
-                                     (or (= temp___is_init_256 true)
-                                     (<= 0 256)) (in_range5 temp___expr_260)))
-
-(declare-fun length1 (us_rep) Int)
-
-(declare-fun length__function_guard (Int us_rep) Bool)
-
-(declare-fun length2 (Int us_rep) Int)
-
-(declare-fun length__function_guard1 (Int Int us_rep) Bool)
-
-;; some_package__float_buffer__buffer_tag__compat_axiom
-  (assert
-  (forall ((self us_rep))
-  (! (= (length1 self) (length2 us_tag self)) :pattern ((length2 us_tag self)) )))
-
 (declare-const self us_rep)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -911,7 +862,7 @@
   (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
   (temp___do_typ_inv_38 Bool)) Bool (=>
                                     (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range2
+                                    (<= 0 2147483647)) (in_range1
                                     temp___expr_39)))
 
 (define-fun dynamic_invariant2 ((temp___expr_18 Int) (temp___is_init_14 Bool)
@@ -935,7 +886,7 @@
   (temp___do_toplevel_271 Bool)
   (temp___do_typ_inv_272 Bool)) Bool (=>
                                      (or (= temp___is_init_269 true)
-                                     (<= 0 1)) (in_range3 temp___expr_273)))
+                                     (<= 0 1)) (in_range2 temp___expr_273)))
 
 (define-fun default_initial_assumption1 ((temp___expr_282 (Array (_ BitVec 8) element_type))
   (temp___skip_top_level_283 Bool)) Bool (forall ((temp___284 (_ BitVec 8)))
@@ -955,7 +906,7 @@
   (temp___do_typ_inv_252 Bool)) Bool (=>
                                      (or (= temp___is_init_249 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b01000000000000000000000)))
-                                     (in_range4 temp___expr_253)))
+                                     (in_range3 temp___expr_253)))
 
 (declare-const o Int)
 
@@ -966,7 +917,10 @@
   (to_rep elements__last)))
 
 ;; H
-  (assert (and (= o1 (length1 self)) (in_range5 o1)))
+  (assert (= o1 (length self)))
+
+;; H
+  (assert (in_range4 o1))
 
 ;; H
   (assert

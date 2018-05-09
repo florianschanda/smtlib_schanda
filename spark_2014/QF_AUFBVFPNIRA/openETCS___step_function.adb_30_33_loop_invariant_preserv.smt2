@@ -50,19 +50,9 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(define-fun in_range1 ((x Int)) Bool (and (<= (- 128) x) (<= x 127)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant ((temp___expr_166 Int)
-  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
-  (temp___do_toplevel_164 Bool)
-  (temp___do_typ_inv_165 Bool)) Bool (=>
-                                     (or (= temp___is_init_162 true)
-                                     (<= 0 2147483647)) (in_range3
-                                     temp___expr_166)))
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-const value__size Int)
 
@@ -166,6 +156,16 @@
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
 
+(define-fun in_range3 ((x Int)) Bool (and (<= (- 128) x) (<= x 127)))
+
+(define-fun dynamic_invariant ((temp___expr_166 Int)
+  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
+  (temp___do_toplevel_164 Bool)
+  (temp___do_typ_inv_165 Bool)) Bool (=>
+                                     (or (= temp___is_init_162 true)
+                                     (<= 0 2147483647)) (in_range2
+                                     temp___expr_166)))
+
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const x Int)
@@ -190,21 +190,21 @@
   (temp___do_toplevel_157 Bool)
   (temp___do_typ_inv_158 Bool)) Bool (=>
                                      (or (= temp___is_init_155 true)
-                                     (<= 0 10)) (in_range2 temp___expr_159)))
+                                     (<= 0 10)) (in_range1 temp___expr_159)))
 
 (declare-const i Int)
 
 (declare-const step_function__get_value__result Float32)
 
-(declare-const temp___274 Int)
+(declare-const temp___266 Int)
 
-(declare-const temp___275 Int)
+(declare-const temp___267 Int)
 
-(declare-const temp___270 Int)
+(declare-const temp___272 Int)
 
 (declare-const j Int)
 
-(declare-const temp___268 Int)
+(declare-const temp___270 Int)
 
 (declare-const o Int)
 
@@ -285,7 +285,7 @@
 (declare-const step_function__get_value__result13 Float32)
 
 ;; H
-  (assert (in_range3 x))
+  (assert (in_range2 x))
 
 ;; H
   (assert (= i2 0))
@@ -294,13 +294,13 @@
   (assert (<= 0 i2))
 
 ;; H
-  (assert (and (= temp___268 (+ i3 1)) (in_range1 (+ i3 1))))
+  (assert (and (= temp___270 (+ i3 1)) (in_range3 (+ i3 1))))
 
 ;; H
-  (assert (and (<= 0 temp___268) (<= temp___268 10)))
+  (assert (and (<= 0 temp___270) (<= temp___270 10)))
 
 ;; H
-  (assert (= o temp___268))
+  (assert (= o temp___270))
 
 ;; H
   (assert (= o2 (ite (< x o1) true false)))
@@ -328,7 +328,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 5912, characters 5-8
   (not false))
 (check-sat)
 (exit)

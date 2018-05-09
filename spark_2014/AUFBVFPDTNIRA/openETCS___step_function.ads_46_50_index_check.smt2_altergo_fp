@@ -80,6 +80,13 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tnum_delimiters_rangeB
 
+logic tnum_delimiters_rangeBqtint : tnum_delimiters_rangeB -> int
+
+axiom tnum_delimiters_rangeBqtaxiom :
+  (forall i:tnum_delimiters_rangeB.
+  (((- 128) <= tnum_delimiters_rangeBqtint(i)) and
+  (tnum_delimiters_rangeBqtint(i) <= 127)))
+
 predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool
@@ -137,6 +144,12 @@ function tnum_delimiters_rangeB__ref___projection(a: tnum_delimiters_rangeB__ref
 
 type num_delimiters_range
 
+logic num_delimiters_rangeqtint : num_delimiters_range -> int
+
+axiom num_delimiters_rangeqtaxiom :
+  (forall i:num_delimiters_range. ((0 <= num_delimiters_rangeqtint(i)) and
+  (num_delimiters_rangeqtint(i) <= 10)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 10))
 
 logic bool_eq3 : int, int -> bool
@@ -162,7 +175,7 @@ num_delimiters_range
 function num_delimiters_range__ref___projection(a: num_delimiters_range__ref) : num_delimiters_range =
   (a).num_delimiters_range__content
 
-logic to_rep : num_delimiters_range -> int
+function to_rep(x: num_delimiters_range) : int = num_delimiters_rangeqtint(x)
 
 logic of_rep : int -> num_delimiters_range
 
@@ -177,6 +190,12 @@ axiom coerce_axiom :
   (to_rep(of_rep(x)) = x)))
 
 type function_range
+
+logic function_rangeqtint : function_range -> int
+
+axiom function_rangeqtaxiom :
+  (forall i:function_range. ((0 <= function_rangeqtint(i)) and
+  (function_rangeqtint(i) <= 2147483647)))
 
 predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
 
@@ -202,7 +221,7 @@ type function_range__ref = { function_range__content : function_range
 function function_range__ref___projection(a: function_range__ref) : function_range =
   (a).function_range__content
 
-logic to_rep1 : function_range -> int
+function to_rep1(x: function_range) : int = function_rangeqtint(x)
 
 logic of_rep1 : int -> function_range
 
@@ -1245,6 +1264,9 @@ function_range; rec__step_function__delimiter_entry__value : float1
 function us_split_fields_Delimiter__projection(a: us_split_fields) : function_range =
   (a).rec__step_function__delimiter_entry__delimiter
 
+function us_split_fields_Value__projection(a: us_split_fields) : float1 =
+  (a).rec__step_function__delimiter_entry__value
+
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
@@ -1524,4 +1546,4 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
  (* File "step_function.ads", line 42, characters 0-0 *)
 goal WP_parameter_def :
-  (forall i:int. (((0 <= i) and (i <= (to_rep(sfun) - 1))) -> (0 <= i)))
+  (forall i:int. (((0 <= i) and (i <= (to_rep(sfun) - 1))) -> (i <= 10)))

@@ -95,11 +95,11 @@
   (fp.isFinite32 u)))
 
 ;; H
-  (assert (< y 0))
+  (assert (not (< y 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "division_by_zero.adb", line 32, characters 0-0
-  (not (not (= x ((_ to_fp 8 24) #x00000000)))))
+  (not true))
 (check-sat)
 (exit)

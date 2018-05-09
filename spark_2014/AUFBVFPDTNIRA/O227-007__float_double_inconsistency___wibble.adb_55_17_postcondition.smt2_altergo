@@ -2278,6 +2278,10 @@ logic fliteral2 : t1
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 10.0))
 
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 1)
+
  (* File "wibble.adb", line 45, characters 0-0 *)
 goal WP_parameter_def :
   (forall state:t1. forall o:t1. forall result:t1. forall state1:t1.
@@ -2287,4 +2291,4 @@ goal WP_parameter_def :
   fliteral2))))) and ((((o = add1(RNE, state, fliteral2)) and
   tqtisFinite(add1(RNE, state, fliteral2))) and ((result = state) and
   (state1 = o))) and ((state1 = state2) and (state3 = state1)))))) ->
-  le(fliteral2, state2)))
+  le(state2, mul1(RNE, of_ubv32(RNE, add(x, rliteral2)), fliteral2))))

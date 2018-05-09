@@ -121,6 +121,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "generic_interval_tests.adb", line 129, characters 0-0
-  (not (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) z2)))
+  (not (fp.leq z2 (fp #b0 #b10000011 #b01000000000000000000000))))
 (check-sat)
 (exit)

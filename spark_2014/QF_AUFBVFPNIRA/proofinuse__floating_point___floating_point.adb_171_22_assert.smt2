@@ -346,7 +346,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) res1)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10377, characters 5-8
+  (not (fp.leq res1 (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

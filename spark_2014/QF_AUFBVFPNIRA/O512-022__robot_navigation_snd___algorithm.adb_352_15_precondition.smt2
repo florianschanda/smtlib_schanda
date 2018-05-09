@@ -80,11 +80,6 @@
 (define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
 (declare-const value__size1 Int)
@@ -121,29 +116,41 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-const value__size2 Int)
-
-(declare-const value__component__size1 Int)
 
 (declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
 
-;; value__component__size_axiom
-  (assert (<= 0 value__component__size1))
-
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
 
-(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+(declare-const algorithm__gap_vectors__list__capacity__first__bit Int)
+
+(declare-const algorithm__gap_vectors__list__capacity__last__bit Int)
+
+(declare-const algorithm__gap_vectors__list__capacity__position Int)
+
+;; algorithm__gap_vectors__list__capacity__first__bit_axiom
+  (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit))
+
+;; algorithm__gap_vectors__list__capacity__last__bit_axiom
+  (assert
+  (< algorithm__gap_vectors__list__capacity__first__bit algorithm__gap_vectors__list__capacity__last__bit))
+
+;; algorithm__gap_vectors__list__capacity__position_axiom
+  (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
+
+(define-fun dynamic_invariant1 ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range5
+                                     temp___expr_365)))
 
 (declare-const value__size3 Int)
 
@@ -154,6 +161,140 @@
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment3))
+
+(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
+
+(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
+
+(declare-const algorithm__gap_vectors__cursor__node__position Int)
+
+;; algorithm__gap_vectors__cursor__node__first__bit_axiom
+  (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
+
+;; algorithm__gap_vectors__cursor__node__last__bit_axiom
+  (assert
+  (< algorithm__gap_vectors__cursor__node__first__bit algorithm__gap_vectors__cursor__node__last__bit))
+
+;; algorithm__gap_vectors__cursor__node__position_axiom
+  (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
+
+(declare-const value__size4 Int)
+
+(declare-const value__alignment4 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size4))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment4))
+
+(define-fun in_range6 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
+
+(declare-const value__size5 Int)
+
+(declare-const value__alignment5 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size5))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment5))
+
+(declare-const gaps__gap__bearing__first__bit Int)
+
+(declare-const gaps__gap__bearing__last__bit Int)
+
+(declare-const gaps__gap__bearing__position Int)
+
+;; gaps__gap__bearing__first__bit_axiom
+  (assert (<= 0 gaps__gap__bearing__first__bit))
+
+;; gaps__gap__bearing__last__bit_axiom
+  (assert (< gaps__gap__bearing__first__bit gaps__gap__bearing__last__bit))
+
+;; gaps__gap__bearing__position_axiom
+  (assert (<= 0 gaps__gap__bearing__position))
+
+(declare-const gaps__gap__distance__first__bit Int)
+
+(declare-const gaps__gap__distance__last__bit Int)
+
+(declare-const gaps__gap__distance__position Int)
+
+;; gaps__gap__distance__first__bit_axiom
+  (assert (<= 0 gaps__gap__distance__first__bit))
+
+;; gaps__gap__distance__last__bit_axiom
+  (assert (< gaps__gap__distance__first__bit gaps__gap__distance__last__bit))
+
+;; gaps__gap__distance__position_axiom
+  (assert (<= 0 gaps__gap__distance__position))
+
+(declare-const gaps__gap__idir__first__bit Int)
+
+(declare-const gaps__gap__idir__last__bit Int)
+
+(declare-const gaps__gap__idir__position Int)
+
+;; gaps__gap__idir__first__bit_axiom
+  (assert (<= 0 gaps__gap__idir__first__bit))
+
+;; gaps__gap__idir__last__bit_axiom
+  (assert (< gaps__gap__idir__first__bit gaps__gap__idir__last__bit))
+
+;; gaps__gap__idir__position_axiom
+  (assert (<= 0 gaps__gap__idir__position))
+
+(declare-const value__size6 Int)
+
+(declare-const value__alignment6 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size6))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment6))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(define-fun in_range7 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(define-fun in_range8 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(define-fun in_range9 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(declare-const value__size7 Int)
+
+(declare-const value__component__size1 Int)
+
+(declare-const value__alignment7 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size7))
+
+;; value__component__size_axiom
+  (assert (<= 0 value__component__size1))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment7))
+
+(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+
+(declare-const value__size8 Int)
+
+(declare-const value__alignment8 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size8))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment8))
 
 (declare-const robot_iface__speed_option__opt__first__bit Int)
 
@@ -203,15 +344,15 @@
 ;; robot_iface__speed_option__angle__position_axiom
   (assert (<= 0 robot_iface__speed_option__angle__position))
 
-(declare-const value__size4 Int)
+(declare-const value__size9 Int)
 
-(declare-const value__alignment4 Int)
+(declare-const value__alignment9 Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size4))
+  (assert (<= 0 value__size9))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment4))
+  (assert (<= 0 value__alignment9))
 
 (declare-const robot_iface__proxy__robot_radius__first__bit Int)
 
@@ -517,147 +658,6 @@
 ;; robot_iface__proxy__goal_reached__position_axiom
   (assert (<= 0 robot_iface__proxy__goal_reached__position))
 
-(define-fun in_range9 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
-
-(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(declare-const value__size5 Int)
-
-(declare-const value__alignment5 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size5))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment5))
-
-(declare-const gaps__gap__bearing__first__bit Int)
-
-(declare-const gaps__gap__bearing__last__bit Int)
-
-(declare-const gaps__gap__bearing__position Int)
-
-;; gaps__gap__bearing__first__bit_axiom
-  (assert (<= 0 gaps__gap__bearing__first__bit))
-
-;; gaps__gap__bearing__last__bit_axiom
-  (assert (< gaps__gap__bearing__first__bit gaps__gap__bearing__last__bit))
-
-;; gaps__gap__bearing__position_axiom
-  (assert (<= 0 gaps__gap__bearing__position))
-
-(declare-const gaps__gap__distance__first__bit Int)
-
-(declare-const gaps__gap__distance__last__bit Int)
-
-(declare-const gaps__gap__distance__position Int)
-
-;; gaps__gap__distance__first__bit_axiom
-  (assert (<= 0 gaps__gap__distance__first__bit))
-
-;; gaps__gap__distance__last__bit_axiom
-  (assert (< gaps__gap__distance__first__bit gaps__gap__distance__last__bit))
-
-;; gaps__gap__distance__position_axiom
-  (assert (<= 0 gaps__gap__distance__position))
-
-(declare-const gaps__gap__idir__first__bit Int)
-
-(declare-const gaps__gap__idir__last__bit Int)
-
-(declare-const gaps__gap__idir__position Int)
-
-;; gaps__gap__idir__first__bit_axiom
-  (assert (<= 0 gaps__gap__idir__first__bit))
-
-;; gaps__gap__idir__last__bit_axiom
-  (assert (< gaps__gap__idir__first__bit gaps__gap__idir__last__bit))
-
-;; gaps__gap__idir__position_axiom
-  (assert (<= 0 gaps__gap__idir__position))
-
-(declare-const value__size6 Int)
-
-(declare-const value__alignment6 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size6))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment6))
-
-(declare-const algorithm__gap_vectors__list__capacity__first__bit Int)
-
-(declare-const algorithm__gap_vectors__list__capacity__last__bit Int)
-
-(declare-const algorithm__gap_vectors__list__capacity__position Int)
-
-;; algorithm__gap_vectors__list__capacity__first__bit_axiom
-  (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit))
-
-;; algorithm__gap_vectors__list__capacity__last__bit_axiom
-  (assert
-  (< algorithm__gap_vectors__list__capacity__first__bit algorithm__gap_vectors__list__capacity__last__bit))
-
-;; algorithm__gap_vectors__list__capacity__position_axiom
-  (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
-
-(declare-const value__size7 Int)
-
-(declare-const value__alignment7 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size7))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment7))
-
-(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
-
-(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
-
-(declare-const algorithm__gap_vectors__cursor__node__position Int)
-
-;; algorithm__gap_vectors__cursor__node__first__bit_axiom
-  (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
-
-;; algorithm__gap_vectors__cursor__node__last__bit_axiom
-  (assert
-  (< algorithm__gap_vectors__cursor__node__first__bit algorithm__gap_vectors__cursor__node__last__bit))
-
-;; algorithm__gap_vectors__cursor__node__position_axiom
-  (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(define-fun dynamic_invariant1 ((temp___expr_365 Int)
-  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
-  (temp___do_toplevel_363 Bool)
-  (temp___do_typ_inv_364 Bool)) Bool (=>
-                                     (or (= temp___is_init_361 true)
-                                     (<= 0 2147483647)) (in_range10
-                                     temp___expr_365)))
-
-(declare-const value__size8 Int)
-
-(declare-const value__alignment8 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size8))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment8))
-
-(declare-const value__size9 Int)
-
-(declare-const value__alignment9 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size9))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment9))
-
 (declare-const value__size10 Int)
 
 (declare-const value__alignment10 Int)
@@ -901,7 +901,7 @@
   (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
   (temp___do_typ_inv_38 Bool)) Bool (=>
                                     (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range6
+                                    (<= 0 2147483647)) (in_range8
                                     temp___expr_39)))
 
 (define-fun dynamic_invariant3 ((temp___expr_46 Int) (temp___is_init_42 Bool)
@@ -929,7 +929,7 @@
   (temp___do_toplevel_252 Bool)
   (temp___do_typ_inv_253 Bool)) Bool (=>
                                      (or (= temp___is_init_250 true)
-                                     (<= 0 1)) (in_range8 temp___expr_254)))
+                                     (<= 0 1)) (in_range10 temp___expr_254)))
 
 (define-fun dynamic_invariant7 ((temp___expr_163 Float32)
   (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
@@ -937,7 +937,7 @@
   (temp___do_typ_inv_162 Bool)) Bool (=>
                                      (or (= temp___is_init_159 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range4 temp___expr_163)))
+                                     (in_range7 temp___expr_163)))
 
 (define-fun dynamic_invariant8 ((temp___expr_170 Float32)
   (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
@@ -945,7 +945,7 @@
   (temp___do_typ_inv_169 Bool)) Bool (=>
                                      (or (= temp___is_init_166 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range7 temp___expr_170)))
+                                     (in_range9 temp___expr_170)))
 
 (define-fun dynamic_invariant9 ((temp___expr_184 Float32)
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
@@ -961,14 +961,14 @@
   (temp___do_typ_inv_197 Bool)) Bool (=>
                                      (or (= temp___is_init_194 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                     (in_range5 temp___expr_198)))
+                                     (in_range4 temp___expr_198)))
 
 (define-fun dynamic_invariant11 ((temp___expr_323 Int)
   (temp___is_init_319 Bool) (temp___skip_constant_320 Bool)
   (temp___do_toplevel_321 Bool)
   (temp___do_typ_inv_322 Bool)) Bool (=>
                                      (or (= temp___is_init_319 true)
-                                     (<= (- 1) 1)) (in_range9
+                                     (<= (- 1) 1)) (in_range6
                                      temp___expr_323)))
 
 (define-fun in_range11 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))

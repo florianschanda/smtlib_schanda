@@ -1496,11 +1496,39 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-type unsigned_32
+logic float_to_unsigned_32 : t1 -> t
+
+logic float_to_unsigned_32__function_guard : t, t1 -> prop
+
+type source
+
+logic bool_eq4 : t1, t1 -> bool
+
+axiom bool_eq_def4 :
+  (forall x:t1. forall y:t1 [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
+
+logic user_eq1 : source, source -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t1
+
+logic dummy1 : source
+
+type source__ref = { source__content : source
+}
+
+function source__ref___projection(a: source__ref) : source =
+  (a).source__content
+
+type target
 
 logic attr__ATTRIBUTE_MODULUS : t
 
-logic bool_eq4 : int, int -> bool
+logic bool_eq5 : int, int -> bool
 
 logic bool_ne1 : int, int -> bool
 
@@ -1513,7 +1541,7 @@ logic bool_gt2 : int, int -> bool
 logic bool_ge2 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq4(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq5(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne1(x, y) = true) <-> (not (x = y)))))
@@ -1530,21 +1558,107 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge2(x, y) = true) <-> (y <= x))))
 
-logic bool_eq5 : t, t -> bool
+logic bool_eq6 : t, t -> bool
 
-axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+axiom bool_eq_def5 :
+  (forall x:t. forall y:t [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
 
-logic user_eq1 : unsigned_32, unsigned_32 -> bool
+logic user_eq2 : target, target -> bool
 
-logic dummy1 : unsigned_32
+logic dummy2 : target
+
+type target__ref = { target__content : target
+}
+
+function target__ref___projection(a: target__ref) : target =
+  (a).target__content
+
+axiom float_to_unsigned_32__post_axiom : true
+
+logic unsigned_32_to_float : t -> t1
+
+logic unsigned_32_to_float__function_guard : t1, t -> prop
+
+type source1
+
+logic attr__ATTRIBUTE_MODULUS1 : t
+
+logic bool_eq7 : t, t -> bool
+
+axiom bool_eq_def6 :
+  (forall x:t. forall y:t [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+
+logic user_eq3 : source1, source1 -> bool
+
+logic dummy3 : source1
+
+type source__ref1 = { source__content1 : source1
+}
+
+function source__ref___2__projection(a: source__ref1) : source1 =
+  (a).source__content1
+
+type target1
+
+logic bool_eq8 : t1, t1 -> bool
+
+axiom bool_eq_def7 :
+  (forall x:t1. forall y:t1 [bool_eq8(x, y)]. ((eq(x, y) -> (bool_eq8(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq8(x, y) = false))))
+
+logic user_eq4 : target1, target1 -> bool
+
+logic attr__ATTRIBUTE_IMAGE5 : t1 -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> t1
+
+logic dummy4 : target1
+
+type target__ref1 = { target__content1 : target1
+}
+
+function target__ref___2__projection(a: target__ref1) : target1 =
+  (a).target__content1
+
+axiom unsigned_32_to_float__post_axiom :
+  (forall s:t [unsigned_32_to_float(s)].
+  tqtisFinite(unsigned_32_to_float(s)))
+
+type unsigned_32
+
+logic attr__ATTRIBUTE_MODULUS2 : t
+
+logic bool_eq9 : t, t -> bool
+
+axiom bool_eq_def8 :
+  (forall x:t. forall y:t [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> t
+
+logic user_eq5 : unsigned_32, unsigned_32 -> bool
+
+logic dummy5 : unsigned_32
 
 type unsigned_32__ref = { unsigned_32__content : unsigned_32
 }
@@ -1564,120 +1678,6 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-type source
-
-logic bool_eq6 : t1, t1 -> bool
-
-axiom bool_eq_def5 :
-  (forall x1:t1. forall y:t1 [bool_eq6(x1, y)]. ((eq(x1, y) -> (bool_eq6(x1,
-  y) = true)) and ((not eq(x1, y)) -> (bool_eq6(x1, y) = false))))
-
-logic user_eq2 : source, source -> bool
-
-logic attr__ATTRIBUTE_IMAGE3 : t1 -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t1
-
-logic dummy2 : source
-
-type source__ref = { source__content : source
-}
-
-function source__ref___projection(a: source__ref) : source =
-  (a).source__content
-
-type target
-
-logic attr__ATTRIBUTE_MODULUS1 : t
-
-logic bool_eq7 : t, t -> bool
-
-axiom bool_eq_def6 :
-  (forall x1:t. forall y:t [bool_eq7(x1, y)]. (((x1 = y) -> (bool_eq7(x1,
-  y) = true)) and ((not (x1 = y)) -> (bool_eq7(x1, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE4 : us_image -> t
-
-logic user_eq3 : target, target -> bool
-
-logic dummy3 : target
-
-type target__ref = { target__content : target
-}
-
-function target__ref___projection(a: target__ref) : target =
-  (a).target__content
-
-logic float_to_unsigned_32 : t1 -> t
-
-logic float_to_unsigned_32__function_guard : t, t1 -> prop
-
-axiom float_to_unsigned_32__post_axiom : true
-
-type source1
-
-logic attr__ATTRIBUTE_MODULUS2 : t
-
-logic bool_eq8 : t, t -> bool
-
-axiom bool_eq_def7 :
-  (forall x1:t. forall y:t [bool_eq8(x1, y)]. (((x1 = y) -> (bool_eq8(x1,
-  y) = true)) and ((not (x1 = y)) -> (bool_eq8(x1, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE5 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE5 : us_image -> t
-
-logic user_eq4 : source1, source1 -> bool
-
-logic dummy4 : source1
-
-type source__ref1 = { source__content1 : source1
-}
-
-function source__ref___2__projection(a: source__ref1) : source1 =
-  (a).source__content1
-
-type target1
-
-logic bool_eq9 : t1, t1 -> bool
-
-axiom bool_eq_def8 :
-  (forall x1:t1. forall y:t1 [bool_eq9(x1, y)]. ((eq(x1, y) -> (bool_eq9(x1,
-  y) = true)) and ((not eq(x1, y)) -> (bool_eq9(x1, y) = false))))
-
-logic user_eq5 : target1, target1 -> bool
-
-logic attr__ATTRIBUTE_IMAGE6 : t1 -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE6 : us_image -> t1
-
-logic dummy5 : target1
-
-type target__ref1 = { target__content1 : target1
-}
-
-function target__ref___2__projection(a: target__ref1) : target1 =
-  (a).target__content1
-
-logic unsigned_32_to_float : t -> t1
-
-logic unsigned_32_to_float__function_guard : t1, t -> prop
-
-axiom unsigned_32_to_float__post_axiom :
-  (forall s:t [unsigned_32_to_float(s)].
-  tqtisFinite(unsigned_32_to_float(s)))
-
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
@@ -1692,7 +1692,7 @@ logic rliteral : t
 
 axiom rliteral_axiom : (tqtint(rliteral) = 1597463007)
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/maths_pack.mlw", line 30671, characters 5-8 *)
 goal WP_parameter_def :
   (forall half_x:t1. forall y:t1. forall magic_num:t. forall i:t. forall o:t.
   forall o1:t1. forall result:t1. forall half_x1:t1. forall result1:t1.

@@ -1049,6 +1049,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1103,19 +1109,6 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
-
-logic of_rep : int -> integer
-
-axiom inversion_axiom :
-  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:integer [to_rep(x)]. in_range2(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range2(x) ->
-  (to_rep(of_rep(x)) = x)))
-
 type float1
 
 logic bool_eq4 : t, t -> bool
@@ -1139,17 +1132,30 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-logic to_rep1 : float1 -> t
+logic to_rep : float1 -> t
 
-logic of_rep1 : t -> float1
+logic of_rep : t -> float1
+
+axiom inversion_axiom :
+  (forall x:float1 [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:float1 [to_rep(x)]. tqtisFinite(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
 
 axiom inversion_axiom1 :
-  (forall x:float1 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
 
-axiom range_axiom1 : (forall x:float1 [to_rep1(x)]. tqtisFinite(to_rep1(x)))
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range2(to_rep1(x)))
 
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (tqtisFinite(x) ->
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
   (to_rep1(of_rep1(x)) = x)))
 
 type us_split_fields = { rec__t__stupid_record__a : integer;
@@ -1161,6 +1167,9 @@ function us_split_fields_A__projection(a: us_split_fields) : integer =
 
 function us_split_fields_B__projection(a: us_split_fields) : bool =
   (a).rec__t__stupid_record__b
+
+function us_split_fields_C__projection(a: us_split_fields) : float1 =
+  (a).rec__t__stupid_record__c
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1178,13 +1187,13 @@ logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  (((((to_rep(((a).us_split_fields1).rec__t__stupid_record__a) = to_rep(((b).us_split_fields1).rec__t__stupid_record__a)) and
+  (((((to_rep1(((a).us_split_fields1).rec__t__stupid_record__a) = to_rep1(((b).us_split_fields1).rec__t__stupid_record__a)) and
   (((a).us_split_fields1).rec__t__stupid_record__b = ((b).us_split_fields1).rec__t__stupid_record__b)) and
-  (to_rep1(((a).us_split_fields1).rec__t__stupid_record__c) = to_rep1(((b).us_split_fields1).rec__t__stupid_record__c))) ->
+  (to_rep(((a).us_split_fields1).rec__t__stupid_record__c) = to_rep(((b).us_split_fields1).rec__t__stupid_record__c))) ->
   (bool_eq5(a, b) = true)) and
-  ((not (((to_rep(((a).us_split_fields1).rec__t__stupid_record__a) = to_rep(((b).us_split_fields1).rec__t__stupid_record__a)) and
+  ((not (((to_rep1(((a).us_split_fields1).rec__t__stupid_record__a) = to_rep1(((b).us_split_fields1).rec__t__stupid_record__a)) and
   (((a).us_split_fields1).rec__t__stupid_record__b = ((b).us_split_fields1).rec__t__stupid_record__b)) and
-  (to_rep1(((a).us_split_fields1).rec__t__stupid_record__c) = to_rep1(((b).us_split_fields1).rec__t__stupid_record__c)))) ->
+  (to_rep(((a).us_split_fields1).rec__t__stupid_record__c) = to_rep(((b).us_split_fields1).rec__t__stupid_record__c)))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int
@@ -1353,7 +1362,7 @@ logic mk : int, int -> t1
 
 axiom mk_def :
   (forall f:int. forall l:int [mk(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep(first(mk(f, l))) = f) and (to_rep(last(mk(f, l))) = l)))))
+  ((to_rep1(first(mk(f, l))) = f) and (to_rep1(last(mk(f, l))) = l)))))
 
 predicate dynamic_property1(range_first: int, range_last: int, low: int,
   high: int) = (in_range2(low) and (in_range2(high) and ((low <= high) ->
@@ -1368,9 +1377,9 @@ function to_array(a: us_t) : (int,us_rep) farray = (a).elts
 function of_array(a: (int,us_rep) farray, f: int, l: int) : us_t = { elts =
   a; rt = mk(f, l) }
 
-function first1(a: us_t) : int = to_rep(first((a).rt))
+function first1(a: us_t) : int = to_rep1(first((a).rt))
 
-function last1(a: us_t) : int = to_rep(last((a).rt))
+function last1(a: us_t) : int = to_rep1(last((a).rt))
 
 logic length : us_t -> int
 
@@ -1407,8 +1416,8 @@ axiom object__alignment_axiom1 :
   (forall a:(int,us_rep) farray. (0 <= object__alignment1(a)))
 
 function bool_eq8(x: us_t, y: us_t) : bool = bool_eq6((x).elts,
-  to_rep(first((x).rt)), to_rep(last((x).rt)), (y).elts,
-  to_rep(first((y).rt)), to_rep(last((y).rt)))
+  to_rep1(first((x).rt)), to_rep1(last((x).rt)), (y).elts,
+  to_rep1(first((y).rt)), to_rep1(last((y).rt)))
 
 logic user_eq4 : us_t, us_t -> bool
 
@@ -1455,7 +1464,7 @@ logic mk1 : int, int -> t2
 
 axiom mk_def1 :
   (forall f:int. forall l:int [mk1(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep(first2(mk1(f, l))) = f) and (to_rep(last2(mk1(f, l))) = l)))))
+  ((to_rep1(first2(mk1(f, l))) = f) and (to_rep1(last2(mk1(f, l))) = l)))))
 
 predicate dynamic_property3(range_first: int, range_last: int, low: int,
   high: int) = (in_range2(low) and (in_range2(high) and ((low <= high) ->
@@ -1470,9 +1479,9 @@ function to_array1(a: us_t1) : (int,us_rep) farray = (a).elts1
 function of_array1(a: (int,us_rep) farray, f: int, l: int) : us_t1 = {
   elts1 = a; rt1 = mk1(f, l) }
 
-function first3(a: us_t1) : int = to_rep(first2((a).rt1))
+function first3(a: us_t1) : int = to_rep1(first2((a).rt1))
 
-function last3(a: us_t1) : int = to_rep(last2((a).rt1))
+function last3(a: us_t1) : int = to_rep1(last2((a).rt1))
 
 logic length1 : us_t1 -> int
 
@@ -1509,8 +1518,8 @@ axiom object__alignment_axiom2 :
   (forall a:(int,us_rep) farray. (0 <= object__alignment2(a)))
 
 function bool_eq10(x: us_t1, y: us_t1) : bool = bool_eq6((x).elts1,
-  to_rep(first2((x).rt1)), to_rep(last2((x).rt1)), (y).elts1,
-  to_rep(first2((y).rt1)), to_rep(last2((y).rt1)))
+  to_rep1(first2((x).rt1)), to_rep1(last2((x).rt1)), (y).elts1,
+  to_rep1(first2((y).rt1)), to_rep1(last2((y).rt1)))
 
 logic user_eq6 : us_t1, us_t1 -> bool
 
@@ -1531,17 +1540,21 @@ logic attr__ATTRIBUTE_ADDRESS : int
 
 logic t__dummy__aggregate_def : us_rep, int, int -> us_t1
 
+logic rliteral : integer
+
+axiom rliteral_axiom : (integerqtint(rliteral) = 0)
+
 axiom dummy__def_axiom : ((dummy11 = (t__dummy__aggregate_def({
-  us_split_fields1 = { rec__t__stupid_record__a = of_rep(0);
+  us_split_fields1 = { rec__t__stupid_record__a = rliteral;
   rec__t__stupid_record__b = of_int1(1); rec__t__stupid_record__c =
-  of_rep1(fliteral) } }, 0, comp_div(value__size,8))).elts1) and
-  (dummy12 = mk(to_rep(first2((t__dummy__aggregate_def({ us_split_fields1 = {
-  rec__t__stupid_record__a = of_rep(0); rec__t__stupid_record__b =
-  of_int1(1); rec__t__stupid_record__c = of_rep1(fliteral) } }, 0,
-  comp_div(value__size,8))).rt1)), to_rep(last2((t__dummy__aggregate_def({
-  us_split_fields1 = { rec__t__stupid_record__a = of_rep(0);
+  of_rep(fliteral) } }, 0, comp_div(value__size,8))).elts1) and
+  (dummy12 = mk(to_rep1(first2((t__dummy__aggregate_def({ us_split_fields1 =
+  { rec__t__stupid_record__a = rliteral; rec__t__stupid_record__b =
+  of_int1(1); rec__t__stupid_record__c = of_rep(fliteral) } }, 0,
+  comp_div(value__size,8))).rt1)), to_rep1(last2((t__dummy__aggregate_def({
+  us_split_fields1 = { rec__t__stupid_record__a = rliteral;
   rec__t__stupid_record__b = of_int1(1); rec__t__stupid_record__c =
-  of_rep1(fliteral) } }, 0, comp_div(value__size,8))).rt1)))))
+  of_rep(fliteral) } }, 0, comp_div(value__size,8))).rt1)))))
 
 type t3
 
@@ -1553,7 +1566,7 @@ logic mk2 : int, int -> t3
 
 axiom mk_def2 :
   (forall f:int. forall l:int [mk2(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep(first4(mk2(f, l))) = f) and (to_rep(last4(mk2(f, l))) = l)))))
+  ((to_rep1(first4(mk2(f, l))) = f) and (to_rep1(last4(mk2(f, l))) = l)))))
 
 predicate dynamic_property4(range_first: int, range_last: int, low: int,
   high: int) = (in_range2(low) and (in_range2(high) and ((low <= high) ->
@@ -1567,9 +1580,9 @@ function to_array2(a: us_t2) : (int,us_rep) farray = (a).elts2
 function of_array2(a: (int,us_rep) farray, f: int, l: int) : us_t2 = {
   elts2 = a; rt2 = mk2(f, l) }
 
-function first5(a: us_t2) : int = to_rep(first4((a).rt2))
+function first5(a: us_t2) : int = to_rep1(first4((a).rt2))
 
-function last5(a: us_t2) : int = to_rep(last4((a).rt2))
+function last5(a: us_t2) : int = to_rep1(last4((a).rt2))
 
 logic length2 : us_t2 -> int
 
@@ -1606,8 +1619,8 @@ axiom object__alignment_axiom3 :
   (forall a:(int,us_rep) farray. (0 <= object__alignment3(a)))
 
 function bool_eq11(x: us_t2, y: us_t2) : bool = bool_eq6((x).elts2,
-  to_rep(first4((x).rt2)), to_rep(last4((x).rt2)), (y).elts2,
-  to_rep(first4((y).rt2)), to_rep(last4((y).rt2)))
+  to_rep1(first4((x).rt2)), to_rep1(last4((x).rt2)), (y).elts2,
+  to_rep1(first4((y).rt2)), to_rep1(last4((y).rt2)))
 
 logic user_eq7 : us_t2, us_t2 -> bool
 
@@ -1625,11 +1638,11 @@ axiom def_axiom :
   forall temp___1562:float1.
   (forall temp___157:int. forall temp___158:int.
   ((dynamic_property4((- 2147483648), 2147483647, temp___157, temp___158) ->
-  ((to_rep(first2((t__dummy__aggregate_def({ us_split_fields1 = {
+  ((to_rep1(first2((t__dummy__aggregate_def({ us_split_fields1 = {
   rec__t__stupid_record__a = temp___156; rec__t__stupid_record__b =
   temp___1561; rec__t__stupid_record__c = temp___1562 } }, temp___157,
   temp___158)).rt1)) = temp___157) and
-  (to_rep(last2((t__dummy__aggregate_def({ us_split_fields1 = {
+  (to_rep1(last2((t__dummy__aggregate_def({ us_split_fields1 = {
   rec__t__stupid_record__a = temp___156; rec__t__stupid_record__b =
   temp___1561; rec__t__stupid_record__c = temp___1562 } }, temp___157,
   temp___158)).rt1)) = temp___158))) and
@@ -1642,24 +1655,23 @@ axiom def_axiom :
 
  (* File "t.ads", line 15, characters 0-0 *)
 goal WP_parameter_def :
-  (forall o:float1. forall o1:integer. forall o2:integer. forall o3:bool.
-  forall o4:float1. forall o5:integer. forall o6:bool. forall o7:float1.
+  (forall o:float1. forall o1:integer. forall o2:bool. forall o3:float1.
+  forall o4:integer. forall o5:bool. forall o6:float1.
   forall temp___190:(int,us_rep) farray. forall temp___1901:t2.
   forall temp___191:(int,us_rep) farray. forall temp___1911:t2.
-  ((((((to_rep1(o) = fliteral) and ((to_rep(o1) = 0) and ((o1 = o2) and
-  ((of_int1(1) = o3) and (o = o4))))) and ((o5 = o2) and ((o6 = o3) and
-  (o7 = o4)))) and ({ elts1 = temp___190; rt1 = temp___1901
-  } = t__dummy__aggregate_def({ us_split_fields1 = {
-  rec__t__stupid_record__a = o5; rec__t__stupid_record__b = o6;
-  rec__t__stupid_record__c = o7 } }, 0, comp_div(value__size,8)))) and
-  ((to_rep(first2(temp___1901)) = 0) and
-  ((to_rep(last2(temp___1901)) = comp_div(value__size,8)) and
+  ((((((to_rep(o) = fliteral) and ((rliteral = o1) and ((of_int1(1) = o2) and
+  (o = o3)))) and ((o4 = o1) and ((o5 = o2) and (o6 = o3)))) and ({ elts1 =
+  temp___190; rt1 = temp___1901 } = t__dummy__aggregate_def({
+  us_split_fields1 = { rec__t__stupid_record__a = o4;
+  rec__t__stupid_record__b = o5; rec__t__stupid_record__c = o6 } }, 0,
+  comp_div(value__size,8)))) and ((to_rep1(first2(temp___1901)) = 0) and
+  ((to_rep1(last2(temp___1901)) = comp_div(value__size,8)) and
   ((temp___191 = temp___190) and (temp___1911 = temp___1901))))) ->
-  (((to_rep(first2(temp___1911)) <= to_rep(last2(temp___1911))) ->
+  (((to_rep1(first2(temp___1911)) <= to_rep1(last2(temp___1911))) ->
   (((0 <= comp_div(value__size,8)) ->
-  (((to_rep(last2(temp___1911)) - to_rep(first2(temp___1911))) + 1) = ((comp_div(value__size,8) - 0) + 1))) and
+  (((to_rep1(last2(temp___1911)) - to_rep1(first2(temp___1911))) + 1) = ((comp_div(value__size,8) - 0) + 1))) and
   ((not (0 <= comp_div(value__size,8))) ->
-  (((to_rep(last2(temp___1911)) - to_rep(first2(temp___1911))) + 1) = 0)))) and
-  ((not (to_rep(first2(temp___1911)) <= to_rep(last2(temp___1911)))) ->
+  (((to_rep1(last2(temp___1911)) - to_rep1(first2(temp___1911))) + 1) = 0)))) and
+  ((not (to_rep1(first2(temp___1911)) <= to_rep1(last2(temp___1911)))) ->
   ((0 <= comp_div(value__size,8)) ->
   (0 = ((comp_div(value__size,8) - 0) + 1)))))))

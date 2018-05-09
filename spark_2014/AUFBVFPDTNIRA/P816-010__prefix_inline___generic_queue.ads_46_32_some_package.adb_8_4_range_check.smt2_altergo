@@ -52,6 +52,12 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
@@ -106,7 +112,7 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
+function to_rep(x: integer) : int = integerqtint(x)
 
 logic of_rep : int -> integer
 
@@ -676,6 +682,12 @@ axiom bv_max_to_uint :
 
 type natural
 
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
@@ -700,7 +712,7 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
-logic to_rep1 : natural -> int
+function to_rep1(x: natural) : int = naturalqtint(x)
 
 logic of_rep1 : int -> natural
 
@@ -1871,6 +1883,73 @@ type buffer_tag__ref = { buffer_tag__content : us_rep
 function buffer_tag__ref___projection(a: buffer_tag__ref) : us_rep =
   (a).buffer_tag__content
 
+logic length : us_rep -> int
+
+logic length__function_guard : int, us_rep -> prop
+
+logic length1 : int, us_rep -> int
+
+logic length__function_guard1 : int, int, us_rep -> prop
+
+type length_type
+
+logic length_typeqtint : length_type -> int
+
+axiom length_typeqtaxiom :
+  (forall i:length_type. ((0 <= length_typeqtint(i)) and
+  (length_typeqtint(i) <= 256)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 256))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq7 : length_type, length_type -> bool
+
+logic dummy14 : length_type
+
+type length_type__ref = { length_type__content : length_type
+}
+
+function length_type__ref___projection(a: length_type__ref) : length_type =
+  (a).length_type__content
+
+axiom some_package__float_buffer__buffer_tag__compat_axiom :
+  (forall self:mode_type. forall self1:(t,element_type) farray.
+  forall self2:index_type. forall self3:index_type. forall self4:bool.
+  forall self5:natural. forall self6:us_private. forall self7:int
+  [length1(us_tag, { us_split_fields1 = {
+  rec__some_package__float_buffer__buffer_tag__mode = self;
+  rec__some_package__float_buffer__buffer_tag__buffer = self1;
+  rec__some_package__float_buffer__buffer_tag__index_head = self2;
+  rec__some_package__float_buffer__buffer_tag__index_tail = self3;
+  rec__some_package__float_buffer__buffer_tag__haselements = self4;
+  rec__some_package__float_buffer__buffer_tag__num_overflows = self5;
+  rec__ext__ = self6 }; attr__tag = self7 })]. (length({ us_split_fields1 = {
+  rec__some_package__float_buffer__buffer_tag__mode = self;
+  rec__some_package__float_buffer__buffer_tag__buffer = self1;
+  rec__some_package__float_buffer__buffer_tag__index_head = self2;
+  rec__some_package__float_buffer__buffer_tag__index_tail = self3;
+  rec__some_package__float_buffer__buffer_tag__haselements = self4;
+  rec__some_package__float_buffer__buffer_tag__num_overflows = self5;
+  rec__ext__ = self6 }; attr__tag = self7 }) = length1(us_tag, {
+  us_split_fields1 = { rec__some_package__float_buffer__buffer_tag__mode =
+  self; rec__some_package__float_buffer__buffer_tag__buffer = self1;
+  rec__some_package__float_buffer__buffer_tag__index_head = self2;
+  rec__some_package__float_buffer__buffer_tag__index_tail = self3;
+  rec__some_package__float_buffer__buffer_tag__haselements = self4;
+  rec__some_package__float_buffer__buffer_tag__num_overflows = self5;
+  rec__ext__ = self6 }; attr__tag = self7 })))
+
 function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
 
 logic to_int3 : bool -> int
@@ -1885,45 +1964,19 @@ axiom of_int_def :
   (forall i:int [of_int2(i)]. (((i = 0) -> (of_int2(i) = false)) and
   ((not (i = 0)) -> (of_int2(i) = true))))
 
-logic bool_eq10 : bool, bool -> bool
-
-axiom bool_eq_def9 :
-  (forall x:bool. forall y:bool [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
-
-predicate in_range5(x: int) = ((x = 0) or (x = 1))
-
-logic attr__ATTRIBUTE_IMAGE5 : bool -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE5 : us_image -> bool
-
-type length_type
-
-predicate in_range6(x: int) = ((0 <= x) and (x <= 256))
-
-logic bool_eq11 : int, int -> bool
+logic bool_eq11 : bool, bool -> bool
 
 axiom bool_eq_def10 :
-  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  (forall x:bool. forall y:bool [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
   y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+predicate in_range6(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE6 : bool -> us_image
 
 logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE6 : us_image -> int
-
-logic user_eq7 : length_type, length_type -> bool
-
-logic dummy14 : length_type
-
-type length_type__ref = { length_type__content : length_type
-}
-
-function length_type__ref___projection(a: length_type__ref) : length_type =
-  (a).length_type__content
+logic attr__ATTRIBUTE_VALUE6 : us_image -> bool
 
 type map__ref1 = { map__content1 : (int,element_type) farray
 }
@@ -1991,7 +2044,7 @@ axiom mk_def :
 
 predicate dynamic_property(range_first: int, range_last: int, low: int,
   high: int) = (in_range(low) and (in_range(high) and ((low <= high) ->
-  (in_range6(low) and in_range6(high)))))
+  (in_range5(low) and in_range5(high)))))
 
 type us_t = { elts : (int,element_type) farray; rt : t2
 }
@@ -2005,12 +2058,12 @@ function first1(a: us_t) : int = to_rep(first((a).rt))
 
 function last1(a: us_t) : int = to_rep(last((a).rt))
 
-logic length : us_t -> int
+logic length2 : us_t -> int
 
 axiom length_def :
-  (forall a:us_t [length(a)]. (((first1(a) <= last1(a)) ->
-  (length(a) = ((last1(a) - first1(a)) + 1))) and
-  ((not (first1(a) <= last1(a))) -> (length(a) = 0))))
+  (forall a:us_t [length2(a)]. (((first1(a) <= last1(a)) ->
+  (length2(a) = ((last1(a) - first1(a)) + 1))) and
+  ((not (first1(a) <= last1(a))) -> (length2(a) = 0))))
 
 logic value__size2 : int
 
@@ -2065,41 +2118,6 @@ logic elements__last : integer
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic length1 : us_rep -> int
-
-logic length__function_guard : int, us_rep -> prop
-
-logic length2 : int, us_rep -> int
-
-logic length__function_guard1 : int, int, us_rep -> prop
-
-axiom some_package__float_buffer__buffer_tag__compat_axiom :
-  (forall self:mode_type. forall self1:(t,element_type) farray.
-  forall self2:index_type. forall self3:index_type. forall self4:bool.
-  forall self5:natural. forall self6:us_private. forall self7:int
-  [length2(us_tag, { us_split_fields1 = {
-  rec__some_package__float_buffer__buffer_tag__mode = self;
-  rec__some_package__float_buffer__buffer_tag__buffer = self1;
-  rec__some_package__float_buffer__buffer_tag__index_head = self2;
-  rec__some_package__float_buffer__buffer_tag__index_tail = self3;
-  rec__some_package__float_buffer__buffer_tag__haselements = self4;
-  rec__some_package__float_buffer__buffer_tag__num_overflows = self5;
-  rec__ext__ = self6 }; attr__tag = self7 })]. (length1({ us_split_fields1 =
-  { rec__some_package__float_buffer__buffer_tag__mode = self;
-  rec__some_package__float_buffer__buffer_tag__buffer = self1;
-  rec__some_package__float_buffer__buffer_tag__index_head = self2;
-  rec__some_package__float_buffer__buffer_tag__index_tail = self3;
-  rec__some_package__float_buffer__buffer_tag__haselements = self4;
-  rec__some_package__float_buffer__buffer_tag__num_overflows = self5;
-  rec__ext__ = self6 }; attr__tag = self7 }) = length2(us_tag, {
-  us_split_fields1 = { rec__some_package__float_buffer__buffer_tag__mode =
-  self; rec__some_package__float_buffer__buffer_tag__buffer = self1;
-  rec__some_package__float_buffer__buffer_tag__index_head = self2;
-  rec__some_package__float_buffer__buffer_tag__index_tail = self3;
-  rec__some_package__float_buffer__buffer_tag__haselements = self4;
-  rec__some_package__float_buffer__buffer_tag__num_overflows = self5;
-  rec__ext__ = self6 }; attr__tag = self7 })))
-
  (* File "generic_queue.ads", line 45, characters 0-0 *)
 goal WP_parameter_def :
   (forall self__split_fields:mode_type.
@@ -2108,7 +2126,7 @@ goal WP_parameter_def :
   forall self__split_fields3:index_type. forall self__split_fields4:bool.
   forall self__split_fields5:natural. forall self__split_fields6:us_private.
   forall o:int. forall o1:int. (dynamic_property(0, 256,
-  to_rep(elements__first), to_rep(elements__last)) -> (((o1 = length1({
+  to_rep(elements__first), to_rep(elements__last)) -> (((o1 = length({
   us_split_fields1 = { rec__some_package__float_buffer__buffer_tag__mode =
   self__split_fields; rec__some_package__float_buffer__buffer_tag__buffer =
   self__split_fields1;
@@ -2120,7 +2138,7 @@ goal WP_parameter_def :
   self__split_fields4;
   rec__some_package__float_buffer__buffer_tag__num_overflows =
   self__split_fields5; rec__ext__ = self__split_fields6 }; attr__tag =
-  self__attr__tag })) and in_range6(o1)) ->
+  self__attr__tag })) and in_range5(o1)) ->
   ((((to_rep(elements__first) <= to_rep(elements__last)) and
   (o = ((to_rep(elements__last) - to_rep(elements__first)) + 1))) or
   ((not (to_rep(elements__first) <= to_rep(elements__last))) and (o = 0))) ->

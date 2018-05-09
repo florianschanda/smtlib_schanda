@@ -10,18 +10,7 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
-(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
-                                    (<= x 2147483647)))
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant ((temp___expr_365 Int)
-  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
-  (temp___do_toplevel_363 Bool)
-  (temp___do_typ_inv_364 Bool)) Bool (=>
-                                     (or (= temp___is_init_361 true)
-                                     (<= 0 2147483647)) (in_range1
-                                     temp___expr_365)))
+(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-const value__size Int)
 
@@ -48,6 +37,17 @@
 
 ;; algorithm__gap_vectors__list__capacity__position_axiom
   (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
+
+(define-fun dynamic_invariant ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range
+                                     temp___expr_365)))
+
+(define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -186,7 +186,7 @@
 (declare-const o Int)
 
 ;; H
-  (assert (in_range1 count))
+  (assert (in_range count))
 
 (assert
 ;; WP_parameter_def

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -151,8 +147,6 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-const o Float32)
-
 ;; H
   (assert (fp.isFinite32 val1))
 
@@ -164,20 +158,30 @@
 
 ;; H
   (assert
-  (and
-  (and (fp.leq (fp.neg (fp #b0 #b11111101 #b11111111111111111111111))
-  val1) (fp.leq val1 (fp #b0 #b11111101 #b11111111111111111111111)))
-  (and
-  (and (fp.leq (fp.neg (fp #b0 #b11111101 #b11111111111111111111111))
-  val2) (fp.leq val2 (fp #b0 #b11111101 #b11111111111111111111111)))
-  (and
-  (and (fp.leq (fp.neg (fp #b0 #b11111101 #b11111111111111111111111))
-  val3) (fp.leq val3 (fp #b0 #b11111101 #b11111111111111111111111)))
-  (fp.leq val1 val2)))))
+  (fp.leq (fp.neg (fp #b0 #b11111101 #b11111111111111111111111)) val1))
+
+;; H
+  (assert (fp.leq val1 (fp #b0 #b11111101 #b11111111111111111111111)))
 
 ;; H
   (assert
-  (and (= o (fp.sub RNE val2 val3)) (fp.isFinite32 (fp.sub RNE val2 val3))))
+  (fp.leq (fp.neg (fp #b0 #b11111101 #b11111111111111111111111)) val2))
+
+;; H
+  (assert (fp.leq val2 (fp #b0 #b11111101 #b11111111111111111111111)))
+
+;; H
+  (assert
+  (fp.leq (fp.neg (fp #b0 #b11111101 #b11111111111111111111111)) val3))
+
+;; H
+  (assert (fp.leq val3 (fp #b0 #b11111101 #b11111111111111111111111)))
+
+;; H
+  (assert (fp.leq val1 val2))
+
+;; H
+  (assert (fp.isFinite32 (fp.sub RNE val2 val3)))
 
 (assert
 ;; WP_parameter_def

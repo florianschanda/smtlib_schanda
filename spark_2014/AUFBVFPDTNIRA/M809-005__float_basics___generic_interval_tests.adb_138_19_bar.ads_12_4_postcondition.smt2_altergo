@@ -1017,4 +1017,4 @@ goal WP_parameter_def :
   tqtisFinite(z)) and (((le(fliteral2, x) and le(x, fliteral3)) and
   (le(fliteral4, x) and le(x, fliteral5))) and ((((o = mul(RNE, x,
   fliteral6)) and tqtisFinite(mul(RNE, x, fliteral6))) and ((result = z) and
-  (z1 = o))) and ((z1 = z2) and (z3 = z1)))))) -> le(fliteral3, z2)))
+  (z1 = o))) and ((z1 = z2) and (z3 = z1)))))) -> le(z2, fliteral5)))

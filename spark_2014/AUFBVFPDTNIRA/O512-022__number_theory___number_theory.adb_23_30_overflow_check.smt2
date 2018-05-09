@@ -48,6 +48,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -67,6 +74,13 @@
                                                                  a))
 
 (declare-sort natural 0)
+
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -94,6 +108,13 @@
 
 (declare-sort positive 0)
 
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
+
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -118,7 +139,106 @@
                                     (<= 1 2147483647)) (in_range3
                                     temp___expr_46)))
 
+(declare-fun fib (Int) Int)
+
+(declare-fun fib__function_guard (Int Int) Bool)
+
+(declare-fun pow2 (Int) Int)
+
+(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                (fp.isPositive x)))
+
+(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
+                                                 (fp.isNegative x)))
+
+(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                            (fp.isPositive x)))
+
+(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
+                                             (fp.isNegative x)))
+
+(declare-const max_int Int)
+
+(define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
+                                        (<= i max_int)))
+
+(define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
+                                             (<= i 16777216)))
+
+(define-fun same_sign ((x Float32)
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
+                    (and (fp.isNegative x) (fp.isNegative y))))
+
+(define-fun diff_sign ((x Float32)
+  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
+                    (and (fp.isNegative x) (fp.isPositive y))))
+
+(define-fun product_sign ((z Float32) (x Float32)
+  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
+                    (=> (diff_sign x y) (fp.isNegative z))))
+
+(define-fun sqr ((x Real)) Real (* x x))
+
+(declare-fun sqrt1 (Real) Real)
+
+(define-fun same_sign_real ((x Float32)
+  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
+                 (and (fp.isNegative x) (< r 0.0))))
+
+(declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
+(declare-fun power (Float32 Int) Float32)
+
+;; Power_0
+  (assert
+  (forall ((x Float32))
+  (=> (fp.isFinite32 x) (fp.eq (power x 0) ((_ to_fp 8 24) RNE (to_real 1))))))
+
+;; Power_1
+  (assert
+  (forall ((x Float32)) (=> (fp.isFinite32 x) (fp.eq (power x 1) x))))
+
+;; Power_2
+  (assert
+  (forall ((x Float32))
+  (=> (fp.isFinite32 x) (fp.eq (power x 2) (fp.mul RNE x x)))))
+
+;; Power_3
+  (assert
+  (forall ((x Float32))
+  (=> (fp.isFinite32 x) (fp.eq (power x 3) (fp.mul RNE x (fp.mul RNE x x))))))
+
+;; Power_neg1
+  (assert
+  (forall ((x Float32))
+  (=> (fp.isFinite32 x)
+  (=> (not (fp.isZero x))
+  (fp.eq (power x (- 1)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1)) x))))))
+
+;; Power_neg2
+  (assert
+  (forall ((x Float32))
+  (=> (fp.isFinite32 x)
+  (=> (not (fp.isZero x))
+  (fp.eq (power x (- 2)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1))
+  (power x 2)))))))
+
+;; Power_neg3
+  (assert
+  (forall ((x Float32))
+  (=> (fp.isFinite32 x)
+  (=> (not (fp.isZero x))
+  (fp.eq (power x (- 2)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1))
+  (power x 3)))))))
+
 (declare-sort fibonacci_argument_type 0)
+
+(declare-fun fibonacci_argument_typeqtint (fibonacci_argument_type) Int)
+
+;; fibonacci_argument_type'axiom
+  (assert
+  (forall ((i fibonacci_argument_type))
+  (and (<= 0 (fibonacci_argument_typeqtint i))
+  (<= (fibonacci_argument_typeqtint i) 46))))
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
 
@@ -146,99 +266,6 @@
                                      (or (= temp___is_init_204 true)
                                      (<= 0 46)) (in_range4 temp___expr_208)))
 
-(declare-fun fib (Int) Int)
-
-(declare-fun fib__function_guard (Int Int) Bool)
-
-(declare-fun pow2 (Int) Int)
-
-(define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
-                                                (fp.isPositive x)))
-
-(define-fun is_minus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
-                                                 (fp.isNegative x)))
-
-(define-fun is_plus_zero ((x Float32)) Bool (and (fp.isZero x)
-                                            (fp.isPositive x)))
-
-(define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
-                                             (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
-(declare-const max_int Int)
-
-(define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
-                                        (<= i max_int)))
-
-(define-fun in_safe_int_range ((i Int)) Bool (and (<= (- 16777216) i)
-                                             (<= i 16777216)))
-
-(define-fun same_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isPositive y))
-                    (and (fp.isNegative x) (fp.isNegative y))))
-
-(define-fun diff_sign ((x Float32)
-  (y Float32)) Bool (or (and (fp.isPositive x) (fp.isNegative y))
-                    (and (fp.isNegative x) (fp.isPositive y))))
-
-(define-fun product_sign ((z Float32) (x Float32)
-  (y Float32)) Bool (and (=> (same_sign x y) (fp.isPositive z))
-                    (=> (diff_sign x y) (fp.isNegative z))))
-
-(define-fun sqr ((x Real)) Real (* x x))
-
-(declare-fun sqrt (Real) Real)
-
-(define-fun same_sign_real ((x Float32)
-  (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
-                 (and (fp.isNegative x) (< r 0.0))))
-
-(declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(declare-fun power (Float32 Int) Float32)
-
-;; Power_0
-  (assert
-  (forall ((x Float32))
-  (=> (fp.isFinite32 x) (fp.eq (power x 0) (of_int RNE 1)))))
-
-;; Power_1
-  (assert
-  (forall ((x Float32)) (=> (fp.isFinite32 x) (fp.eq (power x 1) x))))
-
-;; Power_2
-  (assert
-  (forall ((x Float32))
-  (=> (fp.isFinite32 x) (fp.eq (power x 2) (fp.mul RNE x x)))))
-
-;; Power_3
-  (assert
-  (forall ((x Float32))
-  (=> (fp.isFinite32 x) (fp.eq (power x 3) (fp.mul RNE x (fp.mul RNE x x))))))
-
-;; Power_neg1
-  (assert
-  (forall ((x Float32))
-  (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero x))
-  (fp.eq (power x (- 1)) (fp.div RNE (of_int RNE 1) x))))))
-
-;; Power_neg2
-  (assert
-  (forall ((x Float32))
-  (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 2)))))))
-
-;; Power_neg3
-  (assert
-  (forall ((x Float32))
-  (=> (fp.isFinite32 x)
-  (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 3)))))))
-
 ;; fib__def_axiom
   (assert
   (forall ((n Int))
@@ -258,7 +285,7 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -411,7 +438,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 2849, characters 5-8
   (not (in_range1 (+ old__2 temp2))))
 (check-sat)
 (exit)

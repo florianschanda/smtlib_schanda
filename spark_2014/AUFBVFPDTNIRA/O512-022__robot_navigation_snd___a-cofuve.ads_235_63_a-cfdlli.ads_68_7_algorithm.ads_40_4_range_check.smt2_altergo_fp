@@ -78,121 +78,13 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
-type tcount_typeB
-
-predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
-
-logic bool_eq1 : int, int -> bool
-
-logic bool_ne : int, int -> bool
-
-logic bool_lt : int, int -> bool
-
-logic bool_le : int, int -> bool
-
-logic bool_gt : int, int -> bool
-
-logic bool_ge : int, int -> bool
-
-axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
-
-axiom bool_ne_axiom :
-  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
-
-axiom bool_lt_axiom :
-  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
-
-axiom bool_int__le_axiom :
-  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
-
-axiom bool_gt_axiom :
-  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
-
-axiom bool_ge_axiom :
-  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
-
-logic bool_eq2 : int, int -> bool
-
-axiom bool_eq_def1 :
-  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
-
-logic user_eq : tcount_typeB, tcount_typeB -> bool
-
-logic dummy : tcount_typeB
-
-type tcount_typeB__ref = { tcount_typeB__content : tcount_typeB
-}
-
-function tcount_typeB__ref___projection(a: tcount_typeB__ref) : tcount_typeB =
-  (a).tcount_typeB__content
-
-type index_type
-
-predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
-
-logic bool_eq3 : int, int -> bool
-
-axiom bool_eq_def2 :
-  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
-
-logic user_eq1 : index_type, index_type -> bool
-
-logic dummy1 : index_type
-
-type index_type__ref = { index_type__content : index_type
-}
-
-function index_type__ref___projection(a: index_type__ref) : index_type =
-  (a).index_type__content
-
-type extended_index
-
-predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq4 : int, int -> bool
-
-axiom bool_eq_def3 :
-  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> int
-
-logic user_eq2 : extended_index, extended_index -> bool
-
-logic dummy2 : extended_index
-
-type extended_index__ref = { extended_index__content : extended_index
-}
-
-function extended_index__ref___projection(a: extended_index__ref) : extended_index =
-  (a).extended_index__content
-
 type us_main_type
 
 logic us_main_eq : us_main_type, us_main_type -> bool
 
 type us_rep
 
-logic bool_eq5 : us_rep, us_rep -> bool
+logic bool_eq1 : us_rep, us_rep -> bool
 
 logic value__size : int
 
@@ -211,9 +103,9 @@ axiom value__alignment_axiom : (0 <= value__alignment)
 axiom object__alignment_axiom :
   (forall a:us_rep. (0 <= object__alignment(a)))
 
-logic user_eq3 : us_rep, us_rep -> bool
+logic user_eq : us_rep, us_rep -> bool
 
-logic dummy3 : us_rep
+logic dummy : us_rep
 
 type sequence__ref = { sequence__content : us_rep
 }
@@ -224,6 +116,68 @@ function sequence__ref___projection(a: sequence__ref) : us_rep =
 logic length : us_rep -> int
 
 logic length__function_guard : int, us_rep -> prop
+
+type count_type
+
+logic count_typeqtint : count_type -> int
+
+axiom count_typeqtaxiom :
+  (forall i:count_type. ((0 <= count_typeqtint(i)) and
+  (count_typeqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq2 : int, int -> bool
+
+logic bool_ne : int, int -> bool
+
+logic bool_lt : int, int -> bool
+
+logic bool_le : int, int -> bool
+
+logic bool_gt : int, int -> bool
+
+logic bool_ge : int, int -> bool
+
+axiom bool_eq_axiom :
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
+
+axiom bool_ne_axiom :
+  (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
+
+axiom bool_lt_axiom :
+  (forall x:int. (forall y:int. ((bool_lt(x, y) = true) <-> (x <  y))))
+
+axiom bool_int__le_axiom :
+  (forall x:int. (forall y:int. ((bool_le(x, y) = true) <-> (x <= y))))
+
+axiom bool_gt_axiom :
+  (forall x:int. (forall y:int. ((bool_gt(x, y) = true) <-> (y <  x))))
+
+axiom bool_ge_axiom :
+  (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def1 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq1 : count_type, count_type -> bool
+
+logic dummy1 : count_type
+
+type count_type__ref = { count_type__content : count_type
+}
+
+function count_type__ref___projection(a: count_type__ref) : count_type =
+  (a).count_type__content
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -576,19 +530,19 @@ logic max_int1 : int
 
 axiom max_real_int : (0x1.FFFFFEp127 = real_of_int(max_int1))
 
-predicate in_range4(x: real) = (((-0x1.FFFFFEp127) <= x) and
+predicate in_range2(x: real) = (((-0x1.FFFFFEp127) <= x) and
   (x <= 0x1.FFFFFEp127))
 
 predicate in_int_range(i: int) = (((-max_int1) <= i) and (i <= max_int1))
 
-axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range4(tqtreal(x))))
+axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range2(tqtreal(x))))
 
 predicate no_overflow(m: fpa_rounding_mode, x: real) =
-  in_range4(float32(m,x))
+  in_range2(float32(m,x))
 
 axiom Bounded_real_no_overflow :
-  (forall m:fpa_rounding_mode. forall x:real. (in_range4(x) ->
-  in_range4(float32(m,x))))
+  (forall m:fpa_rounding_mode. forall x:real. (in_range2(x) ->
+  in_range2(float32(m,x))))
 
 axiom Round_to_real :
   (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
@@ -740,7 +694,7 @@ predicate sign_zero_result(m: fpa_rounding_mode, x: t) = (is_zero(x) ->
 axiom add_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range4(float32(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
+  (in_range2(float32(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
   y)) and (tqtreal(add(m, x, y)) = float32(m,(tqtreal(x) + tqtreal(y)))))))))
 
 axiom add_finite_rev :
@@ -750,13 +704,13 @@ axiom add_finite_rev :
 axiom add_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(add(m, x, y)) ->
-  (in_range4(float32(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
+  (in_range2(float32(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
   y)) = float32(m,(tqtreal(x) + tqtreal(y))))))))
 
 axiom sub_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range4(float32(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
+  (in_range2(float32(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
   y)) and (tqtreal(sub(m, x, y)) = float32(m,(tqtreal(x) - tqtreal(y)))))))))
 
 axiom sub_finite_rev :
@@ -766,13 +720,13 @@ axiom sub_finite_rev :
 axiom sub_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(sub(m, x, y)) ->
-  (in_range4(float32(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
+  (in_range2(float32(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
   y)) = float32(m,(tqtreal(x) - tqtreal(y))))))))
 
 axiom mul_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range4(float32(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
+  (in_range2(float32(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
   y)) and (tqtreal(mul(m, x, y)) = float32(m,(tqtreal(x) * tqtreal(y)))))))))
 
 axiom mul_finite_rev :
@@ -782,13 +736,13 @@ axiom mul_finite_rev :
 axiom mul_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(mul(m, x, y)) ->
-  (in_range4(float32(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
+  (in_range2(float32(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
   y)) = float32(m,(tqtreal(x) * tqtreal(y))))))))
 
 axiom div_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) -> ((not is_zero(y)) ->
-  (in_range4(float32(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
+  (in_range2(float32(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
   y)) and (tqtreal(div(m, x,
   y)) = float32(m,(tqtreal(x) / tqtreal(y))))))))))
 
@@ -801,7 +755,7 @@ axiom div_finite_rev :
 axiom div_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(div(m, x, y)) -> (tqtisFinite(y) ->
-  (in_range4(float32(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
+  (in_range2(float32(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
   y)) = float32(m,(tqtreal(x) / tqtreal(y)))))))))
 
 axiom neg_finite :
@@ -825,7 +779,7 @@ axiom abs_universal : (forall x:t [abs(x)]. (not is_negative(abs(x))))
 axiom fma_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
   y, z)]. (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) ->
-  (in_range4(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
+  (in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
   (tqtisFinite(fma(m, x, y, z)) and (tqtreal(fma(m, x, y,
   z)) = float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))))
 
@@ -837,7 +791,7 @@ axiom fma_finite_rev :
 axiom fma_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
   y, z)]. (to_nearest(m) -> (tqtisFinite(fma(m, x, y, z)) ->
-  (in_range4(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
+  (in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
   (tqtreal(fma(m, x, y,
   z)) = float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))
 
@@ -880,7 +834,7 @@ axiom add_special :
   (is_infinite(add(m, x, y)) and same_sign(add(m, x, y), x))) and
   (((is_infinite(x) and (is_infinite(y) and diff_sign(x, y))) ->
   is_nan(add(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range4(float32(m,(tqtreal(x) + tqtreal(y))))))) ->
+  (not in_range2(float32(m,(tqtreal(x) + tqtreal(y))))))) ->
   (same_sign_real(add(m, x, y), (tqtreal(x) + tqtreal(y))) and
   overflow_value(m, add(m, x, y)))) and ((tqtisFinite(x) and
   tqtisFinite(y)) -> ((same_sign(x, y) -> same_sign(add(m, x, y), x)) and
@@ -896,7 +850,7 @@ axiom sub_special :
   is_nan(sub(m, x, y))) and (((is_infinite(x) and (is_infinite(y) and
   diff_sign(x, y))) -> (is_infinite(sub(m, x, y)) and same_sign(sub(m, x, y),
   x))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range4(float32(m,(tqtreal(x) - tqtreal(y))))))) ->
+  (not in_range2(float32(m,(tqtreal(x) - tqtreal(y))))))) ->
   (same_sign_real(sub(m, x, y), (tqtreal(x) - tqtreal(y))) and
   overflow_value(m, sub(m, x, y)))) and ((tqtisFinite(x) and
   tqtisFinite(y)) -> ((diff_sign(x, y) -> same_sign(sub(m, x, y), x)) and
@@ -911,7 +865,7 @@ axiom mul_special :
   (((is_infinite(x) and (tqtisFinite(y) and (not is_zero(y)))) ->
   is_infinite(mul(m, x, y))) and (((is_infinite(x) and is_infinite(y)) ->
   is_infinite(mul(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range4(float32(m,(tqtreal(x) * tqtreal(y))))))) ->
+  (not in_range2(float32(m,(tqtreal(x) * tqtreal(y))))))) ->
   overflow_value(m, mul(m, x, y))) and ((not is_nan(mul(m, x, y))) ->
   product_sign(mul(m, x, y), x, y))))))))))
 
@@ -922,7 +876,7 @@ axiom div_special :
   (((is_infinite(x) and tqtisFinite(y)) -> is_infinite(div(m, x, y))) and
   (((is_infinite(x) and is_infinite(y)) -> is_nan(div(m, x, y))) and
   (((tqtisFinite(x) and (tqtisFinite(y) and ((not is_zero(y)) and
-  (not in_range4(float32(m,(tqtreal(x) / tqtreal(y)))))))) ->
+  (not in_range2(float32(m,(tqtreal(x) / tqtreal(y)))))))) ->
   overflow_value(m, div(m, x, y))) and (((tqtisFinite(x) and (is_zero(y) and
   (not is_zero(x)))) -> is_infinite(div(m, x, y))) and (((is_zero(x) and
   is_zero(y)) -> is_nan(div(m, x, y))) and ((not is_nan(div(m, x, y))) ->
@@ -964,7 +918,7 @@ axiom fma_special :
   same_sign(fma(m, x, y, z), z))) and ((not product_sign(z, x, y)) ->
   is_nan(fma(m, x, y, z))))) and (((tqtisFinite(x) and (tqtisFinite(y) and
   (tqtisFinite(z) and
-  (not in_range4(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
+  (not in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
   (same_sign_real(fma(m, x, y, z),
   ((tqtreal(x) * tqtreal(y)) + tqtreal(z))) and overflow_value(m, fma(m, x,
   y, z)))) and ((tqtisFinite(x) and (tqtisFinite(y) and tqtisFinite(z))) ->
@@ -1150,13 +1104,13 @@ axiom roundToIntegral_is_finite :
 
 axiom round_bound_ne :
   (forall x:real [float32(NearestTiesToEven,x)].
-  (in_range4(float32(NearestTiesToEven,x)) ->
+  (in_range2(float32(NearestTiesToEven,x)) ->
   ((((x - (0x1.0p-24 * abs_real(x))) - 0x1.0p-150) <= float32(NearestTiesToEven,x)) and
   (float32(NearestTiesToEven,x) <= ((x + (0x1.0p-24 * abs_real(x))) + 0x1.0p-150)))))
 
 axiom round_bound :
   (forall m:fpa_rounding_mode. forall x:real [float32(m,x)].
-  (in_range4(float32(m,x)) ->
+  (in_range2(float32(m,x)) ->
   ((((x - (0x1.0p-23 * abs_real(x))) - 0x1.0p-149) <= float32(m,x)) and
   (float32(m,x) <= ((x + (0x1.0p-23 * abs_real(x))) + 0x1.0p-149)))))
 
@@ -1186,11 +1140,11 @@ axiom bool_ge_def :
   (forall x:t. forall y:t [bool_ge1(x, y)]. ((le(y, x) -> (bool_ge1(x,
   y) = true)) and ((not le(y, x)) -> (bool_ge1(x, y) = false))))
 
-logic bool_eq6 : t, t -> bool
+logic bool_eq4 : t, t -> bool
 
-axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq6(x, y)]. ((eq(x, y) -> (bool_eq6(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq6(x, y) = false))))
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
 
 logic bool_neq : t, t -> bool
 
@@ -1213,21 +1167,21 @@ type t__ref = { t__content : t
 
 type float1
 
-logic bool_eq7 : t, t -> bool
+logic bool_eq5 : t, t -> bool
 
-axiom bool_eq_def5 :
-  (forall x:t. forall y:t [bool_eq7(x, y)]. ((eq(x, y) -> (bool_eq7(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq7(x, y) = false))))
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
 
-logic user_eq4 : float1, float1 -> bool
+logic user_eq2 : float1, float1 -> bool
 
-logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
 
-logic dummy4 : float1
+logic dummy2 : float1
 
 type float__ref = { float__content : float1
 }
@@ -1259,24 +1213,24 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 6.283185482025146484375))
 
-predicate in_range5(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
+predicate in_range3(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
   fliteral2)))
 
-logic bool_eq8 : t, t -> bool
+logic bool_eq6 : t, t -> bool
 
-axiom bool_eq_def6 :
-  (forall x:t. forall y:t [bool_eq8(x, y)]. ((eq(x, y) -> (bool_eq8(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq8(x, y) = false))))
+axiom bool_eq_def4 :
+  (forall x:t. forall y:t [bool_eq6(x, y)]. ((eq(x, y) -> (bool_eq6(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq6(x, y) = false))))
 
-logic user_eq5 : normalized2pi, normalized2pi -> bool
+logic user_eq3 : normalized2pi, normalized2pi -> bool
 
-logic attr__ATTRIBUTE_IMAGE5 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE5 : us_image -> t
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
 
-logic dummy5 : normalized2pi
+logic dummy3 : normalized2pi
 
 type normalized2pi__ref = { normalized2pi__content : normalized2pi
 }
@@ -1292,14 +1246,17 @@ axiom inversion_axiom1 :
   (forall x:normalized2pi [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
 
 axiom range_axiom1 :
-  (forall x:normalized2pi [to_rep1(x)]. in_range5(to_rep1(x)))
+  (forall x:normalized2pi [to_rep1(x)]. in_range3(to_rep1(x)))
 
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (in_range5(x) ->
+  (forall x:t [to_rep1(of_rep1(x))]. (in_range3(x) ->
   (to_rep1(of_rep1(x)) = x)))
 
 type us_split_fields = { rec__spaces__angles__angle__theta : normalized2pi
 }
+
+function us_split_fields_Theta__projection(a: us_split_fields) : normalized2pi =
+  (a).rec__spaces__angles__angle__theta
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1313,14 +1270,14 @@ type us_rep1 = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep1) : us_split_fields =
   (a).us_split_fields1
 
-logic bool_eq9 : us_rep1, us_rep1 -> bool
+logic bool_eq7 : us_rep1, us_rep1 -> bool
 
-axiom bool_eq_def7 :
-  (forall a:us_rep1. forall b:us_rep1 [bool_eq9(a, b)].
+axiom bool_eq_def5 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq7(a, b)].
   (((to_rep1(((a).us_split_fields1).rec__spaces__angles__angle__theta) = to_rep1(((b).us_split_fields1).rec__spaces__angles__angle__theta)) ->
-  (bool_eq9(a, b) = true)) and
+  (bool_eq7(a, b) = true)) and
   ((not (to_rep1(((a).us_split_fields1).rec__spaces__angles__angle__theta) = to_rep1(((b).us_split_fields1).rec__spaces__angles__angle__theta))) ->
-  (bool_eq9(a, b) = false))))
+  (bool_eq7(a, b) = false))))
 
 logic value__size1 : int
 
@@ -1357,9 +1314,9 @@ axiom spaces__angles__angle__theta__last__bit_axiom :
 axiom spaces__angles__angle__theta__position_axiom :
   (0 <= spaces__angles__angle__theta__position)
 
-logic user_eq6 : us_rep1, us_rep1 -> bool
+logic user_eq4 : us_rep1, us_rep1 -> bool
 
-logic dummy6 : normalized2pi
+logic dummy4 : normalized2pi
 
 type angle__ref = { angle__content : us_rep1
 }
@@ -1369,23 +1326,28 @@ function angle__ref___projection(a: angle__ref) : us_rep1 =
 
 type idir_t
 
-predicate in_range6(x: int) = (((- 1) <= x) and (x <= 1))
+logic idir_tqtint : idir_t -> int
 
-logic bool_eq10 : int, int -> bool
+axiom idir_tqtaxiom :
+  (forall i:idir_t. (((- 1) <= idir_tqtint(i)) and (idir_tqtint(i) <= 1)))
 
-axiom bool_eq_def8 :
-  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+predicate in_range4(x: int) = (((- 1) <= x) and (x <= 1))
 
-logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+logic bool_eq8 : int, int -> bool
 
-logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
 
-logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
 
-logic user_eq7 : idir_t, idir_t -> bool
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
-logic dummy7 : idir_t
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq5 : idir_t, idir_t -> bool
+
+logic dummy5 : idir_t
 
 type idir_t__ref = { idir_t__content : idir_t
 }
@@ -1393,17 +1355,17 @@ type idir_t__ref = { idir_t__content : idir_t
 function idir_t__ref___projection(a: idir_t__ref) : idir_t =
   (a).idir_t__content
 
-logic to_rep2 : idir_t -> int
+function to_rep2(x: idir_t) : int = idir_tqtint(x)
 
 logic of_rep2 : int -> idir_t
 
 axiom inversion_axiom2 :
   (forall x:idir_t [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
 
-axiom range_axiom2 : (forall x:idir_t [to_rep2(x)]. in_range6(to_rep2(x)))
+axiom range_axiom2 : (forall x:idir_t [to_rep2(x)]. in_range4(to_rep2(x)))
 
 axiom coerce_axiom2 :
-  (forall x:int [to_rep2(of_rep2(x))]. (in_range6(x) ->
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
   (to_rep2(of_rep2(x)) = x)))
 
 type us_split_fields2 = { rec__gaps__gap__bearing : us_rep1;
@@ -1412,6 +1374,9 @@ rec__gaps__gap__distance : float1; rec__gaps__gap__idir : idir_t
 
 function us_split_fields_bearing__projection(a: us_split_fields2) : us_rep1 =
   (a).rec__gaps__gap__bearing
+
+function us_split_fields_distance__projection(a: us_split_fields2) : float1 =
+  (a).rec__gaps__gap__distance
 
 function us_split_fields_iDir__projection(a: us_split_fields2) : idir_t =
   (a).rec__gaps__gap__idir
@@ -1428,20 +1393,20 @@ type us_rep2 = { us_split_fields3 : us_split_fields2
 function us_rep___8__projection(a: us_rep2) : us_split_fields2 =
   (a).us_split_fields3
 
-logic bool_eq11 : us_rep2, us_rep2 -> bool
+logic bool_eq9 : us_rep2, us_rep2 -> bool
 
-axiom bool_eq_def9 :
-  (forall a:us_rep2. forall b:us_rep2 [bool_eq11(a, b)].
-  (((((bool_eq9(((a).us_split_fields3).rec__gaps__gap__bearing,
+axiom bool_eq_def7 :
+  (forall a:us_rep2. forall b:us_rep2 [bool_eq9(a, b)].
+  (((((bool_eq7(((a).us_split_fields3).rec__gaps__gap__bearing,
   ((b).us_split_fields3).rec__gaps__gap__bearing) = true) and
   (to_rep(((a).us_split_fields3).rec__gaps__gap__distance) = to_rep(((b).us_split_fields3).rec__gaps__gap__distance))) and
   (to_rep2(((a).us_split_fields3).rec__gaps__gap__idir) = to_rep2(((b).us_split_fields3).rec__gaps__gap__idir))) ->
-  (bool_eq11(a, b) = true)) and
-  ((not (((bool_eq9(((a).us_split_fields3).rec__gaps__gap__bearing,
+  (bool_eq9(a, b) = true)) and
+  ((not (((bool_eq7(((a).us_split_fields3).rec__gaps__gap__bearing,
   ((b).us_split_fields3).rec__gaps__gap__bearing) = true) and
   (to_rep(((a).us_split_fields3).rec__gaps__gap__distance) = to_rep(((b).us_split_fields3).rec__gaps__gap__distance))) and
   (to_rep2(((a).us_split_fields3).rec__gaps__gap__idir) = to_rep2(((b).us_split_fields3).rec__gaps__gap__idir)))) ->
-  (bool_eq11(a, b) = false))))
+  (bool_eq9(a, b) = false))))
 
 logic value__size2 : int
 
@@ -1510,26 +1475,26 @@ axiom gaps__gap__idir__last__bit_axiom :
 
 axiom gaps__gap__idir__position_axiom : (0 <= gaps__gap__idir__position)
 
-logic user_eq8 : us_rep2, us_rep2 -> bool
+logic user_eq6 : us_rep2, us_rep2 -> bool
 
-logic dummy8 : normalized2pi
+logic dummy6 : normalized2pi
 
-logic dummy9 : float1
+logic dummy7 : float1
 
-logic dummy10 : idir_t
+logic dummy8 : idir_t
 
 type gap__ref = { gap__content : us_rep2
 }
 
 function gap__ref___projection(a: gap__ref) : us_rep2 = (a).gap__content
 
+logic last__function_guard : int, us_rep -> prop
+
 type element_type__ref = { element_type__content : us_rep2
 }
 
 function element_type__ref___2__projection(a: element_type__ref) : us_rep2 =
   (a).element_type__content
-
-logic last__function_guard : int, us_rep -> prop
 
 logic get : us_rep, int -> us_rep2
 
@@ -1538,19 +1503,93 @@ logic get__function_guard : us_rep2, us_rep, int -> prop
 logic oeq__function_guard : bool, us_rep, us_rep -> prop
 
 axiom user_eq__def_axiom :
-  (forall a:us_rep. forall b:us_rep [user_eq3(a, b)].
-  (((forall n:int. (((1 <= n) and (n <= (0 + length(a)))) ->
-    (bool_eq11(get(a, n), get(b, n)) = true))) ->
-  (user_eq3(a, b) = match_bool(bool_eq1(length(a), length(b)), true,
+  (forall a:us_rep. forall b:us_rep [user_eq(a, b)].
+  (((forall n:int. (((1 <= n) and (n <= (0 + length(a)))) -> (bool_eq9(get(a,
+    n), get(b, n)) = true))) ->
+  (user_eq(a, b) = match_bool(bool_eq2(length(a), length(b)), true,
   false))) and
   ((not (forall n:int. (((1 <= n) and (n <= (0 + length(a)))) ->
-        (bool_eq11(get(a, n), get(b, n)) = true)))) ->
-  (user_eq3(a, b) = match_bool(bool_eq1(length(a), length(b)), false,
+        (bool_eq9(get(a, n), get(b, n)) = true)))) ->
+  (user_eq(a, b) = match_bool(bool_eq2(length(a), length(b)), false,
   false)))))
 
-type count_type
+axiom length__post_axiom :
+  (forall container:us_rep [length(container)].
+  (((0 + length(container)) <= 2147483647) and in_range1(length(container))))
 
-predicate in_range7(x: int) = ((0 <= x) and (x <= 2147483647))
+type extended_index
+
+logic extended_indexqtint : extended_index -> int
+
+axiom extended_indexqtaxiom :
+  (forall i:extended_index. ((0 <= extended_indexqtint(i)) and
+  (extended_indexqtint(i) <= 2147483647)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq7 : extended_index, extended_index -> bool
+
+logic dummy9 : extended_index
+
+type extended_index__ref = { extended_index__content : extended_index
+}
+
+function extended_index__ref___projection(a: extended_index__ref) : extended_index =
+  (a).extended_index__content
+
+type tcount_typeB
+
+logic tcount_typeBqtint : tcount_typeB -> int
+
+axiom tcount_typeBqtaxiom :
+  (forall i:tcount_typeB. (((- 2147483648) <= tcount_typeBqtint(i)) and
+  (tcount_typeBqtint(i) <= 2147483647)))
+
+predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq11 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq11(x, y)]. (((x = y) -> (bool_eq11(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq11(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq8 : tcount_typeB, tcount_typeB -> bool
+
+logic dummy10 : tcount_typeB
+
+type tcount_typeB__ref = { tcount_typeB__content : tcount_typeB
+}
+
+function tcount_typeB__ref___projection(a: tcount_typeB__ref) : tcount_typeB =
+  (a).tcount_typeB__content
+
+type index_type
+
+logic index_typeqtint : index_type -> int
+
+axiom index_typeqtaxiom :
+  (forall i:index_type. ((1 <= index_typeqtint(i)) and
+  (index_typeqtint(i) <= 2147483647)))
+
+predicate in_range7(x: int) = ((1 <= x) and (x <= 2147483647))
 
 logic bool_eq12 : int, int -> bool
 
@@ -1564,19 +1603,15 @@ logic attr__ATTRIBUTE_VALUE__pre_check7 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE7 : us_image -> int
 
-logic user_eq9 : count_type, count_type -> bool
+logic user_eq9 : index_type, index_type -> bool
 
-logic dummy11 : count_type
+logic dummy11 : index_type
 
-type count_type__ref = { count_type__content : count_type
+type index_type__ref = { index_type__content : index_type
 }
 
-function count_type__ref___projection(a: count_type__ref) : count_type =
-  (a).count_type__content
-
-axiom length__post_axiom :
-  (forall container:us_rep [length(container)].
-  (((0 + length(container)) <= 2147483647) and in_range7(length(container))))
+function index_type__ref___projection(a: index_type__ref) : index_type =
+  (a).index_type__content
 
 logic left : us_rep
 
@@ -1604,18 +1639,18 @@ axiom get__post_axiom : true
 goal WP_parameter_def :
   (forall o:int. forall o1:int. forall o2:int. forall o3:int. forall o4:int.
   forall o5:int. forall o6:bool. forall o7:int. forall o8:int.
-  forall result:bool. forall result1:bool. (in_range2(fst) ->
-  (in_range3(lst) -> (in_range1(offset) -> ((((o8 = (0 + length(left))) and
-  (in_range3(o8) and (o8 = (0 + length(left))))) and (((lst <= o8) and
+  forall result:bool. forall result1:bool. (in_range7(fst) ->
+  (in_range5(lst) -> (in_range6(offset) -> ((((o8 = (0 + length(left))) and
+  (in_range5(o8) and (o8 = (0 + length(left))))) and (((lst <= o8) and
   (result = true)) or ((not (lst <= o8)) and (result = false)))) ->
   ((result = true) -> ((((offset <  0) and
   (((o7 = ((- 2147483648) - offset)) and
-  in_range1(((- 2147483648) - offset))) and (((o7 <= 1) and
+  in_range6(((- 2147483648) - offset))) and (((o7 <= 1) and
   (result1 = true)) or ((not (o7 <= 1)) and (result1 = false))))) or
   ((not (offset <  0)) and (result1 = of_int(1)))) -> ((result1 = true) ->
-  ((fst <= lst) -> ((((((o2 = lst) and in_range1(lst)) and
-  (((((o = length(right)) and (in_range7(o) and ((0 + o) <= 2147483647))) and
-  (o1 = (0 + o))) and ((o3 = o1) and in_range1(o1))) and
-  (o4 = (o3 - o2)))) and ((o5 = o4) and in_range1(o4))) and
+  ((fst <= lst) -> ((((((o2 = lst) and in_range6(lst)) and
+  (((((o = length(right)) and (in_range1(o) and ((0 + o) <= 2147483647))) and
+  (o1 = (0 + o))) and ((o3 = o1) and in_range6(o1))) and
+  (o4 = (o3 - o2)))) and ((o5 = o4) and in_range6(o4))) and
   (((offset <= o5) and (o6 = true)) or ((not (offset <= o5)) and
-  (o6 = false)))) -> in_range1(fst)))))))))))
+  (o6 = false)))) -> in_range6(fst)))))))))))

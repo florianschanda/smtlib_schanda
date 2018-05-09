@@ -82,12 +82,24 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
+(define-fun dynamic_invariant ((temp___expr_236 Float32)
+  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
+  (temp___do_toplevel_234 Bool)
+  (temp___do_typ_inv_235 Bool)) Bool (=>
+                                     (or (= temp___is_init_232 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_236)))
+
+(declare-const battery_threshold Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (define-fun in_range1 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
                                               (bvule x #x31)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
 
-(define-fun dynamic_invariant ((temp___expr_243 (_ BitVec 8))
+(define-fun dynamic_invariant1 ((temp___expr_243 (_ BitVec 8))
   (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
   (temp___do_toplevel_241 Bool)
   (temp___do_typ_inv_242 Bool)) Bool (=>
@@ -102,7 +114,7 @@
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
 
-(define-fun dynamic_invariant1 ((temp___expr_250 (_ BitVec 8))
+(define-fun dynamic_invariant2 ((temp___expr_250 (_ BitVec 8))
   (temp___is_init_246 Bool) (temp___skip_constant_247 Bool)
   (temp___do_toplevel_248 Bool)
   (temp___do_typ_inv_249 Bool)) Bool (=>
@@ -110,21 +122,17 @@
                                      (bvule #x00 #x32)) (in_range2
                                      temp___expr_250)))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(define-fun dynamic_invariant2 ((temp___expr_236 Float32)
-  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
-  (temp___do_toplevel_234 Bool)
-  (temp___do_typ_inv_235 Bool)) Bool (=>
-                                     (or (= temp___is_init_232 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_236)))
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+;; battery_threshold__def_axiom
+  (assert
+  (= battery_threshold (fp #b0 #b01111100 #b10011001100110011001101)))
 
 (declare-const current_time (_ BitVec 8))
 
@@ -134,9 +142,9 @@
 
 (declare-const failsafe__model__time_below_threshold__result (_ BitVec 8))
 
-(declare-const temp___294 (_ BitVec 8))
+(declare-const temp___296 (_ BitVec 8))
 
-(declare-const temp___293 (_ BitVec 8))
+(declare-const temp___295 (_ BitVec 8))
 
 (declare-const o (_ BitVec 8))
 
@@ -148,13 +156,13 @@
 
 (declare-const o4 (_ BitVec 8))
 
-(declare-const temp___295 (_ BitVec 8))
+(declare-const temp___297 (_ BitVec 8))
 
 (declare-const o5 (_ BitVec 8))
 
 (declare-const o6 (_ BitVec 8))
 
-(declare-const temp___297 (_ BitVec 8))
+(declare-const temp___299 (_ BitVec 8))
 
 (declare-const o7 (_ BitVec 8))
 
@@ -279,6 +287,13 @@
 (declare-const result13 Bool)
 
 ;; H
+  (assert (fp.isFinite32 battery_threshold))
+
+;; H
+  (assert
+  (= (fp #b0 #b01111100 #b10011001100110011001101) battery_threshold))
+
+;; H
   (assert (in_range1 current_time))
 
 ;; H
@@ -335,6 +350,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "failsafe.ads", line 16, characters 0-0
-  (not false))
+  (not true))
 (check-sat)
 (exit)

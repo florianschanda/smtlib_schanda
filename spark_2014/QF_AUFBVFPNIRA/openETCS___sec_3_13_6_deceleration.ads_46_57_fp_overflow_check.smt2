@@ -48,30 +48,7 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun dynamic_invariant ((temp___expr_174 Float32)
-  (temp___is_init_170 Bool) (temp___skip_constant_171 Bool)
-  (temp___do_toplevel_172 Bool)
-  (temp___do_typ_inv_173 Bool)) Bool (=>
-                                     (or (= temp___is_init_170 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_174)))
-
-(define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
-                                        (and
-                                        (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                        (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant1 ((temp___expr_202 Int)
-  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
-  (temp___do_toplevel_200 Bool)
-  (temp___do_typ_inv_201 Bool)) Bool (=>
-                                     (or (= temp___is_init_198 true)
-                                     (<= 0 2147483647)) (in_range1
-                                     temp___expr_202)))
-
-(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
   (temp___do_toplevel_58 Bool)
   (temp___do_typ_inv_59 Bool)) Bool (=>
@@ -79,9 +56,9 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
+(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-const value__size Int)
 
@@ -185,27 +162,54 @@
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
 
+(define-fun dynamic_invariant1 ((temp___expr_174 Float32)
+  (temp___is_init_170 Bool) (temp___skip_constant_171 Bool)
+  (temp___do_toplevel_172 Bool)
+  (temp___do_typ_inv_173 Bool)) Bool (=>
+                                     (or (= temp___is_init_170 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_174)))
+
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun dynamic_invariant3 ((temp___expr_195 Float32)
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(define-fun dynamic_invariant2 ((temp___expr_195 Float32)
   (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
   (temp___do_toplevel_193 Bool)
   (temp___do_typ_inv_194 Bool)) Bool (=>
                                      (or (= temp___is_init_191 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range temp___expr_195)))
+                                     (in_range2 temp___expr_195)))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(define-fun dynamic_invariant3 ((temp___expr_202 Int)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)
+  (temp___do_typ_inv_201 Bool)) Bool (=>
+                                     (or (= temp___is_init_198 true)
+                                     (<= 0 2147483647)) (in_range3
+                                     temp___expr_202)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const v Float32)
+(declare-const m_nvavadh Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const d Int)
+(declare-const v Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const d Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun dynamic_invariant4 ((temp___expr_181 Float32)
   (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
@@ -215,20 +219,31 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_181)))
 
+(declare-const maximum_valid_speed_km_per_h Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
+
 (define-fun dynamic_invariant5 ((temp___expr_216 Int)
   (temp___is_init_212 Bool) (temp___skip_constant_213 Bool)
   (temp___do_toplevel_214 Bool)
   (temp___do_typ_inv_215 Bool)) Bool (=>
                                      (or (= temp___is_init_212 true)
-                                     (<= 0 10)) (in_range2 temp___expr_216)))
+                                     (<= 0 10)) (in_range temp___expr_216)))
 
 (define-fun dynamic_invariant6 ((temp___expr_223 Int)
   (temp___is_init_219 Bool) (temp___skip_constant_220 Bool)
   (temp___do_toplevel_221 Bool)
   (temp___do_typ_inv_222 Bool)) Bool (=>
                                      (or (= temp___is_init_219 true)
-                                     (<= 0 2147483647)) (in_range3
+                                     (<= 0 2147483647)) (in_range1
                                      temp___expr_223)))
+
+;; m_nvavadh__def_axiom
+  (assert (= m_nvavadh (fp #b0 #b00000000 #b00000000000000000000000)))
 
 (declare-const o Float32)
 
@@ -259,10 +274,16 @@
 (declare-const o13 Float32)
 
 ;; H
+  (assert (fp.isFinite32 m_nvavadh))
+
+;; H
+  (assert (= (fp #b0 #b00000000 #b00000000000000000000000) m_nvavadh))
+
+;; H
   (assert (fp.isFinite32 v))
 
 ;; H
-  (assert (in_range1 d))
+  (assert (in_range3 d))
 
 ;; H
   (assert

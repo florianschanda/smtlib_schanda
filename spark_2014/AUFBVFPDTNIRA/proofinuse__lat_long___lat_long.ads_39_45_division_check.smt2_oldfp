@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1050,11 +1050,15 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(declare-sort tfloat_with_approxB 0)
+(declare-fun olt (t t) Bool)
+
+(declare-fun olt__function_guard (Bool t t) Bool)
+
+(declare-sort float_with_approx 0)
 
 (define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq (tfloat_with_approxB tfloat_with_approxB) Bool)
+(declare-fun user_eq (float_with_approx float_with_approx) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (t) us_image)
 
@@ -1062,32 +1066,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) t)
 
-(declare-const dummy tfloat_with_approxB)
-
-(declare-datatypes ()
-((tfloat_with_approxB__ref
- (mk_tfloat_with_approxB__ref
- (tfloat_with_approxB__content tfloat_with_approxB)))))
-(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
-  (tfloat_with_approxB__content a))
-
-(declare-fun olt (t t) Bool)
-
-(declare-fun olt__function_guard (Bool t t) Bool)
-
-(declare-sort float_with_approx 0)
-
-(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
-
-(declare-fun user_eq1 (float_with_approx float_with_approx) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
-
-(declare-const dummy1 float_with_approx)
+(declare-const dummy float_with_approx)
 
 (declare-datatypes ()
 ((float_with_approx__ref
@@ -1159,6 +1138,31 @@
   (forall ((x t))
   (! (=> (dynamic_invariant x true true true true) (= (cos1 x) (sin1 x))) :pattern (
   (cos1 x)) )))
+
+(declare-sort tfloat_with_approxB 0)
+
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(declare-fun user_eq1 (tfloat_with_approxB tfloat_with_approxB) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
+
+(declare-const dummy1 tfloat_with_approxB)
+
+(declare-datatypes ()
+((tfloat_with_approxB__ref
+ (mk_tfloat_with_approxB__ref
+ (tfloat_with_approxB__content tfloat_with_approxB)))))
+(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
+  (tfloat_with_approxB__content a))
+
+(declare-const r t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-sort latitude 0)
 
@@ -1261,6 +1265,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__lat_long__coordinates__lat latitude)(rec__lat_long__coordinates__long longitude)))))
+(define-fun us_split_fields_Lat__projection ((a us_split_fields)) latitude
+  (rec__lat_long__coordinates__lat a))
+
+(define-fun us_split_fields_Long__projection ((a us_split_fields)) longitude
+  (rec__lat_long__coordinates__long a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -1349,11 +1359,11 @@
 
 (declare-const source us_rep)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const destination us_rep)
 
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-sort float 0)
 
@@ -1379,6 +1389,15 @@
                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                     temp___expr_60)))
 
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) (/ 63674445.0 10.0))))
+
+;; r__def_axiom
+  (assert (= r fliteral7))
+
 (define-fun dynamic_invariant2 ((temp___expr_172 t) (temp___is_init_168 Bool)
   (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
   (temp___do_typ_inv_171 Bool)) Bool (=>
@@ -1393,10 +1412,10 @@
                                      (neg fliteral5) fliteral6)) (in_range2
                                      temp___expr_179)))
 
-(declare-const fliteral7 t)
+(declare-const fliteral8 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral7) (= (tqtreal fliteral7) (/ 0.0 10.0))))
+  (assert (and (tqtisFinite fliteral8) (= (tqtreal fliteral8) (/ 0.0 10.0))))
 
 ;; sin__post_axiom
   (assert
@@ -1405,10 +1424,16 @@
      (let ((result (sin1 x)))
      (and
      (and (and (le (neg fliteral) result) (le result fliteral))
-     (=> (eq x fliteral7) (eq result fliteral7))) (dynamic_invariant1 result
+     (=> (eq x fliteral8) (eq result fliteral8))) (dynamic_invariant1 result
      true false true true)))) :pattern ((sin1 x)) )))
 
 (declare-const o t)
+
+;; H
+  (assert (tqtisFinite r))
+
+;; H
+  (assert (= fliteral7 r))
 
 ;; H
   (assert

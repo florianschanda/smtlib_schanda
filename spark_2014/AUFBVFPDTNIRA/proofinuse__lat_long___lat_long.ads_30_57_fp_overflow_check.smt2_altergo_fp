@@ -1035,56 +1035,6 @@ axiom one_of_int : (fliteral = of_int(NearestTiesToAway, 1))
 type t__ref = { t__content : t
 }
 
-type tfloat_with_approxB
-
-logic bool_eq1 : t, t -> bool
-
-axiom bool_eq_def1 :
-  (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
-
-logic user_eq : tfloat_with_approxB, tfloat_with_approxB -> bool
-
-logic attr__ATTRIBUTE_IMAGE : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE : us_image -> t
-
-logic dummy : tfloat_with_approxB
-
-type tfloat_with_approxB__ref = { tfloat_with_approxB__content :
-tfloat_with_approxB
-}
-
-function tfloat_with_approxB__ref___projection(a: tfloat_with_approxB__ref) : tfloat_with_approxB =
-  (a).tfloat_with_approxB__content
-
-type float_with_approx
-
-logic bool_eq2 : t, t -> bool
-
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
-
-logic user_eq1 : float_with_approx, float_with_approx -> bool
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic dummy1 : float_with_approx
-
-type float_with_approx__ref = { float_with_approx__content :
-float_with_approx
-}
-
-function float_with_approx__ref___projection(a: float_with_approx__ref) : float_with_approx =
-  (a).float_with_approx__content
-
 logic sin : t -> t
 
 logic sin__function_guard : t, t -> prop
@@ -1092,6 +1042,31 @@ logic sin__function_guard : t, t -> prop
 logic cos : t -> t
 
 logic cos__function_guard : t, t -> prop
+
+type float_with_approx
+
+logic bool_eq1 : t, t -> bool
+
+axiom bool_eq_def1 :
+  (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
+
+logic user_eq : float_with_approx, float_with_approx -> bool
+
+logic attr__ATTRIBUTE_IMAGE : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> t
+
+logic dummy : float_with_approx
+
+type float_with_approx__ref = { float_with_approx__content :
+float_with_approx
+}
+
+function float_with_approx__ref___projection(a: float_with_approx__ref) : float_with_approx =
+  (a).float_with_approx__content
 
 logic fliteral1 : t
 
@@ -1126,21 +1101,21 @@ type latitude
 predicate in_range1(x: t) = (tqtisFinite(x) and (le(neg(fliteral1), x) and
   le(x, fliteral1)))
 
-logic bool_eq3 : t, t -> bool
+logic bool_eq2 : t, t -> bool
 
-axiom bool_eq_def3 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
 
-logic user_eq2 : latitude, latitude -> bool
+logic user_eq1 : latitude, latitude -> bool
 
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
 
-logic dummy2 : latitude
+logic dummy1 : latitude
 
 type latitude__ref = { latitude__content : latitude
 }
@@ -1175,21 +1150,21 @@ axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
 predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral3), x) and
   le(x, fliteral4)))
 
-logic bool_eq4 : t, t -> bool
+logic bool_eq3 : t, t -> bool
 
-axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
 
-logic user_eq3 : longitude, longitude -> bool
+logic user_eq2 : longitude, longitude -> bool
 
-logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
 
-logic dummy3 : longitude
+logic dummy2 : longitude
 
 type longitude__ref = { longitude__content : longitude
 }
@@ -1211,7 +1186,14 @@ axiom coerce_axiom1 :
   (to_rep1(of_rep1(x)) = x)))
 
 type us_split_fields = { rec__lat_long__coordinates__lat : latitude;
-rec__lat_long__coordinates__long : longitude }
+rec__lat_long__coordinates__long : longitude
+}
+
+function us_split_fields_Lat__projection(a: us_split_fields) : latitude =
+  (a).rec__lat_long__coordinates__lat
+
+function us_split_fields_Long__projection(a: us_split_fields) : longitude =
+  (a).rec__lat_long__coordinates__long
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1225,16 +1207,16 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-logic bool_eq5 : us_rep, us_rep -> bool
+logic bool_eq4 : us_rep, us_rep -> bool
 
-axiom bool_eq_def5 :
-  (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
+axiom bool_eq_def4 :
+  (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
   ((((to_rep(((a).us_split_fields1).rec__lat_long__coordinates__lat) = to_rep(((b).us_split_fields1).rec__lat_long__coordinates__lat)) and
   (to_rep1(((a).us_split_fields1).rec__lat_long__coordinates__long) = to_rep1(((b).us_split_fields1).rec__lat_long__coordinates__long))) ->
-  (bool_eq5(a, b) = true)) and
+  (bool_eq4(a, b) = true)) and
   ((not ((to_rep(((a).us_split_fields1).rec__lat_long__coordinates__lat) = to_rep(((b).us_split_fields1).rec__lat_long__coordinates__lat)) and
   (to_rep1(((a).us_split_fields1).rec__lat_long__coordinates__long) = to_rep1(((b).us_split_fields1).rec__lat_long__coordinates__long)))) ->
-  (bool_eq5(a, b) = false))))
+  (bool_eq4(a, b) = false))))
 
 logic value__size : int
 
@@ -1288,29 +1270,17 @@ axiom lat_long__coordinates__long__last__bit_axiom :
 axiom lat_long__coordinates__long__position_axiom :
   (0 <= lat_long__coordinates__long__position)
 
-logic user_eq4 : us_rep, us_rep -> bool
+logic user_eq3 : us_rep, us_rep -> bool
 
-logic dummy4 : latitude
+logic dummy3 : latitude
 
-logic dummy5 : longitude
+logic dummy4 : longitude
 
 type coordinates__ref = { coordinates__content : us_rep
 }
 
 function coordinates__ref___projection(a: coordinates__ref) : us_rep =
   (a).coordinates__content
-
-logic source : latitude
-
-logic source1 : longitude
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic destination : latitude
-
-logic destination1 : longitude
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic delta_lat_in_meters : us_rep, us_rep -> t
 
@@ -1320,104 +1290,138 @@ logic olt : t, t -> bool
 
 logic olt__function_guard : bool, t, t -> prop
 
+logic r : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic conv_deg_to_rad : t
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 20003916.0))
 
 axiom delta_lat_in_meters__post_axiom :
-  (forall source2:latitude. forall source3:longitude.
-  forall destination2:latitude. forall destination3:longitude
+  (forall source:latitude. forall source1:longitude.
+  forall destination:latitude. forall destination1:longitude
   [delta_lat_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 } })].
+  rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 } })].
   ((olt(abs(delta_lat_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 } })),
+  rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 } })),
   fliteral5) = true) and tqtisFinite(delta_lat_in_meters({ us_split_fields1 =
-  { rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 } }))))
-
-logic fliteral6 : t
-
-axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
-  (tqtreal(fliteral6) = 6367444.5))
-
-logic fliteral7 : t
-
-axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
-  (tqtreal(fliteral7) = 0.01745329238474369049072265625))
+  { rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 } }))))
 
 axiom delta_lat_in_meters__def_axiom :
-  (forall source2:latitude. forall source3:longitude.
-  forall destination2:latitude. forall destination3:longitude
+  (forall source:latitude. forall source1:longitude.
+  forall destination:latitude. forall destination1:longitude
   [delta_lat_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 } })].
+  rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 } })].
   (delta_lat_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 }
+  rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 }
   }) = mul(NearestTiesToEven, mul(NearestTiesToEven, sub(NearestTiesToEven,
-  to_rep(destination2), to_rep(source2)), fliteral6), fliteral7)))
+  to_rep(destination), to_rep(source)), r), conv_deg_to_rad)))
 
 logic delta_long_in_meters : us_rep, us_rep -> t
 
 logic delta_long_in_meters__function_guard : t, us_rep, us_rep -> prop
 
-logic fliteral8 : t
+logic fliteral6 : t
 
-axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
-  (tqtreal(fliteral8) = 40007832.0))
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 40007832.0))
 
 axiom delta_long_in_meters__post_axiom :
-  (forall source2:latitude. forall source3:longitude.
-  forall destination2:latitude. forall destination3:longitude
+  (forall source:latitude. forall source1:longitude.
+  forall destination:latitude. forall destination1:longitude
   [delta_long_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 } })].
+  rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 } })].
   ((olt(abs(delta_long_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 } })),
-  fliteral8) = true) and tqtisFinite(delta_long_in_meters({
-  us_split_fields1 = { rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 } }))))
+  rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 } })),
+  fliteral6) = true) and tqtisFinite(delta_long_in_meters({
+  us_split_fields1 = { rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 } }))))
 
 axiom delta_long_in_meters__def_axiom :
-  (forall source2:latitude. forall source3:longitude.
-  forall destination2:latitude. forall destination3:longitude
+  (forall source:latitude. forall source1:longitude.
+  forall destination:latitude. forall destination1:longitude
   [delta_long_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 } })].
+  rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 } })].
   (delta_long_in_meters({ us_split_fields1 = {
-  rec__lat_long__coordinates__lat = source2;
-  rec__lat_long__coordinates__long = source3 } }, { us_split_fields1 = {
-  rec__lat_long__coordinates__lat = destination2;
-  rec__lat_long__coordinates__long = destination3 }
+  rec__lat_long__coordinates__lat = source;
+  rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
+  rec__lat_long__coordinates__lat = destination;
+  rec__lat_long__coordinates__long = destination1 }
   }) = div(NearestTiesToEven, mul(NearestTiesToEven, sub(NearestTiesToEven,
-  to_rep1(destination3), to_rep1(source3)), fliteral6),
-  cos(to_rep(source2)))))
+  to_rep1(destination1), to_rep1(source1)), r), cos(to_rep(source)))))
+
+type tfloat_with_approxB
+
+logic bool_eq5 : t, t -> bool
+
+axiom bool_eq_def5 :
+  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
+
+logic user_eq4 : tfloat_with_approxB, tfloat_with_approxB -> bool
+
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
+
+logic dummy5 : tfloat_with_approxB
+
+type tfloat_with_approxB__ref = { tfloat_with_approxB__content :
+tfloat_with_approxB
+}
+
+function tfloat_with_approxB__ref___projection(a: tfloat_with_approxB__ref) : tfloat_with_approxB =
+  (a).tfloat_with_approxB__content
+
+logic source : latitude
+
+logic source1 : longitude
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
+logic destination : latitude
+
+logic destination1 : longitude
+
 logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
 
 type float1
 
@@ -1444,14 +1448,28 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 axiom olt__post_axiom : true
 
-logic fliteral9 : t
+logic fliteral7 : t
 
-axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
-  (tqtreal(fliteral9) = 0.0000099999997473787516355514526367187500))
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 0.0000099999997473787516355514526367187500))
 
 axiom olt__def_axiom :
   (forall left:t. forall right:t [olt(left, right)]. ((olt(left,
-  right) = true) <-> lt(left, add(NearestTiesToEven, right, fliteral9))))
+  right) = true) <-> lt(left, add(NearestTiesToEven, right, fliteral7))))
+
+logic fliteral8 : t
+
+axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
+  (tqtreal(fliteral8) = 6367444.5))
+
+axiom r__def_axiom : (r = fliteral8)
+
+logic fliteral9 : t
+
+axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
+  (tqtreal(fliteral9) = 0.01745329238474369049072265625))
+
+axiom conv_deg_to_rad__def_axiom : (conv_deg_to_rad = fliteral9)
 
 logic fliteral10 : t
 
@@ -1480,19 +1498,21 @@ goal WP_parameter_def :
   forall lat_long__distance__result3:t. forall delta_lat2:t.
   forall delta_long2:t. forall lat_long__distance__result4:t.
   forall delta_lat3:t. forall delta_long3:t.
-  forall lat_long__distance__result5:t. ((((le(neg(fliteral11),
-  fliteral11) -> tqtisFinite(delta_lat)) and ((le(neg(fliteral11),
-  fliteral11) -> tqtisFinite(delta_long)) and ((({ t__content = result } = {
-  t__content = delta_lat }) and (delta_lat1 = mul(NearestTiesToEven,
+  forall lat_long__distance__result5:t. (tqtisFinite(r) ->
+  ((fliteral8 = r) -> (tqtisFinite(conv_deg_to_rad) ->
+  ((fliteral9 = conv_deg_to_rad) -> ((((le(neg(fliteral11), fliteral11) ->
+  tqtisFinite(delta_lat)) and ((le(neg(fliteral11), fliteral11) ->
+  tqtisFinite(delta_long)) and ((({ t__content = result } = { t__content =
+  delta_lat }) and (delta_lat1 = mul(NearestTiesToEven,
   mul(NearestTiesToEven, sub(NearestTiesToEven, to_rep(destination),
-  to_rep(source)), fliteral6), fliteral7))) and
+  to_rep(source)), r), conv_deg_to_rad))) and
   ((((((o = cos(to_rep(source))) and (tqtisFinite(o) and
   ((o = sin(to_rep(source))) and ((le(neg(fliteral1), to_rep(source)) and
   le(to_rep(source), fliteral1)) -> le(fliteral2, o))))) and
   (o1 = div(NearestTiesToEven, mul(NearestTiesToEven, sub(NearestTiesToEven,
-  to_rep1(destination1), to_rep1(source1)), fliteral6), o))) and
-  ((o2 = o1) and tqtisFinite(o1))) and (({ t__content = result1 } = {
-  t__content = delta_long }) and (delta_long1 = o2))) and
+  to_rep1(destination1), to_rep1(source1)), r), o))) and ((o2 = o1) and
+  tqtisFinite(o1))) and (({ t__content = result1 } = { t__content =
+  delta_long }) and (delta_long1 = o2))) and
   (((lat_long__distance__result1 = lat_long__distance__result2) and
   (lat_long__distance__result3 = lat_long__distance__result1)) and
   ((((((o3 = mul(NearestTiesToEven, delta_long1, delta_long1)) and
@@ -1514,31 +1534,31 @@ goal WP_parameter_def :
   rec__lat_long__coordinates__lat = destination;
   rec__lat_long__coordinates__long = destination1 } })) and
   (tqtisFinite(o11) and ((o11 = div(NearestTiesToEven, mul(NearestTiesToEven,
-  sub(NearestTiesToEven, to_rep1(destination1), to_rep1(source1)),
-  fliteral6), cos(to_rep(source)))) and (olt(abs(o11),
-  fliteral8) = true)))) and (((o12 = delta_long_in_meters({
-  us_split_fields1 = { rec__lat_long__coordinates__lat = source;
+  sub(NearestTiesToEven, to_rep1(destination1), to_rep1(source1)), r),
+  cos(to_rep(source)))) and (olt(abs(o11), fliteral6) = true)))) and
+  (((o12 = delta_long_in_meters({ us_split_fields1 = {
+  rec__lat_long__coordinates__lat = source;
   rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
   rec__lat_long__coordinates__lat = destination;
   rec__lat_long__coordinates__long = destination1 } })) and
   (tqtisFinite(o12) and ((o12 = div(NearestTiesToEven, mul(NearestTiesToEven,
-  sub(NearestTiesToEven, to_rep1(destination1), to_rep1(source1)),
-  fliteral6), cos(to_rep(source)))) and (olt(abs(o12),
-  fliteral8) = true)))) and (o13 = mul(NearestTiesToEven, o12, o11)))) and
-  ((o14 = o13) and tqtisFinite(o13))) -> ((((o8 = delta_lat_in_meters({
-  us_split_fields1 = { rec__lat_long__coordinates__lat = source;
+  sub(NearestTiesToEven, to_rep1(destination1), to_rep1(source1)), r),
+  cos(to_rep(source)))) and (olt(abs(o12), fliteral6) = true)))) and
+  (o13 = mul(NearestTiesToEven, o12, o11)))) and ((o14 = o13) and
+  tqtisFinite(o13))) -> ((((o8 = delta_lat_in_meters({ us_split_fields1 = {
+  rec__lat_long__coordinates__lat = source;
   rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
   rec__lat_long__coordinates__lat = destination;
   rec__lat_long__coordinates__long = destination1 } })) and
   (tqtisFinite(o8) and ((o8 = mul(NearestTiesToEven, mul(NearestTiesToEven,
-  sub(NearestTiesToEven, to_rep(destination), to_rep(source)), fliteral6),
-  fliteral7)) and (olt(abs(o8), fliteral5) = true)))) and
+  sub(NearestTiesToEven, to_rep(destination), to_rep(source)), r),
+  conv_deg_to_rad)) and (olt(abs(o8), fliteral5) = true)))) and
   (((o9 = delta_lat_in_meters({ us_split_fields1 = {
   rec__lat_long__coordinates__lat = source;
   rec__lat_long__coordinates__long = source1 } }, { us_split_fields1 = {
   rec__lat_long__coordinates__lat = destination;
   rec__lat_long__coordinates__long = destination1 } })) and
   (tqtisFinite(o9) and ((o9 = mul(NearestTiesToEven, mul(NearestTiesToEven,
-  sub(NearestTiesToEven, to_rep(destination), to_rep(source)), fliteral6),
-  fliteral7)) and (olt(abs(o9), fliteral5) = true)))) and
-  (o10 = mul(NearestTiesToEven, o9, o8)))) -> tqtisFinite(o10)))))
+  sub(NearestTiesToEven, to_rep(destination), to_rep(source)), r),
+  conv_deg_to_rad)) and (olt(abs(o9), fliteral5) = true)))) and
+  (o10 = mul(NearestTiesToEven, o9, o8)))) -> tqtisFinite(o10)))))))))

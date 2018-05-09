@@ -131,12 +131,12 @@
 
 ;; H
   (assert
-  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000)))
+  (not
+  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "flight_manager.ads", line 3, characters 0-0
-  (not
-  (fp.eq f3 (fp.div RNE (fp.mul RNE f distance_to_target) (fp #b0 #b10000010 #b01000000000000000000000)))))
+  (not true))
 (check-sat)
 (exit)

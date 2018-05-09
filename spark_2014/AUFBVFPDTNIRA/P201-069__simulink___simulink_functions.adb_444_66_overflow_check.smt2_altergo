@@ -899,6 +899,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -984,7 +990,7 @@ logic right : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 20738, characters 5-8 *)
 goal WP_parameter_def :
   (forall o:t. forall o1:t. forall o2:int. forall o3:int. forall o4:int.
   (in_range1(left) -> (in_range1(right) -> ((not (right = 0)) ->

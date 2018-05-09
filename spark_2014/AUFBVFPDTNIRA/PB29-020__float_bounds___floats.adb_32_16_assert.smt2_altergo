@@ -1815,4 +1815,4 @@ goal WP_parameter_def :
   mul(RNE, to_rep((a[3])), fliteral3))) and (o15 = (c4[4 <- o14]))) and
   ((result10 = c4) and (c5 = o15))) -> ((le1(neg1(fliteral1),
   to_rep1((c5[1]))) and le1(to_rep1((c5[1])), fliteral1)) ->
-  le1(neg1(fliteral1), to_rep1((c5[2])))))))))))))))))))))))))
+  le1(to_rep1((c5[2])), fliteral1)))))))))))))))))))))))

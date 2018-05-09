@@ -1110,7 +1110,7 @@ logic fliteral4 : t
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.0e-1))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 24046, characters 5-8 *)
 goal WP_parameter_def :
   (forall result__:t. forall o:t. forall o1:t. forall result:t.
   forall result__1:t. (tqtisFinite(left) -> (tqtisFinite(right) ->
@@ -1122,4 +1122,4 @@ goal WP_parameter_def :
   ((o1 = atan__2(o)) and tqtisFinite(o1))) and ((result = result__) and
   (result__1 = o1))) -> (le(right, fliteral4) -> ((not le(left,
   fliteral4)) -> tqtisFinite(add(NearestTiesToEven, result__1,
-  fliteral1)))))))))))))
+  pi)))))))))))))

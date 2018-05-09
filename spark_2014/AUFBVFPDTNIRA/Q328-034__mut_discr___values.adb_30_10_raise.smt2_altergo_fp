@@ -1037,6 +1037,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -1091,7 +1097,7 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
+function to_rep(x: integer) : int = integerqtint(x)
 
 logic of_rep : int -> integer
 
@@ -1128,6 +1134,12 @@ type float__ref = { float__content : float1
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
 

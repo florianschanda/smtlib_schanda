@@ -1354,7 +1354,14 @@ axiom coerce_axiom :
   (to_rep(of_rep(x)) = x)))
 
 type us_split_fields = { rec__test_pack__pid_obj__desired : float1;
-rec__test_pack__pid_obj__error : float1 }
+rec__test_pack__pid_obj__error : float1
+}
+
+function us_split_fields_Desired__projection(a: us_split_fields) : float1 =
+  (a).rec__test_pack__pid_obj__desired
+
+function us_split_fields_Error__projection(a: us_split_fields) : float1 =
+  (a).rec__test_pack__pid_obj__error
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1443,6 +1450,10 @@ type pid_obj__ref = { pid_obj__content : us_rep
 function pid_obj__ref___projection(a: pid_obj__ref) : us_rep =
   (a).pid_obj__content
 
+logic to_fp : t -> t1
+
+logic to_fp__function_guard : t1, t -> prop
+
 type source
 
 logic attr__ATTRIBUTE_MODULUS : t
@@ -1523,10 +1534,6 @@ type target__ref = { target__content : target
 function target__ref___projection(a: target__ref) : target =
   (a).target__content
 
-logic to_fp : t -> t1
-
-logic to_fp__function_guard : t1, t -> prop
-
 axiom to_fp__post_axiom : (forall s:t [to_fp(s)]. tqtisFinite(to_fp(s)))
 
 logic attr__ATTRIBUTE_ADDRESS : int
@@ -1563,5 +1570,5 @@ goal WP_parameter_def :
   (result1 = x__split_fields1)) and
   ((wibble__x__assume = x__split_fields2) and
   (wibble__x__assume1 = x__split_fields3)))) -> (((o5 = to_fp(rliteral1)) and
-  tqtisFinite(o5)) -> (lt(fliteral1, o5) -> le(add1(RNE, neg1(fliteral2),
-  o5), to_rep(x__split_fields2))))))
+  tqtisFinite(o5)) -> ((not lt(fliteral1, o5)) ->
+  le(to_rep(x__split_fields2), add1(RNE, fliteral2, o5))))))

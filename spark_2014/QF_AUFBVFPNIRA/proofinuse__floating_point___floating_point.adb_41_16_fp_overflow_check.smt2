@@ -106,9 +106,7 @@
   (assert (fp.lt y (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert
-  (fp.leq (fp.div RNE x (fp #b0 #b10001000 #b11110100000000000000000))
-  y))
+  (assert (fp.leq (fp.div RNE x threshold) y))
 
 (assert
 ;; WP_parameter_def

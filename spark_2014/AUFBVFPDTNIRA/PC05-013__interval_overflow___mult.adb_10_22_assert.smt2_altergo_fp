@@ -1065,6 +1065,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type tframeB
 
+logic tframeBqtint : tframeB -> int
+
+axiom tframeBqtaxiom :
+  (forall i:tframeB. (((- 32768) <= tframeBqtint(i)) and
+  (tframeBqtint(i) <= 32767)))
+
 predicate in_range2(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq2 : int, int -> bool
@@ -1120,6 +1126,11 @@ function tframeB__ref___projection(a: tframeB__ref) : tframeB =
   (a).tframeB__content
 
 type frame
+
+logic frameqtint : frame -> int
+
+axiom frameqtaxiom :
+  (forall i:frame. ((0 <= frameqtint(i)) and (frameqtint(i) <= 25000)))
 
 predicate in_range3(x: int) = ((0 <= x) and (x <= 25000))
 

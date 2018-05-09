@@ -928,7 +928,7 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K831-006__cmp/gnatprove/max.mlw", line 2087, characters 5-8 *)
 goal WP_parameter_def :
   (forall max__max__result:t. forall o:t. forall result:t.
   forall max__max__result1:t. forall max__max__result2:t.
@@ -941,5 +941,5 @@ goal WP_parameter_def :
   ((result = max__max__result) and (max__max__result1 = o)))) and
   ((max__max__result4 = max__max__result2) and
   (max__max__result5 = max__max__result3))) and
-  (result1 = max__max__result4)))) -> (lt(left, right) ->
-  eq(max__max__result4, right)))))
+  (result1 = max__max__result4)))) -> ((not lt(left, right)) ->
+  eq(max__max__result4, left)))))

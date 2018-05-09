@@ -1873,4 +1873,4 @@ goal WP_parameter_def :
   ((le1(neg1(fliteral2), fliteral2) -> tqtisFinite1(res)) ->
   ((le(neg(fliteral), x) and le(x, fliteral)) -> (((result = res) and
   (res1 = to_float64(NearestTiesToEven, mul(NearestTiesToEven, x,
-  fliteral3)))) -> le1(neg1(fliteral1), res1))))))
+  fliteral3)))) -> le1(res1, fliteral1))))))

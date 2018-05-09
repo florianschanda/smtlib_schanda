@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -131,11 +127,15 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_160)))
 
-(declare-const x Float32)
+(declare-const biggest_representable_int Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const x Float32)
+
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -144,6 +144,10 @@
                                     (or (= temp___is_init_56 true)
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
+
+;; biggest_representable_int__def_axiom
+  (assert
+  (= biggest_representable_int (fp #b0 #b10010111 #b00000000000000000000000)))
 
 (declare-const y Float32)
 
@@ -154,6 +158,13 @@
 (declare-const y2 Float32)
 
 (declare-const y3 Float32)
+
+;; H
+  (assert (fp.isFinite32 biggest_representable_int))
+
+;; H
+  (assert
+  (= (fp #b0 #b10010111 #b00000000000000000000000) biggest_representable_int))
 
 ;; H
   (assert (fp.isFinite32 x))
@@ -167,7 +178,7 @@
 ;; H
   (assert
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b10010111 #b00000000000000000000000))))
+  (fp.leq x biggest_representable_int)))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref y)))
@@ -183,7 +194,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/M809-005__float_basics/proof/sessions/foo/../../../gnatprove/foo.mlw", line 11697, characters 5-8
   (not
   (fp.isFinite32 (fp.add RNE x (fp #b0 #b01111110 #b00000000000000000000000)))))
 (check-sat)

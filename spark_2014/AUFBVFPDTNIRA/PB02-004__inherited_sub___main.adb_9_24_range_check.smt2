@@ -63,13 +63,6 @@
 (declare-datatypes () ((enum__ref (mk_enum__ref (enum__content enum)))))
 (define-fun enum__ref___projection ((a enum__ref)) enum (enum__content a))
 
-(define-fun dynamic_invariant ((temp___expr_161 Int)
-  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
-  (temp___do_toplevel_159 Bool)
-  (temp___do_typ_inv_160 Bool)) Bool (=>
-                                     (or (= temp___is_init_157 true)
-                                     (<= 0 2)) (in_range1 temp___expr_161)))
-
 (declare-fun to_rep (enum) Int)
 
 (declare-fun of_rep (Int) enum)
@@ -102,10 +95,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -128,7 +117,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -136,6 +125,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -155,7 +151,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -263,6 +259,9 @@
  (mk___split_fields (rec__rec__my_rec__x integer)(rec__rec__my_rec__y float)))))
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__rec__my_rec__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__rec__my_rec__y a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -555,6 +554,13 @@
 ((sub_rec__ref (mk_sub_rec__ref (sub_rec__content us_rep1)))))
 (define-fun sub_rec__ref___projection ((a sub_rec__ref)) us_rep1 (sub_rec__content
                                                                  a))
+
+(define-fun dynamic_invariant ((temp___expr_161 Int)
+  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
+  (temp___do_toplevel_159 Bool)
+  (temp___do_typ_inv_160 Bool)) Bool (=>
+                                     (or (= temp___is_init_157 true)
+                                     (<= 0 2)) (in_range1 temp___expr_161)))
 
 (declare-const a Int)
 

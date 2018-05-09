@@ -72,12 +72,9 @@
 ;; H
   (assert (fp.isFinite32 right))
 
-;; H
-  (assert (fp.eq left (fp #b0 #b00000000 #b00000000000000000000000)))
-
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) right)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 25028, characters 5-8
+  (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) left)))
 (check-sat)
 (exit)

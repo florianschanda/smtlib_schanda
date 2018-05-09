@@ -899,7 +899,11 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
-type tfloat64B
+logic invariant__ : int, t, t -> bool
+
+logic invariant____function_guard : bool, int, t, t -> prop
+
+type float641
 
 logic bool_eq1 : t, t -> bool
 
@@ -907,7 +911,7 @@ axiom bool_eq_def1 :
   (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
 
-logic user_eq : tfloat64B, tfloat64B -> bool
+logic user_eq : float641, float641 -> bool
 
 logic attr__ATTRIBUTE_IMAGE : t -> us_image
 
@@ -915,31 +919,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> t
 
-logic dummy : tfloat64B
-
-type tfloat64B__ref = { tfloat64B__content : tfloat64B
-}
-
-function tfloat64B__ref___projection(a: tfloat64B__ref) : tfloat64B =
-  (a).tfloat64B__content
-
-type float641
-
-logic bool_eq2 : t, t -> bool
-
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
-
-logic user_eq1 : float641, float641 -> bool
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic dummy1 : float641
+logic dummy : float641
 
 type float64__ref = { float64__content : float641
 }
@@ -949,9 +929,14 @@ function float64__ref___projection(a: float64__ref) : float641 =
 
 type frame
 
+logic frameqtint : frame -> int
+
+axiom frameqtaxiom :
+  (forall i:frame. ((0 <= frameqtint(i)) and (frameqtint(i) <= 25000)))
+
 predicate in_range1(x: int) = ((0 <= x) and (x <= 25000))
 
-logic bool_eq3 : int, int -> bool
+logic bool_eq2 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -964,7 +949,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq2(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -981,26 +966,76 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq4 : int, int -> bool
+logic bool_eq3 : int, int -> bool
 
-axiom bool_eq_def3 :
-  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> int
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
 
-logic user_eq2 : frame, frame -> bool
+logic user_eq1 : frame, frame -> bool
 
-logic dummy2 : frame
+logic dummy1 : frame
 
 type frame__ref = { frame__content : frame
 }
 
 function frame__ref___projection(a: frame__ref) : frame = (a).frame__content
+
+logic max_speed_variance : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+axiom invariant____post_axiom : true
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 65.0))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.50000000000000000000000000000000000000000000000000000))
+
+axiom invariant____def_axiom :
+  (forall n:int.
+  (forall speed:t. forall distance:t [invariant__(n, speed, distance)].
+  ((invariant__(n, speed, distance) = true) <-> ((le(mul(RNE, of_int(RNE, n),
+  neg(fliteral1)), speed) and le(speed, mul(RNE, of_int(RNE, n),
+  max_speed_variance))) and (le(mul(RNE, mul(RNE, mul(RNE, of_int(RNE, n),
+  of_int(RNE, (n + 1))), neg(fliteral1)), fliteral2), distance) and
+  le(distance, mul(RNE, mul(RNE, mul(RNE, of_int(RNE, n), of_int(RNE,
+  (n + 1))), max_speed_variance), fliteral2)))))))
+
+type tfloat64B
+
+logic bool_eq4 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
+
+logic user_eq2 : tfloat64B, tfloat64B -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+
+logic dummy2 : tfloat64B
+
+type tfloat64B__ref = { tfloat64B__content : tfloat64B
+}
+
+function tfloat64B__ref___projection(a: tfloat64B__ref) : tfloat64B =
+  (a).tfloat64B__content
 
 type ratio_t
 
@@ -1029,39 +1064,11 @@ type ratio_t__ref = { ratio_t__content : ratio_t
 function ratio_t__ref___projection(a: ratio_t__ref) : ratio_t =
   (a).ratio_t__content
 
-logic invariant__ : int, t, t -> bool
-
-logic invariant____function_guard : bool, int, t, t -> prop
-
-axiom invariant____post_axiom : true
-
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 65.0))
-
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 0.50000000000000000000000000000000000000000000000000000))
-
-axiom invariant____def_axiom :
-  (forall n:int.
-  (forall speed:t. forall distance:t [invariant__(n, speed, distance)].
-  ((invariant__(n, speed, distance) = true) <-> ((le(mul(RNE, of_int(RNE, n),
-  neg(fliteral1)), speed) and le(speed, mul(RNE, of_int(RNE, n),
-  fliteral1))) and (le(mul(RNE, mul(RNE, mul(RNE, of_int(RNE, n), of_int(RNE,
-  (n + 1))), neg(fliteral1)), fliteral2), distance) and le(distance, mul(RNE,
-  mul(RNE, mul(RNE, of_int(RNE, n), of_int(RNE, (n + 1))), fliteral1),
-  fliteral2)))))))
-
 logic n : int
 
-logic attr__ATTRIBUTE_ADDRESS : int
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic factor : t
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
@@ -1069,9 +1076,13 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
+logic attr__ATTRIBUTE_ADDRESS5 : int
+
 logic old_speed : t
 
-logic attr__ATTRIBUTE_ADDRESS5 : int
+logic attr__ATTRIBUTE_ADDRESS6 : int
+
+axiom max_speed_variance__def_axiom : (max_speed_variance = fliteral1)
 
 logic fliteral3 : t
 

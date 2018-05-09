@@ -897,7 +897,11 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
-type tt_float32B
+logic equal : t, t -> bool
+
+logic equal__function_guard : bool, t, t -> prop
+
+type t_float32
 
 logic bool_eq1 : t, t -> bool
 
@@ -905,7 +909,7 @@ axiom bool_eq_def1 :
   (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
 
-logic user_eq : tt_float32B, tt_float32B -> bool
+logic user_eq : t_float32, t_float32 -> bool
 
 logic attr__ATTRIBUTE_IMAGE : t -> us_image
 
@@ -913,41 +917,13 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> t
 
-logic dummy : tt_float32B
-
-type tt_float32B__ref = { tt_float32B__content : tt_float32B
-}
-
-function tt_float32B__ref___projection(a: tt_float32B__ref) : tt_float32B =
-  (a).tt_float32B__content
-
-type t_float32
-
-logic bool_eq2 : t, t -> bool
-
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
-
-logic user_eq1 : t_float32, t_float32 -> bool
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic dummy1 : t_float32
+logic dummy : t_float32
 
 type t_float32__ref = { t_float32__content : t_float32
 }
 
 function t_float32__ref___projection(a: t_float32__ref) : t_float32 =
   (a).t_float32__content
-
-logic equal : t, t -> bool
-
-logic equal__function_guard : bool, t, t -> prop
 
 axiom equal__post_axiom : true
 
@@ -959,6 +935,30 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
 axiom equal__def_axiom :
   (forall x1:t. forall x2:t [equal(x1, x2)]. ((equal(x1, x2) = true) <->
   lt(abs1(sub(RNE, x1, x2)), fliteral1)))
+
+type tt_float32B
+
+logic bool_eq2 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+
+logic user_eq1 : tt_float32B, tt_float32B -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic dummy1 : tt_float32B
+
+type tt_float32B__ref = { tt_float32B__content : tt_float32B
+}
+
+function tt_float32B__ref___projection(a: tt_float32B__ref) : tt_float32B =
+  (a).tt_float32B__content
 
 type t_x2
 

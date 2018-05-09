@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,16 +74,20 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(declare-sort tspeed_km_per_h_tB 0)
+(declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
-(declare-fun user_eq (tspeed_km_per_h_tB tspeed_km_per_h_tB) Bool)
+(declare-fun is_valid_speed_km_per_h__function_guard (Bool Float32) Bool)
+
+(declare-sort speed_km_per_h_t 0)
+
+(declare-fun user_eq (speed_km_per_h_t speed_km_per_h_t) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Float32) us_image)
 
@@ -95,26 +95,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Float32)
 
-(declare-const dummy tspeed_km_per_h_tB)
-
-(declare-datatypes ()
-((tspeed_km_per_h_tB__ref
- (mk_tspeed_km_per_h_tB__ref
- (tspeed_km_per_h_tB__content tspeed_km_per_h_tB)))))
-(define-fun tspeed_km_per_h_tB__ref___projection ((a tspeed_km_per_h_tB__ref)) tspeed_km_per_h_tB
-  (tspeed_km_per_h_tB__content a))
-
-(declare-sort speed_km_per_h_t 0)
-
-(declare-fun user_eq1 (speed_km_per_h_t speed_km_per_h_t) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
-
-(declare-const dummy1 speed_km_per_h_t)
+(declare-const dummy speed_km_per_h_t)
 
 (declare-datatypes ()
 ((speed_km_per_h_t__ref
@@ -130,9 +111,9 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_165)))
 
-(declare-fun is_valid_speed_km_per_h (Float32) Bool)
+(declare-const maximum_valid_speed_km_per_h Float32)
 
-(declare-fun is_valid_speed_km_per_h__function_guard (Bool Float32) Bool)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 ;; is_valid_speed_km_per_h__post_axiom
   (assert true)
@@ -142,12 +123,35 @@
   (forall ((speed Float32))
   (! (= (= (is_valid_speed_km_per_h speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
-     (fp.leq speed (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
-  (is_valid_speed_km_per_h speed)) )))
+     (fp.leq speed maximum_valid_speed_km_per_h))) :pattern ((is_valid_speed_km_per_h
+                                                             speed)) )))
+
+(declare-sort tspeed_km_per_h_tB 0)
+
+(declare-fun user_eq1 (tspeed_km_per_h_tB tspeed_km_per_h_tB) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
+
+(declare-const dummy1 tspeed_km_per_h_tB)
+
+(declare-datatypes ()
+((tspeed_km_per_h_tB__ref
+ (mk_tspeed_km_per_h_tB__ref
+ (tspeed_km_per_h_tB__content tspeed_km_per_h_tB)))))
+(define-fun tspeed_km_per_h_tB__ref___projection ((a tspeed_km_per_h_tB__ref)) tspeed_km_per_h_tB
+  (tspeed_km_per_h_tB__content a))
 
 (declare-const speed Float32)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
 
 ;; H
   (assert (fp.isFinite32 speed))

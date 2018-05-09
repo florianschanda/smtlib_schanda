@@ -143,7 +143,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/KB25-022__exp/gnatprove/gp_exp.mlw", line 2103, characters 5-8
   (not (in_range (* x x))))
 (check-sat)
 (exit)

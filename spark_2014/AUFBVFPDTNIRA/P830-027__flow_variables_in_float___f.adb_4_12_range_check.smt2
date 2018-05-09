@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -197,7 +200,7 @@
 (define-fun float_type__ref___projection ((a float_type__ref)) float
   (float_type__content a))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x1 integer)) Int (integerqtint x1))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -273,6 +276,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "f.adb", line 1, characters 0-0
-  (not (<= (- 2147483648) 0)))
+  (not (<= y 2147483647)))
 (check-sat)
 (exit)

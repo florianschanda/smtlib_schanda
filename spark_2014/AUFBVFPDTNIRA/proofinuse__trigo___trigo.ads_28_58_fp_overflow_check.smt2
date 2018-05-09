@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -187,37 +183,37 @@
 
 (declare-const o3 Float32)
 
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
 ;; H
   (assert (fp.isFinite32 x))
 
 ;; H
+  (assert (= o2 (pow9 x)))
+
+;; H
+  (assert (fp.isFinite32 o2))
+
+;; H
   (assert
-  (and (= o2 (pow9 x))
-  (and (fp.isFinite32 o2)
   (= o2 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
-  x x) x) x) x) x) x) x) x)))))
+  x x) x) x) x) x) x) x) x)))
 
 ;; H
   (assert
   (= o3 (fp.mul RNE (fp #b0 #b10000100 #b11110000000000000000000) o2)))
 
 ;; H
-  (assert (and (= o4 o3) (fp.isFinite32 o3)))
+  (assert (fp.isFinite32 o3))
+
+;; H
+  (assert (= o (pow7 x)))
+
+;; H
+  (assert (fp.isFinite32 o))
 
 ;; H
   (assert
-  (= o5 (fp.div RNE o4 (fp #b0 #b10001010 #b01100010011000000000000))))
-
-;; H
-  (assert
-  (and (= o (pow7 x))
-  (and (fp.isFinite32 o)
   (= o (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
-  x x) x) x) x) x) x)))))
+  x x) x) x) x) x) x)))
 
 ;; H
   (assert
@@ -225,7 +221,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 5467, characters 5-8
   (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

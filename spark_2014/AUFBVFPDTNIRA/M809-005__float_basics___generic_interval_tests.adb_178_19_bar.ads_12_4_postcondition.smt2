@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -171,13 +167,55 @@
 
 (declare-const o4 Float64)
 
-(declare-const result Float64)
-
 (declare-const z1 Float64)
 
 (declare-const z2 Float64)
 
-(declare-const z3 Float64)
+;; H
+  (assert (fp.lt a b))
+
+;; H
+  (assert
+  (fp.eq c (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000)))
+
+;; H
+  (assert
+  (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
+  d))
+
+;; H
+  (assert
+  (fp.leq d (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
+
+;; H
+  (assert (= o (fp.add RNE a b)))
+
+;; H
+  (assert (fp.isFinite64 (fp.add RNE a b)))
+
+;; H
+  (assert (= o1 (fp.add RNE o c)))
+
+;; H
+  (assert (= o2 o1))
+
+;; H
+  (assert (fp.isFinite64 o1))
+
+;; H
+  (assert (= o3 (fp.add RNE o2 d)))
+
+;; H
+  (assert (= o4 o3))
+
+;; H
+  (assert (fp.isFinite64 o3))
+
+;; H
+  (assert (= z1 o4))
+
+;; H
+  (assert (= z1 z2))
 
 ;; H
   (assert (fp.isFinite64 a))
@@ -199,66 +237,42 @@
 
 ;; H
   (assert
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
-  (and
   (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  a)
+  a))
+
+;; H
+  (assert
   (fp.leq a (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000)))
-  (and
+
+;; H
+  (assert
   (fp.leq (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000)
-  b)
-  (fp.leq b (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000))))
-  (and
+  b))
+
+;; H
+  (assert
+  (fp.leq b (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
+
+;; H
+  (assert
   (fp.leq (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)
-  c)
-  (fp.leq c (fp #b0 #b10000000001 #b1000000000000000000000000000000000000000000000000000))))
-  (fp.lt a d)) (fp.lt d b)) (fp.leq c a)) (fp.leq b c)))
-
-;; H
-  (assert (fp.lt a b))
+  c))
 
 ;; H
   (assert
-  (fp.eq c (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000)))
+  (fp.leq c (fp #b0 #b10000000001 #b1000000000000000000000000000000000000000000000000000)))
 
 ;; H
-  (assert
-  (and
-  (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  d)
-  (fp.leq d (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000))))
+  (assert (fp.lt a d))
 
 ;; H
-  (assert (and (= o (fp.add RNE a b)) (fp.isFinite64 (fp.add RNE a b))))
+  (assert (fp.lt d b))
 
 ;; H
-  (assert (= o1 (fp.add RNE o c)))
+  (assert (fp.leq c a))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite64 o1)))
-
-;; H
-  (assert (= o3 (fp.add RNE o2 d)))
-
-;; H
-  (assert (and (= o4 o3) (fp.isFinite64 o3)))
-
-;; H
-  (assert (= result z))
-
-;; H
-  (assert (= z1 o4))
-
-;; H
-  (assert (= z1 z2))
-
-;; H
-  (assert (= z3 z1))
+  (assert (fp.leq b c))
 
 (assert
 ;; WP_parameter_def

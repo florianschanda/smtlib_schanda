@@ -79,47 +79,47 @@
                                     (or (= temp___is_init_70 true)
                                     (<= 0 255)) (in_range2 temp___expr_74)))
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+(define-fun in_range3 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
 
-(define-fun dynamic_invariant3 ((temp___expr_534 Int)
+(define-fun dynamic_invariant3 ((temp___expr_572 Int)
+  (temp___is_init_568 Bool) (temp___skip_constant_569 Bool)
+  (temp___do_toplevel_570 Bool)
+  (temp___do_typ_inv_571 Bool)) Bool (=>
+                                     (or (= temp___is_init_568 true)
+                                     (<= (- 2147483648) 2147483647))
+                                     (in_range3 temp___expr_572)))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+
+(define-fun dynamic_invariant4 ((temp___expr_527 Int)
+  (temp___is_init_523 Bool) (temp___skip_constant_524 Bool)
+  (temp___do_toplevel_525 Bool)
+  (temp___do_typ_inv_526 Bool)) Bool (=>
+                                     (or (= temp___is_init_523 true)
+                                     (<= 0 255)) (in_range4 temp___expr_527)))
+
+(define-fun in_range5 ((x Int)) Bool (and (<= 2 x) (<= x 16)))
+
+(define-fun dynamic_invariant5 ((temp___expr_534 Int)
   (temp___is_init_530 Bool) (temp___skip_constant_531 Bool)
   (temp___do_toplevel_532 Bool)
   (temp___do_typ_inv_533 Bool)) Bool (=>
                                      (or (= temp___is_init_530 true)
-                                     (<= 0 255)) (in_range3 temp___expr_534)))
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 2 x) (<= x 16)))
-
-(define-fun dynamic_invariant4 ((temp___expr_541 Int)
-  (temp___is_init_537 Bool) (temp___skip_constant_538 Bool)
-  (temp___do_toplevel_539 Bool)
-  (temp___do_typ_inv_540 Bool)) Bool (=>
-                                     (or (= temp___is_init_537 true)
-                                     (<= 2 16)) (in_range4 temp___expr_541)))
+                                     (<= 2 16)) (in_range5 temp___expr_534)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun in_range5 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
-
-(define-fun dynamic_invariant5 ((temp___expr_579 Int)
-  (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
-  (temp___do_toplevel_577 Bool)
-  (temp___do_typ_inv_578 Bool)) Bool (=>
-                                     (or (= temp___is_init_575 true)
-                                     (<= (- 2147483648) 2147483647))
-                                     (in_range5 temp___expr_579)))
-
 (define-fun in_range6 ((x Int)) Bool (and (<= 65 x) (<= x 90)))
 
-(define-fun dynamic_invariant6 ((temp___expr_594 Int)
-  (temp___is_init_590 Bool) (temp___skip_constant_591 Bool)
-  (temp___do_toplevel_592 Bool)
-  (temp___do_typ_inv_593 Bool)) Bool (=>
-                                     (or (= temp___is_init_590 true)
-                                     (<= 65 90)) (in_range6 temp___expr_594)))
+(define-fun dynamic_invariant6 ((temp___expr_587 Int)
+  (temp___is_init_583 Bool) (temp___skip_constant_584 Bool)
+  (temp___do_toplevel_585 Bool)
+  (temp___do_typ_inv_586 Bool)) Bool (=>
+                                     (or (= temp___is_init_583 true)
+                                     (<= 65 90)) (in_range6 temp___expr_587)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -264,9 +264,9 @@
 
 (declare-const o14 Int)
 
-(declare-const temp___598 Int)
+(declare-const temp___591 Int)
 
-(declare-const temp___597 Int)
+(declare-const temp___590 Int)
 
 (declare-const o15 Int)
 
@@ -278,7 +278,7 @@
 
 (declare-const o19 Float32)
 
-(declare-const temp___599 Float32)
+(declare-const temp___592 Float32)
 
 (declare-const o20 Float32)
 
@@ -467,10 +467,10 @@
 (declare-const temperature2 Int)
 
 ;; H
-  (assert (in_range3 default_width))
+  (assert (in_range4 default_width))
 
 ;; H
-  (assert (in_range4 default_base))
+  (assert (in_range5 default_base))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range1 a)))
@@ -1024,10 +1024,10 @@
   (assert (= sum1 0))
 
 ;; H
-  (assert (= temp___598 sum1))
+  (assert (= temp___591 sum1))
 
 ;; H
-  (assert (= temp___597 value1))
+  (assert (= temp___590 value1))
 
 ;; H
   (assert
@@ -1035,7 +1035,7 @@
   (=> (<= (- 2147483648) 2147483647) (in_range1 sum2))))
 
 ;; H
-  (assert (in_range5 ada__integer_text_io__get__2__item))
+  (assert (in_range3 ada__integer_text_io__get__2__item))
 
 ;; H
   (assert (= value3 ada__integer_text_io__get__2__item))
@@ -1070,9 +1070,55 @@
 ;; H
   (assert (= o17 (fp.sub RNE x1 o16)))
 
+;; H
+  (assert (and (= o18 o17) (fp.isFinite32 o17)))
+
+;; H
+  (assert (= o19 (fp.abs o18)))
+
+;; H
+  (assert (= result5 (ite (fp.lt tolerance o19) true false)))
+
+;; H
+  (assert (= result5 true))
+
+;; H
+  (assert
+  (and
+  (=>
+  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
+  (fp.isFinite32 approx2))
+  (fp.lt tolerance (fp.abs (fp.sub RNE x1 (fp.mul RNE approx2 approx2))))))
+
+;; H
+  (assert
+  (and (= o20 (fp.div RNE x1 approx2))
+  (fp.isFinite32 (fp.div RNE x1 approx2))))
+
+;; H
+  (assert (= o21 (fp.add RNE approx2 o20)))
+
+;; H
+  (assert (and (= o22 o21) (fp.isFinite32 o21)))
+
+;; H
+  (assert
+  (= o23 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) o22)))
+
+;; H
+  (assert (= approx3 o23))
+
+;; H
+  (assert
+  (and (= o24 (fp.mul RNE approx3 approx3))
+  (fp.isFinite32 (fp.mul RNE approx3 approx3))))
+
+;; H
+  (assert (= o25 (fp.sub RNE x1 o24)))
+
 (assert
 ;; WP_parameter_def
  ;; File "control_structures.adb", line 29, characters 0-0
-  (not (fp.isFinite32 o17)))
+  (not (fp.isFinite32 o25)))
 (check-sat)
 (exit)

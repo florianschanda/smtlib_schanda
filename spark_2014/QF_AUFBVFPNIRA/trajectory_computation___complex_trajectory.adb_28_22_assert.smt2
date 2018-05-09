@@ -166,13 +166,7 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
-
-(define-fun dynamic_invariant ((temp___expr_193 (_ BitVec 16))
-  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
-  (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool true)
-
-(define-fun dynamic_invariant1 ((temp___expr_235 Float64)
+(define-fun dynamic_invariant ((temp___expr_235 Float64)
   (temp___is_init_231 Bool) (temp___skip_constant_232 Bool)
   (temp___do_toplevel_233 Bool)
   (temp___do_typ_inv_234 Bool)) Bool (=>
@@ -182,7 +176,7 @@
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
-(define-fun dynamic_invariant2 ((temp___expr_242 Int)
+(define-fun dynamic_invariant1 ((temp___expr_242 Int)
   (temp___is_init_238 Bool) (temp___skip_constant_239 Bool)
   (temp___do_toplevel_240 Bool)
   (temp___do_typ_inv_241 Bool)) Bool (=>
@@ -190,43 +184,61 @@
                                      (<= 0 25000)) (in_range1
                                      temp___expr_242)))
 
-(define-fun in_range2 ((x Float64)) Bool (and (fp.isFinite64 x)
+(declare-const bound Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
+
+(define-fun dynamic_invariant2 ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647))
+                                    (in_range2 temp___expr_18)))
+
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
+
+(define-fun dynamic_invariant3 ((temp___expr_193 (_ BitVec 16))
+  (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
+  (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool true)
+
+(define-fun in_range3 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
 
-(define-fun dynamic_invariant3 ((temp___expr_249 Float64)
+(define-fun dynamic_invariant4 ((temp___expr_249 Float64)
   (temp___is_init_245 Bool) (temp___skip_constant_246 Bool)
   (temp___do_toplevel_247 Bool)
   (temp___do_typ_inv_248 Bool)) Bool (=>
                                      (or (= temp___is_init_245 true)
                                      (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-                                     (in_range2 temp___expr_249)))
+                                     (in_range3 temp___expr_249)))
 
-(define-fun in_range3 ((x Float64)) Bool (and (fp.isFinite64 x)
+(define-fun in_range4 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)))))
 
-(define-fun dynamic_invariant4 ((temp___expr_256 Float64)
+(define-fun dynamic_invariant5 ((temp___expr_256 Float64)
   (temp___is_init_252 Bool) (temp___skip_constant_253 Bool)
   (temp___do_toplevel_254 Bool)
   (temp___do_typ_inv_255 Bool)) Bool (=>
                                      (or (= temp___is_init_252 true)
                                      (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000000000000000000000000000000000000000000000000000)))
-                                     (in_range3 temp___expr_256)))
+                                     (in_range4 temp___expr_256)))
 
 (declare-const n Int)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const factor Float64)
 
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const drag Float64)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -234,27 +246,19 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-const old_speed Float64)
-
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
-(declare-const delta_speed Float64)
+(declare-const old_speed Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
+(declare-const delta_speed Float64)
 
-(define-fun dynamic_invariant5 ((temp___expr_18 Int) (temp___is_init_14 Bool)
-  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
-  (temp___do_typ_inv_17 Bool)) Bool (=>
-                                    (or (= temp___is_init_14 true)
-                                    (<= (- 2147483648) 2147483647))
-                                    (in_range4 temp___expr_18)))
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
 (declare-const n_bv (_ BitVec 16))
 
-(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
 ;; delta_speed__def_axiom
   (assert
@@ -264,6 +268,10 @@
 
 ;; n_bv__def_axiom
   (assert (= n_bv abstr28))
+
+;; bound__def_axiom
+  (assert
+  (= bound (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))
 
 (declare-const speed Float64)
 
@@ -322,13 +330,21 @@
 (declare-const average3 Float64)
 
 ;; H
+  (assert (fp.isFinite64 bound))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)
+  bound))
+
+;; H
   (assert (in_range1 n))
 
 ;; H
-  (assert (in_range2 factor))
+  (assert (in_range3 factor))
 
 ;; H
-  (assert (in_range3 drag))
+  (assert (in_range4 drag))
 
 ;; H
   (assert (fp.isFinite64 speed))
@@ -379,8 +395,7 @@
   (assert
   (and
   (fp.leq (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))
-  delta_speed)
-  (fp.leq delta_speed (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
+  delta_speed) (fp.leq delta_speed bound)))
 
 (declare-const abstr30 Bool)
 
@@ -396,7 +411,9 @@
 ;; WP_parameter_def
  ;; File "complex_trajectory.ads", line 29, characters 0-0
   (not
-  (fp.eq (fp.add RNE (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE n_bv) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp.mul RNE (fp.add RNE ((_ to_fp_unsigned 11 53) RNE
-  n_bv) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))
+  (fp.eq (fp.add RNE (fp.mul RNE ((_ to_fp_unsigned 11 53) RNE n_bv)
+  bound) bound) (fp.mul RNE (fp.add RNE ((_ to_fp_unsigned 11 53) RNE
+  n_bv) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
+  bound))))
 (check-sat)
 (exit)

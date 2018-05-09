@@ -929,6 +929,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1038,19 +1044,4 @@ axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.0e-1))
 
  (* File "generic_float_tests.adb", line 351, characters 0-0 *)
-goal WP_parameter_def :
-  (forall i:int. forall o:int. forall result:int. forall i1:int.
-  forall i2:int. forall i3:int. (tqtisFinite(x) ->
-  ((((- 2147483648) <= 2147483647) -> in_range2(i)) -> ((le(neg(fliteral1),
-  x) and le(x, fliteral1)) -> (((((o = to_int(RNA, x)) and
-  in_range2(to_int(RNA, x))) and ((result = i) and (i1 = o))) and
-  ((i1 = i2) and (i3 = i1))) -> ((((bool_eq(x, neg(fliteral2)) = true) and
-  (i2 = (- 2))) or (not (bool_eq(x, neg(fliteral2)) = true))) ->
-  ((((bool_eq(x, neg(fliteral3)) = true) and (i2 = (- 2))) or
-  (not (bool_eq(x, neg(fliteral3)) = true))) -> ((((bool_eq(x,
-  neg(fliteral4)) = true) and (i2 = (- 1))) or (not (bool_eq(x,
-  neg(fliteral4)) = true))) -> ((((bool_eq(x, neg(fliteral)) = true) and
-  (i2 = (- 1))) or (not (bool_eq(x, neg(fliteral)) = true))) ->
-  ((((bool_eq(x, fliteral5) = true) and (i2 = 0)) or (not (bool_eq(x,
-  fliteral5) = true))) -> ((bool_eq(x, fliteral) = true) ->
-  (i2 = 1))))))))))))
+goal WP_parameter_def : true

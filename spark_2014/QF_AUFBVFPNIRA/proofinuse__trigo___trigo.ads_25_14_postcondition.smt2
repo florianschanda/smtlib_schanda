@@ -125,7 +125,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 5412, characters 5-8
   (not
   (fp.lt (fp.abs (fp.sub RNE trigo__cos__result4 abstr1)) (fp #b0 #b01101100 #b10010010101001110011100))))
 (check-sat)

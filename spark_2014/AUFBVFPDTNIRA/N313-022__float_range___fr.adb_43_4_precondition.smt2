@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,21 +74,27 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(declare-sort float1 0)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-sort float2 0)
 
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
                                         (and
-                                        (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) x)
-                                        (fp.leq x (fp #b0 #b01111110 #b11001100110011001100110)))))
+                                        (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                        (fp.leq x (fp #b0 #b10000000 #b00001100110011001100110)))))
 
-(declare-fun user_eq (float1 float1) Bool)
+(declare-fun user_eq (float2 float2) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Float32) us_image)
 
@@ -100,29 +102,29 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Float32)
 
-(declare-const dummy float1)
+(declare-const dummy float2)
 
 (declare-datatypes ()
-((float1__ref (mk_float1__ref (float1__content float1)))))
-(define-fun float1__ref___projection ((a float1__ref)) float1 (float1__content
+((float2__ref (mk_float2__ref (float2__content float2)))))
+(define-fun float2__ref___projection ((a float2__ref)) float2 (float2__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_200 Float32)
-  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
-  (temp___do_toplevel_198 Bool)
-  (temp___do_typ_inv_199 Bool)) Bool (=>
-                                     (or (= temp___is_init_196 true)
-                                     (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) (fp #b0 #b01111110 #b11001100110011001100110)))
-                                     (in_range temp___expr_200)))
+(define-fun dynamic_invariant ((temp___expr_207 Float32)
+  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
+  (temp___do_toplevel_205 Bool)
+  (temp___do_typ_inv_206 Bool)) Bool (=>
+                                     (or (= temp___is_init_203 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000000 #b00001100110011001100110)))
+                                     (in_range temp___expr_207)))
 
-(declare-sort float2 0)
+(declare-sort float1 0)
 
 (define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b10000000 #b00001100110011001100110)))))
+                                         (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b01111110 #b11001100110011001100110)))))
 
-(declare-fun user_eq1 (float2 float2) Bool)
+(declare-fun user_eq1 (float1 float1) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
 
@@ -130,26 +132,20 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
 
-(declare-const dummy1 float2)
+(declare-const dummy1 float1)
 
 (declare-datatypes ()
-((float2__ref (mk_float2__ref (float2__content float2)))))
-(define-fun float2__ref___projection ((a float2__ref)) float2 (float2__content
+((float1__ref (mk_float1__ref (float1__content float1)))))
+(define-fun float1__ref___projection ((a float1__ref)) float1 (float1__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_207 Float32)
-  (temp___is_init_203 Bool) (temp___skip_constant_204 Bool)
-  (temp___do_toplevel_205 Bool)
-  (temp___do_typ_inv_206 Bool)) Bool (=>
-                                     (or (= temp___is_init_203 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000000 #b00001100110011001100110)))
-                                     (in_range1 temp___expr_207)))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+(define-fun dynamic_invariant1 ((temp___expr_200 Float32)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (fp.leq (fp #b0 #b01111110 #b00000000000000000000000) (fp #b0 #b01111110 #b11001100110011001100110)))
+                                     (in_range1 temp___expr_200)))
 
 (assert
 ;; WP_parameter_def

@@ -1035,7 +1035,11 @@ axiom one_of_int : (fliteral = of_int(NearestTiesToAway, 1))
 type t__ref = { t__content : t
 }
 
-type tspeed_km_per_h_tB
+logic is_valid_speed_km_per_h : t -> bool
+
+logic is_valid_speed_km_per_h__function_guard : bool, t -> prop
+
+type speed_km_per_h_t
 
 logic bool_eq1 : t, t -> bool
 
@@ -1043,7 +1047,7 @@ axiom bool_eq_def1 :
   (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
 
-logic user_eq : tspeed_km_per_h_tB, tspeed_km_per_h_tB -> bool
+logic user_eq : speed_km_per_h_t, speed_km_per_h_t -> bool
 
 logic attr__ATTRIBUTE_IMAGE : t -> us_image
 
@@ -1051,32 +1055,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> t
 
-logic dummy : tspeed_km_per_h_tB
-
-type tspeed_km_per_h_tB__ref = { tspeed_km_per_h_tB__content :
-tspeed_km_per_h_tB
-}
-
-function tspeed_km_per_h_tB__ref___projection(a: tspeed_km_per_h_tB__ref) : tspeed_km_per_h_tB =
-  (a).tspeed_km_per_h_tB__content
-
-type speed_km_per_h_t
-
-logic bool_eq2 : t, t -> bool
-
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
-
-logic user_eq1 : speed_km_per_h_t, speed_km_per_h_t -> bool
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic dummy1 : speed_km_per_h_t
+logic dummy : speed_km_per_h_t
 
 type speed_km_per_h_t__ref = { speed_km_per_h_t__content : speed_km_per_h_t
 }
@@ -1084,9 +1063,9 @@ type speed_km_per_h_t__ref = { speed_km_per_h_t__content : speed_km_per_h_t
 function speed_km_per_h_t__ref___projection(a: speed_km_per_h_t__ref) : speed_km_per_h_t =
   (a).speed_km_per_h_t__content
 
-logic is_valid_speed_km_per_h : t -> bool
+logic maximum_valid_speed_km_per_h : t
 
-logic is_valid_speed_km_per_h__function_guard : bool, t -> prop
+logic attr__ATTRIBUTE_ADDRESS : int
 
 axiom is_valid_speed_km_per_h__post_axiom : true
 
@@ -1095,19 +1074,47 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+axiom is_valid_speed_km_per_h__def_axiom :
+  (forall speed:t [is_valid_speed_km_per_h(speed)].
+  ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral1, speed) and
+  le(speed, maximum_valid_speed_km_per_h))))
+
+type tspeed_km_per_h_tB
+
+logic bool_eq2 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+
+logic user_eq1 : tspeed_km_per_h_tB, tspeed_km_per_h_tB -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic dummy1 : tspeed_km_per_h_tB
+
+type tspeed_km_per_h_tB__ref = { tspeed_km_per_h_tB__content :
+tspeed_km_per_h_tB
+}
+
+function tspeed_km_per_h_tB__ref___projection(a: tspeed_km_per_h_tB__ref) : tspeed_km_per_h_tB =
+  (a).tspeed_km_per_h_tB__content
+
+logic speed : t
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 500.0))
 
-axiom is_valid_speed_km_per_h__def_axiom :
-  (forall speed:t [is_valid_speed_km_per_h(speed)].
-  ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral1, speed) and
-  le(speed, fliteral2))))
-
-logic speed : t
-
-logic attr__ATTRIBUTE_ADDRESS : int
+axiom maximum_valid_speed_km_per_h__def_axiom :
+  (maximum_valid_speed_km_per_h = fliteral2)
 
 logic fliteral3 : t
 

@@ -931,6 +931,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -985,7 +991,7 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
+function to_rep(x: integer) : int = integerqtint(x)
 
 logic of_rep : int -> integer
 
@@ -999,6 +1005,12 @@ axiom coerce_axiom :
   (to_rep(of_rep(x)) = x)))
 
 type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
 
 predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483647))
 
@@ -1024,7 +1036,7 @@ type positive__ref = { positive__content : positive
 function positive__ref___projection(a: positive__ref) : positive =
   (a).positive__content
 
-logic to_rep1 : positive -> int
+function to_rep1(x: positive) : int = positiveqtint(x)
 
 logic of_rep1 : int -> positive
 
@@ -1218,6 +1230,9 @@ float1; rec__pred__r__c3 : bool
 
 function us_split_fields_C1__projection(a: us_split_fields) : integer =
   (a).rec__pred__r__c1
+
+function us_split_fields_C2__projection(a: us_split_fields) : float1 =
+  (a).rec__pred__r__c2
 
 function us_split_fields_C3__projection(a: us_split_fields) : bool =
   (a).rec__pred__r__c3

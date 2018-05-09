@@ -338,7 +338,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__pi/gnatprove/pi_compute.mlw", line 21202, characters 5-8
   (not (fp.eq res1 (fp #b0 #b10000000 #b10000101010110110000000))))
 (check-sat)
 (exit)

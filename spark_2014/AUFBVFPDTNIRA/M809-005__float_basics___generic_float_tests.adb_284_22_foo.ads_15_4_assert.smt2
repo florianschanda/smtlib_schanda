@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -153,19 +149,9 @@
 
 (declare-const o1 Float64)
 
-(declare-const o2 Float64)
-
-(declare-const result Float64)
-
 (declare-const a1 Float64)
 
-(declare-const result1 Float64)
-
 (declare-const b1 Float64)
-
-(declare-const result2 Float64)
-
-(declare-const c1 Float64)
 
 ;; H
   (assert (fp.isFinite64 x))
@@ -190,45 +176,34 @@
 
 ;; H
   (assert
-  (and
   (= o (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  x))
-  (fp.isFinite64 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  x))))
-
-;; H
-  (assert (= result a))
+  x)))
 
 ;; H
   (assert (= a1 o))
 
 ;; H
   (assert
-  (and
-  (= o1 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  a1))
   (fp.isFinite64 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  a1))))
+  x)))
 
 ;; H
-  (assert (= result1 b))
+  (assert
+  (= o1 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
+  a1)))
 
 ;; H
   (assert (= b1 o1))
 
 ;; H
   (assert
-  (and
-  (= o2 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  b1))
   (fp.isFinite64 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  b1))))
+  a1)))
 
 ;; H
-  (assert (= result2 c))
-
-;; H
-  (assert (= c1 o2))
+  (assert
+  (fp.isFinite64 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
+  b1)))
 
 (assert
 ;; WP_parameter_def

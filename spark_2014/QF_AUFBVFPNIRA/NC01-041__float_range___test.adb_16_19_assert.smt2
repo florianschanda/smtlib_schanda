@@ -117,7 +117,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "test.adb", line 7, characters 0-0
-  (not
-  (fp.leq (fp.neg (fp #b0 #b01110001 #b10100011011011100010111)) value1)))
+  (not (fp.leq value1 (fp #b0 #b01110001 #b10100011011011100010111))))
 (check-sat)
 (exit)

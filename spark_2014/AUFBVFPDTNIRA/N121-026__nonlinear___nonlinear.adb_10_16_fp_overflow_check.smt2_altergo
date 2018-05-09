@@ -949,7 +949,7 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 180.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/N121-026__nonlinear/gnatprove/nonlinear.mlw", line 2098, characters 5-8 *)
 goal WP_parameter_def :
   (forall result__:t. forall o:t. forall o1:t. (tqtisFinite(x) ->
   (tqtisFinite(y) -> (tqtisFinite(z) -> ((le(neg(fliteral1), fliteral1) ->

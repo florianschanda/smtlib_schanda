@@ -1099,7 +1099,29 @@ axiom coerce_axiom :
   (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
   (to_rep(of_rep(x)) = x)))
 
+logic adjust2triangle : t, t, t -> t
+
+logic adjust2triangle__function_guard : t, t, t, t -> prop
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0e-1))
+
+axiom adjust2triangle__post_axiom :
+  (forall d:t. forall kv:t. forall ka:t [adjust2triangle(d, kv, ka)].
+  ((((tqtisFinite(d) and tqtisFinite(kv)) and tqtisFinite(ka)) and ((neq(d,
+  fliteral1) and lt(fliteral1, kv)) and lt(fliteral1, ka))) ->
+  ((lt(fliteral1, adjust2triangle(d, kv, ka)) and le(adjust2triangle(d, kv,
+  ka), kv)) and tqtisFinite(adjust2triangle(d, kv, ka)))))
+
 type joint_index
+
+logic joint_indexqtint : joint_index -> int
+
+axiom joint_indexqtaxiom :
+  (forall i:joint_index. ((1 <= joint_indexqtint(i)) and
+  (joint_indexqtint(i) <= 2)))
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2))
 
@@ -1221,22 +1243,6 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
-logic adjust2triangle : t, t, t -> t
-
-logic adjust2triangle__function_guard : t, t, t, t -> prop
-
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.0e-1))
-
-axiom adjust2triangle__post_axiom :
-  (forall d1:t. forall kv1:t. forall ka1:t [adjust2triangle(d1, kv1, ka1)].
-  ((((tqtisFinite(d1) and tqtisFinite(kv1)) and tqtisFinite(ka1)) and
-  ((neq(d1, fliteral1) and lt(fliteral1, kv1)) and lt(fliteral1, ka1))) ->
-  ((lt(fliteral1, adjust2triangle(d1, kv1, ka1)) and le(adjust2triangle(d1,
-  kv1, ka1), kv1)) and tqtisFinite(adjust2triangle(d1, kv1, ka1)))))
-
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
@@ -1244,6 +1250,11 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
 type t11b
+
+logic t11bqtint : t11b -> int
+
+axiom t11bqtaxiom :
+  (forall i:t11b. ((1 <= t11bqtint(i)) and (t11bqtint(i) <= 2)))
 
 predicate in_range3(x: int) = ((1 <= x) and (x <= 2))
 
@@ -1280,9 +1291,9 @@ logic homothetical__homothetical__upsilon__aggregate_def : t -> (int,float1) far
 
 logic homothetical__homothetical__kvp__aggregate_def : t -> (int,float1) farray
 
-logic temp___198 : t -> (int,float1) farray
+logic temp_____aggregate_def_198 : t -> (int,float1) farray
 
-logic temp___202 : t -> (int,float1) farray
+logic temp_____aggregate_def_202 : t -> (int,float1) farray
 
 axiom def_axiom :
   (forall temp___185:t. (tqtisFinite(temp___185) ->
@@ -1302,12 +1313,12 @@ axiom def_axiom2 :
 axiom def_axiom3 :
   (forall temp___200:t. (tqtisFinite(temp___200) ->
   (forall temp___201:int.
-  (to_rep((temp___198(temp___200)[temp___201])) = temp___200))))
+  (to_rep((temp_____aggregate_def_198(temp___200)[temp___201])) = temp___200))))
 
 axiom def_axiom4 :
   (forall temp___204:t. (tqtisFinite(temp___204) ->
   (forall temp___205:int.
-  (to_rep((temp___202(temp___204)[temp___205])) = temp___204))))
+  (to_rep((temp_____aggregate_def_202(temp___204)[temp___205])) = temp___204))))
 
  (* File "homothetical.adb", line 48, characters 0-0 *)
 goal WP_parameter_def :
@@ -1332,7 +1343,7 @@ goal WP_parameter_def :
   ((forall j1:int. (((1 <= j1) and (j1 <= (i2 - 1))) -> lt(fliteral1,
    to_rep((kvp2[j1]))))) ->
   (((((1 <= 2) -> in_range3(i2)) and
-  (forall temp___195:int. (((1 <= temp___195) and (temp___195 <= 2)) ->
-  ((i2 <= temp___195) -> ((kvp2[temp___195]) = (kvp1[temp___195])))))) and
-  ((1 <= i2) and (i2 <= 2))) -> (((1 <= j) and (j <= (i2 - 1))) ->
-  (1 <= j)))))))))))
+  (forall temp___197:int. (((1 <= temp___197) and (temp___197 <= 2)) ->
+  (((2 <  temp___197) or ((temp___197 <  1) or (i2 <= temp___197))) ->
+  ((kvp2[temp___197]) = (kvp1[temp___197])))))) and ((1 <= i2) and
+  (i2 <= 2))) -> (((1 <= j) and (j <= (i2 - 1))) -> (j <= 2)))))))))))

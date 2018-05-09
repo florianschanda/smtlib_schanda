@@ -1790,5 +1790,5 @@ goal WP_parameter_def :
   mul(RNE, to_rep((a[2])), fliteral3))) and (o5 = (e2[3 <- o4]))) and
   ((result5 = e2) and (e3 = o5))) -> ((((to_rep1(o6) = to_float64(RNE,
   mul(RNE, to_rep((a[3])), fliteral3))) and (o7 = (e3[4 <- o6]))) and
-  ((result6 = e3) and (e4 = o7))) -> le1(neg1(fliteral1),
-  to_rep1((e4[1])))))))))))))))
+  ((result6 = e3) and (e4 = o7))) -> le1(to_rep1((e4[1])),
+  fliteral1)))))))))))))

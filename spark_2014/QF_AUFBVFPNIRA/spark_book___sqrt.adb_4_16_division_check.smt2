@@ -118,7 +118,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/spark_book/Chapter-02/build/gnatprove/sqrt.mlw", line 2104, characters 5-8
   (not (not (fp.isZero (fp #b0 #b10000000 #b00000000000000000000000)))))
 (check-sat)
 (exit)

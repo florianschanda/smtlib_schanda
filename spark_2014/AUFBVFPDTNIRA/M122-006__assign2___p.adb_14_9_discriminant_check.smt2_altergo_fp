@@ -1037,6 +1037,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -1091,19 +1097,6 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
-
-logic of_rep : int -> integer
-
-axiom inversion_axiom :
-  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
-  (to_rep(of_rep(x)) = x)))
-
 type float1
 
 logic bool_eq3 : t, t -> bool
@@ -1127,18 +1120,18 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-logic to_rep1 : float1 -> t
+logic to_rep : float1 -> t
 
-logic of_rep1 : t -> float1
+logic of_rep : t -> float1
 
-axiom inversion_axiom1 :
-  (forall x:float1 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+axiom inversion_axiom :
+  (forall x:float1 [to_rep(x)]. (of_rep(to_rep(x)) = x))
 
-axiom range_axiom1 : (forall x:float1 [to_rep1(x)]. tqtisFinite(to_rep1(x)))
+axiom range_axiom : (forall x:float1 [to_rep(x)]. tqtisFinite(to_rep(x)))
 
-axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (tqtisFinite(x) ->
-  (to_rep1(of_rep1(x)) = x)))
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
+  (to_rep(of_rep(x)) = x)))
 
 type enum
 
@@ -1165,17 +1158,30 @@ type enum__ref = { enum__content : enum
 
 function enum__ref___projection(a: enum__ref) : enum = (a).enum__content
 
-logic to_rep2 : enum -> int
+logic to_rep1 : enum -> int
 
-logic of_rep2 : int -> enum
+logic of_rep1 : int -> enum
+
+axiom inversion_axiom1 :
+  (forall x:enum [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:enum [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+function to_rep2(x: integer) : int = integerqtint(x)
+
+logic of_rep2 : int -> integer
 
 axiom inversion_axiom2 :
-  (forall x:enum [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+  (forall x:integer [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
 
-axiom range_axiom2 : (forall x:enum [to_rep2(x)]. in_range2(to_rep2(x)))
+axiom range_axiom2 : (forall x:integer [to_rep2(x)]. in_range1(to_rep2(x)))
 
 axiom coerce_axiom2 :
-  (forall x:int [to_rep2(of_rep2(x))]. (in_range2(x) ->
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range1(x) ->
   (to_rep2(of_rep2(x)) = x)))
 
 type us_split_discrs = { rec__types__r__i : enum
@@ -1197,6 +1203,9 @@ float1
 function us_split_fields_X__projection(a: us_split_fields) : integer =
   (a).rec__types__r__x
 
+function us_split_fields_Y__projection(a: us_split_fields) : float1 =
+  (a).rec__types__r__y
+
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
@@ -1216,26 +1225,26 @@ function us_rep___2__projection(a: us_rep) : us_split_fields =
 function us_rep___3__projection(a: us_rep) : bool = (a).attr__constrained
 
 predicate types__r__x__pred(a: us_rep) =
-  (to_rep2(((a).us_split_discrs1).rec__types__r__i) = 0)
+  (to_rep1(((a).us_split_discrs1).rec__types__r__i) = 0)
 
 predicate types__r__y__pred(a: us_rep) =
-  (to_rep2(((a).us_split_discrs1).rec__types__r__i) = 1)
+  (to_rep1(((a).us_split_discrs1).rec__types__r__i) = 1)
 
 logic bool_eq5 : us_rep, us_rep -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep. forall b:us_rep [bool_eq5(a, b)].
-  ((((to_rep2(((a).us_split_discrs1).rec__types__r__i) = to_rep2(((b).us_split_discrs1).rec__types__r__i)) and
+  ((((to_rep1(((a).us_split_discrs1).rec__types__r__i) = to_rep1(((b).us_split_discrs1).rec__types__r__i)) and
   ((types__r__x__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__types__r__x) = to_rep(((b).us_split_fields1).rec__types__r__x))) and
+  (to_rep2(((a).us_split_fields1).rec__types__r__x) = to_rep2(((b).us_split_fields1).rec__types__r__x))) and
   (types__r__y__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__types__r__y) = to_rep1(((b).us_split_fields1).rec__types__r__y))))) ->
+  (to_rep(((a).us_split_fields1).rec__types__r__y) = to_rep(((b).us_split_fields1).rec__types__r__y))))) ->
   (bool_eq5(a, b) = true)) and
-  ((not ((to_rep2(((a).us_split_discrs1).rec__types__r__i) = to_rep2(((b).us_split_discrs1).rec__types__r__i)) and
+  ((not ((to_rep1(((a).us_split_discrs1).rec__types__r__i) = to_rep1(((b).us_split_discrs1).rec__types__r__i)) and
   ((types__r__x__pred(a) ->
-  (to_rep(((a).us_split_fields1).rec__types__r__x) = to_rep(((b).us_split_fields1).rec__types__r__x))) and
+  (to_rep2(((a).us_split_fields1).rec__types__r__x) = to_rep2(((b).us_split_fields1).rec__types__r__x))) and
   (types__r__y__pred(a) ->
-  (to_rep1(((a).us_split_fields1).rec__types__r__y) = to_rep1(((b).us_split_fields1).rec__types__r__y)))))) ->
+  (to_rep(((a).us_split_fields1).rec__types__r__y) = to_rep(((b).us_split_fields1).rec__types__r__y)))))) ->
   (bool_eq5(a, b) = false))))
 
 logic value__size : int
@@ -1317,7 +1326,7 @@ type r__ref = { r__content : us_rep
 function r__ref___projection(a: r__ref) : us_rep = (a).r__content
 
 predicate in_range3(rec__types__r__i1: int, a: us_rep) =
-  (rec__types__r__i1 = to_rep2(((a).us_split_discrs1).rec__types__r__i))
+  (rec__types__r__i1 = to_rep1(((a).us_split_discrs1).rec__types__r__i))
 
 logic value__size1 : int
 
@@ -1402,7 +1411,7 @@ logic x__attr__constrained : bool
 logic attr__ATTRIBUTE_ADDRESS : int
 
 predicate in_range4(rec__types__r__i1: int, a: us_rep) =
-  (rec__types__r__i1 = to_rep2(((a).us_split_discrs1).rec__types__r__i))
+  (rec__types__r__i1 = to_rep1(((a).us_split_discrs1).rec__types__r__i))
 
 logic value__size2 : int
 
@@ -1482,34 +1491,14 @@ type t6b__ref = { t6b__content : us_rep
 
 function t6b__ref___projection(a: t6b__ref) : us_rep = (a).t6b__content
 
+logic rliteral : integer
+
+axiom rliteral_axiom : (integerqtint(rliteral) = 1)
+
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 2.0))
 
  (* File "p.adb", line 5, characters 0-0 *)
-goal WP_parameter_def :
-  (forall x__split_fields:integer. forall x__split_fields1:float1.
-  forall x__split_discrs:enum. forall o:enum. forall o1:integer.
-  forall o2:integer. forall o3:float1. forall o4:enum.
-  forall p__good_2__x__assume:enum. forall p__good_2__x__assume1:integer.
-  forall p__good_2__x__assume2:float1. forall p__good_2__x__assume3:bool.
-  forall o5:enum. forall o6:float1. forall o7:integer. forall o8:float1.
-  forall o9:enum. forall temp___175:enum. forall temp___1751:integer.
-  forall temp___1752:float1. forall temp___1753:bool. forall result:integer.
-  forall result1:float1. forall x__split_fields2:integer.
-  forall x__split_fields3:float1. forall result2:enum.
-  forall x__split_discrs1:enum. (((((to_rep(o1) = 1) and ((o1 = o2) and
-  (dummy1 = o3))) and (((to_rep2(o) = 0) and (o = o4)) and
-  ((p__good_2__x__assume = o4) and (((p__good_2__x__assume1 = o2) and
-  (p__good_2__x__assume2 = o3)) and (true = p__good_2__x__assume3))))) and
-  ((((result = x__split_fields) and (result1 = x__split_fields1)) and
-  ((p__good_2__x__assume1 = x__split_fields2) and
-  (p__good_2__x__assume2 = x__split_fields3))) and
-  (((result2 = x__split_discrs) and
-  (p__good_2__x__assume = x__split_discrs1)) and
-  (x__attr__constrained = false)))) -> ((((to_rep1(o6) = fliteral1) and
-  ((dummy = o7) and (o6 = o8))) and (((to_rep2(o5) = 1) and (o5 = o9)) and
-  ((temp___175 = o9) and (((temp___1751 = o7) and (temp___1752 = o8)) and
-  (true = temp___1753))))) -> ((x__attr__constrained = true) ->
-  (temp___175 = x__split_discrs1)))))
+goal WP_parameter_def : true

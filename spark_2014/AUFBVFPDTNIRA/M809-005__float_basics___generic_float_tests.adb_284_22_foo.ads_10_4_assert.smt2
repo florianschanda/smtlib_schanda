@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -151,19 +147,9 @@
 
 (declare-const o1 Float32)
 
-(declare-const o2 Float32)
-
-(declare-const result Float32)
-
 (declare-const a1 Float32)
 
-(declare-const result1 Float32)
-
 (declare-const b1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const c1 Float32)
 
 ;; H
   (assert (fp.isFinite32 x))
@@ -187,43 +173,33 @@
   (fp.isFinite32 c)))
 
 ;; H
-  (assert
-  (and (= o (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  x))
-  (fp.isFinite32 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  x))))
-
-;; H
-  (assert (= result a))
+  (assert (= o (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  x)))
 
 ;; H
   (assert (= a1 o))
 
 ;; H
   (assert
-  (and (= o1 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  a1))
   (fp.isFinite32 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  a1))))
+  x)))
 
 ;; H
-  (assert (= result1 b))
+  (assert
+  (= o1 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) a1)))
 
 ;; H
   (assert (= b1 o1))
 
 ;; H
   (assert
-  (and (= o2 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  b1))
   (fp.isFinite32 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  b1))))
+  a1)))
 
 ;; H
-  (assert (= result2 c))
-
-;; H
-  (assert (= c1 o2))
+  (assert
+  (fp.isFinite32 (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
+  b1)))
 
 (assert
 ;; WP_parameter_def

@@ -87,7 +87,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 20793, characters 5-8
   (not (not (fp.isZero right))))
 (check-sat)
 (exit)

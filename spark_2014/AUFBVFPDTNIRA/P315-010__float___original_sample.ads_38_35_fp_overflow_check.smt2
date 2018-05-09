@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -117,6 +113,13 @@
                                     (fp.isFinite32 temp___expr_60)))
 
 (declare-sort nb_type 0)
+
+(declare-fun nb_typeqtint (nb_type) Int)
+
+;; nb_type'axiom
+  (assert
+  (forall ((i nb_type))
+  (and (<= 0 (nb_typeqtint i)) (<= (nb_typeqtint i) 100))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 100)))
 
@@ -241,7 +244,7 @@
 ;; WP_parameter_def
  ;; File "original_sample.ads", line 15, characters 0-0
   (not
-  (fp.isFinite32 (fp.sub RNE (fp #b0 #b11111110 #b11111111111111111111111) (fp.mul RNE
-  (of_int RNE (+ nb_of_fp nb_of_pp)) delta_time)))))
+  (fp.isFinite32 (fp.sub RNE (fp #b0 #b11111110 #b11111111111111111111111) (fp.mul RNE ((_ to_fp 8 24) RNE (to_real (+
+  nb_of_fp nb_of_pp))) delta_time)))))
 (check-sat)
 (exit)

@@ -1344,48 +1344,21 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
-type long_float
+type log_index
 
-logic bool_eq3 : t1, t1 -> bool
+logic rliteral : t
 
-axiom bool_eq_def3 :
-  (forall x:t1. forall y:t1 [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+axiom rliteral_axiom : (tqtint(rliteral) = 0)
 
-logic user_eq : long_float, long_float -> bool
+logic rliteral1 : t
 
-logic attr__ATTRIBUTE_IMAGE1 : t1 -> us_image
+axiom rliteral_axiom1 : (tqtint(rliteral1) = 599)
 
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t1
+predicate in_range_int(x: int) = ((0 <= x) and (x <= 599))
 
-logic dummy : long_float
-
-type long_float__ref = { long_float__content : long_float
-}
-
-function long_float__ref___projection(a: long_float__ref) : long_float =
-  (a).long_float__content
-
-logic to_rep : long_float -> t1
-
-logic of_rep : t1 -> long_float
-
-axiom inversion_axiom :
-  (forall x:long_float [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:long_float [to_rep(x)]. tqtisFinite(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:t1 [to_rep(of_rep(x))]. (tqtisFinite(x) ->
-  (to_rep(of_rep(x)) = x)))
-
-type unsigned_16
-
-logic attr__ATTRIBUTE_MODULUS : t
-
-logic bool_eq4 : int, int -> bool
+logic bool_eq3 : int, int -> bool
 
 logic bool_ne1 : int, int -> bool
 
@@ -1398,7 +1371,7 @@ logic bool_gt2 : int, int -> bool
 logic bool_ge2 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq4(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne1(x, y) = true) <-> (not (x = y)))))
@@ -1415,21 +1388,107 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge2(x, y) = true) <-> (y <= x))))
 
-logic bool_eq5 : t, t -> bool
+logic bool_eq4 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic user_eq : log_index, log_index -> bool
+
+logic dummy : log_index
+
+type log_index__ref = { log_index__content : log_index
+}
+
+function log_index__ref___projection(a: log_index__ref) : log_index =
+  (a).log_index__content
+
+logic to_rep : log_index -> t
+
+logic of_rep : t -> log_index
+
+axiom inversion_axiom :
+  (forall x:log_index [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:log_index [to_rep(x)]. in_range2(to_rep(x)))
+
+logic rliteral2 : t
+
+axiom rliteral_axiom2 : (tqtint(rliteral2) = 600)
+
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (in_range2(urem(x, rliteral2)) ->
+  (to_rep(of_rep(x)) = urem(x, rliteral2))))
+
+function to_int3(x: log_index) : int = tqtint(to_rep(x))
+
+axiom range_int_axiom :
+  (forall x:log_index [to_int3(x)]. in_range_int(to_int3(x)))
+
+type long_float
+
+logic bool_eq5 : t1, t1 -> bool
 
 axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+  (forall x:t1. forall y:t1 [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+logic user_eq1 : long_float, long_float -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t1 -> us_image
 
 logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t1
 
-logic user_eq1 : unsigned_16, unsigned_16 -> bool
+logic dummy1 : long_float
 
-logic dummy1 : unsigned_16
+type long_float__ref = { long_float__content : long_float
+}
+
+function long_float__ref___projection(a: long_float__ref) : long_float =
+  (a).long_float__content
+
+logic to_rep1 : long_float -> t1
+
+logic of_rep1 : t1 -> long_float
+
+axiom inversion_axiom1 :
+  (forall x:long_float [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:long_float [to_rep1(x)]. tqtisFinite(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:t1 [to_rep1(of_rep1(x))]. (tqtisFinite(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type unsigned_16
+
+logic attr__ATTRIBUTE_MODULUS : t
+
+logic bool_eq6 : t, t -> bool
+
+axiom bool_eq_def5 :
+  (forall x:t. forall y:t [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
+
+logic user_eq2 : unsigned_16, unsigned_16 -> bool
+
+logic dummy2 : unsigned_16
 
 type unsigned_16__ref = { unsigned_16__content : unsigned_16
 }
@@ -1437,22 +1496,22 @@ type unsigned_16__ref = { unsigned_16__content : unsigned_16
 function unsigned_16__ref___projection(a: unsigned_16__ref) : unsigned_16 =
   (a).unsigned_16__content
 
-logic to_rep1 : unsigned_16 -> t
+logic to_rep2 : unsigned_16 -> t
 
-logic of_rep1 : t -> unsigned_16
+logic of_rep2 : t -> unsigned_16
 
-axiom inversion_axiom1 :
-  (forall x:unsigned_16 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+axiom inversion_axiom2 :
+  (forall x:unsigned_16 [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
 
-axiom range_axiom1 : true
+axiom range_axiom2 : true
 
-axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (to_rep1(of_rep1(x)) = x))
+axiom coerce_axiom2 :
+  (forall x:t [to_rep2(of_rep2(x))]. (to_rep2(of_rep2(x)) = x))
 
-function to_int3(x: unsigned_16) : int = tqtint(to_rep1(x))
+function to_int4(x: unsigned_16) : int = tqtint(to_rep2(x))
 
-axiom range_int_axiom :
-  (forall x:unsigned_16 [to_int3(x)]. uint_in_range(to_int3(x)))
+axiom range_int_axiom1 :
+  (forall x:unsigned_16 [to_int4(x)]. uint_in_range(to_int4(x)))
 
 type us_split_fields = { rec__logger__log_entry__ngrotations : unsigned_16;
 rec__logger__log_entry__ngclicktime : unsigned_16;
@@ -1470,6 +1529,9 @@ function us_split_fields_NGClickTime__projection(a: us_split_fields) : unsigned_
 function us_split_fields_Millisecs__projection(a: us_split_fields) : unsigned_16 =
   (a).rec__logger__log_entry__millisecs
 
+function us_split_fields_EstimatedGroundVelocity__projection(a: us_split_fields) : long_float =
+  (a).rec__logger__log_entry__estimatedgroundvelocity
+
 function us_split_fields_EstimatedGroundVelocityIsAvailable__projection(a: us_split_fields) : bool =
   (a).rec__logger__log_entry__estimatedgroundvelocityisavailable
 
@@ -1485,22 +1547,22 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-logic bool_eq6 : us_rep, us_rep -> bool
+logic bool_eq7 : us_rep, us_rep -> bool
 
-axiom bool_eq_def5 :
-  (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  (((((((to_rep1(((a).us_split_fields1).rec__logger__log_entry__ngrotations) = to_rep1(((b).us_split_fields1).rec__logger__log_entry__ngrotations)) and
-  (to_rep1(((a).us_split_fields1).rec__logger__log_entry__ngclicktime) = to_rep1(((b).us_split_fields1).rec__logger__log_entry__ngclicktime))) and
-  (to_rep1(((a).us_split_fields1).rec__logger__log_entry__millisecs) = to_rep1(((b).us_split_fields1).rec__logger__log_entry__millisecs))) and
-  (to_rep(((a).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocity) = to_rep(((b).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocity))) and
+axiom bool_eq_def6 :
+  (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
+  (((((((to_rep2(((a).us_split_fields1).rec__logger__log_entry__ngrotations) = to_rep2(((b).us_split_fields1).rec__logger__log_entry__ngrotations)) and
+  (to_rep2(((a).us_split_fields1).rec__logger__log_entry__ngclicktime) = to_rep2(((b).us_split_fields1).rec__logger__log_entry__ngclicktime))) and
+  (to_rep2(((a).us_split_fields1).rec__logger__log_entry__millisecs) = to_rep2(((b).us_split_fields1).rec__logger__log_entry__millisecs))) and
+  (to_rep1(((a).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocity) = to_rep1(((b).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocity))) and
   (((a).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocityisavailable = ((b).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocityisavailable)) ->
-  (bool_eq6(a, b) = true)) and
-  ((not (((((to_rep1(((a).us_split_fields1).rec__logger__log_entry__ngrotations) = to_rep1(((b).us_split_fields1).rec__logger__log_entry__ngrotations)) and
-  (to_rep1(((a).us_split_fields1).rec__logger__log_entry__ngclicktime) = to_rep1(((b).us_split_fields1).rec__logger__log_entry__ngclicktime))) and
-  (to_rep1(((a).us_split_fields1).rec__logger__log_entry__millisecs) = to_rep1(((b).us_split_fields1).rec__logger__log_entry__millisecs))) and
-  (to_rep(((a).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocity) = to_rep(((b).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocity))) and
+  (bool_eq7(a, b) = true)) and
+  ((not (((((to_rep2(((a).us_split_fields1).rec__logger__log_entry__ngrotations) = to_rep2(((b).us_split_fields1).rec__logger__log_entry__ngrotations)) and
+  (to_rep2(((a).us_split_fields1).rec__logger__log_entry__ngclicktime) = to_rep2(((b).us_split_fields1).rec__logger__log_entry__ngclicktime))) and
+  (to_rep2(((a).us_split_fields1).rec__logger__log_entry__millisecs) = to_rep2(((b).us_split_fields1).rec__logger__log_entry__millisecs))) and
+  (to_rep1(((a).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocity) = to_rep1(((b).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocity))) and
   (((a).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocityisavailable = ((b).us_split_fields1).rec__logger__log_entry__estimatedgroundvelocityisavailable))) ->
-  (bool_eq6(a, b) = false))))
+  (bool_eq7(a, b) = false))))
 
 logic value__size : int
 
@@ -1607,81 +1669,23 @@ axiom logger__log_entry__estimatedgroundvelocityisavailable__last__bit_axiom :
 axiom logger__log_entry__estimatedgroundvelocityisavailable__position_axiom :
   (0 <= logger__log_entry__estimatedgroundvelocityisavailable__position)
 
-logic user_eq2 : us_rep, us_rep -> bool
-
-logic dummy2 : unsigned_16
+logic user_eq3 : us_rep, us_rep -> bool
 
 logic dummy3 : unsigned_16
 
 logic dummy4 : unsigned_16
 
-logic dummy5 : long_float
+logic dummy5 : unsigned_16
 
-logic dummy6 : bool
+logic dummy6 : long_float
+
+logic dummy7 : bool
 
 type log_entry__ref = { log_entry__content : us_rep
 }
 
 function log_entry__ref___projection(a: log_entry__ref) : us_rep =
   (a).log_entry__content
-
-type log_index
-
-logic rliteral : t
-
-axiom rliteral_axiom : (tqtint(rliteral) = 0)
-
-logic rliteral1 : t
-
-axiom rliteral_axiom1 : (tqtint(rliteral1) = 599)
-
-predicate in_range2(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
-
-predicate in_range_int(x: int) = ((0 <= x) and (x <= 599))
-
-logic bool_eq7 : t, t -> bool
-
-axiom bool_eq_def6 :
-  (forall x:t. forall y:t [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t
-
-logic user_eq3 : log_index, log_index -> bool
-
-logic dummy7 : log_index
-
-type log_index__ref = { log_index__content : log_index
-}
-
-function log_index__ref___projection(a: log_index__ref) : log_index =
-  (a).log_index__content
-
-logic to_rep2 : log_index -> t
-
-logic of_rep2 : t -> log_index
-
-axiom inversion_axiom2 :
-  (forall x:log_index [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
-
-axiom range_axiom2 : (forall x:log_index [to_rep2(x)]. in_range2(to_rep2(x)))
-
-logic rliteral2 : t
-
-axiom rliteral_axiom2 : (tqtint(rliteral2) = 600)
-
-axiom coerce_axiom2 :
-  (forall x:t [to_rep2(of_rep2(x))]. (in_range2(urem(x, rliteral2)) ->
-  (to_rep2(of_rep2(x)) = urem(x, rliteral2))))
-
-function to_int4(x: log_index) : int = tqtint(to_rep2(x))
-
-axiom range_int_axiom1 :
-  (forall x:log_index [to_int4(x)]. in_range_int(to_int4(x)))
 
 type map__ref = { map__content : (t,us_rep) farray
 }
@@ -1709,7 +1713,7 @@ axiom bool_eq_def7 :
   a__first) = sub(b__last, b__first)))) or ((not ule(a__first, a__last)) and
   ugt(b__first, b__last))) and
   (forall temp___idx_154:t. (((ule(a__first, temp___idx_154) and
-  ule(temp___idx_154, a__last)) and (bool_eq6((a[temp___idx_154]),
+  ule(temp___idx_154, a__last)) and (bool_eq7((a[temp___idx_154]),
   (b[add(sub(b__first, a__first), temp___idx_154)])) = true)) or
   (not (ule(a__first, temp___idx_154) and ule(temp___idx_154, a__last)))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
@@ -1717,7 +1721,7 @@ axiom bool_eq_def7 :
   (sub(a__last, a__first) = sub(b__last, b__first)))) and ((not ule(a__first,
   a__last)) -> ugt(b__first, b__last))) and
   (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
-  ule(temp___idx_154, a__last)) -> (bool_eq6((a[temp___idx_154]),
+  ule(temp___idx_154, a__last)) -> (bool_eq7((a[temp___idx_154]),
   (b[add(sub(b__first, a__first), temp___idx_154)])) = true))))) ->
   (bool_eq8(a, a__first, a__last, b, b__first, b__last) = false))))
 
@@ -1729,8 +1733,378 @@ axiom bool_eq_rev :
   a__first) = sub(b__last, b__first)))) and ((not ule(a__first, a__last)) ->
   ugt(b__first, b__last))) and
   (forall temp___idx_154:t. ((ule(a__first, temp___idx_154) and
-  ule(temp___idx_154, a__last)) -> (bool_eq6((a[temp___idx_154]),
+  ule(temp___idx_154, a__last)) -> (bool_eq7((a[temp___idx_154]),
   (b[add(sub(b__first, a__first), temp___idx_154)])) = true)))))))
+
+logic dummy8 : (t,us_rep) farray
+
+logic value__size1 : int
+
+logic object__size1 : (t,us_rep) farray -> int
+
+logic value__component__size : int
+
+logic object__component__size : (t,us_rep) farray -> int
+
+logic value__alignment1 : int
+
+logic object__alignment1 : (t,us_rep) farray -> int
+
+axiom value__size_axiom1 : (0 <= value__size1)
+
+axiom object__size_axiom1 :
+  (forall a:(t,us_rep) farray. (0 <= object__size1(a)))
+
+axiom value__component__size_axiom : (0 <= value__component__size)
+
+axiom object__component__size_axiom :
+  (forall a:(t,us_rep) farray. (0 <= object__component__size(a)))
+
+axiom value__alignment_axiom1 : (0 <= value__alignment1)
+
+axiom object__alignment_axiom1 :
+  (forall a:(t,us_rep) farray. (0 <= object__alignment1(a)))
+
+logic user_eq4 : (t,us_rep) farray, (t,us_rep) farray -> bool
+
+type us_split_fields2 = { rec__logger__log_database__data :
+(t,us_rep) farray; rec__logger__log_database__first : log_index;
+rec__logger__log_database__last : log_index; rec__logger__log_database__empty
+: bool
+}
+
+function us_split_fields_Data__projection(a: us_split_fields2) : (t,us_rep) farray =
+  (a).rec__logger__log_database__data
+
+function us_split_fields_First__projection(a: us_split_fields2) : log_index =
+  (a).rec__logger__log_database__first
+
+function us_split_fields_Last__projection(a: us_split_fields2) : log_index =
+  (a).rec__logger__log_database__last
+
+function us_split_fields_Empty__projection(a: us_split_fields2) : bool =
+  (a).rec__logger__log_database__empty
+
+type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
+}
+
+function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
+  (a).us_split_fields__content1
+
+type us_rep1 = { us_split_fields3 : us_split_fields2
+}
+
+function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
+  (a).us_split_fields3
+
+logic bool_eq9 : us_rep1, us_rep1 -> bool
+
+axiom bool_eq_def8 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq9(a, b)].
+  ((((((bool_eq8(((a).us_split_fields3).rec__logger__log_database__data,
+  rliteral, rliteral1,
+  ((b).us_split_fields3).rec__logger__log_database__data, rliteral,
+  rliteral1) = true) and
+  (to_rep(((a).us_split_fields3).rec__logger__log_database__first) = to_rep(((b).us_split_fields3).rec__logger__log_database__first))) and
+  (to_rep(((a).us_split_fields3).rec__logger__log_database__last) = to_rep(((b).us_split_fields3).rec__logger__log_database__last))) and
+  (((a).us_split_fields3).rec__logger__log_database__empty = ((b).us_split_fields3).rec__logger__log_database__empty)) ->
+  (bool_eq9(a, b) = true)) and
+  ((not ((((bool_eq8(((a).us_split_fields3).rec__logger__log_database__data,
+  rliteral, rliteral1,
+  ((b).us_split_fields3).rec__logger__log_database__data, rliteral,
+  rliteral1) = true) and
+  (to_rep(((a).us_split_fields3).rec__logger__log_database__first) = to_rep(((b).us_split_fields3).rec__logger__log_database__first))) and
+  (to_rep(((a).us_split_fields3).rec__logger__log_database__last) = to_rep(((b).us_split_fields3).rec__logger__log_database__last))) and
+  (((a).us_split_fields3).rec__logger__log_database__empty = ((b).us_split_fields3).rec__logger__log_database__empty))) ->
+  (bool_eq9(a, b) = false))))
+
+logic value__size2 : int
+
+logic object__size2 : us_rep1 -> int
+
+logic value__alignment2 : int
+
+logic object__alignment2 : us_rep1 -> int
+
+axiom value__size_axiom2 : (0 <= value__size2)
+
+axiom object__size_axiom2 :
+  (forall a:(t,us_rep) farray. forall a1:log_index. forall a2:log_index.
+  forall a3:bool. (0 <= object__size2({ us_split_fields3 = {
+  rec__logger__log_database__data = a; rec__logger__log_database__first = a1;
+  rec__logger__log_database__last = a2; rec__logger__log_database__empty = a3
+  } })))
+
+axiom value__alignment_axiom2 : (0 <= value__alignment2)
+
+axiom object__alignment_axiom2 :
+  (forall a:(t,us_rep) farray. forall a1:log_index. forall a2:log_index.
+  forall a3:bool. (0 <= object__alignment2({ us_split_fields3 = {
+  rec__logger__log_database__data = a; rec__logger__log_database__first = a1;
+  rec__logger__log_database__last = a2; rec__logger__log_database__empty = a3
+  } })))
+
+logic logger__log_database__data__first__bit : int
+
+logic logger__log_database__data__last__bit : int
+
+logic logger__log_database__data__position : int
+
+axiom logger__log_database__data__first__bit_axiom :
+  (0 <= logger__log_database__data__first__bit)
+
+axiom logger__log_database__data__last__bit_axiom :
+  (logger__log_database__data__first__bit <  logger__log_database__data__last__bit)
+
+axiom logger__log_database__data__position_axiom :
+  (0 <= logger__log_database__data__position)
+
+logic logger__log_database__first__first__bit : int
+
+logic logger__log_database__first__last__bit : int
+
+logic logger__log_database__first__position : int
+
+axiom logger__log_database__first__first__bit_axiom :
+  (0 <= logger__log_database__first__first__bit)
+
+axiom logger__log_database__first__last__bit_axiom :
+  (logger__log_database__first__first__bit <  logger__log_database__first__last__bit)
+
+axiom logger__log_database__first__position_axiom :
+  (0 <= logger__log_database__first__position)
+
+logic logger__log_database__last__first__bit : int
+
+logic logger__log_database__last__last__bit : int
+
+logic logger__log_database__last__position : int
+
+axiom logger__log_database__last__first__bit_axiom :
+  (0 <= logger__log_database__last__first__bit)
+
+axiom logger__log_database__last__last__bit_axiom :
+  (logger__log_database__last__first__bit <  logger__log_database__last__last__bit)
+
+axiom logger__log_database__last__position_axiom :
+  (0 <= logger__log_database__last__position)
+
+logic logger__log_database__empty__first__bit : int
+
+logic logger__log_database__empty__last__bit : int
+
+logic logger__log_database__empty__position : int
+
+axiom logger__log_database__empty__first__bit_axiom :
+  (0 <= logger__log_database__empty__first__bit)
+
+axiom logger__log_database__empty__last__bit_axiom :
+  (logger__log_database__empty__first__bit <  logger__log_database__empty__last__bit)
+
+axiom logger__log_database__empty__position_axiom :
+  (0 <= logger__log_database__empty__position)
+
+logic user_eq5 : us_rep1, us_rep1 -> bool
+
+logic dummy9 : (t,us_rep) farray
+
+logic dummy10 : log_index
+
+logic dummy11 : log_index
+
+logic dummy12 : bool
+
+type log_database__ref = { log_database__content : us_rep1
+}
+
+function log_database__ref___projection(a: log_database__ref) : us_rep1 =
+  (a).log_database__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic log_size : us_split_fields2 -> int
+
+logic log_size__function_guard : int, us_split_fields2 -> prop
+
+type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def9 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq6 : natural, natural -> bool
+
+logic dummy13 : natural
+
+type natural__ref = { natural__content : natural
+}
+
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
+
+axiom log_size__post_axiom :
+  (forall logger__event_log__fields:(t,us_rep) farray.
+  forall logger__event_log__fields1:log_index.
+  forall logger__event_log__fields2:log_index.
+  forall logger__event_log__fields3:bool [log_size({
+  rec__logger__log_database__data = logger__event_log__fields;
+  rec__logger__log_database__first = logger__event_log__fields1;
+  rec__logger__log_database__last = logger__event_log__fields2;
+  rec__logger__log_database__empty = logger__event_log__fields3 })].
+  in_range3(log_size({ rec__logger__log_database__data =
+  logger__event_log__fields; rec__logger__log_database__first =
+  logger__event_log__fields1; rec__logger__log_database__last =
+  logger__event_log__fields2; rec__logger__log_database__empty =
+  logger__event_log__fields3 })))
+
+axiom log_size__def_axiom :
+  (forall logger__event_log__fields:(t,us_rep) farray.
+  forall logger__event_log__fields1:log_index.
+  forall logger__event_log__fields2:log_index.
+  forall logger__event_log__fields3:bool [log_size({
+  rec__logger__log_database__data = logger__event_log__fields;
+  rec__logger__log_database__first = logger__event_log__fields1;
+  rec__logger__log_database__last = logger__event_log__fields2;
+  rec__logger__log_database__empty = logger__event_log__fields3 })].
+  (((logger__event_log__fields3 = true) -> (log_size({
+  rec__logger__log_database__data = logger__event_log__fields;
+  rec__logger__log_database__first = logger__event_log__fields1;
+  rec__logger__log_database__last = logger__event_log__fields2;
+  rec__logger__log_database__empty = logger__event_log__fields3 }) = 0)) and
+  ((not (logger__event_log__fields3 = true)) ->
+  ((ult(to_rep(logger__event_log__fields2),
+  to_rep(logger__event_log__fields1)) -> (log_size({
+  rec__logger__log_database__data = logger__event_log__fields;
+  rec__logger__log_database__first = logger__event_log__fields1;
+  rec__logger__log_database__last = logger__event_log__fields2;
+  rec__logger__log_database__empty = logger__event_log__fields3
+  }) = (tqtint(add(sub(to_rep(logger__event_log__fields2),
+  to_rep(logger__event_log__fields1)), rliteral2)) + 1))) and
+  ((not ult(to_rep(logger__event_log__fields2),
+  to_rep(logger__event_log__fields1))) -> (log_size({
+  rec__logger__log_database__data = logger__event_log__fields;
+  rec__logger__log_database__first = logger__event_log__fields1;
+  rec__logger__log_database__last = logger__event_log__fields2;
+  rec__logger__log_database__empty = logger__event_log__fields3
+  }) = (tqtint(sub(to_rep(logger__event_log__fields2),
+  to_rep(logger__event_log__fields1))) + 1)))))))
+
+logic make_entry : t, t, t, t1, bool -> us_rep
+
+logic make_entry__function_guard : us_rep, t, t, t, t1, bool -> prop
+
+axiom make_entry__post_axiom : true
+
+axiom make_entry__def_axiom :
+  (forall ngrotations:t. forall ngclicktime:t. forall millisecs:t.
+  (forall estimatedgroundvelocity:t1.
+  (forall estimatedgroundvelocityisavailable:bool [make_entry(ngrotations,
+  ngclicktime, millisecs, estimatedgroundvelocity,
+  estimatedgroundvelocityisavailable)].
+  (tqtisFinite(estimatedgroundvelocity) -> (make_entry(ngrotations,
+  ngclicktime, millisecs, estimatedgroundvelocity,
+  estimatedgroundvelocityisavailable) = { us_split_fields1 = {
+  rec__logger__log_entry__ngrotations = of_rep2(ngrotations);
+  rec__logger__log_entry__ngclicktime = of_rep2(ngclicktime);
+  rec__logger__log_entry__millisecs = of_rep2(millisecs);
+  rec__logger__log_entry__estimatedgroundvelocity =
+  of_rep1(estimatedgroundvelocity);
+  rec__logger__log_entry__estimatedgroundvelocityisavailable =
+  estimatedgroundvelocityisavailable } })))))
+
+type t2
+
+logic first : t2 -> log_index
+
+logic last : t2 -> log_index
+
+logic mk : t, t -> t2
+
+axiom mk_def :
+  (forall f:t. forall l:t [mk(f, l)]. (in_range2(f) -> (in_range2(l) ->
+  ((to_rep(first(mk(f, l))) = f) and (to_rep(last(mk(f, l))) = l)))))
+
+predicate dynamic_property(range_first: t, range_last: t, low: t, high: t) =
+  (in_range2(low) and (in_range2(high) and (ule(low, high) ->
+  (in_range2(low) and in_range2(high)))))
+
+type us_t = { elts : (t,us_rep) farray; rt : t2
+}
+
+function to_array(a: us_t) : (t,us_rep) farray = (a).elts
+
+function of_array(a: (t,us_rep) farray, f: t, l: t) : us_t = { elts = a; rt =
+  mk(f, l) }
+
+function first1(a: us_t) : t = to_rep(first((a).rt))
+
+function last1(a: us_t) : t = to_rep(last((a).rt))
+
+logic length : us_t -> int
+
+axiom length_def :
+  (forall a:us_t [length(a)]. ((ule(first1(a), last1(a)) ->
+  (length(a) = ((tqtint(last1(a)) - tqtint(first1(a))) + 1))) and
+  ((not ule(first1(a), last1(a))) -> (length(a) = 0))))
+
+logic value__size3 : int
+
+logic object__size3 : (t,us_rep) farray -> int
+
+logic value__component__size1 : int
+
+logic object__component__size1 : (t,us_rep) farray -> int
+
+logic value__alignment3 : int
+
+logic object__alignment3 : (t,us_rep) farray -> int
+
+axiom value__size_axiom3 : (0 <= value__size3)
+
+axiom object__size_axiom3 :
+  (forall a:(t,us_rep) farray. (0 <= object__size3(a)))
+
+axiom value__component__size_axiom1 : (0 <= value__component__size1)
+
+axiom object__component__size_axiom1 :
+  (forall a:(t,us_rep) farray. (0 <= object__component__size1(a)))
+
+axiom value__alignment_axiom3 : (0 <= value__alignment3)
+
+axiom object__alignment_axiom3 :
+  (forall a:(t,us_rep) farray. (0 <= object__alignment3(a)))
+
+function bool_eq11(x: us_t, y: us_t) : bool = bool_eq8((x).elts,
+  to_rep(first((x).rt)), to_rep(last((x).rt)), (y).elts,
+  to_rep(first((y).rt)), to_rep(last((y).rt)))
+
+logic user_eq7 : us_t, us_t -> bool
+
+logic dummy14 : (t,us_rep) farray
+
+logic dummy15 : t2
+
+type log_array__ref = { log_array__content : us_t
+}
+
+function log_array__ref___projection(a: log_array__ref) : us_t =
+  (a).log_array__content
 
 logic concat : (t,us_rep) farray, t, t, (t,us_rep) farray, t,
   t -> (t,us_rep) farray
@@ -1901,396 +2275,32 @@ axiom singleton_def :
   rec__logger__log_entry__estimatedgroundvelocity = v3;
   rec__logger__log_entry__estimatedgroundvelocityisavailable = v4 } })))
 
-type t2
-
-logic first : t2 -> log_index
-
-logic last : t2 -> log_index
-
-logic mk : t, t -> t2
-
-axiom mk_def :
-  (forall f:t. forall l:t [mk(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep2(first(mk(f, l))) = f) and (to_rep2(last(mk(f, l))) = l)))))
-
-predicate dynamic_property(range_first: t, range_last: t, low: t, high: t) =
-  (in_range2(low) and (in_range2(high) and (ule(low, high) ->
-  (in_range2(low) and in_range2(high)))))
-
-type us_t = { elts : (t,us_rep) farray; rt : t2
-}
-
-function to_array(a: us_t) : (t,us_rep) farray = (a).elts
-
-function of_array(a: (t,us_rep) farray, f: t, l: t) : us_t = { elts = a; rt =
-  mk(f, l) }
-
-function first1(a: us_t) : t = to_rep2(first((a).rt))
-
-function last1(a: us_t) : t = to_rep2(last((a).rt))
-
-logic length : us_t -> int
-
-axiom length_def :
-  (forall a:us_t [length(a)]. ((ule(first1(a), last1(a)) ->
-  (length(a) = ((tqtint(last1(a)) - tqtint(first1(a))) + 1))) and
-  ((not ule(first1(a), last1(a))) -> (length(a) = 0))))
-
-logic value__size1 : int
-
-logic object__size1 : (t,us_rep) farray -> int
-
-logic value__component__size : int
-
-logic object__component__size : (t,us_rep) farray -> int
-
-logic value__alignment1 : int
-
-logic object__alignment1 : (t,us_rep) farray -> int
-
-axiom value__size_axiom1 : (0 <= value__size1)
-
-axiom object__size_axiom1 :
-  (forall a:(t,us_rep) farray. (0 <= object__size1(a)))
-
-axiom value__component__size_axiom : (0 <= value__component__size)
-
-axiom object__component__size_axiom :
-  (forall a:(t,us_rep) farray. (0 <= object__component__size(a)))
-
-axiom value__alignment_axiom1 : (0 <= value__alignment1)
-
-axiom object__alignment_axiom1 :
-  (forall a:(t,us_rep) farray. (0 <= object__alignment1(a)))
-
-function bool_eq9(x: us_t, y: us_t) : bool = bool_eq8((x).elts,
-  to_rep2(first((x).rt)), to_rep2(last((x).rt)), (y).elts,
-  to_rep2(first((y).rt)), to_rep2(last((y).rt)))
-
-logic user_eq4 : us_t, us_t -> bool
-
-logic dummy8 : (t,us_rep) farray
-
-logic dummy9 : t2
-
-type log_array__ref = { log_array__content : us_t
-}
-
-function log_array__ref___projection(a: log_array__ref) : us_t =
-  (a).log_array__content
-
 type t4s
 
-predicate in_range3(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
+predicate in_range4(x: t) = (ule(rliteral, x) and ule(x, rliteral1))
 
 predicate in_range_int1(x: int) = ((0 <= x) and (x <= 599))
 
-logic bool_eq10 : t, t -> bool
+logic bool_eq12 : t, t -> bool
 
-axiom bool_eq_def8 :
-  (forall x:t. forall y:t [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+axiom bool_eq_def10 :
+  (forall x:t. forall y:t [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE5 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+logic attr__ATTRIBUTE_VALUE5 : us_image -> t
 
-logic user_eq5 : t4s, t4s -> bool
+logic user_eq8 : t4s, t4s -> bool
 
-logic dummy10 : t4s
+logic dummy16 : t4s
 
 type t4s__ref = { t4s__content : t4s
 }
 
 function t4s__ref___projection(a: t4s__ref) : t4s = (a).t4s__content
-
-logic dummy11 : (t,us_rep) farray
-
-logic value__size2 : int
-
-logic object__size2 : (t,us_rep) farray -> int
-
-logic value__component__size1 : int
-
-logic object__component__size1 : (t,us_rep) farray -> int
-
-logic value__alignment2 : int
-
-logic object__alignment2 : (t,us_rep) farray -> int
-
-axiom value__size_axiom2 : (0 <= value__size2)
-
-axiom object__size_axiom2 :
-  (forall a:(t,us_rep) farray. (0 <= object__size2(a)))
-
-axiom value__component__size_axiom1 : (0 <= value__component__size1)
-
-axiom object__component__size_axiom1 :
-  (forall a:(t,us_rep) farray. (0 <= object__component__size1(a)))
-
-axiom value__alignment_axiom2 : (0 <= value__alignment2)
-
-axiom object__alignment_axiom2 :
-  (forall a:(t,us_rep) farray. (0 <= object__alignment2(a)))
-
-logic user_eq6 : (t,us_rep) farray, (t,us_rep) farray -> bool
-
-type us_split_fields2 = { rec__logger__log_database__data :
-(t,us_rep) farray; rec__logger__log_database__first : log_index;
-rec__logger__log_database__last : log_index; rec__logger__log_database__empty
-: bool
-}
-
-function us_split_fields_Data__projection(a: us_split_fields2) : (t,us_rep) farray =
-  (a).rec__logger__log_database__data
-
-function us_split_fields_First__projection(a: us_split_fields2) : log_index =
-  (a).rec__logger__log_database__first
-
-function us_split_fields_Last__projection(a: us_split_fields2) : log_index =
-  (a).rec__logger__log_database__last
-
-function us_split_fields_Empty__projection(a: us_split_fields2) : bool =
-  (a).rec__logger__log_database__empty
-
-type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
-}
-
-function us_split_fields__ref___2__projection(a: us_split_fields__ref1) : us_split_fields2 =
-  (a).us_split_fields__content1
-
-type us_rep1 = { us_split_fields3 : us_split_fields2
-}
-
-function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
-  (a).us_split_fields3
-
-logic bool_eq11 : us_rep1, us_rep1 -> bool
-
-axiom bool_eq_def9 :
-  (forall a:us_rep1. forall b:us_rep1 [bool_eq11(a, b)].
-  ((((((bool_eq8(((a).us_split_fields3).rec__logger__log_database__data,
-  rliteral, rliteral1,
-  ((b).us_split_fields3).rec__logger__log_database__data, rliteral,
-  rliteral1) = true) and
-  (to_rep2(((a).us_split_fields3).rec__logger__log_database__first) = to_rep2(((b).us_split_fields3).rec__logger__log_database__first))) and
-  (to_rep2(((a).us_split_fields3).rec__logger__log_database__last) = to_rep2(((b).us_split_fields3).rec__logger__log_database__last))) and
-  (((a).us_split_fields3).rec__logger__log_database__empty = ((b).us_split_fields3).rec__logger__log_database__empty)) ->
-  (bool_eq11(a, b) = true)) and
-  ((not ((((bool_eq8(((a).us_split_fields3).rec__logger__log_database__data,
-  rliteral, rliteral1,
-  ((b).us_split_fields3).rec__logger__log_database__data, rliteral,
-  rliteral1) = true) and
-  (to_rep2(((a).us_split_fields3).rec__logger__log_database__first) = to_rep2(((b).us_split_fields3).rec__logger__log_database__first))) and
-  (to_rep2(((a).us_split_fields3).rec__logger__log_database__last) = to_rep2(((b).us_split_fields3).rec__logger__log_database__last))) and
-  (((a).us_split_fields3).rec__logger__log_database__empty = ((b).us_split_fields3).rec__logger__log_database__empty))) ->
-  (bool_eq11(a, b) = false))))
-
-logic value__size3 : int
-
-logic object__size3 : us_rep1 -> int
-
-logic value__alignment3 : int
-
-logic object__alignment3 : us_rep1 -> int
-
-axiom value__size_axiom3 : (0 <= value__size3)
-
-axiom object__size_axiom3 :
-  (forall a:(t,us_rep) farray. forall a1:log_index. forall a2:log_index.
-  forall a3:bool. (0 <= object__size3({ us_split_fields3 = {
-  rec__logger__log_database__data = a; rec__logger__log_database__first = a1;
-  rec__logger__log_database__last = a2; rec__logger__log_database__empty = a3
-  } })))
-
-axiom value__alignment_axiom3 : (0 <= value__alignment3)
-
-axiom object__alignment_axiom3 :
-  (forall a:(t,us_rep) farray. forall a1:log_index. forall a2:log_index.
-  forall a3:bool. (0 <= object__alignment3({ us_split_fields3 = {
-  rec__logger__log_database__data = a; rec__logger__log_database__first = a1;
-  rec__logger__log_database__last = a2; rec__logger__log_database__empty = a3
-  } })))
-
-logic logger__log_database__data__first__bit : int
-
-logic logger__log_database__data__last__bit : int
-
-logic logger__log_database__data__position : int
-
-axiom logger__log_database__data__first__bit_axiom :
-  (0 <= logger__log_database__data__first__bit)
-
-axiom logger__log_database__data__last__bit_axiom :
-  (logger__log_database__data__first__bit <  logger__log_database__data__last__bit)
-
-axiom logger__log_database__data__position_axiom :
-  (0 <= logger__log_database__data__position)
-
-logic logger__log_database__first__first__bit : int
-
-logic logger__log_database__first__last__bit : int
-
-logic logger__log_database__first__position : int
-
-axiom logger__log_database__first__first__bit_axiom :
-  (0 <= logger__log_database__first__first__bit)
-
-axiom logger__log_database__first__last__bit_axiom :
-  (logger__log_database__first__first__bit <  logger__log_database__first__last__bit)
-
-axiom logger__log_database__first__position_axiom :
-  (0 <= logger__log_database__first__position)
-
-logic logger__log_database__last__first__bit : int
-
-logic logger__log_database__last__last__bit : int
-
-logic logger__log_database__last__position : int
-
-axiom logger__log_database__last__first__bit_axiom :
-  (0 <= logger__log_database__last__first__bit)
-
-axiom logger__log_database__last__last__bit_axiom :
-  (logger__log_database__last__first__bit <  logger__log_database__last__last__bit)
-
-axiom logger__log_database__last__position_axiom :
-  (0 <= logger__log_database__last__position)
-
-logic logger__log_database__empty__first__bit : int
-
-logic logger__log_database__empty__last__bit : int
-
-logic logger__log_database__empty__position : int
-
-axiom logger__log_database__empty__first__bit_axiom :
-  (0 <= logger__log_database__empty__first__bit)
-
-axiom logger__log_database__empty__last__bit_axiom :
-  (logger__log_database__empty__first__bit <  logger__log_database__empty__last__bit)
-
-axiom logger__log_database__empty__position_axiom :
-  (0 <= logger__log_database__empty__position)
-
-logic user_eq7 : us_rep1, us_rep1 -> bool
-
-logic dummy12 : (t,us_rep) farray
-
-logic dummy13 : log_index
-
-logic dummy14 : log_index
-
-logic dummy15 : bool
-
-type log_database__ref = { log_database__content : us_rep1
-}
-
-function log_database__ref___projection(a: log_database__ref) : us_rep1 =
-  (a).log_database__content
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic log_size : us_split_fields2 -> int
-
-logic log_size__function_guard : int, us_split_fields2 -> prop
-
-type natural
-
-predicate in_range4(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq12 : int, int -> bool
-
-axiom bool_eq_def10 :
-  (forall x:int. forall y:int [bool_eq12(x, y)]. (((x = y) -> (bool_eq12(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq12(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE5 : us_image -> int
-
-logic user_eq8 : natural, natural -> bool
-
-logic dummy16 : natural
-
-type natural__ref = { natural__content : natural
-}
-
-function natural__ref___projection(a: natural__ref) : natural =
-  (a).natural__content
-
-axiom log_size__post_axiom :
-  (forall logger__event_log__fields:(t,us_rep) farray.
-  forall logger__event_log__fields1:log_index.
-  forall logger__event_log__fields2:log_index.
-  forall logger__event_log__fields3:bool [log_size({
-  rec__logger__log_database__data = logger__event_log__fields;
-  rec__logger__log_database__first = logger__event_log__fields1;
-  rec__logger__log_database__last = logger__event_log__fields2;
-  rec__logger__log_database__empty = logger__event_log__fields3 })].
-  in_range4(log_size({ rec__logger__log_database__data =
-  logger__event_log__fields; rec__logger__log_database__first =
-  logger__event_log__fields1; rec__logger__log_database__last =
-  logger__event_log__fields2; rec__logger__log_database__empty =
-  logger__event_log__fields3 })))
-
-axiom log_size__def_axiom :
-  (forall logger__event_log__fields:(t,us_rep) farray.
-  forall logger__event_log__fields1:log_index.
-  forall logger__event_log__fields2:log_index.
-  forall logger__event_log__fields3:bool [log_size({
-  rec__logger__log_database__data = logger__event_log__fields;
-  rec__logger__log_database__first = logger__event_log__fields1;
-  rec__logger__log_database__last = logger__event_log__fields2;
-  rec__logger__log_database__empty = logger__event_log__fields3 })].
-  (((logger__event_log__fields3 = true) -> (log_size({
-  rec__logger__log_database__data = logger__event_log__fields;
-  rec__logger__log_database__first = logger__event_log__fields1;
-  rec__logger__log_database__last = logger__event_log__fields2;
-  rec__logger__log_database__empty = logger__event_log__fields3 }) = 0)) and
-  ((not (logger__event_log__fields3 = true)) ->
-  ((ult(to_rep2(logger__event_log__fields2),
-  to_rep2(logger__event_log__fields1)) -> (log_size({
-  rec__logger__log_database__data = logger__event_log__fields;
-  rec__logger__log_database__first = logger__event_log__fields1;
-  rec__logger__log_database__last = logger__event_log__fields2;
-  rec__logger__log_database__empty = logger__event_log__fields3
-  }) = (tqtint(add(sub(to_rep2(logger__event_log__fields2),
-  to_rep2(logger__event_log__fields1)), rliteral2)) + 1))) and
-  ((not ult(to_rep2(logger__event_log__fields2),
-  to_rep2(logger__event_log__fields1))) -> (log_size({
-  rec__logger__log_database__data = logger__event_log__fields;
-  rec__logger__log_database__first = logger__event_log__fields1;
-  rec__logger__log_database__last = logger__event_log__fields2;
-  rec__logger__log_database__empty = logger__event_log__fields3
-  }) = (tqtint(sub(to_rep2(logger__event_log__fields2),
-  to_rep2(logger__event_log__fields1))) + 1)))))))
-
-logic make_entry : t, t, t, t1, bool -> us_rep
-
-logic make_entry__function_guard : us_rep, t, t, t, t1, bool -> prop
-
-axiom make_entry__post_axiom : true
-
-axiom make_entry__def_axiom :
-  (forall ngrotations:t. forall ngclicktime:t. forall millisecs:t.
-  (forall estimatedgroundvelocity:t1.
-  (forall estimatedgroundvelocityisavailable:bool [make_entry(ngrotations,
-  ngclicktime, millisecs, estimatedgroundvelocity,
-  estimatedgroundvelocityisavailable)].
-  (tqtisFinite(estimatedgroundvelocity) -> (make_entry(ngrotations,
-  ngclicktime, millisecs, estimatedgroundvelocity,
-  estimatedgroundvelocityisavailable) = { us_split_fields1 = {
-  rec__logger__log_entry__ngrotations = of_rep1(ngrotations);
-  rec__logger__log_entry__ngclicktime = of_rep1(ngclicktime);
-  rec__logger__log_entry__millisecs = of_rep1(millisecs);
-  rec__logger__log_entry__estimatedgroundvelocity =
-  of_rep(estimatedgroundvelocity);
-  rec__logger__log_entry__estimatedgroundvelocityisavailable =
-  estimatedgroundvelocityisavailable } })))))
 
 logic tmp : t
 
@@ -2334,7 +2344,7 @@ logic mk1 : t, t -> t3
 
 axiom mk_def1 :
   (forall f:t. forall l:t [mk1(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep2(first2(mk1(f, l))) = f) and (to_rep2(last2(mk1(f, l))) = l)))))
+  ((to_rep(first2(mk1(f, l))) = f) and (to_rep(last2(mk1(f, l))) = l)))))
 
 predicate dynamic_property2(range_first: t, range_last: t, low: t, high: t) =
   (in_range2(low) and (in_range2(high) and (ule(low, high) ->
@@ -2349,9 +2359,9 @@ function to_array1(a: us_t1) : (t,us_rep) farray = (a).elts1
 function of_array1(a: (t,us_rep) farray, f: t, l: t) : us_t1 = { elts1 = a;
   rt1 = mk1(f, l) }
 
-function first3(a: us_t1) : t = to_rep2(first2((a).rt1))
+function first3(a: us_t1) : t = to_rep(first2((a).rt1))
 
-function last3(a: us_t1) : t = to_rep2(last2((a).rt1))
+function last3(a: us_t1) : t = to_rep(last2((a).rt1))
 
 logic length1 : us_t1 -> int
 
@@ -2388,8 +2398,8 @@ axiom object__alignment_axiom4 :
   (forall a:(t,us_rep) farray. (0 <= object__alignment4(a)))
 
 function bool_eq14(x: us_t1, y: us_t1) : bool = bool_eq8((x).elts1,
-  to_rep2(first2((x).rt1)), to_rep2(last2((x).rt1)), (y).elts1,
-  to_rep2(first2((y).rt1)), to_rep2(last2((y).rt1)))
+  to_rep(first2((x).rt1)), to_rep(last2((x).rt1)), (y).elts1,
+  to_rep(first2((y).rt1)), to_rep(last2((y).rt1)))
 
 logic user_eq10 : us_t1, us_t1 -> bool
 
@@ -2454,7 +2464,7 @@ logic mk2 : t, t -> t4
 
 axiom mk_def2 :
   (forall f:t. forall l:t [mk2(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep2(first4(mk2(f, l))) = f) and (to_rep2(last4(mk2(f, l))) = l)))))
+  ((to_rep(first4(mk2(f, l))) = f) and (to_rep(last4(mk2(f, l))) = l)))))
 
 predicate dynamic_property4(range_first: t, range_last: t, low: t, high: t) =
   (in_range2(low) and (in_range2(high) and (ule(low, high) ->
@@ -2469,9 +2479,9 @@ function to_array2(a: us_t2) : (t,us_rep) farray = (a).elts2
 function of_array2(a: (t,us_rep) farray, f: t, l: t) : us_t2 = { elts2 = a;
   rt2 = mk2(f, l) }
 
-function first5(a: us_t2) : t = to_rep2(first4((a).rt2))
+function first5(a: us_t2) : t = to_rep(first4((a).rt2))
 
-function last5(a: us_t2) : t = to_rep2(last4((a).rt2))
+function last5(a: us_t2) : t = to_rep(last4((a).rt2))
 
 logic length2 : us_t2 -> int
 
@@ -2508,8 +2518,8 @@ axiom object__alignment_axiom5 :
   (forall a:(t,us_rep) farray. (0 <= object__alignment5(a)))
 
 function bool_eq16(x: us_t2, y: us_t2) : bool = bool_eq8((x).elts2,
-  to_rep2(first4((x).rt2)), to_rep2(last4((x).rt2)), (y).elts2,
-  to_rep2(first4((y).rt2)), to_rep2(last4((y).rt2)))
+  to_rep(first4((x).rt2)), to_rep(last4((x).rt2)), (y).elts2,
+  to_rep(first4((y).rt2)), to_rep(last4((y).rt2)))
 
 logic user_eq12 : us_t2, us_t2 -> bool
 
@@ -2567,7 +2577,7 @@ logic mk3 : t, t -> t5
 
 axiom mk_def3 :
   (forall f:t. forall l:t [mk3(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep2(first6(mk3(f, l))) = f) and (to_rep2(last6(mk3(f, l))) = l)))))
+  ((to_rep(first6(mk3(f, l))) = f) and (to_rep(last6(mk3(f, l))) = l)))))
 
 predicate dynamic_property6(range_first: t, range_last: t, low: t, high: t) =
   (in_range2(low) and (in_range2(high) and (ule(low, high) ->
@@ -2582,9 +2592,9 @@ function to_array3(a: us_t3) : (t,us_rep) farray = (a).elts3
 function of_array3(a: (t,us_rep) farray, f: t, l: t) : us_t3 = { elts3 = a;
   rt3 = mk3(f, l) }
 
-function first7(a: us_t3) : t = to_rep2(first6((a).rt3))
+function first7(a: us_t3) : t = to_rep(first6((a).rt3))
 
-function last7(a: us_t3) : t = to_rep2(last6((a).rt3))
+function last7(a: us_t3) : t = to_rep(last6((a).rt3))
 
 logic length3 : us_t3 -> int
 
@@ -2621,8 +2631,8 @@ axiom object__alignment_axiom6 :
   (forall a:(t,us_rep) farray. (0 <= object__alignment6(a)))
 
 function bool_eq18(x: us_t3, y: us_t3) : bool = bool_eq8((x).elts3,
-  to_rep2(first6((x).rt3)), to_rep2(last6((x).rt3)), (y).elts3,
-  to_rep2(first6((y).rt3)), to_rep2(last6((y).rt3)))
+  to_rep(first6((x).rt3)), to_rep(last6((x).rt3)), (y).elts3,
+  to_rep(first6((y).rt3)), to_rep(last6((y).rt3)))
 
 logic user_eq14 : us_t3, us_t3 -> bool
 
@@ -2672,7 +2682,7 @@ logic mk4 : t, t -> t6
 
 axiom mk_def4 :
   (forall f:t. forall l:t [mk4(f, l)]. (in_range2(f) -> (in_range2(l) ->
-  ((to_rep2(first8(mk4(f, l))) = f) and (to_rep2(last8(mk4(f, l))) = l)))))
+  ((to_rep(first8(mk4(f, l))) = f) and (to_rep(last8(mk4(f, l))) = l)))))
 
 predicate dynamic_property8(range_first: t, range_last: t, low: t, high: t) =
   (in_range2(low) and (in_range2(high) and (ule(low, high) ->
@@ -2687,9 +2697,9 @@ function to_array4(a: us_t4) : (t,us_rep) farray = (a).elts4
 function of_array4(a: (t,us_rep) farray, f: t, l: t) : us_t4 = { elts4 = a;
   rt4 = mk4(f, l) }
 
-function first9(a: us_t4) : t = to_rep2(first8((a).rt4))
+function first9(a: us_t4) : t = to_rep(first8((a).rt4))
 
-function last9(a: us_t4) : t = to_rep2(last8((a).rt4))
+function last9(a: us_t4) : t = to_rep(last8((a).rt4))
 
 logic length4 : us_t4 -> int
 
@@ -2726,8 +2736,8 @@ axiom object__alignment_axiom7 :
   (forall a:(t,us_rep) farray. (0 <= object__alignment7(a)))
 
 function bool_eq20(x: us_t4, y: us_t4) : bool = bool_eq8((x).elts4,
-  to_rep2(first8((x).rt4)), to_rep2(last8((x).rt4)), (y).elts4,
-  to_rep2(first8((y).rt4)), to_rep2(last8((y).rt4)))
+  to_rep(first8((x).rt4)), to_rep(last8((x).rt4)), (y).elts4,
+  to_rep(first8((y).rt4)), to_rep(last8((y).rt4)))
 
 logic user_eq16 : us_t4, us_t4 -> bool
 
@@ -2740,13 +2750,13 @@ type t13b__ref = { t13b__content : us_t4
 
 function t13b__ref___projection(a: t13b__ref) : us_t4 = (a).t13b__content
 
-logic temp___322 : us_rep -> (t,us_rep) farray
+logic temp_____aggregate_def_322 : us_rep -> (t,us_rep) farray
 
 axiom def_axiom :
   (forall temp___324:unsigned_16. forall temp___3241:unsigned_16.
   forall temp___3242:unsigned_16. forall temp___3243:long_float.
   forall temp___3244:bool.
-  (forall temp___325:t. ((temp___322({ us_split_fields1 = {
+  (forall temp___325:t. ((temp_____aggregate_def_322({ us_split_fields1 = {
   rec__logger__log_entry__ngrotations = temp___324;
   rec__logger__log_entry__ngclicktime = temp___3241;
   rec__logger__log_entry__millisecs = temp___3242;
@@ -2777,26 +2787,26 @@ goal WP_parameter_def :
   rec__logger__log_database__first = event_log__split_fields1;
   rec__logger__log_database__last = event_log__split_fields2;
   rec__logger__log_database__empty = event_log__split_fields3 })) and
-  (in_range4(o) and (((event_log__split_fields3 = true) and (o = 0)) or
+  (in_range3(o) and (((event_log__split_fields3 = true) and (o = 0)) or
   ((not (event_log__split_fields3 = true)) and
-  ((ult(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1)) and
-  (o = (tqtint(add(sub(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1)), rliteral2)) + 1))) or
-  ((not ult(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1))) and
-  (o = (tqtint(sub(to_rep2(event_log__split_fields2),
-  to_rep2(event_log__split_fields1))) + 1)))))))) and (o1 = (o - 1))) and
+  ((ult(to_rep(event_log__split_fields2),
+  to_rep(event_log__split_fields1)) and
+  (o = (tqtint(add(sub(to_rep(event_log__split_fields2),
+  to_rep(event_log__split_fields1)), rliteral2)) + 1))) or
+  ((not ult(to_rep(event_log__split_fields2),
+  to_rep(event_log__split_fields1))) and
+  (o = (tqtint(sub(to_rep(event_log__split_fields2),
+  to_rep(event_log__split_fields1))) + 1)))))))) and (o1 = (o - 1))) and
   ((o2 = o1) and in_range_int(o1))) and
   (logger__log_content__B_1__tmp__assume = of_int(o2))) and
   (logger__log_content__B_1__tmp__assume = tmp)) -> (in_range2(tmp) ->
-  ((dynamic_property2(rliteral, tmp, to_rep2(result____first),
-  to_rep2(result____last)) and ((to_rep2(result____first) = rliteral) and
-  (to_rep2(result____last) = tmp))) ->
-  ((not ule(to_rep2(event_log__split_fields1),
-  to_rep2(event_log__split_fields2))) ->
-  (((to_rep2(event_log__split_fields1) = r8b) and in_range2(r8b)) ->
-  (((to_rep2(event_log__split_fields2) = r11b) and in_range2(r11b)) ->
+  ((dynamic_property2(rliteral, tmp, to_rep(result____first),
+  to_rep(result____last)) and ((to_rep(result____first) = rliteral) and
+  (to_rep(result____last) = tmp))) ->
+  ((not ule(to_rep(event_log__split_fields1),
+  to_rep(event_log__split_fields2))) ->
+  (((to_rep(event_log__split_fields1) = r8b) and in_range2(r8b)) ->
+  (((to_rep(event_log__split_fields2) = r11b) and in_range2(r11b)) ->
   (((((ule(rliteral, r11b) -> ((ule(rliteral, rliteral) and ule(rliteral,
   rliteral1)) and (ule(rliteral, r11b) and ule(r11b, rliteral1)))) and
   (o3 = event_log__split_fields)) and ((o3 = temp___313) and (mk4(rliteral,
@@ -2805,28 +2815,28 @@ goal WP_parameter_def :
   ule(rliteral1, rliteral1)))) and (o4 = event_log__split_fields)) and
   ((o4 = temp___312) and (mk3(r8b, rliteral1) = temp___3121))) and
   (((length3({ elts3 = temp___312; rt3 = temp___3121 }) = 0) and
-  ((temp___313 = temp___314) and (mk(to_rep2(first8(temp___3131)),
-  to_rep2(last8(temp___3131))) = temp___3141))) or ((not (length3({ elts3 =
+  ((temp___313 = temp___314) and (mk(to_rep(first8(temp___3131)),
+  to_rep(last8(temp___3131))) = temp___3141))) or ((not (length3({ elts3 =
   temp___312; rt3 = temp___3121 }) = 0)) and
-  (((((((((tqtint(to_rep2(first8(temp___3131))) <= tqtint(to_rep2(last8(temp___3131)))) and
-  (o5 = ((tqtint(to_rep2(last8(temp___3131))) - tqtint(to_rep2(first8(temp___3131)))) + 1))) or
-  ((not (tqtint(to_rep2(first8(temp___3131))) <= tqtint(to_rep2(last8(temp___3131))))) and
+  (((((((((tqtint(to_rep(first8(temp___3131))) <= tqtint(to_rep(last8(temp___3131)))) and
+  (o5 = ((tqtint(to_rep(last8(temp___3131))) - tqtint(to_rep(first8(temp___3131)))) + 1))) or
+  ((not (tqtint(to_rep(first8(temp___3131))) <= tqtint(to_rep(last8(temp___3131))))) and
   (o5 = 0))) and
-  ((((tqtint(to_rep2(first6(temp___3121))) <= tqtint(to_rep2(last6(temp___3121)))) and
-  (o6 = ((tqtint(to_rep2(last6(temp___3121))) - tqtint(to_rep2(first6(temp___3121)))) + 1))) or
-  ((not (tqtint(to_rep2(first6(temp___3121))) <= tqtint(to_rep2(last6(temp___3121))))) and
+  ((((tqtint(to_rep(first6(temp___3121))) <= tqtint(to_rep(last6(temp___3121)))) and
+  (o6 = ((tqtint(to_rep(last6(temp___3121))) - tqtint(to_rep(first6(temp___3121)))) + 1))) or
+  ((not (tqtint(to_rep(first6(temp___3121))) <= tqtint(to_rep(last6(temp___3121))))) and
   (o6 = 0))) and (o7 = (o6 + o5)))) and
-  (o8 = (tqtint(to_rep2(first6(temp___3121))) + o7))) and
-  (o9 = (o8 - 1))) and ((o10 = o9) and in_range_int(o9))) and
-  (o11 = of_int(o10))) and ((concat(temp___312, to_rep2(first6(temp___3121)),
-  to_rep2(last6(temp___3121)), temp___313, to_rep2(first8(temp___3131)),
-  to_rep2(last8(temp___3131))) = temp___314) and
-  (mk(to_rep2(first6(temp___3121)), o11) = temp___3141))))))) ->
-  (((tqtint(to_rep2(first(temp___3141))) <= tqtint(to_rep2(last(temp___3141)))) ->
+  (o8 = (tqtint(to_rep(first6(temp___3121))) + o7))) and (o9 = (o8 - 1))) and
+  ((o10 = o9) and in_range_int(o9))) and (o11 = of_int(o10))) and
+  ((concat(temp___312, to_rep(first6(temp___3121)),
+  to_rep(last6(temp___3121)), temp___313, to_rep(first8(temp___3131)),
+  to_rep(last8(temp___3131))) = temp___314) and
+  (mk(to_rep(first6(temp___3121)), o11) = temp___3141))))))) ->
+  (((tqtint(to_rep(first(temp___3141))) <= tqtint(to_rep(last(temp___3141)))) ->
   (((tqtint(rliteral) <= tqtint(tmp)) ->
-  (((tqtint(to_rep2(last(temp___3141))) - tqtint(to_rep2(first(temp___3141)))) + 1) = ((tqtint(tmp) - tqtint(rliteral)) + 1))) and
+  (((tqtint(to_rep(last(temp___3141))) - tqtint(to_rep(first(temp___3141)))) + 1) = ((tqtint(tmp) - tqtint(rliteral)) + 1))) and
   ((not (tqtint(rliteral) <= tqtint(tmp))) ->
-  (((tqtint(to_rep2(last(temp___3141))) - tqtint(to_rep2(first(temp___3141)))) + 1) = 0)))) and
-  ((not (tqtint(to_rep2(first(temp___3141))) <= tqtint(to_rep2(last(temp___3141))))) ->
+  (((tqtint(to_rep(last(temp___3141))) - tqtint(to_rep(first(temp___3141)))) + 1) = 0)))) and
+  ((not (tqtint(to_rep(first(temp___3141))) <= tqtint(to_rep(last(temp___3141))))) ->
   ((tqtint(rliteral) <= tqtint(tmp)) ->
   (0 = ((tqtint(tmp) - tqtint(rliteral)) + 1))))))))))))))

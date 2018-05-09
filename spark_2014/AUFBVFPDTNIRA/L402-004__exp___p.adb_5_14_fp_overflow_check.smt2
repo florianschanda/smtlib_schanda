@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -147,13 +150,7 @@
 
 (declare-const o1 Bool)
 
-(declare-const o2 Int)
-
 (declare-const result Bool)
-
-(declare-const result1 Int)
-
-(declare-const x1 Int)
 
 ;; H
   (assert (in_range x))
@@ -162,7 +159,10 @@
   (assert (fp.isFinite32 y))
 
 ;; H
-  (assert (and (= o (abs x)) (in_range (abs x))))
+  (assert (= o (abs x)))
+
+;; H
+  (assert (in_range (abs x)))
 
 ;; H
   (assert (= o1 (ite (< o 1000) true false)))
@@ -177,13 +177,7 @@
   (assert (= result true))
 
 ;; H
-  (assert (and (= o2 (* x x)) (in_range (* x x))))
-
-;; H
-  (assert (= result1 x))
-
-;; H
-  (assert (= x1 o2))
+  (assert (in_range (* x x)))
 
 (assert
 ;; WP_parameter_def

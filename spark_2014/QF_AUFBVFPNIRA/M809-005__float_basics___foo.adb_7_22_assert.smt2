@@ -122,11 +122,11 @@
   (assert (fp.isFinite64 y))
 
 ;; H
-  (assert (fp.eq ((_ to_fp 8 24) RNE y) x))
+  (assert (fp.eq ((_ to_fp 11 53) RNE x) y))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 444, characters 0-0
-  (not (fp.eq ((_ to_fp 11 53) RNE x) y)))
+  (not (fp.eq ((_ to_fp 8 24) RNE y) x)))
 (check-sat)
 (exit)

@@ -1175,6 +1175,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1252,20 +1258,25 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-logic x : t
+logic to_float : int -> t
 
-logic attr__ATTRIBUTE_ADDRESS : int
+logic to_float__function_guard : t, int -> prop
 
 type source
 
-predicate in_range3(x1: int) = (((- 2147483648) <= x1) and
-  (x1 <= 2147483647))
+logic sourceqtint : source -> int
+
+axiom sourceqtaxiom :
+  (forall i:source. (((- 2147483648) <= sourceqtint(i)) and
+  (sourceqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
 axiom bool_eq_def4 :
-  (forall x1:int. forall y:int [bool_eq5(x1, y)]. (((x1 = y) -> (bool_eq5(x1,
-  y) = true)) and ((not (x1 = y)) -> (bool_eq5(x1, y) = false))))
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
 
@@ -1288,8 +1299,8 @@ type target
 logic bool_eq6 : t, t -> bool
 
 axiom bool_eq_def5 :
-  (forall x1:t. forall y:t [bool_eq6(x1, y)]. ((eq(x1, y) -> (bool_eq6(x1,
-  y) = true)) and ((not eq(x1, y)) -> (bool_eq6(x1, y) = false))))
+  (forall x:t. forall y:t [bool_eq6(x, y)]. ((eq(x, y) -> (bool_eq6(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq6(x, y) = false))))
 
 logic user_eq3 : target, target -> bool
 
@@ -1307,20 +1318,20 @@ type target__ref = { target__content : target
 function target__ref___projection(a: target__ref) : target =
   (a).target__content
 
-logic to_float : int -> t
-
-logic to_float__function_guard : t, int -> prop
-
 axiom to_float__post_axiom :
   (forall s:int [to_float(s)]. (in_range3(s) -> tqtisFinite(to_float(s))))
+
+logic to_int2 : t -> int
+
+logic to_int__function_guard : int, t -> prop
 
 type source1
 
 logic bool_eq7 : t, t -> bool
 
 axiom bool_eq_def6 :
-  (forall x1:t. forall y:t [bool_eq7(x1, y)]. ((eq(x1, y) -> (bool_eq7(x1,
-  y) = true)) and ((not eq(x1, y)) -> (bool_eq7(x1, y) = false))))
+  (forall x:t. forall y:t [bool_eq7(x, y)]. ((eq(x, y) -> (bool_eq7(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq7(x, y) = false))))
 
 logic user_eq4 : source1, source1 -> bool
 
@@ -1340,14 +1351,19 @@ function source__ref___2__projection(a: source__ref1) : source1 =
 
 type target1
 
-predicate in_range4(x1: int) = (((- 2147483648) <= x1) and
-  (x1 <= 2147483647))
+logic targetqtint : target1 -> int
+
+axiom targetqtaxiom :
+  (forall i:target1. (((- 2147483648) <= targetqtint(i)) and
+  (targetqtint(i) <= 2147483647)))
+
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
 
 axiom bool_eq_def7 :
-  (forall x1:int. forall y:int [bool_eq8(x1, y)]. (((x1 = y) -> (bool_eq8(x1,
-  y) = true)) and ((not (x1 = y)) -> (bool_eq8(x1, y) = false))))
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
 
 logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
 
@@ -1365,12 +1381,12 @@ type target__ref1 = { target__content1 : target1
 function target__ref___2__projection(a: target__ref1) : target1 =
   (a).target__content1
 
-logic to_int2 : t -> int
-
-logic to_int__function_guard : int, t -> prop
-
 axiom to_int__post_axiom :
   (forall s:t [to_int2(s)]. (tqtisFinite(s) -> in_range4(to_int2(s))))
+
+logic x : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
@@ -1408,11 +1424,17 @@ logic fliteral4 : t
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.0000099999997473787516355514526367187500))
 
- (* File "system.ads", line 1, characters 0-0 *)
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 1.00499999523162841796875))
+
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10253, characters 5-8 *)
 goal WP_parameter_def :
   (forall i:int. forall y:t. forall o:int. forall o1:int. forall o2:t.
   forall o3:t. forall o4:t. forall o5:t. forall o6:t. forall o7:t.
-  forall o8:t. forall o9:t. forall o10:t. forall o11:t. forall result:int.
+  forall o8:t. forall o9:t. forall o10:t. forall o11:t. forall o12:t.
+  forall o13:t. forall o14:t. forall o15:bool. forall result:int.
   forall i1:int. forall result1:int. forall i2:int. forall result2:t.
   forall y1:t. forall result3:t. forall y2:t. (tqtisFinite(x) ->
   ((((- 2147483648) <= 2147483647) -> in_range2(i)) -> ((le(neg(fliteral3),
@@ -1425,9 +1447,14 @@ goal WP_parameter_def :
   ((result2 = y) and (y1 = o2))) -> ((((((((((o3 = mul(NearestTiesToEven, y1,
   y1)) and tqtisFinite(mul(NearestTiesToEven, y1, y1))) and
   (o4 = mul(NearestTiesToEven, x2, o3))) and ((o5 = o4) and
-  tqtisFinite(o4))) and (o6 = sub(NearestTiesToEven, fliteral2, o5))) and
+  tqtisFinite(o4))) and (o6 = sub(NearestTiesToEven, threehalfs, o5))) and
   ((o7 = o6) and tqtisFinite(o6))) and (o8 = mul(NearestTiesToEven, y1,
   o7))) and ((o9 = o8) and tqtisFinite(o8))) and ((result3 = y1) and
-  (y2 = o9))) -> ((((o10 = mul(NearestTiesToEven, y2, y2)) and
+  (y2 = o9))) -> ((((((o12 = mul(NearestTiesToEven, y2, y2)) and
   tqtisFinite(mul(NearestTiesToEven, y2, y2))) and
-  (o11 = mul(NearestTiesToEven, o10, x))) -> tqtisFinite(o11))))))))))))))
+  (o13 = mul(NearestTiesToEven, o12, x))) and ((o14 = o13) and
+  tqtisFinite(o13))) and ((le(o14, fliteral5) and (o15 = true)) or
+  ((not le(o14, fliteral5)) and (o15 = false)))) ->
+  ((((o10 = mul(NearestTiesToEven, y2, y2)) and
+  tqtisFinite(mul(NearestTiesToEven, y2, y2))) and
+  (o11 = mul(NearestTiesToEven, o10, x))) -> tqtisFinite(o11)))))))))))))))

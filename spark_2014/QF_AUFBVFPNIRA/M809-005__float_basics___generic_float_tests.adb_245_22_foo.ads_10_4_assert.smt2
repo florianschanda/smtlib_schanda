@@ -68,7 +68,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/M809-005__float_basics/proof/sessions/foo/../../../gnatprove/foo.mlw", line 10724, characters 5-8
   (not (fp.eq f (fp #b0 #b00000000 #b00000000000000000000000))))
 (check-sat)
 (exit)

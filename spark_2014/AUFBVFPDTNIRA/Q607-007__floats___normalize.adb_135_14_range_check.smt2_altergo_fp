@@ -1063,6 +1063,10 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
+logic r3 : t -> t
+
+logic r3__function_guard : t, t -> prop
+
 type t_float32
 
 logic fliteral1 : t
@@ -1094,6 +1098,14 @@ type t_float32__ref = { t_float32__content : t_float32
 
 function t_float32__ref___projection(a: t_float32__ref) : t_float32 =
   (a).t_float32__content
+
+axiom r3__post_axiom :
+  (forall x:t [r3(x)]. ((in_range2(x) and le(neg(fliteral1), x)) ->
+  ((le(r3(x), x) and le(sub(NearestTiesToEven, x, fliteral), r3(x))) and
+  in_range2(r3(x)))))
+
+axiom r3__def_axiom :
+  (forall x:t [r3(x)]. (in_range2(x) -> (r3(x) = roundToIntegral(Down, x))))
 
 type t1
 
@@ -1165,19 +1177,6 @@ function t2__ref___projection(a: t2__ref) : t2 = (a).t2__content
 logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
-
-logic r3 : t -> t
-
-logic r3__function_guard : t, t -> prop
-
-axiom r3__post_axiom :
-  (forall x1:t [r3(x1)]. ((in_range2(x1) and le(neg(fliteral1), x1)) ->
-  ((le(r3(x1), x1) and le(sub(NearestTiesToEven, x1, fliteral), r3(x1))) and
-  in_range2(r3(x1)))))
-
-axiom r3__def_axiom :
-  (forall x1:t [r3(x1)]. (in_range2(x1) -> (r3(x1) = roundToIntegral(Down,
-  x1))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 

@@ -54,10 +54,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -80,7 +76,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -98,10 +94,6 @@
 
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero x)
                                               (fp.isNegative x)))
-
-(declare-fun of_int1 (RoundingMode Int) Float64)
-
-(declare-fun to_int2 (RoundingMode Float64) Int)
 
 (declare-const max_int1 Int)
 
@@ -208,6 +200,10 @@
   (assert
   (= max_double (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
 
+(declare-const o Float32)
+
+(declare-const o1 Float32)
+
 (declare-const x Float32)
 
 (declare-const y Float32)
@@ -216,26 +212,6 @@
 
 (declare-const t Float32)
 
-(declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const result Float32)
-
-(declare-const x1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const y1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const z1 Float32)
-
-(declare-const result3 Float32)
-
-(declare-const t1 Float32)
-
 ;; H
   (assert (fp.isFinite32 max_float))
 
@@ -243,69 +219,60 @@
   (assert (fp.isFinite64 max_double))
 
 ;; H
-  (assert (= result x))
+  (assert (= x (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (= x1 (fp #b0 #b00000000 #b00000000000000000000000)))
+  (assert (fp.isFinite32 x))
 
 ;; H
-  (assert (fp.isFinite32 x1))
+  (assert (= y (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert (= result1 y))
+  (assert (fp.isFinite32 y))
 
 ;; H
-  (assert (= y1 (fp #b0 #b01111111 #b00000000000000000000000)))
+  (assert (= z (fp #b0 #b01111110 #b00000000000000000000000)))
 
 ;; H
-  (assert (fp.isFinite32 y1))
+  (assert (fp.isFinite32 z))
 
 ;; H
-  (assert (= result2 z))
+  (assert (= o (fp.add RNE x y)))
 
 ;; H
-  (assert (= z1 (fp #b0 #b01111110 #b00000000000000000000000)))
-
-;; H
-  (assert (fp.isFinite32 z1))
-
-;; H
-  (assert (and (= o (fp.add RNE x1 y1)) (fp.isFinite32 (fp.add RNE x1 y1))))
+  (assert (fp.isFinite32 (fp.add RNE x y)))
 
 ;; H
   (assert
   (= o1 (fp.div RNE o (fp #b0 #b10000000 #b00000000000000000000000))))
 
 ;; H
-  (assert (= result3 t))
+  (assert (= t o1))
 
 ;; H
-  (assert (= t1 o1))
+  (assert (fp.isFinite32 t))
 
 ;; H
-  (assert (fp.isFinite32 t1))
+  (assert (fp.eq (fp.roundToIntegral RTN x) x))
 
 ;; H
-  (assert (fp.eq (fp.roundToIntegral RTN x1) x1))
+  (assert (fp.eq (fp.roundToIntegral RTN y) y))
 
 ;; H
-  (assert (fp.eq (fp.roundToIntegral RTN y1) y1))
+  (assert (fp.eq (fp.roundToIntegral RTN z) x))
 
 ;; H
-  (assert (fp.eq (fp.roundToIntegral RTN z1) x1))
+  (assert (fp.eq (fp.roundToIntegral RTN t) x))
 
 ;; H
-  (assert (fp.eq (fp.roundToIntegral RTN t1) x1))
+  (assert (fp.eq (fp.roundToIntegral RTP x) x))
 
 ;; H
-  (assert (fp.eq (fp.roundToIntegral RTP x1) x1))
-
-;; H
-  (assert (fp.eq (fp.roundToIntegral RTP y1) y1))
+  (assert (fp.eq (fp.roundToIntegral RTP y) y))
 
 (assert
 ;; WP_parameter_def
  ;; File "testfloat.adb", line 11, characters 0-0
-  (not (fp.eq (fp.roundToIntegral RTP z1) y1)))
+  (not (fp.eq (fp.roundToIntegral RTP z) y)))
 (check-sat)
 (exit)

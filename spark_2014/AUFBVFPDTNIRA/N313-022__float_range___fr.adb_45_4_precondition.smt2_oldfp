@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1050,28 +1050,32 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(declare-sort float1 0)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-sort float2 0)
 
 (declare-const fliteral1 t)
 
 ;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral1)
-  (= (tqtreal fliteral1) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
+  (assert (and (tqtisFinite fliteral1) (= (tqtreal fliteral1) (/ 0.0 10.0))))
 
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
   (assert
   (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 899999976158142089843750.0 1000000000000000000000000.0))))
+  (= (tqtreal fliteral2) (/ 20999999046325683593750.0 10000000000000000000000.0))))
 
 (define-fun in_range1 ((x t)) Bool (and (tqtisFinite x)
                                    (and (le fliteral1 x) (le x fliteral2))))
 
 (define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq (float1 float1) Bool)
+(declare-fun user_eq (float2 float2) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (t) us_image)
 
@@ -1079,40 +1083,42 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) t)
 
-(declare-const dummy float1)
+(declare-const dummy float2)
 
 (declare-datatypes ()
-((float1__ref (mk_float1__ref (float1__content float1)))))
-(define-fun float1__ref___projection ((a float1__ref)) float1 (float1__content
+((float2__ref (mk_float2__ref (float2__content float2)))))
+(define-fun float2__ref___projection ((a float2__ref)) float2 (float2__content
                                                               a))
 
-(define-fun dynamic_invariant ((temp___expr_200 t) (temp___is_init_196 Bool)
-  (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool)
-  (temp___do_typ_inv_199 Bool)) Bool (=>
-                                     (or (= temp___is_init_196 true) (le
+(define-fun dynamic_invariant ((temp___expr_207 t) (temp___is_init_203 Bool)
+  (temp___skip_constant_204 Bool) (temp___do_toplevel_205 Bool)
+  (temp___do_typ_inv_206 Bool)) Bool (=>
+                                     (or (= temp___is_init_203 true) (le
                                      fliteral1 fliteral2)) (in_range1
-                                     temp___expr_200)))
+                                     temp___expr_207)))
 
-(declare-sort float2 0)
+(declare-sort float1 0)
 
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
+  (assert
+  (and (tqtisFinite fliteral3)
+  (= (tqtreal fliteral3) (/ 500000000000000000000000.0 1000000000000000000000000.0))))
 
 (declare-const fliteral4 t)
 
 ;; fliteral_axiom
   (assert
   (and (tqtisFinite fliteral4)
-  (= (tqtreal fliteral4) (/ 20999999046325683593750.0 10000000000000000000000.0))))
+  (= (tqtreal fliteral4) (/ 899999976158142089843750.0 1000000000000000000000000.0))))
 
 (define-fun in_range2 ((x t)) Bool (and (tqtisFinite x)
                                    (and (le fliteral3 x) (le x fliteral4))))
 
 (define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq1 (float2 float2) Bool)
+(declare-fun user_eq1 (float1 float1) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
 
@@ -1120,25 +1126,19 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
 
-(declare-const dummy1 float2)
+(declare-const dummy1 float1)
 
 (declare-datatypes ()
-((float2__ref (mk_float2__ref (float2__content float2)))))
-(define-fun float2__ref___projection ((a float2__ref)) float2 (float2__content
+((float1__ref (mk_float1__ref (float1__content float1)))))
+(define-fun float1__ref___projection ((a float1__ref)) float1 (float1__content
                                                               a))
 
-(define-fun dynamic_invariant1 ((temp___expr_207 t) (temp___is_init_203 Bool)
-  (temp___skip_constant_204 Bool) (temp___do_toplevel_205 Bool)
-  (temp___do_typ_inv_206 Bool)) Bool (=>
-                                     (or (= temp___is_init_203 true) (le
+(define-fun dynamic_invariant1 ((temp___expr_200 t) (temp___is_init_196 Bool)
+  (temp___skip_constant_197 Bool) (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true) (le
                                      fliteral3 fliteral4)) (in_range2
-                                     temp___expr_207)))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+                                     temp___expr_200)))
 
 (assert
 ;; WP_parameter_def

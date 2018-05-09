@@ -73,8 +73,6 @@
                                      (<= 0 2147483647)) (in_range2
                                      temp___expr_208)))
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
-
 (declare-const abstr Bool)
 
 (define-fun bool_eq ((a (Array Int Bool)) (a__first Int) (a__last Int)
@@ -87,6 +85,8 @@
                       true false))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
@@ -111,13 +111,13 @@
 
 (declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
 
-(declare-const temp___296 Int)
+(declare-const temp___298 Int)
 
-(declare-const temp___295 Int)
+(declare-const temp___297 Int)
 
-(declare-const temp___293 (Array Int Bool))
+(declare-const temp___295 (Array Int Bool))
 
-(declare-const temp___292 Int)
+(declare-const temp___294 Int)
 
 (declare-const v Int)
 
@@ -137,9 +137,9 @@
 
 (declare-const o5 Int)
 
-(declare-const temp___290 (Array Int Bool))
+(declare-const temp___292 (Array Int Bool))
 
-(declare-const temp___289 Int)
+(declare-const temp___291 Int)
 
 (declare-const o6 Int)
 
@@ -332,19 +332,19 @@
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___296 index_1)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___298 index_1)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___295 index_21)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___297 index_21)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___293 is_prime3)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___295 is_prime3)))
 
 ;; H
   (assert
-  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___292 index_3)))
+  (=> (and (<= 2 index_21) (<= index_21 r87b)) (= temp___294 index_3)))
 
 ;; H
   (assert
@@ -409,12 +409,12 @@
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= temp___290 is_prime4)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= temp___292 is_prime4)))))
 
 ;; H
   (assert
   (=> (and (<= 2 index_21) (<= index_21 r87b))
-  (=> (= result4 true) (=> (<= index_33 100000) (= temp___289 index_33)))))
+  (=> (= result4 true) (=> (<= index_33 100000) (= temp___291 index_33)))))
 
 ;; H
   (assert

@@ -1842,5 +1842,5 @@ goal WP_parameter_def :
   fliteral1)) -> ((le1(neg1(fliteral1), to_rep1((b5[3]))) and
   le1(to_rep1((b5[3])), fliteral1)) -> ((le1(neg1(fliteral1),
   to_rep1((b5[4]))) and le1(to_rep1((b5[4])), fliteral1)) ->
-  (forall i:int. (((1 <= i) and (i <= 4)) -> le1(neg1(fliteral1),
-  to_rep1((b5[i])))))))))))))))))))))))))))))))))))))))
+  (forall i:int. (((1 <= i) and (i <= 4)) -> le1(to_rep1((b5[i])),
+  fliteral1)))))))))))))))))))))))))))))))))))))

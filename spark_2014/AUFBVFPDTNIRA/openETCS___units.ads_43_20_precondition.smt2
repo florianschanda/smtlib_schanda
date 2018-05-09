@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -92,6 +88,14 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
+
+(declare-fun is_valid_speed_km_per_h (Float32) Bool)
+
+(declare-fun is_valid_speed_km_per_h__function_guard (Bool Float32) Bool)
+
+(declare-fun m_per_s_from_km_per_h (Float32) Float32)
+
+(declare-fun m_per_s_from_km_per_h__function_guard (Float32 Float32) Bool)
 
 (declare-sort speed_t 0)
 
@@ -144,14 +148,6 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_165)))
 
-(declare-fun is_valid_speed_km_per_h (Float32) Bool)
-
-(declare-fun is_valid_speed_km_per_h__function_guard (Bool Float32) Bool)
-
-(declare-fun m_per_s_from_km_per_h (Float32) Float32)
-
-(declare-fun m_per_s_from_km_per_h__function_guard (Float32 Float32) Bool)
-
 ;; m_per_s_from_km_per_h__post_axiom
   (assert
   (forall ((speed Float32))
@@ -168,9 +164,17 @@
      (= (m_per_s_from_km_per_h speed) (fp.div RNE (fp.mul RNE speed (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000)))) :pattern (
   (m_per_s_from_km_per_h speed)) )))
 
-(declare-const speed Float32)
+(declare-const maximum_valid_speed_km_per_h Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const speed Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
 
 ;; is_valid_speed_km_per_h__post_axiom
   (assert true)
@@ -180,8 +184,15 @@
   (forall ((speed1 Float32))
   (! (= (= (is_valid_speed_km_per_h speed1) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed1)
-     (fp.leq speed1 (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
-  (is_valid_speed_km_per_h speed1)) )))
+     (fp.leq speed1 maximum_valid_speed_km_per_h))) :pattern ((is_valid_speed_km_per_h
+                                                              speed1)) )))
+
+;; H
+  (assert (fp.isFinite32 maximum_valid_speed_km_per_h))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000111 #b11110100000000000000000) maximum_valid_speed_km_per_h))
 
 ;; H
   (assert (fp.isFinite32 speed))
@@ -189,7 +200,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "units.ads", line 41, characters 0-0
-  (not
-  (= (is_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)) true)))
+  (not (= (is_valid_speed_km_per_h maximum_valid_speed_km_per_h) true)))
 (check-sat)
 (exit)

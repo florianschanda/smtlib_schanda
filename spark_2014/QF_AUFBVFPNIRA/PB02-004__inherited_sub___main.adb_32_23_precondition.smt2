@@ -205,6 +205,13 @@
 ;; rec__sub_rec__plop__position_axiom
   (assert (<= 0 rec__sub_rec__plop__position))
 
+(define-fun dynamic_invariant ((temp___expr_161 Int)
+  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
+  (temp___do_toplevel_159 Bool)
+  (temp___do_typ_inv_160 Bool)) Bool (=>
+                                     (or (= temp___is_init_157 true)
+                                     (<= 0 2)) (in_range temp___expr_161)))
+
 (declare-const value__size3 Int)
 
 (declare-const value__alignment3 Int)
@@ -383,13 +390,6 @@
 
 ;; rec__sub_arr__content__position_axiom
   (assert (<= 0 rec__sub_arr__content__position))
-
-(define-fun dynamic_invariant ((temp___expr_161 Int)
-  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
-  (temp___do_toplevel_159 Bool)
-  (temp___do_typ_inv_160 Bool)) Bool (=>
-                                     (or (= temp___is_init_157 true)
-                                     (<= 0 2)) (in_range temp___expr_161)))
 
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
   (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)

@@ -235,7 +235,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -721,45 +721,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -932,14 +932,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1217,6 +1217,13 @@
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 t)))))
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -1273,6 +1280,10 @@
                                     (neg fliteral1) fliteral1)) (tqtisFinite
                                     temp___expr_60)))
 
+(declare-fun convert ((_ BitVec 32)) t)
+
+(declare-fun convert__function_guard (t (_ BitVec 32)) Bool)
+
 (declare-sort source 0)
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
@@ -1322,31 +1333,15 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_228)))
 
-(declare-fun convert ((_ BitVec 32)) t)
-
-(declare-fun convert__function_guard (t (_ BitVec 32)) Bool)
-
 ;; convert__post_axiom
   (assert
   (forall ((s (_ BitVec 32)))
   (! (=> (dynamic_invariant2 s true true true true) (dynamic_invariant3
      (convert s) true false true true)) :pattern ((convert s)) )))
 
-(declare-const zero_plus t)
+(declare-fun magic (t) Int)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const zero_neg t)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const c1b t)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const c2b t)
-
-(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+(declare-fun magic__function_guard (Int t) Bool)
 
 (declare-sort source1 0)
 
@@ -1376,6 +1371,13 @@
 
 (declare-sort target1 0)
 
+(declare-fun targetqtint (target1) Int)
+
+;; target'axiom
+  (assert
+  (forall ((i target1))
+  (and (<= (- 2147483648) (targetqtint i)) (<= (targetqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -1402,15 +1404,27 @@
                                      (<= (- 2147483648) 2147483647))
                                      (in_range2 temp___expr_242)))
 
-(declare-fun magic (t) Int)
-
-(declare-fun magic__function_guard (Int t) Bool)
-
 ;; magic__post_axiom
   (assert
   (forall ((s t))
   (! (=> (dynamic_invariant4 s true true true true) (dynamic_invariant5
      (magic s) true false true true)) :pattern ((magic s)) )))
+
+(declare-const zero_plus t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const zero_neg t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const c1b t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const c2b t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 

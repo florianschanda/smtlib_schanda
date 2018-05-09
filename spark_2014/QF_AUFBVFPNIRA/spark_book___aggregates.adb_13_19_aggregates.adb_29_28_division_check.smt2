@@ -206,7 +206,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "aggregates.adb", line 44, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/spark_book/Chapter-02/build/gnatprove/aggregates.mlw", line 6457, characters 5-8
   (not (not (fp.isZero (fp #b0 #b10000000 #b00000000000000000000000)))))
 (check-sat)
 (exit)

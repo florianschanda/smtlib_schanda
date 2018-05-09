@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -193,8 +196,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const x Int)
-
 (declare-const o Int)
 
 (declare-const o1 Int)
@@ -203,55 +204,45 @@
 
 (declare-const o3 Int)
 
-(declare-const result Int)
+(declare-const x Int)
 
 (declare-const x1 Int)
 
-(declare-const result1 Int)
-
-(declare-const x2 Int)
-
-(declare-const result2 Int)
-
-(declare-const x3 Int)
+;; H
+  (assert (= x 0))
 
 ;; H
-  (assert (= result x))
+  (assert (in_range x))
 
 ;; H
-  (assert (= x1 0))
+  (assert (= o (pure_function x)))
 
 ;; H
-  (assert (in_range x1))
+  (assert (in_range o))
 
 ;; H
-  (assert (and (= o (pure_function x1)) (in_range o)))
+  (assert (= x1 o))
 
 ;; H
-  (assert (= result1 x1))
+  (assert (= o1 (impure_function x1)))
 
 ;; H
-  (assert (= x2 o))
+  (assert (in_range o1))
 
 ;; H
-  (assert (and (= o1 (impure_function x2)) (in_range o1)))
+  (assert (= o2 (log (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
-  (assert (= result2 x2))
-
-;; H
-  (assert (= x3 o1))
+  (assert (fp.isFinite32 o2))
 
 ;; H
   (assert
-  (and (= o2 (log (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and (fp.isFinite32 o2)
   (=>
   (fp.eq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000))
-  (fp.eq o2 (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq o2 (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
-  (assert (= o3 (to_int1 RNA o2)))
+  (assert (= o3 (to_int (fp.to_real (fp.roundToIntegral RNA o2)))))
 
 (assert
 ;; WP_parameter_def

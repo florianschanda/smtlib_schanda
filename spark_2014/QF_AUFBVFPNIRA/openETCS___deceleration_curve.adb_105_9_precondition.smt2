@@ -77,8 +77,6 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
 (define-fun dynamic_invariant ((temp___expr_175 Float32)
   (temp___is_init_171 Bool) (temp___skip_constant_172 Bool)
   (temp___do_toplevel_173 Bool)
@@ -95,9 +93,19 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_182)))
 
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(define-fun dynamic_invariant2 ((temp___expr_203 Int)
+  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
+  (temp___do_toplevel_201 Bool)
+  (temp___do_typ_inv_202 Bool)) Bool (=>
+                                     (or (= temp___is_init_199 true)
+                                     (<= 0 2147483647)) (in_range4
+                                     temp___expr_203)))
+
 (define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 1000)))
 
-(define-fun dynamic_invariant2 ((temp___expr_362 Int)
+(define-fun dynamic_invariant3 ((temp___expr_362 Int)
   (temp___is_init_358 Bool) (temp___skip_constant_359 Bool)
   (temp___do_toplevel_360 Bool)
   (temp___do_typ_inv_361 Bool)) Bool (=>
@@ -205,14 +213,6 @@
 ;; deceleration_curve__braking_curve_t__end_point__position_axiom
   (assert (<= 0 deceleration_curve__braking_curve_t__end_point__position))
 
-(define-fun dynamic_invariant3 ((temp___expr_203 Int)
-  (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
-  (temp___do_toplevel_201 Bool)
-  (temp___do_typ_inv_202 Bool)) Bool (=>
-                                     (or (= temp___is_init_199 true)
-                                     (<= 0 2147483647)) (in_range4
-                                     temp___expr_203)))
-
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const r4b Int)
@@ -240,6 +240,14 @@
                                     (or (= temp___is_init_14 true)
                                     (<= (- 2147483648) 2147483647))
                                     (in_range1 temp___expr_18)))
+
+(declare-const maximum_valid_speed_km_per_h Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
 
 (declare-const i Int)
 

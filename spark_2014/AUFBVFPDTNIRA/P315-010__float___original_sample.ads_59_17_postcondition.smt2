@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -157,13 +153,9 @@
 
 (declare-const o Float32)
 
-(declare-const result Float32)
-
 (declare-const time1 Float32)
 
 (declare-const time2 Float32)
-
-(declare-const time3 Float32)
 
 ;; H
   (assert (in_range1 nb))
@@ -172,29 +164,26 @@
   (assert (fp.isFinite32 time))
 
 ;; H
-  (assert
-  (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) time)
-  (fp.lt time (fp #b0 #b10000010 #b01000000000000000000000))))
+  (assert (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) time))
+
+;; H
+  (assert (fp.lt time (fp #b0 #b10000010 #b01000000000000000000000)))
 
 ;; H
   (assert
-  (and
   (= o (fp.add RNE time (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
-  nb)))
-  (fp.isFinite32 (fp.add RNE time (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
-  nb)))))
-
-;; H
-  (assert (= result time))
+  nb))))
 
 ;; H
   (assert (= time1 o))
 
 ;; H
-  (assert (= time1 time2))
+  (assert
+  (fp.isFinite32 (fp.add RNE time (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000)
+  nb))))
 
 ;; H
-  (assert (= time3 time1))
+  (assert (= time1 time2))
 
 (assert
 ;; WP_parameter_def

@@ -12,29 +12,6 @@
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant ((temp___expr_481 Int)
-  (temp___is_init_477 Bool) (temp___skip_constant_478 Bool)
-  (temp___do_toplevel_479 Bool)
-  (temp___do_typ_inv_480 Bool)) Bool (=>
-                                     (or (= temp___is_init_477 true)
-                                     (<= 1 2147483647)) (in_range2
-                                     temp___expr_481)))
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant1 ((temp___expr_499 Int)
-  (temp___is_init_495 Bool) (temp___skip_constant_496 Bool)
-  (temp___do_toplevel_497 Bool)
-  (temp___do_typ_inv_498 Bool)) Bool (=>
-                                     (or (= temp___is_init_495 true)
-                                     (<= 0 2147483647)) (in_range3
-                                     temp___expr_499)))
-
 (declare-const value__size Int)
 
 (declare-const value__alignment Int)
@@ -44,6 +21,16 @@
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(define-fun dynamic_invariant ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range1
+                                     temp___expr_365)))
 
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
                                                 (fp.isPositive x)))
@@ -83,7 +70,7 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
@@ -114,7 +101,7 @@
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
 
-(define-fun in_range5 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
+(define-fun in_range3 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
 (declare-const value__size2 Int)
 
@@ -171,15 +158,28 @@
 ;; gaps__gap__idir__position_axiom
   (assert (<= 0 gaps__gap__idir__position))
 
-(define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant2 ((temp___expr_365 Int)
-  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
-  (temp___do_toplevel_363 Bool)
-  (temp___do_typ_inv_364 Bool)) Bool (=>
-                                     (or (= temp___is_init_361 true)
-                                     (<= 0 2147483647)) (in_range6
-                                     temp___expr_365)))
+(define-fun dynamic_invariant1 ((temp___expr_499 Int)
+  (temp___is_init_495 Bool) (temp___skip_constant_496 Bool)
+  (temp___do_toplevel_497 Bool)
+  (temp___do_typ_inv_498 Bool)) Bool (=>
+                                     (or (= temp___is_init_495 true)
+                                     (<= 0 2147483647)) (in_range4
+                                     temp___expr_499)))
+
+(define-fun in_range5 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
+
+(define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
+
+(define-fun dynamic_invariant2 ((temp___expr_481 Int)
+  (temp___is_init_477 Bool) (temp___skip_constant_478 Bool)
+  (temp___do_toplevel_479 Bool)
+  (temp___do_typ_inv_480 Bool)) Bool (=>
+                                     (or (= temp___is_init_477 true)
+                                     (<= 1 2147483647)) (in_range6
+                                     temp___expr_481)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -211,14 +211,14 @@
   (temp___do_typ_inv_197 Bool)) Bool (=>
                                      (or (= temp___is_init_194 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                     (in_range4 temp___expr_198)))
+                                     (in_range2 temp___expr_198)))
 
 (define-fun dynamic_invariant5 ((temp___expr_323 Int)
   (temp___is_init_319 Bool) (temp___skip_constant_320 Bool)
   (temp___do_toplevel_321 Bool)
   (temp___do_typ_inv_322 Bool)) Bool (=>
                                      (or (= temp___is_init_319 true)
-                                     (<= (- 1) 1)) (in_range5
+                                     (<= (- 1) 1)) (in_range3
                                      temp___expr_323)))
 
 (declare-const o Int)
@@ -246,13 +246,13 @@
 (declare-const result1 Bool)
 
 ;; H
-  (assert (in_range2 fst))
+  (assert (in_range6 fst))
 
 ;; H
-  (assert (in_range3 lst))
+  (assert (in_range4 lst))
 
 ;; H
-  (assert (in_range1 offset))
+  (assert (in_range5 offset))
 
 ;; H
   (assert (= result (ite (<= lst o9) true false)))
@@ -263,7 +263,7 @@
 ;; H
   (assert
   (=> (< offset 0)
-  (and (= o8 (- (- 2147483648) offset)) (in_range1
+  (and (= o8 (- (- 2147483648) offset)) (in_range5
   (- (- 2147483648) offset)))))
 
 ;; H
@@ -281,6 +281,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "a-cofuve.ads", line 201, characters 0-0
-  (not (in_range1 lst)))
+  (not (in_range5 lst)))
 (check-sat)
 (exit)

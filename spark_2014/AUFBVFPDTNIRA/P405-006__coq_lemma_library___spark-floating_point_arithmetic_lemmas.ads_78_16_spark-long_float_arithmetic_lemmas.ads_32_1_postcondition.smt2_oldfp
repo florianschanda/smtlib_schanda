@@ -72,7 +72,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -559,45 +559,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -770,14 +770,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1112,17 +1112,21 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_158)))
 
-(declare-const val1 t)
+(declare-const fl_last_sqrt t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const val2 t)
+(declare-const val1 t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const val3 t)
+(declare-const val2 t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const val3 t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_67 t) (temp___is_init_63 Bool)
   (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
@@ -1138,10 +1142,19 @@
   (and (tqtisFinite fliteral2)
   (= (tqtreal fliteral2) 6703903964971298549787012499102923063739682910296196688861780721860882015036773488400937149083451713845015929093243025426876941405973284973216824503042048.0)))
 
+;; fl_last_sqrt__def_axiom
+  (assert (= fl_last_sqrt fliteral2))
+
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
   (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
+
+;; H
+  (assert (tqtisFinite fl_last_sqrt))
+
+;; H
+  (assert (= fliteral2 fl_last_sqrt))
 
 ;; H
   (assert (tqtisFinite val1))
@@ -1154,9 +1167,9 @@
 
 ;; H
   (assert
-  (and (and (le (neg fliteral2) val1) (le val1 fliteral2))
-  (and (and (le (neg fliteral2) val2) (le val2 fliteral2))
-  (and (and (le fliteral3 val3) (le val3 fliteral2)) (le val1 val2)))))
+  (and (and (le (neg fliteral2) val1) (le val1 fl_last_sqrt))
+  (and (and (le (neg fliteral2) val2) (le val2 fl_last_sqrt))
+  (and (and (le fliteral3 val3) (le val3 fl_last_sqrt)) (le val1 val2)))))
 
 (assert
 ;; WP_parameter_def

@@ -1133,34 +1133,5 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall res:t. forall safety_pack__dead_band__result:t. forall o:t.
-  forall o1:t. forall result:t. forall res1:t. forall result1:t.
-  forall res2:t. forall result2:t. forall res3:t. forall result3:t.
-  forall res4:t. forall result4:t. forall safety_pack__dead_band__result1:t.
-  forall safety_pack__dead_band__result2:t.
-  forall safety_pack__dead_band__result3:t. forall res5:t.
-  forall safety_pack__dead_band__result4:t. forall res6:t.
-  forall safety_pack__dead_band__result5:t. (tqtisFinite(value) ->
-  (in_range2(threshold) -> ((((({ t__content = result } = { t__content = res
-  }) and (res1 = value)) and (tqtisFinite(res1) and ((((le(neg(threshold),
-  value) and le(value, threshold)) and ((result1 = res1) and
-  (res2 = fliteral1))) or ((not (le(neg(threshold), value) and le(value,
-  threshold))) and (((lt(fliteral1, value) and (((o = sub(NearestTiesToEven,
-  res1, threshold)) and tqtisFinite(sub(NearestTiesToEven, res1,
-  threshold))) and ((result2 = res1) and (res3 = o)))) or ((not lt(fliteral1,
-  value)) and (((lt(value, fliteral1) and (((o1 = add(NearestTiesToEven,
-  res1, threshold)) and tqtisFinite(add(NearestTiesToEven, res1,
-  threshold))) and ((result3 = res1) and (res4 = o1)))) or ((not lt(value,
-  fliteral1)) and (res4 = res1))) and (res3 = res4)))) and
-  (res2 = res3)))) and
-  (((safety_pack__dead_band__result1 = safety_pack__dead_band__result2) and
-  (safety_pack__dead_band__result3 = safety_pack__dead_band__result1)) and
-  ((result4 = safety_pack__dead_band__result) and
-  (safety_pack__dead_band__result1 = res2)))))) and
-  (((safety_pack__dead_band__result4 = safety_pack__dead_band__result2) and
-  (res5 = res2)) and
-  ((safety_pack__dead_band__result5 = safety_pack__dead_band__result3) and
-  (res6 = res2)))) -> ((le(neg(threshold), value) and le(value,
-  threshold)) -> eq(safety_pack__dead_band__result4, fliteral1))))))
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/safety_pack.mlw", line 30367, characters 5-8 *)
+goal WP_parameter_def : true

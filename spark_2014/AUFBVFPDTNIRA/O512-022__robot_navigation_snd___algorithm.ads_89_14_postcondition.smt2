@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -130,6 +126,13 @@
 
 (declare-sort natural 0)
 
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
@@ -147,7 +150,7 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(declare-fun to_rep1 (natural) Int)
+(define-fun to_rep1 ((x natural)) Int (naturalqtint x))
 
 (declare-fun of_rep1 (Int) natural)
 
@@ -425,6 +428,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__robot_iface__speed_option__modulus float)(rec__robot_iface__speed_option__angle float)))))
+(define-fun us_split_fields_modulus__projection ((a us_split_fields)) float
+  (rec__robot_iface__speed_option__modulus a))
+
+(define-fun us_split_fields_angle__projection ((a us_split_fields)) float
+  (rec__robot_iface__speed_option__angle a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -552,11 +561,56 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__robot_iface__proxy__robot_radius positive_float)(rec__robot_iface__proxy__min_gap_width positive_float)(rec__robot_iface__proxy__obstacle_avoid_dist positive_float)(rec__robot_iface__proxy__max_speed positive_float)(rec__robot_iface__proxy__max_turn_rate positive_float)(rec__robot_iface__proxy__goal_position_tol nonnegative_float)(rec__robot_iface__proxy__goal_angle_tol nonnegative_float)(rec__robot_iface__proxy__goalx float)(rec__robot_iface__proxy__goaly float)(rec__robot_iface__proxy__goala float)(rec__robot_iface__proxy__scan_count natural)(rec__robot_iface__proxy__scan_res positive_float)(rec__robot_iface__proxy__max_range positive_float)(rec__robot_iface__proxy__scans (Array Int nonnegative_float))(rec__robot_iface__proxy__x unbounded_float)(rec__robot_iface__proxy__y unbounded_float)(rec__robot_iface__proxy__yaw unbounded_float)(rec__robot_iface__proxy__speed us_rep)(rec__robot_iface__proxy__goal_reached Bool)))))
+(define-fun us_split_fields_robot_radius__projection ((a us_split_fields2)) positive_float
+  (rec__robot_iface__proxy__robot_radius a))
+
+(define-fun us_split_fields_min_gap_width__projection ((a us_split_fields2)) positive_float
+  (rec__robot_iface__proxy__min_gap_width a))
+
+(define-fun us_split_fields_obstacle_avoid_dist__projection ((a us_split_fields2)) positive_float
+  (rec__robot_iface__proxy__obstacle_avoid_dist a))
+
+(define-fun us_split_fields_max_speed__projection ((a us_split_fields2)) positive_float
+  (rec__robot_iface__proxy__max_speed a))
+
+(define-fun us_split_fields_max_turn_rate__projection ((a us_split_fields2)) positive_float
+  (rec__robot_iface__proxy__max_turn_rate a))
+
+(define-fun us_split_fields_goal_position_tol__projection ((a us_split_fields2)) nonnegative_float
+  (rec__robot_iface__proxy__goal_position_tol a))
+
+(define-fun us_split_fields_goal_angle_tol__projection ((a us_split_fields2)) nonnegative_float
+  (rec__robot_iface__proxy__goal_angle_tol a))
+
+(define-fun us_split_fields_goalX__projection ((a us_split_fields2)) float
+  (rec__robot_iface__proxy__goalx a))
+
+(define-fun us_split_fields_goalY__projection ((a us_split_fields2)) float
+  (rec__robot_iface__proxy__goaly a))
+
+(define-fun us_split_fields_goalA__projection ((a us_split_fields2)) float
+  (rec__robot_iface__proxy__goala a))
+
 (define-fun us_split_fields_scan_Count__projection ((a us_split_fields2)) natural
   (rec__robot_iface__proxy__scan_count a))
 
+(define-fun us_split_fields_scan_Res__projection ((a us_split_fields2)) positive_float
+  (rec__robot_iface__proxy__scan_res a))
+
+(define-fun us_split_fields_max_Range__projection ((a us_split_fields2)) positive_float
+  (rec__robot_iface__proxy__max_range a))
+
 (define-fun us_split_fields_scans__projection ((a us_split_fields2)) (Array Int nonnegative_float)
   (rec__robot_iface__proxy__scans a))
+
+(define-fun us_split_fields_X__projection ((a us_split_fields2)) unbounded_float
+  (rec__robot_iface__proxy__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields2)) unbounded_float
+  (rec__robot_iface__proxy__y a))
+
+(define-fun us_split_fields_Yaw__projection ((a us_split_fields2)) unbounded_float
+  (rec__robot_iface__proxy__yaw a))
 
 (define-fun us_split_fields_speed__projection ((a us_split_fields2)) us_rep
   (rec__robot_iface__proxy__speed a))
@@ -1066,6 +1120,9 @@
 (declare-datatypes ()
 ((us_split_fields4
  (mk___split_fields2 (rec__spaces__angles__angle__theta normalized2pi)))))
+(define-fun us_split_fields_Theta__projection ((a us_split_fields4)) normalized2pi
+  (rec__spaces__angles__angle__theta a))
+
 (declare-datatypes ()
 ((us_split_fields__ref2
  (mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
@@ -1132,6 +1189,13 @@
 
 (declare-sort count_type 0)
 
+(declare-fun count_typeqtint (count_type) Int)
+
+;; count_type'axiom
+  (assert
+  (forall ((i count_type))
+  (and (<= 0 (count_typeqtint i)) (<= (count_typeqtint i) 2147483647))))
+
 (define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
@@ -1149,7 +1213,7 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
-(declare-fun to_rep7 (count_type) Int)
+(define-fun to_rep7 ((x count_type)) Int (count_typeqtint x))
 
 (declare-fun of_rep7 (Int) count_type)
 
@@ -1320,6 +1384,9 @@
 ((us_split_fields8
  (mk___split_fields4
  (rec__algorithm__laser_scan_data__first nonnegative_float)(rec__algorithm__laser_scan_data__second us_rep2)))))
+(define-fun us_split_fields_first__projection ((a us_split_fields8)) nonnegative_float
+  (rec__algorithm__laser_scan_data__first a))
+
 (define-fun us_split_fields_second__projection ((a us_split_fields8)) us_rep2
   (rec__algorithm__laser_scan_data__second a))
 
@@ -1506,6 +1573,9 @@
 (define-fun us_split_fields_gapVec__projection ((a us_split_fields10)) us_rep3
   (rec__algorithm__controller__gapvec a))
 
+(define-fun us_split_fields_obsAvoidDelta__projection ((a us_split_fields10)) float
+  (rec__algorithm__controller__obsavoiddelta a))
+
 (define-fun us_split_fields_driveAngle__projection ((a us_split_fields10)) us_rep2
   (rec__algorithm__controller__driveangle a))
 
@@ -1669,13 +1739,13 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Bool)
 
-(declare-const null_angle us_rep2)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-fun is_empty (us_rep3) Bool)
 
 (declare-fun is_empty__function_guard (Bool us_rep3) Bool)
+
+(declare-const null_angle us_rep2)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun in_range8 ((rec__robot_iface__speed_option__opt1 Int)
   (a us_rep)) Bool (= rec__robot_iface__speed_option__opt1 (to_rep5
@@ -1759,9 +1829,9 @@
 (define-fun t252s__ref___projection ((a t252s__ref)) us_rep (t252s__content
                                                             a))
 
-(declare-fun temp___680 (Float32) (Array Int nonnegative_float))
+(declare-fun temp_____aggregate_def_680 (Float32) (Array Int nonnegative_float))
 
-(declare-fun temp___684 (us_rep4) (Array Int us_rep4))
+(declare-fun temp_____aggregate_def_684 (us_rep4) (Array Int us_rep4))
 
 (define-fun dynamic_invariant ((temp___expr_673 us_rep5)
   (temp___is_init_669 Bool) (temp___skip_constant_670 Bool)
@@ -1775,6 +1845,11 @@
                                      (in_range6 1000
                                      (rec__algorithm__controller__gapvec
                                      (us_split_fields11 temp___expr_673)))))
+
+(declare-const rliteral natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral) 0))
 
 (define-fun default_initial_assumption ((temp___expr_678 us_rep5)
   (temp___skip_top_level_679 Bool)) Bool (and
@@ -1805,12 +1880,12 @@
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep2
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep1 0)
+                                                              rliteral
                                                               (of_rep
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (temp___680
+                                                              (temp_____aggregate_def_680
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep4
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
@@ -1833,7 +1908,7 @@
                                                               (distinct 0 0))))
                                          (= (rec__algorithm__controller__laserscan
                                             (us_split_fields11
-                                            temp___expr_678)) (temp___684
+                                            temp___expr_678)) (temp_____aggregate_def_684
                                                               (mk___rep4
                                                               (mk___split_fields4
                                                               (of_rep3
@@ -1897,7 +1972,7 @@
   (assert
   (forall ((temp___686 us_rep4))
   (forall ((temp___687 Int))
-  (= (select (temp___684 temp___686) temp___687) temp___686))))
+  (= (select (temp_____aggregate_def_684 temp___686) temp___687) temp___686))))
 
 (define-fun dynamic_invariant4 ((temp___expr_254 Int)
   (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
@@ -2007,7 +2082,7 @@
   (forall ((temp___682 Float32))
   (=> (dynamic_invariant7 temp___682 true true true true)
   (forall ((temp___683 Int))
-  (= (to_rep3 (select (temp___680 temp___682) temp___683)) temp___682)))))
+  (= (to_rep3 (select (temp_____aggregate_def_680 temp___682) temp___683)) temp___682)))))
 
 (declare-const this__split_fields us_split_fields__ref5)
 
@@ -2017,25 +2092,24 @@
 
 (declare-const this__split_fields3 us_split_fields__ref5)
 
-(declare-const this__split_fields4 us_split_fields10)
-
 ;; H
   (assert
-  (and
   (= (attr__constrained
      (rec__robot_iface__proxy__speed
      (us_split_fields3
      (rec__algorithm__controller__robot
-     (us_split_fields__content5 this__split_fields))))) false)
+     (us_split_fields__content5 this__split_fields))))) false))
+
+;; H
+  (assert
   (= 1000 (to_rep7
           (rec__algorithm__gap_vectors__list__capacity
           (us_split_discrs3
           (rec__algorithm__controller__gapvec
-          (us_split_fields__content5 this__split_fields))))))))
+          (us_split_fields__content5 this__split_fields)))))))
 
 ;; H
   (assert
-  (and
   (fp.eq (to_rep
          (rec__robot_iface__proxy__robot_radius
          (us_split_fields3
@@ -2045,22 +2119,26 @@
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields3
   (rec__algorithm__controller__robot
-  (us_split_fields__content5 this__split_fields))))))
-  (and
+  (us_split_fields__content5 this__split_fields)))))))
+
+;; H
+  (assert
   (= (attr__constrained
      (rec__robot_iface__proxy__speed
      (us_split_fields3
      (rec__algorithm__controller__robot
-     (let ((subject this__split_fields)) this__split_fields1))))) false)
+     (let ((subject this__split_fields)) this__split_fields1))))) false))
+
+;; H
+  (assert
   (= 1000 (to_rep7
           (rec__algorithm__gap_vectors__list__capacity
           (us_split_discrs3
           (rec__algorithm__controller__gapvec
-          (let ((subject this__split_fields)) this__split_fields1)))))))))
+          (let ((subject this__split_fields)) this__split_fields1)))))))
 
 ;; H
   (assert
-  (and
   (fp.eq (to_rep
          (rec__robot_iface__proxy__robot_radius
          (us_split_fields3
@@ -2070,26 +2148,28 @@
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields3
   (rec__algorithm__controller__robot
-  (let ((subject this__split_fields)) this__split_fields1))))))
-  (and
+  (let ((subject this__split_fields)) this__split_fields1)))))))
+
+;; H
+  (assert
   (= (attr__constrained
      (rec__robot_iface__proxy__speed
      (us_split_fields3
      (rec__algorithm__controller__robot
-     (let ((subject this__split_fields)) this__split_fields2))))) false)
+     (let ((subject this__split_fields)) this__split_fields2))))) false))
+
+;; H
+  (assert
   (= 1000 (to_rep7
           (rec__algorithm__gap_vectors__list__capacity
           (us_split_discrs3
           (rec__algorithm__controller__gapvec
-          (let ((subject this__split_fields)) this__split_fields2)))))))))
+          (let ((subject this__split_fields)) this__split_fields2)))))))
 
 ;; H
   (assert
   (= this__split_fields3 (let ((subject this__split_fields))
                          (mk___split_fields__ref5 this__split_fields2))))
-
-;; H
-  (assert (= this__split_fields4 this__split_fields2))
 
 (assert
 ;; WP_parameter_def

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -155,19 +151,9 @@
 
 (declare-const foo__double_tests__sqrt_comedy_1__result Bool)
 
-(declare-const result Bool)
-
 (declare-const foo__double_tests__sqrt_comedy_1__result1 Bool)
 
 (declare-const foo__double_tests__sqrt_comedy_1__result2 Bool)
-
-(declare-const foo__double_tests__sqrt_comedy_1__result3 Bool)
-
-(declare-const foo__double_tests__sqrt_comedy_1__result4 Bool)
-
-(declare-const foo__double_tests__sqrt_comedy_1__result5 Bool)
-
-(declare-const result1 Bool)
 
 ;; H
   (assert (fp.isFinite64 a))
@@ -179,38 +165,27 @@
   (assert (fp.isFinite64 c))
 
 ;; H
-  (assert (and (fp.eq (fp.mul RNE a a) c) (fp.eq (fp.mul RNE b b) c)))
+  (assert (fp.eq (fp.mul RNE a a) c))
+
+;; H
+  (assert (fp.eq (fp.mul RNE b b) c))
 
 ;; H
   (assert
-  (= foo__double_tests__sqrt_comedy_1__result1 foo__double_tests__sqrt_comedy_1__result2))
+  (= foo__double_tests__sqrt_comedy_1__result foo__double_tests__sqrt_comedy_1__result1))
 
 ;; H
   (assert
-  (= foo__double_tests__sqrt_comedy_1__result3 foo__double_tests__sqrt_comedy_1__result1))
-
-;; H
-  (assert (= result foo__double_tests__sqrt_comedy_1__result))
+  (= foo__double_tests__sqrt_comedy_1__result (ite (fp.eq a b) true false)))
 
 ;; H
   (assert
-  (= foo__double_tests__sqrt_comedy_1__result1 (ite (fp.eq a b) true false)))
-
-;; H
-  (assert
-  (= (mk_bool__ref foo__double_tests__sqrt_comedy_1__result4) (mk_bool__ref
-                                                              foo__double_tests__sqrt_comedy_1__result2)))
-
-;; H
-  (assert
-  (= foo__double_tests__sqrt_comedy_1__result5 foo__double_tests__sqrt_comedy_1__result3))
-
-;; H
-  (assert (= result1 foo__double_tests__sqrt_comedy_1__result4))
+  (= (mk_bool__ref foo__double_tests__sqrt_comedy_1__result2) (mk_bool__ref
+                                                              foo__double_tests__sqrt_comedy_1__result1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 112, characters 0-0
-  (not (= foo__double_tests__sqrt_comedy_1__result4 true)))
+  (not (= foo__double_tests__sqrt_comedy_1__result2 true)))
 (check-sat)
 (exit)

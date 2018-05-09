@@ -87,21 +87,33 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(define-fun dynamic_invariant ((temp___expr_67 Float64)
+  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
+  (temp___do_toplevel_65 Bool)
+  (temp___do_typ_inv_66 Bool)) Bool (=>
+                                    (or (= temp___is_init_63 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
+                                    (fp.isFinite64 temp___expr_67)))
 
-(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 3)))
+(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
+                                    (<= x 2147483647)))
 
-(define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
-
-(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
   (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
   (temp___do_typ_inv_17 Bool)) Bool (=>
                                     (or (= temp___is_init_14 true)
-                                    (<= (- 2147483648) 2147483647))
-                                    (in_range1 temp___expr_18)))
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
-(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const limit Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
+
+(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
   (temp___do_toplevel_58 Bool)
   (temp___do_typ_inv_59 Bool)) Bool (=>
@@ -109,13 +121,9 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant2 ((temp___expr_67 Float64)
-  (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
-  (temp___do_toplevel_65 Bool)
-  (temp___do_typ_inv_66 Bool)) Bool (=>
-                                    (or (= temp___is_init_63 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
-                                    (fp.isFinite64 temp___expr_67)))
+;; limit__def_axiom
+  (assert
+  (= limit (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
 
 (declare-const temp___159 Int)
 
@@ -137,9 +145,17 @@
 
 (declare-const o7 Float64)
 
+;; H
+  (assert (fp.isFinite64 limit))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)
+  limit))
+
 (assert
 ;; WP_parameter_def
  ;; File "repr.adb", line 4, characters 0-0
-  (not (<= 0 temp___1591)))
+  (not (<= temp___1591 3)))
 (check-sat)
 (exit)

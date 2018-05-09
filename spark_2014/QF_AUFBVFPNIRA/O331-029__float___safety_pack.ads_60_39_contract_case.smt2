@@ -260,12 +260,12 @@
 
 ;; H
   (assert
-  (= (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))) true))
+  (not
+  (= (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))) true)))
 
 (assert
 ;; WP_parameter_def
  ;; File "imu_pack.ads", line 16, characters 0-0
-  (not
-  (not (fp.eq safety_pack__lift_away_from_zero__result4 (fp #b0 #b00000000 #b00000000000000000000000)))))
+  (not true))
 (check-sat)
 (exit)

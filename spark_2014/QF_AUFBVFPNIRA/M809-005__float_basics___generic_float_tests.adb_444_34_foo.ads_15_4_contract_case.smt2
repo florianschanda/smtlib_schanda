@@ -152,12 +152,12 @@
 
 ;; H
   (assert
-  (= (fp.eq x (fp #b0 #b01111111111 #b1001100110011001100110011001100110011001100110011010)) true))
+  (not
+  (= (fp.eq x (fp #b0 #b01111111111 #b1001100110011001100110011001100110011001100110011010)) true)))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.ads", line 2, characters 0-0
-  (not
-  (fp.eq y2 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+  (not true))
 (check-sat)
 (exit)

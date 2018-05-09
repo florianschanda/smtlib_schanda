@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -93,9 +89,13 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
-(declare-sort tfloat64B 0)
+(declare-fun low_bound (Int) Float64)
 
-(declare-fun user_eq (tfloat64B tfloat64B) Bool)
+(declare-fun low_bound__function_guard (Float64 Int) Bool)
+
+(declare-sort float64 0)
+
+(declare-fun user_eq (float64 float64) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Float64) us_image)
 
@@ -103,24 +103,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float64)
 
-(declare-const dummy tfloat64B)
-
-(declare-datatypes ()
-((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
-(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
-  (tfloat64B__content a))
-
-(declare-sort float64 0)
-
-(declare-fun user_eq1 (float64 float64) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float64) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float64)
-
-(declare-const dummy1 float64)
+(declare-const dummy float64)
 
 (declare-datatypes ()
 ((float64__ref (mk_float64__ref (float64__content float64)))))
@@ -137,17 +120,23 @@
 
 (declare-sort frame 0)
 
+(declare-fun frameqtint (frame) Int)
+
+;; frame'axiom
+  (assert
+  (forall ((i frame)) (and (<= 0 (frameqtint i)) (<= (frameqtint i) 25000))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
 
-(declare-fun user_eq2 (frame frame) Bool)
+(declare-fun user_eq1 (frame frame) Bool)
 
-(declare-const dummy2 frame)
+(declare-const dummy1 frame)
 
 (declare-datatypes () ((frame__ref (mk_frame__ref (frame__content frame)))))
 (define-fun frame__ref___projection ((a frame__ref)) frame (frame__content a))
@@ -160,40 +149,6 @@
                                      (<= 0 25000)) (in_range1
                                      temp___expr_165)))
 
-(declare-sort ratio_t 0)
-
-(define-fun in_range2 ((x Float64)) Bool (and (fp.isFinite64 x)
-                                         (and
-                                         (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
-                                         (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
-
-(declare-fun user_eq3 (ratio_t ratio_t) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Float64) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float64)
-
-(declare-const dummy3 ratio_t)
-
-(declare-datatypes ()
-((ratio_t__ref (mk_ratio_t__ref (ratio_t__content ratio_t)))))
-(define-fun ratio_t__ref___projection ((a ratio_t__ref)) ratio_t (ratio_t__content
-                                                                 a))
-
-(define-fun dynamic_invariant2 ((temp___expr_172 Float64)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)
-  (temp___do_typ_inv_171 Bool)) Bool (=>
-                                     (or (= temp___is_init_168 true)
-                                     (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-                                     (in_range2 temp___expr_172)))
-
-(declare-fun low_bound (Int) Float64)
-
-(declare-fun low_bound__function_guard (Float64 Int) Bool)
-
 ;; low_bound__post_axiom
   (assert
   (forall ((n Int))
@@ -204,7 +159,7 @@
   (assert
   (forall ((n Int))
   (! (=> (dynamic_invariant1 n true true true true)
-     (= (low_bound n) (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))) :pattern (
+     (= (low_bound n) (fp.mul RNE ((_ to_fp 11 53) RNE (to_real n)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))) :pattern (
   (low_bound n)) )))
 
 (declare-fun high_bound (Int) Float64)
@@ -221,7 +176,7 @@
   (assert
   (forall ((n Int))
   (! (=> (dynamic_invariant1 n true true true true)
-     (= (high_bound n) (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))) :pattern (
+     (= (high_bound n) (fp.mul RNE ((_ to_fp 11 53) RNE (to_real n)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))) :pattern (
   (high_bound n)) )))
 
 (declare-fun invariant__ (Int Float64) Bool)
@@ -254,6 +209,53 @@
      (fp.leq (fp.neg (fp #b0 #b10000010011 #b1000110010111010100000000000000000000000000000000000)) v)
      (fp.leq v (fp #b0 #b10000010011 #b1000110010111010100000000000000000000000000000000000)))) :pattern (
   (in_bounds v)) )))
+
+(declare-sort tfloat64B 0)
+
+(declare-fun user_eq2 (tfloat64B tfloat64B) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Float64) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float64)
+
+(declare-const dummy2 tfloat64B)
+
+(declare-datatypes ()
+((tfloat64B__ref (mk_tfloat64B__ref (tfloat64B__content tfloat64B)))))
+(define-fun tfloat64B__ref___projection ((a tfloat64B__ref)) tfloat64B
+  (tfloat64B__content a))
+
+(declare-sort ratio_t 0)
+
+(define-fun in_range2 ((x Float64)) Bool (and (fp.isFinite64 x)
+                                         (and
+                                         (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
+                                         (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))))
+
+(declare-fun user_eq3 (ratio_t ratio_t) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Float64) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float64)
+
+(declare-const dummy3 ratio_t)
+
+(declare-datatypes ()
+((ratio_t__ref (mk_ratio_t__ref (ratio_t__content ratio_t)))))
+(define-fun ratio_t__ref___projection ((a ratio_t__ref)) ratio_t (ratio_t__content
+                                                                 a))
+
+(define-fun dynamic_invariant2 ((temp___expr_172 Float64)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
+                                     (in_range2 temp___expr_172)))
 
 (declare-const n Int)
 
@@ -360,8 +362,8 @@
 
 ;; H
   (assert
-  (fp.leq (fp.add RNE (fp.mul RNE (of_int RNE n) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.mul RNE
-  (of_int RNE (+ n 1)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
+  (fp.leq (fp.add RNE (fp.mul RNE ((_ to_fp 11 53) RNE (to_real n)) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) (fp.mul RNE ((_ to_fp 11 53) RNE (to_real (+
+  n 1))) (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert
@@ -388,7 +390,7 @@
   (assert
   (and (= o1 (low_bound n))
   (and (fp.isFinite64 o1)
-  (= o1 (fp.mul RNE (of_int RNE n) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))))
+  (= o1 (fp.mul RNE ((_ to_fp 11 53) RNE (to_real n)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))))))
 
 ;; H
   (assert

@@ -1065,6 +1065,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1226,7 +1232,7 @@ axiom num__def_axiom : (num = of_int(NearestTiesToEven, numerator))
 
 axiom den__def_axiom : (den = of_int(NearestTiesToEven, denominator))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA21-002__floatdiv/gnatprove/basic_contracts.mlw", line 2583, characters 5-8 *)
 goal WP_parameter_def :
   (forall basic_contracts__average__num__assume:t.
   forall basic_contracts__average__den__assume:t. (in_range2(numerator) ->

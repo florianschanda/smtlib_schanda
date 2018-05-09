@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort tframeB 0)
+
+(declare-fun tframeBqtint (tframeB) Int)
+
+;; tframeB'axiom
+  (assert
+  (forall ((i tframeB))
+  (and (<= (- 32768) (tframeBqtint i)) (<= (tframeBqtint i) 32767))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
 
@@ -113,6 +116,12 @@
                                                                  a))
 
 (declare-sort frame 0)
+
+(declare-fun frameqtint (frame) Int)
+
+;; frame'axiom
+  (assert
+  (forall ((i frame)) (and (<= 0 (frameqtint i)) (<= (frameqtint i) 25000))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
@@ -141,13 +150,11 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const o Int)
-
 ;; H
   (assert (in_range2 n))
 
 ;; H
-  (assert (and (= o (* (+ n 1) 65)) (in_range1 (* (+ n 1) 65))))
+  (assert (in_range1 (* (+ n 1) 65)))
 
 (assert
 ;; WP_parameter_def

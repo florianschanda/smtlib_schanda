@@ -1768,4 +1768,4 @@ goal WP_parameter_def :
   fliteral2))) -> (((result2 = d) and
   (d1 = floats__test__d__aggregate_def(fliteral2, fliteral2, fliteral2,
   fliteral2))) -> ((le(neg(fliteral), to_rep((a[1]))) and le(to_rep((a[1])),
-  fliteral)) -> le(neg(fliteral), to_rep((a[2])))))))))
+  fliteral)) -> le(to_rep((a[2])), fliteral)))))))

@@ -1060,6 +1060,12 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type tinteger_16B
 
+logic tinteger_16Bqtint : tinteger_16B -> int
+
+axiom tinteger_16Bqtaxiom :
+  (forall i:tinteger_16B. (((- 32768) <= tinteger_16Bqtint(i)) and
+  (tinteger_16Bqtint(i) <= 32767)))
+
 predicate in_range1(x: int) = (((- 32768) <= x) and (x <= 32767))
 
 logic bool_eq2 : int, int -> bool
@@ -1115,6 +1121,12 @@ function tinteger_16B__ref___projection(a: tinteger_16B__ref) : tinteger_16B =
   (a).tinteger_16B__content
 
 type integer_16
+
+logic integer_16qtint : integer_16 -> int
+
+axiom integer_16qtaxiom :
+  (forall i:integer_16. (((- 32768) <= integer_16qtint(i)) and
+  (integer_16qtint(i) <= 32767)))
 
 predicate in_range2(x: int) = (((- 32768) <= x) and (x <= 32767))
 

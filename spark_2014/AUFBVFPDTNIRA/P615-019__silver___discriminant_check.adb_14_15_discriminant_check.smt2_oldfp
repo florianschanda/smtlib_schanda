@@ -36,24 +36,23 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
+(declare-sort integer 0)
 
-(declare-fun attr__ATTRIBUTE_IMAGE (Bool) us_image)
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
+(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
+                                    (<= x 2147483647)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
-
-(declare-sort integer 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
 
 (declare-fun user_eq (integer integer) Bool)
 
@@ -64,7 +63,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -74,13 +73,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x integer)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
+  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
 
 (declare-sort t 0)
 
@@ -116,7 +115,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -190,7 +189,7 @@
   (assert
   (= (* 33554430.0 10141204801825835211973625643008.0) (to_real max_int)))
 
-(define-fun in_range2 ((x Real)) Bool (and
+(define-fun in_range1 ((x Real)) Bool (and
                                       (<= (- (* 33554430.0 10141204801825835211973625643008.0)) x)
                                       (<= x (* 33554430.0 10141204801825835211973625643008.0))))
 
@@ -198,12 +197,12 @@
                                         (<= i max_int)))
 
 ;; is_finite
-  (assert (forall ((x t)) (=> (tqtisFinite x) (in_range2 (tqtreal x)))))
+  (assert (forall ((x t)) (=> (tqtisFinite x) (in_range1 (tqtreal x)))))
 
-(define-fun no_overflow ((m mode) (x Real)) Bool (in_range2 (round m x)))
+(define-fun no_overflow ((m mode) (x Real)) Bool (in_range1 (round m x)))
 
 ;; Bounded_real_no_overflow
-  (assert (forall ((m mode) (x Real)) (=> (in_range2 x) (no_overflow m x))))
+  (assert (forall ((m mode) (x Real)) (=> (in_range1 x) (no_overflow m x))))
 
 ;; Round_monotonic
   (assert
@@ -602,45 +601,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -813,14 +812,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1096,6 +1095,14 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
+(define-fun in_range2 ((x Int)) Bool (or (= x 0) (= x 1)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Bool) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Bool)
+
 (declare-sort float 0)
 
 (define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
@@ -1149,6 +1156,9 @@
  (rec__discriminant_check__rec__x integer)(rec__discriminant_check__rec__y float)))))
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__discriminant_check__rec__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__discriminant_check__rec__y a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -1276,8 +1286,8 @@
   (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
   (temp___do_typ_inv_17 Bool)) Bool (=>
                                     (or (= temp___is_init_14 true)
-                                    (<= (- 2147483648) 2147483647))
-                                    (in_range1 temp___expr_18)))
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
 
 (declare-const fliteral1 t)
 
@@ -1295,7 +1305,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P615-019__silver/gnatprove/discriminant_check.mlw", line 4115, characters 5-8
   (not
   (= (ite (rec__discriminant_check__rec__b (us_split_discrs1 r)) 1 0) 1)))
 (check-sat)

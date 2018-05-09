@@ -56,7 +56,15 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_175)))
 
-(define-fun dynamic_invariant1 ((temp___expr_189 Float32)
+(define-fun dynamic_invariant1 ((temp___expr_182 Float32)
+  (temp___is_init_178 Bool) (temp___skip_constant_179 Bool)
+  (temp___do_toplevel_180 Bool)
+  (temp___do_typ_inv_181 Bool)) Bool (=>
+                                     (or (= temp___is_init_178 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_182)))
+
+(define-fun dynamic_invariant2 ((temp___expr_189 Float32)
   (temp___is_init_185 Bool) (temp___skip_constant_186 Bool)
   (temp___do_toplevel_187 Bool)
   (temp___do_typ_inv_188 Bool)) Bool (=>
@@ -66,7 +74,7 @@
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant2 ((temp___expr_203 Int)
+(define-fun dynamic_invariant3 ((temp___expr_203 Int)
   (temp___is_init_199 Bool) (temp___skip_constant_200 Bool)
   (temp___do_toplevel_201 Bool)
   (temp___do_typ_inv_202 Bool)) Bool (=>
@@ -74,33 +82,29 @@
                                      (<= 0 2147483647)) (in_range
                                      temp___expr_203)))
 
-(define-fun dynamic_invariant3 ((temp___expr_182 Float32)
-  (temp___is_init_178 Bool) (temp___skip_constant_179 Bool)
-  (temp___do_toplevel_180 Bool)
-  (temp___do_typ_inv_181 Bool)) Bool (=>
-                                     (or (= temp___is_init_178 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_182)))
-
-(declare-const distance_resolution Int)
+(declare-const maximum_valid_speed_km_per_h Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const maximum_valid_speed Float32)
+(declare-const distance_resolution Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const minimum_valid_acceleration Float32)
+(declare-const maximum_valid_speed Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const braking_curve_maximum_end_point Int)
+(declare-const minimum_valid_acceleration Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const minimum_valid_speed Float32)
+(declare-const braking_curve_maximum_end_point Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const minimum_valid_speed Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 ;; minimum_valid_speed__def_axiom
   (assert
@@ -121,7 +125,18 @@
 ;; braking_curve_maximum_end_point__def_axiom
   (assert (= braking_curve_maximum_end_point 5000))
 
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
+
 (declare-const deceleration_curve__maximum_valid_speed__assume Float32)
+
+;; H
+  (assert (fp.isFinite32 maximum_valid_speed_km_per_h))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000111 #b11110100000000000000000) maximum_valid_speed_km_per_h))
 
 ;; H
   (assert (in_range distance_resolution))

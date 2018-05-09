@@ -1118,4 +1118,5 @@ goal WP_parameter_def :
   fliteral1, fliteral2)))) and ((o2 = add1(fliteral3, o1)) and
   (tqtisFinite(o2) and eq(o2, add(NearestTiesToEven, fliteral3, o1))))) ->
   (((o = add1(fliteral3, fliteral1)) and (tqtisFinite(o) and eq(o,
-  add(NearestTiesToEven, fliteral3, fliteral1)))) -> lt(o, fliteral))))
+  add(NearestTiesToEven, fliteral3, fliteral1)))) -> lt(fliteral2,
+  fliteral))))

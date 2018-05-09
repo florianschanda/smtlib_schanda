@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -157,15 +153,21 @@
 
 ;; H
   (assert
-  (and
-  (and
   (fp.leq (fp.neg (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000))
-  x)
+  x))
+
+;; H
+  (assert
   (fp.leq x (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
-  (and
+
+;; H
+  (assert
   (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  y)
-  (fp.leq y (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))))
+  y))
+
+;; H
+  (assert
+  (fp.leq y (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
 
 (assert
 ;; WP_parameter_def

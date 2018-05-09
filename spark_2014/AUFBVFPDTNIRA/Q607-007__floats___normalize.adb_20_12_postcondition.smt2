@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -119,23 +115,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const normalize__r4__result Float32)
-
 (declare-const o Float32)
 
-(declare-const result Float32)
+(declare-const normalize__r4__result Float32)
 
 (declare-const normalize__r4__result1 Float32)
 
 (declare-const normalize__r4__result2 Float32)
-
-(declare-const normalize__r4__result3 Float32)
-
-(declare-const normalize__r4__result4 Float32)
-
-(declare-const normalize__r4__result5 Float32)
-
-(declare-const result1 Float32)
 
 ;; H
   (assert (in_range x))
@@ -145,35 +131,24 @@
   x))
 
 ;; H
-  (assert (= normalize__r4__result1 normalize__r4__result2))
+  (assert (= normalize__r4__result normalize__r4__result1))
 
 ;; H
-  (assert (= normalize__r4__result3 normalize__r4__result1))
+  (assert (= o (fp.roundToIntegral RTN x)))
 
 ;; H
-  (assert
-  (and (= o (fp.roundToIntegral RTN x))
-  (fp.isFinite32 (fp.roundToIntegral RTN x))))
+  (assert (= normalize__r4__result o))
 
 ;; H
-  (assert (= result normalize__r4__result))
-
-;; H
-  (assert (= normalize__r4__result1 o))
+  (assert (fp.isFinite32 (fp.roundToIntegral RTN x)))
 
 ;; H
   (assert
-  (= (mk_t__ref normalize__r4__result4) (mk_t__ref normalize__r4__result2)))
-
-;; H
-  (assert (= normalize__r4__result5 normalize__r4__result3))
-
-;; H
-  (assert (= result1 normalize__r4__result4))
+  (= (mk_t__ref normalize__r4__result2) (mk_t__ref normalize__r4__result1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "normalize.ads", line 5, characters 0-0
-  (not (fp.eq normalize__r4__result4 (fp.roundToIntegral RTN x))))
+  (not (fp.eq normalize__r4__result2 (fp.roundToIntegral RTN x))))
 (check-sat)
 (exit)

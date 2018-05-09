@@ -1066,6 +1066,6 @@ logic b : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/OA26-022__gnatprove_crash/o;no/gnatprove/eg.mlw", line 2051, characters 5-8 *)
 goal WP_parameter_def : (tqtisFinite(a) -> (tqtisFinite(b) ->
   tqtisFinite(mul(NearestTiesToEven, a, b))))

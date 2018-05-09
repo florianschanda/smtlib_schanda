@@ -88,7 +88,6 @@
 ;; WP_parameter_def
  ;; File "generic_interval_tests.adb", line 26, characters 0-0
   (not
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp.mul RNE x
-  x))))
+  (fp.leq (fp.mul RNE x x) (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

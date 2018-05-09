@@ -995,7 +995,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/safety_pack.mlw", line 30367, characters 5-8 *)
 goal WP_parameter_def :
   (forall res:t. forall safety_pack__dead_band__result:t. forall o:t.
   forall o1:t. forall result:t. forall res1:t. forall result1:t.

@@ -1093,6 +1093,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type positive
 
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool

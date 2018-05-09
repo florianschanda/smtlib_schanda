@@ -48,6 +48,14 @@
 
 (declare-sort tnum_delimiters_rangeB 0)
 
+(declare-fun tnum_delimiters_rangeBqtint (tnum_delimiters_rangeB) Int)
+
+;; tnum_delimiters_rangeB'axiom
+  (assert
+  (forall ((i tnum_delimiters_rangeB))
+  (and (<= (- 128) (tnum_delimiters_rangeBqtint i))
+  (<= (tnum_delimiters_rangeBqtint i) 127))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 128) x) (<= x 127)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
@@ -69,6 +77,14 @@
 
 (declare-sort num_delimiters_range 0)
 
+(declare-fun num_delimiters_rangeqtint (num_delimiters_range) Int)
+
+;; num_delimiters_range'axiom
+  (assert
+  (forall ((i num_delimiters_range))
+  (and (<= 0 (num_delimiters_rangeqtint i))
+  (<= (num_delimiters_rangeqtint i) 10))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
@@ -88,7 +104,8 @@
 (define-fun num_delimiters_range__ref___projection ((a num_delimiters_range__ref)) num_delimiters_range
   (num_delimiters_range__content a))
 
-(declare-fun to_rep (num_delimiters_range) Int)
+(define-fun to_rep ((x num_delimiters_range)) Int (num_delimiters_rangeqtint
+                                                  x))
 
 (declare-fun of_rep (Int) num_delimiters_range)
 
@@ -110,6 +127,14 @@
 
 (declare-sort function_range 0)
 
+(declare-fun function_rangeqtint (function_range) Int)
+
+;; function_range'axiom
+  (assert
+  (forall ((i function_range))
+  (and (<= 0 (function_rangeqtint i))
+  (<= (function_rangeqtint i) 2147483647))))
+
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -128,7 +153,7 @@
 (define-fun function_range__ref___projection ((a function_range__ref)) function_range
   (function_range__content a))
 
-(declare-fun to_rep1 (function_range) Int)
+(define-fun to_rep1 ((x function_range)) Int (function_rangeqtint x))
 
 (declare-fun of_rep1 (Int) function_range)
 
@@ -162,10 +187,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -188,7 +209,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -236,6 +257,9 @@
  (rec__step_function__delimiter_entry__delimiter function_range)(rec__step_function__delimiter_entry__value float)))))
 (define-fun us_split_fields_Delimiter__projection ((a us_split_fields)) function_range
   (rec__step_function__delimiter_entry__delimiter a))
+
+(define-fun us_split_fields_Value__projection ((a us_split_fields)) float
+  (rec__step_function__delimiter_entry__value a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -542,14 +566,6 @@
 
 (declare-const o2 float)
 
-(declare-const o3 function_range)
-
-(declare-const o4 float)
-
-(declare-const o5 function_range)
-
-(declare-const o6 Int)
-
 ;; H
   (assert (<= 0 i))
 
@@ -560,7 +576,10 @@
            (us_split_fields3 sfun))) 1)))
 
 ;; H
-  (assert (and (<= 0 i) (<= i 10)))
+  (assert (<= 0 i))
+
+;; H
+  (assert (<= i 10))
 
 ;; H
   (assert (= o i))
@@ -570,18 +589,6 @@
   (= (mk___rep (mk___split_fields o1 o2)) (select (rec__step_function__step_function_t__step
                                                   (us_split_fields3 sfun))
   o)))
-
-;; H
-  (assert (= o1 o3))
-
-;; H
-  (assert (= o2 o4))
-
-;; H
-  (assert (= o5 o3))
-
-;; H
-  (assert (= o6 (to_rep1 o5)))
 
 (assert
 ;; WP_parameter_def

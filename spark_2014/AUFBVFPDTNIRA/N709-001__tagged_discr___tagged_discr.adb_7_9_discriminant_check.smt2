@@ -48,6 +48,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -66,24 +73,6 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
-
-(declare-fun of_rep (Int) integer)
-
-;; inversion_axiom
-  (assert
-  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x integer)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
-
 (declare-fun pow2 (Int) Int)
 
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
@@ -97,10 +86,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -124,7 +109,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -146,6 +131,44 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
+(define-fun to_rep ((x integer)) Int (integerqtint x))
+
+(declare-fun of_rep (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                            (of_rep x))) )))
+
+(declare-fun to_rep1 (float) Float32)
+
+(declare-fun of_rep1 (Float32) float)
+
+;; inversion_axiom
+  (assert
+  (forall ((x float))
+  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x float))
+  (! (fp.isFinite32 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (fp.isFinite32 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                                  (of_rep1 x))) )))
+
 (declare-sort e 0)
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 3)))
@@ -163,50 +186,23 @@
 (declare-datatypes () ((e__ref (mk_e__ref (e__content e)))))
 (define-fun e__ref___projection ((a e__ref)) e (e__content a))
 
-(define-fun dynamic_invariant ((temp___expr_158 Int)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)
-  (temp___do_typ_inv_157 Bool)) Bool (=>
-                                     (or (= temp___is_init_154 true)
-                                     (<= 0 3)) (in_range2 temp___expr_158)))
+(declare-fun to_rep2 (e) Int)
 
-(declare-fun to_rep1 (e) Int)
-
-(declare-fun of_rep1 (Int) e)
+(declare-fun of_rep2 (Int) e)
 
 ;; inversion_axiom
   (assert
-  (forall ((x e)) (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+  (forall ((x e)) (! (= (of_rep2 (to_rep2 x)) x) :pattern ((to_rep2 x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x e)) (! (in_range2 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x e)) (! (in_range2 (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range2 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
-                                                              (of_rep1 x))) )))
-
-(declare-fun to_rep2 (float) Float32)
-
-(declare-fun of_rep2 (Float32) float)
-
-;; inversion_axiom
-  (assert
-  (forall ((x float))
-  (! (= (of_rep2 (to_rep2 x)) x) :pattern ((to_rep2 x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x float))
-  (! (fp.isFinite32 (to_rep2 x)) :pattern ((to_rep2 x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
-                                                                  (of_rep2 x))) )))
+  (! (=> (in_range2 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                              (of_rep2 x))) )))
 
 (declare-datatypes ()
 ((us_split_discrs (mk___split_discrs (rec__tagged_discr__t__discr e)))))
@@ -228,6 +224,9 @@
 
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__tagged_discr__t__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__tagged_discr__t__y a))
 
 (define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))
@@ -251,31 +250,31 @@
 (define-fun us_rep___3__projection ((a us_rep)) Int (attr__tag a))
 
 (define-fun tagged_discr__t__x__pred ((a us_rep)) Bool (or
-                                                       (= (to_rep1
+                                                       (= (to_rep2
                                                           (rec__tagged_discr__t__discr
                                                           (us_split_discrs1
                                                           a))) 0)
-                                                       (= (to_rep1
+                                                       (= (to_rep2
                                                           (rec__tagged_discr__t__discr
                                                           (us_split_discrs1
                                                           a))) 2)))
 
 (define-fun tagged_discr__t__y__pred ((a us_rep)) Bool (not
                                                        (or
-                                                       (= (to_rep1
+                                                       (= (to_rep2
                                                           (rec__tagged_discr__t__discr
                                                           (us_split_discrs1
                                                           a))) 0)
-                                                       (= (to_rep1
+                                                       (= (to_rep2
                                                           (rec__tagged_discr__t__discr
                                                           (us_split_discrs1
                                                           a))) 2))))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (= (to_rep1
+                        (= (to_rep2
                            (rec__tagged_discr__t__discr (us_split_discrs1 a)))
-                        (to_rep1
+                        (to_rep2
                         (rec__tagged_discr__t__discr (us_split_discrs1 b))))
                         (and
                         (and
@@ -287,9 +286,9 @@
                         (to_rep
                         (rec__tagged_discr__t__x (us_split_fields1 b))))))
                         (=> (tagged_discr__t__y__pred a)
-                        (= (to_rep2
+                        (= (to_rep1
                            (rec__tagged_discr__t__y (us_split_fields1 a)))
-                        (to_rep2
+                        (to_rep1
                         (rec__tagged_discr__t__y (us_split_fields1 b)))))))
                    true false))
 
@@ -406,6 +405,9 @@
 (define-fun us_split_fields_X__2__projection ((a us_split_fields2)) integer
   (rec__tagged_discr__t__x1 a))
 
+(define-fun us_split_fields_Y__2__projection ((a us_split_fields2)) float
+  (rec__tagged_discr__t__y1 a))
+
 (define-fun us_split_fields___2__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
 
@@ -468,31 +470,31 @@
                                          (attr__tag r)))
 
 (define-fun tagged_discr__t__x__pred1 ((a us_rep1)) Bool (or
-                                                         (= (to_rep1
+                                                         (= (to_rep2
                                                             (rec__tagged_discr__t__discr
                                                             (us_split_discrs2
                                                             a))) 0)
-                                                         (= (to_rep1
+                                                         (= (to_rep2
                                                             (rec__tagged_discr__t__discr
                                                             (us_split_discrs2
                                                             a))) 2)))
 
 (define-fun tagged_discr__t__y__pred1 ((a us_rep1)) Bool (not
                                                          (or
-                                                         (= (to_rep1
+                                                         (= (to_rep2
                                                             (rec__tagged_discr__t__discr
                                                             (us_split_discrs2
                                                             a))) 0)
-                                                         (= (to_rep1
+                                                         (= (to_rep2
                                                             (rec__tagged_discr__t__discr
                                                             (us_split_discrs2
                                                             a))) 2))))
 
 (define-fun bool_eq1 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (= (to_rep1
+                         (= (to_rep2
                             (rec__tagged_discr__t__discr
-                            (us_split_discrs2 a))) (to_rep1
+                            (us_split_discrs2 a))) (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs2 b))))
                          (and
@@ -510,9 +512,9 @@
                          (to_rep
                          (rec__tagged_discr__t__x1 (us_split_fields3 b))))))
                          (=> (tagged_discr__t__y__pred1 a)
-                         (= (to_rep2
+                         (= (to_rep1
                             (rec__tagged_discr__t__y1 (us_split_fields3 a)))
-                         (to_rep2
+                         (to_rep1
                          (rec__tagged_discr__t__y1 (us_split_fields3 b)))))))
                     true false))
 
@@ -639,11 +641,17 @@
 (define-fun us_split_fields_XX__projection ((a us_split_fields4)) integer
   (rec__tagged_discr__u2__xx a))
 
+(define-fun us_split_fields_YY__projection ((a us_split_fields4)) float
+  (rec__tagged_discr__u2__yy a))
+
 (define-fun us_split_fields_Z__3__projection ((a us_split_fields4)) Bool
   (rec__tagged_discr__t__z2 a))
 
 (define-fun us_split_fields_X__3__projection ((a us_split_fields4)) integer
   (rec__tagged_discr__t__x2 a))
+
+(define-fun us_split_fields_Y__3__projection ((a us_split_fields4)) float
+  (rec__tagged_discr__t__y2 a))
 
 (define-fun us_split_fields___3__projection ((a us_split_fields4)) us_private
   (rec__ext__2 a))
@@ -734,31 +742,31 @@
                                           (attr__tag r)))
 
 (define-fun tagged_discr__t__x__pred2 ((a us_rep2)) Bool (or
-                                                         (= (to_rep1
+                                                         (= (to_rep2
                                                             (rec__tagged_discr__t__discr
                                                             (us_split_discrs3
                                                             a))) 0)
-                                                         (= (to_rep1
+                                                         (= (to_rep2
                                                             (rec__tagged_discr__t__discr
                                                             (us_split_discrs3
                                                             a))) 2)))
 
 (define-fun tagged_discr__t__y__pred2 ((a us_rep2)) Bool (not
                                                          (or
-                                                         (= (to_rep1
+                                                         (= (to_rep2
                                                             (rec__tagged_discr__t__discr
                                                             (us_split_discrs3
                                                             a))) 0)
-                                                         (= (to_rep1
+                                                         (= (to_rep2
                                                             (rec__tagged_discr__t__discr
                                                             (us_split_discrs3
                                                             a))) 2))))
 
 (define-fun bool_eq2 ((a us_rep2)
   (b us_rep2)) Bool (ite (and
-                         (= (to_rep1
+                         (= (to_rep2
                             (rec__tagged_discr__t__discr
-                            (us_split_discrs3 a))) (to_rep1
+                            (us_split_discrs3 a))) (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs3 b))))
                          (and
@@ -774,9 +782,9 @@
                             (rec__tagged_discr__u2__xx (us_split_fields5 a)))
                          (to_rep
                          (rec__tagged_discr__u2__xx (us_split_fields5 b)))))
-                         (= (to_rep2
+                         (= (to_rep1
                             (rec__tagged_discr__u2__yy (us_split_fields5 a)))
-                         (to_rep2
+                         (to_rep1
                          (rec__tagged_discr__u2__yy (us_split_fields5 b)))))
                          (= (rec__tagged_discr__t__z2 (us_split_fields5 a))
                          (rec__tagged_discr__t__z2 (us_split_fields5 b))))
@@ -786,9 +794,9 @@
                          (to_rep
                          (rec__tagged_discr__t__x2 (us_split_fields5 b))))))
                          (=> (tagged_discr__t__y__pred2 a)
-                         (= (to_rep2
+                         (= (to_rep1
                             (rec__tagged_discr__t__y2 (us_split_fields5 a)))
-                         (to_rep2
+                         (to_rep1
                          (rec__tagged_discr__t__y2 (us_split_fields5 b)))))))
                     true false))
 
@@ -940,7 +948,7 @@
 (declare-const us_tag3 Int)
 
 (define-fun in_range3 ((rec__tagged_discr__t__discr1 Int)
-  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep1
+  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs1 a)))))
 
@@ -1035,7 +1043,7 @@
 (declare-const us_tag4 Int)
 
 (define-fun in_range4 ((rec__tagged_discr__t__discr1 Int)
-  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep1
+  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs1 a)))))
 
@@ -1130,7 +1138,7 @@
 (declare-const us_tag5 Int)
 
 (define-fun in_range5 ((rec__tagged_discr__t__discr1 Int)
-  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep1
+  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs1 a)))))
 
@@ -1241,7 +1249,7 @@
 (declare-const us_tag6 Int)
 
 (define-fun in_range6 ((rec__tagged_discr__t__discr1 Int)
-  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep1
+  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs1 a)))))
 
@@ -1336,7 +1344,7 @@
 (declare-const us_tag7 Int)
 
 (define-fun in_range7 ((rec__tagged_discr__t__discr1 Int)
-  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep1
+  (a us_rep)) Bool (= rec__tagged_discr__t__discr1 (to_rep2
                                                    (rec__tagged_discr__t__discr
                                                    (us_split_discrs1 a)))))
 
@@ -1536,11 +1544,18 @@
   (! (= (= (is_zero v) true)
      (and (not (= (rec__tagged_discr__t__z (us_split_fields1 v)) true))
      (ite (or
-          (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 0)
-          (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 2))
+          (= (to_rep2 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 0)
+          (= (to_rep2 (rec__tagged_discr__t__discr (us_split_discrs1 v))) 2))
      (= (to_rep (rec__tagged_discr__t__x (us_split_fields1 v))) 0)
-     (fp.eq (to_rep2 (rec__tagged_discr__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000))))) :pattern (
+     (fp.eq (to_rep1 (rec__tagged_discr__t__y (us_split_fields1 v))) (fp #b0 #b00000000 #b00000000000000000000000))))) :pattern (
   (is_zero v)) )))
+
+(define-fun dynamic_invariant ((temp___expr_158 Int)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (<= 0 3)) (in_range2 temp___expr_158)))
 
 (declare-const v__split_discrs us_split_discrs)
 
@@ -1592,10 +1607,10 @@
      (and
      (and (not (= (rec__tagged_discr__t__z1 (us_split_fields3 v)) true))
      (ite (or
-          (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 0)
-          (= (to_rep1 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 2))
+          (= (to_rep2 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 0)
+          (= (to_rep2 (rec__tagged_discr__t__discr (us_split_discrs2 v))) 2))
      (= (to_rep (rec__tagged_discr__t__x1 (us_split_fields3 v))) 0)
-     (fp.eq (to_rep2 (rec__tagged_discr__t__y1 (us_split_fields3 v))) (fp #b0 #b00000000 #b00000000000000000000000))))
+     (fp.eq (to_rep1 (rec__tagged_discr__t__y1 (us_split_fields3 v))) (fp #b0 #b00000000 #b00000000000000000000000))))
      (= (to_rep (rec__tagged_discr__u1__w (us_split_fields3 v))) 0))) :pattern (
   (is_zero__2 v)) )))
 
@@ -1626,82 +1641,32 @@
      (and (= (is_zero (to_base1 v)) true)
      (= (to_rep (rec__tagged_discr__u2__w (us_split_fields5 v))) 0))
      (= (to_rep (rec__tagged_discr__u2__xx (us_split_fields5 v))) 0))
-     (fp.eq (to_rep2 (rec__tagged_discr__u2__yy (us_split_fields5 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
+     (fp.eq (to_rep1 (rec__tagged_discr__u2__yy (us_split_fields5 v))) (fp #b0 #b00000000 #b00000000000000000000000)))) :pattern (
   (is_zero__3 v)) )))
 
 (declare-const o e)
 
-(declare-const o1 integer)
-
-(declare-const o2 Bool)
-
-(declare-const o3 integer)
-
-(declare-const o4 float)
-
-(declare-const o5 us_private)
-
-(declare-const o6 e)
+(declare-const o1 e)
 
 (declare-const temp___226 e)
 
-(declare-const temp___2261 Bool)
-
-(declare-const temp___2262 integer)
-
-(declare-const temp___2263 float)
-
-(declare-const temp___2264 us_private)
-
-(declare-const temp___2265 Int)
+;; H
+  (assert (= (to_rep2 (rec__tagged_discr__t__discr v__split_discrs)) 0))
 
 ;; H
-  (assert (= (to_rep1 (rec__tagged_discr__t__discr v__split_discrs)) 0))
-
-;; H
-  (assert (= (to_rep1 (rec__tagged_discr__t__discr v__split_discrs)) r2b))
+  (assert (= (to_rep2 (rec__tagged_discr__t__discr v__split_discrs)) r2b))
 
 ;; H
   (assert (in_range2 r2b))
 
 ;; H
-  (assert (= (to_rep o1) 0))
+  (assert (= (to_rep2 o) 0))
 
 ;; H
-  (assert (= (distinct 0 0) o2))
+  (assert (= o o1))
 
 ;; H
-  (assert (= o1 o3))
-
-;; H
-  (assert (= dummy1 o4))
-
-;; H
-  (assert (= us_null_ext__ o5))
-
-;; H
-  (assert (= (to_rep1 o) 0))
-
-;; H
-  (assert (= o o6))
-
-;; H
-  (assert (= temp___226 o6))
-
-;; H
-  (assert (= temp___2261 o2))
-
-;; H
-  (assert (= temp___2262 o3))
-
-;; H
-  (assert (= temp___2263 o4))
-
-;; H
-  (assert (= temp___2264 o5))
-
-;; H
-  (assert (= us_tag3 temp___2265))
+  (assert (= temp___226 o1))
 
 (assert
 ;; WP_parameter_def

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -126,7 +122,37 @@
   (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                                 (of_rep x))) )))
 
+(declare-fun min (Float32 Float32) Float32)
+
+(declare-fun min__function_guard (Float32 Float32 Float32) Bool)
+
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
+
+;; min__post_axiom
+  (assert
+  (forall ((x1 Float32) (x2 Float32))
+  (! (=>
+     (and (dynamic_invariant x1 true true true true) (dynamic_invariant x2
+     true true true true))
+     (let ((result (min x1 x2)))
+     (and (ite (fp.leq x1 x2) (fp.eq result x1) (fp.eq result x2))
+     (dynamic_invariant result true false true true)))) :pattern ((min x1 x2)) )))
+
 (declare-sort num_delimiters_range 0)
+
+(declare-fun num_delimiters_rangeqtint (num_delimiters_range) Int)
+
+;; num_delimiters_range'axiom
+  (assert
+  (forall ((i num_delimiters_range))
+  (and (<= 0 (num_delimiters_rangeqtint i))
+  (<= (num_delimiters_rangeqtint i) 10))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -147,14 +173,8 @@
 (define-fun num_delimiters_range__ref___projection ((a num_delimiters_range__ref)) num_delimiters_range
   (num_delimiters_range__content a))
 
-(define-fun dynamic_invariant ((temp___expr_159 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)
-  (temp___do_typ_inv_158 Bool)) Bool (=>
-                                     (or (= temp___is_init_155 true)
-                                     (<= 0 10)) (in_range1 temp___expr_159)))
-
-(declare-fun to_rep1 (num_delimiters_range) Int)
+(define-fun to_rep1 ((x num_delimiters_range)) Int (num_delimiters_rangeqtint
+                                                   x))
 
 (declare-fun of_rep1 (Int) num_delimiters_range)
 
@@ -176,6 +196,14 @@
 
 (declare-sort function_range 0)
 
+(declare-fun function_rangeqtint (function_range) Int)
+
+;; function_range'axiom
+  (assert
+  (forall ((i function_range))
+  (and (<= 0 (function_rangeqtint i))
+  (<= (function_rangeqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -194,7 +222,7 @@
 (define-fun function_range__ref___projection ((a function_range__ref)) function_range
   (function_range__content a))
 
-(declare-fun to_rep2 (function_range) Int)
+(define-fun to_rep2 ((x function_range)) Int (function_rangeqtint x))
 
 (declare-fun of_rep2 (Int) function_range)
 
@@ -220,6 +248,9 @@
  (rec__step_function__delimiter_entry__delimiter function_range)(rec__step_function__delimiter_entry__value float)))))
 (define-fun us_split_fields_Delimiter__projection ((a us_split_fields)) function_range
   (rec__step_function__delimiter_entry__delimiter a))
+
+(define-fun us_split_fields_Value__projection ((a us_split_fields)) float
+  (rec__step_function__delimiter_entry__value a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -491,29 +522,6 @@
 (define-fun step_function_t__ref___projection ((a step_function_t__ref)) us_rep1
   (step_function_t__content a))
 
-(declare-fun min (Float32 Float32) Float32)
-
-(declare-fun min__function_guard (Float32 Float32 Float32) Bool)
-
-(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
-  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
-  (temp___do_toplevel_58 Bool)
-  (temp___do_typ_inv_59 Bool)) Bool (=>
-                                    (or (= temp___is_init_56 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                    (fp.isFinite32 temp___expr_60)))
-
-;; min__post_axiom
-  (assert
-  (forall ((x1 Float32) (x2 Float32))
-  (! (=>
-     (and (dynamic_invariant1 x1 true true true true) (dynamic_invariant1 x2
-     true true true true))
-     (let ((result (min x1 x2)))
-     (and (ite (fp.leq x1 x2) (fp.eq result x1) (fp.eq result x2))
-     (dynamic_invariant1 result true false true true)))) :pattern ((min x1
-                                                                   x2)) )))
-
 (declare-fun is_valid (us_rep1) Bool)
 
 (declare-fun is_valid__function_guard (Bool us_rep1) Bool)
@@ -555,7 +563,7 @@
 
 (declare-fun get_value__function_guard (Float32 us_rep1 Int) Bool)
 
-(define-fun dynamic_invariant2 ((temp___expr_166 Int)
+(define-fun dynamic_invariant1 ((temp___expr_166 Int)
   (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
   (temp___do_toplevel_164 Bool)
   (temp___do_typ_inv_165 Bool)) Bool (=>
@@ -568,7 +576,7 @@
   (forall ((sfun us_rep1))
   (forall ((x Int))
   (! (=>
-     (and (dynamic_invariant2 x true true true true)
+     (and (dynamic_invariant1 x true true true true)
      (= (is_valid sfun) true))
      (let ((result (get_value sfun x)))
      (and
@@ -616,8 +624,15 @@
                    (select temp___230 (to_rep1
                                       (rec__step_function__step_function_t__number_of_delimiters
                                       (us_split_fields3 sfun)))))))))))
-     (dynamic_invariant1 result true false true true)))) :pattern ((get_value
-                                                                   sfun x)) ))))
+     (dynamic_invariant result true false true true)))) :pattern ((get_value
+                                                                  sfun x)) ))))
+
+(define-fun dynamic_invariant2 ((temp___expr_159 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)
+  (temp___do_typ_inv_158 Bool)) Bool (=>
+                                     (or (= temp___is_init_155 true)
+                                     (<= 0 10)) (in_range1 temp___expr_159)))
 
 (declare-const sfun1 us_rep1)
 
@@ -639,185 +654,14 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-const merge__split_fields num_delimiters_range)
+(declare-const rliteral function_range)
 
-(declare-const merge__split_fields1 (Array Int us_rep))
-
-(declare-const i1 Int)
-
-(declare-const i2 Int)
-
-(declare-const im Int)
-
-(declare-const scan_sfun1 Bool)
-
-(declare-const scan_sfun2 Bool)
-
-(declare-const o float)
-
-(declare-const o1 function_range)
-
-(declare-const o2 function_range)
-
-(declare-const o3 float)
-
-(declare-const o4 function_range)
-
-(declare-const o5 float)
-
-(declare-const o6 (Array Int us_rep))
-
-(declare-const o7 num_delimiters_range)
-
-(declare-const o8 (Array Int us_rep))
-
-(declare-const temp___340 num_delimiters_range)
-
-(declare-const temp___3401 (Array Int us_rep))
-
-(declare-const result int__ref)
-
-(declare-const i11 Int)
-
-(declare-const result1 int__ref)
-
-(declare-const i21 Int)
-
-(declare-const result2 int__ref)
-
-(declare-const im1 Int)
-
-(declare-const result3 bool__ref)
-
-(declare-const scan_sfun11 Bool)
-
-(declare-const result4 bool__ref)
-
-(declare-const scan_sfun21 Bool)
-
-(declare-const result5 us_split_fields__ref1)
-
-(declare-const merge__split_fields2 us_split_fields2)
-
-;; H
-  (assert
-  (and (and (= (is_valid sfun1) true) (= (is_valid sfun2) true))
-  (<= (+ (to_rep1
-         (rec__step_function__step_function_t__number_of_delimiters
-         (us_split_fields3 sfun1))) (to_rep1
-                                    (rec__step_function__step_function_t__number_of_delimiters
-                                    (us_split_fields3 sfun2)))) 10)))
-
-;; H
-  (assert (= result (mk_int__ref i1)))
-
-;; H
-  (assert (= i11 0))
-
-;; H
-  (assert (in_range1 i11))
-
-;; H
-  (assert (= result1 (mk_int__ref i2)))
-
-;; H
-  (assert (= i21 0))
-
-;; H
-  (assert (in_range1 i21))
-
-;; H
-  (assert (= result2 (mk_int__ref im)))
-
-;; H
-  (assert (= im1 0))
-
-;; H
-  (assert (in_range1 im1))
-
-;; H
-  (assert (= result3 (mk_bool__ref scan_sfun1)))
-
-;; H
-  (assert (= scan_sfun11 (distinct 1 0)))
-
-;; H
-  (assert (= result4 (mk_bool__ref scan_sfun2)))
-
-;; H
-  (assert (= scan_sfun21 (distinct 1 0)))
-
-;; H
-  (assert (= (to_rep o) (fp #b0 #b00000000 #b00000000000000000000000)))
-
-;; H
-  (assert (= (to_rep2 o1) 0))
-
-;; H
-  (assert (= o1 o2))
-
-;; H
-  (assert (= o o3))
-
-;; H
-  (assert (= o4 o2))
-
-;; H
-  (assert (= o5 o3))
-
-;; H
-  (assert
-  (= o6 (store merge__split_fields1 im1 (mk___rep (mk___split_fields o4 o5)))))
-
-;; H
-  (assert (= merge__split_fields o7))
-
-;; H
-  (assert (= o6 o8))
-
-;; H
-  (assert (= temp___340 o7))
-
-;; H
-  (assert (= temp___3401 o8))
-
-;; H
-  (assert
-  (= result5 (mk___split_fields__ref1
-             (mk___split_fields1 merge__split_fields merge__split_fields1))))
-
-;; H
-  (assert
-  (= merge__split_fields2 (mk___split_fields1 temp___340 temp___3401)))
-
-;; H
-  (assert (not (= scan_sfun11 true)))
-
-(declare-const i Int)
-
-;; H
-  (assert (<= 0 i))
-
-;; H
-  (assert
-  (<= i (to_rep1
-        (rec__step_function__step_function_t__number_of_delimiters
-        (us_split_fields3 sfun1)))))
+;; rliteral_axiom
+  (assert (= (function_rangeqtint rliteral) 0))
 
 (assert
 ;; WP_parameter_def
  ;; File "step_function.ads", line 89, characters 0-0
-  (not
-  (exists ((j Int))
-  (and (and (<= 0 j) (<= j (- im1 1)))
-  (= (to_rep2
-     (rec__step_function__delimiter_entry__delimiter
-     (us_split_fields1
-     (select (rec__step_function__step_function_t__step
-             (us_split_fields3 sfun1)) i)))) (to_rep2
-                                             (rec__step_function__delimiter_entry__delimiter
-                                             (us_split_fields1
-                                             (select (rec__step_function__step_function_t__step
-                                                     merge__split_fields2) j)))))))))
+  (not true))
 (check-sat)
 (exit)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -199,8 +195,6 @@
 
 (declare-const o3 Float64)
 
-(declare-const result Float64)
-
 (declare-const abs_out11 Float64)
 
 ;; H
@@ -230,21 +224,22 @@
   (not (fp.eq requested_force (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
-  (assert
-  (and (= o (fp.sub RNE requested_force calculated_force))
-  (fp.isFinite64 (fp.sub RNE requested_force calculated_force))))
+  (assert (= o (fp.sub RNE requested_force calculated_force)))
+
+;; H
+  (assert (fp.isFinite64 (fp.sub RNE requested_force calculated_force)))
 
 ;; H
   (assert (= o1 (fp.div RNE o requested_force)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite64 o1)))
+  (assert (= o2 o1))
+
+;; H
+  (assert (fp.isFinite64 o1))
 
 ;; H
   (assert (= o3 (fp.abs o2)))
-
-;; H
-  (assert (= result abs_out1))
 
 ;; H
   (assert (= abs_out11 o3))

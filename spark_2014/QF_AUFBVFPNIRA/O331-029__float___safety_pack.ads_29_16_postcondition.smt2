@@ -171,11 +171,14 @@
   (assert (= result4 safety_pack__saturate__result4))
 
 ;; H
-  (assert (fp.lt value min_value))
+  (assert (not (fp.lt value min_value)))
+
+;; H
+  (assert (fp.lt max_value value))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.eq safety_pack__saturate__result4 min_value)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/safety_pack.mlw", line 30499, characters 5-8
+  (not (fp.eq safety_pack__saturate__result4 max_value)))
 (check-sat)
 (exit)

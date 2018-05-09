@@ -73,8 +73,6 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
                    (and (in_range1 high)
@@ -94,6 +92,8 @@
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
   (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
@@ -133,7 +133,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P405-006__coq_lemma_library/proof/sessions/spark-test_array_lemmas/../../../obj/gnatprove/spark-test_array_lemmas.mlw", line 5307, characters 5-8
   (not false))
 (check-sat)
 (exit)

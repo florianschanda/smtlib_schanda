@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -90,7 +86,7 @@
 ;; Power_0
   (assert
   (forall ((x Float32))
-  (=> (fp.isFinite32 x) (fp.eq (power x 0) (of_int RNE 1)))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 0) ((_ to_fp 8 24) RNE (to_real 1))))))
 
 ;; Power_1
   (assert
@@ -111,21 +107,23 @@
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 1)) (fp.div RNE (of_int RNE 1) x))))))
+  (fp.eq (power x (- 1)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1)) x))))))
 
 ;; Power_neg2
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 2)))))))
+  (fp.eq (power x (- 2)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1))
+  (power x 2)))))))
 
 ;; Power_neg3
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 3)))))))
+  (fp.eq (power x (- 2)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1))
+  (power x 3)))))))
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
@@ -136,6 +134,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -170,9 +175,16 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-sort fibonacci_argument_type 0)
+(declare-sort natural 0)
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
+
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
@@ -180,9 +192,47 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq2 (fibonacci_argument_type fibonacci_argument_type) Bool)
+(declare-fun user_eq2 (natural natural) Bool)
 
-(declare-const dummy2 fibonacci_argument_type)
+(declare-const dummy2 natural)
+
+(declare-datatypes ()
+((natural__ref (mk_natural__ref (natural__content natural)))))
+(define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
+                                                                 a))
+
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range2
+                                    temp___expr_39)))
+
+(declare-fun fib (Int) Int)
+
+(declare-fun fib__function_guard (Int Int) Bool)
+
+(declare-sort fibonacci_argument_type 0)
+
+(declare-fun fibonacci_argument_typeqtint (fibonacci_argument_type) Int)
+
+;; fibonacci_argument_type'axiom
+  (assert
+  (forall ((i fibonacci_argument_type))
+  (and (<= 0 (fibonacci_argument_typeqtint i))
+  (<= (fibonacci_argument_typeqtint i) 46))))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+
+(declare-fun user_eq3 (fibonacci_argument_type fibonacci_argument_type) Bool)
+
+(declare-const dummy3 fibonacci_argument_type)
 
 (declare-datatypes ()
 ((fibonacci_argument_type__ref
@@ -191,53 +241,23 @@
 (define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
   (fibonacci_argument_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_208 Int)
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
   (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
   (temp___do_toplevel_206 Bool)
   (temp___do_typ_inv_207 Bool)) Bool (=>
                                      (or (= temp___is_init_204 true)
-                                     (<= 0 46)) (in_range2 temp___expr_208)))
+                                     (<= 0 46)) (in_range3 temp___expr_208)))
+
+;; fib__def_axiom
+  (assert
+  (forall ((n Int))
+  (! (=> (dynamic_invariant1 n true true true true)
+     (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))) :pattern (
+  (fib n)) )))
 
 (declare-const n Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-sort natural 0)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (natural natural) Bool)
-
-(declare-const dummy3 natural)
-
-(declare-datatypes ()
-((natural__ref (mk_natural__ref (natural__content natural)))))
-(define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
-                                                                 a))
-
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
-  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
-  (temp___do_typ_inv_38 Bool)) Bool (=>
-                                    (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range3
-                                    temp___expr_39)))
-
-(declare-fun fib (Int) Int)
-
-(declare-fun fib__function_guard (Int Int) Bool)
-
-;; fib__def_axiom
-  (assert
-  (forall ((n1 Int))
-  (! (=> (dynamic_invariant n1 true true true true)
-     (= (fib n1) (ite (or (= n1 0) (= n1 1)) n1
-                 (+ (fib (- n1 1)) (fib (- n1 2)))))) :pattern ((fib n1)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -255,7 +275,7 @@
                                     (in_range1 temp___expr_18)))
 
 ;; H
-  (assert (in_range2 n))
+  (assert (in_range3 n))
 
 ;; H
   (assert (not (not (not (= n 0)))))
@@ -265,7 +285,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (in_range2 (- n 2))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 2765, characters 5-8
+  (not (in_range3 (- n 2))))
 (check-sat)
 (exit)

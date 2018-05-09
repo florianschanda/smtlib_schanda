@@ -152,21 +152,21 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_579 Float64)
+(define-fun dynamic_invariant1 ((temp___expr_572 Float64)
+  (temp___is_init_568 Bool) (temp___skip_constant_569 Bool)
+  (temp___do_toplevel_570 Bool)
+  (temp___do_typ_inv_571 Bool)) Bool (=>
+                                     (or (= temp___is_init_568 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
+                                     (in_range3 temp___expr_572)))
+
+(define-fun dynamic_invariant2 ((temp___expr_579 Float64)
   (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
   (temp___do_toplevel_577 Bool)
   (temp___do_typ_inv_578 Bool)) Bool (=>
                                      (or (= temp___is_init_575 true)
-                                     (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
-                                     (in_range3 temp___expr_579)))
-
-(define-fun dynamic_invariant2 ((temp___expr_586 Float64)
-  (temp___is_init_582 Bool) (temp___skip_constant_583 Bool)
-  (temp___do_toplevel_584 Bool)
-  (temp___do_typ_inv_585 Bool)) Bool (=>
-                                     (or (= temp___is_init_582 true)
                                      (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
-                                     (in_range4 temp___expr_586)))
+                                     (in_range4 temp___expr_579)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 

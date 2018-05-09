@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -135,63 +131,41 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-const foo__float_tests__negate_wrong__result Float32)
-
 (declare-const o Float32)
 
-(declare-const result Float32)
+(declare-const foo__float_tests__negate_wrong__result Float32)
 
 (declare-const foo__float_tests__negate_wrong__result1 Float32)
 
 (declare-const foo__float_tests__negate_wrong__result2 Float32)
-
-(declare-const foo__float_tests__negate_wrong__result3 Float32)
-
-(declare-const foo__float_tests__negate_wrong__result4 Float32)
-
-(declare-const foo__float_tests__negate_wrong__result5 Float32)
-
-(declare-const result1 Float32)
 
 ;; H
   (assert (fp.isFinite32 x))
 
 ;; H
   (assert
-  (= foo__float_tests__negate_wrong__result1 foo__float_tests__negate_wrong__result2))
+  (= foo__float_tests__negate_wrong__result foo__float_tests__negate_wrong__result1))
+
+;; H
+  (assert (= o (fp.sub RNE (fp #b0 #b00000000 #b00000000000000000000000)
+  x)))
+
+;; H
+  (assert (= foo__float_tests__negate_wrong__result o))
 
 ;; H
   (assert
-  (= foo__float_tests__negate_wrong__result3 foo__float_tests__negate_wrong__result1))
-
-;; H
-  (assert
-  (and (= o (fp.sub RNE (fp #b0 #b00000000 #b00000000000000000000000)
-  x))
   (fp.isFinite32 (fp.sub RNE (fp #b0 #b00000000 #b00000000000000000000000)
-  x))))
-
-;; H
-  (assert (= result foo__float_tests__negate_wrong__result))
-
-;; H
-  (assert (= foo__float_tests__negate_wrong__result1 o))
+  x)))
 
 ;; H
   (assert
-  (= (mk_t__ref foo__float_tests__negate_wrong__result4) (mk_t__ref
-                                                         foo__float_tests__negate_wrong__result2)))
-
-;; H
-  (assert
-  (= foo__float_tests__negate_wrong__result5 foo__float_tests__negate_wrong__result3))
-
-;; H
-  (assert (= result1 foo__float_tests__negate_wrong__result4))
+  (= (mk_t__ref foo__float_tests__negate_wrong__result2) (mk_t__ref
+                                                         foo__float_tests__negate_wrong__result1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.ads", line 2, characters 0-0
-  (not (fp.eq foo__float_tests__negate_wrong__result4 (fp.neg x))))
+  (not (fp.eq foo__float_tests__negate_wrong__result2 (fp.neg x))))
 (check-sat)
 (exit)

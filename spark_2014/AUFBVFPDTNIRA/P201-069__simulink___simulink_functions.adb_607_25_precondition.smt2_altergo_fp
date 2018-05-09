@@ -1037,6 +1037,12 @@ type t__ref = { t__content : t
 
 type integer_8
 
+logic integer_8qtint : integer_8 -> int
+
+axiom integer_8qtaxiom :
+  (forall i:integer_8. (((- 128) <= integer_8qtint(i)) and
+  (integer_8qtint(i) <= 127)))
+
 predicate in_range1(x: int) = (((- 128) <= x) and (x <= 127))
 
 logic bool_eq1 : int, int -> bool

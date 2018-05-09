@@ -73,8 +73,6 @@
                                      (<= 0 2147483647)) (in_range2
                                      temp___expr_208)))
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
-
 (declare-const abstr Bool)
 
 (define-fun bool_eq ((a (Array Int Bool)) (a__first Int) (a__last Int)
@@ -87,6 +85,8 @@
                       true false))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 100000)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
@@ -111,13 +111,13 @@
 
 (declare-const test_prime_and_coprime_numbers__p__eratosthenes__L_5__R87b__assume Int)
 
-(declare-const temp___296 Int)
+(declare-const temp___298 Int)
 
-(declare-const temp___295 Int)
+(declare-const temp___297 Int)
 
-(declare-const temp___293 (Array Int Bool))
+(declare-const temp___295 (Array Int Bool))
 
-(declare-const temp___292 Int)
+(declare-const temp___294 Int)
 
 (declare-const v Int)
 
@@ -137,9 +137,9 @@
 
 (declare-const o5 Int)
 
-(declare-const temp___290 (Array Int Bool))
+(declare-const temp___292 (Array Int Bool))
 
-(declare-const temp___289 Int)
+(declare-const temp___291 Int)
 
 (declare-const o6 Int)
 
@@ -438,14 +438,14 @@
 ;; H
   (assert (<= v4 index_22))
 
-;; H
-  (assert (= (select is_prime7 v4) true))
-
 (declare-const abstr2 Bool)
+
+;; H
+  (assert (= abstr2 true))
 
 (assert
 ;; WP_parameter_def
  ;; File "prime_and_coprime_numbers.adb", line 205, characters 0-0
-  (not (= abstr2 true)))
+  (not (= (select is_prime7 v4) true)))
 (check-sat)
 (exit)

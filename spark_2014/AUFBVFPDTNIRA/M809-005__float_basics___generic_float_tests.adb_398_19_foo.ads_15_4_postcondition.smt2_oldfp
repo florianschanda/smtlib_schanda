@@ -72,7 +72,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -559,45 +559,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -770,14 +770,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1112,11 +1112,15 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_194)))
 
-(declare-const x t)
+(declare-const biggest_representable_int t)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const x t)
+
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_67 t) (temp___is_init_63 Bool)
   (temp___skip_constant_64 Bool) (temp___do_toplevel_65 Bool)
@@ -1128,13 +1132,16 @@
 (declare-const fliteral2 t)
 
 ;; fliteral_axiom
-  (assert (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) (/ 0.0 10.0))))
+  (assert
+  (and (tqtisFinite fliteral2) (= (tqtreal fliteral2) 9007199254740992.0)))
+
+;; biggest_representable_int__def_axiom
+  (assert (= biggest_representable_int fliteral2))
 
 (declare-const fliteral3 t)
 
 ;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) 9007199254740992.0)))
+  (assert (and (tqtisFinite fliteral3) (= (tqtreal fliteral3) (/ 0.0 10.0))))
 
 (declare-const fliteral4 t)
 
@@ -1154,13 +1161,19 @@
 (declare-const y3 t)
 
 ;; H
+  (assert (tqtisFinite biggest_representable_int))
+
+;; H
+  (assert (= fliteral2 biggest_representable_int))
+
+;; H
   (assert (tqtisFinite x))
 
 ;; H
   (assert (=> (le (neg fliteral1) fliteral1) (tqtisFinite y)))
 
 ;; H
-  (assert (and (le fliteral2 x) (le x fliteral3)))
+  (assert (and (le fliteral3 x) (le x biggest_representable_int)))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref y)))
@@ -1176,7 +1189,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (le (sub RNE1 x fliteral4) y2)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/M809-005__float_basics/proof/sessions/foo/../../../gnatprove/foo.mlw", line 14489, characters 5-8
+  (not (le y2 (add RNE1 x fliteral4))))
 (check-sat)
 (exit)

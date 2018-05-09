@@ -66,6 +66,10 @@
                                      (<= 0 25000)) (in_range
                                      temp___expr_165)))
 
+(declare-const max_speed_variance Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (define-fun in_range1 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) x)
@@ -81,11 +85,9 @@
 
 (declare-const n Int)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const factor Float64)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -93,9 +95,15 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+
 (declare-const old_speed Float64)
 
-(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
+
+;; max_speed_variance__def_axiom
+  (assert
+  (= max_speed_variance (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000)))
 
 (declare-const speed Float64)
 

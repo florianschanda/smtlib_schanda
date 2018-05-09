@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -194,7 +197,7 @@
   (= (to_rep (select a temp___idx_155)) (to_rep
                                         (select b (+ (- b__first a__first) temp___idx_155)))))))))))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -287,24 +290,8 @@
 
 (declare-const dummy2 us_t)
 
-(declare-datatypes ()
-((arr_float_unconstrained__ref
- (mk_arr_float_unconstrained__ref (arr_float_unconstrained__content us_t)))))
-(define-fun arr_float_unconstrained__ref___projection ((a arr_float_unconstrained__ref)) us_t
-  (arr_float_unconstrained__content a))
-
-(define-fun dynamic_invariant ((temp___expr_195 us_t)
-  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
-  (temp___do_toplevel_193 Bool)
-  (temp___do_typ_inv_194 Bool)) Bool (=>
-                                     (not (= temp___skip_constant_192 true))
-                                     (dynamic_property (- 2147483648)
-                                     2147483647 (first1 temp___expr_195)
-                                     (last1 temp___expr_195))))
-
-(declare-const arr us_t)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-datatypes () ((a__ref (mk_a__ref (a__content us_t)))))
+(define-fun a__ref___2__projection ((a a__ref)) us_t (a__content a))
 
 (declare-sort t1 0)
 
@@ -380,8 +367,24 @@
 
 (declare-const dummy3 us_t1)
 
-(declare-datatypes () ((a__ref (mk_a__ref (a__content us_t1)))))
-(define-fun a__ref___2__projection ((a a__ref)) us_t1 (a__content a))
+(declare-datatypes ()
+((arr_float_unconstrained__ref
+ (mk_arr_float_unconstrained__ref (arr_float_unconstrained__content us_t1)))))
+(define-fun arr_float_unconstrained__ref___projection ((a arr_float_unconstrained__ref)) us_t1
+  (arr_float_unconstrained__content a))
+
+(define-fun dynamic_invariant ((temp___expr_195 us_t1)
+  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
+  (temp___do_toplevel_193 Bool)
+  (temp___do_typ_inv_194 Bool)) Bool (=>
+                                     (not (= temp___skip_constant_192 true))
+                                     (dynamic_property1 (- 2147483648)
+                                     2147483647 (first3 temp___expr_195)
+                                     (last3 temp___expr_195))))
+
+(declare-const arr us_t1)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
   (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
@@ -398,55 +401,56 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant3 ((temp___expr_248 us_t1)
+(define-fun dynamic_invariant3 ((temp___expr_248 us_t)
   (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
   (temp___do_toplevel_246 Bool)
   (temp___do_typ_inv_247 Bool)) Bool (=>
                                      (not (= temp___skip_constant_245 true))
-                                     (dynamic_property1 (- 2147483648)
-                                     2147483647 (first3 temp___expr_248)
-                                     (last3 temp___expr_248))))
+                                     (dynamic_property (- 2147483648)
+                                     2147483647 (first1 temp___expr_248)
+                                     (last1 temp___expr_248))))
 
 (declare-const o (Array Int float))
 
-(declare-const o1 t1)
+(declare-const o1 t)
+
+(declare-const i Int)
 
 ;; H
   (assert (dynamic_invariant arr true false true true))
 
 ;; H
   (assert
-  (forall ((i Int))
+  (forall ((i1 Int))
   (=>
-  (and (<= (+ (to_rep1 (first (rt arr))) 1) i)
-  (<= i (to_rep1 (last (rt arr)))))
-  (fp.lt (to_rep (select (elts arr) (- i 1))) (to_rep (select (elts arr) i))))))
+  (and (<= (+ (to_rep1 (first2 (rt1 arr))) 1) i1)
+  (<= i1 (to_rep1 (last2 (rt1 arr)))))
+  (fp.lt (to_rep (select (elts1 arr) (- i1 1))) (to_rep
+                                                (select (elts1 arr) i1))))))
 
 ;; H
-  (assert (dynamic_property1 (- 2147483648) 2147483647
-  (to_rep1 (first (rt arr))) (to_rep1 (last (rt arr)))))
+  (assert (dynamic_property (- 2147483648) 2147483647
+  (to_rep1 (first2 (rt1 arr))) (to_rep1 (last2 (rt1 arr)))))
 
 ;; H
-  (assert (= (elts arr) o))
+  (assert (= (elts1 arr) o))
 
 ;; H
-  (assert (= (mk1 (to_rep1 (first (rt arr))) (to_rep1 (last (rt arr))))
-  o1))
-
-(declare-const i Int)
+  (assert
+  (= (mk (to_rep1 (first2 (rt1 arr))) (to_rep1 (last2 (rt1 arr)))) o1))
 
 ;; H
-  (assert (<= (to_rep1 (first2 o1)) i))
+  (assert (<= (to_rep1 (first o1)) i))
 
 ;; H
-  (assert (<= i (to_rep1 (last2 o1))))
+  (assert (<= i (to_rep1 (last o1))))
 
 ;; H
-  (assert (not (= i (to_rep1 (first2 o1)))))
+  (assert (not (= i (to_rep1 (first o1)))))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P405-006__coq_lemma_library/proof/sessions/spark-test_array_lemmas/../../../obj/gnatprove/spark-test_array_lemmas.mlw", line 5307, characters 5-8
   (not (fp.lt (to_rep (select o (- i 1))) (to_rep (select o i)))))
 (check-sat)
 (exit)

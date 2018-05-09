@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -157,168 +153,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const res Float32)
-
-(declare-const safety_pack__dead_band__result Float32)
-
-(declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const result Float32)
-
-(declare-const res1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const res2 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const res3 Float32)
-
-(declare-const result3 Float32)
-
-(declare-const res4 Float32)
-
-(declare-const result4 Float32)
-
-(declare-const safety_pack__dead_band__result1 Float32)
-
-(declare-const safety_pack__dead_band__result2 Float32)
-
-(declare-const safety_pack__dead_band__result3 Float32)
-
-(declare-const res5 Float32)
-
-(declare-const safety_pack__dead_band__result4 Float32)
-
-(declare-const res6 Float32)
-
-(declare-const safety_pack__dead_band__result5 Float32)
-
-;; H
-  (assert (fp.isFinite32 value))
-
-;; H
-  (assert (in_range1 threshold))
-
-;; H
-  (assert (= (mk_t__ref result) (mk_t__ref res)))
-
-;; H
-  (assert (= res1 value))
-
-;; H
-  (assert (fp.isFinite32 res1))
-
-;; H
-  (assert
-  (=> (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold))
-  (= result1 res1)))
-
-;; H
-  (assert
-  (=> (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold))
-  (= res2 (fp #b0 #b00000000 #b00000000000000000000000))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value)
-  (and (= o (fp.sub RNE res1 threshold))
-  (fp.isFinite32 (fp.sub RNE res1 threshold))))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value)
-  (= result2 res1))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (=> (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value) (= res3 o))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value))
-  (=> (fp.lt value (fp #b0 #b00000000 #b00000000000000000000000))
-  (and (= o1 (fp.add RNE res1 threshold))
-  (fp.isFinite32 (fp.add RNE res1 threshold)))))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value))
-  (=> (fp.lt value (fp #b0 #b00000000 #b00000000000000000000000))
-  (= result3 res1)))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value))
-  (=> (fp.lt value (fp #b0 #b00000000 #b00000000000000000000000))
-  (= res4 o1)))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value))
-  (=> (not (fp.lt value (fp #b0 #b00000000 #b00000000000000000000000)))
-  (= res4 res1)))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (=> (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) value))
-  (= res3 res4))))
-
-;; H
-  (assert
-  (=> (not (and (fp.leq (fp.neg threshold) value) (fp.leq value threshold)))
-  (= res2 res3)))
-
-;; H
-  (assert
-  (= safety_pack__dead_band__result1 safety_pack__dead_band__result2))
-
-;; H
-  (assert
-  (= safety_pack__dead_band__result3 safety_pack__dead_band__result1))
-
-;; H
-  (assert (= result4 safety_pack__dead_band__result))
-
-;; H
-  (assert (= safety_pack__dead_band__result1 res2))
-
-;; H
-  (assert
-  (= (mk_t__ref safety_pack__dead_band__result4) (mk_t__ref
-                                                 safety_pack__dead_band__result2)))
-
-;; H
-  (assert (= res5 res2))
-
-;; H
-  (assert
-  (= safety_pack__dead_band__result5 safety_pack__dead_band__result3))
-
-;; H
-  (assert (= res6 res2))
-
-;; H
-  (assert (fp.leq (fp.neg threshold) value))
-
-;; H
-  (assert (fp.leq value threshold))
-
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not
-  (fp.eq safety_pack__dead_band__result4 (fp #b0 #b00000000 #b00000000000000000000000))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/safety_pack.mlw", line 30367, characters 5-8
+  (not true))
 (check-sat)
 (exit)

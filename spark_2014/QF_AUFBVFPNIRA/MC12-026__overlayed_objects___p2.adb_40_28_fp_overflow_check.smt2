@@ -106,6 +106,8 @@
 ;; p2__r__b__position_axiom
   (assert (<= 0 p2__r__b__position))
 
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (declare-const abstr Int)
 
 (define-fun to_int1 ((x (_ BitVec 8))) Int (ite (bvsge x (_ bv0 8)) abstr
@@ -139,8 +141,6 @@
   (y (_ BitVec 8))) (_ BitVec 8) (ite (bvule x y) y x))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 

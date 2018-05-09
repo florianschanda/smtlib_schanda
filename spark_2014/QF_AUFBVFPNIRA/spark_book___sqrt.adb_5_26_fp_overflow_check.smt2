@@ -123,9 +123,57 @@
   (assert
   (= approx1 (fp.div RNE x (fp #b0 #b10000000 #b00000000000000000000000))))
 
+;; H
+  (assert
+  (and (= o (fp.mul RNE approx1 approx1))
+  (fp.isFinite32 (fp.mul RNE approx1 approx1))))
+
+;; H
+  (assert (= o1 (fp.sub RNE x o)))
+
+;; H
+  (assert (and (= o2 o1) (fp.isFinite32 o1)))
+
+;; H
+  (assert (= o3 (fp.abs o2)))
+
+;; H
+  (assert (= result1 (ite (fp.lt tolerance o3) true false)))
+
+;; H
+  (assert (= result1 true))
+
+;; H
+  (assert
+  (and
+  (=>
+  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
+  (fp.isFinite32 approx2))
+  (fp.lt tolerance (fp.abs (fp.sub RNE x (fp.mul RNE approx2 approx2))))))
+
+;; H
+  (assert
+  (and (= o4 (fp.div RNE x approx2)) (fp.isFinite32 (fp.div RNE x approx2))))
+
+;; H
+  (assert (= o5 (fp.add RNE approx2 o4)))
+
+;; H
+  (assert (and (= o6 o5) (fp.isFinite32 o5)))
+
+;; H
+  (assert
+  (= o7 (fp.mul RNE (fp #b0 #b01111110 #b00000000000000000000000) o6)))
+
+;; H
+  (assert (= result2 approx2))
+
+;; H
+  (assert (= approx3 o7))
+
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.isFinite32 (fp.mul RNE approx1 approx1))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/spark_book/Chapter-02/build/gnatprove/sqrt.mlw", line 2104, characters 5-8
+  (not (fp.isFinite32 (fp.mul RNE approx3 approx3))))
 (check-sat)
 (exit)

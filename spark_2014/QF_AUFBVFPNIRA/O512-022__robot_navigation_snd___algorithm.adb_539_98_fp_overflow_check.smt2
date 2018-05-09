@@ -61,24 +61,6 @@
 (define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun dynamic_invariant1 ((temp___expr_170 Float32)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)
-  (temp___do_typ_inv_169 Bool)) Bool (=>
-                                     (or (= temp___is_init_166 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range2 temp___expr_170)))
-
-(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
 (declare-const value__size Int)
@@ -106,6 +88,24 @@
 
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
+
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(define-fun dynamic_invariant1 ((temp___expr_170 Float32)
+  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
+  (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range3 temp___expr_170)))
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -821,7 +821,7 @@
   (temp___do_typ_inv_162 Bool)) Bool (=>
                                      (or (= temp___is_init_159 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range1 temp___expr_163)))
+                                     (in_range2 temp___expr_163)))
 
 (define-fun dynamic_invariant7 ((temp___expr_184 Float32)
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
@@ -837,7 +837,7 @@
   (temp___do_typ_inv_197 Bool)) Bool (=>
                                      (or (= temp___is_init_194 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                     (in_range3 temp___expr_198)))
+                                     (in_range1 temp___expr_198)))
 
 (define-fun dynamic_invariant9 ((temp___expr_365 Int)
   (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
@@ -857,17 +857,17 @@
 
 (declare-const i Int)
 
+(declare-const temp___955 Float32)
+
+(declare-const temp___954 Float32)
+
 (declare-const temp___953 Float32)
 
 (declare-const temp___952 Float32)
 
-(declare-const temp___951 Float32)
+(declare-const temp___951 Int)
 
 (declare-const temp___950 Float32)
-
-(declare-const temp___949 Int)
-
-(declare-const temp___948 Float32)
 
 (declare-const o Float32)
 
@@ -1007,7 +1007,7 @@
   (assert (= deltaareasum1 (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (in_range2 deltaareasum1))
+  (assert (in_range3 deltaareasum1))
 
 ;; H
   (assert (= result1 obstacleavoiddelta))
@@ -1047,7 +1047,7 @@
   (fp.isFinite32 deltaangle2)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111))
-  (in_range2 deltaareasum2))) (and (<= 1 i2) (<= i2 1000))))
+  (in_range3 deltaareasum2))) (and (<= 1 i2) (<= i2 1000))))
 
 ;; H
   (assert (= result3 true))
@@ -1060,7 +1060,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__robot_navigation_snd/gnatprove/algorithm.mlw", line 36822, characters 5-8
   (not (fp.isFinite32 o4)))
 (check-sat)
 (exit)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -128,31 +124,15 @@
 
 (declare-const res Float32)
 
-(declare-const basic_contracts__average_float__result Float32)
-
 (declare-const o Float32)
-
-(declare-const result Float32)
 
 (declare-const res1 Float32)
 
-(declare-const result1 Float32)
+(declare-const basic_contracts__average_float__result Float32)
 
 (declare-const basic_contracts__average_float__result1 Float32)
 
 (declare-const basic_contracts__average_float__result2 Float32)
-
-(declare-const basic_contracts__average_float__result3 Float32)
-
-(declare-const res2 Float32)
-
-(declare-const basic_contracts__average_float__result4 Float32)
-
-(declare-const res3 Float32)
-
-(declare-const basic_contracts__average_float__result5 Float32)
-
-(declare-const result2 Float32)
 
 ;; H
   (assert (fp.isFinite32 numerator))
@@ -161,9 +141,10 @@
   (assert (fp.isFinite32 denominator))
 
 ;; H
-  (assert
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) numerator)
-  (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) denominator)))
+  (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) numerator))
+
+;; H
+  (assert (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) denominator))
 
 ;; H
   (assert
@@ -172,52 +153,30 @@
   (fp.isFinite32 res)))
 
 ;; H
-  (assert
-  (and (= o (fp.div RNE numerator denominator))
-  (fp.isFinite32 (fp.div RNE numerator denominator))))
-
-;; H
-  (assert (= result res))
+  (assert (= o (fp.div RNE numerator denominator)))
 
 ;; H
   (assert (= res1 o))
 
 ;; H
-  (assert
-  (= basic_contracts__average_float__result1 basic_contracts__average_float__result2))
+  (assert (fp.isFinite32 (fp.div RNE numerator denominator)))
 
 ;; H
   (assert
-  (= basic_contracts__average_float__result3 basic_contracts__average_float__result1))
+  (= basic_contracts__average_float__result basic_contracts__average_float__result1))
 
 ;; H
-  (assert (= result1 basic_contracts__average_float__result))
-
-;; H
-  (assert (= basic_contracts__average_float__result1 res1))
+  (assert (= basic_contracts__average_float__result res1))
 
 ;; H
   (assert
-  (= (mk_t__ref basic_contracts__average_float__result4) (mk_t__ref
-                                                         basic_contracts__average_float__result2)))
-
-;; H
-  (assert (= res2 res1))
-
-;; H
-  (assert
-  (= basic_contracts__average_float__result5 basic_contracts__average_float__result3))
-
-;; H
-  (assert (= res3 res1))
-
-;; H
-  (assert (= result2 basic_contracts__average_float__result4))
+  (= (mk_t__ref basic_contracts__average_float__result2) (mk_t__ref
+                                                         basic_contracts__average_float__result1)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA21-002__floatdiv/gnatprove/basic_contracts.mlw", line 2725, characters 5-8
   (not
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) basic_contracts__average_float__result4)))
+  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) basic_contracts__average_float__result2)))
 (check-sat)
 (exit)

@@ -1037,6 +1037,12 @@ type t__ref = { t__content : t
 
 type natural
 
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -1092,6 +1098,12 @@ function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
 type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
 
@@ -1170,7 +1182,7 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 0.0e-1))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA20-061__flow_variable_constant/gnatprove/basic_contracts.mlw", line 2141, characters 5-8 *)
 goal WP_parameter_def :
   (forall basic_contracts__average__result:t. forall o:t. forall result:t.
   forall basic_contracts__average__result1:t.
@@ -1180,11 +1192,11 @@ goal WP_parameter_def :
   forall basic_contracts__average__result5:t.
   (forall result1:t. ((in_range1(numerator) and (in_range2(denominator) and
   ((((of_int(NearestTiesToEven, numerator) = num) and (tqtisFinite(num) and
-  (tqtisFinite(den) and (lt(fliteral, fliteral1) and
+  (tqtisFinite(den) and (lt(fliteral, den) and
   (((basic_contracts__average__result1 = basic_contracts__average__result2) and
   (basic_contracts__average__result3 = basic_contracts__average__result1)) and
-  (((o = div(NearestTiesToEven, num, fliteral1)) and
-  tqtisFinite(div(NearestTiesToEven, num, fliteral1))) and
+  (((o = div(NearestTiesToEven, num, den)) and
+  tqtisFinite(div(NearestTiesToEven, num, den))) and
   ((result = basic_contracts__average__result) and
   (basic_contracts__average__result1 = o)))))))) and
   ((basic_contracts__average__result4 = basic_contracts__average__result2) and

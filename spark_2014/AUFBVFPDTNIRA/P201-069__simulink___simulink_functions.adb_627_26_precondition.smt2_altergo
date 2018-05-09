@@ -943,6 +943,12 @@ axiom sqrt__post_axiom :
 
 type integer_32
 
+logic integer_32qtint : integer_32 -> int
+
+axiom integer_32qtaxiom :
+  (forall i:integer_32. (((- 2147483648) <= integer_32qtint(i)) and
+  (integer_32qtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool

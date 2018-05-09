@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -116,23 +112,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const max__max__result Float32)
-
 (declare-const o Float32)
 
-(declare-const result Float32)
+(declare-const max__max__result Float32)
 
 (declare-const max__max__result1 Float32)
 
 (declare-const max__max__result2 Float32)
-
-(declare-const max__max__result3 Float32)
-
-(declare-const max__max__result4 Float32)
-
-(declare-const max__max__result5 Float32)
-
-(declare-const result1 Float32)
 
 ;; H
   (assert (fp.isFinite32 left))
@@ -141,10 +127,10 @@
   (assert (fp.isFinite32 right))
 
 ;; H
-  (assert (= max__max__result1 max__max__result2))
+  (assert (= max__max__result max__max__result1))
 
 ;; H
-  (assert (= max__max__result3 max__max__result1))
+  (assert (= max__max__result o))
 
 ;; H
   (assert (=> (fp.lt left right) (= o right)))
@@ -153,26 +139,14 @@
   (assert (=> (not (fp.lt left right)) (= o left)))
 
 ;; H
-  (assert (= result max__max__result))
+  (assert (= (mk_t__ref max__max__result2) (mk_t__ref max__max__result1)))
 
 ;; H
-  (assert (= max__max__result1 o))
-
-;; H
-  (assert (= (mk_t__ref max__max__result4) (mk_t__ref max__max__result2)))
-
-;; H
-  (assert (= max__max__result5 max__max__result3))
-
-;; H
-  (assert (= result1 max__max__result4))
-
-;; H
-  (assert (fp.lt left right))
+  (assert (not (fp.lt left right)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.eq max__max__result4 right)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K831-006__cmp/gnatprove/max.mlw", line 2087, characters 5-8
+  (not (fp.eq max__max__result2 left)))
 (check-sat)
 (exit)

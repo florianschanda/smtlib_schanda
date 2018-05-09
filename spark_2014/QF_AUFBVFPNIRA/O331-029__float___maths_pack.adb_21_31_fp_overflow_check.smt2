@@ -91,9 +91,37 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
+(define-fun dynamic_invariant1 ((temp___expr_1564 Float32)
+  (temp___is_init_1560 Bool) (temp___skip_constant_1561 Bool)
+  (temp___do_toplevel_1562 Bool)
+  (temp___do_typ_inv_1563 Bool)) Bool (=>
+                                      (or (= temp___is_init_1560 true)
+                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                      (fp.isFinite32 temp___expr_1564)))
+
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 32))
 
-(define-fun dynamic_invariant1 ((temp___expr_212 (_ BitVec 32))
+(define-fun dynamic_invariant2 ((temp___expr_1571 (_ BitVec 32))
+  (temp___is_init_1567 Bool) (temp___skip_constant_1568 Bool)
+  (temp___do_toplevel_1569 Bool) (temp___do_typ_inv_1570 Bool)) Bool true)
+
+(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
+
+(define-fun dynamic_invariant3 ((temp___expr_1578 (_ BitVec 32))
+  (temp___is_init_1574 Bool) (temp___skip_constant_1575 Bool)
+  (temp___do_toplevel_1576 Bool) (temp___do_typ_inv_1577 Bool)) Bool true)
+
+(define-fun dynamic_invariant4 ((temp___expr_1585 Float32)
+  (temp___is_init_1581 Bool) (temp___skip_constant_1582 Bool)
+  (temp___do_toplevel_1583 Bool)
+  (temp___do_typ_inv_1584 Bool)) Bool (=>
+                                      (or (= temp___is_init_1581 true)
+                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                      (fp.isFinite32 temp___expr_1585)))
+
+(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 32))
+
+(define-fun dynamic_invariant5 ((temp___expr_212 (_ BitVec 32))
   (temp___is_init_208 Bool) (temp___skip_constant_209 Bool)
   (temp___do_toplevel_210 Bool) (temp___do_typ_inv_211 Bool)) Bool true)
 
@@ -108,34 +136,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
-
-(define-fun dynamic_invariant2 ((temp___expr_1564 Float32)
-  (temp___is_init_1560 Bool) (temp___skip_constant_1561 Bool)
-  (temp___do_toplevel_1562 Bool)
-  (temp___do_typ_inv_1563 Bool)) Bool (=>
-                                      (or (= temp___is_init_1560 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_1564)))
-
-(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 32))
-
-(define-fun dynamic_invariant3 ((temp___expr_1571 (_ BitVec 32))
-  (temp___is_init_1567 Bool) (temp___skip_constant_1568 Bool)
-  (temp___do_toplevel_1569 Bool) (temp___do_typ_inv_1570 Bool)) Bool true)
-
-(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 32))
-
-(define-fun dynamic_invariant4 ((temp___expr_1578 (_ BitVec 32))
-  (temp___is_init_1574 Bool) (temp___skip_constant_1575 Bool)
-  (temp___do_toplevel_1576 Bool) (temp___do_typ_inv_1577 Bool)) Bool true)
-
-(define-fun dynamic_invariant5 ((temp___expr_1585 Float32)
-  (temp___is_init_1581 Bool) (temp___skip_constant_1582 Bool)
-  (temp___do_toplevel_1583 Bool)
-  (temp___do_typ_inv_1584 Bool)) Bool (=>
-                                      (or (= temp___is_init_1581 true)
-                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                      (fp.isFinite32 temp___expr_1585)))
 
 (declare-const half_x Float32)
 
@@ -279,7 +279,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/maths_pack.mlw", line 30671, characters 5-8
   (not (fp.isFinite32 (fp.mul RNE half_x1 y2))))
 (check-sat)
 (exit)

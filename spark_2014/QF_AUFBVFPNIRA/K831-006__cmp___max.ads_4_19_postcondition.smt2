@@ -113,11 +113,11 @@
   (assert (= result1 max__max__result4))
 
 ;; H
-  (assert (fp.lt left right))
+  (assert (not (fp.lt left right)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.eq max__max__result4 right)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K831-006__cmp/gnatprove/max.mlw", line 2087, characters 5-8
+  (not (fp.eq max__max__result4 left)))
 (check-sat)
 (exit)

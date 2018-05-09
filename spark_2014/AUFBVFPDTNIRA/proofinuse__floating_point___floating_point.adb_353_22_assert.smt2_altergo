@@ -965,30 +965,29 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 340282346638528859811704183484516925440.0))
+  (tqtreal(fliteral3) = 2.0))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 2.0))
+  (tqtreal(fliteral4) = 3.0))
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
-  (tqtreal(fliteral5) = 3.0))
+  (tqtreal(fliteral5) = 4.0))
 
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
-  (tqtreal(fliteral6) = 4.0))
+  (tqtreal(fliteral6) = 5.0))
 
 logic fliteral7 : t
 
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
-  (tqtreal(fliteral7) = 5.0))
+  (tqtreal(fliteral7) = 340282346638528859811704183484516925440.0))
 
  (* File "a-unccon.ads", line 20, characters 0-0 *)
 goal WP_parameter_def : (tqtisFinite(x) -> ((le(fliteral1, x) and le(x,
-  fliteral2)) -> le(neg(fliteral3), add(RNE, mul(RNE, add(RNE, add(RNE,
-  mul(RNE, add(RNE, x, fliteral4), x), fliteral5), fliteral6), x),
-  fliteral7))))
+  fliteral2)) -> le(add(RNE, mul(RNE, add(RNE, add(RNE, mul(RNE, add(RNE, x,
+  fliteral3), x), fliteral4), fliteral5), x), fliteral6), fliteral7)))

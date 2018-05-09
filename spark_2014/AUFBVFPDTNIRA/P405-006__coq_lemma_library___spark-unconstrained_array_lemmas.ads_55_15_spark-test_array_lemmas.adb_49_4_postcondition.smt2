@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -194,7 +197,7 @@
   (= (to_rep (select a temp___idx_155)) (to_rep
                                         (select b (+ (- b__first a__first) temp___idx_155)))))))))))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -318,26 +321,27 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
+(declare-const i Int)
+
+(declare-const j Int)
+
 ;; H
   (assert (dynamic_invariant arr true false true true))
 
 ;; H
   (assert
-  (forall ((i Int))
+  (forall ((i1 Int))
   (=>
-  (and (<= (to_rep1 (first (rt arr))) i) (<= i (to_rep1 (last (rt arr)))))
-  (=> (not (= i (to_rep1 (first (rt arr)))))
-  (fp.lt (to_rep (select (elts arr) (- i 1))) (to_rep (select (elts arr) i)))))))
-
-(declare-const i Int)
+  (and (<= (to_rep1 (first (rt arr))) i1) (<= i1 (to_rep1 (last (rt arr)))))
+  (=> (not (= i1 (to_rep1 (first (rt arr)))))
+  (fp.lt (to_rep (select (elts arr) (- i1 1))) (to_rep
+                                               (select (elts arr) i1)))))))
 
 ;; H
   (assert (<= (to_rep1 (first (rt arr))) i))
 
 ;; H
   (assert (<= i (to_rep1 (last (rt arr)))))
-
-(declare-const j Int)
 
 ;; H
   (assert (<= (to_rep1 (first (rt arr))) j))
@@ -350,7 +354,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P405-006__coq_lemma_library/proof/sessions/spark-test_array_lemmas/../../../obj/gnatprove/spark-test_array_lemmas.mlw", line 5617, characters 5-8
   (not
   (fp.lt (to_rep (select (elts arr) i)) (to_rep (select (elts arr) j)))))
 (check-sat)

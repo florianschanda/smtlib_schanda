@@ -88,11 +88,6 @@
 (define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
 (declare-const value__size1 Int)
@@ -120,6 +115,11 @@
 
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
+
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
 
 (declare-const value__size2 Int)
 
@@ -213,7 +213,7 @@
   (temp___do_typ_inv_169 Bool)) Bool (=>
                                      (or (= temp___is_init_166 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range4 temp___expr_170)))
+                                     (in_range5 temp___expr_170)))
 
 (define-fun dynamic_invariant5 ((temp___expr_198 Float32)
   (temp___is_init_194 Bool) (temp___skip_constant_195 Bool)
@@ -221,7 +221,7 @@
   (temp___do_typ_inv_197 Bool)) Bool (=>
                                      (or (= temp___is_init_194 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                     (in_range5 temp___expr_198)))
+                                     (in_range4 temp___expr_198)))
 
 (declare-const i Int)
 

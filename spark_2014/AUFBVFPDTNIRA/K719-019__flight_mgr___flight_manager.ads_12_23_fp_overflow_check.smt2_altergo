@@ -965,6 +965,12 @@ type us_split_fields = { rec__flight_manager__engine_values__x_speed :
 float1; rec__flight_manager__engine_values__y_speed : float1
 }
 
+function us_split_fields_X_Speed__projection(a: us_split_fields) : float1 =
+  (a).rec__flight_manager__engine_values__x_speed
+
+function us_split_fields_Y_Speed__projection(a: us_split_fields) : float1 =
+  (a).rec__flight_manager__engine_values__y_speed
+
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 

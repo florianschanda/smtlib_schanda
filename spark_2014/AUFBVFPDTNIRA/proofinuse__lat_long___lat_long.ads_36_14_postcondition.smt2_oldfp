@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1104,6 +1104,14 @@
   (! (= (= (olt left right) true) (lt left (add RNE1 right fliteral2))) :pattern (
   (olt left right)) )))
 
+(declare-const r t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const conv_deg_to_rad t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
 (declare-sort latitude 0)
 
 (declare-const fliteral3 t)
@@ -1210,6 +1218,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__lat_long__coordinates__lat latitude)(rec__lat_long__coordinates__long longitude)))))
+(define-fun us_split_fields_Lat__projection ((a us_split_fields)) latitude
+  (rec__lat_long__coordinates__lat a))
+
+(define-fun us_split_fields_Long__projection ((a us_split_fields)) longitude
+  (rec__lat_long__coordinates__long a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -1298,11 +1312,30 @@
 
 (declare-const source us_rep)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const destination us_rep)
 
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+(declare-const fliteral6 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) (/ 63674445.0 10.0))))
+
+;; r__def_axiom
+  (assert (= r fliteral6))
+
+(declare-const fliteral7 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral7)
+  (= (tqtreal fliteral7) (/ 1745329238474369049072265625.0 100000000000000000000000000000.0))))
+
+;; conv_deg_to_rad__def_axiom
+  (assert (= conv_deg_to_rad fliteral7))
 
 (define-fun dynamic_invariant1 ((temp___expr_172 t) (temp___is_init_168 Bool)
   (temp___skip_constant_169 Bool) (temp___do_toplevel_170 Bool)
@@ -1317,19 +1350,6 @@
                                      (or (= temp___is_init_175 true) (le
                                      (neg fliteral4) fliteral5)) (in_range2
                                      temp___expr_179)))
-
-(declare-const fliteral6 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral6) (= (tqtreal fliteral6) (/ 63674445.0 10.0))))
-
-(declare-const fliteral7 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral7)
-  (= (tqtreal fliteral7) (/ 1745329238474369049072265625.0 100000000000000000000000000000.0))))
 
 (declare-const fliteral8 t)
 
@@ -1353,6 +1373,18 @@
 (declare-const result1 t)
 
 ;; H
+  (assert (tqtisFinite r))
+
+;; H
+  (assert (= fliteral6 r))
+
+;; H
+  (assert (tqtisFinite conv_deg_to_rad))
+
+;; H
+  (assert (= fliteral7 conv_deg_to_rad))
+
+;; H
   (assert
   (= lat_long__delta_lat_in_meters__result1 lat_long__delta_lat_in_meters__result2))
 
@@ -1374,7 +1406,7 @@
                                             (to_rep
                                             (rec__lat_long__coordinates__lat
                                             (us_split_fields1 source))))
-                                            fliteral6) fliteral7)))
+                                            r) conv_deg_to_rad)))
 
 ;; H
   (assert

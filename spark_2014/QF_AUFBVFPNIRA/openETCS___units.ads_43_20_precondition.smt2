@@ -66,11 +66,26 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_165)))
 
-(declare-const speed Float32)
+(declare-const maximum_valid_speed_km_per_h Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
+(declare-const speed Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
+
 (declare-const o Float32)
+
+;; H
+  (assert (fp.isFinite32 maximum_valid_speed_km_per_h))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000111 #b11110100000000000000000) maximum_valid_speed_km_per_h))
 
 ;; H
   (assert (fp.isFinite32 speed))

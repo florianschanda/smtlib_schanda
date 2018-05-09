@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -151,13 +147,9 @@
 
 (declare-const o Float64)
 
-(declare-const result Float64)
-
 (declare-const z1 Float64)
 
 (declare-const z2 Float64)
-
-(declare-const z3 Float64)
 
 ;; H
   (assert (fp.isFinite64 x))
@@ -170,33 +162,35 @@
 
 ;; H
   (assert
-  (and
-  (and
   (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  x)
-  (fp.leq x (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
-  (and
-  (fp.leq (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000)
-  x)
-  (fp.leq x (fp #b0 #b10000000011 #b0100000000000000000000000000000000000000000000000000)))))
+  x))
 
 ;; H
   (assert
-  (and
-  (= o (fp.mul RNE x (fp #b0 #b10000000000 #b0000000000000000000000000000000000000000000000000000)))
-  (fp.isFinite64 (fp.mul RNE x (fp #b0 #b10000000000 #b0000000000000000000000000000000000000000000000000000)))))
+  (fp.leq x (fp #b0 #b10000000010 #b0100000000000000000000000000000000000000000000000000)))
 
 ;; H
-  (assert (= result z))
+  (assert
+  (fp.leq (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000)
+  x))
+
+;; H
+  (assert
+  (fp.leq x (fp #b0 #b10000000011 #b0100000000000000000000000000000000000000000000000000)))
+
+;; H
+  (assert
+  (= o (fp.mul RNE x (fp #b0 #b10000000000 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
   (assert (= z1 o))
 
 ;; H
-  (assert (= z1 z2))
+  (assert
+  (fp.isFinite64 (fp.mul RNE x (fp #b0 #b10000000000 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
-  (assert (= z3 z1))
+  (assert (= z1 z2))
 
 (assert
 ;; WP_parameter_def

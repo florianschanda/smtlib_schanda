@@ -974,4 +974,27 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.100000001490116119384765625))
 
  (* File "pack.ads", line 17, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def :
+  (forall pack__associativity_test__result:bool. forall o:t. forall o1:t.
+  forall o2:t. forall o3:t. forall o4:bool. forall result:bool.
+  forall pack__associativity_test__result1:bool.
+  forall pack__associativity_test__result2:bool.
+  forall pack__associativity_test__result3:bool.
+  forall pack__associativity_test__result4:bool.
+  forall pack__associativity_test__result5:bool.
+  (forall result1:bool.
+  ((((((pack__associativity_test__result1 = pack__associativity_test__result2) and
+  (pack__associativity_test__result3 = pack__associativity_test__result1)) and
+  (((((o1 = add1(fliteral1, fliteral2)) and (tqtisFinite(o1) and eq(o1,
+  add(RNE, fliteral1, fliteral2)))) and ((o2 = add1(fliteral3, o1)) and
+  (tqtisFinite(o2) and eq(o2, add(RNE, fliteral3, o1))))) and
+  ((((o = add1(fliteral3, fliteral1)) and (tqtisFinite(o) and eq(o, add(RNE,
+  fliteral3, fliteral1)))) and ((o3 = add1(o, fliteral2)) and
+  (tqtisFinite(o3) and eq(o3, add(RNE, o, fliteral2))))) and ((eq(o3, o2) and
+  (o4 = true)) or ((not eq(o3, o2)) and (o4 = false))))) and
+  ((result = pack__associativity_test__result) and
+  (pack__associativity_test__result1 = o4)))) and
+  ((pack__associativity_test__result4 = pack__associativity_test__result2) and
+  (pack__associativity_test__result5 = pack__associativity_test__result3))) and
+  (result1 = pack__associativity_test__result4)) ->
+  (pack__associativity_test__result4 = true))))

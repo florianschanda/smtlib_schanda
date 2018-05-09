@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -116,44 +112,9 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-const d Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-sort pos_static_float 0)
-
-(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
-
-(declare-fun user_eq1 (pos_static_float pos_static_float) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
-
-(declare-const dummy1 pos_static_float)
-
-(declare-datatypes ()
-((pos_static_float__ref
- (mk_pos_static_float__ref (pos_static_float__content pos_static_float)))))
-(define-fun pos_static_float__ref___projection ((a pos_static_float__ref)) pos_static_float
-  (pos_static_float__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_158 Float32)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)
-  (temp___do_typ_inv_157 Bool)) Bool (=>
-                                     (or (= temp___is_init_154 true)
-                                     (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                     (in_range1 temp___expr_158)))
-
 (declare-const c Float32)
 
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-fun to_rep (float) Float32)
 
@@ -183,6 +144,48 @@
 
 (declare-fun is_finite (Float32) Bool)
 
+(declare-fun user_eq1 (float float) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
+
+(declare-const dummy1 float)
+
+(declare-datatypes ()
+((dynamic_float__ref (mk_dynamic_float__ref (dynamic_float__content float)))))
+(define-fun dynamic_float__ref___projection ((a dynamic_float__ref)) float
+  (dynamic_float__content a))
+
+(define-fun dynamic_invariant1 ((temp___expr_172 Float32)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000)
+                                     last)) (dynamic_property
+                                     (fp #b0 #b00000000 #b00000000000000000000000)
+                                     last temp___expr_172)))
+
+;; last__def_axiom
+  (assert (= last c))
+
+(declare-fun dyn_return (Float32) Float32)
+
+(declare-fun dyn_return__function_guard (Float32 Float32) Bool)
+
+(declare-const last1 Float32)
+
+(define-fun dynamic_property1 ((first_int Float32) (last_int Float32)
+  (x Float32)) Bool (and (fp.isFinite32 x)
+                    (and (fp.leq first_int x) (fp.leq x last_int))))
+
+(declare-fun eq1 (Float32 Float32) Bool)
+
+(declare-fun is_finite1 (Float32) Bool)
+
 (declare-fun user_eq2 (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
@@ -205,26 +208,31 @@
   (temp___do_typ_inv_164 Bool)) Bool (=>
                                      (or (= temp___is_init_161 true)
                                      (fp.leq (fp #b0 #b01111111 #b00000000000000000000000)
-                                     last)) (dynamic_property
+                                     last1)) (dynamic_property1
                                      (fp #b0 #b01111111 #b00000000000000000000000)
-                                     last temp___expr_165)))
+                                     last1 temp___expr_165)))
 
 ;; last__def_axiom
-  (assert (= last c))
+  (assert (= last1 c))
 
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+;; dyn_return__post_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant2
+     (dyn_return x) true false true true)) :pattern ((dyn_return x)) )))
 
-(declare-const last1 Float32)
+(declare-const d Float32)
 
-(define-fun dynamic_property1 ((first_int Float32) (last_int Float32)
-  (x Float32)) Bool (and (fp.isFinite32 x)
-                    (and (fp.leq first_int x) (fp.leq x last_int))))
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun eq1 (Float32 Float32) Bool)
+(declare-sort pos_static_float 0)
 
-(declare-fun is_finite1 (Float32) Bool)
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
 
-(declare-fun user_eq3 (float float) Bool)
+(declare-fun user_eq3 (pos_static_float pos_static_float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (Float32) us_image)
 
@@ -232,37 +240,25 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float32)
 
-(declare-const dummy3 float)
+(declare-const dummy3 pos_static_float)
 
 (declare-datatypes ()
-((dynamic_float__ref (mk_dynamic_float__ref (dynamic_float__content float)))))
-(define-fun dynamic_float__ref___projection ((a dynamic_float__ref)) float
-  (dynamic_float__content a))
+((pos_static_float__ref
+ (mk_pos_static_float__ref (pos_static_float__content pos_static_float)))))
+(define-fun pos_static_float__ref___projection ((a pos_static_float__ref)) pos_static_float
+  (pos_static_float__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_172 Float32)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)
-  (temp___do_typ_inv_171 Bool)) Bool (=>
-                                     (or (= temp___is_init_168 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000)
-                                     last1)) (dynamic_property1
-                                     (fp #b0 #b00000000 #b00000000000000000000000)
-                                     last1 temp___expr_172)))
+(define-fun dynamic_invariant3 ((temp___expr_158 Float32)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
+                                     (in_range1 temp___expr_158)))
 
-;; last__def_axiom
-  (assert (= last1 c))
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
-
-(declare-fun dyn_return (Float32) Float32)
-
-(declare-fun dyn_return__function_guard (Float32 Float32) Bool)
-
-;; dyn_return__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant2
-     (dyn_return x) true false true true)) :pattern ((dyn_return x)) )))
 
 ;; c__def_axiom
   (assert (= c d))
@@ -308,8 +304,8 @@
 
 ;; H
   (assert
-  (and (= us c) (dynamic_property
-  (fp #b0 #b01111111 #b00000000000000000000000) last c)))
+  (and (= us c) (dynamic_property1
+  (fp #b0 #b01111111 #b00000000000000000000000) last1 c)))
 
 ;; H
   (assert (= o c))
@@ -321,17 +317,17 @@
   (assert (= x1 o))
 
 ;; H
-  (assert (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000)
-  last x1))
+  (assert (dynamic_property1 (fp #b0 #b01111111 #b00000000000000000000000)
+  last1 x1))
 
 ;; H
-  (assert (dynamic_property1 (fp #b0 #b00000000 #b00000000000000000000000)
-  last1 y))
+  (assert (dynamic_property (fp #b0 #b00000000 #b00000000000000000000000)
+  last y))
 
 ;; H
   (assert
   (and (= o1 (dyn_return (fp #b0 #b10000011 #b11100000000000000000000)))
-  (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000) last
+  (dynamic_property1 (fp #b0 #b01111111 #b00000000000000000000000) last1
   o1)))
 
 ;; H
@@ -349,8 +345,8 @@
   c))
 
 ;; H
-  (assert (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000)
-  last x3))
+  (assert (dynamic_property1 (fp #b0 #b01111111 #b00000000000000000000000)
+  last1 x3))
 
 (assert
 ;; WP_parameter_def

@@ -139,6 +139,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "proof.ads", line 9, characters 0-0
-  (not (fp.leq x (fp #b0 #b11111101 #b11111111111111111111111))))
+  (not (fp.leq (fp.neg (fp #b0 #b11111101 #b11111111111111111111111)) x)))
 (check-sat)
 (exit)

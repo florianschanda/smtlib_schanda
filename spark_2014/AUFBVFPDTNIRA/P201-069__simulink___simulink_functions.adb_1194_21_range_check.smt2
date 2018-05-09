@@ -54,10 +54,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -80,7 +76,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -98,10 +94,6 @@
 
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero x)
                                               (fp.isNegative x)))
-
-(declare-fun of_int1 (RoundingMode Int) Float64)
-
-(declare-fun to_int2 (RoundingMode Float64) Int)
 
 (declare-const max_int1 Int)
 
@@ -152,14 +144,6 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-const left Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const right Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
 (declare-sort long_float 0)
 
 (declare-fun user_eq1 (long_float long_float) Bool)
@@ -191,11 +175,19 @@
 
 ;; atan2__2__post_axiom
   (assert
-  (forall ((left1 Float64) (right1 Float64))
+  (forall ((left Float64) (right Float64))
   (! (=>
-     (and (dynamic_invariant1 left1 true true true true) (dynamic_invariant1
-     right1 true true true true)) (dynamic_invariant1 (atan2__2 left1 right1)
-     true false true true)) :pattern ((atan2__2 left1 right1)) )))
+     (and (dynamic_invariant1 left true true true true) (dynamic_invariant1
+     right true true true true)) (dynamic_invariant1 (atan2__2 left right)
+     true false true true)) :pattern ((atan2__2 left right)) )))
+
+(declare-const left Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const right Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const o Float64)
 
@@ -209,16 +201,17 @@
 
 ;; H
   (assert
-  (and
-  (= o (atan2__2 ((_ to_fp 11 53) RNE left) ((_ to_fp 11 53) RNE right)))
-  (fp.isFinite64 o)))
+  (= o (atan2__2 ((_ to_fp 11 53) RNE left) ((_ to_fp 11 53) RNE right))))
+
+;; H
+  (assert (fp.isFinite64 o))
 
 ;; H
   (assert (= o1 ((_ to_fp 8 24) RNE o)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 23989, characters 5-8
   (not (fp.isFinite32 o1)))
 (check-sat)
 (exit)

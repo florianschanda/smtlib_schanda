@@ -1037,6 +1037,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -1091,19 +1097,6 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
-
-logic of_rep : int -> integer
-
-axiom inversion_axiom :
-  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
-  (to_rep(of_rep(x)) = x)))
-
 type float1
 
 logic bool_eq3 : t, t -> bool
@@ -1127,17 +1120,30 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-logic to_rep1 : float1 -> t
+logic to_rep : float1 -> t
 
-logic of_rep1 : t -> float1
+logic of_rep : t -> float1
+
+axiom inversion_axiom :
+  (forall x:float1 [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:float1 [to_rep(x)]. tqtisFinite(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+function to_rep1(x: integer) : int = integerqtint(x)
+
+logic of_rep1 : int -> integer
 
 axiom inversion_axiom1 :
-  (forall x:float1 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+  (forall x:integer [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
 
-axiom range_axiom1 : (forall x:float1 [to_rep1(x)]. tqtisFinite(to_rep1(x)))
+axiom range_axiom1 : (forall x:integer [to_rep1(x)]. in_range1(to_rep1(x)))
 
 axiom coerce_axiom1 :
-  (forall x:t [to_rep1(of_rep1(x))]. (tqtisFinite(x) ->
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range1(x) ->
   (to_rep1(of_rep1(x)) = x)))
 
 type us_split_fields = { rec__classwide__t__z : bool; rec__classwide__t__x :
@@ -1149,6 +1155,9 @@ function us_split_fields_Z__projection(a: us_split_fields) : bool =
 
 function us_split_fields_X__projection(a: us_split_fields) : integer =
   (a).rec__classwide__t__x
+
+function us_split_fields_Y__projection(a: us_split_fields) : float1 =
+  (a).rec__classwide__t__y
 
 function us_split_fields___projection(a: us_split_fields) : us_private =
   (a).rec__ext__
@@ -1172,12 +1181,12 @@ logic bool_eq4 : us_rep, us_rep -> bool
 axiom bool_eq_def3 :
   (forall a:us_rep. forall b:us_rep [bool_eq4(a, b)].
   (((((((a).us_split_fields1).rec__classwide__t__z = ((b).us_split_fields1).rec__classwide__t__z) and
-  (to_rep(((a).us_split_fields1).rec__classwide__t__x) = to_rep(((b).us_split_fields1).rec__classwide__t__x))) and
-  (to_rep1(((a).us_split_fields1).rec__classwide__t__y) = to_rep1(((b).us_split_fields1).rec__classwide__t__y))) ->
+  (to_rep1(((a).us_split_fields1).rec__classwide__t__x) = to_rep1(((b).us_split_fields1).rec__classwide__t__x))) and
+  (to_rep(((a).us_split_fields1).rec__classwide__t__y) = to_rep(((b).us_split_fields1).rec__classwide__t__y))) ->
   (bool_eq4(a, b) = true)) and
   ((not (((((a).us_split_fields1).rec__classwide__t__z = ((b).us_split_fields1).rec__classwide__t__z) and
-  (to_rep(((a).us_split_fields1).rec__classwide__t__x) = to_rep(((b).us_split_fields1).rec__classwide__t__x))) and
-  (to_rep1(((a).us_split_fields1).rec__classwide__t__y) = to_rep1(((b).us_split_fields1).rec__classwide__t__y)))) ->
+  (to_rep1(((a).us_split_fields1).rec__classwide__t__x) = to_rep1(((b).us_split_fields1).rec__classwide__t__x))) and
+  (to_rep(((a).us_split_fields1).rec__classwide__t__y) = to_rep(((b).us_split_fields1).rec__classwide__t__y)))) ->
   (bool_eq4(a, b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -1377,11 +1386,17 @@ function us_split_fields_W__projection(a: us_split_fields2) : integer =
 function us_split_fields_XX__projection(a: us_split_fields2) : integer =
   (a).rec__classwide__u2__xx
 
+function us_split_fields_YY__projection(a: us_split_fields2) : float1 =
+  (a).rec__classwide__u2__yy
+
 function us_split_fields_Z__2__projection(a: us_split_fields2) : bool =
   (a).rec__classwide__t__z1
 
 function us_split_fields_X__2__projection(a: us_split_fields2) : integer =
   (a).rec__classwide__t__x1
+
+function us_split_fields_Y__2__projection(a: us_split_fields2) : float1 =
+  (a).rec__classwide__t__y1
 
 function us_split_fields___2__projection(a: us_split_fields2) : us_private =
   (a).rec__ext__1
@@ -1451,19 +1466,19 @@ logic bool_eq5 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def4 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq5(a, b)].
-  ((((((((to_rep(((a).us_split_fields3).rec__classwide__u2__w) = to_rep(((b).us_split_fields3).rec__classwide__u2__w)) and
-  (to_rep(((a).us_split_fields3).rec__classwide__u2__xx) = to_rep(((b).us_split_fields3).rec__classwide__u2__xx))) and
-  (to_rep1(((a).us_split_fields3).rec__classwide__u2__yy) = to_rep1(((b).us_split_fields3).rec__classwide__u2__yy))) and
+  ((((((((to_rep1(((a).us_split_fields3).rec__classwide__u2__w) = to_rep1(((b).us_split_fields3).rec__classwide__u2__w)) and
+  (to_rep1(((a).us_split_fields3).rec__classwide__u2__xx) = to_rep1(((b).us_split_fields3).rec__classwide__u2__xx))) and
+  (to_rep(((a).us_split_fields3).rec__classwide__u2__yy) = to_rep(((b).us_split_fields3).rec__classwide__u2__yy))) and
   (((a).us_split_fields3).rec__classwide__t__z1 = ((b).us_split_fields3).rec__classwide__t__z1)) and
-  (to_rep(((a).us_split_fields3).rec__classwide__t__x1) = to_rep(((b).us_split_fields3).rec__classwide__t__x1))) and
-  (to_rep1(((a).us_split_fields3).rec__classwide__t__y1) = to_rep1(((b).us_split_fields3).rec__classwide__t__y1))) ->
+  (to_rep1(((a).us_split_fields3).rec__classwide__t__x1) = to_rep1(((b).us_split_fields3).rec__classwide__t__x1))) and
+  (to_rep(((a).us_split_fields3).rec__classwide__t__y1) = to_rep(((b).us_split_fields3).rec__classwide__t__y1))) ->
   (bool_eq5(a, b) = true)) and
-  ((not ((((((to_rep(((a).us_split_fields3).rec__classwide__u2__w) = to_rep(((b).us_split_fields3).rec__classwide__u2__w)) and
-  (to_rep(((a).us_split_fields3).rec__classwide__u2__xx) = to_rep(((b).us_split_fields3).rec__classwide__u2__xx))) and
-  (to_rep1(((a).us_split_fields3).rec__classwide__u2__yy) = to_rep1(((b).us_split_fields3).rec__classwide__u2__yy))) and
+  ((not ((((((to_rep1(((a).us_split_fields3).rec__classwide__u2__w) = to_rep1(((b).us_split_fields3).rec__classwide__u2__w)) and
+  (to_rep1(((a).us_split_fields3).rec__classwide__u2__xx) = to_rep1(((b).us_split_fields3).rec__classwide__u2__xx))) and
+  (to_rep(((a).us_split_fields3).rec__classwide__u2__yy) = to_rep(((b).us_split_fields3).rec__classwide__u2__yy))) and
   (((a).us_split_fields3).rec__classwide__t__z1 = ((b).us_split_fields3).rec__classwide__t__z1)) and
-  (to_rep(((a).us_split_fields3).rec__classwide__t__x1) = to_rep(((b).us_split_fields3).rec__classwide__t__x1))) and
-  (to_rep1(((a).us_split_fields3).rec__classwide__t__y1) = to_rep1(((b).us_split_fields3).rec__classwide__t__y1)))) ->
+  (to_rep1(((a).us_split_fields3).rec__classwide__t__x1) = to_rep1(((b).us_split_fields3).rec__classwide__t__x1))) and
+  (to_rep(((a).us_split_fields3).rec__classwide__t__y1) = to_rep(((b).us_split_fields3).rec__classwide__t__y1)))) ->
   (bool_eq5(a, b) = false))))
 
 logic us_tag2 : int
@@ -1775,7 +1790,7 @@ axiom is_zero__3__def_axiom :
   }) = true) <-> ((((is_zero1({ us_split_fields1 = { rec__classwide__t__z =
   v3; rec__classwide__t__x = v4; rec__classwide__t__y = v5; rec__ext__ =
   hide_ext__(v, v1, v2, v6) }; attr__tag = v7 }) = true) and
-  (to_rep(v) = 0)) and (to_rep(v1) = 0)) and eq(to_rep1(v2), fliteral1))))
+  (to_rep1(v) = 0)) and (to_rep1(v1) = 0)) and eq(to_rep(v2), fliteral1))))
 
 logic v__attr__tag : int
 
@@ -1825,7 +1840,7 @@ axiom is_zero__def_axiom :
   attr__tag = v4 })]. ((is_zero1({ us_split_fields1 = {
   rec__classwide__t__z = v; rec__classwide__t__x = v1; rec__classwide__t__y =
   v2; rec__ext__ = v3 }; attr__tag = v4 }) = true) <-> (((not (v = true)) and
-  (to_rep(v1) = 0)) and eq(to_rep1(v2), fliteral1))))
+  (to_rep1(v1) = 0)) and eq(to_rep(v2), fliteral1))))
 
 axiom is_zero__2__post_axiom : true
 
@@ -1849,28 +1864,20 @@ axiom is_zero__2__def_axiom :
   attr__tag = v4 })]. ((is_zero__2({ us_split_fields1 = {
   rec__classwide__t__z = v; rec__classwide__t__x = v1; rec__classwide__t__y =
   v2; rec__ext__ = v3 }; attr__tag = v4 }) = true) <-> (((not (v = true)) and
-  (to_rep(v1) = 0)) and eq(to_rep1(v2), fliteral1))))
+  (to_rep1(v1) = 0)) and eq(to_rep(v2), fliteral1))))
+
+logic rliteral : integer
+
+axiom rliteral_axiom : (integerqtint(rliteral) = 0)
 
  (* File "classwide.ads", line 101, characters 0-0 *)
 goal WP_parameter_def :
   (forall v__split_fields:integer. forall v__split_fields1:integer.
   forall v__split_fields2:float1. forall v__split_fields3:bool.
   forall v__split_fields4:integer. forall v__split_fields5:float1.
-  forall v__split_fields6:us_private. forall o:integer. forall o1:integer.
+  forall v__split_fields6:us_private. forall o:float1. forall o1:integer.
   forall o2:integer. forall o3:float1. forall o4:bool. forall o5:integer.
-  forall o6:float1. forall o7:us_private. forall temp___240:integer.
-  forall temp___2401:integer. forall temp___2402:float1.
-  forall temp___2403:bool. forall temp___2404:integer.
-  forall temp___2405:float1. forall temp___2406:us_private.
-  forall temp___2407:int. forall o8:integer. forall o9:integer.
-  forall o10:integer. forall o11:float1. forall o12:bool. forall o13:integer.
-  forall o14:float1. forall o15:us_private. forall temp___242:integer.
-  forall temp___2421:integer. forall temp___2422:float1.
-  forall temp___2423:bool. forall temp___2424:integer.
-  forall temp___2425:float1. forall temp___2426:us_private.
-  forall temp___2427:int. forall o16:float1. forall o17:integer.
-  forall o18:integer. forall o19:float1. forall o20:bool. forall o21:integer.
-  forall o22:float1. forall o23:us_private. forall temp___244:integer.
+  forall o6:float1. forall o7:us_private. forall temp___244:integer.
   forall temp___2441:integer. forall temp___2442:float1.
   forall temp___2443:bool. forall temp___2444:integer.
   forall temp___2445:float1. forall temp___2446:us_private.
@@ -1926,49 +1933,35 @@ goal WP_parameter_def :
   classwide__update__v__fields1; rec__classwide__t__y =
   classwide__update__v__fields2; rec__ext__ = classwide__update__v__fields3
   }; attr__tag = v__attr__tag })).us_split_fields3))) and
-  (((((to_rep(o) = 0) and ((o = o1) and ((v__split_fields8 = o2) and
-  ((v__split_fields9 = o3) and ((v__split_fields10 = o4) and
-  ((v__split_fields11 = o5) and ((v__split_fields12 = o6) and
-  (v__split_fields13 = o7)))))))) and (((temp___240 = o1) and
-  ((temp___2401 = o2) and ((temp___2402 = o3) and ((temp___2403 = o4) and
-  ((temp___2404 = o5) and ((temp___2405 = o6) and
-  (temp___2406 = o7))))))) and (v__attr__tag = temp___2407))) and
-  (((result7 = v__split_fields7) and ((result8 = v__split_fields8) and
+  ((((result7 = v__split_fields7) and ((result8 = v__split_fields8) and
   ((result9 = v__split_fields9) and ((result10 = v__split_fields10) and
   ((result11 = v__split_fields11) and ((result12 = v__split_fields12) and
   (result13 = v__split_fields13))))))) and
-  ((temp___240 = v__split_fields14) and
-  ((temp___2401 = v__split_fields15) and
-  ((temp___2402 = v__split_fields16) and
-  ((temp___2403 = v__split_fields17) and
-  ((temp___2404 = v__split_fields18) and
-  ((temp___2405 = v__split_fields19) and
-  (temp___2406 = v__split_fields20))))))))) and (((((to_rep(o8) = 0) and
-  ((v__split_fields14 = o9) and ((o8 = o10) and
-  ((v__split_fields16 = o11) and ((v__split_fields17 = o12) and
-  ((v__split_fields18 = o13) and ((v__split_fields19 = o14) and
-  (v__split_fields20 = o15)))))))) and (((temp___242 = o9) and
-  ((temp___2421 = o10) and ((temp___2422 = o11) and ((temp___2423 = o12) and
-  ((temp___2424 = o13) and ((temp___2425 = o14) and
-  (temp___2426 = o15))))))) and (v__attr__tag = temp___2427))) and
-  (((result14 = v__split_fields14) and ((result15 = v__split_fields15) and
+  ((rliteral = v__split_fields14) and
+  ((v__split_fields8 = v__split_fields15) and
+  ((v__split_fields9 = v__split_fields16) and
+  ((v__split_fields10 = v__split_fields17) and
+  ((v__split_fields11 = v__split_fields18) and
+  ((v__split_fields12 = v__split_fields19) and
+  (v__split_fields13 = v__split_fields20)))))))) and
+  ((((result14 = v__split_fields14) and ((result15 = v__split_fields15) and
   ((result16 = v__split_fields16) and ((result17 = v__split_fields17) and
   ((result18 = v__split_fields18) and ((result19 = v__split_fields19) and
   (result20 = v__split_fields20))))))) and
-  ((temp___242 = v__split_fields21) and
-  ((temp___2421 = v__split_fields22) and
-  ((temp___2422 = v__split_fields23) and
-  ((temp___2423 = v__split_fields24) and
-  ((temp___2424 = v__split_fields25) and
-  ((temp___2425 = v__split_fields26) and
-  (temp___2426 = v__split_fields27))))))))) and
-  ((((to_rep1(o16) = fliteral1) and ((v__split_fields21 = o17) and
-  ((v__split_fields22 = o18) and ((o16 = o19) and
-  ((v__split_fields24 = o20) and ((v__split_fields25 = o21) and
-  ((v__split_fields26 = o22) and (v__split_fields27 = o23)))))))) and
-  (((temp___244 = o17) and ((temp___2441 = o18) and ((temp___2442 = o19) and
-  ((temp___2443 = o20) and ((temp___2444 = o21) and ((temp___2445 = o22) and
-  (temp___2446 = o23))))))) and (v__attr__tag = temp___2447))) and
+  ((v__split_fields14 = v__split_fields21) and
+  ((rliteral = v__split_fields22) and
+  ((v__split_fields16 = v__split_fields23) and
+  ((v__split_fields17 = v__split_fields24) and
+  ((v__split_fields18 = v__split_fields25) and
+  ((v__split_fields19 = v__split_fields26) and
+  (v__split_fields20 = v__split_fields27)))))))) and
+  ((((to_rep(o) = fliteral1) and ((v__split_fields21 = o1) and
+  ((v__split_fields22 = o2) and ((o = o3) and ((v__split_fields24 = o4) and
+  ((v__split_fields25 = o5) and ((v__split_fields26 = o6) and
+  (v__split_fields27 = o7)))))))) and (((temp___244 = o1) and
+  ((temp___2441 = o2) and ((temp___2442 = o3) and ((temp___2443 = o4) and
+  ((temp___2444 = o5) and ((temp___2445 = o6) and
+  (temp___2446 = o7))))))) and (v__attr__tag = temp___2447))) and
   (((result21 = v__split_fields21) and ((result22 = v__split_fields22) and
   ((result23 = v__split_fields23) and ((result24 = v__split_fields24) and
   ((result25 = v__split_fields25) and ((result26 = v__split_fields26) and

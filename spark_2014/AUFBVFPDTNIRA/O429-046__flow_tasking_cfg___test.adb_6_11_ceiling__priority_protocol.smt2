@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -106,6 +109,13 @@
                                                                  a))
 
 (declare-sort positive 0)
+
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
@@ -210,7 +220,7 @@
   (= (to_rep (select a temp___idx_91)) (to_rep
                                        (select b (+ (- b__first a__first) temp___idx_91)))))))))))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -314,6 +324,13 @@
 
 (declare-sort natural 0)
 
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
+
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -360,55 +377,6 @@
                                     (or (= temp___is_init_56 true)
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
-
-(declare-sort priority 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 97)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq6 (priority priority) Bool)
-
-(declare-const dummy6 priority)
-
-(declare-datatypes ()
-((priority__ref (mk_priority__ref (priority__content priority)))))
-(define-fun priority__ref___projection ((a priority__ref)) priority (priority__content
-                                                                    a))
-
-(declare-sort field 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq7 (field field) Bool)
-
-(declare-const dummy7 field)
-
-(declare-datatypes () ((field__ref (mk_field__ref (field__content field)))))
-(define-fun field__ref___projection ((a field__ref)) field (field__content a))
-
-(define-fun dynamic_invariant2 ((temp___expr_535 Int)
-  (temp___is_init_531 Bool) (temp___skip_constant_532 Bool)
-  (temp___do_toplevel_533 Bool)
-  (temp___do_typ_inv_534 Bool)) Bool (=>
-                                     (or (= temp___is_init_531 true)
-                                     (<= 0 255)) (in_range5 temp___expr_535)))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-datatypes ()
 ((us_split_fields (mk___split_fields (rec__support__protT__summary natural)))))
@@ -462,13 +430,17 @@
 ;; support__protT__summary__position_axiom
   (assert (<= 0 support__protT__summary__position))
 
-(declare-fun user_eq8 (us_rep us_rep) Bool)
+(declare-fun user_eq6 (us_rep us_rep) Bool)
 
 (declare-datatypes () ((protT__ref (mk_protT__ref (protT__content us_rep)))))
 (define-fun protT__ref___projection ((a protT__ref)) us_rep (protT__content
                                                             a))
 
-(declare-fun to_rep2 (natural) Int)
+(declare-fun get (us_rep) Int)
+
+(declare-fun get__function_guard (Int us_rep) Bool)
+
+(define-fun to_rep2 ((x natural)) Int (naturalqtint x))
 
 (declare-fun of_rep2 (Int) natural)
 
@@ -487,22 +459,80 @@
   (! (=> (in_range3 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
-(define-fun default_initial_assumption ((temp___expr_589 us_rep)
-  (temp___skip_top_level_590 Bool)) Bool (= (to_rep2
+(define-fun default_initial_assumption ((temp___expr_582 us_rep)
+  (temp___skip_top_level_583 Bool)) Bool (= (to_rep2
                                             (rec__support__protT__summary
                                             (us_split_fields1
-                                            temp___expr_589))) 0))
-
-(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
-
-(declare-fun get (us_rep) Int)
-
-(declare-fun get__function_guard (Int us_rep) Bool)
+                                            temp___expr_582))) 0))
 
 ;; get__post_axiom
   (assert
   (forall ((self__ us_rep)) (! (dynamic_invariant (get self__) true false
   true true) :pattern ((get self__)) )))
+
+(declare-sort priority 0)
+
+(declare-fun priorityqtint (priority) Int)
+
+;; priority'axiom
+  (assert
+  (forall ((i priority))
+  (and (<= 0 (priorityqtint i)) (<= (priorityqtint i) 97))))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 97)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+
+(declare-fun user_eq7 (priority priority) Bool)
+
+(declare-const dummy6 priority)
+
+(declare-datatypes ()
+((priority__ref (mk_priority__ref (priority__content priority)))))
+(define-fun priority__ref___projection ((a priority__ref)) priority (priority__content
+                                                                    a))
+
+(declare-sort field 0)
+
+(declare-fun fieldqtint (field) Int)
+
+;; field'axiom
+  (assert
+  (forall ((i field)) (and (<= 0 (fieldqtint i)) (<= (fieldqtint i) 255))))
+
+(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+
+(declare-fun user_eq8 (field field) Bool)
+
+(declare-const dummy7 field)
+
+(declare-datatypes () ((field__ref (mk_field__ref (field__content field)))))
+(define-fun field__ref___projection ((a field__ref)) field (field__content a))
+
+(define-fun dynamic_invariant2 ((temp___expr_528 Int)
+  (temp___is_init_524 Bool) (temp___skip_constant_525 Bool)
+  (temp___do_toplevel_526 Bool)
+  (temp___do_typ_inv_527 Bool)) Bool (=>
+                                     (or (= temp___is_init_524 true)
+                                     (<= 0 255)) (in_range5 temp___expr_528)))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const g Int)
 
@@ -512,9 +542,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
-(declare-fun temp___String_Literal_598 (tuple0) (Array Int character))
+(declare-fun temp___String_Literal_591 (tuple0) (Array Int character))
 
-;; temp___String_Literal_598__def_axiom
+;; temp___String_Literal_591__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
@@ -535,26 +565,26 @@
      (and
      (and
      (and
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 1)) 65)
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 2)) 118))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 3)) 101))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 4)) 114))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 5)) 97))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 6)) 103))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 7)) 101))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 8)) 32))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 9)) 110))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 10)) 117))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 11)) 109))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 12)) 98))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 13)) 101))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 14)) 114))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 15)) 32))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 16)) 105))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 17)) 115))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 18)) 58))
-     (= (to_rep (select (temp___String_Literal_598 us_void_param) 19)) 32)) :pattern (
-  (temp___String_Literal_598 us_void_param)) )))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 1)) 65)
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 2)) 118))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 3)) 101))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 4)) 114))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 5)) 97))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 6)) 103))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 7)) 101))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 8)) 32))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 9)) 110))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 10)) 117))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 11)) 109))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 12)) 98))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 13)) 101))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 14)) 114))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 15)) 32))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 16)) 105))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 17)) 115))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 18)) 58))
+     (= (to_rep (select (temp___String_Literal_591 us_void_param) 19)) 32)) :pattern (
+  (temp___String_Literal_591 us_void_param)) )))
 
 (define-fun dynamic_invariant3 ((temp___expr_46 Int) (temp___is_init_42 Bool)
   (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
@@ -587,7 +617,7 @@
 
 ;; f__def_axiom
   (assert
-  (= f (fp.div RNE (of_int RNE g) (fp #b0 #b10001000 #b11110100000000000000000))))
+  (= f (fp.div RNE ((_ to_fp 8 24) RNE (to_real g)) (fp #b0 #b10001000 #b11110100000000000000000))))
 
 (define-fun dynamic_invariant7 ((temp___expr_245 Int)
   (temp___is_init_241 Bool) (temp___skip_constant_242 Bool)

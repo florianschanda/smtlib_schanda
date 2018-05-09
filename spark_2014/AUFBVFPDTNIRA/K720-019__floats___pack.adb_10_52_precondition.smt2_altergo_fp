@@ -1099,7 +1099,7 @@ axiom add__post_axiom :
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.20000000298023223876953125))
+  (tqtreal(fliteral1) = 0.3000000119209289550781250))
 
  (* File "pack.ads", line 17, characters 0-0 *)
 goal WP_parameter_def : lt(fliteral1, fliteral)

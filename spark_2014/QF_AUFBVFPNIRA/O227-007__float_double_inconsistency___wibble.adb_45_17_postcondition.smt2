@@ -239,6 +239,7 @@
 (assert
 ;; WP_parameter_def
  ;; File "wibble.adb", line 35, characters 0-0
-  (not (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) state2)))
+  (not
+  (fp.leq state2 (fp.mul RNE ((_ to_fp_unsigned 8 24) RNE (bvadd x #x00000001)) (fp #b0 #b10000010 #b01000000000000000000000)))))
 (check-sat)
 (exit)

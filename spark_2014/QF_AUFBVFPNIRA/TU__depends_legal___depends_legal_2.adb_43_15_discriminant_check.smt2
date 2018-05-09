@@ -408,10 +408,6 @@
 
 (declare-const par1__split_discrs Bool)
 
-(declare-const temp___188 Bool)
-
-(declare-const temp___1881 Bool)
-
 (declare-const usq_ Bool)
 
 (declare-const usq_1 Bool)
@@ -424,6 +420,10 @@
 
 (declare-const temp___1851 Bool)
 
+(declare-const usq_2 Bool)
+
+(declare-const usq_3 Bool)
+
 ;; H
   (assert (= rec1__attr__constrained false))
 
@@ -434,17 +434,11 @@
   (assert (= par1__split_discrs r4b))
 
 ;; H
-  (assert (= (distinct 1 0) temp___188))
-
-;; H
-  (assert (= true temp___1881))
-
-;; H
-  (assert (= par1__attr__constrained true))
+  (assert (not (= par1__attr__constrained true)))
 
 (assert
 ;; WP_parameter_def
  ;; File "depends_legal_2.adb", line 14, characters 0-0
-  (not (= temp___188 par1__split_discrs)))
+  (not true))
 (check-sat)
 (exit)

@@ -58,17 +58,21 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (fp.isFinite64 temp___expr_158)))
 
-(declare-const val1 Float64)
+(declare-const fl_last_sqrt Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const val2 Float64)
+(declare-const val1 Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const val3 Float64)
+(declare-const val2 Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const val3 Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_67 Float64)
   (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
@@ -78,9 +82,21 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
+;; fl_last_sqrt__def_axiom
+  (assert
+  (= fl_last_sqrt (fp #b0 #b10111111110 #b0000000000000000000000000000000000000000000000000000)))
+
 (declare-const o Float64)
 
 (declare-const o1 Float64)
+
+;; H
+  (assert (fp.isFinite64 fl_last_sqrt))
+
+;; H
+  (assert
+  (= (fp #b0 #b10111111110 #b0000000000000000000000000000000000000000000000000000)
+  fl_last_sqrt))
 
 ;; H
   (assert (fp.isFinite64 val1))
@@ -96,13 +112,11 @@
   (and
   (and
   (fp.leq (fp.neg (fp #b0 #b10111111110 #b0000000000000000000000000000000000000000000000000000))
-  val1)
-  (fp.leq val1 (fp #b0 #b10111111110 #b0000000000000000000000000000000000000000000000000000)))
+  val1) (fp.leq val1 fl_last_sqrt))
   (and
   (and
   (fp.leq (fp.neg (fp #b0 #b10111111110 #b0000000000000000000000000000000000000000000000000000))
-  val2)
-  (fp.leq val2 (fp #b0 #b10111111110 #b0000000000000000000000000000000000000000000000000000)))
+  val2) (fp.leq val2 fl_last_sqrt))
   (and
   (and
   (fp.leq (fp.neg (fp #b0 #b10111111110 #b0000000000000000000000000000000000000000000000000000))

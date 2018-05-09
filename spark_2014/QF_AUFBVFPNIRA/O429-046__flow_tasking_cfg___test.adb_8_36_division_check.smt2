@@ -92,23 +92,6 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 97)))
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
-
-(define-fun dynamic_invariant2 ((temp___expr_535 Int)
-  (temp___is_init_531 Bool) (temp___skip_constant_532 Bool)
-  (temp___do_toplevel_533 Bool)
-  (temp___do_typ_inv_534 Bool)) Bool (=>
-                                     (or (= temp___is_init_531 true)
-                                     (<= 0 255)) (in_range5 temp___expr_535)))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
 (declare-const value__size1 Int)
 
 (declare-const value__alignment1 Int)
@@ -134,6 +117,23 @@
 
 ;; support__protT__summary__position_axiom
   (assert (<= 0 support__protT__summary__position))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 97)))
+
+(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+
+(define-fun dynamic_invariant2 ((temp___expr_528 Int)
+  (temp___is_init_524 Bool) (temp___skip_constant_525 Bool)
+  (temp___do_toplevel_526 Bool)
+  (temp___do_typ_inv_527 Bool)) Bool (=>
+                                     (or (= temp___is_init_524 true)
+                                     (<= 0 255)) (in_range5 temp___expr_528)))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 

@@ -216,7 +216,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 6451, characters 5-8
   (not (in_range1 (+ i 1))))
 (check-sat)
 (exit)

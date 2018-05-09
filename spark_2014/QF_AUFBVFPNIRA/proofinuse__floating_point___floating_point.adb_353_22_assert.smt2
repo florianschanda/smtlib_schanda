@@ -120,8 +120,8 @@
 ;; WP_parameter_def
  ;; File "a-unccon.ads", line 20, characters 0-0
   (not
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp.add RNE (fp.mul RNE (fp.add RNE (fp.add RNE (fp.mul RNE (fp.add RNE
+  (fp.leq (fp.add RNE (fp.mul RNE (fp.add RNE (fp.add RNE (fp.mul RNE (fp.add RNE
   x (fp #b0 #b10000000 #b00000000000000000000000)) x) (fp #b0 #b10000000 #b10000000000000000000000)) (fp #b0 #b10000001 #b00000000000000000000000))
-  x) (fp #b0 #b10000001 #b01000000000000000000000)))))
+  x) (fp #b0 #b10000001 #b01000000000000000000000)) (fp #b0 #b11111110 #b11111111111111111111111))))
 (check-sat)
 (exit)

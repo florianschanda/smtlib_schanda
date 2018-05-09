@@ -175,7 +175,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 5467, characters 5-8
   (not (not (fp.isZero (fp #b0 #b10000000 #b10000000000000000000000)))))
 (check-sat)
 (exit)

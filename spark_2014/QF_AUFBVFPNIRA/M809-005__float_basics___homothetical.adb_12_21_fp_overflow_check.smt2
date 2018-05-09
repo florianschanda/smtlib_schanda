@@ -122,7 +122,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/M809-005__float_basics/proof/sessions/homothetical/../../../gnatprove/homothetical.mlw", line 6080, characters 5-8
   (not (fp.isFinite32 (fp.mul RNE kv kv))))
 (check-sat)
 (exit)

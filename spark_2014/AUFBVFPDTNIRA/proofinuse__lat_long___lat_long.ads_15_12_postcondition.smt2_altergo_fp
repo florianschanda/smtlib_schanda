@@ -1134,24 +1134,5 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 75.0))
 
-logic fliteral3 : t
-
-axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 0.100000001490116119384765625))
-
  (* File "lat_long.ads", line 6, characters 0-0 *)
-goal WP_parameter_def :
-  (forall lat_long__cos__result:t. forall o:t. forall result:t.
-  forall lat_long__cos__result1:t. forall lat_long__cos__result2:t.
-  forall lat_long__cos__result3:t. forall lat_long__cos__result4:t.
-  forall lat_long__cos__result5:t.
-  (forall result1:t. ((tqtisFinite(x) and
-  (((((lat_long__cos__result1 = lat_long__cos__result2) and
-  (lat_long__cos__result3 = lat_long__cos__result1)) and (((o = sin(x)) and
-  (tqtisFinite(o) and ((le(neg(fliteral), o) and le(o, fliteral)) and (eq(x,
-  fliteral1) -> eq(o, fliteral1))))) and
-  ((result = lat_long__cos__result) and (lat_long__cos__result1 = o)))) and
-  ((lat_long__cos__result4 = lat_long__cos__result2) and
-  (lat_long__cos__result5 = lat_long__cos__result3))) and
-  (result1 = lat_long__cos__result4))) -> ((le(neg(fliteral2), x) and le(x,
-  fliteral2)) -> le(fliteral3, lat_long__cos__result4)))))
+goal WP_parameter_def : true

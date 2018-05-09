@@ -152,7 +152,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/L402-021__float/gnatprove/p.mlw", line 2117, characters 5-8
   (not (or (fp.eq r1 c1) (fp.eq r1 f1))))
 (check-sat)
 (exit)

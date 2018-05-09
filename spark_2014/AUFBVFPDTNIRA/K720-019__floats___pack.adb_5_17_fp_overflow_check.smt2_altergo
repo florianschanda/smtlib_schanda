@@ -928,7 +928,7 @@ logic r2 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K720-019__floats/gnatprove/pack.mlw", line 2609, characters 5-8 *)
 goal WP_parameter_def : (tqtisFinite(r1) -> (tqtisFinite(r2) -> ((lt(r1,
   fliteral) and (lt(r2, fliteral) and (lt(neg(fliteral), r1) and
   lt(neg(fliteral), r2)))) -> tqtisFinite(add(RNE, r1, r2)))))

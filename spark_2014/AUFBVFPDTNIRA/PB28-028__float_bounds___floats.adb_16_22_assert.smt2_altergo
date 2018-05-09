@@ -1723,4 +1723,4 @@ goal WP_parameter_def :
   le1(to_rep1((d4[1])), fliteral1)) -> ((le1(neg1(fliteral1),
   to_rep1((d4[2]))) and le1(to_rep1((d4[2])), fliteral1)) ->
   ((le1(neg1(fliteral1), to_rep1((d4[3]))) and le1(to_rep1((d4[3])),
-  fliteral1)) -> le1(neg1(fliteral1), to_rep1((d4[4])))))))))))))))
+  fliteral1)) -> le1(to_rep1((d4[4])), fliteral1)))))))))))))

@@ -40,6 +40,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
 
@@ -58,24 +65,6 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
-
-(declare-fun of_rep (Int) integer)
-
-;; inversion_axiom
-  (assert
-  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                           (of_rep x))) )))
-
 (declare-fun pow2 (Int) Int)
 
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
@@ -89,10 +78,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -116,7 +101,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -155,23 +140,42 @@
 (declare-datatypes () ((enum__ref (mk_enum__ref (enum__content enum)))))
 (define-fun enum__ref___projection ((a enum__ref)) enum (enum__content a))
 
-(declare-fun to_rep1 (enum) Int)
+(declare-fun to_rep (enum) Int)
 
-(declare-fun of_rep1 (Int) enum)
+(declare-fun of_rep (Int) enum)
 
 ;; inversion_axiom
   (assert
-  (forall ((x enum)) (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+  (forall ((x enum)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x enum)) (! (in_range1 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x enum)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range1 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
-                                                              (of_rep1 x))) )))
+  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                            (of_rep x))) )))
+
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
+
+(declare-fun of_rep1 (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer))
+  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range (to_rep1 x)) :pattern ((to_rep1 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                             (of_rep1 x))) )))
 
 (declare-fun to_rep2 (float) Float32)
 
@@ -210,6 +214,9 @@
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__types__r__x a))
 
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__types__r__y a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -228,22 +235,22 @@
 
 (define-fun us_rep___3__projection ((a us_rep)) Bool (attr__constrained a))
 
-(define-fun types__r__x__pred ((a us_rep)) Bool (= (to_rep1
+(define-fun types__r__x__pred ((a us_rep)) Bool (= (to_rep
                                                    (rec__types__r__i
                                                    (us_split_discrs1 a))) 0))
 
-(define-fun types__r__y__pred ((a us_rep)) Bool (= (to_rep1
+(define-fun types__r__y__pred ((a us_rep)) Bool (= (to_rep
                                                    (rec__types__r__i
                                                    (us_split_discrs1 a))) 1))
 
 (define-fun bool_eq ((a us_rep)
   (b us_rep)) Bool (ite (and
-                        (= (to_rep1 (rec__types__r__i (us_split_discrs1 a)))
-                        (to_rep1 (rec__types__r__i (us_split_discrs1 b))))
+                        (= (to_rep (rec__types__r__i (us_split_discrs1 a)))
+                        (to_rep (rec__types__r__i (us_split_discrs1 b))))
                         (and
                         (=> (types__r__x__pred a)
-                        (= (to_rep (rec__types__r__x (us_split_fields1 a)))
-                        (to_rep (rec__types__r__x (us_split_fields1 b)))))
+                        (= (to_rep1 (rec__types__r__x (us_split_fields1 a)))
+                        (to_rep1 (rec__types__r__x (us_split_fields1 b)))))
                         (=> (types__r__y__pred a)
                         (= (to_rep2 (rec__types__r__y (us_split_fields1 a)))
                         (to_rep2 (rec__types__r__y (us_split_fields1 b)))))))
@@ -325,13 +332,13 @@
   (temp___skip_top_level_168 Bool)) Bool (and
                                          (= (attr__constrained
                                             temp___expr_167) false)
-                                         (= (to_rep1
+                                         (= (to_rep
                                             (rec__types__r__i
                                             (us_split_discrs1
                                             temp___expr_167))) 0)))
 
 (define-fun in_range2 ((rec__types__r__i1 Int)
-  (a us_rep)) Bool (= rec__types__r__i1 (to_rep1
+  (a us_rep)) Bool (= rec__types__r__i1 (to_rep
                                         (rec__types__r__i
                                         (us_split_discrs1 a)))))
 
@@ -412,7 +419,7 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun in_range3 ((rec__types__r__i1 Int)
-  (a us_rep)) Bool (= rec__types__r__i1 (to_rep1
+  (a us_rep)) Bool (= rec__types__r__i1 (to_rep
                                         (rec__types__r__i
                                         (us_split_discrs1 a)))))
 
@@ -510,141 +517,9 @@
                                      (or (= temp___is_init_154 true)
                                      (<= 0 1)) (in_range1 temp___expr_158)))
 
-(declare-const x__split_fields integer)
-
-(declare-const x__split_fields1 float)
-
-(declare-const x__split_discrs enum)
-
-(declare-const o enum)
-
-(declare-const o1 integer)
-
-(declare-const o2 integer)
-
-(declare-const o3 float)
-
-(declare-const o4 enum)
-
-(declare-const p__good__x__assume enum)
-
-(declare-const p__good__x__assume1 integer)
-
-(declare-const p__good__x__assume2 float)
-
-(declare-const p__good__x__assume3 Bool)
-
-(declare-const o5 enum)
-
-(declare-const o6 integer)
-
-(declare-const o7 integer)
-
-(declare-const o8 float)
-
-(declare-const o9 enum)
-
-(declare-const temp___172 enum)
-
-(declare-const temp___1721 integer)
-
-(declare-const temp___1722 float)
-
-(declare-const temp___1723 Bool)
-
-(declare-const result integer)
-
-(declare-const result1 float)
-
-(declare-const x__split_fields2 integer)
-
-(declare-const x__split_fields3 float)
-
-(declare-const result2 enum)
-
-(declare-const x__split_discrs1 enum)
-
-;; H
-  (assert (= (to_rep o1) 1))
-
-;; H
-  (assert (= o1 o2))
-
-;; H
-  (assert (= dummy1 o3))
-
-;; H
-  (assert (= (to_rep1 o) 0))
-
-;; H
-  (assert (= o o4))
-
-;; H
-  (assert (= p__good__x__assume o4))
-
-;; H
-  (assert (= p__good__x__assume1 o2))
-
-;; H
-  (assert (= p__good__x__assume2 o3))
-
-;; H
-  (assert (= true p__good__x__assume3))
-
-;; H
-  (assert (= result x__split_fields))
-
-;; H
-  (assert (= result1 x__split_fields1))
-
-;; H
-  (assert (= p__good__x__assume1 x__split_fields2))
-
-;; H
-  (assert (= p__good__x__assume2 x__split_fields3))
-
-;; H
-  (assert (= result2 x__split_discrs))
-
-;; H
-  (assert (= p__good__x__assume x__split_discrs1))
-
-;; H
-  (assert (= x__attr__constrained false))
-
-;; H
-  (assert (= (to_rep o6) 2))
-
-;; H
-  (assert (= o6 o7))
-
-;; H
-  (assert (= dummy1 o8))
-
-;; H
-  (assert (= (to_rep1 o5) 0))
-
-;; H
-  (assert (= o5 o9))
-
-;; H
-  (assert (= temp___172 o9))
-
-;; H
-  (assert (= temp___1721 o7))
-
-;; H
-  (assert (= temp___1722 o8))
-
-;; H
-  (assert (= true temp___1723))
-
-;; H
-  (assert (= x__attr__constrained true))
-
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 3, characters 0-0
-  (not (= temp___172 x__split_discrs1)))
+  (not true))
 (check-sat)
 (exit)

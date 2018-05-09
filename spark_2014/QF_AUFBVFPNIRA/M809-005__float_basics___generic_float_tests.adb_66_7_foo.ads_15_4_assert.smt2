@@ -58,17 +58,33 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (fp.isFinite64 temp___expr_194)))
 
-(declare-const x Float64)
+(declare-const nextup_one Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const y Float64)
+(declare-const x Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const z Float64)
+(declare-const y Float64)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+
+(declare-const z Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+;; nextup_one__def_axiom
+  (assert
+  (= nextup_one (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000001)))
+
+;; H
+  (assert (fp.isFinite64 nextup_one))
+
+;; H
+  (assert
+  (= (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000001)
+  nextup_one))
 
 ;; H
   (assert (fp.isFinite64 x))
@@ -85,8 +101,7 @@
   (and
   (and
   (fp.eq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  (fp.eq z (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000001)))
-  (fp.lt x y)) (fp.lt y z)))
+  (fp.eq z nextup_one)) (fp.lt x y)) (fp.lt y z)))
 
 (assert
 ;; WP_parameter_def

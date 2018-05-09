@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -186,15 +182,13 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___240 Float32))
-  (=> (dynamic_invariant temp___240 true true true true)
-  (forall ((temp___241 Int))
+  (forall ((temp___243 Float32))
+  (=> (dynamic_invariant temp___243 true true true true)
+  (forall ((temp___244 Int))
   (= (to_rep
-     (select (foo__float_tests__test_array_1__a__aggregate_def temp___240) temp___241)) temp___240)))))
+     (select (foo__float_tests__test_array_1__a__aggregate_def temp___243) temp___244)) temp___243)))))
 
 (declare-const y Float32)
-
-(declare-const a (Array Int ft))
 
 (declare-const o ft)
 
@@ -204,29 +198,15 @@
 
 (declare-const o3 (Array Int ft))
 
-(declare-const result (Array Int ft))
+(declare-const a (Array Int ft))
 
 (declare-const a1 (Array Int ft))
 
-(declare-const result1 (Array Int ft))
-
 (declare-const a2 (Array Int ft))
-
-(declare-const result2 (Array Int ft))
-
-(declare-const a3 (Array Int ft))
-
-(declare-const result3 Float32)
 
 (declare-const y1 Float32)
 
 (declare-const y2 Float32)
-
-(declare-const a4 (Array Int ft))
-
-(declare-const y3 Float32)
-
-(declare-const a5 (Array Int ft))
 
 ;; H
   (assert (fp.isFinite32 x))
@@ -238,54 +218,33 @@
   (fp.isFinite32 y)))
 
 ;; H
-  (assert (= result a))
-
-;; H
   (assert
-  (= a1 (foo__float_tests__test_array_1__a__aggregate_def
-        (fp #b0 #b00000000 #b00000000000000000000000))))
+  (= a (foo__float_tests__test_array_1__a__aggregate_def
+       (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
   (assert (= (to_rep o) x))
 
 ;; H
-  (assert (= o1 (store a1 8 o)))
+  (assert (= o1 (store a 8 o)))
 
 ;; H
-  (assert (= result1 a1))
-
-;; H
-  (assert (= a2 o1))
+  (assert (= a1 o1))
 
 ;; H
   (assert (= (to_rep o2) (fp #b0 #b10000000 #b10000000000000000000000)))
 
 ;; H
-  (assert (= o3 (store a2 5 o2)))
+  (assert (= o3 (store a1 5 o2)))
 
 ;; H
-  (assert (= result2 a2))
+  (assert (= a2 o3))
 
 ;; H
-  (assert (= a3 o3))
-
-;; H
-  (assert (= result3 y))
-
-;; H
-  (assert (= y1 (to_rep (select a3 8))))
-
-;; H
-  (assert (= a4 a3))
+  (assert (= y1 (to_rep (select a2 8))))
 
 ;; H
   (assert (= y1 y2))
-
-;; H
-  (assert (= a5 a3))
-
-;; H
-  (assert (= y3 y1))
 
 (assert
 ;; WP_parameter_def

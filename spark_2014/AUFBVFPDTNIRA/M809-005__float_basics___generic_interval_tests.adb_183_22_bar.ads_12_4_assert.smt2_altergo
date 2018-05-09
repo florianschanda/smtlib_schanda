@@ -1029,4 +1029,4 @@ goal WP_parameter_def :
   ((((((((le(fliteral2, a) and le(a, fliteral3)) and (le(fliteral3, b) and
   le(b, fliteral4))) and (le(fliteral5, c) and le(c, fliteral6))) and lt(a,
   d)) and lt(d, b)) and le(c, a)) and le(b, c)) -> (lt(a, b) -> (eq(c,
-  fliteral3) -> le(fliteral2, d))))))))))
+  fliteral3) -> le(d, fliteral4))))))))))

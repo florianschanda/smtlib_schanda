@@ -1125,6 +1125,6 @@ goal WP_parameter_def :
   (tqtisFinite(x) -> (tqtisFinite(y) -> ((le(neg(fliteral2), fliteral2) ->
   tqtisFinite(res)) -> (tqtisFinite(threshold) -> (le(fliteral3, x) ->
   (lt(fliteral4, y) -> (lt(y, fliteral) -> (le(div(NearestTiesToEven, x,
-  fliteral1), y) -> ((((o = div(NearestTiesToEven, x, y)) and
+  threshold), y) -> ((((o = div(NearestTiesToEven, x, y)) and
   tqtisFinite(div(NearestTiesToEven, x, y))) and ((result = res) and
-  (res1 = o))) -> le(res1, fliteral1)))))))))))
+  (res1 = o))) -> le(res1, threshold)))))))))))

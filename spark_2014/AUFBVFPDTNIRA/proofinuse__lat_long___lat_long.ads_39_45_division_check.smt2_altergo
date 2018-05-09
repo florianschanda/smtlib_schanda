@@ -897,7 +897,11 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
-type tfloat_with_approxB
+logic olt : t, t -> bool
+
+logic olt__function_guard : bool, t, t -> prop
+
+type float_with_approx
 
 logic bool_eq1 : t, t -> bool
 
@@ -905,7 +909,7 @@ axiom bool_eq_def1 :
   (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
 
-logic user_eq : tfloat_with_approxB, tfloat_with_approxB -> bool
+logic user_eq : float_with_approx, float_with_approx -> bool
 
 logic attr__ATTRIBUTE_IMAGE : t -> us_image
 
@@ -913,36 +917,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> t
 
-logic dummy : tfloat_with_approxB
-
-type tfloat_with_approxB__ref = { tfloat_with_approxB__content :
-tfloat_with_approxB
-}
-
-function tfloat_with_approxB__ref___projection(a: tfloat_with_approxB__ref) : tfloat_with_approxB =
-  (a).tfloat_with_approxB__content
-
-logic olt : t, t -> bool
-
-logic olt__function_guard : bool, t, t -> prop
-
-type float_with_approx
-
-logic bool_eq2 : t, t -> bool
-
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
-
-logic user_eq1 : float_with_approx, float_with_approx -> bool
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic dummy1 : float_with_approx
+logic dummy : float_with_approx
 
 type float_with_approx__ref = { float_with_approx__content :
 float_with_approx
@@ -986,6 +961,35 @@ axiom cos__post_axiom :
 
 axiom cos__def_axiom :
   (forall x:t [cos(x)]. (tqtisFinite(x) -> (cos(x) = sin(x))))
+
+type tfloat_with_approxB
+
+logic bool_eq2 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+
+logic user_eq1 : tfloat_with_approxB, tfloat_with_approxB -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic dummy1 : tfloat_with_approxB
+
+type tfloat_with_approxB__ref = { tfloat_with_approxB__content :
+tfloat_with_approxB
+}
+
+function tfloat_with_approxB__ref___projection(a: tfloat_with_approxB__ref) : tfloat_with_approxB =
+  (a).tfloat_with_approxB__content
+
+logic r : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 type latitude
 
@@ -1077,7 +1081,14 @@ axiom coerce_axiom1 :
   (to_rep1(of_rep1(x)) = x)))
 
 type us_split_fields = { rec__lat_long__coordinates__lat : latitude;
-rec__lat_long__coordinates__long : longitude }
+rec__lat_long__coordinates__long : longitude
+}
+
+function us_split_fields_Lat__projection(a: us_split_fields) : latitude =
+  (a).rec__lat_long__coordinates__lat
+
+function us_split_fields_Long__projection(a: us_split_fields) : longitude =
+  (a).rec__lat_long__coordinates__long
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1170,13 +1181,13 @@ logic source : latitude
 
 logic source1 : longitude
 
-logic attr__ATTRIBUTE_ADDRESS : int
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic destination : latitude
 
 logic destination1 : longitude
 
-logic attr__ATTRIBUTE_ADDRESS1 : int
+logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type float1
 
@@ -1204,16 +1215,24 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
-  (tqtreal(fliteral6) = 0.0e-1))
+  (tqtreal(fliteral6) = 6367444.5))
+
+axiom r__def_axiom : (r = fliteral6)
+
+logic fliteral7 : t
+
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 0.0e-1))
 
 axiom sin__post_axiom :
   (forall x:t [sin(x)]. (tqtisFinite(x) -> (((le(neg(fliteral), sin(x)) and
-  le(sin(x), fliteral)) and (eq(x, fliteral6) -> eq(sin(x), fliteral6))) and
+  le(sin(x), fliteral)) and (eq(x, fliteral7) -> eq(sin(x), fliteral7))) and
   tqtisFinite(sin(x)))))
 
  (* File "lat_long.ads", line 6, characters 0-0 *)
 goal WP_parameter_def :
-  (forall o:t. (((o = cos(to_rep(source))) and (tqtisFinite(o) and
+  (forall o:t. (tqtisFinite(r) -> ((fliteral6 = r) ->
+  (((o = cos(to_rep(source))) and (tqtisFinite(o) and
   ((o = sin(to_rep(source))) and ((le(neg(fliteral2), to_rep(source)) and
   le(to_rep(source), fliteral2)) -> le(fliteral3, o))))) ->
-  (not is_zero(o))))
+  (not is_zero(o))))))

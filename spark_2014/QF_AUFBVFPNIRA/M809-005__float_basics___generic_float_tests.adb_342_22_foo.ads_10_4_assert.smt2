@@ -58,9 +58,13 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_160)))
 
-(declare-const x Float32)
+(declare-const biggest_representable_int Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const x Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -70,7 +74,18 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
+;; biggest_representable_int__def_axiom
+  (assert
+  (= biggest_representable_int (fp #b0 #b10010111 #b00000000000000000000000)))
+
 (declare-const o Float32)
+
+;; H
+  (assert (fp.isFinite32 biggest_representable_int))
+
+;; H
+  (assert
+  (= (fp #b0 #b10010111 #b00000000000000000000000) biggest_representable_int))
 
 ;; H
   (assert (fp.isFinite32 x))
@@ -78,7 +93,7 @@
 ;; H
   (assert
   (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b10010111 #b00000000000000000000000))))
+  (fp.leq x biggest_representable_int)))
 
 (assert
 ;; WP_parameter_def

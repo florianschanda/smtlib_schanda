@@ -899,6 +899,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -954,6 +960,12 @@ function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
 type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
 
@@ -1068,7 +1080,7 @@ axiom bool_eq_rev :
   (temp___idx_91 <= a__last)) ->
   (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
-logic to_rep1 : integer -> int
+function to_rep1(x: integer) : int = integerqtint(x)
 
 logic of_rep1 : int -> integer
 
@@ -1165,6 +1177,12 @@ function string__ref___projection(a: string__ref) : us_t =
 
 type natural
 
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
 predicate in_range4(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq7 : int, int -> bool
@@ -1211,63 +1229,6 @@ type float__ref = { float__content : float1
 }
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
-
-type priority
-
-predicate in_range5(x: int) = ((0 <= x) and (x <= 97))
-
-logic bool_eq9 : int, int -> bool
-
-axiom bool_eq_def7 :
-  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE5 : us_image -> int
-
-logic user_eq6 : priority, priority -> bool
-
-logic dummy7 : priority
-
-type priority__ref = { priority__content : priority
-}
-
-function priority__ref___projection(a: priority__ref) : priority =
-  (a).priority__content
-
-type field
-
-predicate in_range6(x: int) = ((0 <= x) and (x <= 255))
-
-logic bool_eq10 : int, int -> bool
-
-axiom bool_eq_def8 :
-  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE6 : us_image -> int
-
-logic user_eq7 : field, field -> bool
-
-logic dummy8 : field
-
-type field__ref = { field__content : field
-}
-
-function field__ref___projection(a: field__ref) : field = (a).field__content
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type us_split_fields = { rec__support__protT__summary : natural
 }
@@ -1322,14 +1283,18 @@ axiom support__protT__summary__last__bit_axiom :
 axiom support__protT__summary__position_axiom :
   (0 <= support__protT__summary__position)
 
-logic user_eq8 : us_rep, us_rep -> bool
+logic user_eq6 : us_rep, us_rep -> bool
 
 type protT__ref = { protT__content : us_rep
 }
 
 function protT__ref___projection(a: protT__ref) : us_rep = (a).protT__content
 
-logic to_rep2 : natural -> int
+logic get : us_rep -> int
+
+logic get__function_guard : int, us_rep -> prop
+
+function to_rep2(x: natural) : int = naturalqtint(x)
 
 logic of_rep2 : int -> natural
 
@@ -1342,16 +1307,79 @@ axiom coerce_axiom2 :
   (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
   (to_rep2(of_rep2(x)) = x)))
 
-logic attr__ATTRIBUTE_ADDRESS3 : int
-
-logic get : us_rep -> int
-
-logic get__function_guard : int, us_rep -> prop
-
 axiom get__post_axiom :
   (forall self__:natural [get({ us_split_fields1 = {
   rec__support__protT__summary = self__ } })]. in_range4(get({
   us_split_fields1 = { rec__support__protT__summary = self__ } })))
+
+type priority
+
+logic priorityqtint : priority -> int
+
+axiom priorityqtaxiom :
+  (forall i:priority. ((0 <= priorityqtint(i)) and (priorityqtint(i) <= 97)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 97))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq7 : priority, priority -> bool
+
+logic dummy7 : priority
+
+type priority__ref = { priority__content : priority
+}
+
+function priority__ref___projection(a: priority__ref) : priority =
+  (a).priority__content
+
+type field
+
+logic fieldqtint : field -> int
+
+axiom fieldqtaxiom :
+  (forall i:field. ((0 <= fieldqtint(i)) and (fieldqtint(i) <= 255)))
+
+predicate in_range6(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq10 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq10(x, y)]. (((x = y) -> (bool_eq10(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq10(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq8 : field, field -> bool
+
+logic dummy8 : field
+
+type field__ref = { field__content : field
+}
+
+function field__ref___projection(a: field__ref) : field = (a).field__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic g : int
 
@@ -1361,28 +1389,28 @@ logic f : t
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic temp___String_Literal_598 : unit -> (int,character) farray
+logic temp___String_Literal_591 : unit -> (int,character) farray
 
-axiom temp___String_Literal_598__def_axiom :
-  (((((((((((((((((((to_rep((temp___String_Literal_598(void)[1])) = 65) and
-  (to_rep((temp___String_Literal_598(void)[2])) = 118)) and
-  (to_rep((temp___String_Literal_598(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_598(void)[4])) = 114)) and
-  (to_rep((temp___String_Literal_598(void)[5])) = 97)) and
-  (to_rep((temp___String_Literal_598(void)[6])) = 103)) and
-  (to_rep((temp___String_Literal_598(void)[7])) = 101)) and
-  (to_rep((temp___String_Literal_598(void)[8])) = 32)) and
-  (to_rep((temp___String_Literal_598(void)[9])) = 110)) and
-  (to_rep((temp___String_Literal_598(void)[10])) = 117)) and
-  (to_rep((temp___String_Literal_598(void)[11])) = 109)) and
-  (to_rep((temp___String_Literal_598(void)[12])) = 98)) and
-  (to_rep((temp___String_Literal_598(void)[13])) = 101)) and
-  (to_rep((temp___String_Literal_598(void)[14])) = 114)) and
-  (to_rep((temp___String_Literal_598(void)[15])) = 32)) and
-  (to_rep((temp___String_Literal_598(void)[16])) = 105)) and
-  (to_rep((temp___String_Literal_598(void)[17])) = 115)) and
-  (to_rep((temp___String_Literal_598(void)[18])) = 58)) and
-  (to_rep((temp___String_Literal_598(void)[19])) = 32))
+axiom temp___String_Literal_591__def_axiom :
+  (((((((((((((((((((to_rep((temp___String_Literal_591(void)[1])) = 65) and
+  (to_rep((temp___String_Literal_591(void)[2])) = 118)) and
+  (to_rep((temp___String_Literal_591(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_591(void)[4])) = 114)) and
+  (to_rep((temp___String_Literal_591(void)[5])) = 97)) and
+  (to_rep((temp___String_Literal_591(void)[6])) = 103)) and
+  (to_rep((temp___String_Literal_591(void)[7])) = 101)) and
+  (to_rep((temp___String_Literal_591(void)[8])) = 32)) and
+  (to_rep((temp___String_Literal_591(void)[9])) = 110)) and
+  (to_rep((temp___String_Literal_591(void)[10])) = 117)) and
+  (to_rep((temp___String_Literal_591(void)[11])) = 109)) and
+  (to_rep((temp___String_Literal_591(void)[12])) = 98)) and
+  (to_rep((temp___String_Literal_591(void)[13])) = 101)) and
+  (to_rep((temp___String_Literal_591(void)[14])) = 114)) and
+  (to_rep((temp___String_Literal_591(void)[15])) = 32)) and
+  (to_rep((temp___String_Literal_591(void)[16])) = 105)) and
+  (to_rep((temp___String_Literal_591(void)[17])) = 115)) and
+  (to_rep((temp___String_Literal_591(void)[18])) = 58)) and
+  (to_rep((temp___String_Literal_591(void)[19])) = 32))
 
 logic fliteral1 : t
 

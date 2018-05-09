@@ -67,7 +67,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 23333, characters 5-8
   (not
   (or
   (not (fp.eq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b00000000 #b00000000000000000000000)))

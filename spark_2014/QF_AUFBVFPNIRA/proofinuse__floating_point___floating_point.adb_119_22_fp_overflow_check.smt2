@@ -97,7 +97,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10177, characters 5-8
   (not
   (fp.isFinite32 (fp.add RNE state (fp #b0 #b10000010 #b01000000000000000000000)))))
 (check-sat)

@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1060,6 +1060,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -1078,24 +1085,6 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
-
-(declare-fun of_rep (Int) integer)
-
-;; inversion_axiom
-  (assert
-  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x integer)) (! (in_range2 (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
-
 (declare-sort float 0)
 
 (define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
@@ -1113,24 +1102,42 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-fun to_rep1 (float) t)
+(declare-fun to_rep (float) t)
 
-(declare-fun of_rep1 (t) float)
+(declare-fun of_rep (t) float)
 
 ;; inversion_axiom
   (assert
-  (forall ((x float))
-  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+  (forall ((x float)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x float)) (! (tqtisFinite (to_rep1 x)) :pattern ((to_rep1 x)) )))
+  (forall ((x float)) (! (tqtisFinite (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x t))
-  (! (=> (tqtisFinite x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
-                                                                (of_rep1 x))) )))
+  (! (=> (tqtisFinite x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                              (of_rep x))) )))
+
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
+
+(declare-fun of_rep1 (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer))
+  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range2 (to_rep1 x)) :pattern ((to_rep1 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range2 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                              (of_rep1 x))) )))
 
 (declare-datatypes ()
 ((us_split_fields
@@ -1141,6 +1148,9 @@
 
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__classwide__t__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__classwide__t__y a))
 
 (define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))
@@ -1163,12 +1173,12 @@
                         (and
                         (= (rec__classwide__t__z (us_split_fields1 a))
                         (rec__classwide__t__z (us_split_fields1 b)))
-                        (= (to_rep
-                           (rec__classwide__t__x (us_split_fields1 a)))
-                        (to_rep (rec__classwide__t__x (us_split_fields1 b)))))
                         (= (to_rep1
+                           (rec__classwide__t__x (us_split_fields1 a)))
+                        (to_rep1 (rec__classwide__t__x (us_split_fields1 b)))))
+                        (= (to_rep
                            (rec__classwide__t__y (us_split_fields1 a)))
-                        (to_rep1 (rec__classwide__t__y (us_split_fields1 b)))))
+                        (to_rep (rec__classwide__t__y (us_split_fields1 b)))))
                    true false))
 
 (declare-fun us_dispatch_eq (us_rep us_rep) Bool)
@@ -1247,10 +1257,6 @@
 (declare-datatypes () ((u1__ref (mk_u1__ref (u1__content us_rep)))))
 (define-fun u1__ref___projection ((a u1__ref)) us_rep (u1__content a))
 
-(define-fun default_initial_assumption ((temp___expr_192 us_rep)
-  (temp___skip_top_level_193 Bool)) Bool (= (attr__tag temp___expr_192)
-  us_tag))
-
 (declare-fun is_zero__2 (us_rep) Bool)
 
 (declare-fun is_zero__2__function_guard (Bool us_rep) Bool)
@@ -1258,6 +1264,10 @@
 (declare-fun is_zero__21 (Int us_rep) Bool)
 
 (declare-fun is_zero__2__function_guard1 (Bool Int us_rep) Bool)
+
+(define-fun default_initial_assumption ((temp___expr_192 us_rep)
+  (temp___skip_top_level_193 Bool)) Bool (= (attr__tag temp___expr_192)
+  us_tag))
 
 ;; is_zero__2__post_axiom
   (assert true)
@@ -1282,8 +1292,8 @@
   (! (= (= (is_zero__2 v) true)
      (and
      (and (not (= (rec__classwide__t__z (us_split_fields1 v)) true))
-     (= (to_rep (rec__classwide__t__x (us_split_fields1 v))) 0)) (eq
-     (to_rep1 (rec__classwide__t__y (us_split_fields1 v))) fliteral1))) :pattern (
+     (= (to_rep1 (rec__classwide__t__x (us_split_fields1 v))) 0)) (eq
+     (to_rep (rec__classwide__t__y (us_split_fields1 v))) fliteral1))) :pattern (
   (is_zero__2 v)) )))
 
 (declare-const v__attr__tag Int)
@@ -1311,6 +1321,11 @@
                                     (neg fliteral2) fliteral2)) (tqtisFinite
                                     temp___expr_60)))
 
+(declare-const rliteral integer)
+
+;; rliteral_axiom
+  (assert (= (integerqtint rliteral) 0))
+
 (declare-const v__split_fields Bool)
 
 (declare-const v__split_fields1 integer)
@@ -1319,7 +1334,7 @@
 
 (declare-const v__split_fields3 us_private)
 
-(declare-const o integer)
+(declare-const o float)
 
 (declare-const o1 Bool)
 
@@ -1328,26 +1343,6 @@
 (declare-const o3 float)
 
 (declare-const o4 us_private)
-
-(declare-const temp___235 Bool)
-
-(declare-const temp___2351 integer)
-
-(declare-const temp___2352 float)
-
-(declare-const temp___2353 us_private)
-
-(declare-const temp___2354 Int)
-
-(declare-const o5 float)
-
-(declare-const o6 Bool)
-
-(declare-const o7 integer)
-
-(declare-const o8 float)
-
-(declare-const o9 us_private)
 
 (declare-const temp___237 Bool)
 
@@ -1448,36 +1443,6 @@
   (assert (= v__split_fields3 v__split_fields7))
 
 ;; H
-  (assert (= (to_rep o) 0))
-
-;; H
-  (assert (= v__split_fields4 o1))
-
-;; H
-  (assert (= o o2))
-
-;; H
-  (assert (= v__split_fields6 o3))
-
-;; H
-  (assert (= v__split_fields7 o4))
-
-;; H
-  (assert (= temp___235 o1))
-
-;; H
-  (assert (= temp___2351 o2))
-
-;; H
-  (assert (= temp___2352 o3))
-
-;; H
-  (assert (= temp___2353 o4))
-
-;; H
-  (assert (= v__attr__tag temp___2354))
-
-;; H
   (assert (= result4 v__split_fields4))
 
 ;; H
@@ -1490,43 +1455,43 @@
   (assert (= result7 v__split_fields7))
 
 ;; H
-  (assert (= temp___235 v__split_fields8))
+  (assert (= v__split_fields4 v__split_fields8))
 
 ;; H
-  (assert (= temp___2351 v__split_fields9))
+  (assert (= rliteral v__split_fields9))
 
 ;; H
-  (assert (= temp___2352 v__split_fields10))
+  (assert (= v__split_fields6 v__split_fields10))
 
 ;; H
-  (assert (= temp___2353 v__split_fields11))
+  (assert (= v__split_fields7 v__split_fields11))
 
 ;; H
-  (assert (= (to_rep1 o5) fliteral1))
+  (assert (= (to_rep o) fliteral1))
 
 ;; H
-  (assert (= v__split_fields8 o6))
+  (assert (= v__split_fields8 o1))
 
 ;; H
-  (assert (= v__split_fields9 o7))
+  (assert (= v__split_fields9 o2))
 
 ;; H
-  (assert (= o5 o8))
+  (assert (= o o3))
 
 ;; H
-  (assert (= v__split_fields11 o9))
+  (assert (= v__split_fields11 o4))
 
 ;; H
-  (assert (= temp___237 o6))
+  (assert (= temp___237 o1))
 
 ;; H
-  (assert (= temp___2371 o7))
+  (assert (= temp___2371 o2))
 
 ;; H
-  (assert (= temp___2372 o8))
+  (assert (= temp___2372 o3))
 
 ;; H
-  (assert (= temp___2373 o9))
+  (assert (= temp___2373 o4))
 
 ;; H
   (assert (= v__attr__tag temp___2374))

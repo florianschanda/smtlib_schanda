@@ -981,5 +981,8 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
  (* File "generic_interval_tests.adb", line 26, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> ((le(fliteral1, x) and le(x,
-  fliteral)) -> tqtisFinite(mul(RNE, x, x))))
+goal WP_parameter_def :
+  (forall o:t. forall o1:bool. (tqtisFinite(x) -> ((le(fliteral1, x) and
+  le(x, fliteral)) -> ((((o = mul(RNE, x, x)) and tqtisFinite(mul(RNE, x,
+  x))) and ((le(o, fliteral) and (o1 = true)) or ((not le(o, fliteral)) and
+  (o1 = false)))) -> tqtisFinite(mul(RNE, x, x))))))

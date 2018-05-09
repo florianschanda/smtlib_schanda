@@ -1133,7 +1133,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O401-034__float_pred/gnatprove/safety_pack.mlw", line 30430, characters 5-8 *)
 goal WP_parameter_def :
   (forall res:t. forall result:t. forall res1:t. (tqtisFinite(value) ->
   (in_range2(threshold) -> ((({ t__content = result } = { t__content = res

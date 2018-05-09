@@ -146,6 +146,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "testfloat.adb", line 1, characters 0-0
-  (not (fp.leq x z)))
+  (not (fp.leq z y)))
 (check-sat)
 (exit)

@@ -106,7 +106,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "floatround.adb", line 5, characters 0-0
-  (not
-  (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) temp___216)))
+  (not (fp.leq temp___216 (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

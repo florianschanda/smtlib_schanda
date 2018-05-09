@@ -795,12 +795,6 @@
 
 (declare-const o Bool)
 
-(declare-const temp___233 Bool)
-
-(declare-const temp___2331 Int)
-
-(declare-const o1 Bool)
-
 (declare-const temp___235 Bool)
 
 (declare-const temp___2351 Int)
@@ -818,6 +812,8 @@
 (declare-const v__split_fields3 Bool)
 
 (declare-const v__split_fields4 Bool)
+
+(declare-const v__split_fields5 Bool)
 
 ;; H
   (assert (= (distinct 0 0) v__split_fields1))

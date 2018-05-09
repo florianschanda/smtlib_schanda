@@ -1041,6 +1041,12 @@ type t__ref = { t__content : t
 
 type natural
 
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -1118,6 +1124,18 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
+logic ident : int -> int
+
+logic ident__function_guard : int, int -> prop
+
+axiom ident__post_axiom :
+  (forall n:int [ident(n)]. ((in_range1(n) and ((1 <= n) and (n <= 10))) ->
+  in_range1(ident(n))))
+
+logic ident__2 : int -> int
+
+logic ident__2__function_guard : int, int -> prop
+
 type color
 
 predicate in_range2(x: int) = ((0 <= x) and (x <= 2))
@@ -1142,6 +1160,10 @@ type color__ref = { color__content : color
 }
 
 function color__ref___projection(a: color__ref) : color = (a).color__content
+
+axiom ident__2__post_axiom :
+  (forall c:int [ident__2(c)]. ((in_range2(c) and ((0 <= c) and (c <= 1))) ->
+  in_range2(ident__2(c))))
 
 type volt
 
@@ -1253,20 +1275,6 @@ axiom mod_def :
   (forall x:int. forall y:int [mod(x, y)]. (((0 <  y) -> (mod(x,
   y) = (x % y))) and ((not (0 <  y)) -> (mod(x, y) = ((x % y) + y)))))
 
-logic dummy3 : volt
-
-logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> int
-
-logic to_fixed : volt -> int
-
-logic of_fixed : int -> volt
-
-logic user_eq3 : volt, volt -> bool
-
 predicate pos_div_relation(res: int, num: int, den: int) = (((num = 0) ->
   (res = 0)) and ((not (num = 0)) -> (((num = (comp_div(num,den) * den)) ->
   (res = comp_div(num,den))) and ((not (num = (comp_div(num,den) * den))) ->
@@ -1280,28 +1288,19 @@ predicate pos_div_relation_rna(res: int, num: int, den: int) = (((num = 0) ->
   ((not ((num - (comp_div(num,den) * den)) <  (((comp_div(num,den) + 1) * den) - num))) ->
   (res = (comp_div(num,den) + 1))))))))
 
-logic fxp_mult : int, int -> int
+logic dummy3 : volt
 
-axiom fxp_mult_def :
-  (forall x:int.
-  (forall y:int [fxp_mult(x, y)]. ((((x = 0) or (y = 0)) -> (fxp_mult(x,
-  y) = 0)) and ((not ((x = 0) or (y = 0))) -> (((((0 <  x) and (0 <  y)) or
-  ((x <  0) and (y <  0))) -> pos_div_relation(fxp_mult(x, y), (x * y),
-  8)) and ((not (((0 <  x) and (0 <  y)) or ((x <  0) and (y <  0)))) ->
-  pos_div_relation((-fxp_mult(x, y)), (-(x * y)), 8)))))))
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
 
-logic fxp_div : int, int -> int
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
-axiom fxp_div_def :
-  (forall x:int.
-  (forall y:int [fxp_div(x, y)]. (((x = 0) -> (fxp_div(x, y) = 0)) and
-  ((not (x = 0)) -> ((((0 <  x) and (0 <  y)) -> pos_div_relation(fxp_div(x,
-  y), (x * 8), y)) and ((not ((0 <  x) and (0 <  y))) -> ((((x <  0) and
-  (y <  0)) -> pos_div_relation(fxp_div(x, y), ((-x) * 8), (-y))) and
-  ((not ((x <  0) and (y <  0))) -> ((((x <  0) and (0 <  y)) ->
-  pos_div_relation((-fxp_div(x, y)), ((-x) * 8), y)) and ((not ((x <  0) and
-  (0 <  y))) -> (((0 <  x) and (y <  0)) -> pos_div_relation((-fxp_div(x,
-  y)), (x * 8), (-y)))))))))))))
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic to_fixed : volt -> int
+
+logic of_fixed : int -> volt
+
+logic user_eq3 : volt, volt -> bool
 
 logic fxp_div_int : int, int -> int
 
@@ -1334,10 +1333,17 @@ logic to_int1 : int -> int
 
 axiom to_int_def :
   (forall x:int [to_int1(x)]. (((x = 0) -> (to_int1(x) = 0)) and
-  ((not (x = 0)) -> (((0 <  x) -> pos_div_relation(to_int1(x), x, 8)) and
-  ((not (0 <  x)) -> pos_div_relation((-to_int1(x)), (-x), 8))))))
+  ((not (x = 0)) -> (((0 <  x) -> pos_div_relation(to_int1(x), (x * 1),
+  8)) and ((not (0 <  x)) -> pos_div_relation((-to_int1(x)), ((-x) * 1),
+  8))))))
 
-logic of_real : real -> int
+logic of_int1 : int -> int
+
+axiom of_int_def :
+  (forall x:int [of_int1(x)]. (((x = 0) -> (of_int1(x) = 0)) and
+  ((not (x = 0)) -> (((0 <  x) -> pos_div_relation(of_int1(x), (x * 8),
+  1)) and ((not (0 <  x)) -> pos_div_relation((-of_int1(x)), ((-x) * 8),
+  1))))))
 
 axiom inversion_axiom :
   (forall x:volt [to_fixed(x)]. (of_fixed(to_fixed(x)) = x))
@@ -1352,6 +1358,12 @@ type volt__ref = { volt__content : volt
 }
 
 function volt__ref___projection(a: volt__ref) : volt = (a).volt__content
+
+logic ident__3 : volt -> volt
+
+logic ident__3__function_guard : volt, volt -> prop
+
+axiom ident__3__post_axiom : true
 
 type money
 
@@ -1372,57 +1384,18 @@ logic of_fixed1 : int -> money
 
 logic user_eq4 : money, money -> bool
 
-predicate pos_div_relation1(res: int, num: int, den: int) = (((num = 0) ->
-  (res = 0)) and ((not (num = 0)) -> (((num = (comp_div(num,den) * den)) ->
-  (res = comp_div(num,den))) and ((not (num = (comp_div(num,den) * den))) ->
-  ((comp_div(num,den) <= res) and (res <= (comp_div(num,den) + 1)))))))
-
-predicate pos_div_relation_rna1(res: int, num: int, den: int) =
-  (((num = 0) -> (res = 0)) and ((not (num = 0)) ->
-  (((num = (comp_div(num,den) * den)) -> (res = comp_div(num,den))) and
-  ((not (num = (comp_div(num,den) * den))) ->
-  ((((num - (comp_div(num,den) * den)) <  (((comp_div(num,den) + 1) * den) - num)) ->
-  (res = comp_div(num,den))) and
-  ((not ((num - (comp_div(num,den) * den)) <  (((comp_div(num,den) + 1) * den) - num))) ->
-  (res = (comp_div(num,den) + 1))))))))
-
-logic fxp_mult1 : int, int -> int
-
-axiom fxp_mult_def1 :
-  (forall x:int.
-  (forall y:int [fxp_mult1(x, y)]. ((((x = 0) or (y = 0)) -> (fxp_mult1(x,
-  y) = 0)) and ((not ((x = 0) or (y = 0))) -> (((((0 <  x) and (0 <  y)) or
-  ((x <  0) and (y <  0))) -> pos_div_relation1(fxp_mult1(x, y), (x * y),
-  100)) and ((not (((0 <  x) and (0 <  y)) or ((x <  0) and (y <  0)))) ->
-  pos_div_relation1((-fxp_mult1(x, y)), (-(x * y)), 100)))))))
-
-logic fxp_div1 : int, int -> int
-
-axiom fxp_div_def1 :
-  (forall x:int.
-  (forall y:int [fxp_div1(x, y)]. (((x = 0) -> (fxp_div1(x, y) = 0)) and
-  ((not (x = 0)) -> ((((0 <  x) and (0 <  y)) ->
-  pos_div_relation1(fxp_div1(x, y), (x * 100), y)) and ((not ((0 <  x) and
-  (0 <  y))) -> ((((x <  0) and (y <  0)) -> pos_div_relation1(fxp_div1(x,
-  y), ((-x) * 100), (-y))) and ((not ((x <  0) and (y <  0))) ->
-  ((((x <  0) and (0 <  y)) -> pos_div_relation1((-fxp_div1(x, y)),
-  ((-x) * 100), y)) and ((not ((x <  0) and (0 <  y))) -> (((0 <  x) and
-  (y <  0)) -> pos_div_relation1((-fxp_div1(x, y)), (x * 100),
-  (-y)))))))))))))
-
 logic fxp_div_int1 : int, int -> int
 
 axiom fxp_div_int_def1 :
   (forall x:int.
   (forall y:int [fxp_div_int1(x, y)]. (((x = 0) -> (fxp_div_int1(x,
   y) = 0)) and ((not (x = 0)) -> ((((0 <  x) and (0 <  y)) ->
-  pos_div_relation1(fxp_div_int1(x, y), x, y)) and ((not ((0 <  x) and
-  (0 <  y))) -> ((((x <  0) and (y <  0)) ->
-  pos_div_relation1(fxp_div_int1(x, y), (-x), (-y))) and ((not ((x <  0) and
-  (y <  0))) -> ((((x <  0) and (0 <  y)) ->
-  pos_div_relation1((-fxp_div_int1(x, y)), (-x), y)) and ((not ((x <  0) and
-  (0 <  y))) -> (((0 <  x) and (y <  0)) ->
-  pos_div_relation1((-fxp_div_int1(x, y)), x, (-y)))))))))))))
+  pos_div_relation(fxp_div_int1(x, y), x, y)) and ((not ((0 <  x) and
+  (0 <  y))) -> ((((x <  0) and (y <  0)) -> pos_div_relation(fxp_div_int1(x,
+  y), (-x), (-y))) and ((not ((x <  0) and (y <  0))) -> ((((x <  0) and
+  (0 <  y)) -> pos_div_relation((-fxp_div_int1(x, y)), (-x), y)) and
+  ((not ((x <  0) and (0 <  y))) -> (((0 <  x) and (y <  0)) ->
+  pos_div_relation((-fxp_div_int1(x, y)), x, (-y)))))))))))))
 
 logic fxp_div_result_int1 : int, int -> int
 
@@ -1430,22 +1403,29 @@ axiom fxp_div_result_int_def1 :
   (forall x:int.
   (forall y:int [fxp_div_result_int1(x, y)]. (((x = 0) ->
   (fxp_div_result_int1(x, y) = 0)) and ((not (x = 0)) -> ((((0 <  x) and
-  (0 <  y)) -> pos_div_relation_rna1(fxp_div_result_int1(x, y), x, y)) and
+  (0 <  y)) -> pos_div_relation_rna(fxp_div_result_int1(x, y), x, y)) and
   ((not ((0 <  x) and (0 <  y))) -> ((((x <  0) and (y <  0)) ->
-  pos_div_relation_rna1(fxp_div_result_int1(x, y), (-x), (-y))) and
+  pos_div_relation_rna(fxp_div_result_int1(x, y), (-x), (-y))) and
   ((not ((x <  0) and (y <  0))) -> ((((x <  0) and (0 <  y)) ->
-  pos_div_relation_rna1((-fxp_div_result_int1(x, y)), (-x), y)) and
+  pos_div_relation_rna((-fxp_div_result_int1(x, y)), (-x), y)) and
   ((not ((x <  0) and (0 <  y))) -> (((0 <  x) and (y <  0)) ->
-  pos_div_relation_rna1((-fxp_div_result_int1(x, y)), x, (-y)))))))))))))
+  pos_div_relation_rna((-fxp_div_result_int1(x, y)), x, (-y)))))))))))))
 
 logic to_int2 : int -> int
 
 axiom to_int_def1 :
   (forall x:int [to_int2(x)]. (((x = 0) -> (to_int2(x) = 0)) and
-  ((not (x = 0)) -> (((0 <  x) -> pos_div_relation1(to_int2(x), x, 100)) and
-  ((not (0 <  x)) -> pos_div_relation1((-to_int2(x)), (-x), 100))))))
+  ((not (x = 0)) -> (((0 <  x) -> pos_div_relation(to_int2(x), (x * 1),
+  100)) and ((not (0 <  x)) -> pos_div_relation((-to_int2(x)), ((-x) * 1),
+  100))))))
 
-logic of_real1 : real -> int
+logic of_int2 : int -> int
+
+axiom of_int_def1 :
+  (forall x:int [of_int2(x)]. (((x = 0) -> (of_int2(x) = 0)) and
+  ((not (x = 0)) -> (((0 <  x) -> pos_div_relation(of_int2(x), (x * 100),
+  1)) and ((not (0 <  x)) -> pos_div_relation((-of_int2(x)), ((-x) * 100),
+  1))))))
 
 axiom inversion_axiom1 :
   (forall x:money [to_fixed1(x)]. (of_fixed1(to_fixed1(x)) = x))
@@ -1460,28 +1440,6 @@ type money__ref = { money__content : money
 }
 
 function money__ref___projection(a: money__ref) : money = (a).money__content
-
-logic ident : int -> int
-
-logic ident__function_guard : int, int -> prop
-
-axiom ident__post_axiom :
-  (forall n:int [ident(n)]. ((in_range1(n) and ((1 <= n) and (n <= 10))) ->
-  in_range1(ident(n))))
-
-logic ident__2 : int -> int
-
-logic ident__2__function_guard : int, int -> prop
-
-axiom ident__2__post_axiom :
-  (forall c:int [ident__2(c)]. ((in_range2(c) and ((0 <= c) and (c <= 1))) ->
-  in_range2(ident__2(c))))
-
-logic ident__3 : volt -> volt
-
-logic ident__3__function_guard : volt, volt -> prop
-
-axiom ident__3__post_axiom : true
 
 logic ident__4 : money -> money
 
@@ -1528,4 +1486,4 @@ goal WP_parameter_def :
   in_range2(o1)) and ((result1 = c) and (c1 = o1))) -> (in_range2(c1) ->
   ((((to_fixed(o2) = 5) and (o3 = ident__3(o2))) and ((result2 = v) and
   (v1 = o3))) -> ((((to_fixed1(o4) = 120) and (o5 = ident__4(o4))) and
-  ((result3 = m) and (m1 = o5))) -> le(neg(fliteral1), neg(fliteral2)))))))))
+  ((result3 = m) and (m1 = o5))) -> le(neg(fliteral2), fliteral1))))))))

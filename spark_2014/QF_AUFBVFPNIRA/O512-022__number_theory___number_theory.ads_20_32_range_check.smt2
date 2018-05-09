@@ -53,27 +53,27 @@
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant ((temp___expr_208 Int)
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range2
+                                    temp___expr_39)))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
   (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
   (temp___do_toplevel_206 Bool)
   (temp___do_typ_inv_207 Bool)) Bool (=>
                                      (or (= temp___is_init_204 true)
-                                     (<= 0 46)) (in_range2 temp___expr_208)))
+                                     (<= 0 46)) (in_range3 temp___expr_208)))
 
 (declare-const n Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
-  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
-  (temp___do_typ_inv_38 Bool)) Bool (=>
-                                    (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range3
-                                    temp___expr_39)))
 
 (define-fun dynamic_invariant2 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -123,7 +123,7 @@
 (declare-const number_theory__fib__result5 Int)
 
 ;; H
-  (assert (in_range2 n))
+  (assert (in_range3 n))
 
 ;; H
   (assert (not (= n 0)))
@@ -132,7 +132,7 @@
   (assert (not (= n 1)))
 
 ;; H
-  (assert (and (= o1 (- n 2)) (in_range2 (- n 2))))
+  (assert (and (= o1 (- n 2)) (in_range3 (- n 2))))
 
 (declare-const abstr Float32)
 
@@ -145,13 +145,13 @@
 ;; H
   (assert
   (and (= o2 abstr3)
-  (and (in_range3 o2)
+  (and (in_range2 o2)
   (and (= o2 (ite (or (= o1 0) (= o1 1)) o1 (+ abstr1 abstr2)))
   (fp.lt ((_ to_fp 8 24) RNE (to_real o2)) (fp.add RNE (fp.div RNE abstr (fp #b0 #b10000000 #b00011110001101010100000)) (fp #b0 #b01111111 #b00000000000000000000000)))))))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (in_range2 (- n 1))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 2765, characters 5-8
+  (not (in_range3 (- n 1))))
 (check-sat)
 (exit)

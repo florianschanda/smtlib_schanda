@@ -1077,6 +1077,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -1132,6 +1138,12 @@ function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
 type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
 
 predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
 
@@ -1197,7 +1209,7 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/KB25-022__exp/gnatprove/gp_exp.mlw", line 2103, characters 5-8 *)
 goal WP_parameter_def :
   (forall a:int. forall b:t. forall o:int. forall o1:int. forall o2:int.
   forall o3:int. forall result:int. forall a1:int. forall result1:int.

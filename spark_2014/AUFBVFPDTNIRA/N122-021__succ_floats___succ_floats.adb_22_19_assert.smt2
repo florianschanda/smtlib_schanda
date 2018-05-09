@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -167,19 +163,13 @@
 
 (declare-const x Float32)
 
-(declare-const result Float32)
-
 (declare-const x1 Float32)
-
-(declare-const result1 Float32)
 
 (declare-const x2 Float32)
 
-(declare-const result2 Float32)
-
 (declare-const x3 Float32)
 
-(declare-const result3 Float32)
+(declare-const result Float32)
 
 (declare-const x4 Float32)
 
@@ -188,9 +178,6 @@
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
   (fp.isFinite32 x)))
-
-;; H
-  (assert (= result x))
 
 ;; H
   (assert (= x1 (fp #b0 #b00000000 #b00000000000000000000000)))
@@ -214,9 +201,6 @@
                                                                 x1)))
 
 ;; H
-  (assert (= result1 x1))
-
-;; H
   (assert (= x2 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
@@ -238,13 +222,10 @@
                                                        x2)))
 
 ;; H
-  (assert (= result2 x2))
-
-;; H
   (assert (= x3 (fp #b0 #b11111110 #b11111111111111111111111)))
 
 ;; H
-  (assert (=> (= a true) (= result3 x3)))
+  (assert (=> (= a true) (= result x3)))
 
 ;; H
   (assert (=> (= a true) (= x4 (next_representable x3))))

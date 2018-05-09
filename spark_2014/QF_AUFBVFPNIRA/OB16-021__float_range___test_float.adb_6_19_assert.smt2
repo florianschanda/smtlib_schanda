@@ -89,7 +89,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (<= (- 1) y)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/OB16-021__float_range/gnatprove/test_float.mlw", line 2058, characters 5-8
+  (not (<= y 1)))
 (check-sat)
 (exit)

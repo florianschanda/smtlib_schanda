@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -160,8 +156,6 @@
 (declare-const result1 Float64)
 
 (declare-const epsifzero_out12 Float64)
-
-(declare-const result2 Float64)
 
 (declare-const diff_out11 Float64)
 
@@ -245,9 +239,10 @@
   (= epsifzero_out11 epsifzero_out12)))
 
 ;; H
-  (assert
-  (and (= o (fp.div RNE wheel_speed epsifzero_out11))
-  (fp.isFinite64 (fp.div RNE wheel_speed epsifzero_out11))))
+  (assert (= o (fp.div RNE wheel_speed epsifzero_out11)))
+
+;; H
+  (assert (fp.isFinite64 (fp.div RNE wheel_speed epsifzero_out11)))
 
 ;; H
   (assert
@@ -255,13 +250,13 @@
   o)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite64 o1)))
-
-;; H
-  (assert (= result2 diff_out1))
+  (assert (= o2 o1))
 
 ;; H
   (assert (= diff_out11 o2))
+
+;; H
+  (assert (fp.isFinite64 o1))
 
 (assert
 ;; WP_parameter_def

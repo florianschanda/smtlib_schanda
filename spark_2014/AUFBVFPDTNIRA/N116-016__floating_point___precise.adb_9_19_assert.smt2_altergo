@@ -982,7 +982,7 @@ axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
-  (tqtreal(fliteral6) = 9.59998989105224609375))
+  (tqtreal(fliteral6) = 9.60000991821289062500))
 
  (* File "precise.adb", line 1, characters 0-0 *)
 goal WP_parameter_def :
@@ -995,4 +995,4 @@ goal WP_parameter_def :
   y1)) and tqtisFinite(add(RNE, x1, y1))) and ((result2 = z) and
   (z1 = o))) -> ((le(fliteral4, z1) and le(z1, fliteral5)) ->
   ((((o1 = sub(RNE, x1, y1)) and tqtisFinite(sub(RNE, x1, y1))) and
-  ((result3 = z1) and (z2 = o1))) -> le(fliteral6, z2))))))))))
+  ((result3 = z1) and (z2 = o1))) -> le(z2, fliteral6))))))))))

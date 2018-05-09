@@ -53,10 +53,6 @@
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (define-fun dynamic_property ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
                    (and (in_range1 high)
@@ -76,6 +72,10 @@
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
+
+(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range1 low)
@@ -120,11 +120,11 @@
                                      (<= 1 10)) (in_range2 temp___expr_160)))
 
 ;; H
-  (assert (dynamic_property (- 2147483648) 2147483647 1 10))
+  (assert (dynamic_property1 (- 2147483648) 2147483647 1 10))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P405-006__coq_lemma_library/proof/sessions/spark-test_array_lemmas/../../../obj/gnatprove/spark-test_array_lemmas.mlw", line 5042, characters 5-8
   (not false))
 (check-sat)
 (exit)

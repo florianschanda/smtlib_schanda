@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,14 +74,25 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(declare-sort myint 0)
+(declare-fun conv (Int) Float32)
+
+(declare-fun conv__function_guard (Float32 Int) Bool)
+
+(declare-sort source 0)
+
+(declare-fun sourceqtint (source) Int)
+
+;; source'axiom
+  (assert
+  (forall ((i source))
+  (and (<= 0 (sourceqtint i)) (<= (sourceqtint i) 4294967295))))
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 4294967295)))
 
@@ -95,19 +102,84 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
 
-(declare-fun user_eq (myint myint) Bool)
+(declare-fun user_eq (source source) Bool)
 
-(declare-const dummy myint)
+(declare-const dummy source)
+
+(declare-datatypes ()
+((source__ref (mk_source__ref (source__content source)))))
+(define-fun source__ref___projection ((a source__ref)) source (source__content
+                                                              a))
+
+(define-fun dynamic_invariant ((temp___expr_172 Int)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (<= 0 4294967295)) (in_range
+                                     temp___expr_172)))
+
+(declare-sort target 0)
+
+(declare-fun user_eq1 (target target) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
+
+(declare-const dummy1 target)
+
+(declare-datatypes ()
+((target__ref (mk_target__ref (target__content target)))))
+(define-fun target__ref___projection ((a target__ref)) target (target__content
+                                                              a))
+
+(define-fun dynamic_invariant1 ((temp___expr_179 Float32)
+  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
+  (temp___do_toplevel_177 Bool)
+  (temp___do_typ_inv_178 Bool)) Bool (=>
+                                     (or (= temp___is_init_175 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_179)))
+
+;; conv__post_axiom
+  (assert
+  (forall ((s Int))
+  (! (=> (dynamic_invariant s true true true true) (dynamic_invariant1
+     (conv s) true false true true)) :pattern ((conv s)) )))
+
+(declare-sort myint 0)
+
+(declare-fun myintqtint (myint) Int)
+
+;; myint'axiom
+  (assert
+  (forall ((i myint))
+  (and (<= 0 (myintqtint i)) (<= (myintqtint i) 4294967295))))
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 4294967295)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq2 (myint myint) Bool)
+
+(declare-const dummy2 myint)
 
 (declare-datatypes () ((myint__ref (mk_myint__ref (myint__content myint)))))
 (define-fun myint__ref___projection ((a myint__ref)) myint (myint__content a))
 
-(define-fun dynamic_invariant ((temp___expr_158 Int)
+(define-fun dynamic_invariant2 ((temp___expr_158 Int)
   (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
   (temp___do_toplevel_156 Bool)
   (temp___do_typ_inv_157 Bool)) Bool (=>
                                      (or (= temp___is_init_154 true)
-                                     (<= 0 4294967295)) (in_range
+                                     (<= 0 4294967295)) (in_range1
                                      temp___expr_158)))
 
 (declare-const x Int)
@@ -118,77 +190,15 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-sort source 0)
-
-(define-fun in_range1 ((x1 Int)) Bool (and (<= 0 x1) (<= x1 4294967295)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (source source) Bool)
-
-(declare-const dummy1 source)
-
-(declare-datatypes ()
-((source__ref (mk_source__ref (source__content source)))))
-(define-fun source__ref___projection ((a source__ref)) source (source__content
-                                                              a))
-
-(define-fun dynamic_invariant1 ((temp___expr_172 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)
-  (temp___do_typ_inv_171 Bool)) Bool (=>
-                                     (or (= temp___is_init_168 true)
-                                     (<= 0 4294967295)) (in_range1
-                                     temp___expr_172)))
-
-(declare-sort target 0)
-
-(declare-fun user_eq2 (target target) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
-
-(declare-const dummy2 target)
-
-(declare-datatypes ()
-((target__ref (mk_target__ref (target__content target)))))
-(define-fun target__ref___projection ((a target__ref)) target (target__content
-                                                              a))
-
-(define-fun dynamic_invariant2 ((temp___expr_179 Float32)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)
-  (temp___do_typ_inv_178 Bool)) Bool (=>
-                                     (or (= temp___is_init_175 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_179)))
-
-(declare-fun conv (Int) Float32)
-
-(declare-fun conv__function_guard (Float32 Int) Bool)
-
-;; conv__post_axiom
-  (assert
-  (forall ((s Int))
-  (! (=> (dynamic_invariant1 s true true true true) (dynamic_invariant2
-     (conv s) true false true true)) :pattern ((conv s)) )))
+;; H
+  (assert (in_range1 x))
 
 ;; H
-  (assert (in_range x))
-
-;; H
-  (assert (in_range y))
+  (assert (in_range1 y))
 
 (assert
 ;; WP_parameter_def
  ;; File "prover_crash.ads", line 8, characters 0-0
-  (not (in_range1 (+ x y))))
+  (not (in_range (+ x y))))
 (check-sat)
 (exit)

@@ -1798,14 +1798,6 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-logic left : t
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic right : t
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
 type long_float
 
 logic bool_eq3 : t1, t1 -> bool
@@ -1835,11 +1827,19 @@ logic atan2__2 : t1, t1 -> t1
 logic atan2__2__function_guard : t1, t1, t1 -> prop
 
 axiom atan2__2__post_axiom :
-  (forall left1:t1. forall right1:t1 [atan2__2(left1, right1)].
-  ((tqtisFinite1(left1) and tqtisFinite1(right1)) ->
-  tqtisFinite1(atan2__2(left1, right1))))
+  (forall left:t1. forall right:t1 [atan2__2(left, right)].
+  ((tqtisFinite1(left) and tqtisFinite1(right)) ->
+  tqtisFinite1(atan2__2(left, right))))
 
- (* File "system.ads", line 1, characters 0-0 *)
+logic left : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic right : t
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 23989, characters 5-8 *)
 goal WP_parameter_def :
   (forall o:t1. forall o1:t. (tqtisFinite(left) -> (tqtisFinite(right) ->
   ((((o = atan2__2(to_float64(NearestTiesToEven, left),

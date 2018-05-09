@@ -33,15 +33,6 @@
                                     (<= 1 2147483647)) (in_range3
                                     temp___expr_46)))
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
-
-(define-fun dynamic_invariant2 ((temp___expr_208 Int)
-  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
-  (temp___do_toplevel_206 Bool)
-  (temp___do_typ_inv_207 Bool)) Bool (=>
-                                     (or (= temp___is_init_204 true)
-                                     (<= 0 46)) (in_range4 temp___expr_208)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
                                                 (fp.isPositive x)))
 
@@ -80,6 +71,15 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+
+(define-fun dynamic_invariant2 ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 46)) (in_range4 temp___expr_208)))
+
 (declare-const n Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -116,13 +116,13 @@
 
 (declare-const number_theory__fibonacci__result Int)
 
+(declare-const temp___219 Int)
+
+(declare-const temp___218 Int)
+
 (declare-const temp___217 Int)
 
 (declare-const temp___216 Int)
-
-(declare-const temp___215 Int)
-
-(declare-const temp___214 Int)
 
 (declare-const o Int)
 
@@ -324,7 +324,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 2849, characters 5-8
   (not (in_range4 (- i3 1))))
 (check-sat)
 (exit)

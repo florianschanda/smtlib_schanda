@@ -164,8 +164,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not
-  (fp.isFinite64 (fp.add RNE result__1 (fp #b0 #b10000000000 #b1001001000011111101101010100010001000010110100011000)))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 24046, characters 5-8
+  (not (fp.isFinite64 (fp.add RNE result__1 pi1))))
 (check-sat)
 (exit)

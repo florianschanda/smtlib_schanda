@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1081,7 +1081,7 @@
 
 (declare-fun fma1 (mode t1 t1 t1) t1)
 
-(declare-fun sqrt2 (mode t1) t1)
+(declare-fun sqrt3 (mode t1) t1)
 
 (declare-fun roundToIntegral1 (mode t1) t1)
 
@@ -1582,18 +1582,18 @@
   (forall ((m mode) (x t1))
   (! (=> (tqtisFinite1 x)
      (=> (<= 0.0 (tqtreal1 x))
-     (and (tqtisFinite1 (sqrt2 m x))
-     (= (tqtreal1 (sqrt2 m x)) (round1 m (sqrt1 (tqtreal1 x))))))) :pattern (
-  (sqrt2 m x)) )))
+     (and (tqtisFinite1 (sqrt3 m x))
+     (= (tqtreal1 (sqrt3 m x)) (round1 m (sqrt2 (tqtreal1 x))))))) :pattern (
+  (sqrt3 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t1))
-  (! (=> (tqtisFinite1 (sqrt2 m x))
+  (! (=> (tqtisFinite1 (sqrt3 m x))
      (and (tqtisFinite1 x)
      (and (<= 0.0 (tqtreal1 x))
-     (= (tqtreal1 (sqrt2 m x)) (round1 m (sqrt1 (tqtreal1 x))))))) :pattern (
-  (sqrt2 m x)) )))
+     (= (tqtreal1 (sqrt3 m x)) (round1 m (sqrt2 (tqtreal1 x))))))) :pattern (
+  (sqrt3 m x)) )))
 
 (define-fun same_sign_real1 ((x t1)
   (r Real)) Bool (or (and (is_positive1 x) (< 0.0 r))
@@ -1769,14 +1769,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t1))
-  (! (let ((r (sqrt2 m x)))
+  (! (let ((r (sqrt3 m x)))
      (and (=> (is_nan1 x) (is_nan1 r))
      (and (=> (is_plus_infinity1 x) (is_plus_infinity1 r))
      (and (=> (is_minus_infinity1 x) (is_nan1 r))
      (and (=> (and (tqtisFinite1 x) (< (tqtreal1 x) 0.0)) (is_nan1 r))
      (and (=> (is_zero1 x) (same_sign1 r x))
      (=> (and (tqtisFinite1 x) (< 0.0 (tqtreal1 x))) (is_positive1 r)))))))) :pattern (
-  (sqrt2 m x)) )))
+  (sqrt3 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -2443,6 +2443,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "floats.ads", line 5, characters 0-0
-  (not (le1 (neg1 fliteral1) (to_rep1 (select d4 i)))))
+  (not (le1 (to_rep1 (select d4 i)) fliteral1)))
 (check-sat)
 (exit)

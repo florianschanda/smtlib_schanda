@@ -959,6 +959,6 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/KC20-032__succ_pred/gnatprove/p.mlw", line 4452, characters 5-8 *)
 goal WP_parameter_def : (tqtisFinite(f) -> (neq(f, fliteral1) ->
   (not (next_representable(f) = neg(fliteral1)))))

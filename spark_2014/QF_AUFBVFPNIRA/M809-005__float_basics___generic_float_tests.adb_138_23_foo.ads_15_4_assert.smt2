@@ -91,12 +91,12 @@
   y)))
 
 ;; H
-  (assert
-  (fp.eq (fp.sub RNE x y) (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
+  (assert (fp.eq x y))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 128, characters 0-0
-  (not (fp.eq x y)))
+  (not
+  (fp.eq (fp.sub RNE x y) (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
 (check-sat)
 (exit)

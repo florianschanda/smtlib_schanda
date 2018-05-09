@@ -1198,7 +1198,7 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10377, characters 5-8 *)
 goal WP_parameter_def :
   (forall res:t. forall o:t. (in_range2(a_x) -> (in_range2(a_y) ->
   (in_range2(b_x) -> (in_range2(b_y) -> (in_range2(c_x) -> (in_range2(c_y) ->

@@ -50,6 +50,14 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -61,14 +69,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
-
-(define-fun dynamic_invariant ((temp___expr_60 Float32)
-  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
-  (temp___do_toplevel_58 Bool)
-  (temp___do_typ_inv_59 Bool)) Bool (=>
-                                    (or (= temp___is_init_56 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
@@ -97,7 +97,7 @@
 
 (declare-const j Int)
 
-(declare-const temp___193 Int)
+(declare-const temp___195 Int)
 
 (declare-const j1 Int)
 
@@ -263,6 +263,39 @@
 
 ;; H
   (assert (=> (not (= i11 j3)) (and (= o19 o18) (fp.isFinite32 o18))))
+
+;; H
+  (assert (= i12 2))
+
+;; H
+  (assert (= j4 1))
+
+;; H
+  (assert (=> (not (= i12 j4)) (= o25 (fp.div RNE o23 o24))))
+
+;; H
+  (assert (=> (not (= i12 j4)) (and (= o26 o25) (fp.isFinite32 o25))))
+
+;; H
+  (assert (=> (not (= i12 j4)) (= o30 (fp.div RNE o28 o29))))
+
+;; H
+  (assert (=> (not (= i12 j4)) (and (= o31 o30) (fp.isFinite32 o30))))
+
+;; H
+  (assert (= j5 2))
+
+;; H
+  (assert (=> (not (= i12 j5)) (= o35 (fp.div RNE o33 o34))))
+
+;; H
+  (assert (=> (not (= i12 j5)) (and (= o36 o35) (fp.isFinite32 o35))))
+
+;; H
+  (assert (=> (not (= i12 j5)) (= o40 (fp.div RNE o38 o39))))
+
+;; H
+  (assert (=> (not (= i12 j5)) (and (= o41 o40) (fp.isFinite32 o40))))
 
 (assert
 ;; WP_parameter_def

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -158,195 +154,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const res Float32)
-
-(declare-const safety_pack__lift_away_from_zero__result Float32)
-
-(declare-const result Float32)
-
-(declare-const res1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const res2 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const res3 Float32)
-
-(declare-const result3 Float32)
-
-(declare-const res4 Float32)
-
-(declare-const result4 Float32)
-
-(declare-const safety_pack__lift_away_from_zero__result1 Float32)
-
-(declare-const safety_pack__lift_away_from_zero__result2 Float32)
-
-(declare-const safety_pack__lift_away_from_zero__result3 Float32)
-
-(declare-const res5 Float32)
-
-(declare-const safety_pack__lift_away_from_zero__result4 Float32)
-
-(declare-const res6 Float32)
-
-(declare-const safety_pack__lift_away_from_zero__result5 Float32)
-
-;; H
-  (assert (in_range1 x))
-
-;; H
-  (assert
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000))
-  (in_range2 res)))
-
-;; H
-  (assert
-  (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)) (= result res)))
-
-;; H
-  (assert
-  (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-  (= res1 (fp #b0 #b00000000 #b00000000000000000000000))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (=>
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (= result1 res))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (=>
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (= res2 (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (=>
-  (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
-  (=>
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000))) (= result2
-  res)))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (=>
-  (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
-  (=>
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))
-  (= res3 (fp #b0 #b00110101 #b00000000000000000000000))))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (=>
-  (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
-  (=>
-  (not
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= result3
-  res)))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (=>
-  (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
-  (=>
-  (not
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= res4
-  x)))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (=>
-  (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
-  (=>
-  (not
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b00110101 #b00000000000000000000000)))) (= res3
-  res4)))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (=>
-  (not
-  (and (fp.leq (fp.neg (fp #b0 #b00110101 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b00000000 #b00000000000000000000000))))
-  (= res2 res3))))
-
-;; H
-  (assert
-  (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-  (= res1 res2)))
-
-;; H
-  (assert
-  (= safety_pack__lift_away_from_zero__result1 safety_pack__lift_away_from_zero__result2))
-
-;; H
-  (assert
-  (= safety_pack__lift_away_from_zero__result3 safety_pack__lift_away_from_zero__result1))
-
-;; H
-  (assert (= result4 safety_pack__lift_away_from_zero__result))
-
-;; H
-  (assert (= safety_pack__lift_away_from_zero__result1 res1))
-
-;; H
-  (assert
-  (= (mk_t__ref safety_pack__lift_away_from_zero__result4) (mk_t__ref
-                                                           safety_pack__lift_away_from_zero__result2)))
-
-;; H
-  (assert (= res5 res1))
-
-;; H
-  (assert
-  (= safety_pack__lift_away_from_zero__result5 safety_pack__lift_away_from_zero__result3))
-
-;; H
-  (assert (= res6 res1))
-
-;; H
-  (assert
-  (=> (= (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)) true)
-  (fp.eq safety_pack__lift_away_from_zero__result4 (fp #b0 #b00000000 #b00000000000000000000000))))
-
-;; H
-  (assert
-  (= (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))) true))
-
 (assert
 ;; WP_parameter_def
  ;; File "imu_pack.ads", line 16, characters 0-0
-  (not
-  (not (fp.eq safety_pack__lift_away_from_zero__result4 (fp #b0 #b00000000 #b00000000000000000000000)))))
+  (not true))
 (check-sat)
 (exit)

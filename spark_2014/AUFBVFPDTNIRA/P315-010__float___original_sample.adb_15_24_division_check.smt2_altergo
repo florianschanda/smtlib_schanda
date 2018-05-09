@@ -950,6 +950,11 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type nb_type
 
+logic nb_typeqtint : nb_type -> int
+
+axiom nb_typeqtaxiom :
+  (forall i:nb_type. ((0 <= nb_typeqtint(i)) and (nb_typeqtint(i) <= 100)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool

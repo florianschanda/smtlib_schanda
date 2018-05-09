@@ -14,13 +14,6 @@
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
 
-(define-fun dynamic_invariant ((temp___expr_161 Int)
-  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
-  (temp___do_toplevel_159 Bool)
-  (temp___do_typ_inv_160 Bool)) Bool (=>
-                                     (or (= temp___is_init_157 true)
-                                     (<= 0 2)) (in_range1 temp___expr_161)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
                                                 (fp.isPositive x)))
 
@@ -214,6 +207,13 @@
 
 ;; rec__sub_rec_ok__plop__position_axiom
   (assert (<= 0 rec__sub_rec_ok__plop__position))
+
+(define-fun dynamic_invariant ((temp___expr_161 Int)
+  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
+  (temp___do_toplevel_159 Bool)
+  (temp___do_typ_inv_160 Bool)) Bool (=>
+                                     (or (= temp___is_init_157 true)
+                                     (<= 0 2)) (in_range1 temp___expr_161)))
 
 (declare-const a Int)
 

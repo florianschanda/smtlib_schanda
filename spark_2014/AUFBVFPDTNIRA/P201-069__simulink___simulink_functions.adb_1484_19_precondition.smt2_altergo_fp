@@ -1088,6 +1088,6 @@ logic right : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 25078, characters 5-8 *)
 goal WP_parameter_def : (tqtisFinite(left) -> (tqtisFinite(right) ->
-  (eq(left, fliteral1) -> lt(fliteral1, right))))
+  le(fliteral1, left)))

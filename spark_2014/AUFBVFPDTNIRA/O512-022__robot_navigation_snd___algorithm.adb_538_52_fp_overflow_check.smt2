@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -116,14 +112,14 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-sort positive_float 0)
+(declare-sort normalized2pi 0)
 
 (define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+                                         (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-fun user_eq1 (positive_float positive_float) Bool)
+(declare-fun user_eq1 (normalized2pi normalized2pi) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
 
@@ -131,26 +127,26 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
 
-(declare-const dummy1 positive_float)
+(declare-const dummy1 normalized2pi)
 
 (declare-datatypes ()
-((positive_float__ref
- (mk_positive_float__ref (positive_float__content positive_float)))))
-(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
-  (positive_float__content a))
+((normalized2pi__ref
+ (mk_normalized2pi__ref (normalized2pi__content normalized2pi)))))
+(define-fun normalized2pi__ref___projection ((a normalized2pi__ref)) normalized2pi
+  (normalized2pi__content a))
 
-(declare-fun to_rep (positive_float) Float32)
+(declare-fun to_rep (normalized2pi) Float32)
 
-(declare-fun of_rep (Float32) positive_float)
+(declare-fun of_rep (Float32) normalized2pi)
 
 ;; inversion_axiom
   (assert
-  (forall ((x positive_float))
+  (forall ((x normalized2pi))
   (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x positive_float)) (! (in_range1
+  (forall ((x normalized2pi)) (! (in_range1
   (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
@@ -159,103 +155,12 @@
   (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                             (of_rep x))) )))
 
-(declare-sort nonnegative_float 0)
-
-(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(declare-fun user_eq2 (nonnegative_float nonnegative_float) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
-
-(declare-const dummy2 nonnegative_float)
-
-(declare-datatypes ()
-((nonnegative_float__ref
- (mk_nonnegative_float__ref (nonnegative_float__content nonnegative_float)))))
-(define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float
-  (nonnegative_float__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_170 Float32)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)
-  (temp___do_typ_inv_169 Bool)) Bool (=>
-                                     (or (= temp___is_init_166 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range2 temp___expr_170)))
-
-(declare-fun to_rep1 (nonnegative_float) Float32)
-
-(declare-fun of_rep1 (Float32) nonnegative_float)
-
-;; inversion_axiom
-  (assert
-  (forall ((x nonnegative_float))
-  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x nonnegative_float)) (! (in_range2
-  (to_rep1 x)) :pattern ((to_rep1 x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=> (in_range2 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
-                                                              (of_rep1 x))) )))
-
-(declare-sort normalized2pi 0)
-
-(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
-
-(declare-fun user_eq3 (normalized2pi normalized2pi) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float32)
-
-(declare-const dummy3 normalized2pi)
-
-(declare-datatypes ()
-((normalized2pi__ref
- (mk_normalized2pi__ref (normalized2pi__content normalized2pi)))))
-(define-fun normalized2pi__ref___projection ((a normalized2pi__ref)) normalized2pi
-  (normalized2pi__content a))
-
-(declare-fun to_rep2 (normalized2pi) Float32)
-
-(declare-fun of_rep2 (Float32) normalized2pi)
-
-;; inversion_axiom
-  (assert
-  (forall ((x normalized2pi))
-  (! (= (of_rep2 (to_rep2 x)) x) :pattern ((to_rep2 x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x normalized2pi)) (! (in_range3
-  (to_rep2 x)) :pattern ((to_rep2 x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=> (in_range3 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
-                                                              (of_rep2 x))) )))
-
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__spaces__angles__angle__theta normalized2pi)))))
+(define-fun us_split_fields_Theta__projection ((a us_split_fields)) normalized2pi
+  (rec__spaces__angles__angle__theta a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -268,9 +173,9 @@
                                                              a))
 
 (define-fun bool_eq ((a us_rep)
-  (b us_rep)) Bool (ite (= (to_rep2
+  (b us_rep)) Bool (ite (= (to_rep
                            (rec__spaces__angles__angle__theta
-                           (us_split_fields1 a))) (to_rep2
+                           (us_split_fields1 a))) (to_rep
                                                   (rec__spaces__angles__angle__theta
                                                   (us_split_fields1 b))))
                    true false))
@@ -311,9 +216,9 @@
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
 
-(declare-fun user_eq4 (us_rep us_rep) Bool)
+(declare-fun user_eq2 (us_rep us_rep) Bool)
 
-(declare-const dummy4 us_rep)
+(declare-const dummy2 us_rep)
 
 (declare-datatypes () ((angle__ref (mk_angle__ref (angle__content us_rep)))))
 (define-fun angle__ref___projection ((a angle__ref)) us_rep (angle__content
@@ -331,7 +236,112 @@
 
 (declare-fun aldiff__function_guard (Float32 us_rep us_rep) Bool)
 
+(declare-fun limit (Float32 Float32 Float32) Float32)
+
+(declare-fun limit__function_guard (Float32 Float32 Float32 Float32) Bool)
+
+(declare-sort positive_float 0)
+
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(declare-fun user_eq3 (positive_float positive_float) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
+
+(declare-const dummy3 positive_float)
+
+(declare-datatypes ()
+((positive_float__ref
+ (mk_positive_float__ref (positive_float__content positive_float)))))
+(define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
+  (positive_float__content a))
+
+(declare-fun to_rep1 (positive_float) Float32)
+
+(declare-fun of_rep1 (Float32) positive_float)
+
+;; inversion_axiom
+  (assert
+  (forall ((x positive_float))
+  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x positive_float)) (! (in_range2
+  (to_rep1 x)) :pattern ((to_rep1 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (in_range2 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                              (of_rep1 x))) )))
+
+(declare-sort nonnegative_float 0)
+
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(declare-fun user_eq4 (nonnegative_float nonnegative_float) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float32)
+
+(declare-const dummy4 nonnegative_float)
+
+(declare-datatypes ()
+((nonnegative_float__ref
+ (mk_nonnegative_float__ref (nonnegative_float__content nonnegative_float)))))
+(define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float
+  (nonnegative_float__content a))
+
+(define-fun dynamic_invariant1 ((temp___expr_170 Float32)
+  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
+  (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range3 temp___expr_170)))
+
+(declare-fun to_rep2 (nonnegative_float) Float32)
+
+(declare-fun of_rep2 (Float32) nonnegative_float)
+
+;; inversion_axiom
+  (assert
+  (forall ((x nonnegative_float))
+  (! (= (of_rep2 (to_rep2 x)) x) :pattern ((to_rep2 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x nonnegative_float)) (! (in_range3
+  (to_rep2 x)) :pattern ((to_rep2 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (in_range3 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                              (of_rep2 x))) )))
+
 (declare-sort natural 0)
+
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -350,7 +360,7 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(declare-fun to_rep3 (natural) Int)
+(define-fun to_rep3 ((x natural)) Int (naturalqtint x))
 
 (declare-fun of_rep3 (Int) natural)
 
@@ -458,7 +468,7 @@
                            (=>
                            (and (<= a__first temp___idx_154)
                            (<= temp___idx_154 a__last))
-                           (= (to_rep1 (select a temp___idx_154)) (to_rep1
+                           (= (to_rep2 (select a temp___idx_154)) (to_rep2
                                                                   (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
@@ -474,7 +484,7 @@
   (< b__last b__first))
   (forall ((temp___idx_154 Int))
   (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
-  (= (to_rep1 (select a temp___idx_154)) (to_rep1
+  (= (to_rep2 (select a temp___idx_154)) (to_rep2
                                          (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
 (declare-const dummy7 (Array Int nonnegative_float))
@@ -570,6 +580,12 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__robot_iface__speed_option__modulus float)(rec__robot_iface__speed_option__angle float)))))
+(define-fun us_split_fields_modulus__projection ((a us_split_fields2)) float
+  (rec__robot_iface__speed_option__modulus a))
+
+(define-fun us_split_fields_angle__projection ((a us_split_fields2)) float
+  (rec__robot_iface__speed_option__angle a))
+
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
@@ -697,11 +713,56 @@
 ((us_split_fields4
  (mk___split_fields2
  (rec__robot_iface__proxy__robot_radius positive_float)(rec__robot_iface__proxy__min_gap_width positive_float)(rec__robot_iface__proxy__obstacle_avoid_dist positive_float)(rec__robot_iface__proxy__max_speed positive_float)(rec__robot_iface__proxy__max_turn_rate positive_float)(rec__robot_iface__proxy__goal_position_tol nonnegative_float)(rec__robot_iface__proxy__goal_angle_tol nonnegative_float)(rec__robot_iface__proxy__goalx float)(rec__robot_iface__proxy__goaly float)(rec__robot_iface__proxy__goala float)(rec__robot_iface__proxy__scan_count natural)(rec__robot_iface__proxy__scan_res positive_float)(rec__robot_iface__proxy__max_range positive_float)(rec__robot_iface__proxy__scans (Array Int nonnegative_float))(rec__robot_iface__proxy__x unbounded_float)(rec__robot_iface__proxy__y unbounded_float)(rec__robot_iface__proxy__yaw unbounded_float)(rec__robot_iface__proxy__speed us_rep1)(rec__robot_iface__proxy__goal_reached Bool)))))
+(define-fun us_split_fields_robot_radius__projection ((a us_split_fields4)) positive_float
+  (rec__robot_iface__proxy__robot_radius a))
+
+(define-fun us_split_fields_min_gap_width__projection ((a us_split_fields4)) positive_float
+  (rec__robot_iface__proxy__min_gap_width a))
+
+(define-fun us_split_fields_obstacle_avoid_dist__projection ((a us_split_fields4)) positive_float
+  (rec__robot_iface__proxy__obstacle_avoid_dist a))
+
+(define-fun us_split_fields_max_speed__projection ((a us_split_fields4)) positive_float
+  (rec__robot_iface__proxy__max_speed a))
+
+(define-fun us_split_fields_max_turn_rate__projection ((a us_split_fields4)) positive_float
+  (rec__robot_iface__proxy__max_turn_rate a))
+
+(define-fun us_split_fields_goal_position_tol__projection ((a us_split_fields4)) nonnegative_float
+  (rec__robot_iface__proxy__goal_position_tol a))
+
+(define-fun us_split_fields_goal_angle_tol__projection ((a us_split_fields4)) nonnegative_float
+  (rec__robot_iface__proxy__goal_angle_tol a))
+
+(define-fun us_split_fields_goalX__projection ((a us_split_fields4)) float
+  (rec__robot_iface__proxy__goalx a))
+
+(define-fun us_split_fields_goalY__projection ((a us_split_fields4)) float
+  (rec__robot_iface__proxy__goaly a))
+
+(define-fun us_split_fields_goalA__projection ((a us_split_fields4)) float
+  (rec__robot_iface__proxy__goala a))
+
 (define-fun us_split_fields_scan_Count__projection ((a us_split_fields4)) natural
   (rec__robot_iface__proxy__scan_count a))
 
+(define-fun us_split_fields_scan_Res__projection ((a us_split_fields4)) positive_float
+  (rec__robot_iface__proxy__scan_res a))
+
+(define-fun us_split_fields_max_Range__projection ((a us_split_fields4)) positive_float
+  (rec__robot_iface__proxy__max_range a))
+
 (define-fun us_split_fields_scans__projection ((a us_split_fields4)) (Array Int nonnegative_float)
   (rec__robot_iface__proxy__scans a))
+
+(define-fun us_split_fields_X__projection ((a us_split_fields4)) unbounded_float
+  (rec__robot_iface__proxy__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields4)) unbounded_float
+  (rec__robot_iface__proxy__y a))
+
+(define-fun us_split_fields_Yaw__projection ((a us_split_fields4)) unbounded_float
+  (rec__robot_iface__proxy__yaw a))
 
 (define-fun us_split_fields_speed__projection ((a us_split_fields4)) us_rep1
   (rec__robot_iface__proxy__speed a))
@@ -739,39 +800,39 @@
                          (and
                          (and
                          (and
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__robot_iface__proxy__robot_radius
-                            (us_split_fields5 a))) (to_rep
+                            (us_split_fields5 a))) (to_rep1
                                                    (rec__robot_iface__proxy__robot_radius
                                                    (us_split_fields5 b))))
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__robot_iface__proxy__min_gap_width
-                            (us_split_fields5 a))) (to_rep
+                            (us_split_fields5 a))) (to_rep1
                                                    (rec__robot_iface__proxy__min_gap_width
                                                    (us_split_fields5 b)))))
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__robot_iface__proxy__obstacle_avoid_dist
-                            (us_split_fields5 a))) (to_rep
+                            (us_split_fields5 a))) (to_rep1
                                                    (rec__robot_iface__proxy__obstacle_avoid_dist
                                                    (us_split_fields5 b)))))
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__robot_iface__proxy__max_speed
-                            (us_split_fields5 a))) (to_rep
+                            (us_split_fields5 a))) (to_rep1
                                                    (rec__robot_iface__proxy__max_speed
                                                    (us_split_fields5 b)))))
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__robot_iface__proxy__max_turn_rate
-                            (us_split_fields5 a))) (to_rep
+                            (us_split_fields5 a))) (to_rep1
                                                    (rec__robot_iface__proxy__max_turn_rate
                                                    (us_split_fields5 b)))))
-                         (= (to_rep1
+                         (= (to_rep2
                             (rec__robot_iface__proxy__goal_position_tol
-                            (us_split_fields5 a))) (to_rep1
+                            (us_split_fields5 a))) (to_rep2
                                                    (rec__robot_iface__proxy__goal_position_tol
                                                    (us_split_fields5 b)))))
-                         (= (to_rep1
+                         (= (to_rep2
                             (rec__robot_iface__proxy__goal_angle_tol
-                            (us_split_fields5 a))) (to_rep1
+                            (us_split_fields5 a))) (to_rep2
                                                    (rec__robot_iface__proxy__goal_angle_tol
                                                    (us_split_fields5 b)))))
                          (= (to_rep4
@@ -794,14 +855,14 @@
                             (us_split_fields5 a))) (to_rep3
                                                    (rec__robot_iface__proxy__scan_count
                                                    (us_split_fields5 b)))))
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__robot_iface__proxy__scan_res
-                            (us_split_fields5 a))) (to_rep
+                            (us_split_fields5 a))) (to_rep1
                                                    (rec__robot_iface__proxy__scan_res
                                                    (us_split_fields5 b)))))
-                         (= (to_rep
+                         (= (to_rep1
                             (rec__robot_iface__proxy__max_range
-                            (us_split_fields5 a))) (to_rep
+                            (us_split_fields5 a))) (to_rep1
                                                    (rec__robot_iface__proxy__max_range
                                                    (us_split_fields5 b)))))
                          (= (bool_eq1
@@ -1169,6 +1230,9 @@
 ((us_split_fields6
  (mk___split_fields3
  (rec__algorithm__laser_scan_data__first nonnegative_float)(rec__algorithm__laser_scan_data__second us_rep)))))
+(define-fun us_split_fields_first__projection ((a us_split_fields6)) nonnegative_float
+  (rec__algorithm__laser_scan_data__first a))
+
 (define-fun us_split_fields_second__projection ((a us_split_fields6)) us_rep
   (rec__algorithm__laser_scan_data__second a))
 
@@ -1185,9 +1249,9 @@
 
 (define-fun bool_eq4 ((a us_rep3)
   (b us_rep3)) Bool (ite (and
-                         (= (to_rep1
+                         (= (to_rep2
                             (rec__algorithm__laser_scan_data__first
-                            (us_split_fields7 a))) (to_rep1
+                            (us_split_fields7 a))) (to_rep2
                                                    (rec__algorithm__laser_scan_data__first
                                                    (us_split_fields7 b))))
                          (= (bool_eq
@@ -1309,6 +1373,13 @@
 
 (declare-sort count_type 0)
 
+(declare-fun count_typeqtint (count_type) Int)
+
+;; count_type'axiom
+  (assert
+  (forall ((i count_type))
+  (and (<= 0 (count_typeqtint i)) (<= (count_typeqtint i) 2147483647))))
+
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
@@ -1326,7 +1397,7 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
-(declare-fun to_rep7 (count_type) Int)
+(define-fun to_rep7 ((x count_type)) Int (count_typeqtint x))
 
 (declare-fun of_rep7 (Int) count_type)
 
@@ -1541,6 +1612,9 @@
 (define-fun us_split_fields_gapVec__projection ((a us_split_fields10)) us_rep4
   (rec__algorithm__controller__gapvec a))
 
+(define-fun us_split_fields_obsAvoidDelta__projection ((a us_split_fields10)) float
+  (rec__algorithm__controller__obsavoiddelta a))
+
 (define-fun us_split_fields_driveAngle__projection ((a us_split_fields10)) us_rep
   (rec__algorithm__controller__driveangle a))
 
@@ -1696,13 +1770,13 @@
 (define-fun controller__ref___projection ((a controller__ref)) us_rep5
   (controller__content a))
 
-(declare-const null_angle us_rep)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-fun is_empty (us_rep4) Bool)
 
 (declare-fun is_empty__function_guard (Bool us_rep4) Bool)
+
+(declare-const null_angle us_rep)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (define-fun in_range8 ((rec__robot_iface__speed_option__opt1 Int)
   (a us_rep1)) Bool (= rec__robot_iface__speed_option__opt1 (to_rep6
@@ -1787,9 +1861,9 @@
 (define-fun t252s__ref___projection ((a t252s__ref)) us_rep1 (t252s__content
                                                              a))
 
-(declare-fun temp___680 (Float32) (Array Int nonnegative_float))
+(declare-fun temp_____aggregate_def_680 (Float32) (Array Int nonnegative_float))
 
-(declare-fun temp___684 (us_rep3) (Array Int us_rep3))
+(declare-fun temp_____aggregate_def_684 (us_rep3) (Array Int us_rep3))
 
 (define-fun dynamic_invariant2 ((temp___expr_673 us_rep5)
   (temp___is_init_669 Bool) (temp___skip_constant_670 Bool)
@@ -1804,6 +1878,11 @@
                                      (rec__algorithm__controller__gapvec
                                      (us_split_fields11 temp___expr_673)))))
 
+(declare-const rliteral natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral) 0))
+
 (define-fun default_initial_assumption ((temp___expr_678 us_rep5)
   (temp___skip_top_level_679 Bool)) Bool (and
                                          (and
@@ -1813,32 +1892,32 @@
                                             (us_split_fields11
                                             temp___expr_678)) (mk___rep2
                                                               (mk___split_fields2
-                                                              (of_rep
+                                                              (of_rep1
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep
+                                                              (of_rep1
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep1
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep1
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep4
+                                                              (of_rep1
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (of_rep2
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (of_rep2
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep4
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep4
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep3 0)
-                                                              (of_rep
+                                                              (of_rep4
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep
+                                                              rliteral
+                                                              (of_rep1
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (temp___680
+                                                              (of_rep1
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (temp_____aggregate_def_680
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep5
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
@@ -1861,10 +1940,10 @@
                                                               (distinct 0 0))))
                                          (= (rec__algorithm__controller__laserscan
                                             (us_split_fields11
-                                            temp___expr_678)) (temp___684
+                                            temp___expr_678)) (temp_____aggregate_def_684
                                                               (mk___rep3
                                                               (mk___split_fields3
-                                                              (of_rep1
+                                                              (of_rep2
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               null_angle)))))
                                          (and
@@ -1893,10 +1972,6 @@
 (declare-const safetydist Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-fun limit (Float32 Float32 Float32) Float32)
-
-(declare-fun limit__function_guard (Float32 Float32 Float32 Float32) Bool)
 
 (declare-sort zero_to_one 0)
 
@@ -1938,6 +2013,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range10 ((x Int)) Bool (and (<= (- 2147483648) x)
                                       (<= x 2147483647)))
 
@@ -1956,7 +2038,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep8 (integer) Int)
+(define-fun to_rep8 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep8 (Int) integer)
 
@@ -2029,7 +2111,7 @@
   (assert
   (forall ((temp___686 us_rep3))
   (forall ((temp___687 Int))
-  (= (select (temp___684 temp___686) temp___687) temp___686))))
+  (= (select (temp_____aggregate_def_684 temp___686) temp___687) temp___686))))
 
 (define-fun dynamic_invariant7 ((temp___expr_254 Int)
   (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
@@ -2073,7 +2155,7 @@
   (temp___do_typ_inv_162 Bool)) Bool (=>
                                      (or (= temp___is_init_159 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range1 temp___expr_163)))
+                                     (in_range2 temp___expr_163)))
 
 (define-fun dynamic_invariant10 ((temp___expr_184 Float32)
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
@@ -2087,7 +2169,7 @@
   (assert
   (= null_angle (mk___rep
                 (mk___split_fields
-                (of_rep2 (fp #b0 #b00000000 #b00000000000000000000000))))))
+                (of_rep (fp #b0 #b00000000 #b00000000000000000000000))))))
 
 (define-fun dynamic_invariant11 ((temp___expr_198 Float32)
   (temp___is_init_194 Bool) (temp___skip_constant_195 Bool)
@@ -2095,7 +2177,7 @@
   (temp___do_typ_inv_197 Bool)) Bool (=>
                                      (or (= temp___is_init_194 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                     (in_range3 temp___expr_198)))
+                                     (in_range1 temp___expr_198)))
 
 (define-fun dynamic_invariant12 ((temp___expr_365 Int)
   (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
@@ -2131,7 +2213,7 @@
   (forall ((temp___682 Float32))
   (=> (dynamic_invariant1 temp___682 true true true true)
   (forall ((temp___683 Int))
-  (= (to_rep1 (select (temp___680 temp___682) temp___683)) temp___682)))))
+  (= (to_rep2 (select (temp_____aggregate_def_680 temp___682) temp___683)) temp___682)))))
 
 (declare-const deltamag Float32)
 
@@ -2203,7 +2285,7 @@
   (assert (= deltaareasum1 (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (in_range2 deltaareasum1))
+  (assert (in_range3 deltaareasum1))
 
 ;; H
   (assert (= result1 obstacleavoiddelta))
@@ -2229,11 +2311,11 @@
 
 ;; H
   (assert
-  (fp.eq (to_rep
+  (fp.eq (to_rep1
          (rec__robot_iface__proxy__robot_radius
          (us_split_fields5
          (rec__algorithm__controller__robot (us_split_fields11 this)))))
-  (to_rep
+  (to_rep1
   (rec__robot_iface__proxy__robot_radius
   (us_split_fields5
   (rec__algorithm__controller__robot (us_split_fields11 this)))))))
@@ -2257,13 +2339,13 @@
   (fp.isFinite32 deltaangle1)))
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111))
-  (in_range2 deltaareasum2))) (and (<= 1 i2) (<= i2 1000))))
+  (in_range3 deltaareasum2))) (and (<= 1 i2) (<= i2 1000))))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__robot_navigation_snd/gnatprove/algorithm.mlw", line 36822, characters 5-8
   (not
-  (fp.isFinite32 (fp.add RNE safetydist (to_rep
+  (fp.isFinite32 (fp.add RNE safetydist (to_rep1
                                         (rec__robot_iface__proxy__robot_radius
                                         (us_split_fields5
                                         (rec__algorithm__controller__robot

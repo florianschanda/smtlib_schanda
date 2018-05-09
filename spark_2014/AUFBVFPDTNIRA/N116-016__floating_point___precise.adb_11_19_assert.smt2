@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -122,10 +118,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const x Float32)
-
-(declare-const y Float32)
-
 (declare-const z Float32)
 
 (declare-const o Float32)
@@ -134,43 +126,27 @@
 
 (declare-const o2 Float32)
 
-(declare-const result Float32)
+(declare-const x Float32)
 
-(declare-const x1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const y1 Float32)
-
-(declare-const result2 Float32)
+(declare-const y Float32)
 
 (declare-const z1 Float32)
 
-(declare-const result3 Float32)
-
 (declare-const z2 Float32)
-
-(declare-const result4 Float32)
 
 (declare-const z3 Float32)
 
 ;; H
-  (assert (= result x))
+  (assert (= x (fp #b0 #b10000010 #b01000000000000000000000)))
 
 ;; H
-  (assert (= x1 (fp #b0 #b10000010 #b01000000000000000000000)))
+  (assert (fp.isFinite32 x))
 
 ;; H
-  (assert (fp.isFinite32 x1))
+  (assert (= y (fp #b0 #b01111101 #b10011001100110011001101)))
 
 ;; H
-  (assert (= result1 y))
-
-;; H
-  (assert (= y1 (fp #b0 #b01111101 #b10011001100110011001101)))
-
-;; H
-  (assert (fp.isFinite32 y1))
+  (assert (fp.isFinite32 y))
 
 ;; H
   (assert
@@ -179,45 +155,47 @@
   (fp.isFinite32 z)))
 
 ;; H
-  (assert (and (= o (fp.add RNE x1 y1)) (fp.isFinite32 (fp.add RNE x1 y1))))
-
-;; H
-  (assert (= result2 z))
+  (assert (= o (fp.add RNE x y)))
 
 ;; H
   (assert (= z1 o))
 
 ;; H
-  (assert
-  (and (fp.leq (fp #b0 #b10000010 #b01001100110011001011100) z1)
-  (fp.leq z1 (fp #b0 #b10000010 #b01001100110011001110001))))
+  (assert (fp.isFinite32 (fp.add RNE x y)))
 
 ;; H
-  (assert (and (= o1 (fp.sub RNE x1 y1)) (fp.isFinite32 (fp.sub RNE x1 y1))))
+  (assert (fp.leq (fp #b0 #b10000010 #b01001100110011001011100) z1))
 
 ;; H
-  (assert (= result3 z1))
+  (assert (fp.leq z1 (fp #b0 #b10000010 #b01001100110011001110001)))
+
+;; H
+  (assert (= o1 (fp.sub RNE x y)))
 
 ;; H
   (assert (= z2 o1))
 
 ;; H
-  (assert
-  (and (fp.leq (fp #b0 #b10000010 #b00110011001100110001111) z2)
-  (fp.leq z2 (fp #b0 #b10000010 #b00110011001100110100100))))
+  (assert (fp.isFinite32 (fp.sub RNE x y)))
 
 ;; H
-  (assert (and (= o2 (fp.mul RNE x1 y1)) (fp.isFinite32 (fp.mul RNE x1 y1))))
+  (assert (fp.leq (fp #b0 #b10000010 #b00110011001100110001111) z2))
 
 ;; H
-  (assert (= result4 z2))
+  (assert (fp.leq z2 (fp #b0 #b10000010 #b00110011001100110100100)))
+
+;; H
+  (assert (= o2 (fp.mul RNE x y)))
 
 ;; H
   (assert (= z3 o2))
 
+;; H
+  (assert (fp.isFinite32 (fp.mul RNE x y)))
+
 (assert
 ;; WP_parameter_def
  ;; File "precise.adb", line 1, characters 0-0
-  (not (fp.leq (fp #b0 #b10000000 #b10110011001100101110000) z3)))
+  (not (fp.leq z3 (fp #b0 #b10000001 #b00000000000000000010101))))
 (check-sat)
 (exit)

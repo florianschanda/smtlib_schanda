@@ -1101,6 +1101,12 @@ axiom coerce_axiom :
 
 type num_delimiters_range
 
+logic num_delimiters_rangeqtint : num_delimiters_range -> int
+
+axiom num_delimiters_rangeqtaxiom :
+  (forall i:num_delimiters_range. ((0 <= num_delimiters_rangeqtint(i)) and
+  (num_delimiters_rangeqtint(i) <= 10)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 10))
 
 logic bool_eq3 : int, int -> bool
@@ -1156,7 +1162,8 @@ num_delimiters_range
 function num_delimiters_range__ref___projection(a: num_delimiters_range__ref) : num_delimiters_range =
   (a).num_delimiters_range__content
 
-logic to_rep1 : num_delimiters_range -> int
+function to_rep1(x: num_delimiters_range) : int =
+  num_delimiters_rangeqtint(x)
 
 logic of_rep1 : int -> num_delimiters_range
 
@@ -1171,6 +1178,12 @@ axiom coerce_axiom1 :
   (to_rep1(of_rep1(x)) = x)))
 
 type function_range
+
+logic function_rangeqtint : function_range -> int
+
+axiom function_rangeqtaxiom :
+  (forall i:function_range. ((0 <= function_rangeqtint(i)) and
+  (function_rangeqtint(i) <= 2147483647)))
 
 predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
 
@@ -1196,7 +1209,7 @@ type function_range__ref = { function_range__content : function_range
 function function_range__ref___projection(a: function_range__ref) : function_range =
   (a).function_range__content
 
-logic to_rep2 : function_range -> int
+function to_rep2(x: function_range) : int = function_rangeqtint(x)
 
 logic of_rep2 : int -> function_range
 
@@ -1216,6 +1229,9 @@ function_range; rec__step_function__delimiter_entry__value : float1
 
 function us_split_fields_Delimiter__projection(a: us_split_fields) : function_range =
   (a).rec__step_function__delimiter_entry__delimiter
+
+function us_split_fields_Value__projection(a: us_split_fields) : float1 =
+  (a).rec__step_function__delimiter_entry__value
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1524,6 +1540,13 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tnum_delimiters_rangeB
 
+logic tnum_delimiters_rangeBqtint : tnum_delimiters_rangeB -> int
+
+axiom tnum_delimiters_rangeBqtaxiom :
+  (forall i:tnum_delimiters_rangeB.
+  (((- 128) <= tnum_delimiters_rangeBqtint(i)) and
+  (tnum_delimiters_rangeBqtint(i) <= 127)))
+
 predicate in_range4(x1: int) = (((- 128) <= x1) and (x1 <= 127))
 
 logic bool_eq9 : int, int -> bool
@@ -1549,7 +1572,8 @@ tnum_delimiters_rangeB
 function tnum_delimiters_rangeB__ref___projection(a: tnum_delimiters_rangeB__ref) : tnum_delimiters_rangeB =
   (a).tnum_delimiters_rangeB__content
 
-logic to_rep3 : tnum_delimiters_rangeB -> int
+function to_rep3(x1: tnum_delimiters_rangeB) : int =
+  tnum_delimiters_rangeBqtint(x1)
 
 logic of_rep3 : int -> tnum_delimiters_rangeB
 
@@ -1597,7 +1621,7 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 6154, characters 5-8 *)
 goal WP_parameter_def :
   (forall min1:t. forall i:int. forall j:int. forall o:int.
   forall o1:function_range. forall o2:float1. forall o3:function_range.
@@ -1627,4 +1651,4 @@ goal WP_parameter_def :
   rec__step_function__delimiter_entry__delimiter = o1;
   rec__step_function__delimiter_entry__value = o2 } } = (sfun1[o]))) and
   ((o1 = o3) and (o2 = o4))) and (o5 = o3)) and (o6 = to_rep2(o5))) ->
-  (0 <= (j - 1)))))))))))))))
+  ((j - 1) <= 10))))))))))))))

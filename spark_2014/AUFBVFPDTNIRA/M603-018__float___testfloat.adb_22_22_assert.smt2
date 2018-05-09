@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -130,15 +126,11 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const t Float32)
-
 (declare-const o Float32)
 
 (declare-const o1 Float32)
 
-(declare-const result Float32)
-
-(declare-const t1 Float32)
+(declare-const t Float32)
 
 ;; H
   (assert (fp.isFinite32 x))
@@ -150,30 +142,43 @@
   (assert (fp.isFinite32 z))
 
 ;; H
-  (assert
-  (and (and (fp.leq x z) (fp.leq z y))
-  (and
-  (and (fp.leq (fp.neg (fp #b0 #b10000010 #b01000000000000000000000))
-  x) (fp.leq x (fp #b0 #b10000010 #b01000000000000000000000)))
-  (and (fp.eq y (fp.add RNE x (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (fp.eq (fp.roundToIntegral RTN z) x)
-  (fp.eq (fp.roundToIntegral RTP z) y))))))
+  (assert (fp.leq x z))
 
 ;; H
-  (assert (and (= o (fp.add RNE x y)) (fp.isFinite32 (fp.add RNE x y))))
+  (assert (fp.leq z y))
+
+;; H
+  (assert (fp.leq (fp.neg (fp #b0 #b10000010 #b01000000000000000000000))
+  x))
+
+;; H
+  (assert (fp.leq x (fp #b0 #b10000010 #b01000000000000000000000)))
+
+;; H
+  (assert
+  (fp.eq y (fp.add RNE x (fp #b0 #b01111111 #b00000000000000000000000))))
+
+;; H
+  (assert (fp.eq (fp.roundToIntegral RTN z) x))
+
+;; H
+  (assert (fp.eq (fp.roundToIntegral RTP z) y))
+
+;; H
+  (assert (= o (fp.add RNE x y)))
+
+;; H
+  (assert (fp.isFinite32 (fp.add RNE x y)))
 
 ;; H
   (assert
   (= o1 (fp.div RNE o (fp #b0 #b10000000 #b00000000000000000000000))))
 
 ;; H
-  (assert (= result t))
+  (assert (= t o1))
 
 ;; H
-  (assert (= t1 o1))
-
-;; H
-  (assert (fp.isFinite32 t1))
+  (assert (fp.isFinite32 t))
 
 ;; H
   (assert (fp.eq (fp.roundToIntegral RTN x) x))

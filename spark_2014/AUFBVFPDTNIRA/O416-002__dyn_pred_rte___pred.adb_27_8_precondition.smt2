@@ -10,6 +10,8 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
+(define-fun __cdiv ((x Int) (y Int)) Int (ite (>= x 0) (div x y) (- (div (- x) y))))
+(define-fun __cmod ((x Int) (y Int)) Int (ite (>= x 0) (mod x y) (- (mod (- x) y))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 
@@ -52,10 +54,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +76,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +92,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -113,7 +118,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -133,6 +138,13 @@
 
 (declare-sort positive 0)
 
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
@@ -150,7 +162,7 @@
 (define-fun positive__ref___projection ((a positive__ref)) positive (positive__content
                                                                     a))
 
-(declare-fun to_rep1 (positive) Int)
+(define-fun to_rep1 ((x positive)) Int (positiveqtint x))
 
 (declare-fun of_rep1 (Int) positive)
 
@@ -204,76 +216,7 @@
   (! (=> (fp.isFinite32 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                                   (of_rep2 x))) )))
 
-(declare-fun div1 (Int Int) Int)
-
-(declare-fun mod1 (Int Int) Int)
-
-;; Div_mod
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (not (= y 0)) (= x (+ (* y (div1 x y)) (mod1 x y))))))
-
-;; Div_bound
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (and (<= 0 x) (< 0 y)) (and (<= 0 (div1 x y)) (<= (div1 x y) x)))))
-
-;; Mod_bound
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (not (= y 0)) (and (< (- (abs y)) (mod1 x y)) (< (mod1 x y) (abs y))))))
-
-;; Div_sign_pos
-  (assert
-  (forall ((x Int) (y Int)) (=> (and (<= 0 x) (< 0 y)) (<= 0 (div1 x y)))))
-
-;; Div_sign_neg
-  (assert
-  (forall ((x Int) (y Int)) (=> (and (<= x 0) (< 0 y)) (<= (div1 x y) 0))))
-
-;; Mod_sign_pos
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (and (<= 0 x) (not (= y 0))) (<= 0 (mod1 x y)))))
-
-;; Mod_sign_neg
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (and (<= x 0) (not (= y 0))) (<= (mod1 x y) 0))))
-
-;; Rounds_toward_zero
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (not (= y 0)) (<= (abs (* (div1 x y) y)) (abs x)))))
-
-;; Div_1
-  (assert (forall ((x Int)) (= (div1 x 1) x)))
-
-;; Mod_1
-  (assert (forall ((x Int)) (= (mod1 x 1) 0)))
-
-;; Div_inf
-  (assert
-  (forall ((x Int) (y Int)) (=> (and (<= 0 x) (< x y)) (= (div1 x y) 0))))
-
-;; Mod_inf
-  (assert
-  (forall ((x Int) (y Int)) (=> (and (<= 0 x) (< x y)) (= (mod1 x y) x))))
-
-;; Div_mult
-  (assert
-  (forall ((x Int) (y Int) (z Int))
-  (! (=> (and (< 0 x) (and (<= 0 y) (<= 0 z)))
-     (= (div1 (+ (* x y) z) x) (+ y (div1 z x)))) :pattern ((div1
-                                                            (+ (* x y) z) x)) )))
-
-;; Mod_mult
-  (assert
-  (forall ((x Int) (y Int) (z Int))
-  (! (=> (and (< 0 x) (and (<= 0 y) (<= 0 z)))
-     (= (mod1 (+ (* x y) z) x) (mod1 z x))) :pattern ((mod1 (+ (* x y) z) x)) )))
-
-(define-fun mod2 ((x Int)
+(define-fun mod1 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
 
 (define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
@@ -293,7 +236,7 @@
 ;; prop____def_axiom
   (assert
   (forall ((x Int))
-  (! (= (= (prop__ x) true) (not (= (mod2 10 x) 0))) :pattern ((prop__ x)) )))
+  (! (= (= (prop__ x) true) (not (= (mod1 10 x) 0))) :pattern ((prop__ x)) )))
 
 (declare-datatypes ()
 ((us_split_discrs (mk___split_discrs (rec__pred__r__d positive)))))
@@ -312,6 +255,9 @@
  (rec__pred__r__c1 integer)(rec__pred__r__c2 float)(rec__pred__r__c3 Bool)))))
 (define-fun us_split_fields_C1__projection ((a us_split_fields)) integer
   (rec__pred__r__c1 a))
+
+(define-fun us_split_fields_C2__projection ((a us_split_fields)) float
+  (rec__pred__r__c2 a))
 
 (define-fun us_split_fields_C3__projection ((a us_split_fields)) Bool
   (rec__pred__r__c3 a))

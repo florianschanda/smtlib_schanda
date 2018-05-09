@@ -48,40 +48,18 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+(define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
+                                        (and
+                                        (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                        (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
 
-(define-fun dynamic_invariant ((temp___expr_534 Int)
-  (temp___is_init_530 Bool) (temp___skip_constant_531 Bool)
-  (temp___do_toplevel_532 Bool)
-  (temp___do_typ_inv_533 Bool)) Bool (=>
-                                     (or (= temp___is_init_530 true)
-                                     (<= 0 255)) (in_range temp___expr_534)))
-
-(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
-
-(define-fun dynamic_invariant1 ((temp___expr_580 Float32)
-  (temp___is_init_576 Bool) (temp___skip_constant_577 Bool)
-  (temp___do_toplevel_578 Bool)
-  (temp___do_typ_inv_579 Bool)) Bool (=>
-                                     (or (= temp___is_init_576 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                     (in_range1 temp___expr_580)))
-
-(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b10000010 #b10000000000000000000000)))))
-
-(define-fun dynamic_invariant2 ((temp___expr_587 Float32)
+(define-fun dynamic_invariant ((temp___expr_587 Float32)
   (temp___is_init_583 Bool) (temp___skip_constant_584 Bool)
   (temp___do_toplevel_585 Bool)
   (temp___do_typ_inv_586 Bool)) Bool (=>
                                      (or (= temp___is_init_583 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
-                                     (in_range2 temp___expr_587)))
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
+                                     (in_range temp___expr_587)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -89,37 +67,59 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b10000010 #b10000000000000000000000)))))
+
+(define-fun dynamic_invariant1 ((temp___expr_595 Float32)
+  (temp___is_init_591 Bool) (temp___skip_constant_592 Bool)
+  (temp___do_toplevel_593 Bool)
+  (temp___do_typ_inv_594 Bool)) Bool (=>
+                                     (or (= temp___is_init_591 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
+                                     (in_range1 temp___expr_595)))
+
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+
+(define-fun dynamic_invariant2 ((temp___expr_527 Int)
+  (temp___is_init_523 Bool) (temp___skip_constant_524 Bool)
+  (temp___do_toplevel_525 Bool)
+  (temp___do_typ_inv_526 Bool)) Bool (=>
+                                     (or (= temp___is_init_523 true)
+                                     (<= 0 255)) (in_range2 temp___expr_527)))
+
 (define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
 
-(define-fun dynamic_invariant3 ((temp___expr_594 Float32)
-  (temp___is_init_590 Bool) (temp___skip_constant_591 Bool)
-  (temp___do_toplevel_592 Bool)
-  (temp___do_typ_inv_593 Bool)) Bool (=>
-                                     (or (= temp___is_init_590 true)
+(define-fun dynamic_invariant3 ((temp___expr_573 Float32)
+  (temp___is_init_569 Bool) (temp___skip_constant_570 Bool)
+  (temp___do_toplevel_571 Bool)
+  (temp___do_typ_inv_572 Bool)) Bool (=>
+                                     (or (= temp___is_init_569 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                     (in_range3 temp___expr_594)))
-
-(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+                                     (in_range3 temp___expr_573)))
 
 (define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000010 #b10000000000000000000000)))))
 
-(define-fun dynamic_invariant4 ((temp___expr_602 Float32)
-  (temp___is_init_598 Bool) (temp___skip_constant_599 Bool)
-  (temp___do_toplevel_600 Bool)
-  (temp___do_typ_inv_601 Bool)) Bool (=>
-                                     (or (= temp___is_init_598 true)
+(define-fun dynamic_invariant4 ((temp___expr_580 Float32)
+  (temp___is_init_576 Bool) (temp___skip_constant_577 Bool)
+  (temp___do_toplevel_578 Bool)
+  (temp___do_typ_inv_579 Bool)) Bool (=>
+                                     (or (= temp___is_init_576 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000)))
-                                     (in_range4 temp___expr_602)))
+                                     (in_range4 temp___expr_580)))
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
@@ -164,43 +164,43 @@
 (declare-const wall_thickness1 Float32)
 
 ;; H
-  (assert (in_range default_fore))
+  (assert (in_range2 default_fore))
 
 ;; H
-  (assert (in_range default_aft))
+  (assert (in_range2 default_aft))
 
 ;; H
-  (assert (in_range default_exp))
+  (assert (in_range2 default_exp))
 
 ;; H
-  (assert (in_range default_fore1))
+  (assert (in_range2 default_fore1))
 
 ;; H
-  (assert (in_range default_aft1))
+  (assert (in_range2 default_aft1))
 
 ;; H
-  (assert (in_range default_exp1))
+  (assert (in_range2 default_exp1))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000))
-  (in_range1 room_length)))
+  (in_range3 room_length)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000010 #b10000000000000000000000))
-  (in_range2 wall_thickness)))
+  (in_range4 wall_thickness)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000))
-  (in_range1 total)))
+  (in_range3 total)))
 
 ;; H
-  (assert (in_range3 good_types__feet_io__get__2__item))
+  (assert (in_range good_types__feet_io__get__2__item))
 
 ;; H
   (assert (= result room_length))
@@ -209,7 +209,7 @@
   (assert (= room_length1 good_types__feet_io__get__2__item))
 
 ;; H
-  (assert (in_range4 good_types__inch_io__get__2__item))
+  (assert (in_range1 good_types__inch_io__get__2__item))
 
 ;; H
   (assert (= result1 wall_thickness))
@@ -221,12 +221,12 @@
   (assert (= wall_thickness1 c3b))
 
 ;; H
-  (assert (in_range2 c3b))
+  (assert (in_range4 c3b))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-tiflio.ads", line 80, characters 0-0
-  (not (in_range1
+  (not (in_range3
   (fp.add RNE room_length1 (fp.mul RNE (fp #b0 #b10000000 #b00000000000000000000000) (fp.div RNE
   c3b (fp #b0 #b10000010 #b10000000000000000000000)))))))
 (check-sat)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -187,54 +183,52 @@
 
 (declare-const o3 Float32)
 
-(declare-const o4 Float32)
-
-(declare-const o5 Float32)
-
-(declare-const o6 Float32)
-
 ;; H
   (assert (fp.isFinite32 x))
 
 ;; H
-  (assert
-  (and (= o5 (pow8 x))
-  (and (fp.isFinite32 o5)
-  (= o5 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
-  x x) x) x) x) x) x) x)))))
+  (assert (= o3 (pow8 x)))
+
+;; H
+  (assert (fp.isFinite32 o3))
 
 ;; H
   (assert
-  (= o6 (fp.div RNE o5 (fp #b0 #b10001110 #b00111011000000000000000))))
+  (= o3 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
+  x x) x) x) x) x) x) x)))
+
+;; H
+  (assert (= o2 (pow6 x)))
+
+;; H
+  (assert (fp.isFinite32 o2))
 
 ;; H
   (assert
-  (and (= o3 (pow6 x))
-  (and (fp.isFinite32 o3)
-  (= o3 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x
-  x) x) x) x) x)))))
+  (= o2 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x
+  x) x) x) x) x)))
 
 ;; H
-  (assert
-  (= o4 (fp.div RNE o3 (fp #b0 #b10001000 #b01101000000000000000000))))
+  (assert (= o1 (pow4 x)))
 
 ;; H
-  (assert
-  (and (= o1 (pow4 x))
-  (and (fp.isFinite32 o1)
-  (= o1 (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x)))))
+  (assert (fp.isFinite32 o1))
 
 ;; H
-  (assert
-  (= o2 (fp.div RNE o1 (fp #b0 #b10000011 #b10000000000000000000000))))
+  (assert (= o1 (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x)))
 
 ;; H
-  (assert
-  (and (= o (pow21 x)) (and (fp.isFinite32 o) (= o (fp.mul RNE x x)))))
+  (assert (= o (pow21 x)))
+
+;; H
+  (assert (fp.isFinite32 o))
+
+;; H
+  (assert (= o (fp.mul RNE x x)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 5350, characters 5-8
   (not (not (fp.isZero (fp #b0 #b10000000 #b00000000000000000000000)))))
 (check-sat)
 (exit)

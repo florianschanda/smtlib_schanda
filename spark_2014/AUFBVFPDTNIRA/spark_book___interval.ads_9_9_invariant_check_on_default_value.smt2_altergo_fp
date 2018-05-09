@@ -1072,7 +1072,14 @@ axiom coerce_axiom :
   (to_rep(of_rep(x)) = x)))
 
 type us_split_fields = { rec__interval__interval__low : float1;
-rec__interval__interval__high : float1 }
+rec__interval__interval__high : float1
+}
+
+function us_split_fields_Low__projection(a: us_split_fields) : float1 =
+  (a).rec__interval__interval__low
+
+function us_split_fields_High__projection(a: us_split_fields) : float1 =
+  (a).rec__interval__interval__high
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }

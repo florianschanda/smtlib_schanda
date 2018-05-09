@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -274,8 +270,7 @@
   (= (= result3 true)
   (exists ((y Int))
   (and (and (<= 0 y) (<= y 100000))
-  (fp.eq x4 (fp.mul RNE (fp.div RNE (of_int RNE y) (fp #b0 #b10001111 #b10000110101000000000000)) (fp.div RNE
-  (of_int RNE y) (fp #b0 #b10001111 #b10000110101000000000000))))))))
+  (fp.eq x4 (fp.mul RNE (fp.div RNE ((_ to_fp 8 24) RNE (to_real y)) (fp #b0 #b10001111 #b10000110101000000000000)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real y)) (fp #b0 #b10001111 #b10000110101000000000000))))))))
 
 ;; H
   (assert

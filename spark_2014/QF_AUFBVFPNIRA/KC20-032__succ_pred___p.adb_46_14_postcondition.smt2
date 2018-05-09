@@ -108,7 +108,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/KC20-032__succ_pred/gnatprove/p.mlw", line 4452, characters 5-8
   (not (fp.eq p__ident__5__result4 f)))
 (check-sat)
 (exit)

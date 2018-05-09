@@ -38,6 +38,33 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
+(declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
+(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
+                                    (<= x 2147483647)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
+
+(declare-fun user_eq (integer integer) Bool)
+
+(declare-const dummy integer)
+
+(declare-datatypes ()
+((integer__ref (mk_integer__ref (integer__content integer)))))
+(define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
+                                                                 a))
+
 (declare-fun pow2 (Int) Int)
 
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
@@ -51,10 +78,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -78,7 +101,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -87,36 +110,56 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
 
-(declare-fun user_eq (float float) Bool)
+(declare-fun user_eq1 (float float) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE (Float32) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE (us_image) Float32)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
 
-(declare-const dummy float)
+(declare-const dummy1 float)
 
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-fun to_rep (float) Float32)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
-(declare-fun of_rep (Float32) float)
+(declare-fun of_rep (Int) integer)
 
 ;; inversion_axiom
   (assert
-  (forall ((x float)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x float)) (! (fp.isFinite32 (to_rep x)) :pattern ((to_rep x)) )))
+  (forall ((x integer)) (! (in_range (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
+
+(declare-fun to_rep1 (float) Float32)
+
+(declare-fun of_rep1 (Float32) float)
+
+;; inversion_axiom
+  (assert
+  (forall ((x float))
+  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x float))
+  (! (fp.isFinite32 (to_rep1 x)) :pattern ((to_rep1 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                                (of_rep x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
+                                                                  (of_rep1 x))) )))
 
 (declare-sort map1 0)
 
@@ -178,9 +221,9 @@
                              (<= temp___idx_155 a__last))
                              (and (<= a__first_2 temp___idx_156)
                              (<= temp___idx_156 a__last_2)))
-                             (= (to_rep
+                             (= (to_rep1
                                 (get a temp___idx_155 temp___idx_156))
-                             (to_rep
+                             (to_rep1
                              (get b (+ (- b__first a__first) temp___idx_155)
                              (+ (- b__first_2 a__first_2) temp___idx_156)))))))
                         true false))
@@ -206,49 +249,10 @@
   (=>
   (and (and (<= a__first temp___idx_155) (<= temp___idx_155 a__last))
   (and (<= a__first_2 temp___idx_156) (<= temp___idx_156 a__last_2)))
-  (= (to_rep (get a temp___idx_155 temp___idx_156)) (to_rep
-                                                    (get b
-                                                    (+ (- b__first a__first) temp___idx_155)
-                                                    (+ (- b__first_2 a__first_2) temp___idx_156)))))))))))
-
-(declare-sort integer 0)
-
-(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
-                                    (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (integer integer) Bool)
-
-(declare-const dummy1 integer)
-
-(declare-datatypes ()
-((integer__ref (mk_integer__ref (integer__content integer)))))
-(define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
-                                                                 a))
-
-(declare-fun to_rep1 (integer) Int)
-
-(declare-fun of_rep1 (Int) integer)
-
-;; inversion_axiom
-  (assert
-  (forall ((x integer))
-  (! (= (of_rep1 (to_rep1 x)) x) :pattern ((to_rep1 x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x integer)) (! (in_range (to_rep1 x)) :pattern ((to_rep1 x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range x) (= (to_rep1 (of_rep1 x)) x)) :pattern ((to_rep1
-                                                             (of_rep1 x))) )))
+  (= (to_rep1 (get a temp___idx_155 temp___idx_156)) (to_rep1
+                                                     (get b
+                                                     (+ (- b__first a__first) temp___idx_155)
+                                                     (+ (- b__first_2 a__first_2) temp___idx_156)))))))))))
 
 (declare-sort t 0)
 
@@ -263,7 +267,7 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep1 (first (mk f l))) f) (= (to_rep1 (last (mk f l))) l)))) :pattern (
+     (and (= (to_rep (first (mk f l))) f) (= (to_rep (last (mk f l))) l)))) :pattern (
   (mk f l)) )))
 
 (define-fun dynamic_property ((range_first Int) (range_last Int) (low Int)
@@ -284,8 +288,8 @@
   (forall ((f Int) (l Int))
   (! (=> (in_range f)
      (=> (in_range l)
-     (and (= (to_rep1 (first1 (mk1 f l))) f)
-     (= (to_rep1 (last1 (mk1 f l))) l)))) :pattern ((mk1 f l)) )))
+     (and (= (to_rep (first1 (mk1 f l))) f) (= (to_rep (last1 (mk1 f l))) l)))) :pattern (
+  (mk1 f l)) )))
 
 (define-fun dynamic_property1 ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range low)
@@ -298,16 +302,16 @@
 (define-fun of_array ((a map1) (f Int) (l Int) (f2 Int)
   (l2 Int)) us_t (mk___t a (mk f l) (mk1 f2 l2)))
 
-(define-fun first2 ((a us_t)) Int (to_rep1 (first (rt a))))
+(define-fun first2 ((a us_t)) Int (to_rep (first (rt a))))
 
-(define-fun last2 ((a us_t)) Int (to_rep1 (last (rt a))))
+(define-fun last2 ((a us_t)) Int (to_rep (last (rt a))))
 
 (define-fun length ((a us_t)) Int (ite (<= (first2 a) (last2 a))
                                   (+ (- (last2 a) (first2 a)) 1) 0))
 
-(define-fun first_2 ((a us_t)) Int (to_rep1 (first1 (rt_2 a))))
+(define-fun first_2 ((a us_t)) Int (to_rep (first1 (rt_2 a))))
 
-(define-fun last_2 ((a us_t)) Int (to_rep1 (last1 (rt_2 a))))
+(define-fun last_2 ((a us_t)) Int (to_rep (last1 (rt_2 a))))
 
 (define-fun length_2 ((a us_t)) Int (ite (<= (first_2 a) (last_2 a))
                                     (+ (- (last_2 a) (first_2 a)) 1) 0))
@@ -348,11 +352,11 @@
   (assert (forall ((a map1)) (<= 0 (object__alignment a))))
 
 (define-fun bool_eq1 ((x us_t)
-  (y us_t)) Bool (bool_eq (elts x) (to_rep1 (first (rt x)))
-                 (to_rep1 (last (rt x))) (to_rep1 (first1 (rt_2 x)))
-                 (to_rep1 (last1 (rt_2 x))) (elts y) (to_rep1 (first (rt y)))
-                 (to_rep1 (last (rt y))) (to_rep1 (first1 (rt_2 y)))
-                 (to_rep1 (last1 (rt_2 y)))))
+  (y us_t)) Bool (bool_eq (elts x) (to_rep (first (rt x)))
+                 (to_rep (last (rt x))) (to_rep (first1 (rt_2 x)))
+                 (to_rep (last1 (rt_2 x))) (elts y) (to_rep (first (rt y)))
+                 (to_rep (last (rt y))) (to_rep (first1 (rt_2 y)))
+                 (to_rep (last1 (rt_2 y)))))
 
 (declare-fun user_eq2 (us_t us_t) Bool)
 
@@ -362,6 +366,10 @@
 ((real_matrix__ref (mk_real_matrix__ref (real_matrix__content us_t)))))
 (define-fun real_matrix__ref___projection ((a real_matrix__ref)) us_t
   (real_matrix__content a))
+
+(declare-fun transpose1 (us_t) us_t)
+
+(declare-fun transpose__function_guard (us_t us_t) Bool)
 
 (define-fun dynamic_invariant ((temp___expr_230 us_t)
   (temp___is_init_226 Bool) (temp___skip_constant_227 Bool)
@@ -374,15 +382,11 @@
                                      2147483647 (first_2 temp___expr_230)
                                      (last_2 temp___expr_230))))
 
-(declare-fun transpose (us_t) us_t)
-
-(declare-fun transpose__function_guard (us_t us_t) Bool)
-
 ;; transpose__post_axiom
   (assert
   (forall ((x us_t))
   (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
-     (transpose x) true false true true)) :pattern ((transpose x)) )))
+     (transpose1 x) true false true true)) :pattern ((transpose1 x)) )))
 
 (declare-fun omultiply__4 (us_t us_t) us_t)
 
@@ -397,6 +401,13 @@
      true false true true)) :pattern ((omultiply__4 left right)) )))
 
 (declare-sort taxa_matrixP1 0)
+
+(declare-fun taxa_matrixP1qtint (taxa_matrixP1) Int)
+
+;; taxa_matrixP1'axiom
+  (assert
+  (forall ((i taxa_matrixP1))
+  (and (<= 1 (taxa_matrixP1qtint i)) (<= (taxa_matrixP1qtint i) 3))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
@@ -418,6 +429,13 @@
 
 (declare-sort taxa_matrixP2 0)
 
+(declare-fun taxa_matrixP2qtint (taxa_matrixP2) Int)
+
+;; taxa_matrixP2'axiom
+  (assert
+  (forall ((i taxa_matrixP2))
+  (and (<= 1 (taxa_matrixP2qtint i)) (<= (taxa_matrixP2qtint i) 3))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -437,6 +455,13 @@
   (taxa_matrixP2__content a))
 
 (declare-sort taxb_matrixP1 0)
+
+(declare-fun taxb_matrixP1qtint (taxb_matrixP1) Int)
+
+;; taxb_matrixP1'axiom
+  (assert
+  (forall ((i taxb_matrixP1))
+  (and (<= 1 (taxb_matrixP1qtint i)) (<= (taxb_matrixP1qtint i) 3))))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 1 x) (<= x 3)))
 
@@ -458,6 +483,13 @@
 
 (declare-sort taxb_matrixP2 0)
 
+(declare-fun taxb_matrixP2qtint (taxb_matrixP2) Int)
+
+;; taxb_matrixP2'axiom
+  (assert
+  (forall ((i taxb_matrixP2))
+  (and (<= 1 (taxb_matrixP2qtint i)) (<= (taxb_matrixP2qtint i) 2))))
+
 (define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
@@ -478,6 +510,13 @@
 
 (declare-sort tbxb_matrixP1 0)
 
+(declare-fun tbxb_matrixP1qtint (tbxb_matrixP1) Int)
+
+;; tbxb_matrixP1'axiom
+  (assert
+  (forall ((i tbxb_matrixP1))
+  (and (<= 1 (tbxb_matrixP1qtint i)) (<= (tbxb_matrixP1qtint i) 2))))
+
 (define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
@@ -497,6 +536,13 @@
   (tbxb_matrixP1__content a))
 
 (declare-sort tbxb_matrixP2 0)
+
+(declare-fun tbxb_matrixP2qtint (tbxb_matrixP2) Int)
+
+;; tbxb_matrixP2'axiom
+  (assert
+  (forall ((i tbxb_matrixP2))
+  (and (<= 1 (tbxb_matrixP2qtint i)) (<= (tbxb_matrixP2qtint i) 2))))
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -566,8 +612,8 @@
 
 ;; H
   (assert
-  (and (= o7 (transpose (mk___t map2 (mk 1 3) (mk1 1 2)))) (dynamic_invariant
-  o7 true false true true)))
+  (and (= o7 (transpose1 (mk___t map2 (mk 1 3) (mk1 1 2))))
+  (dynamic_invariant o7 true false true true)))
 
 ;; H
   (assert
@@ -583,8 +629,8 @@
 ;; WP_parameter_def
  ;; File "specific_matrix_other.ads", line 17, characters 0-0
   (not
-  (= (ite (<= (to_rep1 (first temp___17921)) (to_rep1 (last temp___17921)))
-     (+ (- (to_rep1 (last temp___17921)) (to_rep1 (first temp___17921))) 1)
+  (= (ite (<= (to_rep (first1 temp___17922)) (to_rep (last1 temp___17922)))
+     (+ (- (to_rep (last1 temp___17922)) (to_rep (first1 temp___17922))) 1)
      0) (ite (<= 1 2) (+ (- 2 1) 1) 0))))
 (check-sat)
 (exit)

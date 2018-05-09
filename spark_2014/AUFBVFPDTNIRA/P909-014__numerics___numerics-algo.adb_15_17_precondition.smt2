@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,13 +74,17 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
+(declare-fun oadd (Float32 Float32) Float32)
+
+(declare-fun oadd__function_guard (Float32 Float32 Float32) Bool)
+
 (declare-sort t_float 0)
 
 (declare-fun user_eq (t_float t_float) Bool)
@@ -109,10 +109,6 @@
                                      (or (= temp___is_init_161 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_165)))
-
-(declare-fun oadd (Float32 Float32) Float32)
-
-(declare-fun oadd__function_guard (Float32 Float32 Float32) Bool)
 
 ;; oadd__post_axiom
   (assert

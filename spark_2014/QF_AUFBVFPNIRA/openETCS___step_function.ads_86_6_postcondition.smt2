@@ -226,9 +226,12 @@
 ;; H
   (assert (= i4 i2))
 
+;; H
+  (assert (= scan3 true))
+
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (= i3 (+ i 1))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 6451, characters 5-8
+  (not (= scan true)))
 (check-sat)
 (exit)

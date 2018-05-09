@@ -106,9 +106,7 @@
   (assert (fp.lt y (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert
-  (fp.leq (fp.div RNE x (fp #b0 #b10001000 #b11110100000000000000000))
-  y))
+  (assert (fp.leq (fp.div RNE x threshold) y))
 
 ;; H
   (assert (and (= o (fp.div RNE x y)) (fp.isFinite32 (fp.div RNE x y))))
@@ -122,6 +120,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 23, characters 0-0
-  (not (fp.leq res1 (fp #b0 #b10001000 #b11110100000000000000000))))
+  (not (fp.leq res1 threshold)))
 (check-sat)
 (exit)

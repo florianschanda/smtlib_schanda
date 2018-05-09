@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -188,30 +184,42 @@
   (assert (fp.isFinite32 x))
 
 ;; H
+  (assert (= o7 (pow7 x)))
+
+;; H
+  (assert (fp.isFinite32 o7))
+
+;; H
   (assert
-  (and (= o7 (pow7 x))
-  (and (fp.isFinite32 o7)
   (= o7 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE
-  x x) x) x) x) x) x)))))
+  x x) x) x) x) x) x)))
 
 ;; H
   (assert
   (= o8 (fp.div RNE o7 (fp #b0 #b10001011 #b00111011000000000000000))))
 
 ;; H
+  (assert (= o3 (pow5 x)))
+
+;; H
+  (assert (fp.isFinite32 o3))
+
+;; H
   (assert
-  (and (= o3 (pow5 x))
-  (and (fp.isFinite32 o3)
-  (= o3 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x)))))
+  (= o3 (fp.mul RNE (fp.mul RNE (fp.mul RNE (fp.mul RNE x x) x) x) x)))
 
 ;; H
   (assert
   (= o4 (fp.div RNE o3 (fp #b0 #b10000101 #b11100000000000000000000))))
 
 ;; H
-  (assert
-  (and (= o (pow3 x))
-  (and (fp.isFinite32 o) (= o (fp.mul RNE (fp.mul RNE x x) x)))))
+  (assert (= o (pow3 x)))
+
+;; H
+  (assert (fp.isFinite32 o))
+
+;; H
+  (assert (= o (fp.mul RNE (fp.mul RNE x x) x)))
 
 ;; H
   (assert
@@ -221,20 +229,26 @@
   (assert (= o2 (fp.sub RNE x o1)))
 
 ;; H
-  (assert (and (= o5 o2) (fp.isFinite32 o2)))
+  (assert (= o5 o2))
+
+;; H
+  (assert (fp.isFinite32 o2))
 
 ;; H
   (assert (= o6 (fp.add RNE o5 o4)))
 
 ;; H
-  (assert (and (= o9 o6) (fp.isFinite32 o6)))
+  (assert (= o9 o6))
+
+;; H
+  (assert (fp.isFinite32 o6))
 
 ;; H
   (assert (= o10 (fp.sub RNE o9 o8)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 5234, characters 5-8
   (not (fp.isFinite32 o10)))
 (check-sat)
 (exit)

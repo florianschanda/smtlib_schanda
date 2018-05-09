@@ -38,8 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(declare-fun nth ((_ BitVec 16) Int) Bool)
-
 (declare-fun lsr ((_ BitVec 16) Int) (_ BitVec 16))
 
 (declare-fun asr ((_ BitVec 16) Int) (_ BitVec 16))
@@ -57,70 +55,6 @@
                                             (- (- 65536 (bv2nat x)))))
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvlshr x n) (lsr x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvashr x n) (asr x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvshl x n) (lsl x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
-  (rotate_left1 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
-  (rotate_right1 v (bv2nat n)))))
-
-(declare-fun nth_bv ((_ BitVec 16) (_ BitVec 16)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 16)) (i (_ BitVec 16)))
-  (= (= (nth_bv x i) true) (not (= (bvand (bvlshr x i) #x0001) #x0000)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 16)) (i (_ BitVec 16)))
-  (= (nth x (bv2nat i)) (nth_bv x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 16)) (i Int))
-  (=> (and (<= 0 i) (< i 65536)) (= (nth_bv x ((_ int2bv 16) i)) (nth x i)))))
-
-(declare-fun eq_sub_bv ((_ BitVec 16) (_ BitVec 16) (_ BitVec 16)
-  (_ BitVec 16)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 16)) (b (_ BitVec 16)) (i (_ BitVec 16))
-  (n (_ BitVec 16)))
-  (let ((mask (bvshl (bvsub (bvshl #x0001 n) #x0001) i)))
-  (= (eq_sub_bv a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth a j) (nth b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 16)) (b (_ BitVec 16)) (i (_ BitVec 16))
-  (n (_ BitVec 16)))
-  (= (eq_sub a b (bv2nat i) (bv2nat n)) (eq_sub_bv a b i n))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content (_ BitVec 16))))))
 (declare-fun power ((_ BitVec 16) Int) (_ BitVec 16))
@@ -142,10 +76,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int2 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -169,7 +99,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -232,7 +162,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "test.adb", line 7, characters 0-0
-  (not
-  (fp.leq (fp.neg (fp #b0 #b01110001 #b10100011011011100010111)) value1)))
+  (not (fp.leq value1 (fp #b0 #b01110001 #b10100011011011100010111))))
 (check-sat)
 (exit)

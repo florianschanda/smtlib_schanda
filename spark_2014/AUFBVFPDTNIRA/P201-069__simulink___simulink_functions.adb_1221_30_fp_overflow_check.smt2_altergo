@@ -972,7 +972,7 @@ logic fliteral4 : t
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.0e-1))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 24069, characters 5-8 *)
 goal WP_parameter_def :
   (forall result__:t. forall o:t. forall o1:t. forall o2:t. forall result:t.
   forall result__1:t. (tqtisFinite(left) -> (tqtisFinite(right) ->
@@ -983,4 +983,4 @@ goal WP_parameter_def :
   right, left))) and (o1 = neg(o))) and ((o2 = atan__2(o1)) and
   tqtisFinite(o2))) and ((result = result__) and (result__1 = o2))) ->
   (le(left, fliteral4) -> tqtisFinite(sub(RNE, result__1,
-  fliteral2))))))))))))
+  pi_over_two))))))))))))

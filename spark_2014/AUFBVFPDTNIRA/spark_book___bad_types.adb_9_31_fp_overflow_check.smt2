@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -123,13 +119,13 @@
 (declare-datatypes () ((num__ref (mk_num__ref (num__content num)))))
 (define-fun num__ref___projection ((a num__ref)) num (num__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_579 Float32)
-  (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
-  (temp___do_toplevel_577 Bool)
-  (temp___do_typ_inv_578 Bool)) Bool (=>
-                                     (or (= temp___is_init_575 true)
+(define-fun dynamic_invariant1 ((temp___expr_572 Float32)
+  (temp___is_init_568 Bool) (temp___skip_constant_569 Bool)
+  (temp___do_toplevel_570 Bool)
+  (temp___do_typ_inv_571 Bool)) Bool (=>
+                                     (or (= temp___is_init_568 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_579)))
+                                     (fp.isFinite32 temp___expr_572)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -145,13 +141,7 @@
 
 (declare-const ada__float_text_io__get__2__item Float32)
 
-(declare-const result Float32)
-
-(declare-const room_length1 Float32)
-
 (declare-const ada__float_text_io__get__2__item1 Float32)
-
-(declare-const result1 Float32)
 
 (declare-const wall_thickness1 Float32)
 
@@ -177,16 +167,7 @@
   (assert (fp.isFinite32 ada__float_text_io__get__2__item))
 
 ;; H
-  (assert (= result room_length))
-
-;; H
-  (assert (= room_length1 ada__float_text_io__get__2__item))
-
-;; H
   (assert (fp.isFinite32 ada__float_text_io__get__2__item1))
-
-;; H
-  (assert (= result1 wall_thickness))
 
 ;; H
   (assert (= wall_thickness1 ada__float_text_io__get__2__item1))

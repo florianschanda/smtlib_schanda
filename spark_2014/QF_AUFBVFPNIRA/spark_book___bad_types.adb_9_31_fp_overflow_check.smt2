@@ -56,13 +56,13 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant1 ((temp___expr_579 Float32)
-  (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
-  (temp___do_toplevel_577 Bool)
-  (temp___do_typ_inv_578 Bool)) Bool (=>
-                                     (or (= temp___is_init_575 true)
+(define-fun dynamic_invariant1 ((temp___expr_572 Float32)
+  (temp___is_init_568 Bool) (temp___skip_constant_569 Bool)
+  (temp___do_toplevel_570 Bool)
+  (temp___do_typ_inv_571 Bool)) Bool (=>
+                                     (or (= temp___is_init_568 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_579)))
+                                     (fp.isFinite32 temp___expr_572)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 

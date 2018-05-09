@@ -899,6 +899,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -953,7 +959,7 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
+function to_rep(x: integer) : int = integerqtint(x)
 
 logic of_rep : int -> integer
 
@@ -975,6 +981,12 @@ logic limit : int
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type tvar_outS
+
+logic tvar_outSqtint : tvar_outS -> int
+
+axiom tvar_outSqtaxiom :
+  (forall i:tvar_outS. ((0 <= tvar_outSqtint(i)) and
+  (tvar_outSqtint(i) <= 10)))
 
 predicate in_range2(x: int) = ((0 <= x) and (x <= 10))
 
@@ -1004,6 +1016,11 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 type taS
 
+logic taSqtint : taS -> int
+
+axiom taSqtaxiom :
+  (forall i:taS. (((- 10000) <= taSqtint(i)) and (taSqtint(i) <= 10000)))
+
 predicate in_range3(x: int) = (((- 10000) <= x) and (x <= 10000))
 
 logic bool_eq4 : int, int -> bool
@@ -1030,6 +1047,11 @@ function taS__ref___projection(a: taS__ref) : taS = (a).taS__content
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tbS
+
+logic tbSqtint : tbS -> int
+
+axiom tbSqtaxiom :
+  (forall i:tbS. (((- 10000) <= tbSqtint(i)) and (tbSqtint(i) <= 10000)))
 
 predicate in_range4(x: int) = (((- 10000) <= x) and (x <= 10000))
 
@@ -1237,6 +1259,12 @@ logic attr__ATTRIBUTE_ADDRESS6 : int
 
 type tmy_array1D1
 
+logic tmy_array1D1qtint : tmy_array1D1 -> int
+
+axiom tmy_array1D1qtaxiom :
+  (forall i:tmy_array1D1. ((1 <= tmy_array1D1qtint(i)) and
+  (tmy_array1D1qtint(i) <= 10)))
+
 predicate in_range6(x: int) = ((1 <= x) and (x <= 10))
 
 logic bool_eq10 : int, int -> bool
@@ -1315,6 +1343,12 @@ logic attr__ATTRIBUTE_ADDRESS7 : int
 
 type tmy_array2D1
 
+logic tmy_array2D1qtint : tmy_array2D1 -> int
+
+axiom tmy_array2D1qtaxiom :
+  (forall i:tmy_array2D1. ((1 <= tmy_array2D1qtint(i)) and
+  (tmy_array2D1qtint(i) <= 20)))
+
 predicate in_range7(x: int) = ((1 <= x) and (x <= 20))
 
 logic bool_eq12 : int, int -> bool
@@ -1343,7 +1377,7 @@ logic attr__ATTRIBUTE_ADDRESS8 : int
 
 logic anon_type__increment__ten_characters__aggregate_def : int -> (int,character) farray
 
-logic temp___212 : t -> (int,float1) farray
+logic temp_____aggregate_def_212 : t -> (int,float1) farray
 
 axiom limit__def_axiom : (limit = 10000)
 
@@ -1355,9 +1389,9 @@ axiom def_axiom :
 axiom def_axiom1 :
   (forall temp___214:t. (tqtisFinite(temp___214) ->
   (forall temp___215:int.
-  (to_rep2((temp___212(temp___214)[temp___215])) = temp___214))))
+  (to_rep2((temp_____aggregate_def_212(temp___214)[temp___215])) = temp___214))))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K210-006__anontype1/gnatprove/anon_type.mlw", line 3576, characters 5-8 *)
 goal WP_parameter_def :
   (forall var_out:int. forall a:int. forall b:int.
   forall ten_characters:(int,character) farray.
@@ -1383,7 +1417,7 @@ goal WP_parameter_def :
   ten_characters }) and
   (ten_characters1 = anon_type__increment__ten_characters__aggregate_def(32))) and
   ((({ map__content1 = result2 } = { map__content1 = board }) and
-  (board1 = temp___212(fliteral))) and
+  (board1 = temp_____aggregate_def_212(fliteral))) and
   (((((o = (var_in + (var_out1 + 1))) and
   in_range1((var_in + (var_out1 + 1)))) and ((o1 = o) and in_range2(o))) and
   ((var_out1 = result3) and (var_out2 = o1))) and

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -143,30 +139,43 @@
 
 ;; H
   (assert
-  (and
   (= o1 (add (fp #b0 #b01111100 #b10011001100110011001101)
-        (fp #b0 #b01111101 #b00110011001100110011010)))
-  (and (fp.isFinite32 o1)
-  (fp.eq o1 (fp.add RNE (fp #b0 #b01111100 #b10011001100110011001101) (fp #b0 #b01111101 #b00110011001100110011010))))))
+        (fp #b0 #b01111101 #b00110011001100110011010))))
+
+;; H
+  (assert (fp.isFinite32 o1))
 
 ;; H
   (assert
-  (and (= o2 (add (fp #b0 #b01111011 #b10011001100110011001101) o1))
-  (and (fp.isFinite32 o2)
+  (fp.eq o1 (fp.add RNE (fp #b0 #b01111100 #b10011001100110011001101) (fp #b0 #b01111101 #b00110011001100110011010))))
+
+;; H
+  (assert (= o2 (add (fp #b0 #b01111011 #b10011001100110011001101) o1)))
+
+;; H
+  (assert (fp.isFinite32 o2))
+
+;; H
+  (assert
   (fp.eq o2 (fp.add RNE (fp #b0 #b01111011 #b10011001100110011001101)
-  o1)))))
+  o1)))
 
 ;; H
   (assert
-  (and
   (= o (add (fp #b0 #b01111011 #b10011001100110011001101)
-       (fp #b0 #b01111100 #b10011001100110011001101)))
-  (and (fp.isFinite32 o)
-  (fp.eq o (fp.add RNE (fp #b0 #b01111011 #b10011001100110011001101) (fp #b0 #b01111100 #b10011001100110011001101))))))
+       (fp #b0 #b01111100 #b10011001100110011001101))))
+
+;; H
+  (assert (fp.isFinite32 o))
+
+;; H
+  (assert
+  (fp.eq o (fp.add RNE (fp #b0 #b01111011 #b10011001100110011001101) (fp #b0 #b01111100 #b10011001100110011001101))))
 
 (assert
 ;; WP_parameter_def
  ;; File "pack.ads", line 17, characters 0-0
-  (not (fp.lt o (fp #b0 #b01111111 #b00000000000000000000000))))
+  (not
+  (fp.lt (fp #b0 #b01111101 #b00110011001100110011010) (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

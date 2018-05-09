@@ -58,17 +58,17 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (fp.isFinite64 temp___expr_158)))
 
-(define-fun in_range1 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 25000)))
 
 (define-fun dynamic_invariant1 ((temp___expr_165 Int)
   (temp___is_init_161 Bool) (temp___skip_constant_162 Bool)
   (temp___do_toplevel_163 Bool)
   (temp___do_typ_inv_164 Bool)) Bool (=>
                                      (or (= temp___is_init_161 true)
-                                     (<= 0 25000)) (in_range2
+                                     (<= 0 25000)) (in_range1
                                      temp___expr_165)))
+
+(define-fun in_range2 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
 
 (define-fun in_range3 ((x Float64)) Bool (and (fp.isFinite64 x)
                                          (and
@@ -254,7 +254,7 @@
 (declare-const distance3 Float64)
 
 ;; H
-  (assert (in_range2 n))
+  (assert (in_range1 n))
 
 ;; H
   (assert (in_range3 factor))
@@ -411,7 +411,7 @@
   n)) (fp.neg (fp #b0 #b10000000101 #b0000010000000000000000000000000000000000000000000000))) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 
 ;; H
-  (assert (and (= o41 (+ n 1)) (in_range2 (+ n 1))))
+  (assert (and (= o41 (+ n 1)) (in_range1 (+ n 1))))
 
 (declare-const abstr7 Float64)
 

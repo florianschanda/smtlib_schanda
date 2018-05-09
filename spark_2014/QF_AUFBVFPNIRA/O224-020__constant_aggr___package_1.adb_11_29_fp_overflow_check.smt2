@@ -98,6 +98,8 @@
 ;; package_1__record_t__b__position_axiom
   (assert (<= 0 package_1__record_t__b__position))
 
+(declare-const scalar_const Float32)
+
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
@@ -106,9 +108,14 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
 (declare-const temp Float32)
 
-(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+
+;; scalar_const__def_axiom
+  (assert (= scalar_const (fp #b0 #b01111000 #b01000111101011100001010)))
 
 (declare-const res_1 Float32)
 
@@ -127,6 +134,12 @@
 (declare-const result1 Float32)
 
 (declare-const res_21 Float32)
+
+;; H
+  (assert (fp.isFinite32 scalar_const))
+
+;; H
+  (assert (= (fp #b0 #b01111000 #b01000111101011100001010) scalar_const))
 
 ;; H
   (assert

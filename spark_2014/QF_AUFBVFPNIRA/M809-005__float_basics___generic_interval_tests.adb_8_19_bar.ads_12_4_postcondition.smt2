@@ -131,7 +131,6 @@
 ;; WP_parameter_def
  ;; File "generic_interval_tests.ads", line 3, characters 0-0
   (not
-  (fp.leq (fp #b0 #b10000000001 #b0100000000000000000000000000000000000000000000000000)
-  z2)))
+  (fp.leq z2 (fp #b0 #b10000000011 #b0100000000000000000000000000000000000000000000000000))))
 (check-sat)
 (exit)

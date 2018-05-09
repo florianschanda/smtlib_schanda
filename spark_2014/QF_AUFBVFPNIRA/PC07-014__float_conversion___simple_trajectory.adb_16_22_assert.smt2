@@ -213,7 +213,6 @@
 ;; WP_parameter_def
  ;; File "simple_trajectory.ads", line 27, characters 0-0
   (not
-  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  delta_speed)))
+  (fp.leq delta_speed (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 (check-sat)
 (exit)

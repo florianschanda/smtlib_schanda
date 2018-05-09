@@ -82,6 +82,11 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
+(define-fun in_range1 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
+                                               (bvule x #x0257)))
+
+(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 599)))
+
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 16))
 
 (declare-const value__size Int)
@@ -177,26 +182,6 @@
   (assert
   (<= 0 logger__log_entry__estimatedgroundvelocityisavailable__position))
 
-(define-fun in_range1 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
-                                               (bvule x #x0257)))
-
-(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 599)))
-
-(define-fun dynamic_invariant ((temp___expr_248 (_ BitVec 16))
-  (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
-  (temp___do_toplevel_246 Bool)
-  (temp___do_typ_inv_247 Bool)) Bool (=>
-                                     (or (= temp___is_init_244 true)
-                                     (bvule #x0000 #x0257)) (in_range1
-                                     temp___expr_248)))
-
-(define-fun dynamic_property ((range_first (_ BitVec 16))
-  (range_last (_ BitVec 16)) (low (_ BitVec 16))
-  (high (_ BitVec 16))) Bool (and (in_range1 low)
-                             (and (in_range1 high)
-                             (=> (bvule low high)
-                             (and (in_range1 low) (in_range1 high))))))
-
 (declare-const value__size1 Int)
 
 (declare-const value__component__size Int)
@@ -212,35 +197,15 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
-(define-fun in_range2 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
-                                               (bvule x #x0257)))
-
-(define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 599)))
-
 (declare-const value__size2 Int)
-
-(declare-const value__component__size1 Int)
 
 (declare-const value__alignment2 Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size2))
 
-;; value__component__size_axiom
-  (assert (<= 0 value__component__size1))
-
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment2))
-
-(declare-const value__size3 Int)
-
-(declare-const value__alignment3 Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size3))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment3))
 
 (declare-const logger__log_database__data__first__bit Int)
 
@@ -308,16 +273,16 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
   (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
   (temp___do_typ_inv_38 Bool)) Bool (=>
                                     (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range3
+                                    (<= 0 2147483647)) (in_range2
                                     temp___expr_39)))
 
-(define-fun dynamic_invariant2 ((temp___expr_67 Float64)
+(define-fun dynamic_invariant1 ((temp___expr_67 Float64)
   (temp___is_init_63 Bool) (temp___skip_constant_64 Bool)
   (temp___do_toplevel_65 Bool)
   (temp___do_typ_inv_66 Bool)) Bool (=>
@@ -325,9 +290,44 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
-(define-fun dynamic_invariant3 ((temp___expr_194 (_ BitVec 16))
+(define-fun dynamic_invariant2 ((temp___expr_194 (_ BitVec 16))
   (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
   (temp___do_toplevel_192 Bool) (temp___do_typ_inv_193 Bool)) Bool true)
+
+(define-fun dynamic_property ((range_first (_ BitVec 16))
+  (range_last (_ BitVec 16)) (low (_ BitVec 16))
+  (high (_ BitVec 16))) Bool (and (in_range1 low)
+                             (and (in_range1 high)
+                             (=> (bvule low high)
+                             (and (in_range1 low) (in_range1 high))))))
+
+(declare-const value__size3 Int)
+
+(declare-const value__component__size1 Int)
+
+(declare-const value__alignment3 Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size3))
+
+;; value__component__size_axiom
+  (assert (<= 0 value__component__size1))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment3))
+
+(define-fun dynamic_invariant3 ((temp___expr_248 (_ BitVec 16))
+  (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
+  (temp___do_toplevel_246 Bool)
+  (temp___do_typ_inv_247 Bool)) Bool (=>
+                                     (or (= temp___is_init_244 true)
+                                     (bvule #x0000 #x0257)) (in_range1
+                                     temp___expr_248)))
+
+(define-fun in_range3 ((x (_ BitVec 16))) Bool (and (bvule #x0000 x)
+                                               (bvule x #x0257)))
+
+(define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 599)))
 
 (declare-const tmp (_ BitVec 16))
 
@@ -533,6 +533,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "logger.ads", line 23, characters 0-0
-  (not (bvuge #x0000 #x0000)))
+  (not (bvule tmp #x0257)))
 (check-sat)
 (exit)

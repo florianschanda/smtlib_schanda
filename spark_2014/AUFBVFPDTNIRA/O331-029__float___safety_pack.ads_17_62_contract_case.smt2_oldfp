@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1135,161 +1135,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const res t)
-
-(declare-const safety_pack__dead_band__result t)
-
-(declare-const o t)
-
-(declare-const o1 t)
-
-(declare-const result t)
-
-(declare-const res1 t)
-
-(declare-const result1 t)
-
-(declare-const res2 t)
-
-(declare-const result2 t)
-
-(declare-const res3 t)
-
-(declare-const result3 t)
-
-(declare-const res4 t)
-
-(declare-const result4 t)
-
-(declare-const safety_pack__dead_band__result1 t)
-
-(declare-const safety_pack__dead_band__result2 t)
-
-(declare-const safety_pack__dead_band__result3 t)
-
-(declare-const res5 t)
-
-(declare-const safety_pack__dead_band__result4 t)
-
-(declare-const res6 t)
-
-(declare-const safety_pack__dead_band__result5 t)
-
-;; H
-  (assert (tqtisFinite value))
-
-;; H
-  (assert (in_range2 threshold))
-
-;; H
-  (assert (= (mk_t__ref result) (mk_t__ref res)))
-
-;; H
-  (assert (= res1 value))
-
-;; H
-  (assert (tqtisFinite res1))
-
-;; H
-  (assert
-  (=> (and (le (neg threshold) value) (le value threshold)) (= result1 res1)))
-
-;; H
-  (assert
-  (=> (and (le (neg threshold) value) (le value threshold))
-  (= res2 fliteral2)))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (=> (lt fliteral2 value)
-  (and (= o (sub RNE1 res1 threshold)) (tqtisFinite
-  (sub RNE1 res1 threshold))))))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (=> (lt fliteral2 value) (= result2 res1))))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (=> (lt fliteral2 value) (= res3 o))))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (=> (not (lt fliteral2 value))
-  (=> (lt value fliteral2)
-  (and (= o1 (add RNE1 res1 threshold)) (tqtisFinite
-  (add RNE1 res1 threshold)))))))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (=> (not (lt fliteral2 value)) (=> (lt value fliteral2) (= result3 res1)))))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (=> (not (lt fliteral2 value)) (=> (lt value fliteral2) (= res4 o1)))))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (=> (not (lt fliteral2 value))
-  (=> (not (lt value fliteral2)) (= res4 res1)))))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (=> (not (lt fliteral2 value)) (= res3 res4))))
-
-;; H
-  (assert
-  (=> (not (and (le (neg threshold) value) (le value threshold)))
-  (= res2 res3)))
-
-;; H
-  (assert
-  (= safety_pack__dead_band__result1 safety_pack__dead_band__result2))
-
-;; H
-  (assert
-  (= safety_pack__dead_band__result3 safety_pack__dead_band__result1))
-
-;; H
-  (assert (= result4 safety_pack__dead_band__result))
-
-;; H
-  (assert (= safety_pack__dead_band__result1 res2))
-
-;; H
-  (assert
-  (= (mk_t__ref safety_pack__dead_band__result4) (mk_t__ref
-                                                 safety_pack__dead_band__result2)))
-
-;; H
-  (assert (= res5 res2))
-
-;; H
-  (assert
-  (= safety_pack__dead_band__result5 safety_pack__dead_band__result3))
-
-;; H
-  (assert (= res6 res2))
-
-;; H
-  (assert
-  (=> (and (le (neg threshold) value) (le value threshold)) (eq
-  safety_pack__dead_band__result4 fliteral2)))
-
-;; H
-  (assert (= (bool_gt value threshold) true))
-
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (eq safety_pack__dead_band__result4 (sub RNE1 value threshold))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O331-029__float/obj/gnatprove/safety_pack.mlw", line 30367, characters 5-8
+  (not true))
 (check-sat)
 (exit)

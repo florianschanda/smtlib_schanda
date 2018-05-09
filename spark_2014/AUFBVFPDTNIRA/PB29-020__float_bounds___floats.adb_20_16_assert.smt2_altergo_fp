@@ -2085,5 +2085,5 @@ goal WP_parameter_def :
   ((result5 = e2) and (e3 = o5))) ->
   ((((to_rep1(o6) = to_float64(NearestTiesToEven, mul(NearestTiesToEven,
   to_rep((a[3])), fliteral3))) and (o7 = (e3[4 <- o6]))) and
-  ((result6 = e3) and (e4 = o7))) -> le1(neg1(fliteral1),
-  to_rep1((e4[1])))))))))))))))
+  ((result6 = e3) and (e4 = o7))) -> le1(to_rep1((e4[1])),
+  fliteral1)))))))))))))

@@ -162,7 +162,7 @@
   (assert (and (= o1 abstr8) (fp.isFinite32 o1)))
 
 ;; H
-  (assert (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o1))
+  (assert (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) o1)))
 
 (assert
 ;; WP_parameter_def

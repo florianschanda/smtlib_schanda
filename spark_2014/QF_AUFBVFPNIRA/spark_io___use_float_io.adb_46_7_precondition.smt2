@@ -95,18 +95,18 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment1))
 
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
+
+(define-fun dynamic_invariant1 ((temp___expr_600 Int)
+  (temp___is_init_596 Bool) (temp___skip_constant_597 Bool)
+  (temp___do_toplevel_598 Bool)
+  (temp___do_typ_inv_599 Bool)) Bool (=>
+                                     (or (= temp___is_init_596 true)
+                                     (<= 0 10)) (in_range4 temp___expr_600)))
+
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
-
-(define-fun dynamic_invariant1 ((temp___expr_607 Int)
-  (temp___is_init_603 Bool) (temp___skip_constant_604 Bool)
-  (temp___do_toplevel_605 Bool)
-  (temp___do_typ_inv_606 Bool)) Bool (=>
-                                     (or (= temp___is_init_603 true)
-                                     (<= 0 10)) (in_range4 temp___expr_607)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -136,22 +136,22 @@
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
 
-(define-fun dynamic_invariant5 ((temp___expr_621 Int)
+(define-fun dynamic_invariant5 ((temp___expr_614 Int)
+  (temp___is_init_610 Bool) (temp___skip_constant_611 Bool)
+  (temp___do_toplevel_612 Bool)
+  (temp___do_typ_inv_613 Bool)) Bool (=>
+                                     (or (= temp___is_init_610 true)
+                                     (<= 0 2)) (in_range6 temp___expr_614)))
+
+(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(define-fun dynamic_invariant6 ((temp___expr_621 Int)
   (temp___is_init_617 Bool) (temp___skip_constant_618 Bool)
   (temp___do_toplevel_619 Bool)
   (temp___do_typ_inv_620 Bool)) Bool (=>
                                      (or (= temp___is_init_617 true)
-                                     (<= 0 2)) (in_range6 temp___expr_621)))
-
-(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(define-fun dynamic_invariant6 ((temp___expr_628 Int)
-  (temp___is_init_624 Bool) (temp___skip_constant_625 Bool)
-  (temp___do_toplevel_626 Bool)
-  (temp___do_typ_inv_627 Bool)) Bool (=>
-                                     (or (= temp___is_init_624 true)
                                      (<= 0 2147483647)) (in_range7
-                                     temp___expr_628)))
+                                     temp___expr_621)))
 
 (declare-const f Float32)
 

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -137,33 +133,25 @@
 
 (declare-const o Float32)
 
-(declare-const result Float32)
-
 (declare-const f1 Float32)
 
 (declare-const f2 Float32)
-
-(declare-const f3 Float32)
 
 ;; H
   (assert (fp.isFinite32 f))
 
 ;; H
-  (assert
-  (and (= o (fp.sub RNE f (fp #b0 #b00000000 #b00000000000000000000000)))
-  (fp.isFinite32 (fp.sub RNE f (fp #b0 #b00000000 #b00000000000000000000000)))))
-
-;; H
-  (assert (= result f))
+  (assert (= o (fp.sub RNE f (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
   (assert (= f1 o))
 
 ;; H
-  (assert (= f1 f2))
+  (assert
+  (fp.isFinite32 (fp.sub RNE f (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
-  (assert (= f3 f1))
+  (assert (= f1 f2))
 
 (assert
 ;; WP_parameter_def

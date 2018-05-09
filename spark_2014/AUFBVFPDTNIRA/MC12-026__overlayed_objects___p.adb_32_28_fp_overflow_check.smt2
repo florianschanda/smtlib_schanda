@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -112,7 +115,7 @@
                                     (<= (- 2147483648) 2147483647)) (in_range
                                     temp___expr_18)))
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -178,6 +181,9 @@
  (mk___split_fields (rec__p__r__a integer)(rec__p__r__b float)))))
 (define-fun us_split_fields_A__projection ((a us_split_fields)) integer
   (rec__p__r__a a))
+
+(define-fun us_split_fields_B__projection ((a us_split_fields)) float
+  (rec__p__r__b a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -255,7 +261,7 @@
 (declare-datatypes () ((r__ref (mk_r__ref (r__content us_rep)))))
 (define-fun r__ref___projection ((a r__ref)) us_rep (r__content a))
 
-(declare-fun nth ((_ BitVec 8) Int) Bool)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-fun lsr ((_ BitVec 8) Int) (_ BitVec 8))
 
@@ -267,74 +273,10 @@
 
 (declare-fun rotate_left1 ((_ BitVec 8) Int) (_ BitVec 8))
 
-(define-fun to_int2 ((x (_ BitVec 8))) Int (ite (bvsge x (_ bv0 8))
+(define-fun to_int1 ((x (_ BitVec 8))) Int (ite (bvsge x (_ bv0 8))
                                            (bv2nat x) (- (- 256 (bv2nat x)))))
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 255)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvlshr x n) (lsr x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvashr x n) (asr x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvshl x n) (lsl x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
-  (rotate_left1 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
-  (rotate_right1 v (bv2nat n)))))
-
-(declare-fun nth_bv ((_ BitVec 8) (_ BitVec 8)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 8)) (i (_ BitVec 8)))
-  (= (= (nth_bv x i) true) (not (= (bvand (bvlshr x i) #x01) #x00)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 8)) (i (_ BitVec 8)))
-  (= (nth x (bv2nat i)) (nth_bv x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 8)) (i Int))
-  (=> (and (<= 0 i) (< i 256)) (= (nth_bv x ((_ int2bv 8) i)) (nth x i)))))
-
-(declare-fun eq_sub_bv ((_ BitVec 8) (_ BitVec 8) (_ BitVec 8)
-  (_ BitVec 8)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 8)) (b (_ BitVec 8)) (i (_ BitVec 8))
-  (n (_ BitVec 8)))
-  (let ((mask (bvshl (bvsub (bvshl #x01 n) #x01) i)))
-  (= (eq_sub_bv a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth a j) (nth b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 8)) (b (_ BitVec 8)) (i (_ BitVec 8))
-  (n (_ BitVec 8)))
-  (= (eq_sub a b (bv2nat i) (bv2nat n)) (eq_sub_bv a b i n))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 (_ BitVec 8))))))
 (declare-fun power ((_ BitVec 8) Int) (_ BitVec 8))
@@ -381,12 +323,12 @@
   (forall ((x (_ BitVec 8)))
   (! (= (to_rep2 (of_rep2 x)) x) :pattern ((to_rep2 (of_rep2 x))) )))
 
-(define-fun to_int3 ((x unsigned_8)) Int (bv2nat (to_rep2 x)))
+(define-fun to_int2 ((x unsigned_8)) Int (bv2nat (to_rep2 x)))
 
 ;; range_int_axiom
   (assert
   (forall ((x unsigned_8)) (! (uint_in_range
-  (to_int3 x)) :pattern ((to_int3 x)) )))
+  (to_int2 x)) :pattern ((to_int2 x)) )))
 
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int unsigned_8))))))
@@ -436,8 +378,6 @@
   (= (to_rep2 (select a temp___idx_154)) (to_rep2
                                          (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const x Int)
@@ -454,27 +394,15 @@
 
 (declare-const full_s__split_fields integer)
 
-(declare-const full_s__split_fields1 float)
-
 (declare-const o Int)
 
 (declare-const o1 integer)
 
-(declare-const o2 integer)
+(declare-const o2 float)
 
-(declare-const o3 float)
+(declare-const temp___313 float)
 
-(declare-const temp___313 integer)
-
-(declare-const temp___3131 float)
-
-(declare-const result integer)
-
-(declare-const result1 float)
-
-(declare-const full_s__split_fields2 integer)
-
-(declare-const full_s__split_fields3 float)
+(declare-const full_s__split_fields1 float)
 
 ;; H
   (assert (in_range x))
@@ -483,40 +411,23 @@
   (assert (fp.isFinite32 y))
 
 ;; H
-  (assert
-  (and (= o (+ (to_rep full_s__split_fields) x)) (in_range
-  (+ (to_rep full_s__split_fields) x))))
+  (assert (= o (+ (to_rep full_s__split_fields) x)))
 
 ;; H
   (assert (= (to_rep o1) o))
 
 ;; H
-  (assert (= o1 o2))
-
-;; H
-  (assert (= full_s__split_fields1 o3))
+  (assert (in_range (+ (to_rep full_s__split_fields) x)))
 
 ;; H
   (assert (= temp___313 o2))
 
 ;; H
-  (assert (= temp___3131 o3))
-
-;; H
-  (assert (= result full_s__split_fields))
-
-;; H
-  (assert (= result1 full_s__split_fields1))
-
-;; H
-  (assert (= temp___313 full_s__split_fields2))
-
-;; H
-  (assert (= temp___3131 full_s__split_fields3))
+  (assert (= temp___313 full_s__split_fields1))
 
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 18, characters 0-0
-  (not (fp.isFinite32 (fp.add RNE (to_rep1 full_s__split_fields3) y))))
+  (not (fp.isFinite32 (fp.add RNE (to_rep1 full_s__split_fields1) y))))
 (check-sat)
 (exit)

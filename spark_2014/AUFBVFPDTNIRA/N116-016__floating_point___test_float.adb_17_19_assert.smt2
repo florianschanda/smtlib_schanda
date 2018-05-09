@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -117,30 +113,24 @@
 
 (declare-const x Float32)
 
-(declare-const result Float32)
-
 (declare-const x1 Float32)
 
-(declare-const x2 Float32)
+;; H
+  (assert (= x (fp #b0 #b01111011 #b10011001100110011001101)))
 
 ;; H
-  (assert (= result x))
+  (assert (in_range x))
 
 ;; H
-  (assert (= x1 (fp #b0 #b01111011 #b10011001100110011001101)))
+  (assert
+  (fp.eq x1 (fp.add RNE x (fp #b0 #b01111101 #b10011001100110011001101))))
 
 ;; H
   (assert (in_range x1))
 
-;; H
-  (assert
-  (and
-  (fp.eq x2 (fp.add RNE x1 (fp #b0 #b01111101 #b10011001100110011001101)))
-  (in_range x2)))
-
 (assert
 ;; WP_parameter_def
  ;; File "test_float.adb", line 6, characters 0-0
-  (not (fp.leq x2 (fp #b0 #b01111111 #b00000000000000000000000))))
+  (not (fp.leq x1 (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

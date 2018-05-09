@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -136,6 +132,14 @@
 
 (declare-sort num_delimiters_range 0)
 
+(declare-fun num_delimiters_rangeqtint (num_delimiters_range) Int)
+
+;; num_delimiters_range'axiom
+  (assert
+  (forall ((i num_delimiters_range))
+  (and (<= 0 (num_delimiters_rangeqtint i))
+  (<= (num_delimiters_rangeqtint i) 10))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
@@ -155,14 +159,8 @@
 (define-fun num_delimiters_range__ref___projection ((a num_delimiters_range__ref)) num_delimiters_range
   (num_delimiters_range__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_159 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)
-  (temp___do_typ_inv_158 Bool)) Bool (=>
-                                     (or (= temp___is_init_155 true)
-                                     (<= 0 10)) (in_range1 temp___expr_159)))
-
-(declare-fun to_rep1 (num_delimiters_range) Int)
+(define-fun to_rep1 ((x num_delimiters_range)) Int (num_delimiters_rangeqtint
+                                                   x))
 
 (declare-fun of_rep1 (Int) num_delimiters_range)
 
@@ -184,6 +182,14 @@
 
 (declare-sort function_range 0)
 
+(declare-fun function_rangeqtint (function_range) Int)
+
+;; function_range'axiom
+  (assert
+  (forall ((i function_range))
+  (and (<= 0 (function_rangeqtint i))
+  (<= (function_rangeqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -202,15 +208,7 @@
 (define-fun function_range__ref___projection ((a function_range__ref)) function_range
   (function_range__content a))
 
-(define-fun dynamic_invariant2 ((temp___expr_166 Int)
-  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
-  (temp___do_toplevel_164 Bool)
-  (temp___do_typ_inv_165 Bool)) Bool (=>
-                                     (or (= temp___is_init_162 true)
-                                     (<= 0 2147483647)) (in_range2
-                                     temp___expr_166)))
-
-(declare-fun to_rep2 (function_range) Int)
+(define-fun to_rep2 ((x function_range)) Int (function_rangeqtint x))
 
 (declare-fun of_rep2 (Int) function_range)
 
@@ -236,6 +234,9 @@
  (rec__step_function__delimiter_entry__delimiter function_range)(rec__step_function__delimiter_entry__value float)))))
 (define-fun us_split_fields_Delimiter__projection ((a us_split_fields)) function_range
   (rec__step_function__delimiter_entry__delimiter a))
+
+(define-fun us_split_fields_Value__projection ((a us_split_fields)) float
+  (rec__step_function__delimiter_entry__value a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -544,6 +545,21 @@
                                   (select temp___210 (+ i 1))))))))))) :pattern (
   (is_valid sfun)) )))
 
+(define-fun dynamic_invariant1 ((temp___expr_159 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)
+  (temp___do_typ_inv_158 Bool)) Bool (=>
+                                     (or (= temp___is_init_155 true)
+                                     (<= 0 10)) (in_range1 temp___expr_159)))
+
+(define-fun dynamic_invariant2 ((temp___expr_166 Int)
+  (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
+  (temp___do_toplevel_164 Bool)
+  (temp___do_typ_inv_165 Bool)) Bool (=>
+                                     (or (= temp___is_init_162 true)
+                                     (<= 0 2147483647)) (in_range2
+                                     temp___expr_166)))
+
 (declare-const sfun us_rep1)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -559,6 +575,14 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-sort tnum_delimiters_rangeB 0)
+
+(declare-fun tnum_delimiters_rangeBqtint (tnum_delimiters_rangeB) Int)
+
+;; tnum_delimiters_rangeB'axiom
+  (assert
+  (forall ((i tnum_delimiters_rangeB))
+  (and (<= (- 128) (tnum_delimiters_rangeBqtint i))
+  (<= (tnum_delimiters_rangeBqtint i) 127))))
 
 (define-fun in_range3 ((x1 Int)) Bool (and (<= (- 128) x1) (<= x1 127)))
 
@@ -579,7 +603,8 @@
 (define-fun tnum_delimiters_rangeB__ref___projection ((a tnum_delimiters_rangeB__ref)) tnum_delimiters_rangeB
   (tnum_delimiters_rangeB__content a))
 
-(declare-fun to_rep3 (tnum_delimiters_rangeB) Int)
+(define-fun to_rep3 ((x1 tnum_delimiters_rangeB)) Int (tnum_delimiters_rangeBqtint
+                                                      x1))
 
 (declare-fun of_rep3 (Int) tnum_delimiters_rangeB)
 
@@ -825,7 +850,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 6154, characters 5-8
   (not
   (exists ((j Int))
   (and (and (<= 0 j) (<= j i3))

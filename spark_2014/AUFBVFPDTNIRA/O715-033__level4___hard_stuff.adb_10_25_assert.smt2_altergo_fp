@@ -1104,5 +1104,4 @@ goal WP_parameter_def :
   ((le(fliteral1, x) and le(x, fliteral)) -> ((((((o = mul(NearestTiesToEven,
   x, x)) and tqtisFinite(mul(NearestTiesToEven, x, x))) and
   (o1 = sub(NearestTiesToEven, x, o))) and ((o2 = o1) and
-  tqtisFinite(o1))) and ((result = x) and (x1 = o2))) -> le(fliteral1,
-  x1)))))))
+  tqtisFinite(o1))) and ((result = x) and (x1 = o2))) -> le(x1, copy)))))))

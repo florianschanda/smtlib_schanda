@@ -133,12 +133,6 @@
 
 (declare-const o Bool)
 
-(declare-const temp___235 Bool)
-
-(declare-const temp___2351 Int)
-
-(declare-const o1 Bool)
-
 (declare-const temp___237 Bool)
 
 (declare-const temp___2371 Int)
@@ -166,25 +160,16 @@
   (assert (= (distinct 0 0) v__split_fields1))
 
 ;; H
-  (assert (= v__split_fields1 o))
-
-;; H
-  (assert (= temp___235 o))
-
-;; H
-  (assert (= v__attr__tag temp___2351))
-
-;; H
   (assert (= result1 v__split_fields1))
 
 ;; H
-  (assert (= temp___235 v__split_fields2))
+  (assert (= v__split_fields1 v__split_fields2))
 
 ;; H
-  (assert (= v__split_fields2 o1))
+  (assert (= v__split_fields2 o))
 
 ;; H
-  (assert (= temp___237 o1))
+  (assert (= temp___237 o))
 
 ;; H
   (assert (= v__attr__tag temp___2371))

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -122,81 +118,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const f Float32)
-
-(declare-const o Float32)
-
-(declare-const o1 Float32)
-
-(declare-const f1 Float32)
-
-(declare-const result Float32)
-
-(declare-const f2 Float32)
-
-(declare-const f3 Float32)
-
-(declare-const f4 Float32)
-
-;; H
-  (assert (fp.isFinite32 f))
-
-;; H
-  (assert (fp.isFinite32 distance_to_target))
-
-;; H
-  (assert
-  (=>
-  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000))
-  (and (= o (fp.mul RNE f distance_to_target))
-  (fp.isFinite32 (fp.mul RNE f distance_to_target)))))
-
-;; H
-  (assert
-  (=>
-  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000))
-  (= o1 (fp.div RNE o (fp #b0 #b10000010 #b01000000000000000000000)))))
-
-;; H
-  (assert
-  (=>
-  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000))
-  (= (mk_t__ref result) (mk_t__ref f))))
-
-;; H
-  (assert
-  (=>
-  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000))
-  (= f2 o1)))
-
-;; H
-  (assert
-  (=>
-  (not
-  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000)))
-  (= f2 f)))
-
-;; H
-  (assert
-  (=>
-  (not
-  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000)))
-  (= f2 f1)))
-
-;; H
-  (assert (= f2 f3))
-
-;; H
-  (assert (= f4 f2))
-
-;; H
-  (assert
-  (fp.lt distance_to_target (fp #b0 #b10000010 #b01000000000000000000000)))
-
 (assert
 ;; WP_parameter_def
  ;; File "flight_manager.ads", line 3, characters 0-0
-  (not
-  (fp.eq f3 (fp.div RNE (fp.mul RNE f distance_to_target) (fp #b0 #b10000010 #b01000000000000000000000)))))
+  (not true))
 (check-sat)
 (exit)

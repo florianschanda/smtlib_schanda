@@ -901,6 +901,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -954,6 +960,8 @@ type integer__ref = { integer__content : integer
 
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 type coordinate_type
 
@@ -1053,7 +1061,17 @@ axiom coerce_axiom1 :
 
 type us_split_fields = { rec__shapes5__circle__center_x : coordinate_type;
 rec__shapes5__circle__center_y : coordinate_type;
-rec__shapes5__circle__radius : radius_type }
+rec__shapes5__circle__radius : radius_type
+}
+
+function us_split_fields_Center_X__projection(a: us_split_fields) : coordinate_type =
+  (a).rec__shapes5__circle__center_x
+
+function us_split_fields_Center_Y__projection(a: us_split_fields) : coordinate_type =
+  (a).rec__shapes5__circle__center_y
+
+function us_split_fields_Radius__projection(a: us_split_fields) : radius_type =
+  (a).rec__shapes5__circle__radius
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1162,8 +1180,6 @@ type circle__ref = { circle__content : us_rep
 
 function circle__ref___projection(a: circle__ref) : us_rep =
   (a).circle__content
-
-logic attr__ATTRIBUTE_ADDRESS : int
 
 logic in_bounds : us_rep, int -> bool
 

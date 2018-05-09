@@ -1065,6 +1065,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1120,6 +1126,12 @@ function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
 type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
 
 predicate in_range3(x: int) = ((1 <= x) and (x <= 2147483647))
 
@@ -1234,7 +1246,7 @@ axiom bool_eq_rev :
   (temp___idx_91 <= a__last)) ->
   (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
-logic to_rep1 : integer -> int
+function to_rep1(x: integer) : int = integerqtint(x)
 
 logic of_rep1 : int -> integer
 
@@ -1329,6 +1341,14 @@ type string__ref = { string__content : us_t
 function string__ref___projection(a: string__ref) : us_t =
   (a).string__content
 
+logic is_valid_speed : t -> bool
+
+logic is_valid_speed__function_guard : bool, t -> prop
+
+logic km_per_h_from_m_per_s : t -> t
+
+logic km_per_h_from_m_per_s__function_guard : t, t -> prop
+
 type speed_t
 
 logic bool_eq8 : t, t -> bool
@@ -1352,19 +1372,6 @@ type speed_t__ref = { speed_t__content : speed_t
 
 function speed_t__ref___projection(a: speed_t__ref) : speed_t =
   (a).speed_t__content
-
-logic to_rep2 : speed_t -> t
-
-logic of_rep2 : t -> speed_t
-
-axiom inversion_axiom2 :
-  (forall x:speed_t [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
-
-axiom range_axiom2 : (forall x:speed_t [to_rep2(x)]. tqtisFinite(to_rep2(x)))
-
-axiom coerce_axiom2 :
-  (forall x:t [to_rep2(of_rep2(x))]. (tqtisFinite(x) ->
-  (to_rep2(of_rep2(x)) = x)))
 
 type speed_km_per_h_t
 
@@ -1390,7 +1397,22 @@ type speed_km_per_h_t__ref = { speed_km_per_h_t__content : speed_km_per_h_t
 function speed_km_per_h_t__ref___projection(a: speed_km_per_h_t__ref) : speed_km_per_h_t =
   (a).speed_km_per_h_t__content
 
+axiom km_per_h_from_m_per_s__post_axiom :
+  (forall speed:t [km_per_h_from_m_per_s(speed)]. ((tqtisFinite(speed) and
+  (is_valid_speed(speed) = true)) ->
+  tqtisFinite(km_per_h_from_m_per_s(speed))))
+
+logic curve_index_from_location : int -> int
+
+logic curve_index_from_location__function_guard : int, int -> prop
+
 type distance_t
+
+logic distance_tqtint : distance_t -> int
+
+axiom distance_tqtaxiom :
+  (forall i:distance_t. ((0 <= distance_tqtint(i)) and
+  (distance_tqtint(i) <= 2147483647)))
 
 predicate in_range5(x: int) = ((0 <= x) and (x <= 2147483647))
 
@@ -1416,34 +1438,13 @@ type distance_t__ref = { distance_t__content : distance_t
 function distance_t__ref___projection(a: distance_t__ref) : distance_t =
   (a).distance_t__content
 
-logic to_rep3 : distance_t -> int
-
-logic of_rep3 : int -> distance_t
-
-axiom inversion_axiom3 :
-  (forall x:distance_t [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
-
-axiom range_axiom3 :
-  (forall x:distance_t [to_rep3(x)]. in_range5(to_rep3(x)))
-
-axiom coerce_axiom3 :
-  (forall x:int [to_rep3(of_rep3(x))]. (in_range5(x) ->
-  (to_rep3(of_rep3(x)) = x)))
-
-logic is_valid_speed : t -> bool
-
-logic is_valid_speed__function_guard : bool, t -> prop
-
-logic km_per_h_from_m_per_s : t -> t
-
-logic km_per_h_from_m_per_s__function_guard : t, t -> prop
-
-axiom km_per_h_from_m_per_s__post_axiom :
-  (forall speed:t [km_per_h_from_m_per_s(speed)]. ((tqtisFinite(speed) and
-  (is_valid_speed(speed) = true)) ->
-  tqtisFinite(km_per_h_from_m_per_s(speed))))
-
 type braking_curve_range
+
+logic braking_curve_rangeqtint : braking_curve_range -> int
+
+axiom braking_curve_rangeqtaxiom :
+  (forall i:braking_curve_range. ((0 <= braking_curve_rangeqtint(i)) and
+  (braking_curve_rangeqtint(i) <= 1000)))
 
 predicate in_range6(x: int) = ((0 <= x) and (x <= 1000))
 
@@ -1470,6 +1471,37 @@ braking_curve_range
 function braking_curve_range__ref___projection(a: braking_curve_range__ref) : braking_curve_range =
   (a).braking_curve_range__content
 
+axiom curve_index_from_location__post_axiom :
+  (forall d:int [curve_index_from_location(d)]. ((in_range5(d) and
+  (d <= 5000)) -> in_range6(curve_index_from_location(d))))
+
+logic to_rep2 : speed_t -> t
+
+logic of_rep2 : t -> speed_t
+
+axiom inversion_axiom2 :
+  (forall x:speed_t [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
+
+axiom range_axiom2 : (forall x:speed_t [to_rep2(x)]. tqtisFinite(to_rep2(x)))
+
+axiom coerce_axiom2 :
+  (forall x:t [to_rep2(of_rep2(x))]. (tqtisFinite(x) ->
+  (to_rep2(of_rep2(x)) = x)))
+
+function to_rep3(x: distance_t) : int = distance_tqtint(x)
+
+logic of_rep3 : int -> distance_t
+
+axiom inversion_axiom3 :
+  (forall x:distance_t [to_rep3(x)]. (of_rep3(to_rep3(x)) = x))
+
+axiom range_axiom3 :
+  (forall x:distance_t [to_rep3(x)]. in_range5(to_rep3(x)))
+
+axiom coerce_axiom3 :
+  (forall x:int [to_rep3(of_rep3(x))]. (in_range5(x) ->
+  (to_rep3(of_rep3(x)) = x)))
+
 type us_split_fields = {
 rec__deceleration_curve__braking_curve_entry__location : distance_t;
 rec__deceleration_curve__braking_curve_entry__speed : speed_t
@@ -1477,6 +1509,9 @@ rec__deceleration_curve__braking_curve_entry__speed : speed_t
 
 function us_split_fields_location__projection(a: us_split_fields) : distance_t =
   (a).rec__deceleration_curve__braking_curve_entry__location
+
+function us_split_fields_speed__projection(a: us_split_fields) : speed_t =
+  (a).rec__deceleration_curve__braking_curve_entry__speed
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1754,14 +1789,6 @@ type braking_curve_t__ref = { braking_curve_t__content : us_rep1
 function braking_curve_t__ref___projection(a: braking_curve_t__ref) : us_rep1 =
   (a).braking_curve_t__content
 
-logic curve_index_from_location : int -> int
-
-logic curve_index_from_location__function_guard : int, int -> prop
-
-axiom curve_index_from_location__post_axiom :
-  (forall d:int [curve_index_from_location(d)]. ((in_range5(d) and
-  (d <= 5000)) -> in_range6(curve_index_from_location(d))))
-
 logic braking_curve : (int,us_rep) farray
 
 logic braking_curve1 : distance_t
@@ -1774,13 +1801,25 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
-logic temp___String_Literal_447 : unit -> (int,character) farray
+logic temp___String_Literal_452 : unit -> (int,character) farray
 
-axiom temp___String_Literal_447__def_axiom :
-  ((((to_rep((temp___String_Literal_447(void)[1])) = 44) and
-  (to_rep((temp___String_Literal_447(void)[2])) = 32)) and
-  (to_rep((temp___String_Literal_447(void)[3])) = 32)) and
-  (to_rep((temp___String_Literal_447(void)[4])) = 32))
+axiom temp___String_Literal_452__def_axiom :
+  ((((to_rep((temp___String_Literal_452(void)[1])) = 44) and
+  (to_rep((temp___String_Literal_452(void)[2])) = 32)) and
+  (to_rep((temp___String_Literal_452(void)[3])) = 32)) and
+  (to_rep((temp___String_Literal_452(void)[4])) = 32))
+
+logic maximum_valid_speed_km_per_h : t
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 500.0))
+
+axiom maximum_valid_speed_km_per_h__def_axiom :
+  (maximum_valid_speed_km_per_h = fliteral1)
 
 logic is_valid_speed_km_per_h : t -> bool
 
@@ -1788,20 +1827,15 @@ logic is_valid_speed_km_per_h__function_guard : bool, t -> prop
 
 axiom is_valid_speed_km_per_h__post_axiom : true
 
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.0e-1))
-
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 500.0))
+  (tqtreal(fliteral2) = 0.0e-1))
 
 axiom is_valid_speed_km_per_h__def_axiom :
   (forall speed:t [is_valid_speed_km_per_h(speed)].
-  ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral1, speed) and
-  le(speed, fliteral2))))
+  ((is_valid_speed_km_per_h(speed) = true) <-> (le(fliteral2, speed) and
+  le(speed, maximum_valid_speed_km_per_h))))
 
 logic m_per_s_from_km_per_h : t -> t
 
@@ -1831,8 +1865,8 @@ axiom is_valid_speed__post_axiom : true
 
 axiom is_valid_speed__def_axiom :
   (forall speed:t [is_valid_speed(speed)].
-  ((is_valid_speed(speed) = true) <-> (le(fliteral1, speed) and le(speed,
-  m_per_s_from_km_per_h(fliteral2)))))
+  ((is_valid_speed(speed) = true) <-> (le(fliteral2, speed) and le(speed,
+  m_per_s_from_km_per_h(maximum_valid_speed_km_per_h)))))
 
  (* File "deceleration_curve.adb", line 73, characters 0-0 *)
 goal WP_parameter_def :

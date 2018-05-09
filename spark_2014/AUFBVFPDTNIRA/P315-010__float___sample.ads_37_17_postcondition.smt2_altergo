@@ -950,6 +950,11 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type nb_type
 
+logic nb_typeqtint : nb_type -> int
+
+axiom nb_typeqtaxiom :
+  (forall i:nb_type. ((0 <= nb_typeqtint(i)) and (nb_typeqtint(i) <= 100)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 100))
 
 logic bool_eq3 : int, int -> bool
@@ -1204,37 +1209,4 @@ axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
   (tqtreal(fliteral8) = 2.0))
 
  (* File "sample.ads", line 13, characters 0-0 *)
-goal WP_parameter_def :
-  (forall time:t. forall d:t. forall t_fp:t. forall t_pp:t. forall tmp1:t.
-  forall tmp2:t. forall o:t. forall o1:t. forall o2:t. forall o3:t.
-  forall result:t. forall d1:t. forall result1:t. forall t_fp1:t.
-  forall result2:t. forall tmp11:t. forall result3:t. forall t_pp1:t.
-  forall result4:t. forall tmp21:t. forall result5:t. forall time1:t.
-  forall time2:t. forall d2:t. forall t_fp2:t. forall t_pp2:t.
-  forall tmp12:t. forall tmp22:t. forall time3:t. forall d3:t.
-  forall t_fp3:t. forall t_pp3:t. forall tmp13:t. forall tmp23:t.
-  ((in_range2(nb_of_fp) and (in_range2(nb_of_pp) and
-  (in_range4(delta_time) and (tqtisFinite(time) and (((((0 <  nb_of_pp) and
-  lt(fliteral1, delta_time)) and le(mul(RNE, mul(RNE, fliteral7, of_int(RNE,
-  (nb_of_fp + nb_of_pp))), delta_time), time)) and le(time, fliteral4)) and
-  (((le(fliteral1, fliteral2) -> in_range3(d)) and ((le(neg(fliteral3),
-  fliteral4) -> in_range5(t_fp)) and ((le(neg(fliteral3), fliteral3) ->
-  tqtisFinite(t_pp)) and ((le(fliteral1, fliteral5) -> in_range6(tmp1)) and
-  ((le(fliteral1, fliteral6) -> in_range7(tmp2)) and ((({ t__content = result
-  } = { t__content = d }) and (d1 = mul(RNE, of_int(RNE,
-  (nb_of_fp + nb_of_pp)), delta_time))) and (((((o = sub(RNE, time, div(RNE,
-  d1, fliteral8))) and tqtisFinite(sub(RNE, time, div(RNE, d1,
-  fliteral8)))) and ((o1 = o) and tqtisFinite(o))) and (({ t__content =
-  result1 } = { t__content = t_fp }) and (t_fp1 = o1))) and ((({ t__content =
-  result2 } = { t__content = tmp1 }) and (tmp11 = mul(RNE, of_int(RNE,
-  nb_of_fp), delta_time))) and ((((o2 = add(RNE, t_fp1, tmp11)) and
-  tqtisFinite(add(RNE, t_fp1, tmp11))) and (({ t__content = result3 } = {
-  t__content = t_pp }) and (t_pp1 = o2))) and ((({ t__content = result4 } = {
-  t__content = tmp2 }) and (tmp21 = mul(RNE, mul(RNE, fliteral7, of_int(RNE,
-  nb_of_fp)), delta_time))) and (((o3 = add(RNE, t_pp1, tmp21)) and
-  tqtisFinite(add(RNE, t_pp1, tmp21))) and ((result5 = time) and
-  (time1 = o3))))))))))))) and (((tmp22 = tmp21) and ((tmp12 = tmp11) and
-  ((t_pp2 = t_pp1) and ((t_fp2 = t_fp1) and ((d2 = d1) and
-  (time1 = time2)))))) and ((tmp23 = tmp21) and ((tmp13 = tmp11) and
-  ((t_pp3 = t_pp1) and ((t_fp3 = t_fp1) and ((d3 = d1) and
-  (time3 = time1))))))))))))) -> ((0 <  nb_of_fp) -> le(time, time2))))
+goal WP_parameter_def : true

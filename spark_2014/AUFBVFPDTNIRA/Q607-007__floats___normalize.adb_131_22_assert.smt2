@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -92,6 +88,10 @@
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
+
+(declare-fun r3 (Float32) Float32)
+
+(declare-fun r3__function_guard (Float32 Float32) Bool)
 
 (declare-sort t_float32 0)
 
@@ -122,6 +122,24 @@
                                      (or (= temp___is_init_154 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) (fp #b0 #b11111110 #b11111111111111111101110)))
                                      (in_range1 temp___expr_158)))
+
+;; r3__post_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=>
+     (and (dynamic_invariant x true true true true)
+     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x))
+     (let ((result (r3 x)))
+     (and
+     (and (fp.leq result x)
+     (fp.leq (fp.sub RNE x (fp #b0 #b01111111 #b00000000000000000000000)) result))
+     (dynamic_invariant result true false true true)))) :pattern ((r3 x)) )))
+
+;; r3__def_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (dynamic_invariant x true true true true)
+     (= (r3 x) (fp.roundToIntegral RTN x))) :pattern ((r3 x)) )))
 
 (declare-sort t1 0)
 
@@ -175,28 +193,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-fun r3 (Float32) Float32)
-
-(declare-fun r3__function_guard (Float32 Float32) Bool)
-
-;; r3__post_axiom
-  (assert
-  (forall ((x1 Float32))
-  (! (=>
-     (and (dynamic_invariant x1 true true true true)
-     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111101110)) x1))
-     (let ((result (r3 x1)))
-     (and
-     (and (fp.leq result x1)
-     (fp.leq (fp.sub RNE x1 (fp #b0 #b01111111 #b00000000000000000000000)) result))
-     (dynamic_invariant result true false true true)))) :pattern ((r3 x1)) )))
-
-;; r3__def_axiom
-  (assert
-  (forall ((x1 Float32))
-  (! (=> (dynamic_invariant x1 true true true true)
-     (= (r3 x1) (fp.roundToIntegral RTN x1))) :pattern ((r3 x1)) )))
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
@@ -212,8 +208,6 @@
 (declare-const v1 Float32)
 
 (declare-const v2 Float32)
-
-(declare-const result Float32)
 
 (declare-const v11 Float32)
 
@@ -233,15 +227,12 @@
   (in_range1 v2)))
 
 ;; H
-  (assert (= result v1))
-
-;; H
   (assert
   (= v11 (fp.div RNE x (fp #b0 #b10000111 #b01101000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "normalize.ads", line 9, characters 0-0
-  (not (fp.leq (fp.neg (fp #b0 #b10000000 #b00000000000000000000000)) v11)))
+  (not (fp.leq v11 (fp #b0 #b10000000 #b00000000000000000000000))))
 (check-sat)
 (exit)

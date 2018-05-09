@@ -1106,7 +1106,7 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 340282346638528859811704183484516925440.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA21-002__floatdiv/gnatprove/basic_contracts.mlw", line 2725, characters 5-8 *)
 goal WP_parameter_def :
   (forall res:t. (tqtisFinite(numerator) -> (tqtisFinite(denominator) ->
   ((le(fliteral1, numerator) and le(fliteral, denominator)) ->

@@ -79,6 +79,16 @@
 ;; H
   (assert (fp.isFinite32 x))
 
+;; H
+  (assert
+  (and (= o1 (fp.mul RNE x (fp.abs x)))
+  (fp.isFinite32 (fp.mul RNE x (fp.abs x)))))
+
+;; H
+  (assert
+  (= o2 (ite (fp.leq o1 (fp #b0 #b01111111 #b00000000000000000000000)) true
+        false)))
+
 (assert
 ;; WP_parameter_def
  ;; File "generic_interval_tests.adb", line 34, characters 0-0

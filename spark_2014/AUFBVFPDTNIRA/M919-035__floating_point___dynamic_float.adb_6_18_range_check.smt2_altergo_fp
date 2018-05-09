@@ -1037,6 +1037,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -1202,4 +1208,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 goal WP_parameter_def :
   (forall i:int. forall result:int. forall i1:int. (((result = i) and
   (i1 = 1)) -> (le(fliteral1, of_int(NearestTiesToEven, i1)) ->
-  le(neg(fliteral2), fliteral1))))
+  le(of_int(NearestTiesToEven, i1), fliteral2))))

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -212,10 +208,14 @@
 
 ;; H
   (assert
-  (and
-  (= p__t_FIRST__assume (id (fp #b0 #b00000000 #b00000000000000000000000)))
-  (and (fp.isFinite32 p__t_FIRST__assume)
-  (= p__t_FIRST__assume (fp #b0 #b00000000 #b00000000000000000000000)))))
+  (= p__t_FIRST__assume (id (fp #b0 #b00000000 #b00000000000000000000000))))
+
+;; H
+  (assert (fp.isFinite32 p__t_FIRST__assume))
+
+;; H
+  (assert
+  (= p__t_FIRST__assume (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
   (assert (= p__t_FIRST__assume t_FIRST))
@@ -225,10 +225,14 @@
 
 ;; H
   (assert
-  (and
-  (= p__t_LAST__assume (id (fp #b0 #b01111111 #b00000000000000000000000)))
-  (and (fp.isFinite32 p__t_LAST__assume)
-  (= p__t_LAST__assume (fp #b0 #b01111111 #b00000000000000000000000)))))
+  (= p__t_LAST__assume (id (fp #b0 #b01111111 #b00000000000000000000000))))
+
+;; H
+  (assert (fp.isFinite32 p__t_LAST__assume))
+
+;; H
+  (assert
+  (= p__t_LAST__assume (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
   (assert (= p__t_LAST__assume t_LAST))
@@ -242,7 +246,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "p.adb", line 2, characters 0-0
-  (not
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) t_FIRST)))
+  (not (fp.leq t_LAST (fp #b0 #b11111110 #b11111111111111111111111))))
 (check-sat)
 (exit)

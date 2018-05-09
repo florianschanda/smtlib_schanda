@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1050,11 +1050,15 @@
   (assert (= fliteral (of_int RNA1 1)))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
-(declare-sort tt_float32B 0)
+(declare-fun equal (t t) Bool)
+
+(declare-fun equal__function_guard (Bool t t) Bool)
+
+(declare-sort t_float32 0)
 
 (define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq (tt_float32B tt_float32B) Bool)
+(declare-fun user_eq (t_float32 t_float32) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (t) us_image)
 
@@ -1062,26 +1066,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) t)
 
-(declare-const dummy tt_float32B)
-
-(declare-datatypes ()
-((tt_float32B__ref (mk_tt_float32B__ref (tt_float32B__content tt_float32B)))))
-(define-fun tt_float32B__ref___projection ((a tt_float32B__ref)) tt_float32B
-  (tt_float32B__content a))
-
-(declare-sort t_float32 0)
-
-(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
-
-(declare-fun user_eq1 (t_float32 t_float32) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
-
-(declare-const dummy1 t_float32)
+(declare-const dummy t_float32)
 
 (declare-datatypes ()
 ((t_float32__ref (mk_t_float32__ref (t_float32__content t_float32)))))
@@ -1101,10 +1086,6 @@
                                      (or (= temp___is_init_154 true) (le
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_158)))
-
-(declare-fun equal (t t) Bool)
-
-(declare-fun equal__function_guard (Bool t t) Bool)
 
 (declare-const fliteral2 t)
 
@@ -1128,6 +1109,25 @@
   (forall ((x1 t) (x2 t))
   (! (= (= (equal x1 x2) true) (lt (abs1 (sub RNE1 x1 x2)) fliteral3)) :pattern (
   (equal x1 x2)) )))
+
+(declare-sort tt_float32B 0)
+
+(define-fun bool_eq2 ((x t) (y t)) Bool (ite (eq x y) true false))
+
+(declare-fun user_eq1 (tt_float32B tt_float32B) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
+
+(declare-const dummy1 tt_float32B)
+
+(declare-datatypes ()
+((tt_float32B__ref (mk_tt_float32B__ref (tt_float32B__content tt_float32B)))))
+(define-fun tt_float32B__ref___projection ((a tt_float32B__ref)) tt_float32B
+  (tt_float32B__content a))
 
 (declare-sort t_x1 0)
 
@@ -1263,6 +1263,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "proof.ads", line 9, characters 0-0
-  (not (le x fliteral2)))
+  (not (le (neg fliteral2) x)))
 (check-sat)
 (exit)

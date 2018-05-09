@@ -929,6 +929,13 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type long_integer
 
+logic long_integerqtint : long_integer -> int
+
+axiom long_integerqtaxiom :
+  (forall i:long_integer.
+  (((- 9223372036854775808) <= long_integerqtint(i)) and
+  (long_integerqtint(i) <= 9223372036854775807)))
+
 predicate in_range2(x: int) = (((- 9223372036854775808) <= x) and
   (x <= 9223372036854775807))
 
@@ -1010,6 +1017,12 @@ function long_float__ref___projection(a: long_float__ref) : long_float =
 
 type tindexS
 
+logic tindexSqtint : tindexS -> int
+
+axiom tindexSqtaxiom :
+  (forall i:tindexS. ((1 <= tindexSqtint(i)) and
+  (tindexSqtint(i) <= 9223372036854775807)))
+
 predicate in_range3(x: int) = ((1 <= x) and (x <= 9223372036854775807))
 
 logic bool_eq5 : int, int -> bool
@@ -1084,7 +1097,7 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.0000000800000000000000016738048664102778140261307271430268883705139160156250))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/NC05-005__float_division/gnatprove/pi_euler_2.mlw", line 2284, characters 5-8 *)
 goal WP_parameter_def :
   (forall index:int. forall pi:t. forall erreur:t. forall index_float:t.
   forall o:t. forall result:t. forall pi1:t. forall result1:int.

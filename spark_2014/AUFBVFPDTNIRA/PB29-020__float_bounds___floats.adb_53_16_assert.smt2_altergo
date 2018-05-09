@@ -1871,5 +1871,4 @@ goal WP_parameter_def :
   to_rep1((b5[4])))) and tqtisFinite1(add1(RNE, to_rep1((c5[4])),
   to_rep1((b5[4]))))) and (to_rep1(o34) = o33)) and
   (o35 = (d4[4 <- o34]))) and ((result18 = d4) and (d5 = o35))) ->
-  le1(neg1(fliteral4),
-  to_rep1((d5[1]))))))))))))))))))))))))))))))))))))))))))
+  le1(to_rep1((d5[1])), fliteral4))))))))))))))))))))))))))))))))))))))))

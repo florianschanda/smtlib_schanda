@@ -101,11 +101,11 @@
   (assert (= result2 step_function__min__result7))
 
 ;; H
-  (assert (fp.leq x1 x2))
+  (assert (not (fp.leq x1 x2)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.eq step_function__min__result7 x1)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 5633, characters 5-8
+  (not (fp.eq step_function__min__result7 x2)))
 (check-sat)
 (exit)

@@ -1075,6 +1075,14 @@ axiom olt__def_axiom :
   (forall left:t. forall right:t [olt(left, right)]. ((olt(left,
   right) = true) <-> lt(left, add(NearestTiesToEven, right, fliteral1))))
 
+logic r : t
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic conv_deg_to_rad : t
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
 type latitude
 
 logic fliteral2 : t
@@ -1170,7 +1178,14 @@ axiom coerce_axiom1 :
   (to_rep1(of_rep1(x)) = x)))
 
 type us_split_fields = { rec__lat_long__coordinates__lat : latitude;
-rec__lat_long__coordinates__long : longitude }
+rec__lat_long__coordinates__long : longitude
+}
+
+function us_split_fields_Lat__projection(a: us_split_fields) : latitude =
+  (a).rec__lat_long__coordinates__lat
+
+function us_split_fields_Long__projection(a: us_split_fields) : longitude =
+  (a).rec__lat_long__coordinates__long
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1263,23 +1278,27 @@ logic source : latitude
 
 logic source1 : longitude
 
-logic attr__ATTRIBUTE_ADDRESS : int
+logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic destination : latitude
 
 logic destination1 : longitude
 
-logic attr__ATTRIBUTE_ADDRESS1 : int
+logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 6367444.5))
 
+axiom r__def_axiom : (r = fliteral5)
+
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 0.01745329238474369049072265625))
+
+axiom conv_deg_to_rad__def_axiom : (conv_deg_to_rad = fliteral6)
 
 logic fliteral7 : t
 
@@ -1294,14 +1313,15 @@ goal WP_parameter_def :
   forall lat_long__delta_lat_in_meters__result3:t.
   forall lat_long__delta_lat_in_meters__result4:t.
   forall lat_long__delta_lat_in_meters__result5:t.
-  (forall result1:t.
-  ((((((lat_long__delta_lat_in_meters__result1 = lat_long__delta_lat_in_meters__result2) and
+  (forall result1:t. ((tqtisFinite(r) and ((fliteral5 = r) and
+  (tqtisFinite(conv_deg_to_rad) and ((fliteral6 = conv_deg_to_rad) and
+  (((((lat_long__delta_lat_in_meters__result1 = lat_long__delta_lat_in_meters__result2) and
   (lat_long__delta_lat_in_meters__result3 = lat_long__delta_lat_in_meters__result1)) and
   ((result = lat_long__delta_lat_in_meters__result) and
   (lat_long__delta_lat_in_meters__result1 = mul(NearestTiesToEven,
   mul(NearestTiesToEven, sub(NearestTiesToEven, to_rep(destination),
-  to_rep(source)), fliteral5), fliteral6)))) and
+  to_rep(source)), r), conv_deg_to_rad)))) and
   ((lat_long__delta_lat_in_meters__result4 = lat_long__delta_lat_in_meters__result2) and
   (lat_long__delta_lat_in_meters__result5 = lat_long__delta_lat_in_meters__result3))) and
-  (result1 = lat_long__delta_lat_in_meters__result4)) ->
+  (result1 = lat_long__delta_lat_in_meters__result4)))))) ->
   (olt(abs(lat_long__delta_lat_in_meters__result4), fliteral7) = true))))

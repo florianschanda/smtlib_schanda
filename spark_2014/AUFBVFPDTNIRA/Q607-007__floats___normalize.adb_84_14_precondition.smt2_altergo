@@ -897,12 +897,16 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
-type t1
+logic r2 : t -> t
+
+logic r2__function_guard : t, t -> prop
+
+type t_float32
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 720.0))
+  (tqtreal(fliteral1) = 340282001837565597733306976381245063168.0))
 
 predicate in_range1(x: t) = (tqtisFinite(x) and (le(neg(fliteral1), x) and
   le(x, fliteral1)))
@@ -913,7 +917,7 @@ axiom bool_eq_def1 :
   (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
 
-logic user_eq : t1, t1 -> bool
+logic user_eq : t_float32, t_float32 -> bool
 
 logic attr__ATTRIBUTE_IMAGE : t -> us_image
 
@@ -921,7 +925,46 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> t
 
-logic dummy : t1
+logic dummy : t_float32
+
+type t_float32__ref = { t_float32__content : t_float32
+}
+
+function t_float32__ref___projection(a: t_float32__ref) : t_float32 =
+  (a).t_float32__content
+
+axiom r2__post_axiom :
+  (forall x:t [r2(x)]. ((in_range1(x) and le(neg(fliteral1), x)) ->
+  in_range1(r2(x))))
+
+axiom r2__def_axiom :
+  (forall x:t [r2(x)]. (in_range1(x) -> (r2(x) = roundToIntegral(RTN, x))))
+
+type t1
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 720.0))
+
+predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral2), x) and
+  le(x, fliteral2)))
+
+logic bool_eq2 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+
+logic user_eq1 : t1, t1 -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic dummy1 : t1
 
 type t1__ref = { t1__content : t1
 }
@@ -930,34 +973,34 @@ function t1__ref___projection(a: t1__ref) : t1 = (a).t1__content
 
 type t2
 
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 3.0))
-
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 2.0))
+  (tqtreal(fliteral3) = 3.0))
 
-predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral2), x) and
-  le(x, fliteral3)))
+logic fliteral4 : t
 
-logic bool_eq2 : t, t -> bool
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 2.0))
 
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+predicate in_range3(x: t) = (tqtisFinite(x) and (le(neg(fliteral3), x) and
+  le(x, fliteral4)))
 
-logic user_eq1 : t2, t2 -> bool
+logic bool_eq3 : t, t -> bool
 
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
 
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+logic user_eq2 : t2, t2 -> bool
 
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
 
-logic dummy1 : t2
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+
+logic dummy2 : t2
 
 type t2__ref = { t2__content : t2
 }
@@ -968,55 +1011,11 @@ logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-type t_float32
-
-logic fliteral4 : t
-
-axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 340282001837565597733306976381245063168.0))
-
-predicate in_range3(x1: t) = (tqtisFinite(x1) and (le(neg(fliteral4), x1) and
-  le(x1, fliteral4)))
-
-logic bool_eq3 : t, t -> bool
-
-axiom bool_eq_def3 :
-  (forall x1:t. forall y:t [bool_eq3(x1, y)]. ((eq(x1, y) -> (bool_eq3(x1,
-  y) = true)) and ((not eq(x1, y)) -> (bool_eq3(x1, y) = false))))
-
-logic user_eq2 : t_float32, t_float32 -> bool
-
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
-
-logic dummy2 : t_float32
-
-type t_float32__ref = { t_float32__content : t_float32
-}
-
-function t_float32__ref___projection(a: t_float32__ref) : t_float32 =
-  (a).t_float32__content
-
-logic r2 : t -> t
-
-logic r2__function_guard : t, t -> prop
-
-axiom r2__post_axiom :
-  (forall x1:t [r2(x1)]. ((in_range3(x1) and le(neg(fliteral4), x1)) ->
-  in_range3(r2(x1))))
-
-axiom r2__def_axiom :
-  (forall x1:t [r2(x1)]. (in_range3(x1) -> (r2(x1) = roundToIntegral(RTN,
-  x1))))
-
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 360.0))
 
  (* File "normalize.ads", line 9, characters 0-0 *)
-goal WP_parameter_def : (in_range1(x) -> le(neg(fliteral4), div(RNE, x,
+goal WP_parameter_def : (in_range2(x) -> le(neg(fliteral1), div(RNE, x,
   fliteral5)))

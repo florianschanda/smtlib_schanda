@@ -239,7 +239,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O401-034__float_pred/gnatprove/safety_pack.mlw", line 30430, characters 5-8
   (not (fp.isFinite32 (fp.sub RNE value threshold))))
 (check-sat)
 (exit)

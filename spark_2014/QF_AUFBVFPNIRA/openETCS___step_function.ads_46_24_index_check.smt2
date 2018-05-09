@@ -206,6 +206,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "step_function.ads", line 42, characters 0-0
-  (not (<= 0 temp___255)))
+  (not (<= temp___255 10)))
 (check-sat)
 (exit)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -160,8 +156,6 @@
 
 (declare-const o1 Float32)
 
-(declare-const o2 Float32)
-
 ;; H
   (assert (fp.isFinite32 temperature))
 
@@ -200,20 +194,22 @@
 
 ;; H
   (assert
-  (and
-  (= o (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) asl_alpha))
+  (= o (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) asl_alpha)))
+
+;; H
+  (assert
   (fp.isFinite32 (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  asl_alpha))))
+  asl_alpha)))
 
 ;; H
   (assert (= o1 (fp.mul RNE asl_raw o)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite32 o1)))
+  (assert (fp.isFinite32 o1))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O325-024__abstract_state/gnatprove/stabilizer_pack.mlw", line 28269, characters 5-8
   (not (fp.isFinite32 (fp.mul RNE asl asl_alpha))))
 (check-sat)
 (exit)

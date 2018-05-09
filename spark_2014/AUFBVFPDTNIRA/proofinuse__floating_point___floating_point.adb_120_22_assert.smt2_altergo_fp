@@ -1113,6 +1113,11 @@ function float_32__ref___projection(a: float_32__ref) : float_32 =
 
 type t1
 
+logic tqtint : t1 -> int
+
+axiom tqtaxiom1 :
+  (forall i:t1. ((0 <= tqtint(i)) and (tqtint(i) <= 1000000)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 1000000))
 
 logic bool_eq4 : int, int -> bool
@@ -1182,7 +1187,7 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 10.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10177, characters 5-8 *)
 goal WP_parameter_def :
   (forall state:t. forall o:t. forall result:t. forall state1:t.
   (tqtisFinite(state) -> (in_range2(x) -> (((x <  1000000) and
@@ -1190,4 +1195,5 @@ goal WP_parameter_def :
   mul(NearestTiesToEven, of_int(NearestTiesToEven, x), fliteral2))))) ->
   ((((o = add(NearestTiesToEven, state, fliteral2)) and
   tqtisFinite(add(NearestTiesToEven, state, fliteral2))) and
-  ((result = state) and (state1 = o))) -> le(fliteral2, state1))))))
+  ((result = state) and (state1 = o))) -> le(state1, mul(NearestTiesToEven,
+  of_int(NearestTiesToEven, (x + 1)), fliteral2)))))))

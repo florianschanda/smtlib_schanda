@@ -1086,15 +1086,57 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-type t_rate
+logic inv_sqrt : t -> t
+
+logic inv_sqrt__function_guard : t, t -> prop
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 3000.0))
+  (tqtreal(fliteral1) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
 
-predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral1), x) and
-  le(x, fliteral1)))
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0e-1))
+
+logic fliteral3 : t
+
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 200000004008175468544.0))
+
+axiom inv_sqrt__post_axiom :
+  (forall x:t [inv_sqrt(x)]. ((tqtisFinite(x) and le(fliteral1, x)) ->
+  ((lt(fliteral2, inv_sqrt(x)) and lt(inv_sqrt(x), fliteral3)) and
+  tqtisFinite(inv_sqrt(x)))))
+
+logic saturate : t, t, t -> t
+
+logic saturate__function_guard : t, t, t, t -> prop
+
+axiom saturate__post_axiom :
+  (forall value:t. forall min_value:t. forall max_value:t [saturate(value,
+  min_value, max_value)]. (((tqtisFinite(value) and
+  tqtisFinite(min_value)) and tqtisFinite(max_value)) -> (((lt(value,
+  min_value) -> eq(saturate(value, min_value, max_value), min_value)) and
+  ((not lt(value, min_value)) -> ((lt(max_value, value) -> eq(saturate(value,
+  min_value, max_value), max_value)) and ((not lt(max_value, value)) ->
+  eq(saturate(value, min_value, max_value), value))))) and
+  tqtisFinite(saturate(value, min_value, max_value)))))
+
+logic lift_away_from_zero : t -> t
+
+logic lift_away_from_zero__function_guard : t, t -> prop
+
+type t_acc
+
+logic fliteral4 : t
+
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 16.0))
+
+predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral4), x) and
+  le(x, fliteral4)))
 
 logic bool_eq3 : t, t -> bool
 
@@ -1102,7 +1144,7 @@ axiom bool_eq_def3 :
   (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
 
-logic user_eq1 : t_rate, t_rate -> bool
+logic user_eq1 : t_acc, t_acc -> bool
 
 logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
 
@@ -1110,39 +1152,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE2 : us_image -> t
 
-logic dummy1 : t_rate
-
-type t_rate__ref = { t_rate__content : t_rate
-}
-
-function t_rate__ref___projection(a: t_rate__ref) : t_rate =
-  (a).t_rate__content
-
-type t_acc
-
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 16.0))
-
-predicate in_range3(x: t) = (tqtisFinite(x) and (le(neg(fliteral2), x) and
-  le(x, fliteral2)))
-
-logic bool_eq4 : t, t -> bool
-
-axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
-
-logic user_eq2 : t_acc, t_acc -> bool
-
-logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t
-
-logic dummy2 : t_acc
+logic dummy1 : t_acc
 
 type t_acc__ref = { t_acc__content : t_acc
 }
@@ -1151,24 +1161,24 @@ function t_acc__ref___projection(a: t_acc__ref) : t_acc = (a).t_acc__content
 
 type t_acc_lifted
 
-predicate in_range4(x: t) = (tqtisFinite(x) and (le(neg(fliteral2), x) and
-  le(x, fliteral2)))
+predicate in_range3(x: t) = (tqtisFinite(x) and (le(neg(fliteral4), x) and
+  le(x, fliteral4)))
 
-logic bool_eq5 : t, t -> bool
+logic bool_eq4 : t, t -> bool
 
-axiom bool_eq_def5 :
-  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
+axiom bool_eq_def4 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
 
-logic user_eq3 : t_acc_lifted, t_acc_lifted -> bool
+logic user_eq2 : t_acc_lifted, t_acc_lifted -> bool
 
-logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
 
-logic dummy3 : t_acc_lifted
+logic dummy2 : t_acc_lifted
 
 type t_acc_lifted__ref = { t_acc_lifted__content : t_acc_lifted
 }
@@ -1176,20 +1186,53 @@ type t_acc_lifted__ref = { t_acc_lifted__content : t_acc_lifted
 function t_acc_lifted__ref___projection(a: t_acc_lifted__ref) : t_acc_lifted =
   (a).t_acc_lifted__content
 
+axiom lift_away_from_zero__post_axiom :
+  (forall x:t [lift_away_from_zero(x)]. (in_range2(x) -> (((eq(x,
+  fliteral2) -> eq(lift_away_from_zero(x), fliteral2)) and ((not eq(x,
+  fliteral2)) -> (neq(x, fliteral2) -> neq(lift_away_from_zero(x),
+  fliteral2)))) and in_range3(lift_away_from_zero(x)))))
+
+type t_rate
+
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 3000.0))
+
+predicate in_range4(x: t) = (tqtisFinite(x) and (le(neg(fliteral5), x) and
+  le(x, fliteral5)))
+
+logic bool_eq5 : t, t -> bool
+
+axiom bool_eq_def5 :
+  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
+
+logic user_eq3 : t_rate, t_rate -> bool
+
+logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+
+logic dummy3 : t_rate
+
+type t_rate__ref = { t_rate__content : t_rate
+}
+
+function t_rate__ref___projection(a: t_rate__ref) : t_rate =
+  (a).t_rate__content
+
 type positive_float
 
-logic fliteral3 : t
+logic fliteral6 : t
 
-axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 0.0e-1))
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 340282346638528859811704183484516925440.0))
 
-logic fliteral4 : t
-
-axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 340282346638528859811704183484516925440.0))
-
-predicate in_range5(x: t) = (tqtisFinite(x) and (le(fliteral3, x) and le(x,
-  fliteral4)))
+predicate in_range5(x: t) = (tqtisFinite(x) and (le(fliteral2, x) and le(x,
+  fliteral6)))
 
 logic bool_eq6 : t, t -> bool
 
@@ -1215,12 +1258,12 @@ function positive_float__ref___projection(a: positive_float__ref) : positive_flo
 
 type t_delta_time
 
-logic fliteral5 : t
+logic fliteral7 : t
 
-axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
-  (tqtreal(fliteral5) = 0.001000000047497451305389404296875))
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 0.001000000047497451305389404296875))
 
-predicate in_range6(x: t) = (tqtisFinite(x) and (le(fliteral5, x) and le(x,
+predicate in_range6(x: t) = (tqtisFinite(x) and (le(fliteral7, x) and le(x,
   fliteral)))
 
 logic bool_eq7 : t, t -> bool
@@ -1247,7 +1290,7 @@ function t_delta_time__ref___projection(a: t_delta_time__ref) : t_delta_time =
 
 type t_alpha
 
-predicate in_range7(x: t) = (tqtisFinite(x) and (le(fliteral3, x) and le(x,
+predicate in_range7(x: t) = (tqtisFinite(x) and (le(fliteral2, x) and le(x,
   fliteral)))
 
 logic bool_eq8 : t, t -> bool
@@ -1298,49 +1341,6 @@ type t_quaternion__ref = { t_quaternion__content : t_quaternion
 
 function t_quaternion__ref___projection(a: t_quaternion__ref) : t_quaternion =
   (a).t_quaternion__content
-
-logic inv_sqrt : t -> t
-
-logic inv_sqrt__function_guard : t, t -> prop
-
-logic fliteral6 : t
-
-axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
-  (tqtreal(fliteral6) = 0.0000000000000000000000000000000000000000000014012984643248170709237295832899161312802619418765157717570682838897910826858606014866381883621215820312500000000000000000000000))
-
-logic fliteral7 : t
-
-axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
-  (tqtreal(fliteral7) = 200000004008175468544.0))
-
-axiom inv_sqrt__post_axiom :
-  (forall x:t [inv_sqrt(x)]. ((tqtisFinite(x) and le(fliteral6, x)) ->
-  ((lt(fliteral3, inv_sqrt(x)) and lt(inv_sqrt(x), fliteral7)) and
-  tqtisFinite(inv_sqrt(x)))))
-
-logic saturate : t, t, t -> t
-
-logic saturate__function_guard : t, t, t, t -> prop
-
-axiom saturate__post_axiom :
-  (forall value:t. forall min_value:t. forall max_value:t [saturate(value,
-  min_value, max_value)]. (((tqtisFinite(value) and
-  tqtisFinite(min_value)) and tqtisFinite(max_value)) -> (((lt(value,
-  min_value) -> eq(saturate(value, min_value, max_value), min_value)) and
-  ((not lt(value, min_value)) -> ((lt(max_value, value) -> eq(saturate(value,
-  min_value, max_value), max_value)) and ((not lt(max_value, value)) ->
-  eq(saturate(value, min_value, max_value), value))))) and
-  tqtisFinite(saturate(value, min_value, max_value)))))
-
-logic lift_away_from_zero : t -> t
-
-logic lift_away_from_zero__function_guard : t, t -> prop
-
-axiom lift_away_from_zero__post_axiom :
-  (forall x:t [lift_away_from_zero(x)]. (in_range3(x) -> (((eq(x,
-  fliteral3) -> eq(lift_away_from_zero(x), fliteral3)) and ((not eq(x,
-  fliteral3)) -> (neq(x, fliteral3) -> neq(lift_away_from_zero(x),
-  fliteral3)))) and in_range4(lift_away_from_zero(x)))))
 
 logic gx : t
 
@@ -1624,20 +1624,20 @@ goal WP_parameter_def :
   forall result33:t__ref. forall q2_tmp1:t. forall result34:t__ref.
   forall q3_tmp1:t. forall result35:t__ref. forall recip_norm3:t.
   forall result36:t__ref. forall q01:t. forall result37:t__ref. forall q11:t.
-  forall result38:t__ref. forall q21:t. (in_range2(gx) -> (in_range2(gy) ->
-  (in_range2(gz) -> (in_range3(ax) -> (in_range3(ay) -> (in_range3(az) ->
+  forall result38:t__ref. forall q21:t. (in_range4(gx) -> (in_range4(gy) ->
+  (in_range4(gz) -> (in_range2(ax) -> (in_range2(ay) -> (in_range2(az) ->
   (in_range6(dt) -> (in_range8(q0) -> (in_range8(q1) -> (in_range8(q2) ->
   (in_range8(q3) -> (tqtisFinite(two_kp) -> (tqtisFinite(two_ki) ->
   (tqtisFinite(integral_fbx) -> (tqtisFinite(integral_fby) ->
   (tqtisFinite(integral_fbz) -> (in_range7(beta) -> (((gx = c3b) and
-  in_range2(c3b)) -> (((gy = c4b) and in_range2(c4b)) -> (((gz = c5b) and
-  in_range2(c5b)) -> (((ax = c6b) and in_range3(c6b)) -> (((ay = c7b) and
-  in_range3(c7b)) -> (((az = c8b) and in_range3(c8b)) -> (((dt = c9b) and
-  in_range6(c9b)) -> ((le(neg(fliteral4), fliteral4) ->
-  tqtisFinite(recip_norm)) -> ((le(neg(fliteral2), fliteral2) ->
-  in_range3(norm_ax)) -> ((le(neg(fliteral2), fliteral2) ->
-  in_range3(norm_ay)) -> ((le(neg(fliteral2), fliteral2) ->
-  in_range3(norm_az)) -> (((result = rad_gx) and
+  in_range4(c3b)) -> (((gy = c4b) and in_range4(c4b)) -> (((gz = c5b) and
+  in_range4(c5b)) -> (((ax = c6b) and in_range2(c6b)) -> (((ay = c7b) and
+  in_range2(c7b)) -> (((az = c8b) and in_range2(c8b)) -> (((dt = c9b) and
+  in_range6(c9b)) -> ((le(neg(fliteral6), fliteral6) ->
+  tqtisFinite(recip_norm)) -> ((le(neg(fliteral4), fliteral4) ->
+  in_range2(norm_ax)) -> ((le(neg(fliteral4), fliteral4) ->
+  in_range2(norm_ay)) -> ((le(neg(fliteral4), fliteral4) ->
+  in_range2(norm_az)) -> (((result = rad_gx) and
   (rad_gx1 = div(NearestTiesToEven, mul(NearestTiesToEven, c3b, fliteral8),
   fliteral9))) -> (tqtisFinite(rad_gx1) -> (((result1 = rad_gy) and
   (rad_gy1 = div(NearestTiesToEven, mul(NearestTiesToEven, c4b, fliteral8),
@@ -1651,21 +1651,21 @@ goal WP_parameter_def :
   (tqtisFinite(half_vy1) -> (((result5 = half_vz) and
   (half_vz1 = add(NearestTiesToEven, sub(NearestTiesToEven,
   mul(NearestTiesToEven, q0, q0), fliteral10), mul(NearestTiesToEven, q3,
-  q3)))) -> (tqtisFinite(half_vz1) -> ((le(neg(fliteral4), fliteral4) ->
-  tqtisFinite(half_ex)) -> ((le(neg(fliteral4), fliteral4) ->
-  tqtisFinite(half_ey)) -> ((le(neg(fliteral4), fliteral4) ->
-  tqtisFinite(half_ez)) -> ((le(neg(fliteral4), fliteral4) ->
-  tqtisFinite(q0_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
-  tqtisFinite(q1_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
-  tqtisFinite(q2_tmp)) -> ((le(neg(fliteral4), fliteral4) ->
+  q3)))) -> (tqtisFinite(half_vz1) -> ((le(neg(fliteral6), fliteral6) ->
+  tqtisFinite(half_ex)) -> ((le(neg(fliteral6), fliteral6) ->
+  tqtisFinite(half_ey)) -> ((le(neg(fliteral6), fliteral6) ->
+  tqtisFinite(half_ez)) -> ((le(neg(fliteral6), fliteral6) ->
+  tqtisFinite(q0_tmp)) -> ((le(neg(fliteral6), fliteral6) ->
+  tqtisFinite(q1_tmp)) -> ((le(neg(fliteral6), fliteral6) ->
+  tqtisFinite(q2_tmp)) -> ((le(neg(fliteral6), fliteral6) ->
   tqtisFinite(q3_tmp)) -> (((result6 = qa) and (qa1 = q0)) ->
   (in_range8(qa1) -> (((result7 = qb) and (qb1 = q1)) -> (in_range8(qb1) ->
   (((result8 = qc) and (qc1 = q2)) -> (in_range8(qc1) -> ((((not (eq(c6b,
-  fliteral3) and (eq(c7b, fliteral3) and eq(c8b, fliteral3)))) and
+  fliteral2) and (eq(c7b, fliteral2) and eq(c8b, fliteral2)))) and
   ((((o = inv_sqrt(add(NearestTiesToEven, add(NearestTiesToEven,
   mul(NearestTiesToEven, c6b, c6b), mul(NearestTiesToEven, c7b, c7b)),
-  mul(NearestTiesToEven, c8b, c8b)))) and (tqtisFinite(o) and (lt(fliteral3,
-  o) and lt(o, fliteral7)))) and ((result9 = recip_norm) and
+  mul(NearestTiesToEven, c8b, c8b)))) and (tqtisFinite(o) and (lt(fliteral2,
+  o) and lt(o, fliteral3)))) and ((result9 = recip_norm) and
   (recip_norm2 = o))) and ((((((o1 = mul(NearestTiesToEven, c6b,
   recip_norm2)) and tqtisFinite(mul(NearestTiesToEven, c6b,
   recip_norm2))) and ((o2 = saturate(o1, neg(fliteral), fliteral)) and
@@ -1705,7 +1705,7 @@ goal WP_parameter_def :
   tqtisFinite(mul(NearestTiesToEven, norm_ax2, half_vy1))) and
   (o20 = sub(NearestTiesToEven, o19, o18)))) and ((o21 = o20) and
   tqtisFinite(o20))) and ((result15 = { t__content = half_ez }) and
-  (half_ez2 = o21))) and (((lt(fliteral3, two_ki) and
+  (half_ez2 = o21))) and (((lt(fliteral2, two_ki) and
   ((((((((o22 = mul(NearestTiesToEven, two_ki, half_ex2)) and
   tqtisFinite(mul(NearestTiesToEven, two_ki, half_ex2))) and
   (o23 = mul(NearestTiesToEven, o22, c9b))) and ((o24 = o23) and
@@ -1733,10 +1733,10 @@ goal WP_parameter_def :
   (((o39 = add(NearestTiesToEven, rad_gz1, integral_fbz2)) and
   tqtisFinite(add(NearestTiesToEven, rad_gz1, integral_fbz2))) and
   ((result21 = { t__content = rad_gz1 }) and (rad_gz2 = o39))))))))) or
-  ((not lt(fliteral3, two_ki)) and ((((result22 = { t__content = integral_fbx
-  }) and (integral_fbx3 = fliteral3)) and (((result23 = { t__content =
-  integral_fby }) and (integral_fby3 = fliteral3)) and ((result24 = {
-  t__content = integral_fbz }) and (integral_fbz3 = fliteral3)))) and
+  ((not lt(fliteral2, two_ki)) and ((((result22 = { t__content = integral_fbx
+  }) and (integral_fbx3 = fliteral2)) and (((result23 = { t__content =
+  integral_fby }) and (integral_fby3 = fliteral2)) and ((result24 = {
+  t__content = integral_fbz }) and (integral_fbz3 = fliteral2)))) and
   ((rad_gz2 = rad_gz1) and ((rad_gy2 = rad_gy1) and ((rad_gx2 = rad_gx1) and
   ((integral_fbz2 = integral_fbz3) and ((integral_fby2 = integral_fby3) and
   (integral_fbx2 = integral_fbx3))))))))) and
@@ -1752,8 +1752,8 @@ goal WP_parameter_def :
   half_ez2)) and tqtisFinite(mul(NearestTiesToEven, two_kp, half_ez2))) and
   (o47 = add(NearestTiesToEven, rad_gz2, o46))) and ((o48 = o47) and
   tqtisFinite(o47))) and ((result27 = { t__content = rad_gz2 }) and
-  (rad_gz3 = o48)))))))))))))) or ((eq(c6b, fliteral3) and (eq(c7b,
-  fliteral3) and eq(c8b, fliteral3))) and (((half_ez2 = half_ez) and
+  (rad_gz3 = o48)))))))))))))) or ((eq(c6b, fliteral2) and (eq(c7b,
+  fliteral2) and eq(c8b, fliteral2))) and (((half_ez2 = half_ez) and
   ((half_ey2 = half_ey) and ((half_ex2 = half_ex) and
   ((rad_gz3 = rad_gz1) and ((rad_gy3 = rad_gy1) and ((rad_gx3 = rad_gx1) and
   ((norm_az2 = norm_az) and ((norm_ay2 = norm_ay) and
@@ -1828,8 +1828,8 @@ goal WP_parameter_def :
   tqtisFinite(o88))) and (o91 = add(NearestTiesToEven, o90, o89)))) and
   ((o93 = o91) and tqtisFinite(o91))) and (o94 = add(NearestTiesToEven, o93,
   o92)))) and ((o95 = o94) and tqtisFinite(o94))) and
-  ((o96 = inv_sqrt(o95)) and (tqtisFinite(o96) and (lt(fliteral3, o96) and
-  lt(o96, fliteral7))))) and ((result35 = { t__content = recip_norm2 }) and
+  ((o96 = inv_sqrt(o95)) and (tqtisFinite(o96) and (lt(fliteral2, o96) and
+  lt(o96, fliteral3))))) and ((result35 = { t__content = recip_norm2 }) and
   (recip_norm3 = o96))) -> ((((((o97 = mul(NearestTiesToEven, q0_tmp1,
   recip_norm3)) and tqtisFinite(mul(NearestTiesToEven, q0_tmp1,
   recip_norm3))) and ((o98 = saturate(o97, neg(fliteral), fliteral)) and

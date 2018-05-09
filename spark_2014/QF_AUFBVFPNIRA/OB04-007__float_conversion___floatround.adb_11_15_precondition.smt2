@@ -108,6 +108,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "floatround.adb", line 7, characters 0-0
-  (not (in_range1 x11)))
+  (not (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x11)))
 (check-sat)
 (exit)

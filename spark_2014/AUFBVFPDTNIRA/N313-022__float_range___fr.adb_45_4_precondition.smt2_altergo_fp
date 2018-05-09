@@ -1035,17 +1035,23 @@ axiom one_of_int : (fliteral = of_int(NearestTiesToAway, 1))
 type t__ref = { t__content : t
 }
 
-type float1
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+type float2
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.500000000000000000000000))
+  (tqtreal(fliteral1) = 0.0e-1))
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 0.899999976158142089843750))
+  (tqtreal(fliteral2) = 2.0999999046325683593750))
 
 predicate in_range1(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
   fliteral2)))
@@ -1056,7 +1062,7 @@ axiom bool_eq_def1 :
   (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
 
-logic user_eq : float1, float1 -> bool
+logic user_eq : float2, float2 -> bool
 
 logic attr__ATTRIBUTE_IMAGE : t -> us_image
 
@@ -1064,25 +1070,25 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> t
 
-logic dummy : float1
+logic dummy : float2
 
-type float1__ref = { float1__content : float1
+type float2__ref = { float2__content : float2
 }
 
-function float1__ref___projection(a: float1__ref) : float1 =
-  (a).float1__content
+function float2__ref___projection(a: float2__ref) : float2 =
+  (a).float2__content
 
-type float2
+type float1
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 0.0e-1))
+  (tqtreal(fliteral3) = 0.500000000000000000000000))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
-  (tqtreal(fliteral4) = 2.0999999046325683593750))
+  (tqtreal(fliteral4) = 0.899999976158142089843750))
 
 predicate in_range2(x: t) = (tqtisFinite(x) and (le(fliteral3, x) and le(x,
   fliteral4)))
@@ -1093,7 +1099,7 @@ axiom bool_eq_def2 :
   (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
 
-logic user_eq1 : float2, float2 -> bool
+logic user_eq1 : float1, float1 -> bool
 
 logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
 
@@ -1101,19 +1107,13 @@ logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE1 : us_image -> t
 
-logic dummy1 : float2
+logic dummy1 : float1
 
-type float2__ref = { float2__content : float2
+type float1__ref = { float1__content : float1
 }
 
-function float2__ref___projection(a: float2__ref) : float2 =
-  (a).float2__content
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic attr__ATTRIBUTE_ADDRESS2 : int
+function float1__ref___projection(a: float1__ref) : float1 =
+  (a).float1__content
 
  (* File "fr.adb", line 8, characters 0-0 *)
 goal WP_parameter_def : true

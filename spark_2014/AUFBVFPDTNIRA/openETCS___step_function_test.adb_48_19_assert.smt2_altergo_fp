@@ -1071,7 +1071,22 @@ axiom coerce_axiom :
   (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
   (to_rep(of_rep(x)) = x)))
 
+logic min1 : t, t -> t
+
+logic min__function_guard : t, t, t -> prop
+
+axiom min__post_axiom :
+  (forall x1:t. forall x2:t [min1(x1, x2)]. ((tqtisFinite(x1) and
+  tqtisFinite(x2)) -> (((le(x1, x2) -> eq(min1(x1, x2), x1)) and ((not le(x1,
+  x2)) -> eq(min1(x1, x2), x2))) and tqtisFinite(min1(x1, x2)))))
+
 type num_delimiters_range
+
+logic num_delimiters_rangeqtint : num_delimiters_range -> int
+
+axiom num_delimiters_rangeqtaxiom :
+  (forall i:num_delimiters_range. ((0 <= num_delimiters_rangeqtint(i)) and
+  (num_delimiters_rangeqtint(i) <= 10)))
 
 predicate in_range1(x: int) = ((0 <= x) and (x <= 10))
 
@@ -1128,7 +1143,8 @@ num_delimiters_range
 function num_delimiters_range__ref___projection(a: num_delimiters_range__ref) : num_delimiters_range =
   (a).num_delimiters_range__content
 
-logic to_rep1 : num_delimiters_range -> int
+function to_rep1(x: num_delimiters_range) : int =
+  num_delimiters_rangeqtint(x)
 
 logic of_rep1 : int -> num_delimiters_range
 
@@ -1143,6 +1159,12 @@ axiom coerce_axiom1 :
   (to_rep1(of_rep1(x)) = x)))
 
 type function_range
+
+logic function_rangeqtint : function_range -> int
+
+axiom function_rangeqtaxiom :
+  (forall i:function_range. ((0 <= function_rangeqtint(i)) and
+  (function_rangeqtint(i) <= 2147483647)))
 
 predicate in_range2(x: int) = ((0 <= x) and (x <= 2147483647))
 
@@ -1168,7 +1190,7 @@ type function_range__ref = { function_range__content : function_range
 function function_range__ref___projection(a: function_range__ref) : function_range =
   (a).function_range__content
 
-logic to_rep2 : function_range -> int
+function to_rep2(x: function_range) : int = function_rangeqtint(x)
 
 logic of_rep2 : int -> function_range
 
@@ -1188,6 +1210,9 @@ function_range; rec__step_function__delimiter_entry__value : float1
 
 function us_split_fields_Delimiter__projection(a: us_split_fields) : function_range =
   (a).rec__step_function__delimiter_entry__delimiter
+
+function us_split_fields_Value__projection(a: us_split_fields) : float1 =
+  (a).rec__step_function__delimiter_entry__value
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1460,15 +1485,6 @@ type step_function_t__ref = { step_function_t__content : us_rep1
 function step_function_t__ref___projection(a: step_function_t__ref) : us_rep1 =
   (a).step_function_t__content
 
-logic min1 : t, t -> t
-
-logic min__function_guard : t, t, t -> prop
-
-axiom min__post_axiom :
-  (forall x1:t. forall x2:t [min1(x1, x2)]. ((tqtisFinite(x1) and
-  tqtisFinite(x2)) -> (((le(x1, x2) -> eq(min1(x1, x2), x1)) and ((not le(x1,
-  x2)) -> eq(min1(x1, x2), x2))) and tqtisFinite(min1(x1, x2)))))
-
 logic is_valid : us_rep1 -> bool
 
 logic is_valid__function_guard : bool, us_rep1 -> prop
@@ -1580,24 +1596,27 @@ logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
-logic temp___308 : us_rep, us_rep, us_rep, us_rep -> (int,us_rep) farray
-
-logic temp___315 : us_rep, us_rep, us_rep, us_rep -> (int,us_rep) farray
-
-logic temp___322 : us_rep, us_rep, us_rep, us_rep, us_rep, us_rep,
+logic temp_____aggregate_def_308 : us_rep, us_rep, us_rep,
   us_rep -> (int,us_rep) farray
 
-logic temp___332 : us_rep, us_rep, us_rep, us_rep, us_rep, us_rep,
+logic temp_____aggregate_def_315 : us_rep, us_rep, us_rep,
   us_rep -> (int,us_rep) farray
+
+logic temp_____aggregate_def_322 : us_rep, us_rep, us_rep, us_rep, us_rep,
+  us_rep, us_rep -> (int,us_rep) farray
+
+logic temp_____aggregate_def_332 : us_rep, us_rep, us_rep, us_rep, us_rep,
+  us_rep, us_rep -> (int,us_rep) farray
 
 axiom def_axiom :
   (forall temp___310:function_range. forall temp___3101:float1.
   forall temp___311:function_range. forall temp___3111:float1.
   forall temp___312:function_range. forall temp___3121:float1.
   forall temp___313:function_range. forall temp___3131:float1.
-  (forall temp___314:int. (((temp___314 = 0) -> ((temp___308({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___310; rec__step_function__delimiter_entry__value = temp___3101 } }, {
+  (forall temp___314:int. (((temp___314 = 0) ->
+  ((temp_____aggregate_def_308({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___310;
+  rec__step_function__delimiter_entry__value = temp___3101 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___311; rec__step_function__delimiter_entry__value = temp___3111 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1607,9 +1626,10 @@ axiom def_axiom :
   })[temp___314]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___310;
   rec__step_function__delimiter_entry__value = temp___3101 } })) and
-  ((not (temp___314 = 0)) -> (((temp___314 = 1) -> ((temp___308({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___310; rec__step_function__delimiter_entry__value = temp___3101 } }, {
+  ((not (temp___314 = 0)) -> (((temp___314 = 1) ->
+  ((temp_____aggregate_def_308({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___310;
+  rec__step_function__delimiter_entry__value = temp___3101 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___311; rec__step_function__delimiter_entry__value = temp___3111 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1619,9 +1639,10 @@ axiom def_axiom :
   })[temp___314]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___311;
   rec__step_function__delimiter_entry__value = temp___3111 } })) and
-  ((not (temp___314 = 1)) -> (((temp___314 = 2) -> ((temp___308({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___310; rec__step_function__delimiter_entry__value = temp___3101 } }, {
+  ((not (temp___314 = 1)) -> (((temp___314 = 2) ->
+  ((temp_____aggregate_def_308({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___310;
+  rec__step_function__delimiter_entry__value = temp___3101 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___311; rec__step_function__delimiter_entry__value = temp___3111 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1631,9 +1652,9 @@ axiom def_axiom :
   })[temp___314]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___312;
   rec__step_function__delimiter_entry__value = temp___3121 } })) and
-  ((not (temp___314 = 2)) -> ((temp___308({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = temp___310;
-  rec__step_function__delimiter_entry__value = temp___3101 } }, {
+  ((not (temp___314 = 2)) -> ((temp_____aggregate_def_308({
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
+  temp___310; rec__step_function__delimiter_entry__value = temp___3101 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___311; rec__step_function__delimiter_entry__value = temp___3111 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1649,9 +1670,10 @@ axiom def_axiom1 :
   forall temp___318:function_range. forall temp___3181:float1.
   forall temp___319:function_range. forall temp___3191:float1.
   forall temp___320:function_range. forall temp___3201:float1.
-  (forall temp___321:int. (((temp___321 = 0) -> ((temp___315({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___317; rec__step_function__delimiter_entry__value = temp___3171 } }, {
+  (forall temp___321:int. (((temp___321 = 0) ->
+  ((temp_____aggregate_def_315({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___317;
+  rec__step_function__delimiter_entry__value = temp___3171 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___318; rec__step_function__delimiter_entry__value = temp___3181 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1661,9 +1683,10 @@ axiom def_axiom1 :
   })[temp___321]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___317;
   rec__step_function__delimiter_entry__value = temp___3171 } })) and
-  ((not (temp___321 = 0)) -> (((temp___321 = 1) -> ((temp___315({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___317; rec__step_function__delimiter_entry__value = temp___3171 } }, {
+  ((not (temp___321 = 0)) -> (((temp___321 = 1) ->
+  ((temp_____aggregate_def_315({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___317;
+  rec__step_function__delimiter_entry__value = temp___3171 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___318; rec__step_function__delimiter_entry__value = temp___3181 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1673,9 +1696,10 @@ axiom def_axiom1 :
   })[temp___321]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___318;
   rec__step_function__delimiter_entry__value = temp___3181 } })) and
-  ((not (temp___321 = 1)) -> (((temp___321 = 2) -> ((temp___315({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___317; rec__step_function__delimiter_entry__value = temp___3171 } }, {
+  ((not (temp___321 = 1)) -> (((temp___321 = 2) ->
+  ((temp_____aggregate_def_315({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___317;
+  rec__step_function__delimiter_entry__value = temp___3171 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___318; rec__step_function__delimiter_entry__value = temp___3181 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1685,9 +1709,9 @@ axiom def_axiom1 :
   })[temp___321]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___319;
   rec__step_function__delimiter_entry__value = temp___3191 } })) and
-  ((not (temp___321 = 2)) -> ((temp___315({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = temp___317;
-  rec__step_function__delimiter_entry__value = temp___3171 } }, {
+  ((not (temp___321 = 2)) -> ((temp_____aggregate_def_315({
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
+  temp___317; rec__step_function__delimiter_entry__value = temp___3171 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___318; rec__step_function__delimiter_entry__value = temp___3181 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1706,9 +1730,10 @@ axiom def_axiom2 :
   forall temp___328:function_range. forall temp___3281:float1.
   forall temp___329:function_range. forall temp___3291:float1.
   forall temp___330:function_range. forall temp___3301:float1.
-  (forall temp___331:int. (((temp___331 = 0) -> ((temp___322({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___324; rec__step_function__delimiter_entry__value = temp___3241 } }, {
+  (forall temp___331:int. (((temp___331 = 0) ->
+  ((temp_____aggregate_def_322({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___324;
+  rec__step_function__delimiter_entry__value = temp___3241 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___325; rec__step_function__delimiter_entry__value = temp___3251 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1724,9 +1749,10 @@ axiom def_axiom2 :
   })[temp___331]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___324;
   rec__step_function__delimiter_entry__value = temp___3241 } })) and
-  ((not (temp___331 = 0)) -> (((temp___331 = 1) -> ((temp___322({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___324; rec__step_function__delimiter_entry__value = temp___3241 } }, {
+  ((not (temp___331 = 0)) -> (((temp___331 = 1) ->
+  ((temp_____aggregate_def_322({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___324;
+  rec__step_function__delimiter_entry__value = temp___3241 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___325; rec__step_function__delimiter_entry__value = temp___3251 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1742,9 +1768,10 @@ axiom def_axiom2 :
   })[temp___331]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___325;
   rec__step_function__delimiter_entry__value = temp___3251 } })) and
-  ((not (temp___331 = 1)) -> (((temp___331 = 2) -> ((temp___322({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___324; rec__step_function__delimiter_entry__value = temp___3241 } }, {
+  ((not (temp___331 = 1)) -> (((temp___331 = 2) ->
+  ((temp_____aggregate_def_322({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___324;
+  rec__step_function__delimiter_entry__value = temp___3241 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___325; rec__step_function__delimiter_entry__value = temp___3251 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1760,9 +1787,10 @@ axiom def_axiom2 :
   })[temp___331]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___326;
   rec__step_function__delimiter_entry__value = temp___3261 } })) and
-  ((not (temp___331 = 2)) -> (((temp___331 = 3) -> ((temp___322({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___324; rec__step_function__delimiter_entry__value = temp___3241 } }, {
+  ((not (temp___331 = 2)) -> (((temp___331 = 3) ->
+  ((temp_____aggregate_def_322({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___324;
+  rec__step_function__delimiter_entry__value = temp___3241 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___325; rec__step_function__delimiter_entry__value = temp___3251 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1778,9 +1806,10 @@ axiom def_axiom2 :
   })[temp___331]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___327;
   rec__step_function__delimiter_entry__value = temp___3271 } })) and
-  ((not (temp___331 = 3)) -> (((temp___331 = 4) -> ((temp___322({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___324; rec__step_function__delimiter_entry__value = temp___3241 } }, {
+  ((not (temp___331 = 3)) -> (((temp___331 = 4) ->
+  ((temp_____aggregate_def_322({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___324;
+  rec__step_function__delimiter_entry__value = temp___3241 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___325; rec__step_function__delimiter_entry__value = temp___3251 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1796,9 +1825,10 @@ axiom def_axiom2 :
   })[temp___331]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___328;
   rec__step_function__delimiter_entry__value = temp___3281 } })) and
-  ((not (temp___331 = 4)) -> (((temp___331 = 5) -> ((temp___322({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___324; rec__step_function__delimiter_entry__value = temp___3241 } }, {
+  ((not (temp___331 = 4)) -> (((temp___331 = 5) ->
+  ((temp_____aggregate_def_322({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___324;
+  rec__step_function__delimiter_entry__value = temp___3241 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___325; rec__step_function__delimiter_entry__value = temp___3251 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1814,9 +1844,9 @@ axiom def_axiom2 :
   })[temp___331]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___329;
   rec__step_function__delimiter_entry__value = temp___3291 } })) and
-  ((not (temp___331 = 5)) -> ((temp___322({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = temp___324;
-  rec__step_function__delimiter_entry__value = temp___3241 } }, {
+  ((not (temp___331 = 5)) -> ((temp_____aggregate_def_322({
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
+  temp___324; rec__step_function__delimiter_entry__value = temp___3241 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___325; rec__step_function__delimiter_entry__value = temp___3251 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1841,9 +1871,10 @@ axiom def_axiom3 :
   forall temp___338:function_range. forall temp___3381:float1.
   forall temp___339:function_range. forall temp___3391:float1.
   forall temp___340:function_range. forall temp___3401:float1.
-  (forall temp___341:int. (((temp___341 = 0) -> ((temp___332({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___334; rec__step_function__delimiter_entry__value = temp___3341 } }, {
+  (forall temp___341:int. (((temp___341 = 0) ->
+  ((temp_____aggregate_def_332({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___334;
+  rec__step_function__delimiter_entry__value = temp___3341 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___335; rec__step_function__delimiter_entry__value = temp___3351 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1859,9 +1890,10 @@ axiom def_axiom3 :
   })[temp___341]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___334;
   rec__step_function__delimiter_entry__value = temp___3341 } })) and
-  ((not (temp___341 = 0)) -> (((temp___341 = 1) -> ((temp___332({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___334; rec__step_function__delimiter_entry__value = temp___3341 } }, {
+  ((not (temp___341 = 0)) -> (((temp___341 = 1) ->
+  ((temp_____aggregate_def_332({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___334;
+  rec__step_function__delimiter_entry__value = temp___3341 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___335; rec__step_function__delimiter_entry__value = temp___3351 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1877,9 +1909,10 @@ axiom def_axiom3 :
   })[temp___341]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___335;
   rec__step_function__delimiter_entry__value = temp___3351 } })) and
-  ((not (temp___341 = 1)) -> (((temp___341 = 2) -> ((temp___332({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___334; rec__step_function__delimiter_entry__value = temp___3341 } }, {
+  ((not (temp___341 = 1)) -> (((temp___341 = 2) ->
+  ((temp_____aggregate_def_332({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___334;
+  rec__step_function__delimiter_entry__value = temp___3341 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___335; rec__step_function__delimiter_entry__value = temp___3351 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1895,9 +1928,10 @@ axiom def_axiom3 :
   })[temp___341]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___336;
   rec__step_function__delimiter_entry__value = temp___3361 } })) and
-  ((not (temp___341 = 2)) -> (((temp___341 = 3) -> ((temp___332({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___334; rec__step_function__delimiter_entry__value = temp___3341 } }, {
+  ((not (temp___341 = 2)) -> (((temp___341 = 3) ->
+  ((temp_____aggregate_def_332({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___334;
+  rec__step_function__delimiter_entry__value = temp___3341 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___335; rec__step_function__delimiter_entry__value = temp___3351 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1913,9 +1947,10 @@ axiom def_axiom3 :
   })[temp___341]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___337;
   rec__step_function__delimiter_entry__value = temp___3371 } })) and
-  ((not (temp___341 = 3)) -> (((temp___341 = 4) -> ((temp___332({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___334; rec__step_function__delimiter_entry__value = temp___3341 } }, {
+  ((not (temp___341 = 3)) -> (((temp___341 = 4) ->
+  ((temp_____aggregate_def_332({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___334;
+  rec__step_function__delimiter_entry__value = temp___3341 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___335; rec__step_function__delimiter_entry__value = temp___3351 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1931,9 +1966,10 @@ axiom def_axiom3 :
   })[temp___341]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___338;
   rec__step_function__delimiter_entry__value = temp___3381 } })) and
-  ((not (temp___341 = 4)) -> (((temp___341 = 5) -> ((temp___332({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
-  temp___334; rec__step_function__delimiter_entry__value = temp___3341 } }, {
+  ((not (temp___341 = 4)) -> (((temp___341 = 5) ->
+  ((temp_____aggregate_def_332({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = temp___334;
+  rec__step_function__delimiter_entry__value = temp___3341 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___335; rec__step_function__delimiter_entry__value = temp___3351 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1949,9 +1985,9 @@ axiom def_axiom3 :
   })[temp___341]) = { us_split_fields1 = {
   rec__step_function__delimiter_entry__delimiter = temp___339;
   rec__step_function__delimiter_entry__value = temp___3391 } })) and
-  ((not (temp___341 = 5)) -> ((temp___332({ us_split_fields1 = {
-  rec__step_function__delimiter_entry__delimiter = temp___334;
-  rec__step_function__delimiter_entry__value = temp___3341 } }, {
+  ((not (temp___341 = 5)) -> ((temp_____aggregate_def_332({
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
+  temp___334; rec__step_function__delimiter_entry__value = temp___3341 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
   temp___335; rec__step_function__delimiter_entry__value = temp___3351 } }, {
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter =
@@ -1973,50 +2009,102 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.0e-1))
 
+logic rliteral : function_range
+
+axiom rliteral_axiom : (function_rangeqtint(rliteral) = 0)
+
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 5.0))
+
+logic rliteral1 : function_range
+
+axiom rliteral_axiom1 : (function_rangeqtint(rliteral1) = 5)
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 2.0))
 
+logic rliteral2 : function_range
+
+axiom rliteral_axiom2 : (function_rangeqtint(rliteral2) = 3)
+
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 3.0))
+
+logic rliteral3 : num_delimiters_range
+
+axiom rliteral_axiom3 : (num_delimiters_rangeqtint(rliteral3) = 2)
 
 logic fliteral5 : t
 
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 9.0))
 
+logic rliteral4 : function_range
+
+axiom rliteral_axiom4 : (function_rangeqtint(rliteral4) = 9)
+
 logic fliteral6 : t
 
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 7.0))
+
+logic rliteral5 : function_range
+
+axiom rliteral_axiom5 : (function_rangeqtint(rliteral5) = 7)
+
+logic rliteral6 : function_range
+
+axiom rliteral_axiom6 : (function_rangeqtint(rliteral6) = 1)
+
+logic rliteral7 : num_delimiters_range
+
+axiom rliteral_axiom7 : (num_delimiters_rangeqtint(rliteral7) = 5)
 
 logic fliteral7 : t
 
 axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
   (tqtreal(fliteral7) = 0.500000000000000000000000))
 
+logic rliteral8 : function_range
+
+axiom rliteral_axiom8 : (function_rangeqtint(rliteral8) = 10)
+
+logic rliteral9 : function_range
+
+axiom rliteral_axiom9 : (function_rangeqtint(rliteral9) = 8)
+
 logic fliteral8 : t
 
 axiom fliteral_axiom8 : (tqtisFinite(fliteral8) and
   (tqtreal(fliteral8) = 4.0))
+
+logic rliteral10 : function_range
+
+axiom rliteral_axiom10 : (function_rangeqtint(rliteral10) = 6)
 
 logic fliteral9 : t
 
 axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
   (tqtreal(fliteral9) = 6.0))
 
+logic rliteral11 : function_range
+
+axiom rliteral_axiom11 : (function_rangeqtint(rliteral11) = 4)
+
 logic fliteral10 : t
 
 axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
   (tqtreal(fliteral10) = 8.0))
+
+logic rliteral12 : function_range
+
+axiom rliteral_axiom12 : (function_rangeqtint(rliteral12) = 2)
 
 logic fliteral11 : t
 
@@ -2033,54 +2121,44 @@ goal WP_parameter_def :
   forall sfun3__split_fields1:(int,us_rep) farray.
   forall sfun4__split_fields:num_delimiters_range.
   forall sfun4__split_fields1:(int,us_rep) farray. forall o:float1.
-  forall o1:function_range. forall o2:function_range. forall o3:float1.
-  forall o4:float1. forall o5:function_range. forall o6:function_range.
-  forall o7:float1. forall o8:float1. forall o9:function_range.
-  forall o10:function_range. forall o11:float1. forall o12:float1.
-  forall o13:function_range. forall o14:function_range. forall o15:float1.
+  forall o1:function_range. forall o2:float1. forall o3:float1.
+  forall o4:function_range. forall o5:float1. forall o6:float1.
+  forall o7:function_range. forall o8:float1. forall o9:float1.
+  forall o10:function_range. forall o11:float1. forall o12:function_range.
+  forall o13:float1. forall o14:function_range. forall o15:float1.
   forall o16:function_range. forall o17:float1. forall o18:function_range.
-  forall o19:float1. forall o20:function_range. forall o21:float1.
-  forall o22:function_range. forall o23:float1.
-  forall o24:(int,us_rep) farray. forall o25:num_delimiters_range.
-  forall o26:num_delimiters_range. forall o27:(int,us_rep) farray.
+  forall o19:float1. forall o20:(int,us_rep) farray.
+  forall o21:num_delimiters_range. forall o22:(int,us_rep) farray.
   forall step_function_test__sfun1__assume:num_delimiters_range.
   forall step_function_test__sfun1__assume1:(int,us_rep) farray.
-  forall o28:float1. forall o29:function_range. forall o30:function_range.
-  forall o31:float1. forall o32:float1. forall o33:function_range.
-  forall o34:function_range. forall o35:float1. forall o36:float1.
-  forall o37:function_range. forall o38:function_range. forall o39:float1.
-  forall o40:float1. forall o41:function_range. forall o42:function_range.
-  forall o43:float1. forall o44:function_range. forall o45:float1.
-  forall o46:function_range. forall o47:float1. forall o48:function_range.
-  forall o49:float1. forall o50:function_range. forall o51:float1.
-  forall o52:(int,us_rep) farray. forall o53:num_delimiters_range.
-  forall o54:num_delimiters_range. forall o55:(int,us_rep) farray.
+  forall o23:float1. forall o24:function_range. forall o25:float1.
+  forall o26:float1. forall o27:function_range. forall o28:float1.
+  forall o29:float1. forall o30:function_range. forall o31:float1.
+  forall o32:float1. forall o33:function_range. forall o34:float1.
+  forall o35:function_range. forall o36:float1. forall o37:function_range.
+  forall o38:float1. forall o39:function_range. forall o40:float1.
+  forall o41:function_range. forall o42:float1.
+  forall o43:(int,us_rep) farray. forall o44:num_delimiters_range.
+  forall o45:(int,us_rep) farray.
   forall step_function_test__sfun2__assume:num_delimiters_range.
   forall step_function_test__sfun2__assume1:(int,us_rep) farray.
-  forall o56:float1. forall o57:function_range. forall o58:function_range.
-  forall o59:float1. forall o60:float1. forall o61:function_range.
-  forall o62:us_split_fields. forall o63:float1. forall o64:function_range.
-  forall o65:us_split_fields. forall o66:float1. forall o67:function_range.
-  forall o68:us_split_fields. forall o69:float1. forall o70:function_range.
-  forall o71:us_split_fields. forall o72:float1. forall o73:function_range.
-  forall o74:us_split_fields. forall o75:float1. forall o76:function_range.
-  forall o77:us_split_fields. forall o78:us_rep. forall o79:us_rep.
-  forall o80:us_rep. forall o81:us_rep. forall o82:us_rep. forall o83:us_rep.
-  forall o84:us_rep. forall o85:(int,us_rep) farray.
-  forall o86:num_delimiters_range. forall o87:us_split_fields2.
-  forall step_function_test__sfun3__assume:us_rep1. forall o88:float1.
-  forall o89:function_range. forall o90:us_split_fields. forall o91:float1.
-  forall o92:function_range. forall o93:us_split_fields. forall o94:float1.
-  forall o95:function_range. forall o96:us_split_fields. forall o97:float1.
-  forall o98:function_range. forall o99:us_split_fields. forall o100:float1.
-  forall o101:function_range. forall o102:us_split_fields.
-  forall o103:float1. forall o104:function_range.
-  forall o105:us_split_fields. forall o106:float1.
-  forall o107:function_range. forall o108:us_split_fields.
-  forall o109:us_rep. forall o110:us_rep. forall o111:us_rep.
-  forall o112:us_rep. forall o113:us_rep. forall o114:us_rep.
-  forall o115:us_rep. forall o116:(int,us_rep) farray.
-  forall o117:num_delimiters_range. forall o118:us_split_fields2.
+  forall o46:float1. forall o47:function_range. forall o48:float1.
+  forall o49:float1. forall o50:us_split_fields. forall o51:float1.
+  forall o52:us_split_fields. forall o53:float1. forall o54:us_split_fields.
+  forall o55:float1. forall o56:us_split_fields. forall o57:float1.
+  forall o58:us_split_fields. forall o59:float1. forall o60:us_split_fields.
+  forall o61:us_rep. forall o62:us_rep. forall o63:us_rep. forall o64:us_rep.
+  forall o65:us_rep. forall o66:us_rep. forall o67:us_rep.
+  forall o68:(int,us_rep) farray. forall o69:us_split_fields2.
+  forall step_function_test__sfun3__assume:us_rep1. forall o70:float1.
+  forall o71:us_split_fields. forall o72:float1. forall o73:us_split_fields.
+  forall o74:float1. forall o75:us_split_fields. forall o76:float1.
+  forall o77:us_split_fields. forall o78:float1. forall o79:us_split_fields.
+  forall o80:float1. forall o81:us_split_fields. forall o82:float1.
+  forall o83:us_split_fields. forall o84:us_rep. forall o85:us_rep.
+  forall o86:us_rep. forall o87:us_rep. forall o88:us_rep. forall o89:us_rep.
+  forall o90:us_rep. forall o91:(int,us_rep) farray.
+  forall o92:us_split_fields2.
   forall step_function_test__sfun4__assume:us_rep1.
   forall result:us_split_fields__ref1.
   forall sfun1__split_fields2:us_split_fields2.
@@ -2090,25 +2168,24 @@ goal WP_parameter_def :
   forall sfun3__split_fields2:us_split_fields2.
   forall result3:us_split_fields__ref1.
   forall sfun4__split_fields2:us_split_fields2.
-  ((((((((to_rep(o12) = fliteral1) and ((to_rep2(o13) = 0) and
-  ((o13 = o14) and (o12 = o15)))) and ((o16 = o14) and (o17 = o15))) and
-  ((((to_rep(o8) = fliteral2) and ((to_rep2(o9) = 5) and ((o9 = o10) and
-  (o8 = o11)))) and ((o18 = o10) and (o19 = o11))) and
-  ((((to_rep(o4) = fliteral3) and ((to_rep2(o5) = 3) and ((o5 = o6) and
-  (o4 = o7)))) and ((o20 = o6) and (o21 = o7))) and
-  ((((to_rep(o) = fliteral4) and ((to_rep2(o1) = 0) and ((o1 = o2) and
-  (o = o3)))) and ((o2 = o22) and (o3 = o23))) and (o24 = temp___308({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o22;
-  rec__step_function__delimiter_entry__value = o23 } }, { us_split_fields1 =
-  { rec__step_function__delimiter_entry__delimiter = o20;
-  rec__step_function__delimiter_entry__value = o21 } }, { us_split_fields1 =
-  { rec__step_function__delimiter_entry__delimiter = o18;
+  ((((((((to_rep(o9) = fliteral1) and ((rliteral = o10) and (o9 = o11))) and
+  ((o12 = o10) and (o13 = o11))) and ((((to_rep(o6) = fliteral2) and
+  ((rliteral1 = o7) and (o6 = o8))) and ((o14 = o7) and (o15 = o8))) and
+  ((((to_rep(o3) = fliteral3) and ((rliteral2 = o4) and (o3 = o5))) and
+  ((o16 = o4) and (o17 = o5))) and ((((to_rep(o) = fliteral4) and
+  ((rliteral = o1) and (o = o2))) and ((o1 = o18) and (o2 = o19))) and
+  (o20 = temp_____aggregate_def_308({ us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o18;
   rec__step_function__delimiter_entry__value = o19 } }, { us_split_fields1 =
   { rec__step_function__delimiter_entry__delimiter = o16;
-  rec__step_function__delimiter_entry__value = o17 } })))))) and
-  ((to_rep1(o25) = 2) and ((o25 = o26) and (o24 = o27)))) and
-  ((step_function_test__sfun1__assume = o26) and
-  (step_function_test__sfun1__assume1 = o27))) and ((result = {
+  rec__step_function__delimiter_entry__value = o17 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o14;
+  rec__step_function__delimiter_entry__value = o15 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o12;
+  rec__step_function__delimiter_entry__value = o13 } })))))) and
+  ((rliteral3 = o21) and (o20 = o22))) and
+  ((step_function_test__sfun1__assume = o21) and
+  (step_function_test__sfun1__assume1 = o22))) and ((result = {
   us_split_fields__content1 = {
   rec__step_function__step_function_t__number_of_delimiters =
   sfun1__split_fields; rec__step_function__step_function_t__step =
@@ -2117,25 +2194,24 @@ goal WP_parameter_def :
   step_function_test__sfun1__assume;
   rec__step_function__step_function_t__step =
   step_function_test__sfun1__assume1 }))) ->
-  ((((((((to_rep(o40) = fliteral1) and ((to_rep2(o41) = 0) and
-  ((o41 = o42) and (o40 = o43)))) and ((o44 = o42) and (o45 = o43))) and
-  ((((to_rep(o36) = fliteral4) and ((to_rep2(o37) = 5) and ((o37 = o38) and
-  (o36 = o39)))) and ((o46 = o38) and (o47 = o39))) and
-  ((((to_rep(o32) = fliteral) and ((to_rep2(o33) = 3) and ((o33 = o34) and
-  (o32 = o35)))) and ((o48 = o34) and (o49 = o35))) and
-  ((((to_rep(o28) = fliteral) and ((to_rep2(o29) = 0) and ((o29 = o30) and
-  (o28 = o31)))) and ((o50 = o30) and (o51 = o31))) and (o52 = temp___315({
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o50;
-  rec__step_function__delimiter_entry__value = o51 } }, { us_split_fields1 =
-  { rec__step_function__delimiter_entry__delimiter = o48;
-  rec__step_function__delimiter_entry__value = o49 } }, { us_split_fields1 =
-  { rec__step_function__delimiter_entry__delimiter = o46;
-  rec__step_function__delimiter_entry__value = o47 } }, { us_split_fields1 =
-  { rec__step_function__delimiter_entry__delimiter = o44;
-  rec__step_function__delimiter_entry__value = o45 } })))))) and
-  ((to_rep1(o53) = 2) and ((o53 = o54) and (o52 = o55)))) and
-  ((step_function_test__sfun2__assume = o54) and
-  (step_function_test__sfun2__assume1 = o55))) and ((result1 = {
+  ((((((((to_rep(o32) = fliteral1) and ((rliteral = o33) and
+  (o32 = o34))) and ((o35 = o33) and (o36 = o34))) and
+  ((((to_rep(o29) = fliteral4) and ((rliteral1 = o30) and (o29 = o31))) and
+  ((o37 = o30) and (o38 = o31))) and ((((to_rep(o26) = fliteral) and
+  ((rliteral2 = o27) and (o26 = o28))) and ((o39 = o27) and (o40 = o28))) and
+  ((((to_rep(o23) = fliteral) and ((rliteral = o24) and (o23 = o25))) and
+  ((o41 = o24) and (o42 = o25))) and (o43 = temp_____aggregate_def_315({
+  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o41;
+  rec__step_function__delimiter_entry__value = o42 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o39;
+  rec__step_function__delimiter_entry__value = o40 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o37;
+  rec__step_function__delimiter_entry__value = o38 } }, { us_split_fields1 =
+  { rec__step_function__delimiter_entry__delimiter = o35;
+  rec__step_function__delimiter_entry__value = o36 } })))))) and
+  ((rliteral3 = o44) and (o43 = o45))) and
+  ((step_function_test__sfun2__assume = o44) and
+  (step_function_test__sfun2__assume1 = o45))) and ((result1 = {
   us_split_fields__content1 = {
   rec__step_function__step_function_t__number_of_delimiters =
   sfun2__split_fields; rec__step_function__step_function_t__step =
@@ -2144,75 +2220,64 @@ goal WP_parameter_def :
   step_function_test__sfun2__assume;
   rec__step_function__step_function_t__step =
   step_function_test__sfun2__assume1 }))) ->
-  ((((((((to_rep(o75) = fliteral1) and ((to_rep2(o76) = 0) and (o77 = {
-  rec__step_function__delimiter_entry__delimiter = o76;
-  rec__step_function__delimiter_entry__value = o75 }))) and (o78 = {
-  us_split_fields1 = o77 })) and ((((to_rep(o72) = fliteral5) and
-  ((to_rep2(o73) = 9) and (o74 = {
-  rec__step_function__delimiter_entry__delimiter = o73;
-  rec__step_function__delimiter_entry__value = o72 }))) and (o79 = {
-  us_split_fields1 = o74 })) and ((((to_rep(o69) = fliteral6) and
-  ((to_rep2(o70) = 7) and (o71 = {
-  rec__step_function__delimiter_entry__delimiter = o70;
-  rec__step_function__delimiter_entry__value = o69 }))) and (o80 = {
-  us_split_fields1 = o71 })) and ((((to_rep(o66) = fliteral2) and
-  ((to_rep2(o67) = 5) and (o68 = {
-  rec__step_function__delimiter_entry__delimiter = o67;
-  rec__step_function__delimiter_entry__value = o66 }))) and (o81 = {
-  us_split_fields1 = o68 })) and ((((to_rep(o63) = fliteral4) and
-  ((to_rep2(o64) = 3) and (o65 = {
-  rec__step_function__delimiter_entry__delimiter = o64;
-  rec__step_function__delimiter_entry__value = o63 }))) and (o82 = {
-  us_split_fields1 = o65 })) and ((((to_rep(o60) = fliteral) and
-  ((to_rep2(o61) = 1) and (o62 = {
-  rec__step_function__delimiter_entry__delimiter = o61;
-  rec__step_function__delimiter_entry__value = o60 }))) and (o83 = {
-  us_split_fields1 = o62 })) and ((((to_rep(o56) = fliteral) and
-  ((to_rep2(o57) = 0) and ((o57 = o58) and (o56 = o59)))) and (o84 = {
-  us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o58;
-  rec__step_function__delimiter_entry__value = o59 } })) and
-  (o85 = temp___322(o84, o83, o82, o81, o80, o79, o78))))))))) and
-  ((to_rep1(o86) = 5) and (o87 = {
-  rec__step_function__step_function_t__number_of_delimiters = o86;
-  rec__step_function__step_function_t__step = o85 }))) and
-  (step_function_test__sfun3__assume = { us_split_fields3 = o87 })) and
+  ((((((((to_rep(o59) = fliteral1) and (o60 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral;
+  rec__step_function__delimiter_entry__value = o59 })) and (o61 = {
+  us_split_fields1 = o60 })) and ((((to_rep(o57) = fliteral5) and (o58 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral4;
+  rec__step_function__delimiter_entry__value = o57 })) and (o62 = {
+  us_split_fields1 = o58 })) and ((((to_rep(o55) = fliteral6) and (o56 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral5;
+  rec__step_function__delimiter_entry__value = o55 })) and (o63 = {
+  us_split_fields1 = o56 })) and ((((to_rep(o53) = fliteral2) and (o54 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral1;
+  rec__step_function__delimiter_entry__value = o53 })) and (o64 = {
+  us_split_fields1 = o54 })) and ((((to_rep(o51) = fliteral4) and (o52 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral2;
+  rec__step_function__delimiter_entry__value = o51 })) and (o65 = {
+  us_split_fields1 = o52 })) and ((((to_rep(o49) = fliteral) and (o50 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral6;
+  rec__step_function__delimiter_entry__value = o49 })) and (o66 = {
+  us_split_fields1 = o50 })) and ((((to_rep(o46) = fliteral) and
+  ((rliteral = o47) and (o46 = o48))) and (o67 = { us_split_fields1 = {
+  rec__step_function__delimiter_entry__delimiter = o47;
+  rec__step_function__delimiter_entry__value = o48 } })) and
+  (o68 = temp_____aggregate_def_322(o67, o66, o65, o64, o63, o62,
+  o61))))))))) and (o69 = {
+  rec__step_function__step_function_t__number_of_delimiters = rliteral7;
+  rec__step_function__step_function_t__step = o68 })) and
+  (step_function_test__sfun3__assume = { us_split_fields3 = o69 })) and
   ((result2 = { us_split_fields__content1 = {
   rec__step_function__step_function_t__number_of_delimiters =
   sfun3__split_fields; rec__step_function__step_function_t__step =
   sfun3__split_fields1 } }) and
   (sfun3__split_fields2 = (step_function_test__sfun3__assume).us_split_fields3))) ->
-  ((((((((to_rep(o106) = fliteral1) and ((to_rep2(o107) = 0) and (o108 = {
-  rec__step_function__delimiter_entry__delimiter = o107;
-  rec__step_function__delimiter_entry__value = o106 }))) and (o109 = {
-  us_split_fields1 = o108 })) and ((((to_rep(o103) = fliteral7) and
-  ((to_rep2(o104) = 10) and (o105 = {
-  rec__step_function__delimiter_entry__delimiter = o104;
-  rec__step_function__delimiter_entry__value = o103 }))) and (o110 = {
-  us_split_fields1 = o105 })) and ((((to_rep(o100) = fliteral3) and
-  ((to_rep2(o101) = 8) and (o102 = {
-  rec__step_function__delimiter_entry__delimiter = o101;
-  rec__step_function__delimiter_entry__value = o100 }))) and (o111 = {
-  us_split_fields1 = o102 })) and ((((to_rep(o97) = fliteral8) and
-  ((to_rep2(o98) = 6) and (o99 = {
-  rec__step_function__delimiter_entry__delimiter = o98;
-  rec__step_function__delimiter_entry__value = o97 }))) and (o112 = {
-  us_split_fields1 = o99 })) and ((((to_rep(o94) = fliteral9) and
-  ((to_rep2(o95) = 4) and (o96 = {
-  rec__step_function__delimiter_entry__delimiter = o95;
-  rec__step_function__delimiter_entry__value = o94 }))) and (o113 = {
-  us_split_fields1 = o96 })) and ((((to_rep(o91) = fliteral10) and
-  ((to_rep2(o92) = 2) and (o93 = {
-  rec__step_function__delimiter_entry__delimiter = o92;
-  rec__step_function__delimiter_entry__value = o91 }))) and (o114 = {
-  us_split_fields1 = o93 })) and ((((to_rep(o88) = fliteral11) and
-  ((to_rep2(o89) = 0) and (o90 = {
-  rec__step_function__delimiter_entry__delimiter = o89;
-  rec__step_function__delimiter_entry__value = o88 }))) and (o115 = {
-  us_split_fields1 = o90 })) and (o116 = temp___332(o115, o114, o113, o112,
-  o111, o110, o109))))))))) and ((to_rep1(o117) = 5) and (o118 = {
-  rec__step_function__step_function_t__number_of_delimiters = o117;
-  rec__step_function__step_function_t__step = o116 }))) and
-  (step_function_test__sfun4__assume = { us_split_fields3 = o118 })) and
+  ((((((((to_rep(o82) = fliteral1) and (o83 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral;
+  rec__step_function__delimiter_entry__value = o82 })) and (o84 = {
+  us_split_fields1 = o83 })) and ((((to_rep(o80) = fliteral7) and (o81 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral8;
+  rec__step_function__delimiter_entry__value = o80 })) and (o85 = {
+  us_split_fields1 = o81 })) and ((((to_rep(o78) = fliteral3) and (o79 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral9;
+  rec__step_function__delimiter_entry__value = o78 })) and (o86 = {
+  us_split_fields1 = o79 })) and ((((to_rep(o76) = fliteral8) and (o77 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral10;
+  rec__step_function__delimiter_entry__value = o76 })) and (o87 = {
+  us_split_fields1 = o77 })) and ((((to_rep(o74) = fliteral9) and (o75 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral11;
+  rec__step_function__delimiter_entry__value = o74 })) and (o88 = {
+  us_split_fields1 = o75 })) and ((((to_rep(o72) = fliteral10) and (o73 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral12;
+  rec__step_function__delimiter_entry__value = o72 })) and (o89 = {
+  us_split_fields1 = o73 })) and ((((to_rep(o70) = fliteral11) and (o71 = {
+  rec__step_function__delimiter_entry__delimiter = rliteral;
+  rec__step_function__delimiter_entry__value = o70 })) and (o90 = {
+  us_split_fields1 = o71 })) and (o91 = temp_____aggregate_def_332(o90, o89,
+  o88, o87, o86, o85, o84))))))))) and (o92 = {
+  rec__step_function__step_function_t__number_of_delimiters = rliteral7;
+  rec__step_function__step_function_t__step = o91 })) and
+  (step_function_test__sfun4__assume = { us_split_fields3 = o92 })) and
   ((result3 = { us_split_fields__content1 = {
   rec__step_function__step_function_t__number_of_delimiters =
   sfun4__split_fields; rec__step_function__step_function_t__step =

@@ -58,8 +58,6 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_172)))
 
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
 (define-fun dynamic_invariant1 ((temp___expr_179 Float32)
   (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
   (temp___do_toplevel_177 Bool)
@@ -67,6 +65,24 @@
                                      (or (= temp___is_init_175 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_179)))
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(define-fun dynamic_invariant2 ((temp___expr_200 Int)
+  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
+  (temp___do_toplevel_198 Bool)
+  (temp___do_typ_inv_199 Bool)) Bool (=>
+                                     (or (= temp___is_init_196 true)
+                                     (<= 0 2147483647)) (in_range1
+                                     temp___expr_200)))
+
+(declare-const maximum_valid_speed Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const minimum_valid_acceleration Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const value__size Int)
 
@@ -226,28 +242,28 @@
 ;; deceleration_curve__target_t__speed__position_axiom
   (assert (<= 0 deceleration_curve__target_t__speed__position))
 
-(define-fun dynamic_invariant2 ((temp___expr_200 Int)
-  (temp___is_init_196 Bool) (temp___skip_constant_197 Bool)
-  (temp___do_toplevel_198 Bool)
-  (temp___do_typ_inv_199 Bool)) Bool (=>
-                                     (or (= temp___is_init_196 true)
-                                     (<= 0 2147483647)) (in_range1
-                                     temp___expr_200)))
-
-(declare-const maximum_valid_speed Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const maximum_valid_speed_km_per_h Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
 
 (declare-const abstr Float32)
 
 ;; maximum_valid_speed__def_axiom
   (assert (= maximum_valid_speed abstr))
+
+;; minimum_valid_acceleration__def_axiom
+  (assert
+  (= minimum_valid_acceleration (fp.neg (fp #b0 #b10000010 #b01000000000000000000000))))
 
 (declare-const initial_speed Float32)
 

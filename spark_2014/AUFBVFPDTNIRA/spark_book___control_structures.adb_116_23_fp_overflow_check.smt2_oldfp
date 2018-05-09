@@ -142,7 +142,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -628,45 +628,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -839,14 +839,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1132,6 +1132,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -1213,9 +1220,17 @@
                                     (or (= temp___is_init_70 true)
                                     (<= 0 255)) (in_range3 temp___expr_74)))
 
-(declare-sort field 0)
+(declare-sort num 0)
 
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+(declare-fun numqtint (num) Int)
+
+;; num'axiom
+  (assert
+  (forall ((i num))
+  (and (<= (- 2147483648) (numqtint i)) (<= (numqtint i) 2147483647))))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= (- 2147483648) x)
+                                     (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
 
@@ -1223,77 +1238,22 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq3 (field field) Bool)
+(declare-fun user_eq3 (num num) Bool)
 
-(declare-const dummy3 field)
-
-(declare-datatypes () ((field__ref (mk_field__ref (field__content field)))))
-(define-fun field__ref___projection ((a field__ref)) field (field__content a))
-
-(define-fun dynamic_invariant3 ((temp___expr_534 Int)
-  (temp___is_init_530 Bool) (temp___skip_constant_531 Bool)
-  (temp___do_toplevel_532 Bool)
-  (temp___do_typ_inv_533 Bool)) Bool (=>
-                                     (or (= temp___is_init_530 true)
-                                     (<= 0 255)) (in_range4 temp___expr_534)))
-
-(declare-sort number_base 0)
-
-(define-fun in_range5 ((x Int)) Bool (and (<= 2 x) (<= x 16)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
-
-(declare-fun user_eq4 (number_base number_base) Bool)
-
-(declare-const dummy4 number_base)
-
-(declare-datatypes ()
-((number_base__ref (mk_number_base__ref (number_base__content number_base)))))
-(define-fun number_base__ref___projection ((a number_base__ref)) number_base
-  (number_base__content a))
-
-(define-fun dynamic_invariant4 ((temp___expr_541 Int)
-  (temp___is_init_537 Bool) (temp___skip_constant_538 Bool)
-  (temp___do_toplevel_539 Bool)
-  (temp___do_typ_inv_540 Bool)) Bool (=>
-                                     (or (= temp___is_init_537 true)
-                                     (<= 2 16)) (in_range5 temp___expr_541)))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-sort num 0)
-
-(define-fun in_range6 ((x Int)) Bool (and (<= (- 2147483648) x)
-                                     (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
-
-(declare-fun user_eq5 (num num) Bool)
-
-(declare-const dummy5 num)
+(declare-const dummy3 num)
 
 (declare-datatypes () ((num__ref (mk_num__ref (num__content num)))))
 (define-fun num__ref___projection ((a num__ref)) num (num__content a))
 
-(define-fun dynamic_invariant5 ((temp___expr_579 Int)
-  (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
-  (temp___do_toplevel_577 Bool)
-  (temp___do_typ_inv_578 Bool)) Bool (=>
-                                     (or (= temp___is_init_575 true)
+(define-fun dynamic_invariant3 ((temp___expr_572 Int)
+  (temp___is_init_568 Bool) (temp___skip_constant_569 Bool)
+  (temp___do_toplevel_570 Bool)
+  (temp___do_typ_inv_571 Bool)) Bool (=>
+                                     (or (= temp___is_init_568 true)
                                      (<= (- 2147483648) 2147483647))
-                                     (in_range6 temp___expr_579)))
+                                     (in_range4 temp___expr_572)))
 
-(declare-fun sqrt2 (t) t)
+(declare-fun sqrt3 (t) t)
 
 (declare-fun sqrt__function_guard (t t) Bool)
 
@@ -1313,13 +1273,80 @@
   (assert
   (forall ((x t))
   (! (=> (and (dynamic_invariant1 x true true true true) (le fliteral2 x))
-     (let ((result (sqrt2 x)))
+     (let ((result (sqrt3 x)))
      (and
      (and (le fliteral2 result)
      (and (=> (eq x fliteral2) (eq result fliteral2))
      (and (=> (eq x fliteral) (eq result fliteral))
      (=> (le fliteral3 x) (lt fliteral2 result))))) (dynamic_invariant1
-     result true false true true)))) :pattern ((sqrt2 x)) )))
+     result true false true true)))) :pattern ((sqrt3 x)) )))
+
+(declare-sort field 0)
+
+(declare-fun fieldqtint (field) Int)
+
+;; field'axiom
+  (assert
+  (forall ((i field)) (and (<= 0 (fieldqtint i)) (<= (fieldqtint i) 255))))
+
+(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 255)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+
+(declare-fun user_eq4 (field field) Bool)
+
+(declare-const dummy4 field)
+
+(declare-datatypes () ((field__ref (mk_field__ref (field__content field)))))
+(define-fun field__ref___projection ((a field__ref)) field (field__content a))
+
+(define-fun dynamic_invariant4 ((temp___expr_527 Int)
+  (temp___is_init_523 Bool) (temp___skip_constant_524 Bool)
+  (temp___do_toplevel_525 Bool)
+  (temp___do_typ_inv_526 Bool)) Bool (=>
+                                     (or (= temp___is_init_523 true)
+                                     (<= 0 255)) (in_range5 temp___expr_527)))
+
+(declare-sort number_base 0)
+
+(declare-fun number_baseqtint (number_base) Int)
+
+;; number_base'axiom
+  (assert
+  (forall ((i number_base))
+  (and (<= 2 (number_baseqtint i)) (<= (number_baseqtint i) 16))))
+
+(define-fun in_range6 ((x Int)) Bool (and (<= 2 x) (<= x 16)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Int)
+
+(declare-fun user_eq5 (number_base number_base) Bool)
+
+(declare-const dummy5 number_base)
+
+(declare-datatypes ()
+((number_base__ref (mk_number_base__ref (number_base__content number_base)))))
+(define-fun number_base__ref___projection ((a number_base__ref)) number_base
+  (number_base__content a))
+
+(define-fun dynamic_invariant5 ((temp___expr_534 Int)
+  (temp___is_init_530 Bool) (temp___skip_constant_531 Bool)
+  (temp___do_toplevel_532 Bool)
+  (temp___do_typ_inv_533 Bool)) Bool (=>
+                                     (or (= temp___is_init_530 true)
+                                     (<= 2 16)) (in_range6 temp___expr_534)))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-sort uppercase 0)
 
@@ -1340,12 +1367,12 @@
 (define-fun uppercase__ref___projection ((a uppercase__ref)) uppercase
   (uppercase__content a))
 
-(define-fun dynamic_invariant6 ((temp___expr_594 Int)
-  (temp___is_init_590 Bool) (temp___skip_constant_591 Bool)
-  (temp___do_toplevel_592 Bool)
-  (temp___do_typ_inv_593 Bool)) Bool (=>
-                                     (or (= temp___is_init_590 true)
-                                     (<= 65 90)) (in_range7 temp___expr_594)))
+(define-fun dynamic_invariant6 ((temp___expr_587 Int)
+  (temp___is_init_583 Bool) (temp___skip_constant_584 Bool)
+  (temp___do_toplevel_585 Bool)
+  (temp___do_typ_inv_586 Bool)) Bool (=>
+                                     (or (= temp___is_init_583 true)
+                                     (<= 65 90)) (in_range7 temp___expr_587)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
@@ -1638,10 +1665,10 @@
 (define-fun f6 () int__ref (mk_int__ref f))
 
 ;; H
-  (assert (in_range4 default_width))
+  (assert (in_range5 default_width))
 
 ;; H
-  (assert (in_range5 default_base))
+  (assert (in_range6 default_base))
 
 ;; H
   (assert (=> (<= (- 2147483648) 2147483647) (in_range2 a)))

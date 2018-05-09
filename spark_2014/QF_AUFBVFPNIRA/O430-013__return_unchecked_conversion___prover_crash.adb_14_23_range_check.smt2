@@ -50,12 +50,30 @@
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 4294967295)))
 
-(define-fun dynamic_invariant ((temp___expr_158 Int)
+(define-fun dynamic_invariant ((temp___expr_172 Int)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (<= 0 4294967295)) (in_range
+                                     temp___expr_172)))
+
+(define-fun dynamic_invariant1 ((temp___expr_179 Float32)
+  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
+  (temp___do_toplevel_177 Bool)
+  (temp___do_typ_inv_178 Bool)) Bool (=>
+                                     (or (= temp___is_init_175 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_179)))
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 4294967295)))
+
+(define-fun dynamic_invariant2 ((temp___expr_158 Int)
   (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
   (temp___do_toplevel_156 Bool)
   (temp___do_typ_inv_157 Bool)) Bool (=>
                                      (or (= temp___is_init_154 true)
-                                     (<= 0 4294967295)) (in_range
+                                     (<= 0 4294967295)) (in_range1
                                      temp___expr_158)))
 
 (declare-const x Int)
@@ -66,35 +84,17 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun in_range1 ((x1 Int)) Bool (and (<= 0 x1) (<= x1 4294967295)))
-
-(define-fun dynamic_invariant1 ((temp___expr_172 Int)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)
-  (temp___do_typ_inv_171 Bool)) Bool (=>
-                                     (or (= temp___is_init_168 true)
-                                     (<= 0 4294967295)) (in_range1
-                                     temp___expr_172)))
-
-(define-fun dynamic_invariant2 ((temp___expr_179 Float32)
-  (temp___is_init_175 Bool) (temp___skip_constant_176 Bool)
-  (temp___do_toplevel_177 Bool)
-  (temp___do_typ_inv_178 Bool)) Bool (=>
-                                     (or (= temp___is_init_175 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_179)))
-
 (declare-const o Int)
 
 ;; H
-  (assert (in_range x))
+  (assert (in_range1 x))
 
 ;; H
-  (assert (in_range y))
+  (assert (in_range1 y))
 
 (assert
 ;; WP_parameter_def
  ;; File "prover_crash.ads", line 8, characters 0-0
-  (not (in_range1 (+ x y))))
+  (not (in_range (+ x y))))
 (check-sat)
 (exit)

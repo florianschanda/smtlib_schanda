@@ -128,12 +128,11 @@
   (assert (fp.isFinite32 den))
 
 ;; H
-  (assert
-  (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b00000000 #b00000000000000000000001)))
+  (assert (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) den))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (not (fp.isZero (fp #b0 #b00000000 #b00000000000000000000001)))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA20-061__flow_variable_constant/gnatprove/basic_contracts.mlw", line 2141, characters 5-8
+  (not (not (fp.isZero den))))
 (check-sat)
 (exit)

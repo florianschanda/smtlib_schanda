@@ -1124,5 +1124,5 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
 
  (* File "generic_float_tests.adb", line 128, characters 0-0 *)
 goal WP_parameter_def : (tqtisFinite(x) -> (tqtisFinite(y) -> ((le(fliteral1,
-  x) and le(fliteral1, y)) -> (eq(sub(NearestTiesToEven, x, y), fliteral1) ->
-  eq(x, y)))))
+  x) and le(fliteral1, y)) -> (eq(x, y) -> eq(sub(NearestTiesToEven, x, y),
+  fliteral1)))))

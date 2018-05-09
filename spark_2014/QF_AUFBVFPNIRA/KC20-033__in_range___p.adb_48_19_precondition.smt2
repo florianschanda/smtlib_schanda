@@ -99,23 +99,6 @@
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 999999999999999) x)
                                      (<= x 999999999999999)))
 
-(declare-const abstr2 Int)
-
-(define-fun pos_div_relation1 ((res Int) (num Int)
-  (den Int)) Bool (let ((exact abstr2))
-                  (ite (= num 0) (= res 0)
-                  (ite (= num (* exact den)) (= res exact)
-                  (and (<= exact res) (<= res (+ exact 1)))))))
-
-(declare-const abstr3 Int)
-
-(define-fun pos_div_relation_rna1 ((res Int) (num Int)
-  (den Int)) Bool (let ((exact abstr3))
-                  (ite (= num 0) (= res 0)
-                  (ite (= num (* exact den)) (= res exact)
-                  (ite (< (- num (* exact den)) (- (* (+ exact 1) den) num))
-                  (= res exact) (= res (+ exact 1)))))))
-
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
@@ -147,6 +130,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "p.adb", line 40, characters 0-0
-  (not (<= 1 5)))
+  (not (<= 5 10)))
 (check-sat)
 (exit)

@@ -1512,11 +1512,11 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 logic fliteral3 : t1
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 0.001500000013038516044616699218750))
+  (tqtreal(fliteral3) = 0.001000000047497451305389404296875))
 
  (* File "test.adb", line 7, characters 0-0 *)
 goal WP_parameter_def :
   (forall value:t1. forall value1:t1. forall value2:t1. ((le(neg1(fliteral1),
   fliteral1) -> in_range2(value)) -> (in_range2(value1) ->
   ((le(neg1(fliteral2), value1) and le(value1, fliteral2)) ->
-  (in_range2(value2) -> le(neg1(fliteral3), value2))))))
+  (in_range2(value2) -> le(value2, neg1(fliteral3)))))))

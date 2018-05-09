@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -134,8 +130,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const res Bool)
-
 (declare-const o Float32)
 
 (declare-const o1 Float32)
@@ -148,9 +142,7 @@
 
 (declare-const o5 Bool)
 
-(declare-const result Bool)
-
-(declare-const res1 Bool)
+(declare-const res Bool)
 
 ;; H
   (assert (fp.isFinite32 d0))
@@ -168,9 +160,10 @@
   (assert (fp.lt d0 d1))
 
 ;; H
-  (assert
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) r)
-  (fp.leq r (fp #b0 #b01111111 #b00000000000000000000000))))
+  (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) r))
+
+;; H
+  (assert (fp.leq r (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
   (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) d0))
@@ -179,32 +172,38 @@
   (assert (fp.leq d1 x))
 
 ;; H
-  (assert (and (= o (fp.sub RNE d1 d0)) (fp.isFinite32 (fp.sub RNE d1 d0))))
+  (assert (= o (fp.sub RNE d1 d0)))
+
+;; H
+  (assert (fp.isFinite32 (fp.sub RNE d1 d0)))
 
 ;; H
   (assert (= o1 (fp.mul RNE o r)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite32 o1)))
+  (assert (= o2 o1))
+
+;; H
+  (assert (fp.isFinite32 o1))
 
 ;; H
   (assert (= o3 (fp.sub RNE d1 o2)))
 
 ;; H
-  (assert (and (= o4 o3) (fp.isFinite32 o3)))
+  (assert (= o4 o3))
+
+;; H
+  (assert (fp.isFinite32 o3))
 
 ;; H
   (assert (= o5 (ite (fp.leq o4 x) true false)))
 
 ;; H
-  (assert (= result res))
-
-;; H
-  (assert (= res1 o5))
+  (assert (= res o5))
 
 (assert
 ;; WP_parameter_def
  ;; File "floating_point.adb", line 297, characters 0-0
-  (not (= res1 true)))
+  (not (= res true)))
 (check-sat)
 (exit)

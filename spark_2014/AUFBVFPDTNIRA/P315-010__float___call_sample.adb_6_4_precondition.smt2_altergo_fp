@@ -1065,7 +1065,12 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282326356119256160033759537265639424.0))
 
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 0.0e-1))
+
  (* File "call_sample.adb", line 3, characters 0-0 *)
 goal WP_parameter_def :
   (forall time:t. forall result:t. forall time1:t. (((result = time) and
-  (time1 = fliteral1)) -> (tqtisFinite(time1) -> (0 <  1))))
+  (time1 = fliteral1)) -> (tqtisFinite(time1) -> lt(fliteral2, fliteral))))

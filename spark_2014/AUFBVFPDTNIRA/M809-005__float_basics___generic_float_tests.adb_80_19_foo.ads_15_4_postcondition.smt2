@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -149,23 +145,13 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
-(declare-const foo__double_tests__underflow_1__result Float64)
-
 (declare-const o Float64)
 
-(declare-const result Float64)
+(declare-const foo__double_tests__underflow_1__result Float64)
 
 (declare-const foo__double_tests__underflow_1__result1 Float64)
 
 (declare-const foo__double_tests__underflow_1__result2 Float64)
-
-(declare-const foo__double_tests__underflow_1__result3 Float64)
-
-(declare-const foo__double_tests__underflow_1__result4 Float64)
-
-(declare-const foo__double_tests__underflow_1__result5 Float64)
-
-(declare-const result1 Float64)
 
 ;; H
   (assert (fp.isFinite64 a))
@@ -175,46 +161,37 @@
 
 ;; H
   (assert
-  (and
   (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  a)
+  a))
+
+;; H
+  (assert
   (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  b)))
+  b))
 
 ;; H
   (assert
-  (= foo__double_tests__underflow_1__result1 foo__double_tests__underflow_1__result2))
+  (= foo__double_tests__underflow_1__result foo__double_tests__underflow_1__result1))
+
+;; H
+  (assert (= o (fp.div RNE a b)))
+
+;; H
+  (assert (= foo__double_tests__underflow_1__result o))
+
+;; H
+  (assert (fp.isFinite64 (fp.div RNE a b)))
 
 ;; H
   (assert
-  (= foo__double_tests__underflow_1__result3 foo__double_tests__underflow_1__result1))
-
-;; H
-  (assert (and (= o (fp.div RNE a b)) (fp.isFinite64 (fp.div RNE a b))))
-
-;; H
-  (assert (= result foo__double_tests__underflow_1__result))
-
-;; H
-  (assert (= foo__double_tests__underflow_1__result1 o))
-
-;; H
-  (assert
-  (= (mk_t__ref foo__double_tests__underflow_1__result4) (mk_t__ref
-                                                         foo__double_tests__underflow_1__result2)))
-
-;; H
-  (assert
-  (= foo__double_tests__underflow_1__result5 foo__double_tests__underflow_1__result3))
-
-;; H
-  (assert (= result1 foo__double_tests__underflow_1__result4))
+  (= (mk_t__ref foo__double_tests__underflow_1__result2) (mk_t__ref
+                                                         foo__double_tests__underflow_1__result1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.ads", line 2, characters 0-0
   (not
   (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  foo__double_tests__underflow_1__result4)))
+  foo__double_tests__underflow_1__result2)))
 (check-sat)
 (exit)

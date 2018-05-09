@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -109,6 +105,13 @@
                                     (fp.isFinite32 temp___expr_60)))
 
 (declare-sort nb_type 0)
+
+(declare-fun nb_typeqtint (nb_type) Int)
+
+;; nb_type'axiom
+  (assert
+  (forall ((i nb_type))
+  (and (<= 0 (nb_typeqtint i)) (<= (nb_typeqtint i) 100))))
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 100)))
 
@@ -166,6 +169,13 @@
                                      (in_range1 temp___expr_172)))
 
 (declare-sort nb_type1 0)
+
+(declare-fun nb_typeqtint1 (nb_type1) Int)
+
+;; nb_type'axiom
+  (assert
+  (forall ((i nb_type1))
+  (and (<= 0 (nb_typeqtint1 i)) (<= (nb_typeqtint1 i) 100))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 100)))
 
@@ -367,6 +377,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "call_sample2.adb", line 4, characters 0-0
-  (not (< 0 nb_of_pp3)))
+  (not (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) delta_time3)))
 (check-sat)
 (exit)

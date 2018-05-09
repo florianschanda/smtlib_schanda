@@ -138,6 +138,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "normalize.ads", line 9, characters 0-0
-  (not (fp.leq (fp.neg (fp #b0 #b10000000 #b00000000000000000000000)) v11)))
+  (not (fp.leq v11 (fp #b0 #b10000000 #b00000000000000000000000))))
 (check-sat)
 (exit)

@@ -1072,7 +1072,7 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O401-034__float_pred/gnatprove/safety_pack.mlw", line 30562, characters 5-8 *)
 goal WP_parameter_def :
   (forall res:t. forall safety_pack__saturate__result:t. forall result:t.
   forall res1:t. forall result1:t. forall res2:t. forall result2:t.
@@ -1095,4 +1095,5 @@ goal WP_parameter_def :
   (res4 = res2)) and
   ((safety_pack__saturate__result5 = safety_pack__saturate__result3) and
   (res5 = res2)))) and (result4 = safety_pack__saturate__result4))))) ->
-  (lt(value, min_value) -> eq(safety_pack__saturate__result4, min_value)))))
+  ((not lt(value, min_value)) -> (lt(max_value, value) ->
+  eq(safety_pack__saturate__result4, max_value))))))

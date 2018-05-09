@@ -50,9 +50,15 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
-type tcount_typeB
+type count_type
 
-predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+logic count_typeqtint : count_type -> int
+
+axiom count_typeqtaxiom :
+  (forall i:count_type. ((0 <= count_typeqtint(i)) and
+  (count_typeqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
 
@@ -96,35 +102,9 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> int
 
-logic user_eq : tcount_typeB, tcount_typeB -> bool
+logic user_eq : count_type, count_type -> bool
 
-logic dummy : tcount_typeB
-
-type tcount_typeB__ref = { tcount_typeB__content : tcount_typeB
-}
-
-function tcount_typeB__ref___projection(a: tcount_typeB__ref) : tcount_typeB =
-  (a).tcount_typeB__content
-
-type count_type
-
-predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq2 : int, int -> bool
-
-axiom bool_eq_def1 :
-  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
-
-logic user_eq1 : count_type, count_type -> bool
-
-logic dummy1 : count_type
+logic dummy : count_type
 
 type count_type__ref = { count_type__content : count_type
 }
@@ -132,17 +112,17 @@ type count_type__ref = { count_type__content : count_type
 function count_type__ref___projection(a: count_type__ref) : count_type =
   (a).count_type__content
 
-logic to_rep : count_type -> int
+function to_rep(x: count_type) : int = count_typeqtint(x)
 
 logic of_rep : int -> count_type
 
 axiom inversion_axiom :
   (forall x:count_type [to_rep(x)]. (of_rep(to_rep(x)) = x))
 
-axiom range_axiom : (forall x:count_type [to_rep(x)]. in_range1(to_rep(x)))
+axiom range_axiom : (forall x:count_type [to_rep(x)]. in_range(to_rep(x)))
 
 axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
   (to_rep(of_rep(x)) = x)))
 
 type us_main_type
@@ -184,18 +164,18 @@ function us_rep___13__projection(a: us_rep) : us_split_discrs =
 function us_rep___14__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-logic bool_eq3 : us_rep, us_rep -> bool
+logic bool_eq2 : us_rep, us_rep -> bool
 
-axiom bool_eq_def2 :
-  (forall a:us_rep. forall b:us_rep [bool_eq3(a, b)].
+axiom bool_eq_def1 :
+  (forall a:us_rep. forall b:us_rep [bool_eq2(a, b)].
   ((((to_rep(((a).us_split_discrs1).rec__algorithm__gap_vectors__list__capacity) = to_rep(((b).us_split_discrs1).rec__algorithm__gap_vectors__list__capacity)) and
   (us_main_eq(((a).us_split_fields1).rec__algorithm__gap_vectors__list,
   ((b).us_split_fields1).rec__algorithm__gap_vectors__list) = true)) ->
-  (bool_eq3(a, b) = true)) and
+  (bool_eq2(a, b) = true)) and
   ((not ((to_rep(((a).us_split_discrs1).rec__algorithm__gap_vectors__list__capacity) = to_rep(((b).us_split_discrs1).rec__algorithm__gap_vectors__list__capacity)) and
   (us_main_eq(((a).us_split_fields1).rec__algorithm__gap_vectors__list,
   ((b).us_split_fields1).rec__algorithm__gap_vectors__list) = true))) ->
-  (bool_eq3(a, b) = false))))
+  (bool_eq2(a, b) = false))))
 
 logic value__size : int
 
@@ -234,11 +214,11 @@ axiom algorithm__gap_vectors__list__capacity__last__bit_axiom :
 axiom algorithm__gap_vectors__list__capacity__position_axiom :
   (0 <= algorithm__gap_vectors__list__capacity__position)
 
-logic user_eq2 : us_rep, us_rep -> bool
+logic user_eq1 : us_rep, us_rep -> bool
 
-logic dummy2 : count_type
+logic dummy1 : count_type
 
-logic dummy3 : us_main_type
+logic dummy2 : us_main_type
 
 type list__ref = { list__content : us_rep
 }
@@ -256,9 +236,41 @@ axiom length__post_axiom :
   container1 } })]. ((length({ us_split_discrs1 = {
   rec__algorithm__gap_vectors__list__capacity = container };
   us_split_fields1 = { rec__algorithm__gap_vectors__list = container1 }
-  }) <= to_rep(container)) and in_range1(length({ us_split_discrs1 = {
+  }) <= to_rep(container)) and in_range(length({ us_split_discrs1 = {
   rec__algorithm__gap_vectors__list__capacity = container };
   us_split_fields1 = { rec__algorithm__gap_vectors__list = container1 } }))))
+
+type tcount_typeB
+
+logic tcount_typeBqtint : tcount_typeB -> int
+
+axiom tcount_typeBqtaxiom :
+  (forall i:tcount_typeB. (((- 2147483648) <= tcount_typeBqtint(i)) and
+  (tcount_typeBqtint(i) <= 2147483647)))
+
+predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq2 : tcount_typeB, tcount_typeB -> bool
+
+logic dummy3 : tcount_typeB
+
+type tcount_typeB__ref = { tcount_typeB__content : tcount_typeB
+}
+
+function tcount_typeB__ref___projection(a: tcount_typeB__ref) : tcount_typeB =
+  (a).tcount_typeB__content
 
 logic container__split_discrs : count_type
 
@@ -1340,6 +1352,9 @@ axiom coerce_axiom2 :
 type us_split_fields2 = { rec__spaces__angles__angle__theta : normalized2pi
 }
 
+function us_split_fields_Theta__projection(a: us_split_fields2) : normalized2pi =
+  (a).rec__spaces__angles__angle__theta
+
 type us_split_fields__ref1 = { us_split_fields__content1 : us_split_fields2
 }
 
@@ -1408,6 +1423,11 @@ function angle__ref___projection(a: angle__ref) : us_rep1 =
 
 type idir_t
 
+logic idir_tqtint : idir_t -> int
+
+axiom idir_tqtaxiom :
+  (forall i:idir_t. (((- 1) <= idir_tqtint(i)) and (idir_tqtint(i) <= 1)))
+
 predicate in_range4(x: int) = (((- 1) <= x) and (x <= 1))
 
 logic bool_eq8 : int, int -> bool
@@ -1432,7 +1452,7 @@ type idir_t__ref = { idir_t__content : idir_t
 function idir_t__ref___projection(a: idir_t__ref) : idir_t =
   (a).idir_t__content
 
-logic to_rep3 : idir_t -> int
+function to_rep3(x: idir_t) : int = idir_tqtint(x)
 
 logic of_rep3 : int -> idir_t
 
@@ -1451,6 +1471,9 @@ rec__gaps__gap__distance : float1; rec__gaps__gap__idir : idir_t
 
 function us_split_fields_bearing__projection(a: us_split_fields4) : us_rep1 =
   (a).rec__gaps__gap__bearing
+
+function us_split_fields_distance__projection(a: us_split_fields4) : float1 =
+  (a).rec__gaps__gap__distance
 
 function us_split_fields_iDir__projection(a: us_split_fields4) : idir_t =
   (a).rec__gaps__gap__idir
@@ -1581,5 +1604,5 @@ logic count : int
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
  (* File "a-cfdlli.ads", line 667, characters 0-0 *)
-goal WP_parameter_def : (in_range1(count) ->
-  in_range((to_rep(container__split_discrs) - count)))
+goal WP_parameter_def : (in_range(count) ->
+  in_range1((to_rep(container__split_discrs) - count)))

@@ -985,4 +985,4 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
 
  (* File "generic_interval_tests.adb", line 18, characters 0-0 *)
 goal WP_parameter_def : ((tqtisFinite(x) and (le(fliteral1, mul(RNE, x,
-  x)) and le(mul(RNE, x, x), fliteral))) -> le(fliteral1, x))
+  x)) and le(mul(RNE, x, x), fliteral))) -> le(x, fliteral))

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -110,7 +106,7 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
-(declare-fun arccos (Float64) Float64)
+(declare-fun arccos1 (Float64) Float64)
 
 (declare-fun arccos__function_guard (Float64 Float64) Bool)
 
@@ -120,12 +116,12 @@
   (! (=>
      (and (dynamic_invariant x true true true true)
      (fp.leq (fp.abs x) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-     (let ((result (arccos x)))
+     (let ((result (arccos1 x)))
      (and
      (=>
      (fp.eq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
      (fp.eq result (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-     (dynamic_invariant result true false true true)))) :pattern ((arccos x)) )))
+     (dynamic_invariant result true false true true)))) :pattern ((arccos1 x)) )))
 
 (declare-const lf Float64)
 
@@ -136,7 +132,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 23286, characters 5-8
   (not
   (fp.leq (fp.abs lf) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 (check-sat)

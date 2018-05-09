@@ -899,6 +899,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -953,7 +959,7 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
+function to_rep(x: integer) : int = integerqtint(x)
 
 logic of_rep : int -> integer
 
@@ -1007,6 +1013,9 @@ type us_split_fields = { rec__p2__r__a : integer; rec__p2__r__b : float1
 
 function us_split_fields_A__projection(a: us_split_fields) : integer =
   (a).rec__p2__r__a
+
+function us_split_fields_B__projection(a: us_split_fields) : float1 =
+  (a).rec__p2__r__b
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1087,6 +1096,8 @@ type r__ref = { r__content : us_rep
 }
 
 function r__ref___projection(a: r__ref) : us_rep = (a).r__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 type t1
 
@@ -1592,8 +1603,6 @@ axiom bool_eq_rev :
   (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
   (temp___idx_154 <= a__last)) ->
   (to_rep2((a[temp___idx_154])) = to_rep2((b[((b__first - a__first) + temp___idx_154)])))))))))
-
-logic attr__ATTRIBUTE_ADDRESS : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 

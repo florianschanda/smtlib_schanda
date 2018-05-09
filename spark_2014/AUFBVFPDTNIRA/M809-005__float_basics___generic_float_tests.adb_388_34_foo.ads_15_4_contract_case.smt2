@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -149,95 +152,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const i Int)
-
-(declare-const o Int)
-
-(declare-const result Int)
-
-(declare-const i1 Int)
-
-(declare-const i2 Int)
-
-(declare-const i3 Int)
-
-;; H
-  (assert (fp.isFinite64 x))
-
-;; H
-  (assert (=> (<= (- 2147483648) 2147483647) (in_range1 i)))
-
-;; H
-  (assert
-  (and
-  (fp.leq (fp.neg (fp #b0 #b10000001011 #b0000000000000000000000000000000000000000000000000000))
-  x)
-  (fp.leq x (fp #b0 #b10000001011 #b0000000000000000000000000000000000000000000000000000))))
-
-;; H
-  (assert (and (= o (to_int1 RNA x)) (in_range1 (to_int1 RNA x))))
-
-;; H
-  (assert (= result i))
-
-;; H
-  (assert (= i1 o))
-
-;; H
-  (assert (= i1 i2))
-
-;; H
-  (assert (= i3 i1))
-
-;; H
-  (assert
-  (=>
-  (= (fp.eq x (fp.neg (fp #b0 #b01111111111 #b1001100110011001100110011001100110011001100110011010))) true)
-  (= i2 (- 2))))
-
-;; H
-  (assert
-  (=>
-  (= (fp.eq x (fp.neg (fp #b0 #b01111111111 #b1000000000000000000000000000000000000000000000000000))) true)
-  (= i2 (- 2))))
-
-;; H
-  (assert
-  (=>
-  (= (fp.eq x (fp.neg (fp #b0 #b01111111111 #b0110011001100110011001100110011001100110011001100110))) true)
-  (= i2 (- 1))))
-
-;; H
-  (assert
-  (=>
-  (= (fp.eq x (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))) true)
-  (= i2 (- 1))))
-
-;; H
-  (assert
-  (=>
-  (= (fp.eq x (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)) true)
-  (= i2 0)))
-
-;; H
-  (assert
-  (=>
-  (= (fp.eq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)) true)
-  (= i2 1)))
-
-;; H
-  (assert
-  (=>
-  (= (fp.eq x (fp #b0 #b01111111111 #b0110011001100110011001100110011001100110011001100110)) true)
-  (= i2 1)))
-
-;; H
-  (assert
-  (= (fp.eq x (fp #b0 #b01111111111 #b1000000000000000000000000000000000000000000000000000)) true))
-
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 351, characters 0-0
-  (not (= i2 2)))
+  (not true))
 (check-sat)
 (exit)

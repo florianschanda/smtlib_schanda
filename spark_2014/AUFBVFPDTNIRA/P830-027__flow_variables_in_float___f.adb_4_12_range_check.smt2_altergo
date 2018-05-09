@@ -927,6 +927,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1057,7 +1063,7 @@ type float_type__ref = { float_type__content : float1
 function float_type__ref___projection(a: float_type__ref) : float1 =
   (a).float_type__content
 
-logic to_rep1 : integer -> int
+function to_rep1(x1: integer) : int = integerqtint(x1)
 
 logic of_rep1 : int -> integer
 
@@ -1105,4 +1111,4 @@ axiom last__def_axiom1 : (last1 = y)
 
  (* File "f.adb", line 1, characters 0-0 *)
 goal WP_parameter_def : (tqtisFinite(x) -> (in_range2(y) -> ((0 <= y) ->
-  ((- 2147483648) <= 0))))
+  (y <= 2147483647))))

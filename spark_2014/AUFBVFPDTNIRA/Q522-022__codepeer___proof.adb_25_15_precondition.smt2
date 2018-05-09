@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,16 +74,20 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(declare-sort tt_float32B 0)
+(declare-fun equal (Float32 Float32) Bool)
 
-(declare-fun user_eq (tt_float32B tt_float32B) Bool)
+(declare-fun equal__function_guard (Bool Float32 Float32) Bool)
+
+(declare-sort t_float32 0)
+
+(declare-fun user_eq (t_float32 t_float32) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Float32) us_image)
 
@@ -95,24 +95,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Float32)
 
-(declare-const dummy tt_float32B)
-
-(declare-datatypes ()
-((tt_float32B__ref (mk_tt_float32B__ref (tt_float32B__content tt_float32B)))))
-(define-fun tt_float32B__ref___projection ((a tt_float32B__ref)) tt_float32B
-  (tt_float32B__content a))
-
-(declare-sort t_float32 0)
-
-(declare-fun user_eq1 (t_float32 t_float32) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
-
-(declare-const dummy1 t_float32)
+(declare-const dummy t_float32)
 
 (declare-datatypes ()
 ((t_float32__ref (mk_t_float32__ref (t_float32__content t_float32)))))
@@ -127,10 +110,6 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_158)))
 
-(declare-fun equal (Float32 Float32) Bool)
-
-(declare-fun equal__function_guard (Bool Float32 Float32) Bool)
-
 ;; equal__post_axiom
   (assert true)
 
@@ -140,6 +119,23 @@
   (! (= (= (equal x1 x2) true)
      (fp.lt (fp.abs (fp.sub RNE x1 x2)) (fp #b0 #b01101101 #b00001100011011110111101))) :pattern (
   (equal x1 x2)) )))
+
+(declare-sort tt_float32B 0)
+
+(declare-fun user_eq1 (tt_float32B tt_float32B) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
+
+(declare-const dummy1 tt_float32B)
+
+(declare-datatypes ()
+((tt_float32B__ref (mk_tt_float32B__ref (tt_float32B__content tt_float32B)))))
+(define-fun tt_float32B__ref___projection ((a tt_float32B__ref)) tt_float32B
+  (tt_float32B__content a))
 
 (declare-sort t_x2 0)
 
@@ -259,6 +255,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "proof.adb", line 5, characters 0-0
-  (not (fp.leq x (fp #b0 #b11111101 #b11111111111111111111111))))
+  (not (fp.leq (fp.neg (fp #b0 #b11111101 #b11111111111111111111111)) x)))
 (check-sat)
 (exit)

@@ -149,11 +149,12 @@
   (= i2 1)))
 
 ;; H
-  (assert (= (fp.eq x (fp #b0 #b01111111 #b01100110011001100110011)) true))
+  (assert
+  (not (= (fp.eq x (fp #b0 #b01111111 #b01100110011001100110011)) true)))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.adb", line 351, characters 0-0
-  (not (= i2 1)))
+  (not true))
 (check-sat)
 (exit)

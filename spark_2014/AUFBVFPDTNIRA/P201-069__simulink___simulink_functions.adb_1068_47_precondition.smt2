@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -108,7 +104,7 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-fun arctan (Float32 Float32) Float32)
+(declare-fun arctan1 (Float32 Float32) Float32)
 
 (declare-fun arctan__function_guard (Float32 Float32 Float32) Bool)
 
@@ -121,13 +117,13 @@
      true true true))
      (or (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
      (not (fp.eq y (fp #b0 #b00000000 #b00000000000000000000000)))))
-     (let ((result (arctan y x)))
+     (let ((result (arctan1 y x)))
      (and
      (=>
      (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) x)
      (fp.eq y (fp #b0 #b00000000 #b00000000000000000000000)))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (dynamic_invariant result true false true true)))) :pattern ((arctan y
+     (dynamic_invariant result true false true true)))) :pattern ((arctan1 y
                                                                   x)) )))
 
 (declare-const f Float32)
@@ -139,7 +135,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 23333, characters 5-8
   (not
   (or
   (not (fp.eq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b00000000 #b00000000000000000000000)))

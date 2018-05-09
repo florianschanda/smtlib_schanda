@@ -122,16 +122,14 @@
   (assert (= result1 lat_long__cos__result4))
 
 ;; H
-  (assert (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000))
-  x))
-
-;; H
-  (assert (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))
+  (assert
+  (not
+  (and (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000))
+  x) (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))))
 
 (assert
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 6, characters 0-0
-  (not
-  (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) lat_long__cos__result4)))
+  (not true))
 (check-sat)
 (exit)

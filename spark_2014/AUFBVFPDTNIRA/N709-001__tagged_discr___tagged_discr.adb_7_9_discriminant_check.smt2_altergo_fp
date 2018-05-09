@@ -80,6 +80,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -133,19 +139,6 @@ type integer__ref = { integer__content : integer
 
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
-
-logic to_rep : integer -> int
-
-logic of_rep : int -> integer
-
-axiom inversion_axiom :
-  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
-
-axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
-
-axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
-  (to_rep(of_rep(x)) = x)))
 
 axiom add_div :
   (forall x:real. forall y:real. forall z:real. ((not (z = 0.0)) ->
@@ -1156,6 +1149,32 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
+function to_rep(x: integer) : int = integerqtint(x)
+
+logic of_rep : int -> integer
+
+axiom inversion_axiom :
+  (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
+
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
+
+axiom coerce_axiom :
+  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (to_rep(of_rep(x)) = x)))
+
+logic to_rep1 : float1 -> t
+
+logic of_rep1 : t -> float1
+
+axiom inversion_axiom1 :
+  (forall x:float1 [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 : (forall x:float1 [to_rep1(x)]. tqtisFinite(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:t [to_rep1(of_rep1(x))]. (tqtisFinite(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
 type e
 
 predicate in_range3(x: int) = ((0 <= x) and (x <= 3))
@@ -1181,29 +1200,16 @@ type e__ref = { e__content : e
 
 function e__ref___projection(a: e__ref) : e = (a).e__content
 
-logic to_rep1 : e -> int
+logic to_rep2 : e -> int
 
-logic of_rep1 : int -> e
+logic of_rep2 : int -> e
 
-axiom inversion_axiom1 : (forall x:e [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+axiom inversion_axiom2 : (forall x:e [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
 
-axiom range_axiom1 : (forall x:e [to_rep1(x)]. in_range3(to_rep1(x)))
-
-axiom coerce_axiom1 :
-  (forall x:int [to_rep1(of_rep1(x))]. (in_range3(x) ->
-  (to_rep1(of_rep1(x)) = x)))
-
-logic to_rep2 : float1 -> t
-
-logic of_rep2 : t -> float1
-
-axiom inversion_axiom2 :
-  (forall x:float1 [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
-
-axiom range_axiom2 : (forall x:float1 [to_rep2(x)]. tqtisFinite(to_rep2(x)))
+axiom range_axiom2 : (forall x:e [to_rep2(x)]. in_range3(to_rep2(x)))
 
 axiom coerce_axiom2 :
-  (forall x:t [to_rep2(of_rep2(x))]. (tqtisFinite(x) ->
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
   (to_rep2(of_rep2(x)) = x)))
 
 type us_split_discrs = { rec__tagged_discr__t__discr : e
@@ -1229,6 +1235,9 @@ function us_split_fields_Z__projection(a: us_split_fields) : bool =
 function us_split_fields_X__projection(a: us_split_fields) : integer =
   (a).rec__tagged_discr__t__x
 
+function us_split_fields_Y__projection(a: us_split_fields) : float1 =
+  (a).rec__tagged_discr__t__y
+
 function us_split_fields___projection(a: us_split_fields) : us_private =
   (a).rec__ext__
 
@@ -1251,30 +1260,30 @@ function us_rep___2__projection(a: us_rep) : us_split_fields =
 function us_rep___3__projection(a: us_rep) : int = (a).attr__tag
 
 predicate tagged_discr__t__x__pred(a: us_rep) =
-  ((to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 0) or
-  (to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 2))
+  ((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 0) or
+  (to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 2))
 
 predicate tagged_discr__t__y__pred(a: us_rep) =
-  (not ((to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 0) or
-  (to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 2)))
+  (not ((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 0) or
+  (to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = 2)))
 
 logic bool_eq6 : us_rep, us_rep -> bool
 
 axiom bool_eq_def5 :
   (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
-  ((((to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
+  ((((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
   (((((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z) and
   (tagged_discr__t__x__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__tagged_discr__t__x) = to_rep(((b).us_split_fields1).rec__tagged_discr__t__x)))) and
   (tagged_discr__t__y__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep2(((b).us_split_fields1).rec__tagged_discr__t__y))))) ->
+  (to_rep1(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep1(((b).us_split_fields1).rec__tagged_discr__t__y))))) ->
   (bool_eq6(a, b) = true)) and
-  ((not ((to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
+  ((not ((to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs1).rec__tagged_discr__t__discr)) and
   (((((a).us_split_fields1).rec__tagged_discr__t__z = ((b).us_split_fields1).rec__tagged_discr__t__z) and
   (tagged_discr__t__x__pred(a) ->
   (to_rep(((a).us_split_fields1).rec__tagged_discr__t__x) = to_rep(((b).us_split_fields1).rec__tagged_discr__t__x)))) and
   (tagged_discr__t__y__pred(a) ->
-  (to_rep2(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep2(((b).us_split_fields1).rec__tagged_discr__t__y)))))) ->
+  (to_rep1(((a).us_split_fields1).rec__tagged_discr__t__y) = to_rep1(((b).us_split_fields1).rec__tagged_discr__t__y)))))) ->
   (bool_eq6(a, b) = false))))
 
 logic us_dispatch_eq : us_rep, us_rep -> bool
@@ -1408,6 +1417,9 @@ function us_split_fields_Z__2__projection(a: us_split_fields2) : bool =
 function us_split_fields_X__2__projection(a: us_split_fields2) : integer =
   (a).rec__tagged_discr__t__x1
 
+function us_split_fields_Y__2__projection(a: us_split_fields2) : float1 =
+  (a).rec__tagged_discr__t__y1
+
 function us_split_fields___2__projection(a: us_split_fields2) : us_private =
   (a).rec__ext__1
 
@@ -1458,32 +1470,32 @@ function of_base(r: us_rep) : us_rep1 = { us_split_discrs2 =
   (r).attr__tag }
 
 predicate tagged_discr__t__x__pred1(a: us_rep1) =
-  ((to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = 0) or
-  (to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = 2))
+  ((to_rep2(((a).us_split_discrs2).rec__tagged_discr__t__discr) = 0) or
+  (to_rep2(((a).us_split_discrs2).rec__tagged_discr__t__discr) = 2))
 
 predicate tagged_discr__t__y__pred1(a: us_rep1) =
-  (not ((to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = 0) or
-  (to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = 2)))
+  (not ((to_rep2(((a).us_split_discrs2).rec__tagged_discr__t__discr) = 0) or
+  (to_rep2(((a).us_split_discrs2).rec__tagged_discr__t__discr) = 2)))
 
 logic bool_eq7 : us_rep1, us_rep1 -> bool
 
 axiom bool_eq_def6 :
   (forall a:us_rep1. forall b:us_rep1 [bool_eq7(a, b)].
-  ((((to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs2).rec__tagged_discr__t__discr)) and
+  ((((to_rep2(((a).us_split_discrs2).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs2).rec__tagged_discr__t__discr)) and
   ((((to_rep(((a).us_split_fields3).rec__tagged_discr__u1__w) = to_rep(((b).us_split_fields3).rec__tagged_discr__u1__w)) and
   (((a).us_split_fields3).rec__tagged_discr__t__z1 = ((b).us_split_fields3).rec__tagged_discr__t__z1)) and
   (tagged_discr__t__x__pred1(a) ->
   (to_rep(((a).us_split_fields3).rec__tagged_discr__t__x1) = to_rep(((b).us_split_fields3).rec__tagged_discr__t__x1)))) and
   (tagged_discr__t__y__pred1(a) ->
-  (to_rep2(((a).us_split_fields3).rec__tagged_discr__t__y1) = to_rep2(((b).us_split_fields3).rec__tagged_discr__t__y1))))) ->
+  (to_rep1(((a).us_split_fields3).rec__tagged_discr__t__y1) = to_rep1(((b).us_split_fields3).rec__tagged_discr__t__y1))))) ->
   (bool_eq7(a, b) = true)) and
-  ((not ((to_rep1(((a).us_split_discrs2).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs2).rec__tagged_discr__t__discr)) and
+  ((not ((to_rep2(((a).us_split_discrs2).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs2).rec__tagged_discr__t__discr)) and
   ((((to_rep(((a).us_split_fields3).rec__tagged_discr__u1__w) = to_rep(((b).us_split_fields3).rec__tagged_discr__u1__w)) and
   (((a).us_split_fields3).rec__tagged_discr__t__z1 = ((b).us_split_fields3).rec__tagged_discr__t__z1)) and
   (tagged_discr__t__x__pred1(a) ->
   (to_rep(((a).us_split_fields3).rec__tagged_discr__t__x1) = to_rep(((b).us_split_fields3).rec__tagged_discr__t__x1)))) and
   (tagged_discr__t__y__pred1(a) ->
-  (to_rep2(((a).us_split_fields3).rec__tagged_discr__t__y1) = to_rep2(((b).us_split_fields3).rec__tagged_discr__t__y1)))))) ->
+  (to_rep1(((a).us_split_fields3).rec__tagged_discr__t__y1) = to_rep1(((b).us_split_fields3).rec__tagged_discr__t__y1)))))) ->
   (bool_eq7(a, b) = false))))
 
 logic us_tag1 : int
@@ -1633,11 +1645,17 @@ function us_split_fields_W__2__projection(a: us_split_fields4) : integer =
 function us_split_fields_XX__projection(a: us_split_fields4) : integer =
   (a).rec__tagged_discr__u2__xx
 
+function us_split_fields_YY__projection(a: us_split_fields4) : float1 =
+  (a).rec__tagged_discr__u2__yy
+
 function us_split_fields_Z__3__projection(a: us_split_fields4) : bool =
   (a).rec__tagged_discr__t__z2
 
 function us_split_fields_X__3__projection(a: us_split_fields4) : integer =
   (a).rec__tagged_discr__t__x2
+
+function us_split_fields_Y__3__projection(a: us_split_fields4) : float1 =
+  (a).rec__tagged_discr__t__y2
 
 function us_split_fields___3__projection(a: us_split_fields4) : us_private =
   (a).rec__ext__2
@@ -1710,36 +1728,36 @@ function of_base1(r: us_rep) : us_rep2 = { us_split_discrs3 =
   (r).attr__tag }
 
 predicate tagged_discr__t__x__pred2(a: us_rep2) =
-  ((to_rep1(((a).us_split_discrs3).rec__tagged_discr__t__discr) = 0) or
-  (to_rep1(((a).us_split_discrs3).rec__tagged_discr__t__discr) = 2))
+  ((to_rep2(((a).us_split_discrs3).rec__tagged_discr__t__discr) = 0) or
+  (to_rep2(((a).us_split_discrs3).rec__tagged_discr__t__discr) = 2))
 
 predicate tagged_discr__t__y__pred2(a: us_rep2) =
-  (not ((to_rep1(((a).us_split_discrs3).rec__tagged_discr__t__discr) = 0) or
-  (to_rep1(((a).us_split_discrs3).rec__tagged_discr__t__discr) = 2)))
+  (not ((to_rep2(((a).us_split_discrs3).rec__tagged_discr__t__discr) = 0) or
+  (to_rep2(((a).us_split_discrs3).rec__tagged_discr__t__discr) = 2)))
 
 logic bool_eq8 : us_rep2, us_rep2 -> bool
 
 axiom bool_eq_def7 :
   (forall a:us_rep2. forall b:us_rep2 [bool_eq8(a, b)].
-  ((((to_rep1(((a).us_split_discrs3).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs3).rec__tagged_discr__t__discr)) and
+  ((((to_rep2(((a).us_split_discrs3).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs3).rec__tagged_discr__t__discr)) and
   ((((((to_rep(((a).us_split_fields5).rec__tagged_discr__u2__w) = to_rep(((b).us_split_fields5).rec__tagged_discr__u2__w)) and
   (to_rep(((a).us_split_fields5).rec__tagged_discr__u2__xx) = to_rep(((b).us_split_fields5).rec__tagged_discr__u2__xx))) and
-  (to_rep2(((a).us_split_fields5).rec__tagged_discr__u2__yy) = to_rep2(((b).us_split_fields5).rec__tagged_discr__u2__yy))) and
+  (to_rep1(((a).us_split_fields5).rec__tagged_discr__u2__yy) = to_rep1(((b).us_split_fields5).rec__tagged_discr__u2__yy))) and
   (((a).us_split_fields5).rec__tagged_discr__t__z2 = ((b).us_split_fields5).rec__tagged_discr__t__z2)) and
   (tagged_discr__t__x__pred2(a) ->
   (to_rep(((a).us_split_fields5).rec__tagged_discr__t__x2) = to_rep(((b).us_split_fields5).rec__tagged_discr__t__x2)))) and
   (tagged_discr__t__y__pred2(a) ->
-  (to_rep2(((a).us_split_fields5).rec__tagged_discr__t__y2) = to_rep2(((b).us_split_fields5).rec__tagged_discr__t__y2))))) ->
+  (to_rep1(((a).us_split_fields5).rec__tagged_discr__t__y2) = to_rep1(((b).us_split_fields5).rec__tagged_discr__t__y2))))) ->
   (bool_eq8(a, b) = true)) and
-  ((not ((to_rep1(((a).us_split_discrs3).rec__tagged_discr__t__discr) = to_rep1(((b).us_split_discrs3).rec__tagged_discr__t__discr)) and
+  ((not ((to_rep2(((a).us_split_discrs3).rec__tagged_discr__t__discr) = to_rep2(((b).us_split_discrs3).rec__tagged_discr__t__discr)) and
   ((((((to_rep(((a).us_split_fields5).rec__tagged_discr__u2__w) = to_rep(((b).us_split_fields5).rec__tagged_discr__u2__w)) and
   (to_rep(((a).us_split_fields5).rec__tagged_discr__u2__xx) = to_rep(((b).us_split_fields5).rec__tagged_discr__u2__xx))) and
-  (to_rep2(((a).us_split_fields5).rec__tagged_discr__u2__yy) = to_rep2(((b).us_split_fields5).rec__tagged_discr__u2__yy))) and
+  (to_rep1(((a).us_split_fields5).rec__tagged_discr__u2__yy) = to_rep1(((b).us_split_fields5).rec__tagged_discr__u2__yy))) and
   (((a).us_split_fields5).rec__tagged_discr__t__z2 = ((b).us_split_fields5).rec__tagged_discr__t__z2)) and
   (tagged_discr__t__x__pred2(a) ->
   (to_rep(((a).us_split_fields5).rec__tagged_discr__t__x2) = to_rep(((b).us_split_fields5).rec__tagged_discr__t__x2)))) and
   (tagged_discr__t__y__pred2(a) ->
-  (to_rep2(((a).us_split_fields5).rec__tagged_discr__t__y2) = to_rep2(((b).us_split_fields5).rec__tagged_discr__t__y2)))))) ->
+  (to_rep1(((a).us_split_fields5).rec__tagged_discr__t__y2) = to_rep1(((b).us_split_fields5).rec__tagged_discr__t__y2)))))) ->
   (bool_eq8(a, b) = false))))
 
 logic us_tag2 : int
@@ -1917,7 +1935,7 @@ logic is_zero__3__function_guard1 : bool, int, us_rep2 -> prop
 logic us_tag3 : int
 
 predicate in_range4(rec__tagged_discr__t__discr1: int, a: us_rep) =
-  (rec__tagged_discr__t__discr1 = to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr))
+  (rec__tagged_discr__t__discr1 = to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr))
 
 logic value__size3 : int
 
@@ -2027,7 +2045,7 @@ function t3b__ref___projection(a: t3b__ref) : us_rep = (a).t3b__content
 logic us_tag4 : int
 
 predicate in_range5(rec__tagged_discr__t__discr1: int, a: us_rep) =
-  (rec__tagged_discr__t__discr1 = to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr))
+  (rec__tagged_discr__t__discr1 = to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr))
 
 logic value__size4 : int
 
@@ -2137,7 +2155,7 @@ function t6b__ref___projection(a: t6b__ref) : us_rep = (a).t6b__content
 logic us_tag5 : int
 
 predicate in_range6(rec__tagged_discr__t__discr1: int, a: us_rep) =
-  (rec__tagged_discr__t__discr1 = to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr))
+  (rec__tagged_discr__t__discr1 = to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr))
 
 logic value__size5 : int
 
@@ -2267,7 +2285,7 @@ function t8b__ref___projection(a: t8b__ref) : us_rep1 = (a).t8b__content
 logic us_tag6 : int
 
 predicate in_range7(rec__tagged_discr__t__discr1: int, a: us_rep) =
-  (rec__tagged_discr__t__discr1 = to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr))
+  (rec__tagged_discr__t__discr1 = to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr))
 
 logic value__size6 : int
 
@@ -2377,7 +2395,7 @@ function t11b__ref___projection(a: t11b__ref) : us_rep = (a).t11b__content
 logic us_tag7 : int
 
 predicate in_range8(rec__tagged_discr__t__discr1: int, a: us_rep) =
-  (rec__tagged_discr__t__discr1 = to_rep1(((a).us_split_discrs1).rec__tagged_discr__t__discr))
+  (rec__tagged_discr__t__discr1 = to_rep2(((a).us_split_discrs1).rec__tagged_discr__t__discr))
 
 logic value__size7 : int
 
@@ -2676,11 +2694,11 @@ axiom is_zero__def_axiom :
   us_split_fields1 = { rec__tagged_discr__t__z = v1;
   rec__tagged_discr__t__x = v2; rec__tagged_discr__t__y = v3; rec__ext__ = v4
   }; attr__tag = v5 }) = true) -> ((not (v1 = true)) and
-  ((((to_rep1(v) = 0) or (to_rep1(v) = 2)) -> (to_rep(v2) = 0)) and
-  ((not ((to_rep1(v) = 0) or (to_rep1(v) = 2))) -> eq(to_rep2(v3),
-  fliteral1))))) and (((not (v1 = true)) and ((((to_rep1(v) = 0) or
-  (to_rep1(v) = 2)) and (to_rep(v2) = 0)) or ((not ((to_rep1(v) = 0) or
-  (to_rep1(v) = 2))) and eq(to_rep2(v3), fliteral1)))) -> (is_zero1({
+  ((((to_rep2(v) = 0) or (to_rep2(v) = 2)) -> (to_rep(v2) = 0)) and
+  ((not ((to_rep2(v) = 0) or (to_rep2(v) = 2))) -> eq(to_rep1(v3),
+  fliteral1))))) and (((not (v1 = true)) and ((((to_rep2(v) = 0) or
+  (to_rep2(v) = 2)) and (to_rep(v2) = 0)) or ((not ((to_rep2(v) = 0) or
+  (to_rep2(v) = 2))) and eq(to_rep1(v3), fliteral1)))) -> (is_zero1({
   us_split_discrs1 = { rec__tagged_discr__t__discr = v }; us_split_fields1 =
   { rec__tagged_discr__t__z = v1; rec__tagged_discr__t__x = v2;
   rec__tagged_discr__t__y = v3; rec__ext__ = v4 }; attr__tag = v5
@@ -2745,11 +2763,11 @@ axiom is_zero__2__def_axiom :
   rec__tagged_discr__u1__w = v1; rec__tagged_discr__t__z1 = v2;
   rec__tagged_discr__t__x1 = v3; rec__tagged_discr__t__y1 = v4; rec__ext__1 =
   v5 }; attr__tag1 = v6 }) = true) -> (((not (v2 = true)) and
-  ((((to_rep1(v) = 0) or (to_rep1(v) = 2)) -> (to_rep(v3) = 0)) and
-  ((not ((to_rep1(v) = 0) or (to_rep1(v) = 2))) -> eq(to_rep2(v4),
+  ((((to_rep2(v) = 0) or (to_rep2(v) = 2)) -> (to_rep(v3) = 0)) and
+  ((not ((to_rep2(v) = 0) or (to_rep2(v) = 2))) -> eq(to_rep1(v4),
   fliteral1)))) and (to_rep(v1) = 0))) and ((((not (v2 = true)) and
-  ((((to_rep1(v) = 0) or (to_rep1(v) = 2)) and (to_rep(v3) = 0)) or
-  ((not ((to_rep1(v) = 0) or (to_rep1(v) = 2))) and eq(to_rep2(v4),
+  ((((to_rep2(v) = 0) or (to_rep2(v) = 2)) and (to_rep(v3) = 0)) or
+  ((not ((to_rep2(v) = 0) or (to_rep2(v) = 2))) and eq(to_rep1(v4),
   fliteral1)))) and (to_rep(v1) = 0)) -> (is_zero__2({ us_split_discrs2 = {
   rec__tagged_discr__t__discr = v }; us_split_fields3 = {
   rec__tagged_discr__u1__w = v1; rec__tagged_discr__t__z1 = v2;
@@ -2818,18 +2836,20 @@ axiom is_zero__3__def_axiom :
   rec__tagged_discr__t__z = v4; rec__tagged_discr__t__x = v5;
   rec__tagged_discr__t__y = v6; rec__ext__ = hide_ext__1(v1, v2, v3, v7) };
   attr__tag = v8 }) = true) and (to_rep(v1) = 0)) and (to_rep(v2) = 0)) and
-  eq(to_rep2(v3), fliteral1))))
+  eq(to_rep1(v3), fliteral1))))
+
+logic rliteral : integer
+
+axiom rliteral_axiom : (integerqtint(rliteral) = 0)
 
  (* File "tagged_discr.ads", line 16, characters 0-0 *)
 goal WP_parameter_def :
-  (forall o:e. forall o1:integer. forall o2:bool. forall o3:integer.
-  forall o4:float1. forall o5:us_private. forall o6:e. forall temp___226:e.
-  forall temp___2261:bool. forall temp___2262:integer.
-  forall temp___2263:float1. forall temp___2264:us_private.
-  forall temp___2265:int. ((to_rep1(v__split_discrs) = 0) ->
-  (((to_rep1(v__split_discrs) = r2b) and in_range3(r2b)) ->
-  ((((to_rep(o1) = 0) and ((of_int(0) = o2) and ((o1 = o3) and
-  ((dummy1 = o4) and (us_null_ext__ = o5))))) and (((to_rep1(o) = 0) and
-  (o = o6)) and ((temp___226 = o6) and (((temp___2261 = o2) and
-  ((temp___2262 = o3) and ((temp___2263 = o4) and (temp___2264 = o5)))) and
-  (us_tag3 = temp___2265))))) -> (temp___226 = v__split_discrs)))))
+  (forall o:e. forall o1:e. forall temp___226:e. forall temp___2261:bool.
+  forall temp___2262:integer. forall temp___2263:float1.
+  forall temp___2264:us_private. forall temp___2265:int.
+  ((to_rep2(v__split_discrs) = 0) -> (((to_rep2(v__split_discrs) = r2b) and
+  in_range3(r2b)) -> ((((to_rep2(o) = 0) and (o = o1)) and
+  ((temp___226 = o1) and (((of_int(0) = temp___2261) and
+  ((rliteral = temp___2262) and ((dummy1 = temp___2263) and
+  (us_null_ext__ = temp___2264)))) and (us_tag3 = temp___2265)))) ->
+  (temp___226 = v__split_discrs)))))

@@ -324,7 +324,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10377, characters 5-8
   (not (fp.isFinite32 (fp.mul RNE length_ba length_bc))))
 (check-sat)
 (exit)

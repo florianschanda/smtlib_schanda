@@ -1112,37 +1112,46 @@ type ft__ref = { ft__content : ft
 
 function ft__ref___2__projection(a: ft__ref) : ft = (a).ft__content
 
-logic x : t
+logic biggest_representable_int : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
+logic x : t
+
 logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
+  (tqtreal(fliteral1) = 9007199254740992.0))
+
+axiom biggest_representable_int__def_axiom :
+  (biggest_representable_int = fliteral1)
 
 logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 0.0e-1))
+  (tqtreal(fliteral2) = 179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0))
 
 logic fliteral3 : t
 
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 9007199254740992.0))
+  (tqtreal(fliteral3) = 0.0e-1))
 
 logic fliteral4 : t
 
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 0.50000000000000000000000000000000000000000000000000000))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/M809-005__float_basics/proof/sessions/foo/../../../gnatprove/foo.mlw", line 14489, characters 5-8 *)
 goal WP_parameter_def :
   (forall y:t. forall result:t. forall y1:t. forall y2:t. forall y3:t.
-  ((tqtisFinite(x) and ((le(neg(fliteral1), fliteral1) -> tqtisFinite(y)) and
-  ((le(fliteral2, x) and le(x, fliteral3)) and ((({ t__content = result } = {
+  ((tqtisFinite(biggest_representable_int) and
+  ((fliteral1 = biggest_representable_int) and (tqtisFinite(x) and
+  ((le(neg(fliteral2), fliteral2) -> tqtisFinite(y)) and ((le(fliteral3,
+  x) and le(x, biggest_representable_int)) and ((({ t__content = result } = {
   t__content = y }) and (y1 = roundToIntegral(NearestTiesToAway, x))) and
-  ((y1 = y2) and (y3 = y1)))))) -> le(sub(NearestTiesToEven, x, fliteral4),
-  y2)))
+  ((y1 = y2) and (y3 = y1)))))))) -> le(y2, add(NearestTiesToEven, x,
+  fliteral4))))

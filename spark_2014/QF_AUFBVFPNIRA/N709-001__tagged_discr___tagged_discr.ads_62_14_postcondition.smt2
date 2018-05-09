@@ -795,18 +795,6 @@
 
 (declare-const o Bool)
 
-(declare-const temp___262 Bool)
-
-(declare-const temp___2621 Int)
-
-(declare-const o1 Bool)
-
-(declare-const temp___264 Bool)
-
-(declare-const temp___2641 Int)
-
-(declare-const o2 Bool)
-
 (declare-const temp___266 Bool)
 
 (declare-const temp___2661 Int)
@@ -821,38 +809,48 @@
 
 (declare-const v__split_fields2 Bool)
 
+(declare-const result2 Bool)
+
+(declare-const v__split_fields3 Bool)
+
+(declare-const result3 Bool)
+
+(declare-const v__split_fields4 Bool)
+
+(declare-const v__split_fields5 Bool)
+
 ;; H
   (assert (= result v__split_fields))
-
-;; H
-  (assert (= v__split_fields1 o))
-
-;; H
-  (assert (= temp___262 o))
-
-;; H
-  (assert (= v__attr__tag temp___2621))
 
 ;; H
   (assert (= result1 v__split_fields1))
 
 ;; H
-  (assert (= temp___262 v__split_fields2))
+  (assert (= v__split_fields1 v__split_fields2))
 
 ;; H
-  (assert (= v__split_fields2 o1))
+  (assert (= result2 v__split_fields2))
 
 ;; H
-  (assert (= temp___264 o1))
+  (assert (= v__split_fields2 v__split_fields3))
 
 ;; H
-  (assert (= v__attr__tag temp___2641))
+  (assert (= v__split_fields3 o))
 
 ;; H
-  (assert (= temp___266 o2))
+  (assert (= temp___266 o))
 
 ;; H
   (assert (= v__attr__tag temp___2661))
+
+;; H
+  (assert (= result3 v__split_fields3))
+
+;; H
+  (assert (= temp___266 v__split_fields4))
+
+;; H
+  (assert (= v__split_fields5 v__split_fields4))
 
 (assert
 ;; WP_parameter_def

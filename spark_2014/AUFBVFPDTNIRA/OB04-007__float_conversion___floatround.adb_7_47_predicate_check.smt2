@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -167,16 +163,21 @@
   (assert (in_range1 x))
 
 ;; H
+  (assert (in_range2 x))
+
+;; H
   (assert
-  (and (in_range2 x)
   (let ((temp___218 x))
-  (and
-  (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) temp___218)
-  (fp.leq temp___218 (fp #b0 #b01111111 #b00000000000000000000000))))))
+  (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) temp___218)))
+
+;; H
+  (assert
+  (let ((temp___218 x))
+  (fp.leq temp___218 (fp #b0 #b01111111 #b00000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "floatround.adb", line 5, characters 0-0
-  (not (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x)))
+  (not (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

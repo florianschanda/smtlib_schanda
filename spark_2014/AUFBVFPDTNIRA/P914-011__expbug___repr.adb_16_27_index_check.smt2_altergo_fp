@@ -1835,63 +1835,17 @@ type long_float__ref = { long_float__content : long_float
 function long_float__ref___projection(a: long_float__ref) : long_float =
   (a).long_float__content
 
-type map__ref = { map__content : (int,float1) farray
-}
+type integer
 
-logic slide : (int,float1) farray, int, int -> (int,float1) farray
+logic integerqtint : integer -> int
 
-axiom slide_eq :
-  (forall a:(int,float1) farray.
-  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
 
-axiom slide_def :
-  (forall a:(int,float1) farray.
-  (forall old_first:int.
-  (forall new_first:int.
-  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
-  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
-logic bool_eq4 : (int,float1) farray, int, int, (int,float1) farray, int,
-  int -> bool
-
-axiom bool_eq_def4 :
-  (forall a:(int,float1) farray. forall a__first:int. forall a__last:int.
-  forall b:(int,float1) farray. forall b__first:int. forall b__last:int
-  [bool_eq4(a, a__first, a__last, b, b__first, b__last)].
-  ((((((a__first <= a__last) and ((b__first <= b__last) and
-  ((a__last - a__first) = (b__last - b__first)))) or
-  ((not (a__first <= a__last)) and (b__last <  b__first))) and
-  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) and
-  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
-  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
-  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = true)) and
-  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
-  ((a__last - a__first) = (b__last - b__first)))) and
-  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) ->
-  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
-  (bool_eq4(a, a__first, a__last, b, b__first, b__last) = false))))
-
-axiom bool_eq_rev :
-  (forall a:(int,float1) farray. forall b:(int,float1) farray.
-  (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq4(b, b__first, b__last, a, a__first,
-  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
-  ((a__last - a__first) = (b__last - b__first)))) and
-  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
-  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) ->
-  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-type tbufD1
-
-predicate in_range2(x: int) = ((0 <= x) and (x <= 3))
-
-logic bool_eq5 : int, int -> bool
+logic bool_eq4 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -1904,7 +1858,7 @@ logic bool_gt2 : int, int -> bool
 logic bool_ge2 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq5(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq4(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -1921,11 +1875,11 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge2(x, y) = true) <-> (y <= x))))
 
-logic bool_eq6 : int, int -> bool
+logic bool_eq5 : int, int -> bool
 
-axiom bool_eq_def5 :
-  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
+axiom bool_eq_def4 :
+  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
 
 logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
 
@@ -1933,19 +1887,86 @@ logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
-logic user_eq2 : tbufD1, tbufD1 -> bool
+logic user_eq2 : integer, integer -> bool
 
-logic dummy2 : tbufD1
+logic dummy2 : integer
 
-type tbufD1__ref = { tbufD1__content : tbufD1
+type integer__ref = { integer__content : integer
 }
 
-function tbufD1__ref___projection(a: tbufD1__ref) : tbufD1 =
-  (a).tbufD1__content
+function integer__ref___projection(a: integer__ref) : integer =
+  (a).integer__content
 
-type integer
+logic f : unit -> int
 
-predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+logic f__function_guard : int, unit -> prop
+
+axiom f__post_axiom : in_range2(f(void))
+
+type map__ref = { map__content : (int,float1) farray
+}
+
+logic slide : (int,float1) farray, int, int -> (int,float1) farray
+
+axiom slide_eq :
+  (forall a:(int,float1) farray.
+  (forall first:int [slide(a, first, first)]. (slide(a, first, first) = a)))
+
+axiom slide_def :
+  (forall a:(int,float1) farray.
+  (forall old_first:int.
+  (forall new_first:int.
+  (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
+  new_first)[i]) = (a[(i - (new_first - old_first))]))))))
+
+logic bool_eq6 : (int,float1) farray, int, int, (int,float1) farray, int,
+  int -> bool
+
+axiom bool_eq_def5 :
+  (forall a:(int,float1) farray. forall a__first:int. forall a__last:int.
+  forall b:(int,float1) farray. forall b__first:int. forall b__last:int
+  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  ((((((a__first <= a__last) and ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) or
+  ((not (a__first <= a__last)) and (b__last <  b__first))) and
+  (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) and
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))) or
+  (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)]))))))) ->
+  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
+
+axiom bool_eq_rev :
+  (forall a:(int,float1) farray. forall b:(int,float1) farray.
+  (forall a__first:int. forall a__last:int. forall b__first:int.
+  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
+  ((a__last - a__first) = (b__last - b__first)))) and
+  ((not (a__first <= a__last)) -> (b__last <  b__first))) and
+  (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
+  (temp___idx_154 <= a__last)) ->
+  (to_rep((a[temp___idx_154])) = to_rep((b[((b__first - a__first) + temp___idx_154)])))))))))
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic limit : t1
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+type tbufD1
+
+logic tbufD1qtint : tbufD1 -> int
+
+axiom tbufD1qtaxiom :
+  (forall i:tbufD1. ((0 <= tbufD1qtint(i)) and (tbufD1qtint(i) <= 3)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 3))
 
 logic bool_eq7 : int, int -> bool
 
@@ -1959,23 +1980,25 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq3 : integer, integer -> bool
+logic user_eq3 : tbufD1, tbufD1 -> bool
 
-logic dummy3 : integer
+logic dummy3 : tbufD1
 
-type integer__ref = { integer__content : integer
+type tbufD1__ref = { tbufD1__content : tbufD1
 }
 
-function integer__ref___projection(a: integer__ref) : integer =
-  (a).integer__content
+function tbufD1__ref___projection(a: tbufD1__ref) : tbufD1 =
+  (a).tbufD1__content
 
-logic f : unit -> int
+logic fliteral2 : t1
 
-logic f__function_guard : int, unit -> prop
+axiom fliteral_axiom2 : (tqtisFinite1(fliteral2) and
+  (tqtreal1(fliteral2) = 10.0))
 
-axiom f__post_axiom : in_range3(f(void))
+axiom limit__def_axiom : (limit = fliteral2)
 
  (* File "repr.adb", line 4, characters 0-0 *)
 goal WP_parameter_def :
-  (forall temp___159:int. (((temp___159 = f(void)) and
-  in_range3(temp___159)) -> (0 <= temp___159)))
+  (forall temp___159:int. (tqtisFinite1(limit) -> ((fliteral2 = limit) ->
+  (((temp___159 = f(void)) and in_range2(temp___159)) ->
+  (temp___159 <= 3)))))

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -158,9 +161,11 @@
   (assert (=> (<= (- 2147483648) 2147483647) (in_range1 i)))
 
 ;; H
-  (assert
-  (and (fp.leq (fp.neg (fp #b0 #b10001011 #b00000000000000000000000))
-  x) (fp.leq x (fp #b0 #b10001011 #b00000000000000000000000))))
+  (assert (fp.leq (fp.neg (fp #b0 #b10001011 #b00000000000000000000000))
+  x))
+
+;; H
+  (assert (fp.leq x (fp #b0 #b10001011 #b00000000000000000000000)))
 
 (assert
 ;; WP_parameter_def

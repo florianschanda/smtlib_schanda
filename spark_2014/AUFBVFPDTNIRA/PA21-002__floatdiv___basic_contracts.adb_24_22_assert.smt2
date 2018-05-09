@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -178,18 +181,21 @@
 
 ;; H
   (assert
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (of_int RNE
-                                                        numerator)))
+  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) ((_ to_fp 8 24) RNE (to_real
+  numerator))))
 
 ;; H
   (assert
-  (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (of_int RNE
-                                                        denominator)))
+  (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) ((_ to_fp 8 24) RNE (to_real
+  denominator))))
 
 ;; H
   (assert
-  (and (= o (fp.div RNE (of_int RNE numerator) (of_int RNE denominator)))
-  (fp.isFinite32 (fp.div RNE (of_int RNE numerator) (of_int RNE denominator)))))
+  (and
+  (= o (fp.div RNE ((_ to_fp 8 24) RNE (to_real numerator)) ((_ to_fp 8 24) RNE (to_real
+  denominator))))
+  (fp.isFinite32 (fp.div RNE ((_ to_fp 8 24) RNE (to_real numerator)) ((_ to_fp 8 24) RNE (to_real
+  denominator))))))
 
 ;; H
   (assert (= (mk_t__ref result) (mk_t__ref res)))
@@ -199,7 +205,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA21-002__floatdiv/gnatprove/basic_contracts.mlw", line 2649, characters 5-8
   (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) res1)))
 (check-sat)
 (exit)

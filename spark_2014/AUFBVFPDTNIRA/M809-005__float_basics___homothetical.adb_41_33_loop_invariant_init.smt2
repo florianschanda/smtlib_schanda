@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -126,7 +122,45 @@
   (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                                 (of_rep x))) )))
 
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
+
+(declare-fun adjust2triangle (Float32 Float32 Float32) Float32)
+
+(declare-fun adjust2triangle__function_guard (Float32 Float32 Float32
+  Float32) Bool)
+
+;; adjust2triangle__post_axiom
+  (assert
+  (forall ((d Float32) (kv Float32) (ka Float32))
+  (! (=>
+     (and
+     (and
+     (and (dynamic_invariant d true true true true) (dynamic_invariant kv
+     true true true true)) (dynamic_invariant ka true true true true))
+     (and
+     (and (not (fp.eq d (fp #b0 #b00000000 #b00000000000000000000000)))
+     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) kv))
+     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) ka)))
+     (let ((result (adjust2triangle d kv ka)))
+     (and
+     (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
+     (fp.leq result kv)) (dynamic_invariant result true false true true)))) :pattern (
+  (adjust2triangle d kv ka)) )))
+
 (declare-sort joint_index 0)
+
+(declare-fun joint_indexqtint (joint_index) Int)
+
+;; joint_index'axiom
+  (assert
+  (forall ((i joint_index))
+  (and (<= 1 (joint_indexqtint i)) (<= (joint_indexqtint i) 2))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -209,37 +243,6 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(define-fun dynamic_invariant ((temp___expr_60 Float32)
-  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
-  (temp___do_toplevel_58 Bool)
-  (temp___do_typ_inv_59 Bool)) Bool (=>
-                                    (or (= temp___is_init_56 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                    (fp.isFinite32 temp___expr_60)))
-
-(declare-fun adjust2triangle (Float32 Float32 Float32) Float32)
-
-(declare-fun adjust2triangle__function_guard (Float32 Float32 Float32
-  Float32) Bool)
-
-;; adjust2triangle__post_axiom
-  (assert
-  (forall ((d1 Float32) (kv1 Float32) (ka1 Float32))
-  (! (=>
-     (and
-     (and
-     (and (dynamic_invariant d1 true true true true) (dynamic_invariant kv1
-     true true true true)) (dynamic_invariant ka1 true true true true))
-     (and
-     (and (not (fp.eq d1 (fp #b0 #b00000000 #b00000000000000000000000)))
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) kv1))
-     (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) ka1)))
-     (let ((result (adjust2triangle d1 kv1 ka1)))
-     (and
-     (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (fp.leq result kv1)) (dynamic_invariant result true false true true)))) :pattern (
-  (adjust2triangle d1 kv1 ka1)) )))
-
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
@@ -247,6 +250,12 @@
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
 (declare-sort t11b 0)
+
+(declare-fun t11bqtint (t11b) Int)
+
+;; t11b'axiom
+  (assert
+  (forall ((i t11b)) (and (<= 1 (t11bqtint i)) (<= (t11bqtint i) 2))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
@@ -275,9 +284,9 @@
 
 (declare-fun homothetical__homothetical__kvp__aggregate_def (Float32) (Array Int float))
 
-(declare-fun temp___198 (Float32) (Array Int float))
+(declare-fun temp_____aggregate_def_198 (Float32) (Array Int float))
 
-(declare-fun temp___202 (Float32) (Array Int float))
+(declare-fun temp_____aggregate_def_202 (Float32) (Array Int float))
 
 ;; def_axiom
   (assert
@@ -308,14 +317,14 @@
   (forall ((temp___200 Float32))
   (=> (dynamic_invariant temp___200 true true true true)
   (forall ((temp___201 Int))
-  (= (to_rep (select (temp___198 temp___200) temp___201)) temp___200)))))
+  (= (to_rep (select (temp_____aggregate_def_198 temp___200) temp___201)) temp___200)))))
 
 ;; def_axiom
   (assert
   (forall ((temp___204 Float32))
   (=> (dynamic_invariant temp___204 true true true true)
   (forall ((temp___205 Int))
-  (= (to_rep (select (temp___202 temp___204) temp___205)) temp___204)))))
+  (= (to_rep (select (temp_____aggregate_def_202 temp___204) temp___205)) temp___204)))))
 
 (define-fun dynamic_invariant1 ((temp___expr_166 Int)
   (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)

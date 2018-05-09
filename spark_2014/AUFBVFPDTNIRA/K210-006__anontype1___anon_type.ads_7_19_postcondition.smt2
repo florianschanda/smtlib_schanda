@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -112,7 +115,7 @@
                                     (<= (- 2147483648) 2147483647)) (in_range
                                     temp___expr_18)))
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -139,6 +142,13 @@
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-sort tvar_outS 0)
+
+(declare-fun tvar_outSqtint (tvar_outS) Int)
+
+;; tvar_outS'axiom
+  (assert
+  (forall ((i tvar_outS))
+  (and (<= 0 (tvar_outSqtint i)) (<= (tvar_outSqtint i) 10))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -168,6 +178,13 @@
 
 (declare-sort taS 0)
 
+(declare-fun taSqtint (taS) Int)
+
+;; taS'axiom
+  (assert
+  (forall ((i taS))
+  (and (<= (- 10000) (taSqtint i)) (<= (taSqtint i) 10000))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 10000) x) (<= x 10000)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
@@ -194,6 +211,13 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-sort tbS 0)
+
+(declare-fun tbSqtint (tbS) Int)
+
+;; tbS'axiom
+  (assert
+  (forall ((i tbS))
+  (and (<= (- 10000) (tbSqtint i)) (<= (tbSqtint i) 10000))))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 10000) x) (<= x 10000)))
 
@@ -396,6 +420,13 @@
 
 (declare-sort tmy_array1D1 0)
 
+(declare-fun tmy_array1D1qtint (tmy_array1D1) Int)
+
+;; tmy_array1D1'axiom
+  (assert
+  (forall ((i tmy_array1D1))
+  (and (<= 1 (tmy_array1D1qtint i)) (<= (tmy_array1D1qtint i) 10))))
+
 (define-fun in_range5 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE6 (Int) us_image)
@@ -466,6 +497,13 @@
 
 (declare-sort tmy_array2D1 0)
 
+(declare-fun tmy_array2D1qtint (tmy_array2D1) Int)
+
+;; tmy_array2D1'axiom
+  (assert
+  (forall ((i tmy_array2D1))
+  (and (<= 1 (tmy_array2D1qtint i)) (<= (tmy_array2D1qtint i) 20))))
+
 (define-fun in_range6 ((x Int)) Bool (and (<= 1 x) (<= x 20)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
@@ -488,7 +526,7 @@
 
 (declare-fun anon_type__increment__ten_characters__aggregate_def (Int) (Array Int character))
 
-(declare-fun temp___212 (Float32) (Array Int float))
+(declare-fun temp_____aggregate_def_212 (Float32) (Array Int float))
 
 (define-fun dynamic_invariant4 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -520,7 +558,7 @@
   (forall ((temp___214 Float32))
   (=> (dynamic_invariant4 temp___214 true true true true)
   (forall ((temp___215 Int))
-  (= (to_rep2 (select (temp___212 temp___214) temp___215)) temp___214)))))
+  (= (to_rep2 (select (temp_____aggregate_def_212 temp___214) temp___215)) temp___214)))))
 
 (declare-const var_out Int)
 
@@ -613,7 +651,8 @@
 
 ;; H
   (assert
-  (= board1 (temp___212 (fp #b0 #b01111111 #b00000000000000000000000))))
+  (= board1 (temp_____aggregate_def_212
+            (fp #b0 #b01111111 #b00000000000000000000000))))
 
 ;; H
   (assert
@@ -672,7 +711,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/K210-006__anontype1/gnatprove/anon_type.mlw", line 3576, characters 5-8
   (not (= anon_type__increment__result4 (+ var_in 1))))
 (check-sat)
 (exit)

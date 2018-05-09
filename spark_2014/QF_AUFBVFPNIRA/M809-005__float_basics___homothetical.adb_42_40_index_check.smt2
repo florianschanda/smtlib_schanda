@@ -50,6 +50,14 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
@@ -61,14 +69,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
-
-(define-fun dynamic_invariant ((temp___expr_60 Float32)
-  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
-  (temp___do_toplevel_58 Bool)
-  (temp___do_typ_inv_59 Bool)) Bool (=>
-                                    (or (= temp___is_init_56 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                    (fp.isFinite32 temp___expr_60)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
@@ -97,7 +97,7 @@
 
 (declare-const j Int)
 
-(declare-const temp___193 Int)
+(declare-const temp___195 Int)
 
 (declare-const j1 Int)
 
@@ -249,6 +249,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "homothetical.adb", line 48, characters 0-0
-  (not (<= 1 j1)))
+  (not (<= j1 2)))
 (check-sat)
 (exit)

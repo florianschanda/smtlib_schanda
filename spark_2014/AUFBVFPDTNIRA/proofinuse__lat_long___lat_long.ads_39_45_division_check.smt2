@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,16 +74,20 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(declare-sort tfloat_with_approxB 0)
+(declare-fun olt (Float32 Float32) Bool)
 
-(declare-fun user_eq (tfloat_with_approxB tfloat_with_approxB) Bool)
+(declare-fun olt__function_guard (Bool Float32 Float32) Bool)
+
+(declare-sort float_with_approx 0)
+
+(declare-fun user_eq (float_with_approx float_with_approx) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Float32) us_image)
 
@@ -95,30 +95,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Float32)
 
-(declare-const dummy tfloat_with_approxB)
-
-(declare-datatypes ()
-((tfloat_with_approxB__ref
- (mk_tfloat_with_approxB__ref
- (tfloat_with_approxB__content tfloat_with_approxB)))))
-(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
-  (tfloat_with_approxB__content a))
-
-(declare-fun olt (Float32 Float32) Bool)
-
-(declare-fun olt__function_guard (Bool Float32 Float32) Bool)
-
-(declare-sort float_with_approx 0)
-
-(declare-fun user_eq1 (float_with_approx float_with_approx) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
-
-(declare-const dummy1 float_with_approx)
+(declare-const dummy float_with_approx)
 
 (declare-datatypes ()
 ((float_with_approx__ref
@@ -169,6 +146,29 @@
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true true) (= (cos1 x) (sin1 x))) :pattern (
   (cos1 x)) )))
+
+(declare-sort tfloat_with_approxB 0)
+
+(declare-fun user_eq1 (tfloat_with_approxB tfloat_with_approxB) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
+
+(declare-const dummy1 tfloat_with_approxB)
+
+(declare-datatypes ()
+((tfloat_with_approxB__ref
+ (mk_tfloat_with_approxB__ref
+ (tfloat_with_approxB__content tfloat_with_approxB)))))
+(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
+  (tfloat_with_approxB__content a))
+
+(declare-const r Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-sort latitude 0)
 
@@ -257,6 +257,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__lat_long__coordinates__lat latitude)(rec__lat_long__coordinates__long longitude)))))
+(define-fun us_split_fields_Lat__projection ((a us_split_fields)) latitude
+  (rec__lat_long__coordinates__lat a))
+
+(define-fun us_split_fields_Long__projection ((a us_split_fields)) longitude
+  (rec__lat_long__coordinates__long a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -345,11 +351,11 @@
 
 (declare-const source us_rep)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const destination us_rep)
 
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-sort float 0)
 
@@ -373,6 +379,9 @@
                                     (or (= temp___is_init_56 true)
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
+
+;; r__def_axiom
+  (assert (= r (fp #b0 #b10010101 #b10000100101000110101001)))
 
 (define-fun dynamic_invariant2 ((temp___expr_172 Float32)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
@@ -407,14 +416,26 @@
 (declare-const o Float32)
 
 ;; H
+  (assert (fp.isFinite32 r))
+
+;; H
+  (assert (= (fp #b0 #b10010101 #b10000100101000110101001) r))
+
+;; H
   (assert
-  (and
   (= o (cos1
-       (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
-  (and (fp.isFinite32 o)
-  (and
+       (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
+
+;; H
+  (assert (fp.isFinite32 o))
+
+;; H
+  (assert
   (= o (sin1
-       (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))
+       (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))))
+
+;; H
+  (assert
   (=>
   (and
   (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) (to_rep
@@ -423,7 +444,7 @@
                                                                  source))))
   (fp.leq (to_rep
           (rec__lat_long__coordinates__lat (us_split_fields1 source))) (fp #b0 #b10000101 #b00101100000000000000000)))
-  (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) o))))))
+  (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) o)))
 
 (assert
 ;; WP_parameter_def

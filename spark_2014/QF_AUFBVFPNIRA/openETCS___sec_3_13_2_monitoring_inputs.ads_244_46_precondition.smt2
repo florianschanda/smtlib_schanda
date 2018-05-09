@@ -58,12 +58,20 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_174)))
 
+(define-fun dynamic_invariant1 ((temp___expr_181 Float32)
+  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
+  (temp___do_toplevel_179 Bool)
+  (temp___do_typ_inv_180 Bool)) Bool (=>
+                                     (or (= temp___is_init_177 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_181)))
+
 (define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
 
-(define-fun dynamic_invariant1 ((temp___expr_195 Float32)
+(define-fun dynamic_invariant2 ((temp___expr_195 Float32)
   (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
   (temp___do_toplevel_193 Bool)
   (temp___do_typ_inv_194 Bool)) Bool (=>
@@ -73,7 +81,7 @@
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun dynamic_invariant2 ((temp___expr_202 Int)
+(define-fun dynamic_invariant3 ((temp___expr_202 Int)
   (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
   (temp___do_toplevel_200 Bool)
   (temp___do_typ_inv_201 Bool)) Bool (=>
@@ -81,21 +89,13 @@
                                      (<= 0 2147483647)) (in_range2
                                      temp___expr_202)))
 
-(define-fun dynamic_invariant3 ((temp___expr_209 Float32)
+(define-fun dynamic_invariant4 ((temp___expr_209 Float32)
   (temp___is_init_205 Bool) (temp___skip_constant_206 Bool)
   (temp___do_toplevel_207 Bool)
   (temp___do_typ_inv_208 Bool)) Bool (=>
                                      (or (= temp___is_init_205 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_209)))
-
-(define-fun dynamic_invariant4 ((temp___expr_181 Float32)
-  (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
-  (temp___do_toplevel_179 Bool)
-  (temp___do_typ_inv_180 Bool)) Bool (=>
-                                     (or (= temp___is_init_177 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_181)))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
@@ -317,24 +317,20 @@
   (assert (= t_brake_build_up (fp #b0 #b10000000 #b00000000000000000000000)))
 
 ;; t_brake_emergency_react__def_axiom
-  (assert
-  (= t_brake_emergency_react (fp #b0 #b01111111 #b00000000000000000000000)))
+  (assert (= t_brake_emergency_react t_brake_react))
 
 ;; t_brake_emergency_increase__def_axiom
-  (assert
-  (= t_brake_emergency_increase (fp #b0 #b10000000 #b00000000000000000000000)))
+  (assert (= t_brake_emergency_increase t_brake_increase))
 
 ;; t_brake_emergency__def_axiom
   (assert
   (= t_brake_emergency (fp #b0 #b10000000 #b00000000000000000000000)))
 
 ;; t_brake_service_react__def_axiom
-  (assert
-  (= t_brake_service_react (fp #b0 #b01111111 #b00000000000000000000000)))
+  (assert (= t_brake_service_react t_brake_react))
 
 ;; t_brake_service_increase__def_axiom
-  (assert
-  (= t_brake_service_increase (fp #b0 #b10000000 #b00000000000000000000000)))
+  (assert (= t_brake_service_increase t_brake_increase))
 
 ;; t_brake_service__def_axiom
   (assert (= t_brake_service (fp #b0 #b10000000 #b00000000000000000000000)))
@@ -346,6 +342,14 @@
 
 ;; maximum_train_speed__def_axiom
   (assert (= maximum_train_speed abstr))
+
+(declare-const maximum_valid_speed_km_per_h Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS22 Int)
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
 
 (define-fun dynamic_invariant7 ((temp___expr_216 Int)
   (temp___is_init_212 Bool) (temp___skip_constant_213 Bool)

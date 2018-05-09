@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -136,6 +132,15 @@
 ((us_split_fields
  (mk___split_fields
  (rec__foo__double_tests__test_record_1__rec__a ft)(rec__foo__double_tests__test_record_1__rec__b ft)(rec__foo__double_tests__test_record_1__rec__c ft)))))
+(define-fun us_split_fields_A__2__projection ((a us_split_fields)) ft
+  (rec__foo__double_tests__test_record_1__rec__a a))
+
+(define-fun us_split_fields_B__2__projection ((a us_split_fields)) ft
+  (rec__foo__double_tests__test_record_1__rec__b a))
+
+(define-fun us_split_fields_C__2__projection ((a us_split_fields)) ft
+  (rec__foo__double_tests__test_record_1__rec__c a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -247,12 +252,6 @@
 
 (declare-const y Float64)
 
-(declare-const r__split_fields ft)
-
-(declare-const r__split_fields1 ft)
-
-(declare-const r__split_fields2 ft)
-
 (declare-const o ft)
 
 (declare-const o1 ft)
@@ -261,73 +260,21 @@
 
 (declare-const o3 ft)
 
+(declare-const temp___269 ft)
+
 (declare-const o4 ft)
 
 (declare-const o5 ft)
 
-(declare-const temp___263 ft)
+(declare-const temp___271 ft)
 
-(declare-const temp___2631 ft)
+(declare-const r__split_fields ft)
 
-(declare-const temp___2632 ft)
-
-(declare-const o6 ft)
-
-(declare-const o7 ft)
-
-(declare-const o8 ft)
-
-(declare-const o9 ft)
-
-(declare-const temp___265 ft)
-
-(declare-const temp___2651 ft)
-
-(declare-const temp___2652 ft)
-
-(declare-const result ft)
-
-(declare-const result1 ft)
-
-(declare-const result2 ft)
-
-(declare-const r__split_fields3 ft)
-
-(declare-const r__split_fields4 ft)
-
-(declare-const r__split_fields5 ft)
-
-(declare-const result3 ft)
-
-(declare-const result4 ft)
-
-(declare-const result5 ft)
-
-(declare-const r__split_fields6 ft)
-
-(declare-const r__split_fields7 ft)
-
-(declare-const r__split_fields8 ft)
-
-(declare-const result6 Float64)
+(declare-const r__split_fields1 ft)
 
 (declare-const y1 Float64)
 
 (declare-const y2 Float64)
-
-(declare-const r__split_fields9 ft)
-
-(declare-const r__split_fields10 ft)
-
-(declare-const r__split_fields11 ft)
-
-(declare-const y3 Float64)
-
-(declare-const r__split_fields12 ft)
-
-(declare-const r__split_fields13 ft)
-
-(declare-const r__split_fields14 ft)
 
 ;; H
   (assert (fp.isFinite64 x))
@@ -346,113 +293,35 @@
   (assert (= (to_rep o1) x))
 
 ;; H
+  (assert (= o1 o3))
+
+;; H
   (assert
   (= (to_rep o2) (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
 
 ;; H
-  (assert (= o2 o3))
+  (assert (= temp___269 o3))
 
 ;; H
-  (assert (= o1 o4))
+  (assert (= temp___269 r__split_fields))
 
 ;; H
-  (assert (= o o5))
+  (assert (= (to_rep o4) (to_rep r__split_fields)))
 
 ;; H
-  (assert (= temp___263 o3))
+  (assert (= o4 o5))
 
 ;; H
-  (assert (= temp___2631 o4))
+  (assert (= temp___271 o5))
 
 ;; H
-  (assert (= temp___2632 o5))
+  (assert (= temp___271 r__split_fields1))
 
 ;; H
-  (assert (= result r__split_fields))
-
-;; H
-  (assert (= result1 r__split_fields1))
-
-;; H
-  (assert (= result2 r__split_fields2))
-
-;; H
-  (assert (= temp___263 r__split_fields3))
-
-;; H
-  (assert (= temp___2631 r__split_fields4))
-
-;; H
-  (assert (= temp___2632 r__split_fields5))
-
-;; H
-  (assert (= (to_rep o6) (to_rep r__split_fields4)))
-
-;; H
-  (assert (= o6 o7))
-
-;; H
-  (assert (= r__split_fields4 o8))
-
-;; H
-  (assert (= r__split_fields5 o9))
-
-;; H
-  (assert (= temp___265 o7))
-
-;; H
-  (assert (= temp___2651 o8))
-
-;; H
-  (assert (= temp___2652 o9))
-
-;; H
-  (assert (= result3 r__split_fields3))
-
-;; H
-  (assert (= result4 r__split_fields4))
-
-;; H
-  (assert (= result5 r__split_fields5))
-
-;; H
-  (assert (= temp___265 r__split_fields6))
-
-;; H
-  (assert (= temp___2651 r__split_fields7))
-
-;; H
-  (assert (= temp___2652 r__split_fields8))
-
-;; H
-  (assert (= result6 y))
-
-;; H
-  (assert (= y1 (to_rep r__split_fields6)))
-
-;; H
-  (assert (= r__split_fields9 r__split_fields6))
-
-;; H
-  (assert (= r__split_fields10 r__split_fields7))
-
-;; H
-  (assert (= r__split_fields11 r__split_fields8))
+  (assert (= y1 (to_rep r__split_fields1)))
 
 ;; H
   (assert (= y1 y2))
-
-;; H
-  (assert (= r__split_fields12 r__split_fields6))
-
-;; H
-  (assert (= r__split_fields13 r__split_fields7))
-
-;; H
-  (assert (= r__split_fields14 r__split_fields8))
-
-;; H
-  (assert (= y3 y1))
 
 (assert
 ;; WP_parameter_def

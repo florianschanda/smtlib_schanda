@@ -72,7 +72,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -559,45 +559,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -770,14 +770,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1113,6 +1113,15 @@
 ((us_split_fields
  (mk___split_fields
  (rec__foo__double_tests__test_record_1__rec__a ft)(rec__foo__double_tests__test_record_1__rec__b ft)(rec__foo__double_tests__test_record_1__rec__c ft)))))
+(define-fun us_split_fields_A__2__projection ((a us_split_fields)) ft
+  (rec__foo__double_tests__test_record_1__rec__a a))
+
+(define-fun us_split_fields_B__2__projection ((a us_split_fields)) ft
+  (rec__foo__double_tests__test_record_1__rec__b a))
+
+(define-fun us_split_fields_C__2__projection ((a us_split_fields)) ft
+  (rec__foo__double_tests__test_record_1__rec__c a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -1247,11 +1256,11 @@
 
 (declare-const o5 ft)
 
-(declare-const temp___263 ft)
+(declare-const temp___269 ft)
 
-(declare-const temp___2631 ft)
+(declare-const temp___2691 ft)
 
-(declare-const temp___2632 ft)
+(declare-const temp___2692 ft)
 
 (declare-const o6 ft)
 
@@ -1261,11 +1270,11 @@
 
 (declare-const o9 ft)
 
-(declare-const temp___265 ft)
+(declare-const temp___271 ft)
 
-(declare-const temp___2651 ft)
+(declare-const temp___2711 ft)
 
-(declare-const temp___2652 ft)
+(declare-const temp___2712 ft)
 
 (declare-const result ft)
 
@@ -1336,13 +1345,13 @@
   (assert (= o o5))
 
 ;; H
-  (assert (= temp___263 o3))
+  (assert (= temp___269 o3))
 
 ;; H
-  (assert (= temp___2631 o4))
+  (assert (= temp___2691 o4))
 
 ;; H
-  (assert (= temp___2632 o5))
+  (assert (= temp___2692 o5))
 
 ;; H
   (assert (= result r__split_fields))
@@ -1354,13 +1363,13 @@
   (assert (= result2 r__split_fields2))
 
 ;; H
-  (assert (= temp___263 r__split_fields3))
+  (assert (= temp___269 r__split_fields3))
 
 ;; H
-  (assert (= temp___2631 r__split_fields4))
+  (assert (= temp___2691 r__split_fields4))
 
 ;; H
-  (assert (= temp___2632 r__split_fields5))
+  (assert (= temp___2692 r__split_fields5))
 
 ;; H
   (assert (= (to_rep o6) (to_rep r__split_fields4)))
@@ -1375,13 +1384,13 @@
   (assert (= r__split_fields5 o9))
 
 ;; H
-  (assert (= temp___265 o7))
+  (assert (= temp___271 o7))
 
 ;; H
-  (assert (= temp___2651 o8))
+  (assert (= temp___2711 o8))
 
 ;; H
-  (assert (= temp___2652 o9))
+  (assert (= temp___2712 o9))
 
 ;; H
   (assert (= result3 r__split_fields3))
@@ -1393,13 +1402,13 @@
   (assert (= result5 r__split_fields5))
 
 ;; H
-  (assert (= temp___265 r__split_fields6))
+  (assert (= temp___271 r__split_fields6))
 
 ;; H
-  (assert (= temp___2651 r__split_fields7))
+  (assert (= temp___2711 r__split_fields7))
 
 ;; H
-  (assert (= temp___2652 r__split_fields8))
+  (assert (= temp___2712 r__split_fields8))
 
 ;; H
   (assert (= result6 y))

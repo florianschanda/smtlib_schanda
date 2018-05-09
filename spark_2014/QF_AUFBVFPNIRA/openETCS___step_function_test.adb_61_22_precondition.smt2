@@ -48,6 +48,14 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
+
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
@@ -153,14 +161,6 @@
 
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
-
-(define-fun dynamic_invariant ((temp___expr_60 Float32)
-  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
-  (temp___do_toplevel_58 Bool)
-  (temp___do_typ_inv_59 Bool)) Bool (=>
-                                    (or (= temp___is_init_56 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                    (fp.isFinite32 temp___expr_60)))
 
 (define-fun dynamic_invariant1 ((temp___expr_166 Int)
   (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
@@ -342,12 +342,16 @@
 ;; H
   (assert (= i1 0))
 
+;; H
+  (assert (= i2 1))
+
 (declare-const abstr Float32)
 
 ;; H
   (assert
-  (and (= o8 abstr)
-  (and (fp.isFinite32 o8) (ite (fp.leq o6 o7) (fp.eq o8 o6) (fp.eq o8 o7)))))
+  (and (= o12 abstr)
+  (and (fp.isFinite32 o12)
+  (ite (fp.leq o10 o11) (fp.eq o12 o10) (fp.eq o12 o11)))))
 
 (assert
 ;; WP_parameter_def

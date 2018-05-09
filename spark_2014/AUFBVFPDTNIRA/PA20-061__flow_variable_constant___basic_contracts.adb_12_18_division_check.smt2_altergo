@@ -899,6 +899,12 @@ type t__ref = { t__content : t
 
 type natural
 
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -954,6 +960,12 @@ function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
 type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
 
@@ -1027,8 +1039,7 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
 
 axiom den__def_axiom : (den = fliteral1)
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA20-061__flow_variable_constant/gnatprove/basic_contracts.mlw", line 2141, characters 5-8 *)
 goal WP_parameter_def : (in_range1(numerator) -> (in_range2(denominator) ->
   ((of_int(RNE, numerator) = num) -> (tqtisFinite(num) ->
-  (tqtisFinite(den) -> (lt(fliteral, fliteral1) ->
-  (not is_zero(fliteral1))))))))
+  (tqtisFinite(den) -> (lt(fliteral, den) -> (not is_zero(den))))))))

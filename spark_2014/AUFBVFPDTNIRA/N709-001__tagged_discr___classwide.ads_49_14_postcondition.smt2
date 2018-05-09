@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -105,7 +108,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep (integer) Int)
+(define-fun to_rep ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep (Int) integer)
 
@@ -167,6 +170,9 @@
 
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__classwide__t__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__classwide__t__y a))
 
 (define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))
@@ -273,10 +279,6 @@
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 us_rep)))))
 (define-fun t__ref___projection ((a t__ref1)) us_rep (t__content1 a))
 
-(define-fun default_initial_assumption ((temp___expr_159 us_rep)
-  (temp___skip_top_level_160 Bool)) Bool (= (attr__tag temp___expr_159)
-  us_tag))
-
 (declare-fun c_is_zero (us_rep) Bool)
 
 (declare-fun c_is_zero__function_guard (Bool us_rep) Bool)
@@ -288,6 +290,10 @@
 (declare-fun is_zero1 (Int us_rep) Bool)
 
 (declare-fun is_zero__function_guard1 (Bool Int us_rep) Bool)
+
+(define-fun default_initial_assumption ((temp___expr_159 us_rep)
+  (temp___skip_top_level_160 Bool)) Bool (= (attr__tag temp___expr_159)
+  us_tag))
 
 ;; c_is_zero__post_axiom
   (assert true)
@@ -390,11 +396,17 @@
 (define-fun us_split_fields_XX__projection ((a us_split_fields2)) integer
   (rec__classwide__u2__xx a))
 
+(define-fun us_split_fields_YY__projection ((a us_split_fields2)) float
+  (rec__classwide__u2__yy a))
+
 (define-fun us_split_fields_Z__2__projection ((a us_split_fields2)) Bool
   (rec__classwide__t__z1 a))
 
 (define-fun us_split_fields_X__2__projection ((a us_split_fields2)) integer
   (rec__classwide__t__x1 a))
+
+(define-fun us_split_fields_Y__2__projection ((a us_split_fields2)) float
+  (rec__classwide__t__y1 a))
 
 (define-fun us_split_fields___2__projection ((a us_split_fields2)) us_private
   (rec__ext__1 a))
@@ -812,14 +824,6 @@
 
 (declare-const v__split_fields11 us_private)
 
-(declare-const v__split_fields12 Bool)
-
-(declare-const v__split_fields13 integer)
-
-(declare-const v__split_fields14 float)
-
-(declare-const v__split_fields15 us_private)
-
 ;; H
   (assert (update__specific_post v__attr__tag
   (mk___split_fields v__split_fields4 v__split_fields5 v__split_fields6
@@ -831,25 +835,13 @@
   (assert (= v__split_fields8 v__split_fields4))
 
 ;; H
-  (assert (= v__split_fields9 v__split_fields5))
-
-;; H
   (assert (= v__split_fields10 v__split_fields6))
 
 ;; H
   (assert (= v__split_fields11 v__split_fields7))
 
 ;; H
-  (assert (= v__split_fields12 v__split_fields4))
-
-;; H
-  (assert (= v__split_fields13 v__split_fields5))
-
-;; H
-  (assert (= v__split_fields14 v__split_fields6))
-
-;; H
-  (assert (= v__split_fields15 v__split_fields7))
+  (assert (= v__split_fields9 v__split_fields5))
 
 (assert
 ;; WP_parameter_def

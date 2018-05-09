@@ -70,7 +70,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -556,45 +556,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -767,14 +767,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1098,6 +1098,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -1133,9 +1140,16 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-sort fibonacci_argument_type 0)
+(declare-sort natural 0)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
 
@@ -1143,9 +1157,47 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
 
-(declare-fun user_eq2 (fibonacci_argument_type fibonacci_argument_type) Bool)
+(declare-fun user_eq2 (natural natural) Bool)
 
-(declare-const dummy2 fibonacci_argument_type)
+(declare-const dummy2 natural)
+
+(declare-datatypes ()
+((natural__ref (mk_natural__ref (natural__content natural)))))
+(define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
+                                                                 a))
+
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range3
+                                    temp___expr_39)))
+
+(declare-fun fib (Int) Int)
+
+(declare-fun fib__function_guard (Int Int) Bool)
+
+(declare-sort fibonacci_argument_type 0)
+
+(declare-fun fibonacci_argument_typeqtint (fibonacci_argument_type) Int)
+
+;; fibonacci_argument_type'axiom
+  (assert
+  (forall ((i fibonacci_argument_type))
+  (and (<= 0 (fibonacci_argument_typeqtint i))
+  (<= (fibonacci_argument_typeqtint i) 46))))
+
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+
+(declare-fun user_eq3 (fibonacci_argument_type fibonacci_argument_type) Bool)
+
+(declare-const dummy3 fibonacci_argument_type)
 
 (declare-datatypes ()
 ((fibonacci_argument_type__ref
@@ -1154,53 +1206,23 @@
 (define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
   (fibonacci_argument_type__content a))
 
-(define-fun dynamic_invariant ((temp___expr_208 Int)
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
   (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
   (temp___do_toplevel_206 Bool)
   (temp___do_typ_inv_207 Bool)) Bool (=>
                                      (or (= temp___is_init_204 true)
-                                     (<= 0 46)) (in_range3 temp___expr_208)))
+                                     (<= 0 46)) (in_range4 temp___expr_208)))
+
+;; fib__def_axiom
+  (assert
+  (forall ((n Int))
+  (! (=> (dynamic_invariant1 n true true true true)
+     (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))) :pattern (
+  (fib n)) )))
 
 (declare-const n Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-sort natural 0)
-
-(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
-
-(declare-fun user_eq3 (natural natural) Bool)
-
-(declare-const dummy3 natural)
-
-(declare-datatypes ()
-((natural__ref (mk_natural__ref (natural__content natural)))))
-(define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
-                                                                 a))
-
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
-  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
-  (temp___do_typ_inv_38 Bool)) Bool (=>
-                                    (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range4
-                                    temp___expr_39)))
-
-(declare-fun fib (Int) Int)
-
-(declare-fun fib__function_guard (Int Int) Bool)
-
-;; fib__def_axiom
-  (assert
-  (forall ((n1 Int))
-  (! (=> (dynamic_invariant n1 true true true true)
-     (= (fib n1) (ite (or (= n1 0) (= n1 1)) n1
-                 (+ (fib (- n1 1)) (fib (- n1 2)))))) :pattern ((fib n1)) )))
 
 (declare-const fliteral1 t)
 
@@ -1266,7 +1288,7 @@
 (declare-const result1 Int)
 
 ;; H
-  (assert (in_range3 n))
+  (assert (in_range4 n))
 
 ;; H
   (assert (= number_theory__fib__result1 number_theory__fib__result2))
@@ -1280,13 +1302,13 @@
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (and (= o1 (- n 2)) (in_range3 (- n 2)))))
+  (and (= o1 (- n 2)) (in_range4 (- n 2)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
   (and (= o2 (fib o1))
-  (and (in_range4 o2)
+  (and (in_range3 o2)
   (and
   (= o2 (ite (or (= o1 0) (= o1 1)) o1 (+ (fib (- o1 1)) (fib (- o1 2)))))
   (lt (of_int RNE1 o2)
@@ -1295,13 +1317,13 @@
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
-  (and (= o (- n 1)) (in_range3 (- n 1)))))
+  (and (= o (- n 1)) (in_range4 (- n 1)))))
 
 ;; H
   (assert
   (=> (not (=> (not (= n 0)) (= n 1)))
   (and (= o3 (fib o))
-  (and (in_range4 o3)
+  (and (in_range3 o3)
   (and (= o3 (ite (or (= o 0) (= o 1)) o (+ (fib (- o 1)) (fib (- o 2)))))
   (lt (of_int RNE1 o3)
   (add RNE1 (div1 RNE1 (power fliteral2 o) fliteral3) fliteral)))))))
@@ -1332,7 +1354,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 2765, characters 5-8
   (not (lt (of_int RNE1 number_theory__fib__result4)
   (add RNE1 (div1 RNE1 (power fliteral2 n) fliteral3) fliteral))))
 (check-sat)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -114,6 +117,13 @@
                                                                  a))
 
 (declare-sort positive 0)
+
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
@@ -218,7 +228,7 @@
   (= (to_rep (select a temp___idx_91)) (to_rep
                                        (select b (+ (- b__first a__first) temp___idx_91)))))))))))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -343,49 +353,6 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-sort nonnegative_float 0)
-
-(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(declare-fun user_eq5 (nonnegative_float nonnegative_float) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Float32)
-
-(declare-const dummy5 nonnegative_float)
-
-(declare-datatypes ()
-((nonnegative_float__ref
- (mk_nonnegative_float__ref (nonnegative_float__content nonnegative_float)))))
-(define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float
-  (nonnegative_float__content a))
-
-(declare-fun to_rep2 (nonnegative_float) Float32)
-
-(declare-fun of_rep2 (Float32) nonnegative_float)
-
-;; inversion_axiom
-  (assert
-  (forall ((x nonnegative_float))
-  (! (= (of_rep2 (to_rep2 x)) x) :pattern ((to_rep2 x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x nonnegative_float)) (! (in_range4
-  (to_rep2 x)) :pattern ((to_rep2 x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=> (in_range4 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
-                                                              (of_rep2 x))) )))
-
 (declare-fun sin1 (Float32) Float32)
 
 (declare-fun sin__function_guard (Float32 Float32) Bool)
@@ -422,7 +389,7 @@
      (fp.eq result (fp #b0 #b01111111 #b00000000000000000000000))))
      (dynamic_invariant result true false true true)))) :pattern ((cos1 x)) )))
 
-(declare-fun arctan (Float32 Float32) Float32)
+(declare-fun arctan1 (Float32 Float32) Float32)
 
 (declare-fun arctan__function_guard (Float32 Float32 Float32) Bool)
 
@@ -435,31 +402,31 @@
      true true true))
      (or (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
      (not (fp.eq y (fp #b0 #b00000000 #b00000000000000000000000)))))
-     (let ((result (arctan y x)))
+     (let ((result (arctan1 y x)))
      (and
      (=>
      (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) x)
      (fp.eq y (fp #b0 #b00000000 #b00000000000000000000000)))
      (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))
-     (dynamic_invariant result true false true true)))) :pattern ((arctan y
+     (dynamic_invariant result true false true true)))) :pattern ((arctan1 y
                                                                   x)) )))
 
 (declare-sort normalized2pi 0)
 
-(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
+(define-fun in_range4 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-fun user_eq6 (normalized2pi normalized2pi) Bool)
+(declare-fun user_eq5 (normalized2pi normalized2pi) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE6 (Float32) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Float32)
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Float32)
 
-(declare-const dummy6 normalized2pi)
+(declare-const dummy5 normalized2pi)
 
 (declare-datatypes ()
 ((normalized2pi__ref
@@ -467,29 +434,32 @@
 (define-fun normalized2pi__ref___projection ((a normalized2pi__ref)) normalized2pi
   (normalized2pi__content a))
 
-(declare-fun to_rep3 (normalized2pi) Float32)
+(declare-fun to_rep2 (normalized2pi) Float32)
 
-(declare-fun of_rep3 (Float32) normalized2pi)
+(declare-fun of_rep2 (Float32) normalized2pi)
 
 ;; inversion_axiom
   (assert
   (forall ((x normalized2pi))
-  (! (= (of_rep3 (to_rep3 x)) x) :pattern ((to_rep3 x)) )))
+  (! (= (of_rep2 (to_rep2 x)) x) :pattern ((to_rep2 x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x normalized2pi)) (! (in_range5
-  (to_rep3 x)) :pattern ((to_rep3 x)) )))
+  (forall ((x normalized2pi)) (! (in_range4
+  (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (in_range5 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
-                                                              (of_rep3 x))) )))
+  (! (=> (in_range4 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+                                                              (of_rep2 x))) )))
 
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__spaces__angles__angle__theta normalized2pi)))))
+(define-fun us_split_fields_Theta__projection ((a us_split_fields)) normalized2pi
+  (rec__spaces__angles__angle__theta a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -502,9 +472,9 @@
                                                              a))
 
 (define-fun bool_eq2 ((a us_rep)
-  (b us_rep)) Bool (ite (= (to_rep3
+  (b us_rep)) Bool (ite (= (to_rep2
                            (rec__spaces__angles__angle__theta
-                           (us_split_fields1 a))) (to_rep3
+                           (us_split_fields1 a))) (to_rep2
                                                   (rec__spaces__angles__angle__theta
                                                   (us_split_fields1 b))))
                    true false))
@@ -545,9 +515,9 @@
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
 
-(declare-fun user_eq7 (us_rep us_rep) Bool)
+(declare-fun user_eq6 (us_rep us_rep) Bool)
 
-(declare-const dummy7 us_rep)
+(declare-const dummy6 us_rep)
 
 (declare-datatypes () ((angle__ref (mk_angle__ref (angle__content us_rep)))))
 (define-fun angle__ref___projection ((a angle__ref)) us_rep (angle__content
@@ -570,10 +540,56 @@
 
 (declare-fun print__function_guard (us_t us_rep) Bool)
 
+(declare-sort nonnegative_float 0)
+
+(define-fun in_range5 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(declare-fun user_eq7 (nonnegative_float nonnegative_float) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE6 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check6 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE6 (us_image) Float32)
+
+(declare-const dummy7 nonnegative_float)
+
+(declare-datatypes ()
+((nonnegative_float__ref
+ (mk_nonnegative_float__ref (nonnegative_float__content nonnegative_float)))))
+(define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float
+  (nonnegative_float__content a))
+
+(declare-fun to_rep3 (nonnegative_float) Float32)
+
+(declare-fun of_rep3 (Float32) nonnegative_float)
+
+;; inversion_axiom
+  (assert
+  (forall ((x nonnegative_float))
+  (! (= (of_rep3 (to_rep3 x)) x) :pattern ((to_rep3 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x nonnegative_float)) (! (in_range5
+  (to_rep3 x)) :pattern ((to_rep3 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (in_range5 x) (= (to_rep3 (of_rep3 x)) x)) :pattern ((to_rep3
+                                                              (of_rep3 x))) )))
+
 (declare-datatypes ()
 ((us_split_fields2
  (mk___split_fields1
  (rec__algorithm__laser_scan_data__first nonnegative_float)(rec__algorithm__laser_scan_data__second us_rep)))))
+(define-fun us_split_fields_first__projection ((a us_split_fields2)) nonnegative_float
+  (rec__algorithm__laser_scan_data__first a))
+
 (define-fun us_split_fields_second__projection ((a us_split_fields2)) us_rep
   (rec__algorithm__laser_scan_data__second a))
 
@@ -590,9 +606,9 @@
 
 (define-fun bool_eq3 ((a us_rep1)
   (b us_rep1)) Bool (ite (and
-                         (= (to_rep2
+                         (= (to_rep3
                             (rec__algorithm__laser_scan_data__first
-                            (us_split_fields3 a))) (to_rep2
+                            (us_split_fields3 a))) (to_rep3
                                                    (rec__algorithm__laser_scan_data__first
                                                    (us_split_fields3 b))))
                          (= (bool_eq2
@@ -740,107 +756,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-fun temp___String_Literal_852 (tuple0) (Array Int character))
-
-;; temp___String_Literal_852__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 2)) 32))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 3)) 70))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 4)) 105))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 5)) 108))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 6)) 116))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 7)) 101))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 8)) 114))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 9)) 58))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 10)) 32))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 11)) 111))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 12)) 98))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 13)) 115))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 14)) 116))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 15)) 97))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 16)) 99))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 17)) 108))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 18)) 101))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 19)) 32))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 20)) 97))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 21)) 116))
-     (= (to_rep (select (temp___String_Literal_852 us_void_param) 22)) 32)) :pattern (
-  (temp___String_Literal_852 us_void_param)) )))
-
-(declare-fun temp___String_Literal_853 (tuple0) (Array Int character))
-
-;; temp___String_Literal_853__def_axiom
-  (assert
-  (forall ((us_void_param tuple0))
-  (! (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (and
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 1)) 32)
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 2)) 105))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 3)) 110))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 5)) 102))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 6)) 114))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 7)) 111))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 8)) 110))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 9)) 116))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 10)) 32))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 11)) 114))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 12)) 101))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 13)) 99))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 14)) 116))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 15)) 97))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 16)) 110))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 17)) 103))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 18)) 108))
-     (= (to_rep (select (temp___String_Literal_853 us_void_param) 19)) 101)) :pattern (
-  (temp___String_Literal_853 us_void_param)) )))
-
 (declare-fun temp___String_Literal_854 (tuple0) (Array Int character))
 
 ;; temp___String_Literal_854__def_axiom
   (assert
   (forall ((us_void_param tuple0))
   (! (and
-     (and
      (and
      (and
      (and
@@ -871,19 +792,18 @@
      (= (to_rep (select (temp___String_Literal_854 us_void_param) 8)) 114))
      (= (to_rep (select (temp___String_Literal_854 us_void_param) 9)) 58))
      (= (to_rep (select (temp___String_Literal_854 us_void_param) 10)) 32))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 11)) 32))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 12)) 111))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 13)) 98))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 14)) 115))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 15)) 116))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 16)) 97))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 17)) 99))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 18)) 108))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 19)) 101))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 20)) 32))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 21)) 97))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 22)) 116))
-     (= (to_rep (select (temp___String_Literal_854 us_void_param) 23)) 32)) :pattern (
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 11)) 111))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 12)) 98))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 13)) 115))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 14)) 116))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 15)) 97))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 16)) 99))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 17)) 108))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 18)) 101))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 19)) 32))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 20)) 97))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 21)) 116))
+     (= (to_rep (select (temp___String_Literal_854 us_void_param) 22)) 32)) :pattern (
   (temp___String_Literal_854 us_void_param)) )))
 
 (declare-fun temp___String_Literal_855 (tuple0) (Array Int character))
@@ -909,28 +829,124 @@
      (and
      (and
      (and
-     (and
      (= (to_rep (select (temp___String_Literal_855 us_void_param) 1)) 32)
      (= (to_rep (select (temp___String_Literal_855 us_void_param) 2)) 105))
      (= (to_rep (select (temp___String_Literal_855 us_void_param) 3)) 110))
      (= (to_rep (select (temp___String_Literal_855 us_void_param) 4)) 32))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 5)) 114))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 6)) 101))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 7)) 97))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 8)) 114))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 9)) 32))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 10)) 115))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 11)) 101))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 12)) 109))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 13)) 105))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 14)) 45))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 15)) 99))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 16)) 105))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 17)) 114))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 18)) 99))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 19)) 108))
-     (= (to_rep (select (temp___String_Literal_855 us_void_param) 20)) 101)) :pattern (
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 5)) 102))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 6)) 114))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 7)) 111))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 8)) 110))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 9)) 116))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 10)) 32))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 11)) 114))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 12)) 101))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 13)) 99))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 14)) 116))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 15)) 97))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 16)) 110))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 17)) 103))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 18)) 108))
+     (= (to_rep (select (temp___String_Literal_855 us_void_param) 19)) 101)) :pattern (
   (temp___String_Literal_855 us_void_param)) )))
+
+(declare-fun temp___String_Literal_856 (tuple0) (Array Int character))
+
+;; temp___String_Literal_856__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 2)) 32))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 3)) 70))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 4)) 105))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 5)) 108))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 6)) 116))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 7)) 101))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 8)) 114))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 9)) 58))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 10)) 32))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 11)) 32))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 12)) 111))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 13)) 98))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 14)) 115))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 15)) 116))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 16)) 97))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 17)) 99))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 18)) 108))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 19)) 101))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 20)) 32))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 21)) 97))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 22)) 116))
+     (= (to_rep (select (temp___String_Literal_856 us_void_param) 23)) 32)) :pattern (
+  (temp___String_Literal_856 us_void_param)) )))
+
+(declare-fun temp___String_Literal_857 (tuple0) (Array Int character))
+
+;; temp___String_Literal_857__def_axiom
+  (assert
+  (forall ((us_void_param tuple0))
+  (! (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (and
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 1)) 32)
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 2)) 105))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 3)) 110))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 4)) 32))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 5)) 114))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 6)) 101))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 7)) 97))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 8)) 114))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 9)) 32))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 10)) 115))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 11)) 101))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 12)) 109))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 13)) 105))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 14)) 45))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 15)) 99))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 16)) 105))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 17)) 114))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 18)) 99))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 19)) 108))
+     (= (to_rep (select (temp___String_Literal_857 us_void_param) 20)) 101)) :pattern (
+  (temp___String_Literal_857 us_void_param)) )))
 
 (define-fun dynamic_invariant2 ((temp___expr_46 Int) (temp___is_init_42 Bool)
   (temp___skip_constant_43 Bool) (temp___do_toplevel_44 Bool)
@@ -958,7 +974,7 @@
   (temp___do_typ_inv_169 Bool)) Bool (=>
                                      (or (= temp___is_init_166 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range4 temp___expr_170)))
+                                     (in_range5 temp___expr_170)))
 
 (define-fun dynamic_invariant6 ((temp___expr_198 Float32)
   (temp___is_init_194 Bool) (temp___skip_constant_195 Bool)
@@ -966,9 +982,7 @@
   (temp___do_typ_inv_197 Bool)) Bool (=>
                                      (or (= temp___is_init_194 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b10000001 #b10010010000111111011011)))
-                                     (in_range5 temp___expr_198)))
-
-(declare-const i Int)
+                                     (in_range4 temp___expr_198)))
 
 (declare-const algorithm__isfilterclear__B_2__deltaangle__assume Float32)
 
@@ -976,15 +990,13 @@
 
 (declare-const o1 Float32)
 
-(declare-const result Int)
+(declare-const i Int)
 
 (declare-const i1 Int)
 
-(declare-const i2 Int)
-
 (declare-const d Float32)
 
-(declare-const result1 Bool)
+(declare-const result Bool)
 
 ;; H
   (assert (fp.isFinite32 width))
@@ -993,10 +1005,13 @@
   (assert (fp.isFinite32 forwardlength))
 
 ;; H
-  (assert (= result i))
+  (assert (= i 1))
 
 ;; H
-  (assert (= i1 1))
+  (assert (<= 1 i))
+
+;; H
+  (assert (<= i 1000))
 
 ;; H
   (assert (<= 1 i1))
@@ -1005,20 +1020,23 @@
   (assert (<= i1 1000))
 
 ;; H
-  (assert (and (<= 1 i2) (<= i2 1000)))
-
-;; H
   (assert
-  (and
   (= algorithm__isfilterclear__B_2__deltaangle__assume (aldiff
                                                        (rec__algorithm__laser_scan_data__second
                                                        (us_split_fields3
                                                        (select scans
-                                                       i2))) testbearing))
-  (and (fp.isFinite32 algorithm__isfilterclear__B_2__deltaangle__assume)
-  (and
-  (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011)) algorithm__isfilterclear__B_2__deltaangle__assume)
-  (fp.leq algorithm__isfilterclear__B_2__deltaangle__assume (fp #b0 #b10000000 #b10010010000111111011011))))))
+                                                       i1))) testbearing)))
+
+;; H
+  (assert (fp.isFinite32 algorithm__isfilterclear__B_2__deltaangle__assume))
+
+;; H
+  (assert
+  (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011)) algorithm__isfilterclear__B_2__deltaangle__assume))
+
+;; H
+  (assert
+  (fp.leq algorithm__isfilterclear__B_2__deltaangle__assume (fp #b0 #b10000000 #b10010010000111111011011)))
 
 ;; H
   (assert (= algorithm__isfilterclear__B_2__deltaangle__assume deltaangle))
@@ -1044,36 +1062,48 @@
 
 ;; H
   (assert
-  (and
-  (= o (arctan
+  (= o (arctan1
        (fp.div RNE (fp.abs width) (fp #b0 #b10000000 #b00000000000000000000000))
-       (fp.abs forwardlength)))
-  (and (fp.isFinite32 o)
+       (fp.abs forwardlength))))
+
+;; H
+  (assert (fp.isFinite32 o))
+
+;; H
+  (assert
   (=>
   (and
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (fp.abs forwardlength))
   (fp.eq (fp.div RNE (fp.abs width) (fp #b0 #b10000000 #b00000000000000000000000)) (fp #b0 #b00000000 #b00000000000000000000000)))
-  (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000))))))
+  (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
-  (assert (= result1 (ite (fp.lt (fp.abs deltaangle) o) true false)))
+  (assert (= result (ite (fp.lt (fp.abs deltaangle) o) true false)))
 
 ;; H
-  (assert (not (= result1 true)))
+  (assert (not (= result true)))
+
+;; H
+  (assert (= o1 (sin1 deltaangle)))
+
+;; H
+  (assert (fp.isFinite32 o1))
+
+;; H
+  (assert (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
+  o1))
+
+;; H
+  (assert (fp.leq o1 (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
   (assert
-  (and (= o1 (sin1 deltaangle))
-  (and (fp.isFinite32 o1)
-  (and
-  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-  o1) (fp.leq o1 (fp #b0 #b01111111 #b00000000000000000000000)))
   (=> (fp.eq deltaangle (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o1 (fp #b0 #b00000000 #b00000000000000000000000)))))))
+  (fp.eq o1 (fp #b0 #b00000000 #b00000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "algorithm.ads", line 68, characters 0-0
-  (not (not (fp.isZero (fp #b0 #b10000000 #b00000000000000000000000)))))
+  (not (not (fp.isZero o1))))
 (check-sat)
 (exit)

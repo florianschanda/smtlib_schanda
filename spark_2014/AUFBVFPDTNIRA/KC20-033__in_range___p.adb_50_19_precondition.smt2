@@ -10,6 +10,8 @@
 ;;; SMT-LIB2: real arithmetic
 (define-fun fp.isFinite32 ((x Float32)) Bool (not (or (fp.isInfinite x) (fp.isNaN x))))
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
+(define-fun __cdiv ((x Int) (y Int)) Int (ite (>= x 0) (div x y) (- (div (- x) y))))
+(define-fun __cmod ((x Int) (y Int)) Int (ite (>= x 0) (mod x y) (- (mod (- x) y))))
 (declare-datatypes () ((tuple0 (Tuple0))))
 (declare-sort us_private 0)
 
@@ -52,10 +54,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +76,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +84,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort natural 0)
+
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -134,6 +139,21 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
+(declare-fun ident (Int) Int)
+
+(declare-fun ident__function_guard (Int Int) Bool)
+
+;; ident__post_axiom
+  (assert
+  (forall ((n Int))
+  (! (=>
+     (and (dynamic_invariant n true true true true) (and (<= 1 n) (<= n 10)))
+     (dynamic_invariant (ident n) true false true true)) :pattern ((ident n)) )))
+
+(declare-fun ident__2 (Int) Int)
+
+(declare-fun ident__2__function_guard (Int Int) Bool)
+
 (declare-sort color 0)
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2)))
@@ -158,81 +178,33 @@
                                      (or (= temp___is_init_196 true)
                                      (<= 0 2)) (in_range1 temp___expr_200)))
 
+;; ident__2__post_axiom
+  (assert
+  (forall ((c Int))
+  (! (=>
+     (and (dynamic_invariant2 c true true true true) (and (<= 0 c) (<= c 1)))
+     (dynamic_invariant2 (ident__2 c) true false true true)) :pattern (
+  (ident__2 c)) )))
+
 (declare-sort volt 0)
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2040)))
 
-(declare-fun div1 (Int Int) Int)
-
-(declare-fun mod1 (Int Int) Int)
-
-;; Div_mod
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (not (= y 0)) (= x (+ (* y (div1 x y)) (mod1 x y))))))
-
-;; Div_bound
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (and (<= 0 x) (< 0 y)) (and (<= 0 (div1 x y)) (<= (div1 x y) x)))))
-
-;; Mod_bound
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (not (= y 0)) (and (< (- (abs y)) (mod1 x y)) (< (mod1 x y) (abs y))))))
-
-;; Div_sign_pos
-  (assert
-  (forall ((x Int) (y Int)) (=> (and (<= 0 x) (< 0 y)) (<= 0 (div1 x y)))))
-
-;; Div_sign_neg
-  (assert
-  (forall ((x Int) (y Int)) (=> (and (<= x 0) (< 0 y)) (<= (div1 x y) 0))))
-
-;; Mod_sign_pos
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (and (<= 0 x) (not (= y 0))) (<= 0 (mod1 x y)))))
-
-;; Mod_sign_neg
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (and (<= x 0) (not (= y 0))) (<= (mod1 x y) 0))))
-
-;; Rounds_toward_zero
-  (assert
-  (forall ((x Int) (y Int))
-  (=> (not (= y 0)) (<= (abs (* (div1 x y) y)) (abs x)))))
-
-;; Div_1
-  (assert (forall ((x Int)) (= (div1 x 1) x)))
-
-;; Mod_1
-  (assert (forall ((x Int)) (= (mod1 x 1) 0)))
-
-;; Div_inf
-  (assert
-  (forall ((x Int) (y Int)) (=> (and (<= 0 x) (< x y)) (= (div1 x y) 0))))
-
-;; Mod_inf
-  (assert
-  (forall ((x Int) (y Int)) (=> (and (<= 0 x) (< x y)) (= (mod1 x y) x))))
-
-;; Div_mult
-  (assert
-  (forall ((x Int) (y Int) (z Int))
-  (! (=> (and (< 0 x) (and (<= 0 y) (<= 0 z)))
-     (= (div1 (+ (* x y) z) x) (+ y (div1 z x)))) :pattern ((div1
-                                                            (+ (* x y) z) x)) )))
-
-;; Mod_mult
-  (assert
-  (forall ((x Int) (y Int) (z Int))
-  (! (=> (and (< 0 x) (and (<= 0 y) (<= 0 z)))
-     (= (mod1 (+ (* x y) z) x) (mod1 z x))) :pattern ((mod1 (+ (* x y) z) x)) )))
-
-(define-fun mod2 ((x Int)
+(define-fun mod1 ((x Int)
   (y Int)) Int (ite (< 0 y) (mod x y) (+ (mod x y) y)))
+
+(define-fun pos_div_relation ((res Int) (num Int)
+  (den Int)) Bool (let ((exact (__cdiv num den)))
+                  (ite (= num 0) (= res 0)
+                  (ite (= num (* exact den)) (= res exact)
+                  (and (<= exact res) (<= res (+ exact 1)))))))
+
+(define-fun pos_div_relation_rna ((res Int) (num Int)
+  (den Int)) Bool (let ((exact (__cdiv num den)))
+                  (ite (= num 0) (= res 0)
+                  (ite (= num (* exact den)) (= res exact)
+                  (ite (< (- num (* exact den)) (- (* (+ exact 1) den) num))
+                  (= res exact) (= res (+ exact 1)))))))
 
 (declare-const dummy3 volt)
 
@@ -247,45 +219,6 @@
 (declare-fun of_fixed (Int) volt)
 
 (declare-fun user_eq3 (volt volt) Bool)
-
-(define-fun pos_div_relation ((res Int) (num Int)
-  (den Int)) Bool (let ((exact (div1 num den)))
-                  (ite (= num 0) (= res 0)
-                  (ite (= num (* exact den)) (= res exact)
-                  (and (<= exact res) (<= res (+ exact 1)))))))
-
-(define-fun pos_div_relation_rna ((res Int) (num Int)
-  (den Int)) Bool (let ((exact (div1 num den)))
-                  (ite (= num 0) (= res 0)
-                  (ite (= num (* exact den)) (= res exact)
-                  (ite (< (- num (* exact den)) (- (* (+ exact 1) den) num))
-                  (= res exact) (= res (+ exact 1)))))))
-
-(declare-fun fxp_mult (Int Int) Int)
-
-;; fxp_mult_def
-  (assert
-  (forall ((x Int))
-  (forall ((y Int))
-  (! (ite (or (= x 0) (= y 0)) (= (fxp_mult x y) 0)
-     (ite (or (and (< 0 x) (< 0 y)) (and (< x 0) (< y 0))) (pos_div_relation
-     (fxp_mult x y) (* x y) 8) (pos_div_relation (- (fxp_mult x y))
-     (- (* x y)) 8))) :pattern ((fxp_mult x y)) ))))
-
-(declare-fun fxp_div (Int Int) Int)
-
-;; fxp_div_def
-  (assert
-  (forall ((x Int))
-  (forall ((y Int))
-  (! (ite (= x 0) (= (fxp_div x y) 0)
-     (ite (and (< 0 x) (< 0 y)) (pos_div_relation (fxp_div x y) (* x 8) y)
-     (ite (and (< x 0) (< y 0)) (pos_div_relation (fxp_div x y) (* (- x) 8)
-     (- y))
-     (ite (and (< x 0) (< 0 y)) (pos_div_relation (- (fxp_div x y))
-     (* (- x) 8) y)
-     (=> (and (< 0 x) (< y 0)) (pos_div_relation (- (fxp_div x y)) (* x 8)
-     (- y))))))) :pattern ((fxp_div x y)) ))))
 
 (declare-fun fxp_div_int (Int Int) Int)
 
@@ -319,16 +252,23 @@
      (- (fxp_div_result_int x y)) x (- y))))))) :pattern ((fxp_div_result_int
                                                           x y)) ))))
 
-(declare-fun to_int2 (Int) Int)
+(declare-fun to_int1 (Int) Int)
 
 ;; to_int_def
   (assert
   (forall ((x Int))
-  (! (ite (= x 0) (= (to_int2 x) 0)
-     (ite (< 0 x) (pos_div_relation (to_int2 x) x 8) (pos_div_relation
-     (- (to_int2 x)) (- x) 8))) :pattern ((to_int2 x)) )))
+  (! (ite (= x 0) (= (to_int1 x) 0)
+     (ite (< 0 x) (pos_div_relation (to_int1 x) (* x 1) 8) (pos_div_relation
+     (- (to_int1 x)) (* (- x) 1) 8))) :pattern ((to_int1 x)) )))
 
-(declare-fun of_real (Real) Int)
+(declare-fun of_int (Int) Int)
+
+;; of_int_def
+  (assert
+  (forall ((x Int))
+  (! (ite (= x 0) (= (of_int x) 0)
+     (ite (< 0 x) (pos_div_relation (of_int x) (* x 8) 1) (pos_div_relation
+     (- (of_int x)) (* (- x) 8) 1))) :pattern ((of_int x)) )))
 
 ;; inversion_axiom
   (assert
@@ -346,6 +286,13 @@
 
 (declare-datatypes () ((volt__ref (mk_volt__ref (volt__content volt)))))
 (define-fun volt__ref___projection ((a volt__ref)) volt (volt__content a))
+
+(declare-fun ident__3 (volt) volt)
+
+(declare-fun ident__3__function_guard (volt volt) Bool)
+
+;; ident__3__post_axiom
+  (assert true)
 
 (declare-sort money 0)
 
@@ -366,46 +313,6 @@
 
 (declare-fun user_eq4 (money money) Bool)
 
-(define-fun pos_div_relation1 ((res Int) (num Int)
-  (den Int)) Bool (let ((exact (div1 num den)))
-                  (ite (= num 0) (= res 0)
-                  (ite (= num (* exact den)) (= res exact)
-                  (and (<= exact res) (<= res (+ exact 1)))))))
-
-(define-fun pos_div_relation_rna1 ((res Int) (num Int)
-  (den Int)) Bool (let ((exact (div1 num den)))
-                  (ite (= num 0) (= res 0)
-                  (ite (= num (* exact den)) (= res exact)
-                  (ite (< (- num (* exact den)) (- (* (+ exact 1) den) num))
-                  (= res exact) (= res (+ exact 1)))))))
-
-(declare-fun fxp_mult1 (Int Int) Int)
-
-;; fxp_mult_def
-  (assert
-  (forall ((x Int))
-  (forall ((y Int))
-  (! (ite (or (= x 0) (= y 0)) (= (fxp_mult1 x y) 0)
-     (ite (or (and (< 0 x) (< 0 y)) (and (< x 0) (< y 0))) (pos_div_relation1
-     (fxp_mult1 x y) (* x y) 100) (pos_div_relation1 (- (fxp_mult1 x y))
-     (- (* x y)) 100))) :pattern ((fxp_mult1 x y)) ))))
-
-(declare-fun fxp_div1 (Int Int) Int)
-
-;; fxp_div_def
-  (assert
-  (forall ((x Int))
-  (forall ((y Int))
-  (! (ite (= x 0) (= (fxp_div1 x y) 0)
-     (ite (and (< 0 x) (< 0 y)) (pos_div_relation1 (fxp_div1 x y) (* x 100)
-     y)
-     (ite (and (< x 0) (< y 0)) (pos_div_relation1 (fxp_div1 x y)
-     (* (- x) 100) (- y))
-     (ite (and (< x 0) (< 0 y)) (pos_div_relation1 (- (fxp_div1 x y))
-     (* (- x) 100) y)
-     (=> (and (< 0 x) (< y 0)) (pos_div_relation1 (- (fxp_div1 x y))
-     (* x 100) (- y))))))) :pattern ((fxp_div1 x y)) ))))
-
 (declare-fun fxp_div_int1 (Int Int) Int)
 
 ;; fxp_div_int_def
@@ -413,12 +320,12 @@
   (forall ((x Int))
   (forall ((y Int))
   (! (ite (= x 0) (= (fxp_div_int1 x y) 0)
-     (ite (and (< 0 x) (< 0 y)) (pos_div_relation1 (fxp_div_int1 x y) x y)
-     (ite (and (< x 0) (< y 0)) (pos_div_relation1 (fxp_div_int1 x y) (- x)
+     (ite (and (< 0 x) (< 0 y)) (pos_div_relation (fxp_div_int1 x y) x y)
+     (ite (and (< x 0) (< y 0)) (pos_div_relation (fxp_div_int1 x y) (- x)
      (- y))
-     (ite (and (< x 0) (< 0 y)) (pos_div_relation1 (- (fxp_div_int1 x y))
+     (ite (and (< x 0) (< 0 y)) (pos_div_relation (- (fxp_div_int1 x y))
      (- x) y)
-     (=> (and (< 0 x) (< y 0)) (pos_div_relation1 (- (fxp_div_int1 x y)) x
+     (=> (and (< 0 x) (< y 0)) (pos_div_relation (- (fxp_div_int1 x y)) x
      (- y))))))) :pattern ((fxp_div_int1 x y)) ))))
 
 (declare-fun fxp_div_result_int1 (Int Int) Int)
@@ -428,26 +335,35 @@
   (forall ((x Int))
   (forall ((y Int))
   (! (ite (= x 0) (= (fxp_div_result_int1 x y) 0)
-     (ite (and (< 0 x) (< 0 y)) (pos_div_relation_rna1
+     (ite (and (< 0 x) (< 0 y)) (pos_div_relation_rna
      (fxp_div_result_int1 x y) x y)
-     (ite (and (< x 0) (< y 0)) (pos_div_relation_rna1
+     (ite (and (< x 0) (< y 0)) (pos_div_relation_rna
      (fxp_div_result_int1 x y) (- x) (- y))
-     (ite (and (< x 0) (< 0 y)) (pos_div_relation_rna1
+     (ite (and (< x 0) (< 0 y)) (pos_div_relation_rna
      (- (fxp_div_result_int1 x y)) (- x) y)
-     (=> (and (< 0 x) (< y 0)) (pos_div_relation_rna1
+     (=> (and (< 0 x) (< y 0)) (pos_div_relation_rna
      (- (fxp_div_result_int1 x y)) x (- y))))))) :pattern ((fxp_div_result_int1
                                                            x y)) ))))
 
-(declare-fun to_int3 (Int) Int)
+(declare-fun to_int2 (Int) Int)
 
 ;; to_int_def
   (assert
   (forall ((x Int))
-  (! (ite (= x 0) (= (to_int3 x) 0)
-     (ite (< 0 x) (pos_div_relation1 (to_int3 x) x 100) (pos_div_relation1
-     (- (to_int3 x)) (- x) 100))) :pattern ((to_int3 x)) )))
+  (! (ite (= x 0) (= (to_int2 x) 0)
+     (ite (< 0 x) (pos_div_relation (to_int2 x) (* x 1) 100)
+     (pos_div_relation (- (to_int2 x)) (* (- x) 1) 100))) :pattern ((to_int2
+                                                                    x)) )))
 
-(declare-fun of_real1 (Real) Int)
+(declare-fun of_int1 (Int) Int)
+
+;; of_int_def
+  (assert
+  (forall ((x Int))
+  (! (ite (= x 0) (= (of_int1 x) 0)
+     (ite (< 0 x) (pos_div_relation (of_int1 x) (* x 100) 1)
+     (pos_div_relation (- (of_int1 x)) (* (- x) 100) 1))) :pattern ((of_int1
+                                                                    x)) )))
 
 ;; inversion_axiom
   (assert
@@ -466,36 +382,6 @@
 
 (declare-datatypes () ((money__ref (mk_money__ref (money__content money)))))
 (define-fun money__ref___projection ((a money__ref)) money (money__content a))
-
-(declare-fun ident (Int) Int)
-
-(declare-fun ident__function_guard (Int Int) Bool)
-
-;; ident__post_axiom
-  (assert
-  (forall ((n Int))
-  (! (=>
-     (and (dynamic_invariant n true true true true) (and (<= 1 n) (<= n 10)))
-     (dynamic_invariant (ident n) true false true true)) :pattern ((ident n)) )))
-
-(declare-fun ident__2 (Int) Int)
-
-(declare-fun ident__2__function_guard (Int Int) Bool)
-
-;; ident__2__post_axiom
-  (assert
-  (forall ((c Int))
-  (! (=>
-     (and (dynamic_invariant2 c true true true true) (and (<= 0 c) (<= c 1)))
-     (dynamic_invariant2 (ident__2 c) true false true true)) :pattern (
-  (ident__2 c)) )))
-
-(declare-fun ident__3 (volt) volt)
-
-(declare-fun ident__3__function_guard (volt volt) Bool)
-
-;; ident__3__post_axiom
-  (assert true)
 
 (declare-fun ident__4 (money) money)
 
@@ -528,47 +414,39 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const n Int)
-
-(declare-const c Int)
-
 (declare-const o Int)
 
 (declare-const o1 Int)
 
 (declare-const o2 volt)
 
-(declare-const result Int)
+(declare-const n Int)
 
-(declare-const n1 Int)
-
-(declare-const result1 Int)
-
-(declare-const c1 Int)
+(declare-const c Int)
 
 ;; H
-  (assert (and (= o (ident 5)) (in_range o)))
+  (assert (= o (ident 5)))
 
 ;; H
-  (assert (= result n))
+  (assert (in_range o))
 
 ;; H
-  (assert (= n1 o))
+  (assert (= n o))
 
 ;; H
-  (assert (in_range n1))
+  (assert (in_range n))
 
 ;; H
-  (assert (and (= o1 (ident__2 0)) (in_range1 o1)))
+  (assert (= o1 (ident__2 0)))
 
 ;; H
-  (assert (= result1 c))
+  (assert (in_range1 o1))
 
 ;; H
-  (assert (= c1 o1))
+  (assert (= c o1))
 
 ;; H
-  (assert (in_range1 c1))
+  (assert (in_range1 c))
 
 ;; H
   (assert (= (to_fixed o2) 5))
@@ -576,6 +454,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "p.adb", line 40, characters 0-0
-  (not (<= 1 (to_fixed o2))))
+  (not (<= (to_fixed o2) 9)))
 (check-sat)
 (exit)

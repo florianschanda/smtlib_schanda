@@ -1719,4 +1719,4 @@ goal WP_parameter_def :
   fliteral2))) and (o5 = (d2[3 <- o4]))) and ((result2 = d2) and
   (d3 = o5))) -> ((((to_rep1(o6) = to_float64(RNE, mul(RNE, to_rep((a[3])),
   fliteral2))) and (o7 = (d3[4 <- o6]))) and ((result3 = d3) and
-  (d4 = o7))) -> le1(neg1(fliteral1), to_rep1((d4[1]))))))))))))
+  (d4 = o7))) -> le1(to_rep1((d4[1])), fliteral1))))))))))

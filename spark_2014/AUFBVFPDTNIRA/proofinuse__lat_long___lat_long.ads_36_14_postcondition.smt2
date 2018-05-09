@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -124,6 +120,14 @@
   (! (= (= (olt left right) true)
      (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100)))) :pattern (
   (olt left right)) )))
+
+(declare-const r Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const conv_deg_to_rad Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-sort latitude 0)
 
@@ -212,6 +216,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__lat_long__coordinates__lat latitude)(rec__lat_long__coordinates__long longitude)))))
+(define-fun us_split_fields_Lat__projection ((a us_split_fields)) latitude
+  (rec__lat_long__coordinates__lat a))
+
+(define-fun us_split_fields_Long__projection ((a us_split_fields)) longitude
+  (rec__lat_long__coordinates__long a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -300,11 +310,17 @@
 
 (declare-const source us_rep)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const destination us_rep)
 
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+;; r__def_axiom
+  (assert (= r (fp #b0 #b10010101 #b10000100101000110101001)))
+
+;; conv_deg_to_rad__def_axiom
+  (assert (= conv_deg_to_rad (fp #b0 #b01111001 #b00011101111101000110101)))
 
 (define-fun dynamic_invariant1 ((temp___expr_172 Float32)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
@@ -324,54 +340,43 @@
 
 (declare-const lat_long__delta_lat_in_meters__result Float32)
 
-(declare-const result Float32)
-
 (declare-const lat_long__delta_lat_in_meters__result1 Float32)
 
 (declare-const lat_long__delta_lat_in_meters__result2 Float32)
 
-(declare-const lat_long__delta_lat_in_meters__result3 Float32)
+;; H
+  (assert (fp.isFinite32 r))
 
-(declare-const lat_long__delta_lat_in_meters__result4 Float32)
+;; H
+  (assert (= (fp #b0 #b10010101 #b10000100101000110101001) r))
 
-(declare-const lat_long__delta_lat_in_meters__result5 Float32)
+;; H
+  (assert (fp.isFinite32 conv_deg_to_rad))
 
-(declare-const result1 Float32)
+;; H
+  (assert (= (fp #b0 #b01111001 #b00011101111101000110101) conv_deg_to_rad))
 
 ;; H
   (assert
-  (= lat_long__delta_lat_in_meters__result1 lat_long__delta_lat_in_meters__result2))
+  (= lat_long__delta_lat_in_meters__result lat_long__delta_lat_in_meters__result1))
 
 ;; H
   (assert
-  (= lat_long__delta_lat_in_meters__result3 lat_long__delta_lat_in_meters__result1))
-
-;; H
-  (assert (= result lat_long__delta_lat_in_meters__result))
-
-;; H
-  (assert
-  (= lat_long__delta_lat_in_meters__result1 (fp.mul RNE (fp.mul RNE (fp.sub RNE
+  (= lat_long__delta_lat_in_meters__result (fp.mul RNE (fp.mul RNE (fp.sub RNE
   (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 destination)))
-  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101))))
+  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))
+  r) conv_deg_to_rad)))
 
 ;; H
   (assert
-  (= (mk_t__ref lat_long__delta_lat_in_meters__result4) (mk_t__ref
-                                                        lat_long__delta_lat_in_meters__result2)))
-
-;; H
-  (assert
-  (= lat_long__delta_lat_in_meters__result5 lat_long__delta_lat_in_meters__result3))
-
-;; H
-  (assert (= result1 lat_long__delta_lat_in_meters__result4))
+  (= (mk_t__ref lat_long__delta_lat_in_meters__result2) (mk_t__ref
+                                                        lat_long__delta_lat_in_meters__result1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 6, characters 0-0
   (not
-  (= (olt (fp.abs lat_long__delta_lat_in_meters__result4)
+  (= (olt (fp.abs lat_long__delta_lat_in_meters__result2)
      (fp #b0 #b10010111 #b00110001001111000100110)) true)))
 (check-sat)
 (exit)

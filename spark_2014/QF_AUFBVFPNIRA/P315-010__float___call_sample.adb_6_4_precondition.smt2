@@ -78,6 +78,7 @@
 (assert
 ;; WP_parameter_def
  ;; File "call_sample.adb", line 3, characters 0-0
-  (not (< 0 1)))
+  (not
+  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

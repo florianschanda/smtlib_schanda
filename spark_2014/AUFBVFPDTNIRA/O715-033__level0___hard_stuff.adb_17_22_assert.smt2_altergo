@@ -974,4 +974,4 @@ goal WP_parameter_def :
   x3) and le(x3, fliteral1)))) or ((not (le(neg(fliteral), x2) and le(x2,
   fliteral))) and (x3 = x2))) -> ((le(neg(fliteral), x3) and le(x3,
   fliteral)) -> ((((o2 = mul(RNE, x3, x3)) and tqtisFinite(mul(RNE, x3,
-  x3))) and ((x3 = result2) and (x4 = o2))) -> le(neg(fliteral), x4)))))))
+  x3))) and ((x3 = result2) and (x4 = o2))) -> le(x4, fliteral)))))))

@@ -238,7 +238,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "aggregates.adb", line 44, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/spark_book/Chapter-02/build/gnatprove/aggregates.mlw", line 6457, characters 5-8
   (not (fp.isFinite32 (fp.div RNE c13b approx2))))
 (check-sat)
 (exit)

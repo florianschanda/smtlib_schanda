@@ -1088,7 +1088,7 @@ logic fliteral6 : t
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 1.00001001358032226562500))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10381, characters 5-8 *)
 goal WP_parameter_def :
   (forall res:t. forall o:t. forall o1:t. forall o2:t.
   forall floating_point__angle_between__ba_dot_bc__assume:t. forall o3:t.
@@ -1145,4 +1145,4 @@ goal WP_parameter_def :
   tqtisFinite(mul(RNE, length_ba, length_bc))) and (o12 = div(RNE, ba_dot_bc,
   o11))) and ((o13 = o12) and tqtisFinite(o12))) and ((result = res) and
   (res1 = o13))) -> ((le(neg(fliteral6), res1) and le(res1, fliteral6)) ->
-  le(neg(fliteral), res1)))))))))))))))))))))))))))
+  le(res1, fliteral)))))))))))))))))))))))))))

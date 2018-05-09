@@ -143,11 +143,11 @@
   (assert (not (= op 5)))
 
 ;; H
-  (assert (< e 0))
+  (assert (not (< e 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "overflow_check.adb", line 9, characters 0-0
-  (not (not (= x ((_ to_fp 8 24) #x00000000)))))
+  (not true))
 (check-sat)
 (exit)

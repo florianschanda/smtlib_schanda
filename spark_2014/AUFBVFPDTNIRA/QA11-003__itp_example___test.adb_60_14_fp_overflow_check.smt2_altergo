@@ -931,7 +931,7 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 1.10000002384185791015625))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/QA11-003__itp_example/gnatprove/test.mlw", line 3799, characters 5-8 *)
 goal WP_parameter_def :
   (forall b:t. forall result:t. forall b1:t. (tqtisFinite(a) -> ((({
   t__content = result } = { t__content = b }) and (b1 = a)) ->

@@ -123,6 +123,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "f.adb", line 1, characters 0-0
-  (not (<= (- 2147483648) 0)))
+  (not (<= y 2147483647)))
 (check-sat)
 (exit)

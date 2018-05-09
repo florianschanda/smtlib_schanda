@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,29 +74,67 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
-(declare-sort ft 0)
+(declare-fun magic (Float64) Int)
 
-(declare-fun user_eq (ft ft) Bool)
+(declare-fun magic__function_guard (Int Float64) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE (Float64) us_image)
+(declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
+(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
+                                    (<= x 2147483647)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
 
 (declare-fun attr__ATTRIBUTE_VALUE__pre_check (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE (us_image) Float64)
+(declare-fun attr__ATTRIBUTE_VALUE (us_image) Int)
 
-(declare-const dummy ft)
+(declare-fun user_eq (integer integer) Bool)
+
+(declare-const dummy integer)
+
+(declare-datatypes ()
+((integer__ref (mk_integer__ref (integer__content integer)))))
+(define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
+                                                                 a))
+
+(define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
+  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
+  (temp___do_typ_inv_17 Bool)) Bool (=>
+                                    (or (= temp___is_init_14 true)
+                                    (<= (- 2147483648) 2147483647)) (in_range
+                                    temp___expr_18)))
+
+(declare-sort ft 0)
+
+(declare-fun user_eq1 (ft ft) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Float64) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float64)
+
+(declare-const dummy1 ft)
 
 (declare-datatypes () ((ft__ref (mk_ft__ref (ft__content ft)))))
 (define-fun ft__ref___2__projection ((a ft__ref)) ft (ft__content a))
 
-(define-fun dynamic_invariant ((temp___expr_194 Float64)
+(define-fun dynamic_invariant1 ((temp___expr_194 Float64)
   (temp___is_init_190 Bool) (temp___skip_constant_191 Bool)
   (temp___do_toplevel_192 Bool)
   (temp___do_typ_inv_193 Bool)) Bool (=>
@@ -108,41 +142,10 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                      (fp.isFinite64 temp___expr_194)))
 
-(declare-fun magic (Float64) Int)
-
-(declare-fun magic__function_guard (Int Float64) Bool)
-
-(declare-sort integer 0)
-
-(define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
-                                    (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (integer integer) Bool)
-
-(declare-const dummy1 integer)
-
-(declare-datatypes ()
-((integer__ref (mk_integer__ref (integer__content integer)))))
-(define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
-                                                                 a))
-
-(define-fun dynamic_invariant1 ((temp___expr_18 Int) (temp___is_init_14 Bool)
-  (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
-  (temp___do_typ_inv_17 Bool)) Bool (=>
-                                    (or (= temp___is_init_14 true)
-                                    (<= (- 2147483648) 2147483647)) (in_range
-                                    temp___expr_18)))
-
 ;; magic__post_axiom
   (assert
   (forall ((x Float64))
-  (! (=> (dynamic_invariant x true true true true) (dynamic_invariant1
+  (! (=> (dynamic_invariant1 x true true true true) (dynamic_invariant
      (magic x) true false true true)) :pattern ((magic x)) )))
 
 (declare-const a Float64)

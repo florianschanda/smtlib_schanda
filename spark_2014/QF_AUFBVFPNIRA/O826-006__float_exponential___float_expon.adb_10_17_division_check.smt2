@@ -131,11 +131,11 @@
   (assert (and (= o5 o4) (fp.isFinite32 o4)))
 
 ;; H
-  (assert (< 4 0))
+  (assert (not (< 4 0)))
 
 (assert
 ;; WP_parameter_def
  ;; File "float_expon.adb", line 1, characters 0-0
-  (not (not (= x ((_ to_fp 8 24) #x00000000)))))
+  (not true))
 (check-sat)
 (exit)

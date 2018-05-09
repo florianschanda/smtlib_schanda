@@ -1101,6 +1101,12 @@ axiom coerce_axiom :
 
 type num_delimiters_range
 
+logic num_delimiters_rangeqtint : num_delimiters_range -> int
+
+axiom num_delimiters_rangeqtaxiom :
+  (forall i:num_delimiters_range. ((0 <= num_delimiters_rangeqtint(i)) and
+  (num_delimiters_rangeqtint(i) <= 10)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 10))
 
 logic bool_eq3 : int, int -> bool
@@ -1156,7 +1162,8 @@ num_delimiters_range
 function num_delimiters_range__ref___projection(a: num_delimiters_range__ref) : num_delimiters_range =
   (a).num_delimiters_range__content
 
-logic to_rep1 : num_delimiters_range -> int
+function to_rep1(x: num_delimiters_range) : int =
+  num_delimiters_rangeqtint(x)
 
 logic of_rep1 : int -> num_delimiters_range
 
@@ -1171,6 +1178,12 @@ axiom coerce_axiom1 :
   (to_rep1(of_rep1(x)) = x)))
 
 type function_range
+
+logic function_rangeqtint : function_range -> int
+
+axiom function_rangeqtaxiom :
+  (forall i:function_range. ((0 <= function_rangeqtint(i)) and
+  (function_rangeqtint(i) <= 2147483647)))
 
 predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
 
@@ -1196,7 +1209,7 @@ type function_range__ref = { function_range__content : function_range
 function function_range__ref___projection(a: function_range__ref) : function_range =
   (a).function_range__content
 
-logic to_rep2 : function_range -> int
+function to_rep2(x: function_range) : int = function_rangeqtint(x)
 
 logic of_rep2 : int -> function_range
 
@@ -1216,6 +1229,9 @@ function_range; rec__step_function__delimiter_entry__value : float1
 
 function us_split_fields_Delimiter__projection(a: us_split_fields) : function_range =
   (a).rec__step_function__delimiter_entry__delimiter
+
+function us_split_fields_Value__projection(a: us_split_fields) : float1 =
+  (a).rec__step_function__delimiter_entry__value
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1524,6 +1540,13 @@ logic attr__ATTRIBUTE_ADDRESS3 : int
 
 type tnum_delimiters_rangeB
 
+logic tnum_delimiters_rangeBqtint : tnum_delimiters_rangeB -> int
+
+axiom tnum_delimiters_rangeBqtaxiom :
+  (forall i:tnum_delimiters_rangeB.
+  (((- 128) <= tnum_delimiters_rangeBqtint(i)) and
+  (tnum_delimiters_rangeBqtint(i) <= 127)))
+
 predicate in_range4(x1: int) = (((- 128) <= x1) and (x1 <= 127))
 
 logic bool_eq9 : int, int -> bool
@@ -1549,7 +1572,8 @@ tnum_delimiters_rangeB
 function tnum_delimiters_rangeB__ref___projection(a: tnum_delimiters_rangeB__ref) : tnum_delimiters_rangeB =
   (a).tnum_delimiters_rangeB__content
 
-logic to_rep3 : tnum_delimiters_rangeB -> int
+function to_rep3(x1: tnum_delimiters_rangeB) : int =
+  tnum_delimiters_rangeBqtint(x1)
 
 logic of_rep3 : int -> tnum_delimiters_rangeB
 
@@ -1597,11 +1621,11 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 6154, characters 5-8 *)
 goal WP_parameter_def :
   (forall min1:t. forall i:int.
-  forall step_function__minimum_until_point__result:t. forall temp___304:t.
-  forall temp___303:int. forall i1:int. forall result:t. forall min2:t.
+  forall step_function__minimum_until_point__result:t. forall temp___306:t.
+  forall temp___305:int. forall i1:int. forall result:t. forall min2:t.
   forall result1:int. forall i2:int. forall min3:t. forall i3:int.
   forall result2:t. forall min4:t. forall min5:t. forall i4:int.
   forall min6:t. forall i5:int. forall min7:t. forall i6:int. forall min8:t.
@@ -1619,8 +1643,8 @@ goal WP_parameter_def :
   (min2 = to_rep((((sfun1[0])).us_split_fields1).rec__step_function__delimiter_entry__value))) and
   (tqtisFinite(min2) and (((to_rep1(sfun) = r10b) and in_range2(r10b)) and
   (((({ int__content = result1 } = { int__content = i }) and (i2 = 0)) and
-  ((((0 <= i2) and (i2 <= r10b)) and ((((temp___304 = min2) and
-  ((temp___303 = i2) and
+  ((((0 <= i2) and (i2 <= r10b)) and ((((temp___306 = min2) and
+  ((temp___305 = i2) and
   (((forall j:int. (((0 <= j) and (j <= (i3 - 1))) ->
     ((to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x) ->
     le(min3,
@@ -1654,4 +1678,4 @@ goal WP_parameter_def :
   ((i8 = i6) and (min9 = min7))) and
   ((step_function__minimum_until_point__result5 = step_function__minimum_until_point__result3) and
   ((i9 = i7) and (min10 = min8))))) -> (((0 <= i1) and
-  (i1 <= to_rep1(sfun))) -> (0 <= i1))))))
+  (i1 <= to_rep1(sfun))) -> (i1 <= 10))))))

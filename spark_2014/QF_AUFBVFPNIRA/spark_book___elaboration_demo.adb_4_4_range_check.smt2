@@ -190,6 +190,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "elaboration_demo.adb", line 4, characters 0-0
-  (not (<= 1 1)))
+  (not (<= size 2147483647)))
 (check-sat)
 (exit)

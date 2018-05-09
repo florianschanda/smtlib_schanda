@@ -82,26 +82,20 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(define-fun dynamic_invariant ((temp___expr_187 (_ BitVec 8))
-  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
-  (temp___do_toplevel_185 Bool) (temp___do_typ_inv_186 Bool)) Bool true)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(define-fun dynamic_invariant1 ((temp___expr_236 Float32)
-  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
-  (temp___do_toplevel_234 Bool)
-  (temp___do_typ_inv_235 Bool)) Bool (=>
-                                     (or (= temp___is_init_232 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_236)))
+(declare-const battery_threshold Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun in_range1 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
                                               (bvule x #x31)))
 
 (define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
 
-(define-fun dynamic_invariant2 ((temp___expr_243 (_ BitVec 8))
+(define-fun dynamic_invariant ((temp___expr_243 (_ BitVec 8))
   (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
   (temp___do_toplevel_241 Bool)
   (temp___do_typ_inv_242 Bool)) Bool (=>
@@ -109,18 +103,14 @@
                                      (bvule #x00 #x31)) (in_range1
                                      temp___expr_243)))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
 (define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
                                               (bvule x #x32)))
 
 (define-fun in_range_int1 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
 
-(define-fun dynamic_invariant3 ((temp___expr_250 (_ BitVec 8))
+(define-fun dynamic_invariant1 ((temp___expr_250 (_ BitVec 8))
   (temp___is_init_246 Bool) (temp___skip_constant_247 Bool)
   (temp___do_toplevel_248 Bool)
   (temp___do_typ_inv_249 Bool)) Bool (=>
@@ -128,16 +118,16 @@
                                      (bvule #x00 #x32)) (in_range2
                                      temp___expr_250)))
 
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 8))
+(declare-const attr__ATTRIBUTE_MODULUS1 (_ BitVec 8))
 
 (define-fun in_range3 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
                                               (bvule x #x32)))
 
 (define-fun in_range_int2 ((x Int)) Bool (and (<= 0 x) (<= x 50)))
 
-(define-fun dynamic_invariant4 ((temp___expr_282 (_ BitVec 8))
+(define-fun dynamic_invariant2 ((temp___expr_282 (_ BitVec 8))
   (temp___is_init_278 Bool) (temp___skip_constant_279 Bool)
   (temp___do_toplevel_280 Bool)
   (temp___do_typ_inv_281 Bool)) Bool (=>
@@ -145,13 +135,31 @@
                                      (bvule #x00 #x32)) (in_range3
                                      temp___expr_282)))
 
+(declare-const attr__ATTRIBUTE_MODULUS2 (_ BitVec 8))
+
+(define-fun dynamic_invariant3 ((temp___expr_187 (_ BitVec 8))
+  (temp___is_init_183 Bool) (temp___skip_constant_184 Bool)
+  (temp___do_toplevel_185 Bool) (temp___do_typ_inv_186 Bool)) Bool true)
+
+(define-fun dynamic_invariant4 ((temp___expr_236 Float32)
+  (temp___is_init_232 Bool) (temp___skip_constant_233 Bool)
+  (temp___do_toplevel_234 Bool)
+  (temp___do_typ_inv_235 Bool)) Bool (=>
+                                     (or (= temp___is_init_232 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_236)))
+
 (declare-const battery_level Float32)
 
-(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
 (declare-const c (_ BitVec 8))
 
-(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+
+;; battery_threshold__def_axiom
+  (assert
+  (= battery_threshold (fp #b0 #b01111100 #b10011001100110011001101)))
 
 (declare-const current_time (_ BitVec 8))
 
@@ -169,19 +177,19 @@
 
 (declare-const o5 (_ BitVec 8))
 
-(declare-const temp___318 (_ BitVec 8))
+(declare-const temp___319 (_ BitVec 8))
 
 (declare-const o6 (_ BitVec 8))
 
 (declare-const o7 (_ BitVec 8))
 
-(declare-const temp___320 (_ BitVec 8))
+(declare-const temp___321 (_ BitVec 8))
 
 (declare-const o8 (_ BitVec 8))
 
 (declare-const o9 (_ BitVec 8))
 
-(declare-const temp___317 (_ BitVec 8))
+(declare-const temp___318 (_ BitVec 8))
 
 (declare-const o10 (_ BitVec 8))
 
@@ -220,6 +228,13 @@
 (declare-const counter4 (_ BitVec 8))
 
 ;; H
+  (assert (fp.isFinite32 battery_threshold))
+
+;; H
+  (assert
+  (= (fp #b0 #b01111100 #b10011001100110011001101) battery_threshold))
+
+;; H
   (assert (in_range3 counter))
 
 ;; H
@@ -248,8 +263,7 @@
   (assert (= current_time1 o))
 
 ;; H
-  (assert
-  (fp.lt battery_level (fp #b0 #b01111100 #b10011001100110011001101)))
+  (assert (fp.lt battery_level battery_threshold))
 
 ;; H
   (assert
@@ -272,7 +286,7 @@
   (assert (and (= o9 counter1) (in_range1 counter1)))
 
 ;; H
-  (assert (= temp___317 (bvsub current_time1 o9)))
+  (assert (= temp___318 (bvsub current_time1 o9)))
 
 ;; H
   (assert (and (= o10 counter1) (in_range1 counter1)))
@@ -281,15 +295,13 @@
   (assert (= result4 (ite (bvult current_time1 o10) true false)))
 
 ;; H
-  (assert (=> (= result4 true) (= o11 (bvadd temp___317 #x32))))
+  (assert (=> (= result4 true) (= o11 (bvadd temp___318 #x32))))
 
 ;; H
-  (assert (=> (not (= result4 true)) (= o11 temp___317)))
+  (assert (=> (not (= result4 true)) (= o11 temp___318)))
 
 ;; H
-  (assert
-  (= result3 (ite (fp.leq (fp #b0 #b01111100 #b10011001100110011001101)
-             o12) true false)))
+  (assert (= result3 (ite (fp.leq battery_threshold o12) true false)))
 
 ;; H
   (assert (= result3 true))
@@ -306,6 +318,13 @@
 
 ;; H
   (assert (= result6 true))
+
+;; H
+  (assert
+  (and (= o7 (bvsub counter1 #x01)) (in_range1 (bvsub counter1 #x01))))
+
+;; H
+  (assert (= temp___321 (bvsub current_time1 o7)))
 
 (assert
 ;; WP_parameter_def

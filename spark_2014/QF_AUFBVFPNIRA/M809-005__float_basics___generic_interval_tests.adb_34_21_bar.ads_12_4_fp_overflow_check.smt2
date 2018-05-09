@@ -86,6 +86,14 @@
   x)
   (fp.leq x (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 
+;; H
+  (assert (and (= o1 (fp.mul RNE x x)) (fp.isFinite64 (fp.mul RNE x x))))
+
+;; H
+  (assert
+  (= o2 (ite (fp.leq o1 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
+        true false)))
+
 (assert
 ;; WP_parameter_def
  ;; File "generic_interval_tests.adb", line 26, characters 0-0

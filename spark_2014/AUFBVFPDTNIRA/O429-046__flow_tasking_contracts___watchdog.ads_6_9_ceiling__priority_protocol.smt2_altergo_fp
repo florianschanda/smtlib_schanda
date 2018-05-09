@@ -1060,6 +1060,11 @@ function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
 type priority
 
+logic priorityqtint : priority -> int
+
+axiom priorityqtaxiom :
+  (forall i:priority. ((0 <= priorityqtint(i)) and (priorityqtint(i) <= 97)))
+
 predicate in_range1(x: int) = ((0 <= x) and (x <= 97))
 
 logic bool_eq2 : int, int -> bool

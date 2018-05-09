@@ -54,10 +54,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -80,7 +76,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -98,10 +94,6 @@
 
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero x)
                                               (fp.isNegative x)))
-
-(declare-fun of_int1 (RoundingMode Int) Float64)
-
-(declare-fun to_int2 (RoundingMode Float64) Int)
 
 (declare-const max_int1 Int)
 
@@ -214,18 +206,6 @@
 
 (declare-const z Float32)
 
-(declare-const result Float32)
-
-(declare-const x1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const y1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const z1 Float32)
-
 ;; H
   (assert (fp.isFinite32 max_float))
 
@@ -233,35 +213,26 @@
   (assert (fp.isFinite64 max_double))
 
 ;; H
-  (assert (= result x))
+  (assert (= x (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (= x1 (fp #b0 #b00000000 #b00000000000000000000000)))
+  (assert (fp.isFinite32 x))
 
 ;; H
-  (assert (fp.isFinite32 x1))
+  (assert (= y (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert (= result1 y))
+  (assert (fp.isFinite32 y))
 
 ;; H
-  (assert (= y1 (fp #b0 #b01111111 #b00000000000000000000000)))
+  (assert (= z (fp #b0 #b01111110 #b00000000000000000000000)))
 
 ;; H
-  (assert (fp.isFinite32 y1))
-
-;; H
-  (assert (= result2 z))
-
-;; H
-  (assert (= z1 (fp #b0 #b01111110 #b00000000000000000000000)))
-
-;; H
-  (assert (fp.isFinite32 z1))
+  (assert (fp.isFinite32 z))
 
 (assert
 ;; WP_parameter_def
  ;; File "testfloat.adb", line 11, characters 0-0
-  (not (fp.isFinite32 (fp.add RNE x1 y1))))
+  (not (fp.isFinite32 (fp.add RNE x y))))
 (check-sat)
 (exit)

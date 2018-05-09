@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -109,6 +105,11 @@
                                     (fp.isFinite32 temp___expr_60)))
 
 (declare-sort t 0)
+
+(declare-fun tqtint (t) Int)
+
+;; t'axiom
+  (assert (forall ((i t)) (and (<= 0 (tqtint i)) (<= (tqtint i) 33554431))))
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 33554431)))
 
@@ -141,8 +142,6 @@
 
 (declare-const b Int)
 
-(declare-const result Float32)
-
 (declare-const a1 Float32)
 
 ;; H
@@ -155,14 +154,11 @@
   (assert (=> (<= 0 33554431) (in_range b)))
 
 ;; H
-  (assert (= result a))
-
-;; H
   (assert (= a1 (fp #b0 #b10011000 #b00000000000000000000000)))
 
 (assert
 ;; WP_parameter_def
  ;; File "foo.ads", line 4, characters 0-0
-  (not (in_range (to_int1 RNA a1))))
+  (not (in_range (to_int (fp.to_real (fp.roundToIntegral RNA a1))))))
 (check-sat)
 (exit)

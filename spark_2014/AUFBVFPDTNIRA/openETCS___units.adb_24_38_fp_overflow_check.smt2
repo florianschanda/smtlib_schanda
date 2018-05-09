@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -99,6 +95,14 @@
 
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
+
+(declare-fun is_valid_speed (Float32) Bool)
+
+(declare-fun is_valid_speed__function_guard (Bool Float32) Bool)
+
+(declare-fun m_per_s_from_km_per_h (Float32) Float32)
+
+(declare-fun m_per_s_from_km_per_h__function_guard (Float32 Float32) Bool)
 
 (declare-sort speed_t 0)
 
@@ -125,13 +129,9 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_158)))
 
-(declare-fun is_valid_speed (Float32) Bool)
+(declare-const maximum_valid_speed_km_per_h Float32)
 
-(declare-fun is_valid_speed__function_guard (Bool Float32) Bool)
-
-(declare-fun m_per_s_from_km_per_h (Float32) Float32)
-
-(declare-fun m_per_s_from_km_per_h__function_guard (Float32 Float32) Bool)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 ;; is_valid_speed__post_axiom
   (assert true)
@@ -141,13 +141,12 @@
   (forall ((speed Float32))
   (! (= (= (is_valid_speed speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
-     (fp.leq speed (m_per_s_from_km_per_h
-                   (fp #b0 #b10000111 #b11110100000000000000000))))) :pattern (
+     (fp.leq speed (m_per_s_from_km_per_h maximum_valid_speed_km_per_h)))) :pattern (
   (is_valid_speed speed)) )))
 
 (declare-const speed Float32)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -183,6 +182,10 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_165)))
 
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
+
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
 (declare-fun is_valid_speed_km_per_h__function_guard (Bool Float32) Bool)
@@ -195,8 +198,8 @@
   (forall ((speed1 Float32))
   (! (= (= (is_valid_speed_km_per_h speed1) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed1)
-     (fp.leq speed1 (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
-  (is_valid_speed_km_per_h speed1)) )))
+     (fp.leq speed1 maximum_valid_speed_km_per_h))) :pattern ((is_valid_speed_km_per_h
+                                                              speed1)) )))
 
 ;; m_per_s_from_km_per_h__post_axiom
   (assert

@@ -1035,6 +1035,8 @@ axiom one_of_int : (fliteral = of_int(NearestTiesToAway, 1))
 type t__ref = { t__content : t
 }
 
+logic osubtract__function_guard : t, t, t -> prop
+
 type t_float
 
 logic bool_eq1 : t, t -> bool
@@ -1058,8 +1060,6 @@ type t_float__ref = { t_float__content : t_float
 
 function t_float__ref___projection(a: t_float__ref) : t_float =
   (a).t_float__content
-
-logic osubtract__function_guard : t, t, t -> prop
 
 type t_float_value
 

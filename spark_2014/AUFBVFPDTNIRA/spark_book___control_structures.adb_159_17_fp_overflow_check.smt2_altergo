@@ -1049,6 +1049,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1152,9 +1158,15 @@ type character__ref = { character__content : character
 function character__ref___projection(a: character__ref) : character =
   (a).character__content
 
-type field
+type num
 
-predicate in_range4(x: int) = ((0 <= x) and (x <= 255))
+logic numqtint : num -> int
+
+axiom numqtaxiom :
+  (forall i:num. (((- 2147483648) <= numqtint(i)) and
+  (numqtint(i) <= 2147483647)))
+
+predicate in_range4(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1168,64 +1180,9 @@ logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE4 : us_image -> int
 
-logic user_eq3 : field, field -> bool
+logic user_eq3 : num, num -> bool
 
-logic dummy3 : field
-
-type field__ref = { field__content : field
-}
-
-function field__ref___projection(a: field__ref) : field = (a).field__content
-
-type number_base
-
-predicate in_range5(x: int) = ((2 <= x) and (x <= 16))
-
-logic bool_eq7 : int, int -> bool
-
-axiom bool_eq_def6 :
-  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE5 : us_image -> int
-
-logic user_eq4 : number_base, number_base -> bool
-
-logic dummy4 : number_base
-
-type number_base__ref = { number_base__content : number_base
-}
-
-function number_base__ref___projection(a: number_base__ref) : number_base =
-  (a).number_base__content
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
-type num
-
-predicate in_range6(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
-
-logic bool_eq8 : int, int -> bool
-
-axiom bool_eq_def7 :
-  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE6 : us_image -> int
-
-logic user_eq5 : num, num -> bool
-
-logic dummy5 : num
+logic dummy3 : num
 
 type num__ref = { num__content : num
 }
@@ -1252,6 +1209,72 @@ axiom sqrt__post_axiom :
   fliteral1)) and ((eq(x, fliteral) -> eq(sqrt2(x), fliteral)) and
   (le(fliteral2, x) -> lt(fliteral1, sqrt2(x)))))) and
   tqtisFinite(sqrt2(x)))))
+
+type field
+
+logic fieldqtint : field -> int
+
+axiom fieldqtaxiom :
+  (forall i:field. ((0 <= fieldqtint(i)) and (fieldqtint(i) <= 255)))
+
+predicate in_range5(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def6 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE5 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check5 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE5 : us_image -> int
+
+logic user_eq4 : field, field -> bool
+
+logic dummy4 : field
+
+type field__ref = { field__content : field
+}
+
+function field__ref___projection(a: field__ref) : field = (a).field__content
+
+type number_base
+
+logic number_baseqtint : number_base -> int
+
+axiom number_baseqtaxiom :
+  (forall i:number_base. ((2 <= number_baseqtint(i)) and
+  (number_baseqtint(i) <= 16)))
+
+predicate in_range6(x: int) = ((2 <= x) and (x <= 16))
+
+logic bool_eq8 : int, int -> bool
+
+axiom bool_eq_def7 :
+  (forall x:int. forall y:int [bool_eq8(x, y)]. (((x = y) -> (bool_eq8(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq8(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE6 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check6 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE6 : us_image -> int
+
+logic user_eq5 : number_base, number_base -> bool
+
+logic dummy5 : number_base
+
+type number_base__ref = { number_base__content : number_base
+}
+
+function number_base__ref___projection(a: number_base__ref) : number_base =
+  (a).number_base__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type uppercase
 
@@ -1369,6 +1392,11 @@ logic fliteral6 : t
 axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
   (tqtreal(fliteral6) = 2.0))
 
+logic fliteral7 : t
+
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 0.500000000000000000000000))
+
  (* File "control_structures.adb", line 29, characters 0-0 *)
 goal WP_parameter_def :
   (forall default_width:int. forall default_base:int. forall a:int.
@@ -1379,17 +1407,19 @@ goal WP_parameter_def :
   forall letter:int. forall o:int. forall o1:int. forall o2:int.
   forall o3:int. forall o4:int. forall o5:int. forall o6:t. forall o7:t.
   forall o8:t. forall o9:t. forall o10:t. forall o11:t. forall o12:t.
-  forall o13:int. forall o14:int. forall o15:int. forall temp___598:int.
-  forall temp___597:int. forall o16:t. forall o17:t. forall g1:int.
-  forall result:int. forall letter1:int. forall result1:int. forall a1:int.
-  forall result2:int. forall b1:int. forall result3:int. forall c1:int.
-  forall result4:int. forall d1:int. forall result5:int. forall e1:int.
-  forall result6:int. forall ch1:int. forall result7:t. forall x1:t.
-  forall result8:int. forall a2:int. forall result9:int. forall d2:int.
-  forall result10:int. forall b2:int. forall result11:int. forall e2:int.
-  forall result12:int. forall f1:int. forall result13:int. forall e3:int.
-  forall result14:int. forall f2:int. forall result15:int. forall f3:int.
-  forall result16:int. forall f4:int. forall result17:int. forall f5:int.
+  forall o13:int. forall o14:int. forall o15:int. forall temp___591:int.
+  forall temp___590:int. forall o16:t. forall o17:t. forall o18:t.
+  forall o19:t. forall o20:t. forall o21:t. forall o22:t. forall o23:t.
+  forall o24:t. forall o25:t. forall g1:int. forall result:int.
+  forall letter1:int. forall result1:int. forall a1:int. forall result2:int.
+  forall b1:int. forall result3:int. forall c1:int. forall result4:int.
+  forall d1:int. forall result5:int. forall e1:int. forall result6:int.
+  forall ch1:int. forall result7:t. forall x1:t. forall result8:int.
+  forall a2:int. forall result9:int. forall d2:int. forall result10:int.
+  forall b2:int. forall result11:int. forall e2:int. forall result12:int.
+  forall f1:int. forall result13:int. forall e3:int. forall result14:int.
+  forall f2:int. forall result15:int. forall f3:int. forall result16:int.
+  forall f4:int. forall result17:int. forall f5:int.
   forall result18:int__ref. forall g2:int. forall result19:int__ref.
   forall g3:int. forall result20:int__ref. forall g4:int.
   forall result21:bool__ref. forall success1:bool. forall result22:int__ref.
@@ -1411,9 +1441,11 @@ goal WP_parameter_def :
   forall sum4:int. forall value4:int__ref. forall sum5:int__ref.
   forall value5:int. forall sum6:int. forall value6:int__ref.
   forall sum7:int__ref. forall value7:int. forall sum8:int.
-  forall result46:t__ref. forall approx1:t. (in_range4(default_width) ->
-  (in_range5(default_base) -> ((((- 2147483648) <= 2147483647) ->
-  in_range2(a)) -> ((((- 2147483648) <= 2147483647) -> in_range2(b)) ->
+  forall result46:t__ref. forall approx1:t. forall result47:bool.
+  forall approx2:t. forall result48:t__ref. forall approx3:t.
+  (in_range5(default_width) -> (in_range6(default_base) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(a)) ->
+  ((((- 2147483648) <= 2147483647) -> in_range2(b)) ->
   ((((- 2147483648) <= 2147483647) -> in_range2(c)) ->
   ((((- 2147483648) <= 2147483647) -> in_range2(d)) ->
   ((((- 2147483648) <= 2147483647) -> in_range2(e)) ->
@@ -1529,10 +1561,10 @@ goal WP_parameter_def :
   (o15 = 8)) or ((not ((not (letter1 = 74)) -> (letter1 = 88))) and
   (o15 = 10))))))))))))) and ((result43 = { int__content = value }) and
   (value1 = o15))) -> (((result44 = { int__content = sum }) and
-  (sum1 = 0)) -> (((((temp___598 = sum1) and ((temp___597 = value1) and
+  (sum1 = 0)) -> (((((temp___591 = sum1) and ((temp___590 = value1) and
   (((((- 2147483648) <= 2147483647) -> in_range2(value2)) and
   (((- 2147483648) <= 2147483647) -> in_range2(sum2))) and
-  ((in_range6(ada__integer_text_io__get__2__item) and ((result45 = {
+  ((in_range4(ada__integer_text_io__get__2__item) and ((result45 = {
   int__content = value2 }) and
   (value3 = ada__integer_text_io__get__2__item))) and (((sum3 = {
   int__content = sum2 }) and (sum4 = sum2)) and (value3 <  0)))))) and
@@ -1540,6 +1572,16 @@ goal WP_parameter_def :
   ((sum6 = sum4) and (value5 = value3)))) and (((sum7 = sum5) and
   (value6 = value4)) and ((sum8 = sum6) and (value7 = value5)))) ->
   (((result46 = { t__content = approx }) and (approx1 = div(RNE, x1,
-  fliteral6))) -> ((((o16 = mul(RNE, approx1, approx1)) and
-  tqtisFinite(mul(RNE, approx1, approx1))) and (o17 = sub(RNE, x1, o16))) ->
-  tqtisFinite(o17)))))))))))))))))))))))))))))))))))))))))))))))))))
+  fliteral6))) -> (((((((o16 = mul(RNE, approx1, approx1)) and
+  tqtisFinite(mul(RNE, approx1, approx1))) and (o17 = sub(RNE, x1, o16))) and
+  ((o18 = o17) and tqtisFinite(o17))) and (o19 = abs2(o18))) and
+  ((lt(tolerance, o19) and (result47 = true)) or ((not lt(tolerance,
+  o19)) and (result47 = false)))) -> ((result47 = true) ->
+  (((le(neg(fliteral4), fliteral4) -> tqtisFinite(approx2)) and lt(tolerance,
+  abs2(sub(RNE, x1, mul(RNE, approx2, approx2))))) -> (((((((o20 = div(RNE,
+  x1, approx2)) and tqtisFinite(div(RNE, x1, approx2))) and (o21 = add(RNE,
+  approx2, o20))) and ((o22 = o21) and tqtisFinite(o21))) and (o23 = mul(RNE,
+  fliteral7, o22))) and ((result48 = { t__content = approx2 }) and
+  (approx3 = o23))) -> ((((o24 = mul(RNE, approx3, approx3)) and
+  tqtisFinite(mul(RNE, approx3, approx3))) and (o25 = sub(RNE, x1, o24))) ->
+  tqtisFinite(o25)))))))))))))))))))))))))))))))))))))))))))))))))))))))

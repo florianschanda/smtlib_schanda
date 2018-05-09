@@ -12,15 +12,6 @@
 (define-fun fp.isIntegral32 ((x Float32)) Bool (or (fp.isZero x) (and (fp.isNormal x) (= x (fp.roundToIntegral RNE x)))))
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
-
-(define-fun dynamic_invariant ((temp___expr_208 Int)
-  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
-  (temp___do_toplevel_206 Bool)
-  (temp___do_typ_inv_207 Bool)) Bool (=>
-                                     (or (= temp___is_init_204 true)
-                                     (<= 0 46)) (in_range1 temp___expr_208)))
-
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
                                                 (fp.isPositive x)))
 
@@ -59,12 +50,21 @@
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
   (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
   (temp___do_typ_inv_38 Bool)) Bool (=>
                                     (or (= temp___is_init_35 true)
                                     (<= 0 2147483647)) (in_range
                                     temp___expr_39)))
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 46)) (in_range1 temp___expr_208)))
 
 (declare-const n Int)
 
@@ -113,7 +113,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 3028, characters 5-8
   (not (= number_theory__fibonacci2__result4 abstr)))
 (check-sat)
 (exit)

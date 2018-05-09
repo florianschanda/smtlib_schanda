@@ -1511,6 +1511,12 @@ type t__ref1 = { t__content1 : t1
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1588,6 +1594,10 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
+logic convert : t -> t1
+
+logic convert__function_guard : t1, t -> prop
+
 type source
 
 logic attr__ATTRIBUTE_MODULUS : t
@@ -1638,28 +1648,12 @@ type target__ref = { target__content : target
 function target__ref___2__projection(a: target__ref) : target =
   (a).target__content
 
-logic convert : t -> t1
-
-logic convert__function_guard : t1, t -> prop
-
 axiom convert__post_axiom :
   (forall s:t [convert(s)]. tqtisFinite(convert(s)))
 
-logic zero_plus : t1
+logic magic : t1 -> int
 
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic zero_neg : t1
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic c1b : t1
-
-logic attr__ATTRIBUTE_ADDRESS2 : int
-
-logic c2b : t1
-
-logic attr__ATTRIBUTE_ADDRESS3 : int
+logic magic__function_guard : int, t1 -> prop
 
 type source1
 
@@ -1687,6 +1681,12 @@ function source__ref___3__projection(a: source__ref1) : source1 =
 
 type target1
 
+logic targetqtint : target1 -> int
+
+axiom targetqtaxiom :
+  (forall i:target1. (((- 2147483648) <= targetqtint(i)) and
+  (targetqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq8 : int, int -> bool
@@ -1711,12 +1711,24 @@ type target__ref1 = { target__content1 : target1
 function target__ref___3__projection(a: target__ref1) : target1 =
   (a).target__content1
 
-logic magic : t1 -> int
-
-logic magic__function_guard : int, t1 -> prop
-
 axiom magic__post_axiom :
   (forall s:t1 [magic(s)]. (tqtisFinite(s) -> in_range2(magic(s))))
+
+logic zero_plus : t1
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic zero_neg : t1
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic c1b : t1
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic c2b : t1
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic attr__ATTRIBUTE_ADDRESS4 : int
 

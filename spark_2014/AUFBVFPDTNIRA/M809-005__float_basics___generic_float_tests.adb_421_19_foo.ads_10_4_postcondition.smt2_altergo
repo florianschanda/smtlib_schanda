@@ -992,9 +992,9 @@ logic attr__ATTRIBUTE_ADDRESS2 : int
 logic foo__float_tests__test_array_1__a__aggregate_def : t -> (int,ft) farray
 
 axiom def_axiom :
-  (forall temp___240:t. (tqtisFinite(temp___240) ->
-  (forall temp___241:int.
-  (to_rep((foo__float_tests__test_array_1__a__aggregate_def(temp___240)[temp___241])) = temp___240))))
+  (forall temp___243:t. (tqtisFinite(temp___243) ->
+  (forall temp___244:int.
+  (to_rep((foo__float_tests__test_array_1__a__aggregate_def(temp___243)[temp___244])) = temp___243))))
 
 logic fliteral1 : t
 

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -137,27 +133,17 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
-(declare-const foo__double_tests__inverse_reciprocal__result Float64)
-
 (declare-const o Float64)
 
 (declare-const o1 Float64)
 
 (declare-const o2 Float64)
 
-(declare-const result Float64)
+(declare-const foo__double_tests__inverse_reciprocal__result Float64)
 
 (declare-const foo__double_tests__inverse_reciprocal__result1 Float64)
 
 (declare-const foo__double_tests__inverse_reciprocal__result2 Float64)
-
-(declare-const foo__double_tests__inverse_reciprocal__result3 Float64)
-
-(declare-const foo__double_tests__inverse_reciprocal__result4 Float64)
-
-(declare-const foo__double_tests__inverse_reciprocal__result5 Float64)
-
-(declare-const result1 Float64)
 
 ;; H
   (assert (fp.isFinite64 a))
@@ -169,19 +155,23 @@
 
 ;; H
   (assert
-  (= foo__double_tests__inverse_reciprocal__result1 foo__double_tests__inverse_reciprocal__result2))
+  (= foo__double_tests__inverse_reciprocal__result foo__double_tests__inverse_reciprocal__result1))
+
+;; H
+  (assert (= o2 o1))
+
+;; H
+  (assert (= foo__double_tests__inverse_reciprocal__result o2))
 
 ;; H
   (assert
-  (= foo__double_tests__inverse_reciprocal__result3 foo__double_tests__inverse_reciprocal__result1))
-
-;; H
-  (assert
-  (and
   (= o (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  a))
+  a)))
+
+;; H
+  (assert
   (fp.isFinite64 (fp.div RNE (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  a))))
+  a)))
 
 ;; H
   (assert
@@ -189,29 +179,16 @@
   o)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite64 o1)))
-
-;; H
-  (assert (= result foo__double_tests__inverse_reciprocal__result))
-
-;; H
-  (assert (= foo__double_tests__inverse_reciprocal__result1 o2))
+  (assert (fp.isFinite64 o1))
 
 ;; H
   (assert
-  (= (mk_t__ref foo__double_tests__inverse_reciprocal__result4) (mk_t__ref
-                                                                foo__double_tests__inverse_reciprocal__result2)))
-
-;; H
-  (assert
-  (= foo__double_tests__inverse_reciprocal__result5 foo__double_tests__inverse_reciprocal__result3))
-
-;; H
-  (assert (= result1 foo__double_tests__inverse_reciprocal__result4))
+  (= (mk_t__ref foo__double_tests__inverse_reciprocal__result2) (mk_t__ref
+                                                                foo__double_tests__inverse_reciprocal__result1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "generic_float_tests.ads", line 2, characters 0-0
-  (not (fp.eq foo__double_tests__inverse_reciprocal__result4 a)))
+  (not (fp.eq foo__double_tests__inverse_reciprocal__result2 a)))
 (check-sat)
 (exit)

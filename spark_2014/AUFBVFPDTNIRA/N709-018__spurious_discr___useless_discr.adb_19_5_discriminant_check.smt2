@@ -48,6 +48,13 @@
 
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -65,24 +72,6 @@
 ((integer__ref (mk_integer__ref (integer__content integer)))))
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
-
-(declare-fun to_rep (integer) Int)
-
-(declare-fun of_rep (Int) integer)
-
-;; inversion_axiom
-  (assert
-  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x integer)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
 
 (declare-sort e 0)
 
@@ -115,10 +104,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -141,13 +126,31 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
+(define-fun to_rep ((x integer)) Int (integerqtint x))
+
+(declare-fun of_rep (Int) integer)
+
+;; inversion_axiom
+  (assert
+  (forall ((x integer)) (! (= (of_rep (to_rep x)) x) :pattern ((to_rep x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x integer)) (! (in_range1 (to_rep x)) :pattern ((to_rep x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range1 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                            (of_rep x))) )))
+
 (declare-sort float 0)
 
 (declare-fun user_eq2 (float float) Bool)
@@ -221,6 +224,9 @@
 
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__useless_discr__t__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__useless_discr__t__y a))
 
 (define-fun us_split_fields___projection ((a us_split_fields)) us_private
   (rec__ext__ a))
@@ -521,57 +527,34 @@
                                      (or (= temp___is_init_196 true)
                                      (<= 0 3)) (in_range2 temp___expr_200)))
 
-(declare-const v__split_fields Bool)
+(declare-const v__split_fields integer)
 
-(declare-const v__split_fields1 integer)
+(declare-const v__split_fields1 float)
 
-(declare-const v__split_fields2 float)
+(declare-const v__split_fields2 us_private)
 
-(declare-const v__split_fields3 us_private)
+(declare-const v__split_fields3 Bool)
 
-(declare-const us Int)
+(declare-const v__split_fields4 integer)
 
-(declare-const result Bool)
+(declare-const v__split_fields5 float)
 
-(declare-const result1 integer)
-
-(declare-const result2 float)
-
-(declare-const result3 us_private)
-
-(declare-const v__split_fields4 Bool)
-
-(declare-const v__split_fields5 integer)
-
-(declare-const v__split_fields6 float)
-
-(declare-const v__split_fields7 us_private)
+(declare-const v__split_fields6 us_private)
 
 ;; H
-  (assert (and (= us 0) (in_range2 0)))
+  (assert (in_range2 0))
 
 ;; H
-  (assert
-  (and (= v__attr__tag us_tag1)
-  (= (to_rep2 (rec__useless_discr__t__discr v__split_discrs)) 0)))
+  (assert (= v__attr__tag us_tag1))
+
+;; H
+  (assert (= (to_rep2 (rec__useless_discr__t__discr v__split_discrs)) 0))
 
 ;; H
   (assert (= 0 (to_rep2 (rec__useless_discr__t__discr v__split_discrs))))
 
 ;; H
-  (assert (= result v__split_fields))
-
-;; H
-  (assert (= result1 v__split_fields1))
-
-;; H
-  (assert (= result2 v__split_fields2))
-
-;; H
-  (assert (= result3 v__split_fields3))
-
-;; H
-  (assert (= (distinct 1 0) v__split_fields4))
+  (assert (= v__split_fields v__split_fields4))
 
 ;; H
   (assert (= v__split_fields1 v__split_fields5))
@@ -580,14 +563,14 @@
   (assert (= v__split_fields2 v__split_fields6))
 
 ;; H
-  (assert (= v__split_fields3 v__split_fields7))
+  (assert (= (distinct 1 0) v__split_fields3))
 
 (assert
 ;; WP_parameter_def
  ;; File "useless_discr.adb", line 1, characters 0-0
   (not (useless_discr__t__x__pred
   (mk___rep v__split_discrs
-  (mk___split_fields v__split_fields4 v__split_fields5 v__split_fields6
-  v__split_fields7) v__attr__tag))))
+  (mk___split_fields v__split_fields3 v__split_fields4 v__split_fields5
+  v__split_fields6) v__attr__tag))))
 (check-sat)
 (exit)

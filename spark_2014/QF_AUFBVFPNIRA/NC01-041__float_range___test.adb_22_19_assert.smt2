@@ -126,6 +126,6 @@
 ;; WP_parameter_def
  ;; File "test.adb", line 7, characters 0-0
   (not
-  (fp.leq (fp.neg (fp #b0 #b01110101 #b10001001001101110100110)) value2)))
+  (fp.leq value2 (fp.neg (fp #b0 #b01110101 #b00000110001001001101111)))))
 (check-sat)
 (exit)

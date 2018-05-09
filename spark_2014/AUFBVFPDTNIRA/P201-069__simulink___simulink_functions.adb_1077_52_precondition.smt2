@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -110,7 +106,7 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
-(declare-fun arctan (Float64 Float64) Float64)
+(declare-fun arctan1 (Float64 Float64) Float64)
 
 (declare-fun arctan__function_guard (Float64 Float64 Float64) Bool)
 
@@ -124,14 +120,14 @@
      (or
      (not (fp.eq x (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
      (not (fp.eq y (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))))
-     (let ((result (arctan y x)))
+     (let ((result (arctan1 y x)))
      (and
      (=>
      (and
      (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000) x)
      (fp.eq y (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
      (fp.eq result (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-     (dynamic_invariant result true false true true)))) :pattern ((arctan y
+     (dynamic_invariant result true false true true)))) :pattern ((arctan1 y
                                                                   x)) )))
 
 (declare-const lf Float64)
@@ -143,7 +139,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 23380, characters 5-8
   (not
   (or
   (not (fp.eq (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000) (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))

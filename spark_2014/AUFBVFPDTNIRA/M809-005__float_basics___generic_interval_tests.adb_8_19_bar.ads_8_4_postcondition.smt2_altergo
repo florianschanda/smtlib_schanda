@@ -1001,6 +1001,11 @@ logic fliteral4 : t
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 5.0))
 
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 20.0))
+
  (* File "generic_interval_tests.ads", line 3, characters 0-0 *)
 goal WP_parameter_def :
   (forall z:t. forall o:t. forall result:t. forall z1:t. forall z2:t.
@@ -1008,5 +1013,5 @@ goal WP_parameter_def :
   fliteral1) -> tqtisFinite(z)) and (((le(fliteral2, x) and le(x,
   fliteral3)) and (le(fliteral4, y) and le(y, fliteral3))) and
   ((((o = add(RNE, x, y)) and tqtisFinite(add(RNE, x, y))) and
-  ((result = z) and (z1 = o))) and ((z1 = z2) and (z3 = z1))))))) ->
-  le(fliteral4, z2)))
+  ((result = z) and (z1 = o))) and ((z1 = z2) and (z3 = z1))))))) -> le(z2,
+  fliteral5)))

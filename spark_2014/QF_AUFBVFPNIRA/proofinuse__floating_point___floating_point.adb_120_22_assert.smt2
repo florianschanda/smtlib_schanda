@@ -108,7 +108,8 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) state1)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10177, characters 5-8
+  (not
+  (fp.leq state1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real (+ x 1))) (fp #b0 #b10000010 #b01000000000000000000000)))))
 (check-sat)
 (exit)

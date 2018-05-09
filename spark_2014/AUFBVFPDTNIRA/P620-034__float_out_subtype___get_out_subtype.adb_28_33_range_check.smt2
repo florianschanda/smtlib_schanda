@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -175,49 +171,21 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
+(declare-const o Float32)
+
+(declare-const o1 t_rate)
+
 (declare-const roll_rate_desired Float32)
 
 (declare-const pitch_rate_desired Float32)
 
 (declare-const yaw_rate_desired Float32)
 
-(declare-const o Float32)
+(declare-const get_out_subtype__controller_get_desired_rate__yaw_rate_desired Float32)
 
 (declare-const get_out_subtype__controller_get_desired_rate__pitch_rate_desired Float32)
 
-(declare-const o1 Float32)
-
-(declare-const o2 Float32)
-
-(declare-const o3 t_rate)
-
-(declare-const o4 Float32)
-
-(declare-const result Float32)
-
-(declare-const roll_rate_desired1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const pitch_rate_desired1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const yaw_rate_desired1 Float32)
-
-(declare-const get_out_subtype__controller_get_desired_rate__yaw_rate_desired Float32)
-
-(declare-const get_out_subtype__controller_get_desired_rate__pitch_rate_desired1 Float32)
-
 (declare-const get_out_subtype__controller_get_desired_rate__roll_rate_desired Float32)
-
-(declare-const result3 Float32)
-
-(declare-const roll_rate_desired2 Float32)
-
-(declare-const result4 Float32)
-
-(declare-const pitch_rate_desired2 Float32)
 
 ;; H
   (assert (fp.isFinite32 x))
@@ -229,79 +197,54 @@
   (assert (fp.isFinite32 z))
 
 ;; H
-  (assert (= result roll_rate_desired))
+  (assert
+  (= roll_rate_desired (fp #b0 #b00000000 #b00000000000000000000000)))
+
+;; H
+  (assert (in_range roll_rate_desired))
 
 ;; H
   (assert
-  (= roll_rate_desired1 (fp #b0 #b00000000 #b00000000000000000000000)))
+  (= pitch_rate_desired (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert (in_range roll_rate_desired1))
+  (assert (in_range pitch_rate_desired))
 
 ;; H
-  (assert (= result1 pitch_rate_desired))
+  (assert (= yaw_rate_desired (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
-  (assert
-  (= pitch_rate_desired1 (fp #b0 #b00000000 #b00000000000000000000000)))
+  (assert (in_range yaw_rate_desired))
 
 ;; H
-  (assert (in_range pitch_rate_desired1))
-
-;; H
-  (assert (= result2 yaw_rate_desired))
+  (assert (fp.isFinite32 pitch_rate_desired))
 
 ;; H
   (assert
-  (= yaw_rate_desired1 (fp #b0 #b00000000 #b00000000000000000000000)))
-
-;; H
-  (assert (in_range yaw_rate_desired1))
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__roll_rate_desired))
 
 ;; H
   (assert
-  (and (= o pitch_rate_desired1) (fp.isFinite32 pitch_rate_desired1)))
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__pitch_rate_desired))
+
+;; H
+  (assert
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__yaw_rate_desired))
+
+;; H
+  (assert
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__roll_rate_desired))
 
 ;; H
   (assert
   (= o get_out_subtype__controller_get_desired_rate__pitch_rate_desired))
 
 ;; H
-  (assert
-  (and
-  (and
-  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__roll_rate_desired)
-  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__pitch_rate_desired1))
-  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__yaw_rate_desired)))
+  (assert (= (to_rep o1) o))
 
 ;; H
   (assert
-  (and (= o1 get_out_subtype__controller_get_desired_rate__roll_rate_desired)
-  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__roll_rate_desired)))
-
-;; H
-  (assert (= result3 roll_rate_desired1))
-
-;; H
-  (assert (= roll_rate_desired2 o1))
-
-;; H
-  (assert
-  (and
-  (= o2 get_out_subtype__controller_get_desired_rate__pitch_rate_desired1)
-  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__pitch_rate_desired1)))
-
-;; H
-  (assert (= (to_rep o3) o2))
-
-;; H
-  (assert (= o4 (to_rep o3)))
-
-;; H
-  (assert (= result4 pitch_rate_desired1))
-
-;; H
-  (assert (= pitch_rate_desired2 o4))
+  (fp.isFinite32 get_out_subtype__controller_get_desired_rate__pitch_rate_desired))
 
 (assert
 ;; WP_parameter_def

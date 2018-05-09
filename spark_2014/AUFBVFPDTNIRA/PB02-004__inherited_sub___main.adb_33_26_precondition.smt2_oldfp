@@ -105,7 +105,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -591,45 +591,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -802,14 +802,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1087,6 +1087,13 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content t)))))
 (declare-sort integer 0)
 
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -1105,7 +1112,7 @@
 (define-fun integer__ref___projection ((a integer__ref)) integer (integer__content
                                                                  a))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -1214,6 +1221,9 @@
  (mk___split_fields (rec__rec__my_rec__x integer)(rec__rec__my_rec__y float)))))
 (define-fun us_split_fields_X__projection ((a us_split_fields)) integer
   (rec__rec__my_rec__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__rec__my_rec__y a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -1507,11 +1517,28 @@
 (define-fun sub_rec__ref___projection ((a sub_rec__ref)) us_rep1 (sub_rec__content
                                                                  a))
 
-(define-fun dynamic_invariant ((temp___expr_181 us_rep1)
+(declare-fun build_rec (Int) us_rep1)
+
+(declare-fun build_rec__function_guard (us_rep1 Int) Bool)
+
+(define-fun dynamic_invariant ((temp___expr_161 Int)
+  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
+  (temp___do_toplevel_159 Bool)
+  (temp___do_typ_inv_160 Bool)) Bool (=>
+                                     (or (= temp___is_init_157 true)
+                                     (<= 0 2)) (in_range temp___expr_161)))
+
+(define-fun dynamic_invariant1 ((temp___expr_181 us_rep1)
   (temp___is_init_177 Bool) (temp___skip_constant_178 Bool)
   (temp___do_toplevel_179 Bool) (temp___do_typ_inv_180 Bool)) Bool (in_range4
   (to_rep (rec__rec__sub_rec__z (us_split_discrs3 temp___expr_181)))
   (rec__rec__sub_rec__plop (us_split_fields3 temp___expr_181))))
+
+;; build_rec__post_axiom
+  (assert
+  (forall ((a Int))
+  (! (=> (dynamic_invariant a true true true true) (dynamic_invariant1
+     (build_rec a) true false true true)) :pattern ((build_rec a)) )))
 
 (define-fun in_range5 ((rec__rec__my_rec__e1 Int)
   (a us_rep)) Bool (= rec__rec__my_rec__e1 (to_rep3
@@ -1704,7 +1731,11 @@
 (define-fun sub_rec_ok__ref___projection ((a sub_rec_ok__ref)) us_rep2
   (sub_rec_ok__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_188 us_rep2)
+(declare-fun build_rec_ok (Int) us_rep2)
+
+(declare-fun build_rec_ok__function_guard (us_rep2 Int) Bool)
+
+(define-fun dynamic_invariant2 ((temp___expr_188 us_rep2)
   (temp___is_init_184 Bool) (temp___skip_constant_185 Bool)
   (temp___do_toplevel_186 Bool)
   (temp___do_typ_inv_187 Bool)) Bool (=> (rec__sub_rec_ok__plop__pred
@@ -1715,7 +1746,20 @@
                                      (rec__rec__sub_rec_ok__plop
                                      (us_split_fields5 temp___expr_188)))))
 
+;; build_rec_ok__post_axiom
+  (assert
+  (forall ((a Int))
+  (! (=> (dynamic_invariant a true true true true) (dynamic_invariant2
+     (build_rec_ok a) true false true true)) :pattern ((build_rec_ok a)) )))
+
 (declare-sort natural 0)
+
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -1734,7 +1778,7 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(declare-fun to_rep4 (natural) Int)
+(define-fun to_rep4 ((x natural)) Int (naturalqtint x))
 
 (declare-fun of_rep4 (Int) natural)
 
@@ -2024,7 +2068,18 @@
 (define-fun sub_arr__ref___projection ((a sub_arr__ref)) us_rep3 (sub_arr__content
                                                                  a))
 
-(define-fun dynamic_invariant2 ((temp___expr_201 us_rep3)
+(define-fun dynamic_invariant3 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
+  (temp___do_typ_inv_38 Bool)) Bool (=>
+                                    (or (= temp___is_init_35 true)
+                                    (<= 0 2147483647)) (in_range6
+                                    temp___expr_39)))
+
+(declare-fun build_arr (Int Int) us_rep3)
+
+(declare-fun build_arr__function_guard (us_rep3 Int Int) Bool)
+
+(define-fun dynamic_invariant4 ((temp___expr_201 us_rep3)
   (temp___is_init_197 Bool) (temp___skip_constant_198 Bool)
   (temp___do_toplevel_199 Bool)
   (temp___do_typ_inv_200 Bool)) Bool (let ((temp___203 (rec__rec__sub_arr__l
@@ -2052,50 +2107,12 @@
                                         (us_split_fields7 temp___expr_201)))
                                      (to_rep4 temp___203)))))))
 
-(define-fun dynamic_invariant3 ((temp___expr_161 Int)
-  (temp___is_init_157 Bool) (temp___skip_constant_158 Bool)
-  (temp___do_toplevel_159 Bool)
-  (temp___do_typ_inv_160 Bool)) Bool (=>
-                                     (or (= temp___is_init_157 true)
-                                     (<= 0 2)) (in_range temp___expr_161)))
-
-(declare-fun build_rec (Int) us_rep1)
-
-(declare-fun build_rec__function_guard (us_rep1 Int) Bool)
-
-;; build_rec__post_axiom
-  (assert
-  (forall ((a Int))
-  (! (=> (dynamic_invariant3 a true true true true) (dynamic_invariant
-     (build_rec a) true false true true)) :pattern ((build_rec a)) )))
-
-(declare-fun build_rec_ok (Int) us_rep2)
-
-(declare-fun build_rec_ok__function_guard (us_rep2 Int) Bool)
-
-;; build_rec_ok__post_axiom
-  (assert
-  (forall ((a Int))
-  (! (=> (dynamic_invariant3 a true true true true) (dynamic_invariant1
-     (build_rec_ok a) true false true true)) :pattern ((build_rec_ok a)) )))
-
-(define-fun dynamic_invariant4 ((temp___expr_39 Int) (temp___is_init_35 Bool)
-  (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
-  (temp___do_typ_inv_38 Bool)) Bool (=>
-                                    (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range6
-                                    temp___expr_39)))
-
-(declare-fun build_arr (Int Int) us_rep3)
-
-(declare-fun build_arr__function_guard (us_rep3 Int Int) Bool)
-
 ;; build_arr__post_axiom
   (assert
   (forall ((f Int) (l Int))
   (! (=>
-     (and (dynamic_invariant4 f true true true true) (dynamic_invariant4 l
-     true true true true)) (dynamic_invariant2 (build_arr f l) true false
+     (and (dynamic_invariant3 f true true true true) (dynamic_invariant3 l
+     true true true true)) (dynamic_invariant4 (build_arr f l) true false
      true true)) :pattern ((build_arr f l)) )))
 
 (declare-const x__split_discrs us_split_discrs2)

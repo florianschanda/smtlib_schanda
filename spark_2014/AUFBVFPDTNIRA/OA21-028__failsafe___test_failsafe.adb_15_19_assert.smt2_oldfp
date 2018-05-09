@@ -160,7 +160,7 @@
 
 (declare-fun fma (mode t t t) t)
 
-(declare-fun sqrt (mode t) t)
+(declare-fun sqrt1 (mode t) t)
 
 (declare-fun roundToIntegral (mode t) t)
 
@@ -646,45 +646,45 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt1 (Real) Real)
+(declare-fun sqrt2 (Real) Real)
 
 ;; Sqrt_positive
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt1 x)))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (<= 0.0 (sqrt2 x)))))
 
 ;; Sqrt_square
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt1 x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqr (sqrt2 x)) x))))
 
 ;; Square_sqrt
-  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt1 (* x x)) x))))
+  (assert (forall ((x Real)) (=> (<= 0.0 x) (= (sqrt2 (* x x)) x))))
 
 ;; Sqrt_mul
   (assert
   (forall ((x Real) (y Real))
   (=> (and (<= 0.0 x) (<= 0.0 y))
-  (= (sqrt1 (* x y)) (* (sqrt1 x) (sqrt1 y))))))
+  (= (sqrt2 (* x y)) (* (sqrt2 x) (sqrt2 y))))))
 
 ;; Sqrt_le
   (assert
   (forall ((x Real) (y Real))
-  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt1 x) (sqrt1 y)))))
+  (=> (and (<= 0.0 x) (<= x y)) (<= (sqrt2 x) (sqrt2 y)))))
 
 ;; sqrt_finite
   (assert
   (forall ((m mode) (x t))
   (! (=> (tqtisFinite x)
      (=> (<= 0.0 (tqtreal x))
-     (and (tqtisFinite (sqrt m x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (and (tqtisFinite (sqrt1 m x))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 ;; sqrt_finite_rev
   (assert
   (forall ((m mode) (x t))
-  (! (=> (tqtisFinite (sqrt m x))
+  (! (=> (tqtisFinite (sqrt1 m x))
      (and (tqtisFinite x)
      (and (<= 0.0 (tqtreal x))
-     (= (tqtreal (sqrt m x)) (round m (sqrt1 (tqtreal x))))))) :pattern (
-  (sqrt m x)) )))
+     (= (tqtreal (sqrt1 m x)) (round m (sqrt2 (tqtreal x))))))) :pattern (
+  (sqrt1 m x)) )))
 
 (define-fun same_sign_real ((x t)
   (r Real)) Bool (or (and (is_positive x) (< 0.0 r))
@@ -857,14 +857,14 @@
 ;; sqrt_special
   (assert
   (forall ((m mode) (x t))
-  (! (let ((r (sqrt m x)))
+  (! (let ((r (sqrt1 m x)))
      (and (=> (is_nan x) (is_nan r))
      (and (=> (is_plus_infinity x) (is_plus_infinity r))
      (and (=> (is_minus_infinity x) (is_nan r))
      (and (=> (and (tqtisFinite x) (< (tqtreal x) 0.0)) (is_nan r))
      (and (=> (is_zero x) (same_sign r x))
      (=> (and (tqtisFinite x) (< 0.0 (tqtreal x))) (is_positive r)))))))) :pattern (
-  (sqrt m x)) )))
+  (sqrt1 m x)) )))
 
 ;; of_int_add_exact
   (assert
@@ -1148,49 +1148,19 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
-(declare-sort time_slot 0)
-
-(define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
-                                              (bvule x #x31)))
-
-(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 ((_ BitVec 8)) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) (_ BitVec 8))
-
-(declare-fun user_eq (time_slot time_slot) Bool)
-
-(declare-const dummy time_slot)
-
-(declare-datatypes ()
-((time_slot__ref (mk_time_slot__ref (time_slot__content time_slot)))))
-(define-fun time_slot__ref___projection ((a time_slot__ref)) time_slot
-  (time_slot__content a))
-
-(define-fun dynamic_invariant ((temp___expr_243 (_ BitVec 8))
-  (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
-  (temp___do_toplevel_241 Bool)
-  (temp___do_typ_inv_242 Bool)) Bool (=>
-                                     (or (= temp___is_init_239 true)
-                                     (bvule #x00 #x31)) (in_range2
-                                     temp___expr_243)))
-
 (declare-sort battery_level_type 0)
 
 (define-fun bool_eq1 ((x t) (y t)) Bool (ite (eq x y) true false))
 
-(declare-fun user_eq1 (battery_level_type battery_level_type) Bool)
+(declare-fun user_eq (battery_level_type battery_level_type) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 (t) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (t) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) t)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) t)
 
-(declare-const dummy1 battery_level_type)
+(declare-const dummy battery_level_type)
 
 (declare-datatypes ()
 ((battery_level_type__ref
@@ -1284,6 +1254,36 @@
 (declare-fun is_valid__function_guard (Bool us_private
   (Array (_ BitVec 8) battery_level_type) (_ BitVec 8)) Bool)
 
+(declare-sort time_slot 0)
+
+(define-fun in_range2 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
+                                              (bvule x #x31)))
+
+(define-fun in_range_int ((x Int)) Bool (and (<= 0 x) (<= x 49)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE2 ((_ BitVec 8)) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) (_ BitVec 8))
+
+(declare-fun user_eq1 (time_slot time_slot) Bool)
+
+(declare-const dummy1 time_slot)
+
+(declare-datatypes ()
+((time_slot__ref (mk_time_slot__ref (time_slot__content time_slot)))))
+(define-fun time_slot__ref___projection ((a time_slot__ref)) time_slot
+  (time_slot__content a))
+
+(define-fun dynamic_invariant ((temp___expr_243 (_ BitVec 8))
+  (temp___is_init_239 Bool) (temp___skip_constant_240 Bool)
+  (temp___do_toplevel_241 Bool)
+  (temp___do_typ_inv_242 Bool)) Bool (=>
+                                     (or (= temp___is_init_239 true)
+                                     (bvule #x00 #x31)) (in_range2
+                                     temp___expr_243)))
+
 (declare-fun is_raised (us_private (Array (_ BitVec 8) battery_level_type)
   (_ BitVec 8)) Bool)
 
@@ -1335,6 +1335,20 @@
                                      (neg fliteral1) fliteral1)) (tqtisFinite
                                      temp___expr_236)))
 
+(declare-const battery_threshold t)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+(declare-const fliteral2 t)
+
+;; fliteral_axiom
+  (assert
+  (and (tqtisFinite fliteral2)
+  (= (tqtreal fliteral2) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
+
+;; battery_threshold__def_axiom
+  (assert (= battery_threshold fliteral2))
+
 (declare-sort time_slot_length 0)
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
@@ -1368,13 +1382,6 @@
                                      (bvule #x00 #x32)) (in_range3
                                      temp___expr_250)))
 
-(declare-const fliteral2 t)
-
-;; fliteral_axiom
-  (assert
-  (and (tqtisFinite fliteral2)
-  (= (tqtreal fliteral2) (/ 20000000298023223876953125.0 100000000000000000000000000.0))))
-
 ;; time_below_threshold__post_axiom
   (assert
   (forall
@@ -1385,16 +1392,17 @@
      (let ((result (time_below_threshold failsafe__model__battery_level_at
                    failsafe__model__current_time)))
      (and
-     (ite (le fliteral2
+     (ite (le battery_threshold
      (to_rep
      (select failsafe__model__battery_level_at failsafe__model__current_time)))
      (= result #x00)
      (ite (forall ((s (_ BitVec 8)))
           (=> (and (bvule #x00 s) (bvule s #x31)) (lt
-          (to_rep (select failsafe__model__battery_level_at s)) fliteral2)))
+          (to_rep (select failsafe__model__battery_level_at s))
+          battery_threshold)))
      (= result #x32)
      (and
-     (and (bvult result #x32) (le fliteral2
+     (and (bvult result #x32) (le battery_threshold
      (to_rep
      (select failsafe__model__battery_level_at (let ((temp___267 (bvsub failsafe__model__current_time result)))
                                                (ite (bvult failsafe__model__current_time result)
@@ -1408,11 +1416,13 @@
             (ite (bvult failsafe__model__current_time (bvsub result #x01))
             (bvadd temp___268 #x32) temp___268)) s)
      (bvule s failsafe__model__current_time)) (lt
-     (to_rep (select failsafe__model__battery_level_at s)) fliteral2)))
+     (to_rep (select failsafe__model__battery_level_at s))
+     battery_threshold)))
      (and
      (forall ((s (_ BitVec 8)))
      (=> (and (bvule #x00 s) (bvule s failsafe__model__current_time)) (lt
-     (to_rep (select failsafe__model__battery_level_at s)) fliteral2)))
+     (to_rep (select failsafe__model__battery_level_at s))
+     battery_threshold)))
      (forall ((s (_ BitVec 8)))
      (=>
      (and
@@ -1420,10 +1430,11 @@
             (ite (bvult failsafe__model__current_time (bvsub result #x01))
             (bvadd temp___269 #x32) temp___269)) s)
      (bvule s #x31)) (lt
-     (to_rep (select failsafe__model__battery_level_at s)) fliteral2))))))))
-     (dynamic_invariant2 result true false true true)))) :pattern ((time_below_threshold
-                                                                   failsafe__model__battery_level_at
-                                                                   failsafe__model__current_time)) ))))
+     (to_rep (select failsafe__model__battery_level_at s))
+     battery_threshold)))))))) (dynamic_invariant2 result true false true
+     true)))) :pattern ((time_below_threshold
+                        failsafe__model__battery_level_at
+                        failsafe__model__current_time)) ))))
 
 ;; is_valid__post_axiom
   (assert true)
@@ -1443,9 +1454,9 @@
 
 (declare-const failsafe_state us_private)
 
-(declare-const temp___323 (_ BitVec 8))
+(declare-const temp___325 (_ BitVec 8))
 
-(declare-const temp___322 (Array (_ BitVec 8) battery_level_type))
+(declare-const temp___324 (Array (_ BitVec 8) battery_level_type))
 
 (declare-const battery_level_at1 (Array (_ BitVec 8) battery_level_type))
 
@@ -1534,10 +1545,10 @@
   (assert (= j1 1))
 
 ;; H
-  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___323 current_time)))
+  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___325 current_time)))
 
 ;; H
-  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___322 battery_level_at)))
+  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___324 battery_level_at)))
 
 ;; H
   (assert

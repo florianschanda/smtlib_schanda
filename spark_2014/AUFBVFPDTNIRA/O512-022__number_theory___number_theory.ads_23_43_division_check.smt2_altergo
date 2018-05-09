@@ -953,6 +953,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1030,9 +1036,15 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-type fibonacci_argument_type
+type natural
 
-predicate in_range3(x: int) = ((0 <= x) and (x <= 46))
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1046,24 +1058,30 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq2 : fibonacci_argument_type, fibonacci_argument_type -> bool
+logic user_eq2 : natural, natural -> bool
 
-logic dummy2 : fibonacci_argument_type
+logic dummy2 : natural
 
-type fibonacci_argument_type__ref = { fibonacci_argument_type__content :
-fibonacci_argument_type
+type natural__ref = { natural__content : natural
 }
 
-function fibonacci_argument_type__ref___projection(a: fibonacci_argument_type__ref) : fibonacci_argument_type =
-  (a).fibonacci_argument_type__content
+function natural__ref___projection(a: natural__ref) : natural =
+  (a).natural__content
 
-logic n : int
+logic fib : int -> int
 
-logic attr__ATTRIBUTE_ADDRESS : int
+logic fib__function_guard : int, int -> prop
 
-type natural
+type fibonacci_argument_type
 
-predicate in_range4(x: int) = ((0 <= x) and (x <= 2147483647))
+logic fibonacci_argument_typeqtint : fibonacci_argument_type -> int
+
+axiom fibonacci_argument_typeqtaxiom :
+  (forall i:fibonacci_argument_type.
+  ((0 <= fibonacci_argument_typeqtint(i)) and
+  (fibonacci_argument_typeqtint(i) <= 46)))
+
+predicate in_range4(x: int) = ((0 <= x) and (x <= 46))
 
 logic bool_eq6 : int, int -> bool
 
@@ -1077,24 +1095,25 @@ logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE4 : us_image -> int
 
-logic user_eq3 : natural, natural -> bool
+logic user_eq3 : fibonacci_argument_type, fibonacci_argument_type -> bool
 
-logic dummy3 : natural
+logic dummy3 : fibonacci_argument_type
 
-type natural__ref = { natural__content : natural
+type fibonacci_argument_type__ref = { fibonacci_argument_type__content :
+fibonacci_argument_type
 }
 
-function natural__ref___projection(a: natural__ref) : natural =
-  (a).natural__content
-
-logic fib : int -> int
-
-logic fib__function_guard : int, int -> prop
+function fibonacci_argument_type__ref___projection(a: fibonacci_argument_type__ref) : fibonacci_argument_type =
+  (a).fibonacci_argument_type__content
 
 axiom fib__def_axiom :
-  (forall n1:int [fib(n1)]. (in_range3(n1) -> ((((n1 = 0) or (n1 = 1)) ->
-  (fib(n1) = n1)) and ((not ((n1 = 0) or (n1 = 1))) ->
-  (fib(n1) = (fib((n1 - 1)) + fib((n1 - 2))))))))
+  (forall n:int [fib(n)]. (in_range4(n) -> ((((n = 0) or (n = 1)) ->
+  (fib(n) = n)) and ((not ((n = 0) or (n = 1))) ->
+  (fib(n) = (fib((n - 1)) + fib((n - 2))))))))
+
+logic n : int
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 logic fliteral1 : t
 
@@ -1106,31 +1125,5 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.2360000610351562500000))
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def :
-  (forall number_theory__fib__result:int. forall o:int. forall o1:int.
-  forall o2:int. forall o3:int. forall o4:int. forall o5:int.
-  forall result:int. forall number_theory__fib__result1:int.
-  forall number_theory__fib__result2:int.
-  forall number_theory__fib__result3:int.
-  forall number_theory__fib__result4:int.
-  forall number_theory__fib__result5:int. (in_range3(n) ->
-  (((((number_theory__fib__result1 = number_theory__fib__result2) and
-  (number_theory__fib__result3 = number_theory__fib__result1)) and
-  (((((not (n = 0)) -> (n = 1)) and (o5 = n)) or ((not ((not (n = 0)) ->
-  (n = 1))) and (((((o1 = (n - 2)) and in_range3((n - 2))) and
-  ((o2 = fib(o1)) and (in_range4(o2) and (((((o1 = 0) or (o1 = 1)) and
-  (o2 = o1)) or ((not ((o1 = 0) or (o1 = 1))) and
-  (o2 = (fib((o1 - 1)) + fib((o1 - 2)))))) and lt(of_int(RNE, o2), add(RNE,
-  div(RNE, power(fliteral1, o1), fliteral2), fliteral)))))) and
-  ((((o = (n - 1)) and in_range3((n - 1))) and ((o3 = fib(o)) and
-  (in_range4(o3) and (((((o = 0) or (o = 1)) and (o3 = o)) or
-  ((not ((o = 0) or (o = 1))) and (o3 = (fib((o - 1)) + fib((o - 2)))))) and
-  lt(of_int(RNE, o3), add(RNE, div(RNE, power(fliteral1, o), fliteral2),
-  fliteral)))))) and (o4 = (o3 + o2)))) and ((o5 = o4) and
-  in_range2(o4))))) and (({ int__content = result } = { int__content =
-  number_theory__fib__result }) and (number_theory__fib__result1 = o5)))) and
-  (({ int__content = number_theory__fib__result4 } = { int__content =
-  number_theory__fib__result2 }) and
-  (number_theory__fib__result5 = number_theory__fib__result3))) ->
-  ((n <  0) -> neq(fliteral1, zeroF)))))
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 2765, characters 5-8 *)
+goal WP_parameter_def : true

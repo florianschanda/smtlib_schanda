@@ -1000,5 +1000,24 @@ logic fliteral4 : t
 axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
   (tqtreal(fliteral4) = 20.0))
 
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 6.0))
+
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 11.0))
+
  (* File "generic_interval_tests.adb", line 92, characters 0-0 *)
-goal WP_parameter_def : true
+goal WP_parameter_def :
+  (forall z:t. forall o:t. forall result:t. forall z1:t. forall z2:t.
+  forall z3:t. ((tqtisFinite(x) and ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(z)) and (((le(fliteral, x) and le(x, fliteral2)) or
+  (le(fliteral3, x) and le(x, fliteral4))) and ((((o = add(RNE, x,
+  fliteral)) and tqtisFinite(add(RNE, x, fliteral))) and ((result = z) and
+  (z1 = o))) and ((z1 = z2) and (z3 = z1)))))) -> ((match_bool(bool_le(z2,
+  fliteral5), true, bool_ge(z2, fliteral6)) = true) ->
+  (not (match_bool(bool_le(z2, fliteral5), bool_ge(z2, fliteral6),
+  false) = true)))))

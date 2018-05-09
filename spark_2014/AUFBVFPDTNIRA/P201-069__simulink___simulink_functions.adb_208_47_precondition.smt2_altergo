@@ -939,5 +939,10 @@ logic f : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(f) -> lt(fliteral1, f))
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 10.0))
+
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 19822, characters 5-8 *)
+goal WP_parameter_def : (tqtisFinite(f) -> lt(fliteral1, fliteral2))

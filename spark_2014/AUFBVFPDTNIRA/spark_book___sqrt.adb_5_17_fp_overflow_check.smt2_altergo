@@ -968,11 +968,28 @@ logic fliteral2 : t
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 2.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+logic fliteral3 : t
+
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 0.500000000000000000000000))
+
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/spark_book/Chapter-02/build/gnatprove/sqrt.mlw", line 2104, characters 5-8 *)
 goal WP_parameter_def :
-  (forall approx:t. forall o:t. forall o1:t. forall result:t.
-  forall approx1:t. (tqtisFinite(x) -> (tqtisFinite(tolerance) ->
-  ((le(neg(fliteral1), fliteral1) -> tqtisFinite(approx)) ->
-  (((result = approx) and (approx1 = div(RNE, x, fliteral2))) ->
-  ((((o = mul(RNE, approx1, approx1)) and tqtisFinite(mul(RNE, approx1,
-  approx1))) and (o1 = sub(RNE, x, o))) -> tqtisFinite(o1)))))))
+  (forall approx:t. forall o:t. forall o1:t. forall o2:t. forall o3:t.
+  forall o4:t. forall o5:t. forall o6:t. forall o7:t. forall o8:t.
+  forall o9:t. forall result:t. forall approx1:t. forall result1:bool.
+  forall approx2:t. forall result2:t. forall approx3:t. (tqtisFinite(x) ->
+  (tqtisFinite(tolerance) -> ((le(neg(fliteral1), fliteral1) ->
+  tqtisFinite(approx)) -> (((result = approx) and (approx1 = div(RNE, x,
+  fliteral2))) -> (((((((o = mul(RNE, approx1, approx1)) and
+  tqtisFinite(mul(RNE, approx1, approx1))) and (o1 = sub(RNE, x, o))) and
+  ((o2 = o1) and tqtisFinite(o1))) and (o3 = abs1(o2))) and ((lt(tolerance,
+  o3) and (result1 = true)) or ((not lt(tolerance, o3)) and
+  (result1 = false)))) -> ((result1 = true) -> (((le(neg(fliteral1),
+  fliteral1) -> tqtisFinite(approx2)) and lt(tolerance, abs1(sub(RNE, x,
+  mul(RNE, approx2, approx2))))) -> (((((((o4 = div(RNE, x, approx2)) and
+  tqtisFinite(div(RNE, x, approx2))) and (o5 = add(RNE, approx2, o4))) and
+  ((o6 = o5) and tqtisFinite(o5))) and (o7 = mul(RNE, fliteral3, o6))) and
+  ((result2 = approx2) and (approx3 = o7))) -> ((((o8 = mul(RNE, approx3,
+  approx3)) and tqtisFinite(mul(RNE, approx3, approx3))) and (o9 = sub(RNE,
+  x, o8))) -> tqtisFinite(o9)))))))))))

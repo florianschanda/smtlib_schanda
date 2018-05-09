@@ -1105,6 +1105,39 @@ logic fliteral3 : t
 axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 2.0))
 
+logic fliteral4 : t
+
+axiom fliteral_axiom4 : (tqtisFinite(fliteral4) and
+  (tqtreal(fliteral4) = 3.0))
+
+logic fliteral5 : t
+
+axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
+  (tqtreal(fliteral5) = 4.0))
+
+logic fliteral6 : t
+
+axiom fliteral_axiom6 : (tqtisFinite(fliteral6) and
+  (tqtreal(fliteral6) = 5.0))
+
+logic fliteral7 : t
+
+axiom fliteral_axiom7 : (tqtisFinite(fliteral7) and
+  (tqtreal(fliteral7) = 340282346638528859811704183484516925440.0))
+
  (* File "a-unccon.ads", line 20, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> ((le(fliteral1, x) and le(x,
-  fliteral2)) -> tqtisFinite(add(NearestTiesToEven, x, fliteral3))))
+goal WP_parameter_def :
+  (forall o:t. forall o1:t. forall o2:t. forall o3:t. forall o4:t.
+  forall o5:t. forall o6:t. forall o7:t. forall o8:t. forall o9:t.
+  forall o10:t. forall o11:bool. (tqtisFinite(x) -> ((le(fliteral1, x) and
+  le(x, fliteral2)) -> ((((((((((((((o = add(NearestTiesToEven, x,
+  fliteral3)) and tqtisFinite(add(NearestTiesToEven, x, fliteral3))) and
+  (o1 = mul(NearestTiesToEven, o, x))) and ((o2 = o1) and
+  tqtisFinite(o1))) and (o3 = add(NearestTiesToEven, o2, fliteral4))) and
+  ((o4 = o3) and tqtisFinite(o3))) and (o5 = add(NearestTiesToEven, o4,
+  fliteral5))) and ((o6 = o5) and tqtisFinite(o5))) and
+  (o7 = mul(NearestTiesToEven, o6, x))) and ((o8 = o7) and
+  tqtisFinite(o7))) and (o9 = add(NearestTiesToEven, o8, fliteral6))) and
+  ((o10 = o9) and tqtisFinite(o9))) and ((le(o10, fliteral7) and
+  (o11 = true)) or ((not le(o10, fliteral7)) and (o11 = false)))) ->
+  tqtisFinite(add(NearestTiesToEven, x, fliteral3))))))

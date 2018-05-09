@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -130,6 +126,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__package_1__record_t__a float)(rec__package_1__record_t__b float)))))
+(define-fun us_split_fields_A__projection ((a us_split_fields)) float
+  (rec__package_1__record_t__a a))
+
+(define-fun us_split_fields_B__projection ((a us_split_fields)) float
+  (rec__package_1__record_t__b a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -214,9 +216,11 @@
 (define-fun record_t__ref___projection ((a record_t__ref)) us_rep (record_t__content
                                                                   a))
 
-(declare-const record_const us_rep)
+(declare-const scalar_const Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const record_const us_rep)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
@@ -224,14 +228,19 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
 (declare-const temp Float32)
 
-(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 ;; temp__def_axiom
   (assert
   (= temp (to_rep
           (rec__package_1__record_t__a (us_split_fields1 record_const)))))
+
+;; scalar_const__def_axiom
+  (assert (= scalar_const (fp #b0 #b01111000 #b01000111101011100001010)))
 
 ;; record_const__def_axiom
   (assert
@@ -254,16 +263,21 @@
 
 (declare-const o3 float)
 
-(declare-const temp___163 float)
+(declare-const temp___164 float)
 
-(declare-const temp___1631 float)
+(declare-const temp___1641 float)
 
-(declare-const result Float32)
+;; H
+  (assert (fp.isFinite32 scalar_const))
 
-(declare-const res_11 Float32)
+;; H
+  (assert (= (fp #b0 #b01111000 #b01000111101011100001010) scalar_const))
 
 ;; H
   (assert (= (to_rep o) (fp #b0 #b10000010 #b10000000000000000000000)))
+
+;; H
+  (assert (= o o3))
 
 ;; H
   (assert (= (to_rep o1) (fp #b0 #b10000001 #b11000000000000000000000)))
@@ -272,17 +286,14 @@
   (assert (= o1 o2))
 
 ;; H
-  (assert (= o o3))
+  (assert (= temp___164 o2))
 
 ;; H
-  (assert (= temp___163 o2))
-
-;; H
-  (assert (= temp___1631 o3))
+  (assert (= temp___1641 o3))
 
 ;; H
   (assert
-  (= (mk___rep (mk___split_fields temp___163 temp___1631)) record_const))
+  (= (mk___rep (mk___split_fields temp___164 temp___1641)) record_const))
 
 ;; H
   (assert
@@ -310,17 +321,12 @@
 ;; H
   (assert (fp.isFinite32 temp))
 
-;; H
-  (assert (= result res_1))
-
-;; H
-  (assert (= res_11 (fp #b0 #b01111001 #b01000111101011100001010)))
-
 (assert
 ;; WP_parameter_def
  ;; File "package_1.ads", line 11, characters 0-0
   (not
-  (fp.isFinite32 (fp.add RNE (fp #b0 #b01111000 #b01000111101011100001010)
-  (to_rep (rec__package_1__record_t__a (us_split_fields1 record_const)))))))
+  (fp.isFinite32 (fp.add RNE scalar_const (to_rep
+                                          (rec__package_1__record_t__a
+                                          (us_split_fields1 record_const)))))))
 (check-sat)
 (exit)

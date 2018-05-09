@@ -927,7 +927,11 @@ logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
-type tfloat64B
+logic low_bound : int -> t
+
+logic low_bound__function_guard : t, int -> prop
+
+type float641
 
 logic bool_eq2 : t, t -> bool
 
@@ -935,7 +939,7 @@ axiom bool_eq_def2 :
   (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
 
-logic user_eq : tfloat64B, tfloat64B -> bool
+logic user_eq : float641, float641 -> bool
 
 logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
 
@@ -943,31 +947,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE1 : us_image -> t
 
-logic dummy : tfloat64B
-
-type tfloat64B__ref = { tfloat64B__content : tfloat64B
-}
-
-function tfloat64B__ref___projection(a: tfloat64B__ref) : tfloat64B =
-  (a).tfloat64B__content
-
-type float641
-
-logic bool_eq3 : t, t -> bool
-
-axiom bool_eq_def3 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
-
-logic user_eq1 : float641, float641 -> bool
-
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
-
-logic dummy1 : float641
+logic dummy : float641
 
 type float64__ref = { float64__content : float641
 }
@@ -977,9 +957,14 @@ function float64__ref___projection(a: float64__ref) : float641 =
 
 type frame
 
+logic frameqtint : frame -> int
+
+axiom frameqtaxiom :
+  (forall i:frame. ((0 <= frameqtint(i)) and (frameqtint(i) <= 25000)))
+
 predicate in_range2(x: int) = ((0 <= x) and (x <= 25000))
 
-logic bool_eq4 : int, int -> bool
+logic bool_eq3 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -992,7 +977,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq4(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -1009,57 +994,26 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq5 : int, int -> bool
+logic bool_eq4 : int, int -> bool
 
-axiom bool_eq_def4 :
-  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
-logic user_eq2 : frame, frame -> bool
+logic user_eq1 : frame, frame -> bool
 
-logic dummy2 : frame
+logic dummy1 : frame
 
 type frame__ref = { frame__content : frame
 }
 
 function frame__ref___projection(a: frame__ref) : frame = (a).frame__content
-
-type ratio_t
-
-predicate in_range3(x: t) = (tqtisFinite(x) and (le(neg(fliteral), x) and
-  le(x, fliteral)))
-
-logic bool_eq6 : t, t -> bool
-
-axiom bool_eq_def5 :
-  (forall x:t. forall y:t [bool_eq6(x, y)]. ((eq(x, y) -> (bool_eq6(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq6(x, y) = false))))
-
-logic user_eq3 : ratio_t, ratio_t -> bool
-
-logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE4 : us_image -> t
-
-logic dummy3 : ratio_t
-
-type ratio_t__ref = { ratio_t__content : ratio_t
-}
-
-function ratio_t__ref___projection(a: ratio_t__ref) : ratio_t =
-  (a).ratio_t__content
-
-logic low_bound : int -> t
-
-logic low_bound__function_guard : t, int -> prop
 
 axiom low_bound__post_axiom :
   (forall n:int [low_bound(n)]. (in_range2(n) -> tqtisFinite(low_bound(n))))
@@ -1111,6 +1065,57 @@ axiom in_bounds__def_axiom :
   (forall v:t [in_bounds(v)]. ((in_bounds(v) = true) <-> (le(neg(fliteral2),
   v) and le(v, fliteral2))))
 
+type tfloat64B
+
+logic bool_eq5 : t, t -> bool
+
+axiom bool_eq_def4 :
+  (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
+
+logic user_eq2 : tfloat64B, tfloat64B -> bool
+
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
+
+logic dummy2 : tfloat64B
+
+type tfloat64B__ref = { tfloat64B__content : tfloat64B
+}
+
+function tfloat64B__ref___projection(a: tfloat64B__ref) : tfloat64B =
+  (a).tfloat64B__content
+
+type ratio_t
+
+predicate in_range3(x: t) = (tqtisFinite(x) and (le(neg(fliteral), x) and
+  le(x, fliteral)))
+
+logic bool_eq6 : t, t -> bool
+
+axiom bool_eq_def5 :
+  (forall x:t. forall y:t [bool_eq6(x, y)]. ((eq(x, y) -> (bool_eq6(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq6(x, y) = false))))
+
+logic user_eq3 : ratio_t, ratio_t -> bool
+
+logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> t
+
+logic dummy3 : ratio_t
+
+type ratio_t__ref = { ratio_t__content : ratio_t
+}
+
+function ratio_t__ref___projection(a: ratio_t__ref) : ratio_t =
+  (a).ratio_t__content
+
 logic n : int
 
 logic attr__ATTRIBUTE_ADDRESS : int
@@ -1156,5 +1161,5 @@ goal WP_parameter_def :
   mul(RNE, factor, fliteral3), fliteral4) = delta_speed) ->
   (tqtisFinite(delta_speed) -> ((((o = add(RNE, old_speed, delta_speed)) and
   tqtisFinite(add(RNE, old_speed, delta_speed))) and (({ t__content = result
-  } = { t__content = new_speed }) and (new_speed1 = o))) -> le(neg(fliteral),
-  delta_speed))))))))))
+  } = { t__content = new_speed }) and (new_speed1 = o))) -> le(delta_speed,
+  fliteral))))))))))

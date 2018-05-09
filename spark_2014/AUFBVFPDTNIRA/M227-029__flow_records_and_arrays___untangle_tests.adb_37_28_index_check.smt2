@@ -40,6 +40,13 @@
 
 (declare-sort positive 0)
 
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
+
 (define-fun in_range ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
@@ -78,10 +85,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -104,7 +107,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -148,6 +151,18 @@
 ((us_split_fields
  (mk___split_fields
  (rec__untangle_tests__coordinate__x float)(rec__untangle_tests__coordinate__y float)(rec__untangle_tests__coordinate__z float)(rec__untangle_tests__coordinate__w float)))))
+(define-fun us_split_fields_X__projection ((a us_split_fields)) float
+  (rec__untangle_tests__coordinate__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields)) float
+  (rec__untangle_tests__coordinate__y a))
+
+(define-fun us_split_fields_Z__projection ((a us_split_fields)) float
+  (rec__untangle_tests__coordinate__z a))
+
+(define-fun us_split_fields_W__projection ((a us_split_fields)) float
+  (rec__untangle_tests__coordinate__w a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -459,6 +474,13 @@
 
 (declare-sort ttriangle_listD1 0)
 
+(declare-fun ttriangle_listD1qtint (ttriangle_listD1) Int)
+
+;; ttriangle_listD1'axiom
+  (assert
+  (forall ((i ttriangle_listD1))
+  (and (<= 1 (ttriangle_listD1qtint i)) (<= (ttriangle_listD1qtint i) 100))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 100)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
@@ -554,6 +576,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "untangle_tests.adb", line 3, characters 0-0
-  (not (<= 1 a)))
+  (not (<= a 100)))
 (check-sat)
 (exit)

@@ -141,12 +141,9 @@
 ;; H
   (assert (= result1 pack__associativity_test__result4))
 
-;; H
-  (assert (= pack__associativity_test__result4 true))
-
 (assert
 ;; WP_parameter_def
  ;; File "pack.ads", line 17, characters 0-0
-  (not true))
+  (not (= pack__associativity_test__result4 true)))
 (check-sat)
 (exit)

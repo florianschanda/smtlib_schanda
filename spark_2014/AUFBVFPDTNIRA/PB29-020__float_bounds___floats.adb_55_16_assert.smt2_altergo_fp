@@ -2176,5 +2176,5 @@ goal WP_parameter_def :
   (o35 = (d4[4 <- o34]))) and ((result18 = d4) and (d5 = o35))) ->
   ((le1(neg1(fliteral4), to_rep1((d5[1]))) and le1(to_rep1((d5[1])),
   fliteral4)) -> ((le1(neg1(fliteral4), to_rep1((d5[2]))) and
-  le1(to_rep1((d5[2])), fliteral4)) -> le1(neg1(fliteral4),
-  to_rep1((d5[3]))))))))))))))))))))))))))))))))))))))))))))
+  le1(to_rep1((d5[2])), fliteral4)) -> le1(to_rep1((d5[3])),
+  fliteral4))))))))))))))))))))))))))))))))))))))))))

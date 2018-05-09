@@ -1098,15 +1098,4 @@ axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 10.0))
 
  (* File "flight_manager.ads", line 3, characters 0-0 *)
-goal WP_parameter_def :
-  (forall f:t. forall o:t. forall o1:t. forall f1:t. forall result:t.
-  forall f2:t. forall f3:t. forall f4:t. ((tqtisFinite(f) and
-  (tqtisFinite(distance_to_target) and (((lt(distance_to_target,
-  fliteral1) and ((((o = mul(NearestTiesToEven, f, distance_to_target)) and
-  tqtisFinite(mul(NearestTiesToEven, f, distance_to_target))) and
-  (o1 = div(NearestTiesToEven, o, fliteral1))) and (({ t__content = result
-  } = { t__content = f }) and (f2 = o1)))) or ((not lt(distance_to_target,
-  fliteral1)) and ((f2 = f) and (f2 = f1)))) and ((f2 = f3) and
-  (f4 = f2))))) -> (lt(distance_to_target, fliteral1) -> eq(f3,
-  div(NearestTiesToEven, mul(NearestTiesToEven, f, distance_to_target),
-  fliteral1)))))
+goal WP_parameter_def : true

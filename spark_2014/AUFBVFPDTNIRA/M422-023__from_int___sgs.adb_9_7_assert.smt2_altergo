@@ -897,6 +897,14 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
+logic a : int -> t
+
+logic a__function_guard : t, int -> prop
+
+logic c : int -> t
+
+logic c__function_guard : t, int -> prop
+
 type float1
 
 logic bool_eq1 : t, t -> bool
@@ -918,10 +926,14 @@ logic dummy : float1
 type float__ref = { float__content : float1
 }
 
-function float__ref___2__projection(a: float__ref) : float1 =
-  (a).float__content
+function float__ref___2__projection(a1: float__ref) : float1 =
+  (a1).float__content
 
 type t1
+
+logic tqtint : t1 -> int
+
+axiom tqtaxiom1 : (forall i:t1. ((0 <= tqtint(i)) and (tqtint(i) <= 14)))
 
 predicate in_range1(x: int) = ((0 <= x) and (x <= 14))
 
@@ -974,9 +986,7 @@ logic dummy1 : t1
 type t__ref1 = { t__content1 : t1
 }
 
-function t__ref___projection(a: t__ref1) : t1 = (a).t__content1
-
-type u
+function t__ref___projection(a1: t__ref1) : t1 = (a1).t__content1
 
 logic fliteral1 : t
 
@@ -987,6 +997,14 @@ logic fliteral2 : t
 
 axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
   (tqtreal(fliteral2) = 14.0))
+
+axiom a__post_axiom :
+  (forall x:int [a(x)]. (in_range1(x) -> ((le(fliteral1, a(x)) and le(a(x),
+  fliteral2)) and tqtisFinite(a(x)))))
+
+axiom a__def_axiom : (forall x:int [a(x)]. (in_range1(x) -> (a(x) = c(x))))
+
+type u
 
 predicate in_range2(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
   fliteral2)))
@@ -1010,7 +1028,7 @@ logic dummy2 : u
 type u__ref = { u__content : u
 }
 
-function u__ref___projection(a: u__ref) : u = (a).u__content
+function u__ref___projection(a1: u__ref) : u = (a1).u__content
 
 logic x1 : int
 
@@ -1028,25 +1046,17 @@ logic x4 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
-logic a : int -> t
-
-logic a__function_guard : t, int -> prop
-
-logic c : int -> t
-
-logic c__function_guard : t, int -> prop
-
-axiom a__post_axiom :
-  (forall x:int [a(x)]. (in_range1(x) -> ((le(fliteral1, a(x)) and le(a(x),
-  fliteral2)) and tqtisFinite(a(x)))))
-
-axiom a__def_axiom : (forall x:int [a(x)]. (in_range1(x) -> (a(x) = c(x))))
-
 logic attr__ATTRIBUTE_ADDRESS4 : int
 
 logic attr__ATTRIBUTE_ADDRESS5 : int
 
 type integer
+
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
 
 predicate in_range3(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 

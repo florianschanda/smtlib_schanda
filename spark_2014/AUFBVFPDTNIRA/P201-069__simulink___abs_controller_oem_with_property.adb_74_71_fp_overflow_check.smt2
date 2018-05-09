@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -169,11 +165,7 @@
 
 (declare-const epsifzero_out12 Float64)
 
-(declare-const result2 Float64)
-
 (declare-const diff_out11 Float64)
-
-(declare-const result3 Float64)
 
 (declare-const difference_out11 Float64)
 
@@ -257,9 +249,10 @@
   (= epsifzero_out11 epsifzero_out12)))
 
 ;; H
-  (assert
-  (and (= o (fp.div RNE wheel_speed epsifzero_out11))
-  (fp.isFinite64 (fp.div RNE wheel_speed epsifzero_out11))))
+  (assert (= o (fp.div RNE wheel_speed epsifzero_out11)))
+
+;; H
+  (assert (fp.isFinite64 (fp.div RNE wheel_speed epsifzero_out11)))
 
 ;; H
   (assert
@@ -267,43 +260,44 @@
   o)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite64 o1)))
-
-;; H
-  (assert (= result2 diff_out1))
+  (assert (= o2 o1))
 
 ;; H
   (assert (= diff_out11 o2))
 
 ;; H
-  (assert
-  (and
-  (= o3 (fp.sub RNE (fp #b0 #b01111111100 #b1001100110011001100110011001100110011001100110011010)
-  diff_out11))
-  (fp.isFinite64 (fp.sub RNE (fp #b0 #b01111111100 #b1001100110011001100110011001100110011001100110011010)
-  diff_out11))))
+  (assert (fp.isFinite64 o1))
 
 ;; H
-  (assert (= result3 difference_out1))
+  (assert
+  (= o3 (fp.sub RNE (fp #b0 #b01111111100 #b1001100110011001100110011001100110011001100110011010)
+  diff_out11)))
 
 ;; H
   (assert (= difference_out11 o3))
 
 ;; H
   (assert
-  (and
-  (= o4 (boolean_to_long_float
-        (ite (fp.lt difference_out11 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
-        true false)))
-  (fp.isFinite64 o4)))
+  (fp.isFinite64 (fp.sub RNE (fp #b0 #b01111111100 #b1001100110011001100110011001100110011001100110011010)
+  diff_out11)))
 
 ;; H
   (assert
-  (and
+  (= o4 (boolean_to_long_float
+        (ite (fp.lt difference_out11 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
+        true false))))
+
+;; H
+  (assert (fp.isFinite64 o4))
+
+;; H
+  (assert
   (= o5 (boolean_to_long_float
         (ite (fp.lt (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        difference_out11) true false)))
-  (fp.isFinite64 o5)))
+        difference_out11) true false))))
+
+;; H
+  (assert (fp.isFinite64 o5))
 
 ;; H
   (assert (= o6 (fp.sub RNE o5 o4)))

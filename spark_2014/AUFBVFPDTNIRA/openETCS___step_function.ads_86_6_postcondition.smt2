@@ -48,6 +48,14 @@
 
 (declare-sort num_delimiters_range 0)
 
+(declare-fun num_delimiters_rangeqtint (num_delimiters_range) Int)
+
+;; num_delimiters_range'axiom
+  (assert
+  (forall ((i num_delimiters_range))
+  (and (<= 0 (num_delimiters_rangeqtint i))
+  (<= (num_delimiters_rangeqtint i) 10))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
@@ -74,7 +82,8 @@
                                      (or (= temp___is_init_155 true)
                                      (<= 0 10)) (in_range1 temp___expr_159)))
 
-(declare-fun to_rep (num_delimiters_range) Int)
+(define-fun to_rep ((x num_delimiters_range)) Int (num_delimiters_rangeqtint
+                                                  x))
 
 (declare-fun of_rep (Int) num_delimiters_range)
 
@@ -108,10 +117,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -134,7 +139,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -178,6 +183,14 @@
 
 (declare-sort function_range 0)
 
+(declare-fun function_rangeqtint (function_range) Int)
+
+;; function_range'axiom
+  (assert
+  (forall ((i function_range))
+  (and (<= 0 (function_rangeqtint i))
+  (<= (function_rangeqtint i) 2147483647))))
+
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -196,7 +209,7 @@
 (define-fun function_range__ref___projection ((a function_range__ref)) function_range
   (function_range__content a))
 
-(declare-fun to_rep2 (function_range) Int)
+(define-fun to_rep2 ((x function_range)) Int (function_rangeqtint x))
 
 (declare-fun of_rep2 (Int) function_range)
 
@@ -222,6 +235,9 @@
  (rec__step_function__delimiter_entry__delimiter function_range)(rec__step_function__delimiter_entry__value float)))))
 (define-fun us_split_fields_Delimiter__projection ((a us_split_fields)) function_range
   (rec__step_function__delimiter_entry__delimiter a))
+
+(define-fun us_split_fields_Value__projection ((a us_split_fields)) float
+  (rec__step_function__delimiter_entry__value a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -535,13 +551,7 @@
 
 (declare-const scan2 Bool)
 
-(declare-const i3 Int)
-
 (declare-const scan3 Bool)
-
-(declare-const i4 Int)
-
-(declare-const scan4 Bool)
 
 ;; H
   (assert (in_range1 i))
@@ -626,13 +636,7 @@
   (assert (= scan2 scan3))
 
 ;; H
-  (assert (= i2 i3))
-
-;; H
-  (assert (= scan4 scan2))
-
-;; H
-  (assert (= i4 i2))
+  (assert (= scan3 true))
 
 ;; H
   (assert
@@ -642,7 +646,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (= i3 (+ i 1))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 6451, characters 5-8
+  (not (= scan true)))
 (check-sat)
 (exit)

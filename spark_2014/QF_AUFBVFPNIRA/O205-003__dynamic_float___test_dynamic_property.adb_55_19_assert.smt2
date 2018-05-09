@@ -58,30 +58,32 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-const d Float32)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) x)
-                                         (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
-
-(define-fun dynamic_invariant1 ((temp___expr_158 Float32)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)
-  (temp___do_typ_inv_157 Bool)) Bool (=>
-                                     (or (= temp___is_init_154 true)
-                                     (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
-                                     (in_range1 temp___expr_158)))
-
 (declare-const c Float32)
 
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const last Float32)
 
 (define-fun dynamic_property ((first_int Float32) (last_int Float32)
+  (x Float32)) Bool (and (fp.isFinite32 x)
+                    (and (fp.leq first_int x) (fp.leq x last_int))))
+
+(define-fun dynamic_invariant1 ((temp___expr_172 Float32)
+  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
+  (temp___do_toplevel_170 Bool)
+  (temp___do_typ_inv_171 Bool)) Bool (=>
+                                     (or (= temp___is_init_168 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000)
+                                     last)) (dynamic_property
+                                     (fp #b0 #b00000000 #b00000000000000000000000)
+                                     last temp___expr_172)))
+
+;; last__def_axiom
+  (assert (= last c))
+
+(declare-const last1 Float32)
+
+(define-fun dynamic_property1 ((first_int Float32) (last_int Float32)
   (x Float32)) Bool (and (fp.isFinite32 x)
                     (and (fp.leq first_int x) (fp.leq x last_int))))
 
@@ -91,33 +93,31 @@
   (temp___do_typ_inv_164 Bool)) Bool (=>
                                      (or (= temp___is_init_161 true)
                                      (fp.leq (fp #b0 #b01111111 #b00000000000000000000000)
-                                     last)) (dynamic_property
-                                     (fp #b0 #b01111111 #b00000000000000000000000)
-                                     last temp___expr_165)))
-
-;; last__def_axiom
-  (assert (= last c))
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
-(declare-const last1 Float32)
-
-(define-fun dynamic_property1 ((first_int Float32) (last_int Float32)
-  (x Float32)) Bool (and (fp.isFinite32 x)
-                    (and (fp.leq first_int x) (fp.leq x last_int))))
-
-(define-fun dynamic_invariant3 ((temp___expr_172 Float32)
-  (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
-  (temp___do_toplevel_170 Bool)
-  (temp___do_typ_inv_171 Bool)) Bool (=>
-                                     (or (= temp___is_init_168 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000)
                                      last1)) (dynamic_property1
-                                     (fp #b0 #b00000000 #b00000000000000000000000)
-                                     last1 temp___expr_172)))
+                                     (fp #b0 #b01111111 #b00000000000000000000000)
+                                     last1 temp___expr_165)))
 
 ;; last__def_axiom
   (assert (= last1 c))
+
+(declare-const d Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b10000101 #b10010000000000000000000)))))
+
+(define-fun dynamic_invariant3 ((temp___expr_158 Float32)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b10000101 #b10010000000000000000000)))
+                                     (in_range1 temp___expr_158)))
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -201,8 +201,8 @@
 
 ;; H
   (assert
-  (and (= us c) (dynamic_property
-  (fp #b0 #b01111111 #b00000000000000000000000) last c)))
+  (and (= us c) (dynamic_property1
+  (fp #b0 #b01111111 #b00000000000000000000000) last1 c)))
 
 ;; H
   (assert (= o c))
@@ -214,19 +214,19 @@
   (assert (= x1 o))
 
 ;; H
-  (assert (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000)
-  last x1))
+  (assert (dynamic_property1 (fp #b0 #b01111111 #b00000000000000000000000)
+  last1 x1))
 
 ;; H
-  (assert (dynamic_property1 (fp #b0 #b00000000 #b00000000000000000000000)
-  last1 y))
+  (assert (dynamic_property (fp #b0 #b00000000 #b00000000000000000000000)
+  last y))
 
 (declare-const abstr Float32)
 
 ;; H
   (assert
-  (and (= o1 abstr) (dynamic_property
-  (fp #b0 #b01111111 #b00000000000000000000000) last o1)))
+  (and (= o1 abstr) (dynamic_property1
+  (fp #b0 #b01111111 #b00000000000000000000000) last1 o1)))
 
 ;; H
   (assert (= result1 x1))
@@ -243,8 +243,8 @@
   (assert (fp.leq abstr1 c))
 
 ;; H
-  (assert (dynamic_property (fp #b0 #b01111111 #b00000000000000000000000)
-  last x3))
+  (assert (dynamic_property1 (fp #b0 #b01111111 #b00000000000000000000000)
+  last1 x3))
 
 (assert
 ;; WP_parameter_def

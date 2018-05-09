@@ -108,13 +108,21 @@
 ;; lat_long__coordinates__long__position_axiom
   (assert (<= 0 lat_long__coordinates__long__position))
 
+(declare-const r Float32)
+
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const conv_deg_to_rad Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -123,6 +131,12 @@
                                     (or (= temp___is_init_56 true)
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
+
+;; r__def_axiom
+  (assert (= r (fp #b0 #b10010101 #b10000100101000110101001)))
+
+;; conv_deg_to_rad__def_axiom
+  (assert (= conv_deg_to_rad (fp #b0 #b01111001 #b00011101111101000110101)))
 
 (define-fun dynamic_invariant2 ((temp___expr_172 Float32)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
@@ -211,6 +225,18 @@
 (declare-const lat_long__distance__result5 Float32)
 
 (declare-const result3 Float32)
+
+;; H
+  (assert (fp.isFinite32 r))
+
+;; H
+  (assert (= (fp #b0 #b10010101 #b10000100101000110101001) r))
+
+;; H
+  (assert (fp.isFinite32 conv_deg_to_rad))
+
+;; H
+  (assert (= (fp #b0 #b01111001 #b00011101111101000110101) conv_deg_to_rad))
 
 ;; H
   (assert

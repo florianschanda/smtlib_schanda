@@ -80,6 +80,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type num_delimiters_range
 
+logic num_delimiters_rangeqtint : num_delimiters_range -> int
+
+axiom num_delimiters_rangeqtaxiom :
+  (forall i:num_delimiters_range. ((0 <= num_delimiters_rangeqtint(i)) and
+  (num_delimiters_rangeqtint(i) <= 10)))
+
 predicate in_range1(x: int) = ((0 <= x) and (x <= 10))
 
 logic bool_eq1 : int, int -> bool
@@ -135,7 +141,7 @@ num_delimiters_range
 function num_delimiters_range__ref___projection(a: num_delimiters_range__ref) : num_delimiters_range =
   (a).num_delimiters_range__content
 
-logic to_rep : num_delimiters_range -> int
+function to_rep(x: num_delimiters_range) : int = num_delimiters_rangeqtint(x)
 
 logic of_rep : int -> num_delimiters_range
 
@@ -1034,6 +1040,12 @@ axiom coerce_axiom1 :
 
 type function_range
 
+logic function_rangeqtint : function_range -> int
+
+axiom function_rangeqtaxiom :
+  (forall i:function_range. ((0 <= function_rangeqtint(i)) and
+  (function_rangeqtint(i) <= 2147483647)))
+
 predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
@@ -1058,7 +1070,7 @@ type function_range__ref = { function_range__content : function_range
 function function_range__ref___projection(a: function_range__ref) : function_range =
   (a).function_range__content
 
-logic to_rep2 : function_range -> int
+function to_rep2(x: function_range) : int = function_rangeqtint(x)
 
 logic of_rep2 : int -> function_range
 
@@ -1078,6 +1090,9 @@ function_range; rec__step_function__delimiter_entry__value : float1
 
 function us_split_fields_Delimiter__projection(a: us_split_fields) : function_range =
   (a).rec__step_function__delimiter_entry__delimiter
+
+function us_split_fields_Value__projection(a: us_split_fields) : float1 =
+  (a).rec__step_function__delimiter_entry__value
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1360,7 +1375,7 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 6451, characters 5-8 *)
 goal WP_parameter_def :
   (forall i:int. forall scan:bool. forall o:int. forall i1:int.
   forall scan1:bool. forall result:int. forall i2:int. forall result1:bool.
@@ -1371,4 +1386,4 @@ goal WP_parameter_def :
   ((not (i <  to_rep(sfun))) and (((result1 = scan) and
   (scan2 = of_int(0))) and ((i2 = i) and (i2 = i1))))) and
   (((scan2 = scan3) and (i2 = i3)) and ((scan4 = scan2) and (i4 = i2))))) ->
-  ((i <  to_rep(sfun)) -> (i3 = (i + 1)))))
+  ((i <  to_rep(sfun)) -> ((scan3 = true) -> (scan = true)))))

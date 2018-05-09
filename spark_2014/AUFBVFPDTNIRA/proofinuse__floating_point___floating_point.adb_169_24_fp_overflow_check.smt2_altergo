@@ -1083,7 +1083,7 @@ logic fliteral5 : t
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.001000000047497451305389404296875))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10381, characters 5-8 *)
 goal WP_parameter_def :
   (forall res:t. forall o:t. forall o1:t. forall o2:t.
   forall floating_point__angle_between__ba_dot_bc__assume:t. forall o3:t.

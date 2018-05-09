@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -137,6 +133,11 @@
 
 (declare-sort t 0)
 
+(declare-fun tqtint (t) Int)
+
+;; t'axiom
+  (assert (forall ((i t)) (and (<= 0 (tqtint i)) (<= (tqtint i) 1000000))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 1000000)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
@@ -170,8 +171,6 @@
 
 (declare-const o Float32)
 
-(declare-const result Float32)
-
 (declare-const state1 Float32)
 
 ;; H
@@ -181,26 +180,29 @@
   (assert (in_range1 x))
 
 ;; H
+  (assert (< x 1000000))
+
+;; H
   (assert
-  (and (< x 1000000)
   (or (= state (fp #b0 #b00000000 #b00000000000000000000000))
   (and (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) state)
-  (fp.leq state (fp.mul RNE (of_int RNE x) (fp #b0 #b10000010 #b01000000000000000000000)))))))
+  (fp.leq state (fp.mul RNE ((_ to_fp 8 24) RNE (to_real x)) (fp #b0 #b10000010 #b01000000000000000000000))))))
 
 ;; H
   (assert
-  (and (= o (fp.add RNE state (fp #b0 #b10000010 #b01000000000000000000000)))
-  (fp.isFinite32 (fp.add RNE state (fp #b0 #b10000010 #b01000000000000000000000)))))
-
-;; H
-  (assert (= result state))
+  (= o (fp.add RNE state (fp #b0 #b10000010 #b01000000000000000000000))))
 
 ;; H
   (assert (= state1 o))
 
+;; H
+  (assert
+  (fp.isFinite32 (fp.add RNE state (fp #b0 #b10000010 #b01000000000000000000000))))
+
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (fp.leq (fp #b0 #b10000010 #b01000000000000000000000) state1)))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__floating_point/gnatprove/floating_point.mlw", line 10177, characters 5-8
+  (not
+  (fp.leq state1 (fp.mul RNE ((_ to_fp 8 24) RNE (to_real (+ x 1))) (fp #b0 #b10000010 #b01000000000000000000000)))))
 (check-sat)
 (exit)

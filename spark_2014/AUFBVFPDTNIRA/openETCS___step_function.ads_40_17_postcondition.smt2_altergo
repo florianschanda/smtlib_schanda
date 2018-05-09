@@ -928,7 +928,7 @@ logic x2 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 5633, characters 5-8 *)
 goal WP_parameter_def :
   (forall step_function__min__result:t. forall result:t.
   forall step_function__min__result1:t. forall result1:t.
@@ -949,5 +949,5 @@ goal WP_parameter_def :
   (step_function__min__result2 = x2)))))) and
   ((step_function__min__result7 = step_function__min__result5) and
   (step_function__min__result8 = step_function__min__result6))) and
-  (result2 = step_function__min__result7)))) -> (le(x1, x2) ->
-  eq(step_function__min__result7, x1)))))
+  (result2 = step_function__min__result7)))) -> ((not le(x1, x2)) ->
+  eq(step_function__min__result7, x2)))))

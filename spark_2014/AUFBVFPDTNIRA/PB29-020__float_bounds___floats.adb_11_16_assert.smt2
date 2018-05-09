@@ -54,10 +54,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -80,7 +76,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -98,10 +94,6 @@
 
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero x)
                                               (fp.isNegative x)))
-
-(declare-fun of_int1 (RoundingMode Int) Float64)
-
-(declare-fun to_int2 (RoundingMode Float64) Int)
 
 (declare-const max_int1 Int)
 
@@ -400,24 +392,6 @@
   (= (to_rep1 (select temp___191 3)) temp___194))
   (= (to_rep1 (select temp___191 4)) temp___195))))))
 
-(declare-const b (Array Int long_float))
-
-(declare-const c (Array Int long_float))
-
-(declare-const d (Array Int long_float))
-
-(declare-const result (Array Int long_float))
-
-(declare-const b1 (Array Int long_float))
-
-(declare-const result1 (Array Int long_float))
-
-(declare-const c1 (Array Int long_float))
-
-(declare-const result2 (Array Int long_float))
-
-(declare-const d1 (Array Int long_float))
-
 ;; H
   (assert
   (forall ((i Int))
@@ -428,45 +402,10 @@
                                                                  a i)))
   (fp.leq (to_rep (select a i)) (fp #b0 #b01111111 #b00000000000000000000000))))))
 
-;; H
-  (assert (= result b))
-
-;; H
-  (assert
-  (= b1 (floats__test__b__aggregate_def
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
-
-;; H
-  (assert (= result1 c))
-
-;; H
-  (assert
-  (= c1 (floats__test__c__aggregate_def
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
-
-;; H
-  (assert (= result2 d))
-
-;; H
-  (assert
-  (= d1 (floats__test__d__aggregate_def
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-        (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))))
-
 (assert
 ;; WP_parameter_def
  ;; File "floats.adb", line 7, characters 0-0
   (not
-  (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (to_rep
-                                                                 (select
-                                                                 a 1)))))
+  (fp.leq (to_rep (select a 1)) (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

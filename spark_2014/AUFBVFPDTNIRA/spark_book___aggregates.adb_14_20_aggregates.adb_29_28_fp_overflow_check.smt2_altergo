@@ -1013,6 +1013,12 @@ axiom bool_eq_rev :
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq4 : int, int -> bool
@@ -1067,7 +1073,7 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep1 : integer -> int
+function to_rep1(x: integer) : int = integerqtint(x)
 
 logic of_rep1 : int -> integer
 
@@ -1194,27 +1200,28 @@ logic tolerance : t
 
 logic attr__ATTRIBUTE_ADDRESS7 : int
 
-logic temp___241 : t, t, t, t, t, t, t, t, t, t -> (int,float1) farray
+logic temp_____aggregate_def_241 : t, t, t, t, t, t, t, t, t,
+  t -> (int,float1) farray
 
-logic temp___254 : t -> (int,float1) farray
+logic temp_____aggregate_def_254 : t -> (int,float1) farray
 
-logic temp___258 : t, t -> (int,float1) farray
+logic temp_____aggregate_def_258 : t, t -> (int,float1) farray
 
-logic temp___263 : t, t -> (int,float1) farray
+logic temp_____aggregate_def_263 : t, t -> (int,float1) farray
 
-logic temp___269 : t -> (int,float1) farray
+logic temp_____aggregate_def_269 : t -> (int,float1) farray
 
-logic temp___273 : int, int, int, int, int, int, int, int, int, int, int,
-  int -> map
+logic temp_____aggregate_def_273 : int, int, int, int, int, int, int, int,
+  int, int, int, int -> map
 
-logic temp___289 : int, int, int, int, int, int, int, int, int, int, int,
-  int -> map
+logic temp_____aggregate_def_289 : int, int, int, int, int, int, int, int,
+  int, int, int, int -> map
 
-logic temp___305 : int, int, int, int, int -> map
+logic temp_____aggregate_def_305 : int, int, int, int, int -> map
 
-logic temp___314 : int -> map
+logic temp_____aggregate_def_314 : int -> map
 
-logic temp___319 : int -> map
+logic temp_____aggregate_def_319 : int -> map
 
 axiom def_axiom :
   (forall temp___243:t. forall temp___244:t. forall temp___245:t.
@@ -1225,62 +1232,104 @@ axiom def_axiom :
   tqtisFinite(temp___246)) and tqtisFinite(temp___247)) and
   tqtisFinite(temp___248)) and tqtisFinite(temp___249)) and
   tqtisFinite(temp___250)) and tqtisFinite(temp___251)) and
-  tqtisFinite(temp___252)) -> ((((((((((to_rep((temp___241(temp___243,
-  temp___244, temp___245, temp___246, temp___247, temp___248, temp___249,
-  temp___250, temp___251, temp___252)[1])) = temp___243) and
-  (to_rep((temp___241(temp___243, temp___244, temp___245, temp___246,
-  temp___247, temp___248, temp___249, temp___250, temp___251,
-  temp___252)[2])) = temp___244)) and (to_rep((temp___241(temp___243,
-  temp___244, temp___245, temp___246, temp___247, temp___248, temp___249,
-  temp___250, temp___251, temp___252)[3])) = temp___245)) and
-  (to_rep((temp___241(temp___243, temp___244, temp___245, temp___246,
-  temp___247, temp___248, temp___249, temp___250, temp___251,
-  temp___252)[4])) = temp___246)) and (to_rep((temp___241(temp___243,
-  temp___244, temp___245, temp___246, temp___247, temp___248, temp___249,
-  temp___250, temp___251, temp___252)[5])) = temp___247)) and
-  (to_rep((temp___241(temp___243, temp___244, temp___245, temp___246,
-  temp___247, temp___248, temp___249, temp___250, temp___251,
-  temp___252)[6])) = temp___248)) and (to_rep((temp___241(temp___243,
-  temp___244, temp___245, temp___246, temp___247, temp___248, temp___249,
-  temp___250, temp___251, temp___252)[7])) = temp___249)) and
-  (to_rep((temp___241(temp___243, temp___244, temp___245, temp___246,
-  temp___247, temp___248, temp___249, temp___250, temp___251,
-  temp___252)[8])) = temp___250)) and (to_rep((temp___241(temp___243,
-  temp___244, temp___245, temp___246, temp___247, temp___248, temp___249,
-  temp___250, temp___251, temp___252)[9])) = temp___251)) and
-  (to_rep((temp___241(temp___243, temp___244, temp___245, temp___246,
-  temp___247, temp___248, temp___249, temp___250, temp___251,
+  tqtisFinite(temp___252)) ->
+  ((((((((((to_rep((temp_____aggregate_def_241(temp___243, temp___244,
+  temp___245, temp___246, temp___247, temp___248, temp___249, temp___250,
+  temp___251, temp___252)[1])) = temp___243) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
+  temp___252)[2])) = temp___244)) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
+  temp___252)[3])) = temp___245)) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
+  temp___252)[4])) = temp___246)) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
+  temp___252)[5])) = temp___247)) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
+  temp___252)[6])) = temp___248)) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
+  temp___252)[7])) = temp___249)) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
+  temp___252)[8])) = temp___250)) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
+  temp___252)[9])) = temp___251)) and
+  (to_rep((temp_____aggregate_def_241(temp___243, temp___244, temp___245,
+  temp___246, temp___247, temp___248, temp___249, temp___250, temp___251,
   temp___252)[10])) = temp___252))))
 
 axiom def_axiom1 :
   (forall temp___256:t. (tqtisFinite(temp___256) ->
   (forall temp___257:int.
-  (to_rep((temp___254(temp___256)[temp___257])) = temp___256))))
+  (to_rep((temp_____aggregate_def_254(temp___256)[temp___257])) = temp___256))))
 
 axiom def_axiom2 :
   (forall temp___260:t. forall temp___261:t. ((tqtisFinite(temp___260) and
   tqtisFinite(temp___261)) ->
   (forall temp___262:int. ((((6 <= temp___262) and (temp___262 <= 10)) ->
-  (to_rep((temp___258(temp___260,
+  (to_rep((temp_____aggregate_def_258(temp___260,
   temp___261)[temp___262])) = temp___261)) and ((not ((6 <= temp___262) and
   (temp___262 <= 10))) -> (((1 <= temp___262) and (temp___262 <= 5)) ->
-  (to_rep((temp___258(temp___260, temp___261)[temp___262])) = temp___260)))))))
+  (to_rep((temp_____aggregate_def_258(temp___260,
+  temp___261)[temp___262])) = temp___260)))))))
 
 axiom def_axiom3 :
   (forall temp___265:t. forall temp___266:t. ((tqtisFinite(temp___265) and
   tqtisFinite(temp___266)) ->
   (forall temp___267:int. (((((((temp___267 = 1) or (temp___267 = 3)) or
   (temp___267 = 5)) or (temp___267 = 7)) or (temp___267 = 9)) ->
-  (to_rep((temp___263(temp___265,
+  (to_rep((temp_____aggregate_def_263(temp___265,
   temp___266)[temp___267])) = temp___265)) and ((not (((((temp___267 = 1) or
   (temp___267 = 3)) or (temp___267 = 5)) or (temp___267 = 7)) or
-  (temp___267 = 9))) -> (to_rep((temp___263(temp___265,
+  (temp___267 = 9))) -> (to_rep((temp_____aggregate_def_263(temp___265,
   temp___266)[temp___267])) = temp___266))))))
 
 axiom def_axiom4 :
   (forall temp___271:t. (tqtisFinite(temp___271) ->
   (forall temp___272:int.
-  (to_rep((temp___269(temp___271)[temp___272])) = temp___271))))
+  (to_rep((temp_____aggregate_def_269(temp___271)[temp___272])) = temp___271))))
+
+logic rliteral : integer
+
+axiom rliteral_axiom : (integerqtint(rliteral) = 1)
+
+logic rliteral1 : integer
+
+axiom rliteral_axiom1 : (integerqtint(rliteral1) = 2)
+
+logic rliteral2 : integer
+
+axiom rliteral_axiom2 : (integerqtint(rliteral2) = 3)
+
+logic rliteral3 : integer
+
+axiom rliteral_axiom3 : (integerqtint(rliteral3) = 4)
+
+logic rliteral4 : integer
+
+axiom rliteral_axiom4 : (integerqtint(rliteral4) = 5)
+
+logic rliteral5 : integer
+
+axiom rliteral_axiom5 : (integerqtint(rliteral5) = 6)
+
+logic rliteral6 : integer
+
+axiom rliteral_axiom6 : (integerqtint(rliteral6) = 7)
+
+logic rliteral7 : integer
+
+axiom rliteral_axiom7 : (integerqtint(rliteral7) = 8)
+
+logic rliteral8 : integer
+
+axiom rliteral_axiom8 : (integerqtint(rliteral8) = 9)
 
 axiom def_axiom5 :
   (forall temp___275:int. forall temp___276:int. forall temp___277:int.
@@ -1293,42 +1342,42 @@ axiom def_axiom5 :
   in_range2(temp___281)) and in_range2(temp___282)) and
   in_range2(temp___283)) and in_range2(temp___284)) and
   in_range2(temp___285)) and in_range2(temp___286)) ->
-  ((((((to_rep1(get(temp___273(temp___275, temp___276, temp___277,
+  ((((((get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
   temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
-  temp___284, temp___285, temp___286), (- 1), 1)) = temp___275) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), (- 1), 2)) = temp___276)) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), (- 1), 3)) = temp___277)) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), (- 1), 4)) = temp___278)) and
-  ((((to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), 0, 1)) = temp___279) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), 0, 2)) = temp___280)) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), 0, 3)) = temp___281)) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), 0, 4)) = temp___282))) and
-  ((((to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), 1, 1)) = temp___283) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), 1, 2)) = temp___284)) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), 1, 3)) = temp___285)) and
-  (to_rep1(get(temp___273(temp___275, temp___276, temp___277, temp___278,
-  temp___279, temp___280, temp___281, temp___282, temp___283, temp___284,
-  temp___285, temp___286), 1, 4)) = temp___286)))))
+  temp___284, temp___285, temp___286), (- 1), 1) = rliteral) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), (- 1), 2) = rliteral1)) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), (- 1), 3) = rliteral2)) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), (- 1), 4) = rliteral3)) and
+  ((((get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), 0, 1) = rliteral4) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), 0, 2) = rliteral5)) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), 0, 3) = rliteral6)) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), 0, 4) = rliteral7))) and
+  ((((get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), 1, 1) = rliteral8) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), 1, 2) = rliteral7)) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), 1, 3) = rliteral6)) and
+  (get(temp_____aggregate_def_273(temp___275, temp___276, temp___277,
+  temp___278, temp___279, temp___280, temp___281, temp___282, temp___283,
+  temp___284, temp___285, temp___286), 1, 4) = rliteral5)))))
 
 axiom def_axiom6 :
   (forall temp___291:int. forall temp___292:int. forall temp___293:int.
@@ -1341,42 +1390,42 @@ axiom def_axiom6 :
   in_range2(temp___297)) and in_range2(temp___298)) and
   in_range2(temp___299)) and in_range2(temp___300)) and
   in_range2(temp___301)) and in_range2(temp___302)) ->
-  ((((((to_rep1(get(temp___289(temp___291, temp___292, temp___293,
+  ((((((get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
   temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
-  temp___300, temp___301, temp___302), (- 1), 1)) = temp___291) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), (- 1), 2)) = temp___292)) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), (- 1), 3)) = temp___293)) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), (- 1), 4)) = temp___294)) and
-  ((((to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), 0, 1)) = temp___295) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), 0, 2)) = temp___296)) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), 0, 3)) = temp___297)) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), 0, 4)) = temp___298))) and
-  ((((to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), 1, 1)) = temp___299) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), 1, 2)) = temp___300)) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), 1, 3)) = temp___301)) and
-  (to_rep1(get(temp___289(temp___291, temp___292, temp___293, temp___294,
-  temp___295, temp___296, temp___297, temp___298, temp___299, temp___300,
-  temp___301, temp___302), 1, 4)) = temp___302)))))
+  temp___300, temp___301, temp___302), (- 1), 1) = rliteral) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), (- 1), 2) = rliteral1)) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), (- 1), 3) = rliteral2)) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), (- 1), 4) = rliteral3)) and
+  ((((get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), 0, 1) = rliteral4) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), 0, 2) = rliteral5)) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), 0, 3) = rliteral6)) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), 0, 4) = rliteral7))) and
+  ((((get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), 1, 1) = rliteral8) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), 1, 2) = rliteral7)) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), 1, 3) = rliteral6)) and
+  (get(temp_____aggregate_def_289(temp___291, temp___292, temp___293,
+  temp___294, temp___295, temp___296, temp___297, temp___298, temp___299,
+  temp___300, temp___301, temp___302), 1, 4) = rliteral5)))))
 
 axiom def_axiom7 :
   (forall temp___307:int. forall temp___308:int. forall temp___309:int.
@@ -1385,32 +1434,36 @@ axiom def_axiom7 :
   in_range2(temp___309)) and in_range2(temp___310)) and
   in_range2(temp___311)) ->
   (forall temp___312:int. forall temp___313:int. (((temp___312 = 1) ->
-  (((temp___313 = 2) -> (to_rep1(get(temp___305(temp___307, temp___308,
-  temp___309, temp___310, temp___311), temp___312,
-  temp___313)) = temp___310)) and ((not (temp___313 = 2)) ->
-  (to_rep1(get(temp___305(temp___307, temp___308, temp___309, temp___310,
-  temp___311), temp___312, temp___313)) = temp___311)))) and
+  (((temp___313 = 2) -> (get(temp_____aggregate_def_305(temp___307,
+  temp___308, temp___309, temp___310, temp___311), temp___312,
+  temp___313) = rliteral4)) and ((not (temp___313 = 2)) ->
+  (get(temp_____aggregate_def_305(temp___307, temp___308, temp___309,
+  temp___310, temp___311), temp___312, temp___313) = rliteral6)))) and
   ((not (temp___312 = 1)) -> (((temp___312 = 0) -> (((temp___313 = 4) ->
-  (to_rep1(get(temp___305(temp___307, temp___308, temp___309, temp___310,
-  temp___311), temp___312, temp___313)) = temp___309)) and
+  (get(temp_____aggregate_def_305(temp___307, temp___308, temp___309,
+  temp___310, temp___311), temp___312, temp___313) = rliteral5)) and
   ((not (temp___313 = 4)) -> (((1 <= temp___313) and (temp___313 <= 3)) ->
-  (to_rep1(get(temp___305(temp___307, temp___308, temp___309, temp___310,
-  temp___311), temp___312, temp___313)) = temp___308))))) and
+  (get(temp_____aggregate_def_305(temp___307, temp___308, temp___309,
+  temp___310, temp___311), temp___312, temp___313) = rliteral2))))) and
   ((not (temp___312 = 0)) -> ((temp___312 = (- 1)) ->
-  (to_rep1(get(temp___305(temp___307, temp___308, temp___309, temp___310,
-  temp___311), temp___312, temp___313)) = temp___307)))))))))
+  (get(temp_____aggregate_def_305(temp___307, temp___308, temp___309,
+  temp___310, temp___311), temp___312, temp___313) = rliteral1)))))))))
+
+logic rliteral9 : integer
+
+axiom rliteral_axiom9 : (integerqtint(rliteral9) = 0)
 
 axiom def_axiom8 :
   (forall temp___316:int. (in_range2(temp___316) ->
   (forall temp___317:int. forall temp___318:int.
-  (to_rep1(get(temp___314(temp___316), temp___317,
-  temp___318)) = temp___316))))
+  (get(temp_____aggregate_def_314(temp___316), temp___317,
+  temp___318) = rliteral9))))
 
 axiom def_axiom9 :
   (forall temp___321:int. (in_range2(temp___321) ->
   (forall temp___322:int. forall temp___323:int.
-  (to_rep1(get(temp___319(temp___321), temp___322,
-  temp___323)) = temp___321))))
+  (get(temp_____aggregate_def_319(temp___321), temp___322,
+  temp___323) = rliteral9))))
 
 logic fliteral1 : t
 
@@ -1457,27 +1510,46 @@ logic fliteral9 : t
 axiom fliteral_axiom9 : (tqtisFinite(fliteral9) and
   (tqtreal(fliteral9) = 0.0000009999999974752427078783512115478515625))
 
- (* File "aggregates.adb", line 44, characters 0-0 *)
+logic fliteral10 : t
+
+axiom fliteral_axiom10 : (tqtisFinite(fliteral10) and
+  (tqtreal(fliteral10) = 0.500000000000000000000000))
+
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/spark_book/Chapter-02/build/gnatprove/aggregates.mlw", line 6457, characters 5-8 *)
 goal WP_parameter_def :
   (forall small:(int,float1) farray. forall a:t. forall b:t. forall c14b:t.
-  forall approx:t. forall o:t. forall o1:t. forall result:t. forall a1:t.
-  forall result1:t. forall b1:t. forall result2:(int,float1) farray.
-  forall small1:(int,float1) farray. forall result3:(int,float1) farray.
-  forall small2:(int,float1) farray. forall result4:(int,float1) farray.
-  forall small3:(int,float1) farray. forall result5:(int,float1) farray.
-  forall small4:(int,float1) farray. forall result6:t. forall approx1:t.
-  (((result = a) and (a1 = fliteral1)) -> (tqtisFinite(a1) ->
-  (((result1 = b) and (b1 = fliteral2)) -> (tqtisFinite(b1) ->
-  (((result2 = small) and (small1 = temp___241(fliteral3, fliteral,
-  fliteral4, fliteral5, fliteral6, fliteral7, fliteral6, fliteral5,
-  fliteral4, fliteral))) -> (((result3 = small1) and
-  (small2 = temp___254(fliteral3))) -> (((result4 = small2) and
-  (small3 = temp___258(fliteral3, fliteral))) -> (((result5 = small3) and
-  (small4 = temp___263(fliteral3, fliteral))) -> (((b1 = c13b) and
-  tqtisFinite(c13b)) -> ((le(neg(fliteral8), fliteral8) ->
+  forall approx:t. forall o:t. forall o1:t. forall o2:t. forall o3:t.
+  forall o4:t. forall o5:t. forall o6:t. forall o7:t. forall o8:t.
+  forall o9:t. forall result:t. forall a1:t. forall result1:t. forall b1:t.
+  forall result2:(int,float1) farray. forall small1:(int,float1) farray.
+  forall result3:(int,float1) farray. forall small2:(int,float1) farray.
+  forall result4:(int,float1) farray. forall small3:(int,float1) farray.
+  forall result5:(int,float1) farray. forall small4:(int,float1) farray.
+  forall result6:t. forall approx1:t. forall result7:bool. forall approx2:t.
+  forall result8:t. forall approx3:t. (((result = a) and (a1 = fliteral1)) ->
+  (tqtisFinite(a1) -> (((result1 = b) and (b1 = fliteral2)) ->
+  (tqtisFinite(b1) -> (((result2 = small) and
+  (small1 = temp_____aggregate_def_241(fliteral3, fliteral, fliteral4,
+  fliteral5, fliteral6, fliteral7, fliteral6, fliteral5, fliteral4,
+  fliteral))) -> (((result3 = small1) and
+  (small2 = temp_____aggregate_def_254(fliteral3))) ->
+  (((result4 = small2) and (small3 = temp_____aggregate_def_258(fliteral3,
+  fliteral))) -> (((result5 = small3) and
+  (small4 = temp_____aggregate_def_263(fliteral3, fliteral))) ->
+  (((b1 = c13b) and tqtisFinite(c13b)) -> ((le(neg(fliteral8), fliteral8) ->
   tqtisFinite(c14b)) -> ((le(neg(fliteral8), fliteral8) ->
   tqtisFinite(approx)) -> ((mul(RNE, fliteral9, c13b) = tolerance) ->
   (tqtisFinite(tolerance) -> ((({ t__content = result6 } = { t__content =
-  approx }) and (approx1 = div(RNE, c13b, fliteral4))) -> ((((o = mul(RNE,
+  approx }) and (approx1 = div(RNE, c13b, fliteral4))) -> (((((((o = mul(RNE,
   approx1, approx1)) and tqtisFinite(mul(RNE, approx1, approx1))) and
-  (o1 = sub(RNE, c13b, o))) -> tqtisFinite(o1)))))))))))))))))
+  (o1 = sub(RNE, c13b, o))) and ((o2 = o1) and tqtisFinite(o1))) and
+  (o3 = abs1(o2))) and ((lt(tolerance, o3) and (result7 = true)) or
+  ((not lt(tolerance, o3)) and (result7 = false)))) -> ((result7 = true) ->
+  (((le(neg(fliteral8), fliteral8) -> tqtisFinite(approx2)) and lt(tolerance,
+  abs1(sub(RNE, c13b, mul(RNE, approx2, approx2))))) -> (((((((o4 = div(RNE,
+  c13b, approx2)) and tqtisFinite(div(RNE, c13b, approx2))) and
+  (o5 = add(RNE, approx2, o4))) and ((o6 = o5) and tqtisFinite(o5))) and
+  (o7 = mul(RNE, fliteral10, o6))) and ((approx2 = result8) and
+  (approx3 = o7))) -> ((((o8 = mul(RNE, approx3, approx3)) and
+  tqtisFinite(mul(RNE, approx3, approx3))) and (o9 = sub(RNE, c13b, o8))) ->
+  tqtisFinite(o9)))))))))))))))))))))

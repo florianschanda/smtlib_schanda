@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -102,6 +98,13 @@
 
 (declare-sort tinteger_16B 0)
 
+(declare-fun tinteger_16Bqtint (tinteger_16B) Int)
+
+;; tinteger_16B'axiom
+  (assert
+  (forall ((i tinteger_16B))
+  (and (<= (- 32768) (tinteger_16Bqtint i)) (<= (tinteger_16Bqtint i) 32767))))
+
 (define-fun in_range ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
@@ -121,6 +124,13 @@
   (tinteger_16B__content a))
 
 (declare-sort integer_16 0)
+
+(declare-fun integer_16qtint (integer_16) Int)
+
+;; integer_16'axiom
+  (assert
+  (forall ((i integer_16))
+  (and (<= (- 32768) (integer_16qtint i)) (<= (integer_16qtint i) 32767))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 32768) x) (<= x 32767)))
 
@@ -184,17 +194,25 @@
 
 ;; H
   (assert
-  (and (= o (fp.div RNE (of_int RNE left) (of_int RNE right)))
-  (fp.isFinite32 (fp.div RNE (of_int RNE left) (of_int RNE right)))))
+  (= o (fp.div RNE ((_ to_fp 8 24) RNE (to_real left)) ((_ to_fp 8 24) RNE (to_real
+  right)))))
+
+;; H
+  (assert
+  (fp.isFinite32 (fp.div RNE ((_ to_fp 8 24) RNE (to_real left)) ((_ to_fp 8 24) RNE (to_real
+  right)))))
 
 ;; H
   (assert (= o1 (fp.roundToIntegral RTN o)))
 
 ;; H
-  (assert (= o2 (to_int1 RNA o1)))
+  (assert (= o2 (to_int (fp.to_real (fp.roundToIntegral RNA o1)))))
 
 ;; H
-  (assert (and (= o3 o2) (in_range1 o2)))
+  (assert (= o3 o2))
+
+;; H
+  (assert (in_range1 o2))
 
 ;; H
   (assert (= o4 (* o3 right)))

@@ -897,6 +897,10 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
+logic r2 : t -> t
+
+logic r2__function_guard : t, t -> prop
+
 type t_float32
 
 logic fliteral1 : t
@@ -928,6 +932,13 @@ type t_float32__ref = { t_float32__content : t_float32
 
 function t_float32__ref___projection(a: t_float32__ref) : t_float32 =
   (a).t_float32__content
+
+axiom r2__post_axiom :
+  (forall x:t [r2(x)]. ((in_range1(x) and le(neg(fliteral1), x)) ->
+  in_range1(r2(x))))
+
+axiom r2__def_axiom :
+  (forall x:t [r2(x)]. (in_range1(x) -> (r2(x) = roundToIntegral(RTN, x))))
 
 type t1
 
@@ -999,18 +1010,6 @@ function t2__ref___projection(a: t2__ref) : t2 = (a).t2__content
 logic x : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
-
-logic r2 : t -> t
-
-logic r2__function_guard : t, t -> prop
-
-axiom r2__post_axiom :
-  (forall x1:t [r2(x1)]. ((in_range1(x1) and le(neg(fliteral1), x1)) ->
-  in_range1(r2(x1))))
-
-axiom r2__def_axiom :
-  (forall x1:t [r2(x1)]. (in_range1(x1) -> (r2(x1) = roundToIntegral(RTN,
-  x1))))
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 

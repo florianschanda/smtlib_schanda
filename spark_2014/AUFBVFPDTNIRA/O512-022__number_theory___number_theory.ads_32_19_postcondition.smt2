@@ -40,6 +40,13 @@
 
 (declare-sort natural 0)
 
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
+
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Int) us_image)
@@ -57,7 +64,7 @@
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(declare-fun to_rep (natural) Int)
+(define-fun to_rep ((x natural)) Int (naturalqtint x))
 
 (declare-fun of_rep (Int) natural)
 
@@ -74,34 +81,6 @@
   (forall ((x Int))
   (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                            (of_rep x))) )))
-
-(declare-sort fibonacci_argument_type 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
-
-(declare-fun user_eq1 (fibonacci_argument_type fibonacci_argument_type) Bool)
-
-(declare-const dummy1 fibonacci_argument_type)
-
-(declare-datatypes ()
-((fibonacci_argument_type__ref
- (mk_fibonacci_argument_type__ref
- (fibonacci_argument_type__content fibonacci_argument_type)))))
-(define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
-  (fibonacci_argument_type__content a))
-
-(define-fun dynamic_invariant ((temp___expr_208 Int)
-  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
-  (temp___do_toplevel_206 Bool)
-  (temp___do_typ_inv_207 Bool)) Bool (=>
-                                     (or (= temp___is_init_204 true)
-                                     (<= 0 46)) (in_range1 temp___expr_208)))
 
 (declare-fun fib (Int) Int)
 
@@ -120,10 +99,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -147,7 +122,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -159,7 +134,7 @@
 ;; Power_0
   (assert
   (forall ((x Float32))
-  (=> (fp.isFinite32 x) (fp.eq (power x 0) (of_int RNE 1)))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 0) ((_ to_fp 8 24) RNE (to_real 1))))))
 
 ;; Power_1
   (assert
@@ -180,33 +155,71 @@
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 1)) (fp.div RNE (of_int RNE 1) x))))))
+  (fp.eq (power x (- 1)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1)) x))))))
 
 ;; Power_neg2
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 2)))))))
+  (fp.eq (power x (- 2)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1))
+  (power x 2)))))))
 
 ;; Power_neg3
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 3)))))))
+  (fp.eq (power x (- 2)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1))
+  (power x 3)))))))
 
-(define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
+(define-fun dynamic_invariant ((temp___expr_39 Int) (temp___is_init_35 Bool)
   (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
   (temp___do_typ_inv_38 Bool)) Bool (=>
                                     (or (= temp___is_init_35 true)
                                     (<= 0 2147483647)) (in_range
                                     temp___expr_39)))
 
+(declare-sort fibonacci_argument_type 0)
+
+(declare-fun fibonacci_argument_typeqtint (fibonacci_argument_type) Int)
+
+;; fibonacci_argument_type'axiom
+  (assert
+  (forall ((i fibonacci_argument_type))
+  (and (<= 0 (fibonacci_argument_typeqtint i))
+  (<= (fibonacci_argument_typeqtint i) 46))))
+
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 46)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+
+(declare-fun user_eq1 (fibonacci_argument_type fibonacci_argument_type) Bool)
+
+(declare-const dummy1 fibonacci_argument_type)
+
+(declare-datatypes ()
+((fibonacci_argument_type__ref
+ (mk_fibonacci_argument_type__ref
+ (fibonacci_argument_type__content fibonacci_argument_type)))))
+(define-fun fibonacci_argument_type__ref___projection ((a fibonacci_argument_type__ref)) fibonacci_argument_type
+  (fibonacci_argument_type__content a))
+
+(define-fun dynamic_invariant1 ((temp___expr_208 Int)
+  (temp___is_init_204 Bool) (temp___skip_constant_205 Bool)
+  (temp___do_toplevel_206 Bool)
+  (temp___do_typ_inv_207 Bool)) Bool (=>
+                                     (or (= temp___is_init_204 true)
+                                     (<= 0 46)) (in_range1 temp___expr_208)))
+
 ;; fib__def_axiom
   (assert
   (forall ((n Int))
-  (! (=> (dynamic_invariant n true true true true)
+  (! (=> (dynamic_invariant1 n true true true true)
      (= (fib n) (ite (or (= n 0) (= n 1)) n (+ (fib (- n 1)) (fib (- n 2)))))) :pattern (
   (fib n)) )))
 
@@ -280,6 +293,236 @@
                   14930352 24157817 39088169 63245986 102334155 165580141
                   267914296 433494437 701408733 1134903170 1836311903)))
 
+(declare-const rliteral natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral) 0))
+
+(declare-const rliteral1 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral1) 1))
+
+(declare-const rliteral2 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral2) 2))
+
+(declare-const rliteral3 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral3) 3))
+
+(declare-const rliteral4 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral4) 5))
+
+(declare-const rliteral5 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral5) 8))
+
+(declare-const rliteral6 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral6) 13))
+
+(declare-const rliteral7 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral7) 21))
+
+(declare-const rliteral8 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral8) 34))
+
+(declare-const rliteral9 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral9) 55))
+
+(declare-const rliteral10 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral10) 89))
+
+(declare-const rliteral11 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral11) 144))
+
+(declare-const rliteral12 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral12) 233))
+
+(declare-const rliteral13 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral13) 377))
+
+(declare-const rliteral14 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral14) 610))
+
+(declare-const rliteral15 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral15) 987))
+
+(declare-const rliteral16 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral16) 1597))
+
+(declare-const rliteral17 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral17) 2584))
+
+(declare-const rliteral18 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral18) 4181))
+
+(declare-const rliteral19 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral19) 6765))
+
+(declare-const rliteral20 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral20) 10946))
+
+(declare-const rliteral21 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral21) 17711))
+
+(declare-const rliteral22 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral22) 28657))
+
+(declare-const rliteral23 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral23) 46368))
+
+(declare-const rliteral24 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral24) 75025))
+
+(declare-const rliteral25 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral25) 121393))
+
+(declare-const rliteral26 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral26) 196418))
+
+(declare-const rliteral27 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral27) 317811))
+
+(declare-const rliteral28 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral28) 514229))
+
+(declare-const rliteral29 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral29) 832040))
+
+(declare-const rliteral30 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral30) 1346269))
+
+(declare-const rliteral31 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral31) 2178309))
+
+(declare-const rliteral32 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral32) 3524578))
+
+(declare-const rliteral33 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral33) 5702887))
+
+(declare-const rliteral34 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral34) 9227465))
+
+(declare-const rliteral35 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral35) 14930352))
+
+(declare-const rliteral36 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral36) 24157817))
+
+(declare-const rliteral37 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral37) 39088169))
+
+(declare-const rliteral38 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral38) 63245986))
+
+(declare-const rliteral39 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral39) 102334155))
+
+(declare-const rliteral40 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral40) 165580141))
+
+(declare-const rliteral41 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral41) 267914296))
+
+(declare-const rliteral42 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral42) 433494437))
+
+(declare-const rliteral43 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral43) 701408733))
+
+(declare-const rliteral44 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral44) 1134903170))
+
+(declare-const rliteral45 natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral45) 1836311903))
+
 ;; def_axiom
   (assert
   (forall ((temp___156 Int) (temp___157 Int) (temp___158 Int)
@@ -351,42 +594,42 @@
   (and
   (and
   (and
-  (and (dynamic_invariant1 temp___156 true true true true)
-  (dynamic_invariant1 temp___157 true true true true)) (dynamic_invariant1
-  temp___158 true true true true)) (dynamic_invariant1 temp___159 true true
-  true true)) (dynamic_invariant1 temp___160 true true true true))
-  (dynamic_invariant1 temp___161 true true true true)) (dynamic_invariant1
-  temp___162 true true true true)) (dynamic_invariant1 temp___163 true true
-  true true)) (dynamic_invariant1 temp___164 true true true true))
-  (dynamic_invariant1 temp___165 true true true true)) (dynamic_invariant1
-  temp___166 true true true true)) (dynamic_invariant1 temp___167 true true
-  true true)) (dynamic_invariant1 temp___168 true true true true))
-  (dynamic_invariant1 temp___169 true true true true)) (dynamic_invariant1
-  temp___170 true true true true)) (dynamic_invariant1 temp___171 true true
-  true true)) (dynamic_invariant1 temp___172 true true true true))
-  (dynamic_invariant1 temp___173 true true true true)) (dynamic_invariant1
-  temp___174 true true true true)) (dynamic_invariant1 temp___175 true true
-  true true)) (dynamic_invariant1 temp___176 true true true true))
-  (dynamic_invariant1 temp___177 true true true true)) (dynamic_invariant1
-  temp___178 true true true true)) (dynamic_invariant1 temp___179 true true
-  true true)) (dynamic_invariant1 temp___180 true true true true))
-  (dynamic_invariant1 temp___181 true true true true)) (dynamic_invariant1
-  temp___182 true true true true)) (dynamic_invariant1 temp___183 true true
-  true true)) (dynamic_invariant1 temp___184 true true true true))
-  (dynamic_invariant1 temp___185 true true true true)) (dynamic_invariant1
-  temp___186 true true true true)) (dynamic_invariant1 temp___187 true true
-  true true)) (dynamic_invariant1 temp___188 true true true true))
-  (dynamic_invariant1 temp___189 true true true true)) (dynamic_invariant1
-  temp___190 true true true true)) (dynamic_invariant1 temp___191 true true
-  true true)) (dynamic_invariant1 temp___192 true true true true))
-  (dynamic_invariant1 temp___193 true true true true)) (dynamic_invariant1
-  temp___194 true true true true)) (dynamic_invariant1 temp___195 true true
-  true true)) (dynamic_invariant1 temp___196 true true true true))
-  (dynamic_invariant1 temp___197 true true true true)) (dynamic_invariant1
-  temp___198 true true true true)) (dynamic_invariant1 temp___199 true true
-  true true)) (dynamic_invariant1 temp___200 true true true true))
-  (dynamic_invariant1 temp___201 true true true true)) (dynamic_invariant1
-  temp___202 true true true true))
+  (and (dynamic_invariant temp___156 true true true true) (dynamic_invariant
+  temp___157 true true true true)) (dynamic_invariant temp___158 true true
+  true true)) (dynamic_invariant temp___159 true true true true))
+  (dynamic_invariant temp___160 true true true true)) (dynamic_invariant
+  temp___161 true true true true)) (dynamic_invariant temp___162 true true
+  true true)) (dynamic_invariant temp___163 true true true true))
+  (dynamic_invariant temp___164 true true true true)) (dynamic_invariant
+  temp___165 true true true true)) (dynamic_invariant temp___166 true true
+  true true)) (dynamic_invariant temp___167 true true true true))
+  (dynamic_invariant temp___168 true true true true)) (dynamic_invariant
+  temp___169 true true true true)) (dynamic_invariant temp___170 true true
+  true true)) (dynamic_invariant temp___171 true true true true))
+  (dynamic_invariant temp___172 true true true true)) (dynamic_invariant
+  temp___173 true true true true)) (dynamic_invariant temp___174 true true
+  true true)) (dynamic_invariant temp___175 true true true true))
+  (dynamic_invariant temp___176 true true true true)) (dynamic_invariant
+  temp___177 true true true true)) (dynamic_invariant temp___178 true true
+  true true)) (dynamic_invariant temp___179 true true true true))
+  (dynamic_invariant temp___180 true true true true)) (dynamic_invariant
+  temp___181 true true true true)) (dynamic_invariant temp___182 true true
+  true true)) (dynamic_invariant temp___183 true true true true))
+  (dynamic_invariant temp___184 true true true true)) (dynamic_invariant
+  temp___185 true true true true)) (dynamic_invariant temp___186 true true
+  true true)) (dynamic_invariant temp___187 true true true true))
+  (dynamic_invariant temp___188 true true true true)) (dynamic_invariant
+  temp___189 true true true true)) (dynamic_invariant temp___190 true true
+  true true)) (dynamic_invariant temp___191 true true true true))
+  (dynamic_invariant temp___192 true true true true)) (dynamic_invariant
+  temp___193 true true true true)) (dynamic_invariant temp___194 true true
+  true true)) (dynamic_invariant temp___195 true true true true))
+  (dynamic_invariant temp___196 true true true true)) (dynamic_invariant
+  temp___197 true true true true)) (dynamic_invariant temp___198 true true
+  true true)) (dynamic_invariant temp___199 true true true true))
+  (dynamic_invariant temp___200 true true true true)) (dynamic_invariant
+  temp___201 true true true true)) (dynamic_invariant temp___202 true true
+  true true))
   (and
   (and
   (and
@@ -432,69 +675,54 @@
   (and
   (and
   (and
-  (and (= (to_rep (select temp___155 0)) temp___156)
-  (= (to_rep (select temp___155 1)) temp___157))
-  (= (to_rep (select temp___155 2)) temp___158))
-  (= (to_rep (select temp___155 3)) temp___159))
-  (= (to_rep (select temp___155 4)) temp___160))
-  (= (to_rep (select temp___155 5)) temp___161))
-  (= (to_rep (select temp___155 6)) temp___162))
-  (= (to_rep (select temp___155 7)) temp___163))
-  (= (to_rep (select temp___155 8)) temp___164))
-  (= (to_rep (select temp___155 9)) temp___165))
-  (= (to_rep (select temp___155 10)) temp___166))
-  (= (to_rep (select temp___155 11)) temp___167))
-  (= (to_rep (select temp___155 12)) temp___168))
-  (= (to_rep (select temp___155 13)) temp___169))
-  (= (to_rep (select temp___155 14)) temp___170))
-  (= (to_rep (select temp___155 15)) temp___171))
-  (= (to_rep (select temp___155 16)) temp___172))
-  (= (to_rep (select temp___155 17)) temp___173))
-  (= (to_rep (select temp___155 18)) temp___174))
-  (= (to_rep (select temp___155 19)) temp___175))
-  (= (to_rep (select temp___155 20)) temp___176))
-  (= (to_rep (select temp___155 21)) temp___177))
-  (= (to_rep (select temp___155 22)) temp___178))
-  (= (to_rep (select temp___155 23)) temp___179))
-  (= (to_rep (select temp___155 24)) temp___180))
-  (= (to_rep (select temp___155 25)) temp___181))
-  (= (to_rep (select temp___155 26)) temp___182))
-  (= (to_rep (select temp___155 27)) temp___183))
-  (= (to_rep (select temp___155 28)) temp___184))
-  (= (to_rep (select temp___155 29)) temp___185))
-  (= (to_rep (select temp___155 30)) temp___186))
-  (= (to_rep (select temp___155 31)) temp___187))
-  (= (to_rep (select temp___155 32)) temp___188))
-  (= (to_rep (select temp___155 33)) temp___189))
-  (= (to_rep (select temp___155 34)) temp___190))
-  (= (to_rep (select temp___155 35)) temp___191))
-  (= (to_rep (select temp___155 36)) temp___192))
-  (= (to_rep (select temp___155 37)) temp___193))
-  (= (to_rep (select temp___155 38)) temp___194))
-  (= (to_rep (select temp___155 39)) temp___195))
-  (= (to_rep (select temp___155 40)) temp___196))
-  (= (to_rep (select temp___155 41)) temp___197))
-  (= (to_rep (select temp___155 42)) temp___198))
-  (= (to_rep (select temp___155 43)) temp___199))
-  (= (to_rep (select temp___155 44)) temp___200))
-  (= (to_rep (select temp___155 45)) temp___201))
-  (= (to_rep (select temp___155 46)) temp___202))))))
+  (and (= (select temp___155 0) rliteral)
+  (= (select temp___155 1) rliteral1)) (= (select temp___155 2) rliteral1))
+  (= (select temp___155 3) rliteral2)) (= (select temp___155 4) rliteral3))
+  (= (select temp___155 5) rliteral4)) (= (select temp___155 6) rliteral5))
+  (= (select temp___155 7) rliteral6)) (= (select temp___155 8) rliteral7))
+  (= (select temp___155 9) rliteral8)) (= (select temp___155 10) rliteral9))
+  (= (select temp___155 11) rliteral10))
+  (= (select temp___155 12) rliteral11))
+  (= (select temp___155 13) rliteral12))
+  (= (select temp___155 14) rliteral13))
+  (= (select temp___155 15) rliteral14))
+  (= (select temp___155 16) rliteral15))
+  (= (select temp___155 17) rliteral16))
+  (= (select temp___155 18) rliteral17))
+  (= (select temp___155 19) rliteral18))
+  (= (select temp___155 20) rliteral19))
+  (= (select temp___155 21) rliteral20))
+  (= (select temp___155 22) rliteral21))
+  (= (select temp___155 23) rliteral22))
+  (= (select temp___155 24) rliteral23))
+  (= (select temp___155 25) rliteral24))
+  (= (select temp___155 26) rliteral25))
+  (= (select temp___155 27) rliteral26))
+  (= (select temp___155 28) rliteral27))
+  (= (select temp___155 29) rliteral28))
+  (= (select temp___155 30) rliteral29))
+  (= (select temp___155 31) rliteral30))
+  (= (select temp___155 32) rliteral31))
+  (= (select temp___155 33) rliteral32))
+  (= (select temp___155 34) rliteral33))
+  (= (select temp___155 35) rliteral34))
+  (= (select temp___155 36) rliteral35))
+  (= (select temp___155 37) rliteral36))
+  (= (select temp___155 38) rliteral37))
+  (= (select temp___155 39) rliteral38))
+  (= (select temp___155 40) rliteral39))
+  (= (select temp___155 41) rliteral40))
+  (= (select temp___155 42) rliteral41))
+  (= (select temp___155 43) rliteral42))
+  (= (select temp___155 44) rliteral43))
+  (= (select temp___155 45) rliteral44))
+  (= (select temp___155 46) rliteral45))))))
 
 (declare-const number_theory__fibonacci2__result Int)
-
-(declare-const result Int)
 
 (declare-const number_theory__fibonacci2__result1 Int)
 
 (declare-const number_theory__fibonacci2__result2 Int)
-
-(declare-const number_theory__fibonacci2__result3 Int)
-
-(declare-const number_theory__fibonacci2__result4 Int)
-
-(declare-const number_theory__fibonacci2__result5 Int)
-
-(declare-const result1 Int)
 
 ;; H
   (assert (in_range1 n))
@@ -509,34 +737,20 @@
 
 ;; H
   (assert
-  (= number_theory__fibonacci2__result1 number_theory__fibonacci2__result2))
+  (= number_theory__fibonacci2__result number_theory__fibonacci2__result1))
 
 ;; H
   (assert
-  (= number_theory__fibonacci2__result3 number_theory__fibonacci2__result1))
-
-;; H
-  (assert (= result number_theory__fibonacci2__result))
+  (= number_theory__fibonacci2__result (to_rep (select lookup_table n))))
 
 ;; H
   (assert
-  (= number_theory__fibonacci2__result1 (to_rep (select lookup_table n))))
-
-;; H
-  (assert
-  (= (mk_int__ref number_theory__fibonacci2__result4) (mk_int__ref
-                                                      number_theory__fibonacci2__result2)))
-
-;; H
-  (assert
-  (= number_theory__fibonacci2__result5 number_theory__fibonacci2__result3))
-
-;; H
-  (assert (= result1 number_theory__fibonacci2__result4))
+  (= (mk_int__ref number_theory__fibonacci2__result2) (mk_int__ref
+                                                      number_theory__fibonacci2__result1)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
-  (not (= number_theory__fibonacci2__result4 (fib n))))
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 3028, characters 5-8
+  (not (= number_theory__fibonacci2__result2 (fib n))))
 (check-sat)
 (exit)

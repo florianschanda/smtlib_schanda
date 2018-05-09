@@ -1102,7 +1102,20 @@ axiom coerce_axiom :
 type us_split_fields = { rec__untangle_tests__coordinate__x : float1;
 rec__untangle_tests__coordinate__y : float1;
 rec__untangle_tests__coordinate__z : float1;
-rec__untangle_tests__coordinate__w : float1 }
+rec__untangle_tests__coordinate__w : float1
+}
+
+function us_split_fields_X__projection(a: us_split_fields) : float1 =
+  (a).rec__untangle_tests__coordinate__x
+
+function us_split_fields_Y__projection(a: us_split_fields) : float1 =
+  (a).rec__untangle_tests__coordinate__y
+
+function us_split_fields_Z__projection(a: us_split_fields) : float1 =
+  (a).rec__untangle_tests__coordinate__z
+
+function us_split_fields_W__projection(a: us_split_fields) : float1 =
+  (a).rec__untangle_tests__coordinate__w
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1236,6 +1249,12 @@ function coordinate__ref___projection(a: coordinate__ref) : us_rep =
   (a).coordinate__content
 
 type tcoordinate_listD1
+
+logic tcoordinate_listD1qtint : tcoordinate_listD1 -> int
+
+axiom tcoordinate_listD1qtaxiom :
+  (forall i:tcoordinate_listD1. ((1 <= tcoordinate_listD1qtint(i)) and
+  (tcoordinate_listD1qtint(i) <= 3)))
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 3))
 
@@ -1494,6 +1513,12 @@ function triangle__ref___projection(a: triangle__ref) : us_rep1 =
 
 type ttriangle_listD1
 
+logic ttriangle_listD1qtint : ttriangle_listD1 -> int
+
+axiom ttriangle_listD1qtaxiom :
+  (forall i:ttriangle_listD1. ((1 <= ttriangle_listD1qtint(i)) and
+  (ttriangle_listD1qtint(i) <= 100)))
+
 predicate in_range3(x: int) = ((1 <= x) and (x <= 100))
 
 logic bool_eq8 : int, int -> bool
@@ -1593,17 +1618,41 @@ goal WP_parameter_def :
   forall o15:(int,us_rep) farray. forall o16:float1. forall o17:float1.
   forall o18:float1. forall o19:float1. forall o20:(int,us_rep) farray.
   forall o21:float1. forall o22:float1. forall o23:float1. forall o24:float1.
-  forall o25:(int,us_rep1) farray. forall result:int__ref. forall t2:int.
-  forall tl1:(int,us_rep1) farray. forall t3:int. forall v:int.
-  forall result1:int__ref. forall v1:int. forall result2:map__ref1.
-  forall tl2:(int,us_rep1) farray. (((result = { int__content = t1 }) and
+  forall o25:(int,us_rep1) farray. forall o26:t. forall o27:float1.
+  forall o28:float1. forall o29:float1. forall o30:float1. forall o31:float1.
+  forall o32:float1. forall o33:float1. forall o34:float1. forall o35:float1.
+  forall o36:(int,us_rep) farray. forall o37:(int,us_rep) farray.
+  forall o38:float1. forall o39:float1. forall o40:float1. forall o41:float1.
+  forall o42:(int,us_rep) farray. forall o43:float1. forall o44:float1.
+  forall o45:float1. forall o46:float1. forall o47:(int,us_rep1) farray.
+  forall o48:t. forall o49:float1. forall o50:float1. forall o51:float1.
+  forall o52:float1. forall o53:float1. forall o54:float1. forall o55:float1.
+  forall o56:float1. forall o57:float1. forall o58:(int,us_rep) farray.
+  forall o59:(int,us_rep) farray. forall o60:float1. forall o61:float1.
+  forall o62:float1. forall o63:float1. forall o64:(int,us_rep) farray.
+  forall o65:float1. forall o66:float1. forall o67:float1. forall o68:float1.
+  forall o69:(int,us_rep1) farray. forall o70:t. forall o71:float1.
+  forall o72:float1. forall o73:float1. forall o74:float1. forall o75:float1.
+  forall o76:float1. forall o77:float1. forall o78:float1. forall o79:float1.
+  forall o80:(int,us_rep) farray. forall o81:(int,us_rep) farray.
+  forall o82:float1. forall o83:float1. forall o84:float1. forall o85:float1.
+  forall o86:(int,us_rep) farray. forall o87:float1. forall o88:float1.
+  forall o89:float1. forall o90:float1. forall o91:(int,us_rep1) farray.
+  forall result:int__ref. forall t2:int. forall tl1:(int,us_rep1) farray.
+  forall t3:int. forall v:int. forall result1:int__ref. forall v1:int.
+  forall result2:map__ref1. forall tl2:(int,us_rep1) farray.
+  forall result3:map__ref1. forall tl3:(int,us_rep1) farray.
+  forall result4:map__ref1. forall tl4:(int,us_rep1) farray.
+  forall result5:int__ref. forall v2:int. forall result6:map__ref1.
+  forall tl5:(int,us_rep1) farray. (((result = { int__content = t1 }) and
   (t2 = 1)) -> (((1 <= t2) and (t2 <= 100)) ->
-  (((forall temp___279:int. (((1 <= temp___279) and (temp___279 <= 100)) ->
-    (((t3 <= temp___279) and ((tl1[temp___279]) = (tl[temp___279]))) or
-    ((not (t3 <= temp___279)) and
-    ((forall temp___280:int. (((1 <= temp___280) and (temp___280 <= 3)) ->
-     (((((((tl1[temp___279])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___280])).us_split_fields1).rec__untangle_tests__coordinate__w = ((((((tl[temp___279])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___280])).us_split_fields1).rec__untangle_tests__coordinate__w))) and
-    ((((tl1[temp___279])).us_split_fields3).rec__untangle_tests__triangle__normal = (((tl[temp___279])).us_split_fields3).rec__untangle_tests__triangle__normal)))))) and
+  (((forall temp___281:int. (((1 <= temp___281) and (temp___281 <= 100)) ->
+    ((((100 <  temp___281) or ((temp___281 <  1) or (t3 <= temp___281))) and
+    ((tl1[temp___281]) = (tl[temp___281]))) or ((not ((100 <  temp___281) or
+    ((temp___281 <  1) or (t3 <= temp___281)))) and
+    ((forall temp___282:int. (((1 <= temp___282) and (temp___282 <= 3)) ->
+     (((((((tl1[temp___281])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___282])).us_split_fields1).rec__untangle_tests__coordinate__w = ((((((tl[temp___281])).us_split_fields3).rec__untangle_tests__triangle__vertices[temp___282])).us_split_fields1).rec__untangle_tests__coordinate__w))) and
+    ((((tl1[temp___281])).us_split_fields3).rec__untangle_tests__triangle__normal = (((tl[temp___281])).us_split_fields3).rec__untangle_tests__triangle__normal)))))) and
   ((1 <= t3) and (t3 <= 100))) -> (((result1 = { int__content = v }) and
   (v1 = 1)) -> (((((((((((o4 = add(NearestTiesToEven,
   to_rep(((((((tl1[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__x),
@@ -1633,6 +1682,92 @@ goal WP_parameter_def :
   rec__untangle_tests__coordinate__z = o23;
   rec__untangle_tests__coordinate__w = o24 } } } }]))) and ((result2 = {
   map__content1 = tl1 }) and (tl2 = o25))) ->
-  tqtisFinite(add(NearestTiesToEven,
+  (((((((((((o26 = add(NearestTiesToEven,
   to_rep(((((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__y),
-  to_rep(o1)))))))))
+  to_rep(o1))) and tqtisFinite(add(NearestTiesToEven,
+  to_rep(((((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__y),
+  to_rep(o1)))) and (to_rep(o27) = o26)) and
+  ((((((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__x = o28) and
+  ((o27 = o29) and
+  ((((((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__z = o30) and
+  (((((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__w = o31))))) and
+  ((o32 = o28) and ((o33 = o29) and ((o34 = o30) and (o35 = o31))))) and
+  (o36 = ((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1 <- {
+  us_split_fields1 = { rec__untangle_tests__coordinate__x = o32;
+  rec__untangle_tests__coordinate__y = o33;
+  rec__untangle_tests__coordinate__z = o34;
+  rec__untangle_tests__coordinate__w = o35 } }]))) and ((o36 = o37) and
+  ((((tl2[t3])).us_split_fields3).rec__untangle_tests__triangle__normal = {
+  us_split_fields1 = { rec__untangle_tests__coordinate__x = o38;
+  rec__untangle_tests__coordinate__y = o39;
+  rec__untangle_tests__coordinate__z = o40;
+  rec__untangle_tests__coordinate__w = o41 } }))) and ((o42 = o37) and
+  ((o43 = o38) and ((o44 = o39) and ((o45 = o40) and (o46 = o41)))))) and
+  (o47 = (tl2[t3 <- { us_split_fields3 = {
+  rec__untangle_tests__triangle__vertices = o42;
+  rec__untangle_tests__triangle__normal = { us_split_fields1 = {
+  rec__untangle_tests__coordinate__x = o43;
+  rec__untangle_tests__coordinate__y = o44;
+  rec__untangle_tests__coordinate__z = o45;
+  rec__untangle_tests__coordinate__w = o46 } } } }]))) and ((result3 = {
+  map__content1 = tl2 }) and (tl3 = o47))) ->
+  (((((((((((o48 = add(NearestTiesToEven,
+  to_rep(((((((tl3[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__z),
+  to_rep(o2))) and tqtisFinite(add(NearestTiesToEven,
+  to_rep(((((((tl3[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__z),
+  to_rep(o2)))) and (to_rep(o49) = o48)) and
+  ((((((((tl3[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__x = o50) and
+  ((((((((tl3[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__y = o51) and
+  ((o49 = o52) and
+  (((((((tl3[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1])).us_split_fields1).rec__untangle_tests__coordinate__w = o53))))) and
+  ((o54 = o50) and ((o55 = o51) and ((o56 = o52) and (o57 = o53))))) and
+  (o58 = ((((tl3[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v1 <- {
+  us_split_fields1 = { rec__untangle_tests__coordinate__x = o54;
+  rec__untangle_tests__coordinate__y = o55;
+  rec__untangle_tests__coordinate__z = o56;
+  rec__untangle_tests__coordinate__w = o57 } }]))) and ((o58 = o59) and
+  ((((tl3[t3])).us_split_fields3).rec__untangle_tests__triangle__normal = {
+  us_split_fields1 = { rec__untangle_tests__coordinate__x = o60;
+  rec__untangle_tests__coordinate__y = o61;
+  rec__untangle_tests__coordinate__z = o62;
+  rec__untangle_tests__coordinate__w = o63 } }))) and ((o64 = o59) and
+  ((o65 = o60) and ((o66 = o61) and ((o67 = o62) and (o68 = o63)))))) and
+  (o69 = (tl3[t3 <- { us_split_fields3 = {
+  rec__untangle_tests__triangle__vertices = o64;
+  rec__untangle_tests__triangle__normal = { us_split_fields1 = {
+  rec__untangle_tests__coordinate__x = o65;
+  rec__untangle_tests__coordinate__y = o66;
+  rec__untangle_tests__coordinate__z = o67;
+  rec__untangle_tests__coordinate__w = o68 } } } }]))) and ((result4 = {
+  map__content1 = tl3 }) and (tl4 = o69))) -> (((result5 = { int__content =
+  v1 }) and (v2 = 2)) -> (((((((((((o70 = add(NearestTiesToEven,
+  to_rep(((((((tl4[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v2])).us_split_fields1).rec__untangle_tests__coordinate__x),
+  to_rep(o))) and tqtisFinite(add(NearestTiesToEven,
+  to_rep(((((((tl4[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v2])).us_split_fields1).rec__untangle_tests__coordinate__x),
+  to_rep(o)))) and (to_rep(o71) = o70)) and ((o71 = o72) and
+  ((((((((tl4[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v2])).us_split_fields1).rec__untangle_tests__coordinate__y = o73) and
+  ((((((((tl4[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v2])).us_split_fields1).rec__untangle_tests__coordinate__z = o74) and
+  (((((((tl4[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v2])).us_split_fields1).rec__untangle_tests__coordinate__w = o75))))) and
+  ((o76 = o72) and ((o77 = o73) and ((o78 = o74) and (o79 = o75))))) and
+  (o80 = ((((tl4[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v2 <- {
+  us_split_fields1 = { rec__untangle_tests__coordinate__x = o76;
+  rec__untangle_tests__coordinate__y = o77;
+  rec__untangle_tests__coordinate__z = o78;
+  rec__untangle_tests__coordinate__w = o79 } }]))) and ((o80 = o81) and
+  ((((tl4[t3])).us_split_fields3).rec__untangle_tests__triangle__normal = {
+  us_split_fields1 = { rec__untangle_tests__coordinate__x = o82;
+  rec__untangle_tests__coordinate__y = o83;
+  rec__untangle_tests__coordinate__z = o84;
+  rec__untangle_tests__coordinate__w = o85 } }))) and ((o86 = o81) and
+  ((o87 = o82) and ((o88 = o83) and ((o89 = o84) and (o90 = o85)))))) and
+  (o91 = (tl4[t3 <- { us_split_fields3 = {
+  rec__untangle_tests__triangle__vertices = o86;
+  rec__untangle_tests__triangle__normal = { us_split_fields1 = {
+  rec__untangle_tests__coordinate__x = o87;
+  rec__untangle_tests__coordinate__y = o88;
+  rec__untangle_tests__coordinate__z = o89;
+  rec__untangle_tests__coordinate__w = o90 } } } }]))) and ((result6 = {
+  map__content1 = tl4 }) and (tl5 = o91))) ->
+  tqtisFinite(add(NearestTiesToEven,
+  to_rep(((((((tl5[t3])).us_split_fields3).rec__untangle_tests__triangle__vertices[v2])).us_split_fields1).rec__untangle_tests__coordinate__y),
+  to_rep(o1)))))))))))))

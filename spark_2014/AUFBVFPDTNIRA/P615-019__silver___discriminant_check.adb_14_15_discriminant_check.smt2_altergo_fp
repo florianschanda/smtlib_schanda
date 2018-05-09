@@ -50,39 +50,17 @@ function real__ref___projection(a: real__ref) : real = (a).real__content
 function us_private__ref___projection(a: us_private__ref) : us_private =
   (a).us_private__content
 
-function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
-
-logic to_int : bool -> int
-
-axiom to_int_def :
-  (forall b:bool [to_int(b)]. (((b = true) -> (to_int(b) = 1)) and
-  ((not (b = true)) -> (to_int(b) = 0))))
-
-logic of_int : int -> bool
-
-axiom of_int_def :
-  (forall i:int [of_int(i)]. (((i = 0) -> (of_int(i) = false)) and
-  ((not (i = 0)) -> (of_int(i) = true))))
-
-logic bool_eq : bool, bool -> bool
-
-axiom bool_eq_def :
-  (forall x:bool. forall y:bool [bool_eq(x, y)]. (((x = y) -> (bool_eq(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq(x, y) = false))))
-
-predicate in_range(x: int) = ((x = 0) or (x = 1))
-
-logic attr__ATTRIBUTE_IMAGE : bool -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE : us_image -> bool
-
 type integer
 
-predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+logic integerqtint : integer -> int
 
-logic bool_eq1 : int, int -> bool
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
+predicate in_range(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
+
+logic bool_eq : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -95,7 +73,7 @@ logic bool_gt : int, int -> bool
 logic bool_ge : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -112,17 +90,17 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge(x, y) = true) <-> (y <= x))))
 
-logic bool_eq2 : int, int -> bool
+logic bool_eq1 : int, int -> bool
 
-axiom bool_eq_def1 :
-  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+axiom bool_eq_def :
+  (forall x:int. forall y:int [bool_eq1(x, y)]. (((x = y) -> (bool_eq1(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq1(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+logic attr__ATTRIBUTE_IMAGE : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+logic attr__ATTRIBUTE_VALUE : us_image -> int
 
 logic user_eq : integer, integer -> bool
 
@@ -134,17 +112,17 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep : integer -> int
+function to_rep(x: integer) : int = integerqtint(x)
 
 logic of_rep : int -> integer
 
 axiom inversion_axiom :
   (forall x:integer [to_rep(x)]. (of_rep(to_rep(x)) = x))
 
-axiom range_axiom : (forall x:integer [to_rep(x)]. in_range1(to_rep(x)))
+axiom range_axiom : (forall x:integer [to_rep(x)]. in_range(to_rep(x)))
 
 axiom coerce_axiom :
-  (forall x:int [to_rep(of_rep(x))]. (in_range1(x) ->
+  (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
   (to_rep(of_rep(x)) = x)))
 
 axiom add_div :
@@ -488,29 +466,29 @@ axiom zero_to_real :
   (forall x:t [is_zero(x)]. (is_zero(x) <-> (tqtisFinite(x) and
   (tqtreal(x) = 0.0))))
 
-logic of_int1 : fpa_rounding_mode, int -> t
+logic of_int : fpa_rounding_mode, int -> t
 
-logic to_int1 : fpa_rounding_mode, t -> int
+logic to_int : fpa_rounding_mode, t -> int
 
-axiom zero_of_int : (forall m:fpa_rounding_mode. (zeroF = of_int1(m, 0)))
+axiom zero_of_int : (forall m:fpa_rounding_mode. (zeroF = of_int(m, 0)))
 
 logic max_int1 : int
 
 axiom max_real_int : (0x1.FFFFFEp127 = real_of_int(max_int1))
 
-predicate in_range2(x: real) = (((-0x1.FFFFFEp127) <= x) and
+predicate in_range1(x: real) = (((-0x1.FFFFFEp127) <= x) and
   (x <= 0x1.FFFFFEp127))
 
 predicate in_int_range(i: int) = (((-max_int1) <= i) and (i <= max_int1))
 
-axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range2(tqtreal(x))))
+axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range1(tqtreal(x))))
 
 predicate no_overflow(m: fpa_rounding_mode, x: real) =
-  in_range2(float32(m,x))
+  in_range1(float32(m,x))
 
 axiom Bounded_real_no_overflow :
-  (forall m:fpa_rounding_mode. forall x:real. (in_range2(x) ->
-  in_range2(float32(m,x))))
+  (forall m:fpa_rounding_mode. forall x:real. (in_range1(x) ->
+  in_range1(float32(m,x))))
 
 axiom Round_to_real :
   (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
@@ -662,7 +640,7 @@ predicate sign_zero_result(m: fpa_rounding_mode, x: t) = (is_zero(x) ->
 axiom add_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range2(float32(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
+  (in_range1(float32(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
   y)) and (tqtreal(add(m, x, y)) = float32(m,(tqtreal(x) + tqtreal(y)))))))))
 
 axiom add_finite_rev :
@@ -672,13 +650,13 @@ axiom add_finite_rev :
 axiom add_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(add(m, x, y)) ->
-  (in_range2(float32(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
+  (in_range1(float32(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
   y)) = float32(m,(tqtreal(x) + tqtreal(y))))))))
 
 axiom sub_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range2(float32(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
+  (in_range1(float32(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
   y)) and (tqtreal(sub(m, x, y)) = float32(m,(tqtreal(x) - tqtreal(y)))))))))
 
 axiom sub_finite_rev :
@@ -688,13 +666,13 @@ axiom sub_finite_rev :
 axiom sub_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(sub(m, x, y)) ->
-  (in_range2(float32(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
+  (in_range1(float32(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
   y)) = float32(m,(tqtreal(x) - tqtreal(y))))))))
 
 axiom mul_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range2(float32(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
+  (in_range1(float32(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
   y)) and (tqtreal(mul(m, x, y)) = float32(m,(tqtreal(x) * tqtreal(y)))))))))
 
 axiom mul_finite_rev :
@@ -704,13 +682,13 @@ axiom mul_finite_rev :
 axiom mul_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(mul(m, x, y)) ->
-  (in_range2(float32(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
+  (in_range1(float32(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
   y)) = float32(m,(tqtreal(x) * tqtreal(y))))))))
 
 axiom div_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) -> ((not is_zero(y)) ->
-  (in_range2(float32(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
+  (in_range1(float32(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
   y)) and (tqtreal(div(m, x,
   y)) = float32(m,(tqtreal(x) / tqtreal(y))))))))))
 
@@ -723,7 +701,7 @@ axiom div_finite_rev :
 axiom div_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(div(m, x, y)) -> (tqtisFinite(y) ->
-  (in_range2(float32(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
+  (in_range1(float32(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
   y)) = float32(m,(tqtreal(x) / tqtreal(y)))))))))
 
 axiom neg_finite :
@@ -747,7 +725,7 @@ axiom abs_universal : (forall x:t [abs(x)]. (not is_negative(abs(x))))
 axiom fma_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
   y, z)]. (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) ->
-  (in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
+  (in_range1(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
   (tqtisFinite(fma(m, x, y, z)) and (tqtreal(fma(m, x, y,
   z)) = float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))))
 
@@ -759,7 +737,7 @@ axiom fma_finite_rev :
 axiom fma_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
   y, z)]. (to_nearest(m) -> (tqtisFinite(fma(m, x, y, z)) ->
-  (in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
+  (in_range1(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
   (tqtreal(fma(m, x, y,
   z)) = float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))
 
@@ -802,7 +780,7 @@ axiom add_special :
   (is_infinite(add(m, x, y)) and same_sign(add(m, x, y), x))) and
   (((is_infinite(x) and (is_infinite(y) and diff_sign(x, y))) ->
   is_nan(add(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range2(float32(m,(tqtreal(x) + tqtreal(y))))))) ->
+  (not in_range1(float32(m,(tqtreal(x) + tqtreal(y))))))) ->
   (same_sign_real(add(m, x, y), (tqtreal(x) + tqtreal(y))) and
   overflow_value(m, add(m, x, y)))) and ((tqtisFinite(x) and
   tqtisFinite(y)) -> ((same_sign(x, y) -> same_sign(add(m, x, y), x)) and
@@ -818,7 +796,7 @@ axiom sub_special :
   is_nan(sub(m, x, y))) and (((is_infinite(x) and (is_infinite(y) and
   diff_sign(x, y))) -> (is_infinite(sub(m, x, y)) and same_sign(sub(m, x, y),
   x))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range2(float32(m,(tqtreal(x) - tqtreal(y))))))) ->
+  (not in_range1(float32(m,(tqtreal(x) - tqtreal(y))))))) ->
   (same_sign_real(sub(m, x, y), (tqtreal(x) - tqtreal(y))) and
   overflow_value(m, sub(m, x, y)))) and ((tqtisFinite(x) and
   tqtisFinite(y)) -> ((diff_sign(x, y) -> same_sign(sub(m, x, y), x)) and
@@ -833,7 +811,7 @@ axiom mul_special :
   (((is_infinite(x) and (tqtisFinite(y) and (not is_zero(y)))) ->
   is_infinite(mul(m, x, y))) and (((is_infinite(x) and is_infinite(y)) ->
   is_infinite(mul(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range2(float32(m,(tqtreal(x) * tqtreal(y))))))) ->
+  (not in_range1(float32(m,(tqtreal(x) * tqtreal(y))))))) ->
   overflow_value(m, mul(m, x, y))) and ((not is_nan(mul(m, x, y))) ->
   product_sign(mul(m, x, y), x, y))))))))))
 
@@ -844,7 +822,7 @@ axiom div_special :
   (((is_infinite(x) and tqtisFinite(y)) -> is_infinite(div(m, x, y))) and
   (((is_infinite(x) and is_infinite(y)) -> is_nan(div(m, x, y))) and
   (((tqtisFinite(x) and (tqtisFinite(y) and ((not is_zero(y)) and
-  (not in_range2(float32(m,(tqtreal(x) / tqtreal(y)))))))) ->
+  (not in_range1(float32(m,(tqtreal(x) / tqtreal(y)))))))) ->
   overflow_value(m, div(m, x, y))) and (((tqtisFinite(x) and (is_zero(y) and
   (not is_zero(x)))) -> is_infinite(div(m, x, y))) and (((is_zero(x) and
   is_zero(y)) -> is_nan(div(m, x, y))) and ((not is_nan(div(m, x, y))) ->
@@ -886,7 +864,7 @@ axiom fma_special :
   same_sign(fma(m, x, y, z), z))) and ((not product_sign(z, x, y)) ->
   is_nan(fma(m, x, y, z))))) and (((tqtisFinite(x) and (tqtisFinite(y) and
   (tqtisFinite(z) and
-  (not in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
+  (not in_range1(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
   (same_sign_real(fma(m, x, y, z),
   ((tqtreal(x) * tqtreal(y)) + tqtreal(z))) and overflow_value(m, fma(m, x,
   y, z)))) and ((tqtisFinite(x) and (tqtisFinite(y) and tqtisFinite(z))) ->
@@ -907,20 +885,20 @@ axiom sqrt_special :
 axiom of_int_add_exact :
   (forall m:fpa_rounding_mode. forall n:fpa_rounding_mode. forall i:int.
   forall j:int. (in_safe_int_range(i) -> (in_safe_int_range(j) ->
-  (in_safe_int_range((i + j)) -> eq(of_int1(m, (i + j)), add(n, of_int1(m,
-  i), of_int1(m, j)))))))
+  (in_safe_int_range((i + j)) -> eq(of_int(m, (i + j)), add(n, of_int(m, i),
+  of_int(m, j)))))))
 
 axiom of_int_sub_exact :
   (forall m:fpa_rounding_mode. forall n:fpa_rounding_mode. forall i:int.
   forall j:int. (in_safe_int_range(i) -> (in_safe_int_range(j) ->
-  (in_safe_int_range((i - j)) -> eq(of_int1(m, (i - j)), sub(n, of_int1(m,
-  i), of_int1(m, j)))))))
+  (in_safe_int_range((i - j)) -> eq(of_int(m, (i - j)), sub(n, of_int(m, i),
+  of_int(m, j)))))))
 
 axiom of_int_mul_exact :
   (forall m:fpa_rounding_mode. forall n:fpa_rounding_mode. forall i:int.
   forall j:int. (in_safe_int_range(i) -> (in_safe_int_range(j) ->
-  (in_safe_int_range((i * j)) -> eq(of_int1(m, (i * j)), mul(n, of_int1(m,
-  i), of_int1(m, j)))))))
+  (in_safe_int_range((i * j)) -> eq(of_int(m, (i * j)), mul(n, of_int(m, i),
+  of_int(m, j)))))))
 
 axiom Min_r : (forall x:t. forall y:t. (le(y, x) -> eq(min(x, y), y)))
 
@@ -936,11 +914,11 @@ axiom zeroF_is_int : is_int(zeroF)
 
 axiom of_int_is_int :
   (forall m:fpa_rounding_mode. forall x:int. (in_int_range(x) ->
-  is_int(of_int1(m, x))))
+  is_int(of_int(m, x))))
 
 axiom big_float_is_int :
   (forall m:fpa_rounding_mode. forall i:t. (tqtisFinite(i) -> ((le(i,
-  neg(of_int1(m, 16777216))) or le(of_int1(m, 16777216), i)) -> is_int(i))))
+  neg(of_int(m, 16777216))) or le(of_int(m, 16777216), i)) -> is_int(i))))
 
 axiom roundToIntegral_is_int :
   (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
@@ -972,17 +950,17 @@ axiom abs_int1 : (forall x:t. (is_int(x) -> is_int(abs(x))))
 
 axiom is_int_of_int :
   (forall x:t. forall m:fpa_rounding_mode. forall mqt:fpa_rounding_mode.
-  (is_int(x) -> eq(x, of_int1(mqt, to_int1(m, x)))))
+  (is_int(x) -> eq(x, of_int(mqt, to_int(m, x)))))
 
 axiom is_int_to_int :
   (forall m:fpa_rounding_mode. forall x:t. (is_int(x) ->
-  in_int_range(to_int1(m, x))))
+  in_int_range(to_int(m, x))))
 
 axiom is_int_is_finite : (forall x:t. (is_int(x) -> tqtisFinite(x)))
 
 axiom int_to_real :
   (forall m:fpa_rounding_mode. forall x:t. (is_int(x) ->
-  (tqtreal(x) = real_of_int(to_int1(m, x)))))
+  (tqtreal(x) = real_of_int(to_int(m, x)))))
 
 axiom truncate_int :
   (forall m:fpa_rounding_mode. forall i:t. (is_int(i) ->
@@ -1008,7 +986,7 @@ axiom ceil_to_real :
   x)) = real_of_int(ceil(tqtreal(x))))))
 
 axiom ceil_to_int :
-  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) -> (to_int1(m,
+  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) -> (to_int(m,
   roundToIntegral(Up, x)) = ceil(tqtreal(x)))))
 
 axiom floor_le :
@@ -1023,7 +1001,7 @@ axiom floor_to_real :
   x)) = real_of_int(floor(tqtreal(x))))))
 
 axiom floor_to_int :
-  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) -> (to_int1(m,
+  (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) -> (to_int(m,
   roundToIntegral(Down, x)) = floor(tqtreal(x)))))
 
 axiom RNA_down :
@@ -1047,24 +1025,24 @@ axiom RNA_up_tie :
   (roundToIntegral(NearestTiesToAway, x) = roundToIntegral(Up, x)))))
 
 axiom to_int_roundToIntegral :
-  (forall m:fpa_rounding_mode. forall x:t. (to_int1(m, x) = to_int1(m,
+  (forall m:fpa_rounding_mode. forall x:t. (to_int(m, x) = to_int(m,
   roundToIntegral(m, x))))
 
 axiom to_int_monotonic :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. (tqtisFinite(x) ->
-  (tqtisFinite(y) -> (le(x, y) -> (to_int1(m, x) <= to_int1(m, y))))))
+  (tqtisFinite(y) -> (le(x, y) -> (to_int(m, x) <= to_int(m, y))))))
 
 axiom to_int_of_int :
   (forall m:fpa_rounding_mode. forall i:int. (in_safe_int_range(i) ->
-  (to_int1(m, of_int1(m, i)) = i)))
+  (to_int(m, of_int(m, i)) = i)))
 
 axiom eq_to_int :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. (tqtisFinite(x) ->
-  (eq(x, y) -> (to_int1(m, x) = to_int1(m, y)))))
+  (eq(x, y) -> (to_int(m, x) = to_int(m, y)))))
 
 axiom neg_to_int :
-  (forall m:fpa_rounding_mode. forall x:t. (is_int(x) -> (to_int1(m,
-  neg(x)) = (-to_int1(m, x)))))
+  (forall m:fpa_rounding_mode. forall x:t. (is_int(x) -> (to_int(m,
+  neg(x)) = (-to_int(m, x)))))
 
 axiom roundToIntegral_is_finite :
   (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
@@ -1072,13 +1050,13 @@ axiom roundToIntegral_is_finite :
 
 axiom round_bound_ne :
   (forall x:real [float32(NearestTiesToEven,x)].
-  (in_range2(float32(NearestTiesToEven,x)) ->
+  (in_range1(float32(NearestTiesToEven,x)) ->
   ((((x - (0x1.0p-24 * abs_real(x))) - 0x1.0p-150) <= float32(NearestTiesToEven,x)) and
   (float32(NearestTiesToEven,x) <= ((x + (0x1.0p-24 * abs_real(x))) + 0x1.0p-150)))))
 
 axiom round_bound :
   (forall m:fpa_rounding_mode. forall x:real [float32(m,x)].
-  (in_range2(float32(m,x)) ->
+  (in_range1(float32(m,x)) ->
   ((((x - (0x1.0p-23 * abs_real(x))) - 0x1.0p-149) <= float32(m,x)) and
   (float32(m,x) <= ((x + (0x1.0p-23 * abs_real(x))) + 0x1.0p-149)))))
 
@@ -1108,11 +1086,11 @@ axiom bool_ge_def :
   (forall x:t. forall y:t [bool_ge1(x, y)]. ((le(y, x) -> (bool_ge1(x,
   y) = true)) and ((not le(y, x)) -> (bool_ge1(x, y) = false))))
 
-logic bool_eq3 : t, t -> bool
+logic bool_eq2 : t, t -> bool
 
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+axiom bool_eq_def1 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
 
 logic bool_neq : t, t -> bool
 
@@ -1128,10 +1106,38 @@ axiom fliteral_axiom : (tqtisFinite(fliteral) and (tqtreal(fliteral) = 1.0))
 
 axiom one_is_int : is_int(fliteral)
 
-axiom one_of_int : (fliteral = of_int1(NearestTiesToAway, 1))
+axiom one_of_int : (fliteral = of_int(NearestTiesToAway, 1))
 
 type t__ref = { t__content : t
 }
+
+function ite(b: bool, x: 'a, y: 'a) : 'a = match_bool(b, x, y)
+
+logic to_int1 : bool -> int
+
+axiom to_int_def :
+  (forall b:bool [to_int1(b)]. (((b = true) -> (to_int1(b) = 1)) and
+  ((not (b = true)) -> (to_int1(b) = 0))))
+
+logic of_int1 : int -> bool
+
+axiom of_int_def :
+  (forall i:int [of_int1(i)]. (((i = 0) -> (of_int1(i) = false)) and
+  ((not (i = 0)) -> (of_int1(i) = true))))
+
+logic bool_eq3 : bool, bool -> bool
+
+axiom bool_eq_def2 :
+  (forall x:bool. forall y:bool [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+predicate in_range2(x: int) = ((x = 0) or (x = 1))
+
+logic attr__ATTRIBUTE_IMAGE1 : bool -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> bool
 
 type float1
 
@@ -1188,6 +1194,9 @@ rec__discriminant_check__rec__y : float1
 function us_split_fields_X__projection(a: us_split_fields) : integer =
   (a).rec__discriminant_check__rec__x
 
+function us_split_fields_Y__projection(a: us_split_fields) : float1 =
+  (a).rec__discriminant_check__rec__y
+
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
 
@@ -1205,10 +1214,10 @@ function us_rep___2__projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
 predicate discriminant_check__rec__x__pred(a: us_rep) =
-  (to_int(((a).us_split_discrs1).rec__discriminant_check__rec__b) = 1)
+  (to_int1(((a).us_split_discrs1).rec__discriminant_check__rec__b) = 1)
 
 predicate discriminant_check__rec__y__pred(a: us_rep) =
-  (to_int(((a).us_split_discrs1).rec__discriminant_check__rec__b) = 0)
+  (to_int1(((a).us_split_discrs1).rec__discriminant_check__rec__b) = 0)
 
 logic bool_eq5 : us_rep, us_rep -> bool
 
@@ -1318,5 +1327,5 @@ logic r2 : float1
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
- (* File "system.ads", line 1, characters 0-0 *)
-goal WP_parameter_def : (to_int(r) = 1)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P615-019__silver/gnatprove/discriminant_check.mlw", line 4115, characters 5-8 *)
+goal WP_parameter_def : (to_int1(r) = 1)

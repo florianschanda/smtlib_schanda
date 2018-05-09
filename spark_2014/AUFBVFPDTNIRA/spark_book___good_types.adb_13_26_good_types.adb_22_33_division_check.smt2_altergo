@@ -897,11 +897,89 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
+type num
+
+logic fliteral1 : t
+
+axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
+  (tqtreal(fliteral1) = 0.0))
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 100.0))
+
+predicate in_range1(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
+  fliteral2)))
+
+logic bool_eq1 : t, t -> bool
+
+axiom bool_eq_def1 :
+  (forall x:t. forall y:t [bool_eq1(x, y)]. ((eq(x, y) -> (bool_eq1(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq1(x, y) = false))))
+
+logic user_eq : num, num -> bool
+
+logic attr__ATTRIBUTE_IMAGE : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE : us_image -> t
+
+logic dummy : num
+
+type num__ref = { num__content : num
+}
+
+function num__ref___projection(a: num__ref) : num = (a).num__content
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
+logic attr__ATTRIBUTE_ADDRESS1 : int
+
+logic attr__ATTRIBUTE_ADDRESS2 : int
+
+type num1
+
+logic fliteral3 : t
+
+axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
+  (tqtreal(fliteral3) = 12.0))
+
+predicate in_range2(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
+  fliteral3)))
+
+logic bool_eq2 : t, t -> bool
+
+axiom bool_eq_def2 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
+
+logic user_eq1 : num1, num1 -> bool
+
+logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> t
+
+logic dummy1 : num1
+
+type num__ref1 = { num__content1 : num1
+}
+
+function num__ref___2__projection(a: num__ref1) : num1 = (a).num__content1
+
 type field
 
-predicate in_range1(x: int) = ((0 <= x) and (x <= 255))
+logic fieldqtint : field -> int
 
-logic bool_eq1 : int, int -> bool
+axiom fieldqtaxiom :
+  (forall i:field. ((0 <= fieldqtint(i)) and (fieldqtint(i) <= 255)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 255))
+
+logic bool_eq3 : int, int -> bool
 
 logic bool_ne : int, int -> bool
 
@@ -914,7 +992,7 @@ logic bool_gt1 : int, int -> bool
 logic bool_ge1 : int, int -> bool
 
 axiom bool_eq_axiom :
-  (forall x:int. (forall y:int. ((bool_eq1(x, y) = true) <-> (x = y))))
+  (forall x:int. (forall y:int. ((bool_eq3(x, y) = true) <-> (x = y))))
 
 axiom bool_ne_axiom :
   (forall x:int. (forall y:int. ((bool_ne(x, y) = true) <-> (not (x = y)))))
@@ -931,21 +1009,21 @@ axiom bool_gt_axiom :
 axiom bool_ge_axiom :
   (forall x:int. (forall y:int. ((bool_ge1(x, y) = true) <-> (y <= x))))
 
-logic bool_eq2 : int, int -> bool
+logic bool_eq4 : int, int -> bool
 
-axiom bool_eq_def1 :
-  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
+axiom bool_eq_def3 :
+  (forall x:int. forall y:int [bool_eq4(x, y)]. (((x = y) -> (bool_eq4(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq4(x, y) = false))))
 
-logic attr__ATTRIBUTE_IMAGE : int -> us_image
+logic attr__ATTRIBUTE_IMAGE2 : int -> us_image
 
-logic attr__ATTRIBUTE_VALUE__pre_check : us_image -> prop
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
-logic attr__ATTRIBUTE_VALUE : us_image -> int
+logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
-logic user_eq : field, field -> bool
+logic user_eq2 : field, field -> bool
 
-logic dummy : field
+logic dummy2 : field
 
 type field__ref = { field__content : field
 }
@@ -953,80 +1031,6 @@ type field__ref = { field__content : field
 function field__ref___projection(a: field__ref) : field = (a).field__content
 
 type feet
-
-logic fliteral1 : t
-
-axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 0.0))
-
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 100.0))
-
-predicate in_range2(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
-  fliteral2)))
-
-logic bool_eq3 : t, t -> bool
-
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
-
-logic user_eq1 : feet, feet -> bool
-
-logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> t
-
-logic dummy1 : feet
-
-type feet__ref = { feet__content : feet
-}
-
-function feet__ref___projection(a: feet__ref) : feet = (a).feet__content
-
-type inches
-
-logic fliteral3 : t
-
-axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
-  (tqtreal(fliteral3) = 12.0))
-
-predicate in_range3(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
-  fliteral3)))
-
-logic bool_eq4 : t, t -> bool
-
-axiom bool_eq_def3 :
-  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
-
-logic user_eq2 : inches, inches -> bool
-
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
-
-logic dummy2 : inches
-
-type inches__ref = { inches__content : inches
-}
-
-function inches__ref___projection(a: inches__ref) : inches =
-  (a).inches__content
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic attr__ATTRIBUTE_ADDRESS1 : int
-
-logic attr__ATTRIBUTE_ADDRESS2 : int
-
-type num
 
 predicate in_range4(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
   fliteral2)))
@@ -1037,7 +1041,7 @@ axiom bool_eq_def4 :
   (forall x:t. forall y:t [bool_eq5(x, y)]. ((eq(x, y) -> (bool_eq5(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq5(x, y) = false))))
 
-logic user_eq3 : num, num -> bool
+logic user_eq3 : feet, feet -> bool
 
 logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
 
@@ -1045,20 +1049,14 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> t
 
-logic dummy3 : num
+logic dummy3 : feet
 
-type num__ref = { num__content : num
+type feet__ref = { feet__content : feet
 }
 
-function num__ref___projection(a: num__ref) : num = (a).num__content
+function feet__ref___projection(a: feet__ref) : feet = (a).feet__content
 
-logic attr__ATTRIBUTE_ADDRESS3 : int
-
-logic attr__ATTRIBUTE_ADDRESS4 : int
-
-logic attr__ATTRIBUTE_ADDRESS5 : int
-
-type num1
+type inches
 
 predicate in_range5(x: t) = (tqtisFinite(x) and (le(fliteral1, x) and le(x,
   fliteral3)))
@@ -1069,7 +1067,7 @@ axiom bool_eq_def5 :
   (forall x:t. forall y:t [bool_eq6(x, y)]. ((eq(x, y) -> (bool_eq6(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq6(x, y) = false))))
 
-logic user_eq4 : num1, num1 -> bool
+logic user_eq4 : inches, inches -> bool
 
 logic attr__ATTRIBUTE_IMAGE4 : t -> us_image
 
@@ -1077,12 +1075,19 @@ logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE4 : us_image -> t
 
-logic dummy4 : num1
+logic dummy4 : inches
 
-type num__ref1 = { num__content1 : num1
+type inches__ref = { inches__content : inches
 }
 
-function num__ref___2__projection(a: num__ref1) : num1 = (a).num__content1
+function inches__ref___projection(a: inches__ref) : inches =
+  (a).inches__content
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
+
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
+logic attr__ATTRIBUTE_ADDRESS5 : int
 
 logic attr__ATTRIBUTE_ADDRESS6 : int
 
@@ -1101,17 +1106,17 @@ goal WP_parameter_def :
   forall room_length:t. forall wall_thickness:t. forall total:t.
   forall good_types__feet_io__get__2__item:t. forall result:t.
   forall room_length1:t. forall good_types__inch_io__get__2__item:t.
-  forall result1:t. forall wall_thickness1:t. (in_range1(default_fore) ->
-  (in_range1(default_aft) -> (in_range1(default_exp) ->
-  (in_range1(default_fore1) -> (in_range1(default_aft1) ->
-  (in_range1(default_exp1) -> ((le(fliteral1, fliteral2) ->
-  in_range2(room_length)) -> ((le(fliteral1, fliteral3) ->
-  in_range3(wall_thickness)) -> ((le(fliteral1, fliteral2) ->
-  in_range2(total)) -> ((in_range4(good_types__feet_io__get__2__item) and
+  forall result1:t. forall wall_thickness1:t. (in_range3(default_fore) ->
+  (in_range3(default_aft) -> (in_range3(default_exp) ->
+  (in_range3(default_fore1) -> (in_range3(default_aft1) ->
+  (in_range3(default_exp1) -> ((le(fliteral1, fliteral2) ->
+  in_range4(room_length)) -> ((le(fliteral1, fliteral3) ->
+  in_range5(wall_thickness)) -> ((le(fliteral1, fliteral2) ->
+  in_range4(total)) -> ((in_range1(good_types__feet_io__get__2__item) and
   ((result = room_length) and
   (room_length1 = good_types__feet_io__get__2__item))) ->
-  ((in_range5(good_types__inch_io__get__2__item) and
+  ((in_range2(good_types__inch_io__get__2__item) and
   ((result1 = wall_thickness) and
   (wall_thickness1 = good_types__inch_io__get__2__item))) ->
-  (((wall_thickness1 = c3b) and in_range3(c3b)) ->
+  (((wall_thickness1 = c3b) and in_range5(c3b)) ->
   (not is_zero(fliteral3)))))))))))))))

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -253,42 +249,40 @@
   (= (to_rep
      (select (access_inline__angle__aggregate_def temp___229) temp___230)) temp___229)))))
 
-(declare-const angle (Array Int t_angle_360))
-
 (declare-const o Float32)
 
 (declare-const o1 Float32)
 
-(declare-const result (Array Int t_angle_360))
-
-(declare-const angle1 (Array Int t_angle_360))
+(declare-const angle (Array Int t_angle_360))
 
 ;; H
   (assert (in_range c_2pi_in_degrees))
 
 ;; H
-  (assert (= result angle))
-
-;; H
   (assert
-  (= angle1 (access_inline__angle__aggregate_def
-            (fp #b0 #b00000000 #b00000000000000000000000))))
+  (= angle (access_inline__angle__aggregate_def
+           (fp #b0 #b00000000 #b00000000000000000000000))))
 
 ;; H
-  (assert (= (to_rep (select angle1 3)) c6b))
+  (assert (= (to_rep (select angle 3)) c6b))
 
 ;; H
   (assert (in_range c6b))
 
 ;; H
   (assert
-  (and
-  (= o (fp.sub RNE (to_rep (select angle1 3)) (to_rep (select angle1 3))))
-  (fp.isFinite32 (fp.sub RNE (to_rep (select angle1 3)) (to_rep
-                                                        (select angle1 3))))))
+  (= o (fp.sub RNE (to_rep (select angle 3)) (to_rep (select angle 3)))))
 
 ;; H
-  (assert (and (= o1 o) (fp.isFinite32 o)))
+  (assert
+  (fp.isFinite32 (fp.sub RNE (to_rep (select angle 3)) (to_rep
+                                                       (select angle 3)))))
+
+;; H
+  (assert (= o1 o))
+
+;; H
+  (assert (fp.isFinite32 o))
 
 (assert
 ;; WP_parameter_def

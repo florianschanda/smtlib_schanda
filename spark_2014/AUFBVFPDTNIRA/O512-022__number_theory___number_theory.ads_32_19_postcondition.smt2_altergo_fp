@@ -52,6 +52,12 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type natural
 
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
+
 predicate in_range(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
@@ -106,7 +112,7 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
-logic to_rep : natural -> int
+function to_rep(x: natural) : int = naturalqtint(x)
 
 logic of_rep : int -> natural
 
@@ -118,33 +124,6 @@ axiom range_axiom : (forall x:natural [to_rep(x)]. in_range(to_rep(x)))
 axiom coerce_axiom :
   (forall x:int [to_rep(of_rep(x))]. (in_range(x) ->
   (to_rep(of_rep(x)) = x)))
-
-type fibonacci_argument_type
-
-predicate in_range1(x: int) = ((0 <= x) and (x <= 46))
-
-logic bool_eq2 : int, int -> bool
-
-axiom bool_eq_def1 :
-  (forall x:int. forall y:int [bool_eq2(x, y)]. (((x = y) -> (bool_eq2(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq2(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE1 : us_image -> int
-
-logic user_eq1 : fibonacci_argument_type, fibonacci_argument_type -> bool
-
-logic dummy1 : fibonacci_argument_type
-
-type fibonacci_argument_type__ref = { fibonacci_argument_type__content :
-fibonacci_argument_type
-}
-
-function fibonacci_argument_type__ref___projection(a: fibonacci_argument_type__ref) : fibonacci_argument_type =
-  (a).fibonacci_argument_type__content
 
 logic fib : int -> int
 
@@ -501,19 +480,19 @@ logic max_int1 : int
 
 axiom max_real_int : (0x1.FFFFFEp127 = real_of_int(max_int1))
 
-predicate in_range2(x: real) = (((-0x1.FFFFFEp127) <= x) and
+predicate in_range1(x: real) = (((-0x1.FFFFFEp127) <= x) and
   (x <= 0x1.FFFFFEp127))
 
 predicate in_int_range(i: int) = (((-max_int1) <= i) and (i <= max_int1))
 
-axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range2(tqtreal(x))))
+axiom is_finite : (forall x:t. (tqtisFinite(x) -> in_range1(tqtreal(x))))
 
 predicate no_overflow(m: fpa_rounding_mode, x: real) =
-  in_range2(float32(m,x))
+  in_range1(float32(m,x))
 
 axiom Bounded_real_no_overflow :
-  (forall m:fpa_rounding_mode. forall x:real. (in_range2(x) ->
-  in_range2(float32(m,x))))
+  (forall m:fpa_rounding_mode. forall x:real. (in_range1(x) ->
+  in_range1(float32(m,x))))
 
 axiom Round_to_real :
   (forall m:fpa_rounding_mode. forall x:t. (tqtisFinite(x) ->
@@ -665,7 +644,7 @@ predicate sign_zero_result(m: fpa_rounding_mode, x: t) = (is_zero(x) ->
 axiom add_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range2(float32(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
+  (in_range1(float32(m,(tqtreal(x) + tqtreal(y)))) -> (tqtisFinite(add(m, x,
   y)) and (tqtreal(add(m, x, y)) = float32(m,(tqtreal(x) + tqtreal(y)))))))))
 
 axiom add_finite_rev :
@@ -675,13 +654,13 @@ axiom add_finite_rev :
 axiom add_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [add(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(add(m, x, y)) ->
-  (in_range2(float32(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
+  (in_range1(float32(m,(tqtreal(x) + tqtreal(y)))) and (tqtreal(add(m, x,
   y)) = float32(m,(tqtreal(x) + tqtreal(y))))))))
 
 axiom sub_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range2(float32(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
+  (in_range1(float32(m,(tqtreal(x) - tqtreal(y)))) -> (tqtisFinite(sub(m, x,
   y)) and (tqtreal(sub(m, x, y)) = float32(m,(tqtreal(x) - tqtreal(y)))))))))
 
 axiom sub_finite_rev :
@@ -691,13 +670,13 @@ axiom sub_finite_rev :
 axiom sub_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [sub(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(sub(m, x, y)) ->
-  (in_range2(float32(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
+  (in_range1(float32(m,(tqtreal(x) - tqtreal(y)))) and (tqtreal(sub(m, x,
   y)) = float32(m,(tqtreal(x) - tqtreal(y))))))))
 
 axiom mul_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) ->
-  (in_range2(float32(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
+  (in_range1(float32(m,(tqtreal(x) * tqtreal(y)))) -> (tqtisFinite(mul(m, x,
   y)) and (tqtreal(mul(m, x, y)) = float32(m,(tqtreal(x) * tqtreal(y)))))))))
 
 axiom mul_finite_rev :
@@ -707,13 +686,13 @@ axiom mul_finite_rev :
 axiom mul_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [mul(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(mul(m, x, y)) ->
-  (in_range2(float32(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
+  (in_range1(float32(m,(tqtreal(x) * tqtreal(y)))) and (tqtreal(mul(m, x,
   y)) = float32(m,(tqtreal(x) * tqtreal(y))))))))
 
 axiom div_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
   (tqtisFinite(x) -> (tqtisFinite(y) -> ((not is_zero(y)) ->
-  (in_range2(float32(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
+  (in_range1(float32(m,(tqtreal(x) / tqtreal(y)))) -> (tqtisFinite(div(m, x,
   y)) and (tqtreal(div(m, x,
   y)) = float32(m,(tqtreal(x) / tqtreal(y))))))))))
 
@@ -726,7 +705,7 @@ axiom div_finite_rev :
 axiom div_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t [div(m, x, y)].
   (to_nearest(m) -> (tqtisFinite(div(m, x, y)) -> (tqtisFinite(y) ->
-  (in_range2(float32(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
+  (in_range1(float32(m,(tqtreal(x) / tqtreal(y)))) and (tqtreal(div(m, x,
   y)) = float32(m,(tqtreal(x) / tqtreal(y)))))))))
 
 axiom neg_finite :
@@ -750,7 +729,7 @@ axiom abs_universal : (forall x:t [abs(x)]. (not is_negative(abs(x))))
 axiom fma_finite :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
   y, z)]. (tqtisFinite(x) -> (tqtisFinite(y) -> (tqtisFinite(z) ->
-  (in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
+  (in_range1(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) ->
   (tqtisFinite(fma(m, x, y, z)) and (tqtreal(fma(m, x, y,
   z)) = float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))))
 
@@ -762,7 +741,7 @@ axiom fma_finite_rev :
 axiom fma_finite_rev_n :
   (forall m:fpa_rounding_mode. forall x:t. forall y:t. forall z:t [fma(m, x,
   y, z)]. (to_nearest(m) -> (tqtisFinite(fma(m, x, y, z)) ->
-  (in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
+  (in_range1(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))) and
   (tqtreal(fma(m, x, y,
   z)) = float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z))))))))
 
@@ -805,7 +784,7 @@ axiom add_special :
   (is_infinite(add(m, x, y)) and same_sign(add(m, x, y), x))) and
   (((is_infinite(x) and (is_infinite(y) and diff_sign(x, y))) ->
   is_nan(add(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range2(float32(m,(tqtreal(x) + tqtreal(y))))))) ->
+  (not in_range1(float32(m,(tqtreal(x) + tqtreal(y))))))) ->
   (same_sign_real(add(m, x, y), (tqtreal(x) + tqtreal(y))) and
   overflow_value(m, add(m, x, y)))) and ((tqtisFinite(x) and
   tqtisFinite(y)) -> ((same_sign(x, y) -> same_sign(add(m, x, y), x)) and
@@ -821,7 +800,7 @@ axiom sub_special :
   is_nan(sub(m, x, y))) and (((is_infinite(x) and (is_infinite(y) and
   diff_sign(x, y))) -> (is_infinite(sub(m, x, y)) and same_sign(sub(m, x, y),
   x))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range2(float32(m,(tqtreal(x) - tqtreal(y))))))) ->
+  (not in_range1(float32(m,(tqtreal(x) - tqtreal(y))))))) ->
   (same_sign_real(sub(m, x, y), (tqtreal(x) - tqtreal(y))) and
   overflow_value(m, sub(m, x, y)))) and ((tqtisFinite(x) and
   tqtisFinite(y)) -> ((diff_sign(x, y) -> same_sign(sub(m, x, y), x)) and
@@ -836,7 +815,7 @@ axiom mul_special :
   (((is_infinite(x) and (tqtisFinite(y) and (not is_zero(y)))) ->
   is_infinite(mul(m, x, y))) and (((is_infinite(x) and is_infinite(y)) ->
   is_infinite(mul(m, x, y))) and (((tqtisFinite(x) and (tqtisFinite(y) and
-  (not in_range2(float32(m,(tqtreal(x) * tqtreal(y))))))) ->
+  (not in_range1(float32(m,(tqtreal(x) * tqtreal(y))))))) ->
   overflow_value(m, mul(m, x, y))) and ((not is_nan(mul(m, x, y))) ->
   product_sign(mul(m, x, y), x, y))))))))))
 
@@ -847,7 +826,7 @@ axiom div_special :
   (((is_infinite(x) and tqtisFinite(y)) -> is_infinite(div(m, x, y))) and
   (((is_infinite(x) and is_infinite(y)) -> is_nan(div(m, x, y))) and
   (((tqtisFinite(x) and (tqtisFinite(y) and ((not is_zero(y)) and
-  (not in_range2(float32(m,(tqtreal(x) / tqtreal(y)))))))) ->
+  (not in_range1(float32(m,(tqtreal(x) / tqtreal(y)))))))) ->
   overflow_value(m, div(m, x, y))) and (((tqtisFinite(x) and (is_zero(y) and
   (not is_zero(x)))) -> is_infinite(div(m, x, y))) and (((is_zero(x) and
   is_zero(y)) -> is_nan(div(m, x, y))) and ((not is_nan(div(m, x, y))) ->
@@ -889,7 +868,7 @@ axiom fma_special :
   same_sign(fma(m, x, y, z), z))) and ((not product_sign(z, x, y)) ->
   is_nan(fma(m, x, y, z))))) and (((tqtisFinite(x) and (tqtisFinite(y) and
   (tqtisFinite(z) and
-  (not in_range2(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
+  (not in_range1(float32(m,((tqtreal(x) * tqtreal(y)) + tqtreal(z)))))))) ->
   (same_sign_real(fma(m, x, y, z),
   ((tqtreal(x) * tqtreal(y)) + tqtreal(z))) and overflow_value(m, fma(m, x,
   y, z)))) and ((tqtisFinite(x) and (tqtisFinite(y) and tqtisFinite(z))) ->
@@ -1075,13 +1054,13 @@ axiom roundToIntegral_is_finite :
 
 axiom round_bound_ne :
   (forall x:real [float32(NearestTiesToEven,x)].
-  (in_range2(float32(NearestTiesToEven,x)) ->
+  (in_range1(float32(NearestTiesToEven,x)) ->
   ((((x - (0x1.0p-24 * abs_real(x))) - 0x1.0p-150) <= float32(NearestTiesToEven,x)) and
   (float32(NearestTiesToEven,x) <= ((x + (0x1.0p-24 * abs_real(x))) + 0x1.0p-150)))))
 
 axiom round_bound :
   (forall m:fpa_rounding_mode. forall x:real [float32(m,x)].
-  (in_range2(float32(m,x)) ->
+  (in_range1(float32(m,x)) ->
   ((((x - (0x1.0p-23 * abs_real(x))) - 0x1.0p-149) <= float32(m,x)) and
   (float32(m,x) <= ((x + (0x1.0p-23 * abs_real(x))) + 0x1.0p-149)))))
 
@@ -1111,11 +1090,11 @@ axiom bool_ge_def :
   (forall x:t. forall y:t [bool_ge1(x, y)]. ((le(y, x) -> (bool_ge1(x,
   y) = true)) and ((not le(y, x)) -> (bool_ge1(x, y) = false))))
 
-logic bool_eq3 : t, t -> bool
+logic bool_eq2 : t, t -> bool
 
-axiom bool_eq_def2 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+axiom bool_eq_def1 :
+  (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
 
 logic bool_neq : t, t -> bool
 
@@ -1164,8 +1143,42 @@ axiom Power_neg3 :
   (forall x:t. (tqtisFinite(x) -> ((not is_zero(x)) -> eq(power(x, (- 2)),
   div(NearestTiesToEven, of_int(NearestTiesToEven, 1), power(x, 3))))))
 
+type fibonacci_argument_type
+
+logic fibonacci_argument_typeqtint : fibonacci_argument_type -> int
+
+axiom fibonacci_argument_typeqtaxiom :
+  (forall i:fibonacci_argument_type.
+  ((0 <= fibonacci_argument_typeqtint(i)) and
+  (fibonacci_argument_typeqtint(i) <= 46)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 46))
+
+logic bool_eq3 : int, int -> bool
+
+axiom bool_eq_def2 :
+  (forall x:int. forall y:int [bool_eq3(x, y)]. (((x = y) -> (bool_eq3(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq3(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE1 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE1 : us_image -> int
+
+logic user_eq1 : fibonacci_argument_type, fibonacci_argument_type -> bool
+
+logic dummy1 : fibonacci_argument_type
+
+type fibonacci_argument_type__ref = { fibonacci_argument_type__content :
+fibonacci_argument_type
+}
+
+function fibonacci_argument_type__ref___projection(a: fibonacci_argument_type__ref) : fibonacci_argument_type =
+  (a).fibonacci_argument_type__content
+
 axiom fib__def_axiom :
-  (forall n:int [fib(n)]. (in_range1(n) -> ((((n = 0) or (n = 1)) ->
+  (forall n:int [fib(n)]. (in_range2(n) -> ((((n = 0) or (n = 1)) ->
   (fib(n) = n)) and ((not ((n = 0) or (n = 1))) ->
   (fib(n) = (fib((n - 1)) + fib((n - 2))))))))
 
@@ -1241,6 +1254,190 @@ axiom lookup_table__def_axiom :
   24157817, 39088169, 63245986, 102334155, 165580141, 267914296, 433494437,
   701408733, 1134903170, 1836311903))
 
+logic rliteral : natural
+
+axiom rliteral_axiom : (naturalqtint(rliteral) = 0)
+
+logic rliteral1 : natural
+
+axiom rliteral_axiom1 : (naturalqtint(rliteral1) = 1)
+
+logic rliteral2 : natural
+
+axiom rliteral_axiom2 : (naturalqtint(rliteral2) = 2)
+
+logic rliteral3 : natural
+
+axiom rliteral_axiom3 : (naturalqtint(rliteral3) = 3)
+
+logic rliteral4 : natural
+
+axiom rliteral_axiom4 : (naturalqtint(rliteral4) = 5)
+
+logic rliteral5 : natural
+
+axiom rliteral_axiom5 : (naturalqtint(rliteral5) = 8)
+
+logic rliteral6 : natural
+
+axiom rliteral_axiom6 : (naturalqtint(rliteral6) = 13)
+
+logic rliteral7 : natural
+
+axiom rliteral_axiom7 : (naturalqtint(rliteral7) = 21)
+
+logic rliteral8 : natural
+
+axiom rliteral_axiom8 : (naturalqtint(rliteral8) = 34)
+
+logic rliteral9 : natural
+
+axiom rliteral_axiom9 : (naturalqtint(rliteral9) = 55)
+
+logic rliteral10 : natural
+
+axiom rliteral_axiom10 : (naturalqtint(rliteral10) = 89)
+
+logic rliteral11 : natural
+
+axiom rliteral_axiom11 : (naturalqtint(rliteral11) = 144)
+
+logic rliteral12 : natural
+
+axiom rliteral_axiom12 : (naturalqtint(rliteral12) = 233)
+
+logic rliteral13 : natural
+
+axiom rliteral_axiom13 : (naturalqtint(rliteral13) = 377)
+
+logic rliteral14 : natural
+
+axiom rliteral_axiom14 : (naturalqtint(rliteral14) = 610)
+
+logic rliteral15 : natural
+
+axiom rliteral_axiom15 : (naturalqtint(rliteral15) = 987)
+
+logic rliteral16 : natural
+
+axiom rliteral_axiom16 : (naturalqtint(rliteral16) = 1597)
+
+logic rliteral17 : natural
+
+axiom rliteral_axiom17 : (naturalqtint(rliteral17) = 2584)
+
+logic rliteral18 : natural
+
+axiom rliteral_axiom18 : (naturalqtint(rliteral18) = 4181)
+
+logic rliteral19 : natural
+
+axiom rliteral_axiom19 : (naturalqtint(rliteral19) = 6765)
+
+logic rliteral20 : natural
+
+axiom rliteral_axiom20 : (naturalqtint(rliteral20) = 10946)
+
+logic rliteral21 : natural
+
+axiom rliteral_axiom21 : (naturalqtint(rliteral21) = 17711)
+
+logic rliteral22 : natural
+
+axiom rliteral_axiom22 : (naturalqtint(rliteral22) = 28657)
+
+logic rliteral23 : natural
+
+axiom rliteral_axiom23 : (naturalqtint(rliteral23) = 46368)
+
+logic rliteral24 : natural
+
+axiom rliteral_axiom24 : (naturalqtint(rliteral24) = 75025)
+
+logic rliteral25 : natural
+
+axiom rliteral_axiom25 : (naturalqtint(rliteral25) = 121393)
+
+logic rliteral26 : natural
+
+axiom rliteral_axiom26 : (naturalqtint(rliteral26) = 196418)
+
+logic rliteral27 : natural
+
+axiom rliteral_axiom27 : (naturalqtint(rliteral27) = 317811)
+
+logic rliteral28 : natural
+
+axiom rliteral_axiom28 : (naturalqtint(rliteral28) = 514229)
+
+logic rliteral29 : natural
+
+axiom rliteral_axiom29 : (naturalqtint(rliteral29) = 832040)
+
+logic rliteral30 : natural
+
+axiom rliteral_axiom30 : (naturalqtint(rliteral30) = 1346269)
+
+logic rliteral31 : natural
+
+axiom rliteral_axiom31 : (naturalqtint(rliteral31) = 2178309)
+
+logic rliteral32 : natural
+
+axiom rliteral_axiom32 : (naturalqtint(rliteral32) = 3524578)
+
+logic rliteral33 : natural
+
+axiom rliteral_axiom33 : (naturalqtint(rliteral33) = 5702887)
+
+logic rliteral34 : natural
+
+axiom rliteral_axiom34 : (naturalqtint(rliteral34) = 9227465)
+
+logic rliteral35 : natural
+
+axiom rliteral_axiom35 : (naturalqtint(rliteral35) = 14930352)
+
+logic rliteral36 : natural
+
+axiom rliteral_axiom36 : (naturalqtint(rliteral36) = 24157817)
+
+logic rliteral37 : natural
+
+axiom rliteral_axiom37 : (naturalqtint(rliteral37) = 39088169)
+
+logic rliteral38 : natural
+
+axiom rliteral_axiom38 : (naturalqtint(rliteral38) = 63245986)
+
+logic rliteral39 : natural
+
+axiom rliteral_axiom39 : (naturalqtint(rliteral39) = 102334155)
+
+logic rliteral40 : natural
+
+axiom rliteral_axiom40 : (naturalqtint(rliteral40) = 165580141)
+
+logic rliteral41 : natural
+
+axiom rliteral_axiom41 : (naturalqtint(rliteral41) = 267914296)
+
+logic rliteral42 : natural
+
+axiom rliteral_axiom42 : (naturalqtint(rliteral42) = 433494437)
+
+logic rliteral43 : natural
+
+axiom rliteral_axiom43 : (naturalqtint(rliteral43) = 701408733)
+
+logic rliteral44 : natural
+
+axiom rliteral_axiom44 : (naturalqtint(rliteral44) = 1134903170)
+
+logic rliteral45 : natural
+
+axiom rliteral_axiom45 : (naturalqtint(rliteral45) = 1836311903)
+
 axiom def_axiom :
   (forall temp___156:int. forall temp___157:int. forall temp___158:int.
   forall temp___159:int. forall temp___160:int. forall temp___161:int.
@@ -1282,7 +1479,7 @@ axiom def_axiom :
   in_range(temp___197)) and in_range(temp___198)) and
   in_range(temp___199)) and in_range(temp___200)) and
   in_range(temp___201)) and in_range(temp___202)) ->
-  (((((((((((((((((((((((((((((((((((((((((((((((to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  ((((((((((((((((((((((((((((((((((((((((((((((((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1290,8 +1487,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[0])) = temp___156) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[0]) = rliteral) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1299,8 +1496,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[1])) = temp___157)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[1]) = rliteral1)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1308,8 +1505,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[2])) = temp___158)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[2]) = rliteral1)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1317,8 +1514,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[3])) = temp___159)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[3]) = rliteral2)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1326,8 +1523,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[4])) = temp___160)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[4]) = rliteral3)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1335,8 +1532,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[5])) = temp___161)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[5]) = rliteral4)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1344,8 +1541,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[6])) = temp___162)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[6]) = rliteral5)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1353,8 +1550,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[7])) = temp___163)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[7]) = rliteral6)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1362,8 +1559,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[8])) = temp___164)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[8]) = rliteral7)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1371,8 +1568,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[9])) = temp___165)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[9]) = rliteral8)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1380,8 +1577,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[10])) = temp___166)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[10]) = rliteral9)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1389,8 +1586,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[11])) = temp___167)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[11]) = rliteral10)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1398,8 +1595,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[12])) = temp___168)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[12]) = rliteral11)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1407,8 +1604,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[13])) = temp___169)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[13]) = rliteral12)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1416,8 +1613,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[14])) = temp___170)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[14]) = rliteral13)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1425,8 +1622,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[15])) = temp___171)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[15]) = rliteral14)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1434,8 +1631,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[16])) = temp___172)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[16]) = rliteral15)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1443,8 +1640,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[17])) = temp___173)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[17]) = rliteral16)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1452,8 +1649,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[18])) = temp___174)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[18]) = rliteral17)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1461,8 +1658,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[19])) = temp___175)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[19]) = rliteral18)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1470,8 +1667,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[20])) = temp___176)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[20]) = rliteral19)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1479,8 +1676,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[21])) = temp___177)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[21]) = rliteral20)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1488,8 +1685,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[22])) = temp___178)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[22]) = rliteral21)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1497,8 +1694,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[23])) = temp___179)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[23]) = rliteral22)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1506,8 +1703,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[24])) = temp___180)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[24]) = rliteral23)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1515,8 +1712,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[25])) = temp___181)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[25]) = rliteral24)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1524,8 +1721,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[26])) = temp___182)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[26]) = rliteral25)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1533,8 +1730,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[27])) = temp___183)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[27]) = rliteral26)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1542,8 +1739,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[28])) = temp___184)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[28]) = rliteral27)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1551,8 +1748,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[29])) = temp___185)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[29]) = rliteral28)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1560,8 +1757,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[30])) = temp___186)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[30]) = rliteral29)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1569,8 +1766,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[31])) = temp___187)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[31]) = rliteral30)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1578,8 +1775,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[32])) = temp___188)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[32]) = rliteral31)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1587,8 +1784,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[33])) = temp___189)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[33]) = rliteral32)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1596,8 +1793,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[34])) = temp___190)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[34]) = rliteral33)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1605,8 +1802,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[35])) = temp___191)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[35]) = rliteral34)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1614,8 +1811,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[36])) = temp___192)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[36]) = rliteral35)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1623,8 +1820,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[37])) = temp___193)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[37]) = rliteral36)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1632,8 +1829,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[38])) = temp___194)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[38]) = rliteral37)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1641,8 +1838,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[39])) = temp___195)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[39]) = rliteral38)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1650,8 +1847,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[40])) = temp___196)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[40]) = rliteral39)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1659,8 +1856,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[41])) = temp___197)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[41]) = rliteral40)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1668,8 +1865,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[42])) = temp___198)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[42]) = rliteral41)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1677,8 +1874,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[43])) = temp___199)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[43]) = rliteral42)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1686,8 +1883,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[44])) = temp___200)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[44]) = rliteral43)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1695,8 +1892,8 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[45])) = temp___201)) and
-  (to_rep((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
+  temp___199, temp___200, temp___201, temp___202)[45]) = rliteral44)) and
+  ((number_theory__fibonacci2__lookup_table__aggregate_def(temp___156,
   temp___157, temp___158, temp___159, temp___160, temp___161, temp___162,
   temp___163, temp___164, temp___165, temp___166, temp___167, temp___168,
   temp___169, temp___170, temp___171, temp___172, temp___173, temp___174,
@@ -1704,9 +1901,9 @@ axiom def_axiom :
   temp___181, temp___182, temp___183, temp___184, temp___185, temp___186,
   temp___187, temp___188, temp___189, temp___190, temp___191, temp___192,
   temp___193, temp___194, temp___195, temp___196, temp___197, temp___198,
-  temp___199, temp___200, temp___201, temp___202)[46])) = temp___202))))
+  temp___199, temp___200, temp___201, temp___202)[46]) = rliteral45))))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O512-022__number_theory/gnatprove/number_theory.mlw", line 3028, characters 5-8 *)
 goal WP_parameter_def :
   (forall number_theory__fibonacci2__result:int. forall result:int.
   forall number_theory__fibonacci2__result1:int.
@@ -1714,7 +1911,7 @@ goal WP_parameter_def :
   forall number_theory__fibonacci2__result3:int.
   forall number_theory__fibonacci2__result4:int.
   forall number_theory__fibonacci2__result5:int.
-  (forall result1:int. ((in_range1(n) and
+  (forall result1:int. ((in_range2(n) and
   ((((number_theory__fibonacci2__lookup_table__aggregate_def(0, 1, 1, 2, 3,
   5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765,
   10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040,

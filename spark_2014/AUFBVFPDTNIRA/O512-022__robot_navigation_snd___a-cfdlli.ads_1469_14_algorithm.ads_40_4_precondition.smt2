@@ -48,6 +48,13 @@
 
 (declare-sort count_type 0)
 
+(declare-fun count_typeqtint (count_type) Int)
+
+;; count_type'axiom
+  (assert
+  (forall ((i count_type))
+  (and (<= 0 (count_typeqtint i)) (<= (count_typeqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
@@ -65,7 +72,7 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
-(declare-fun to_rep (count_type) Int)
+(define-fun to_rep ((x count_type)) Int (count_typeqtint x))
 
 (declare-fun of_rep (Int) count_type)
 
@@ -179,86 +186,6 @@
 (declare-datatypes () ((list__ref (mk_list__ref (list__content us_rep)))))
 (define-fun list__ref___projection ((a list__ref)) us_rep (list__content a))
 
-(declare-datatypes ()
-((us_split_fields2
- (mk___split_fields1 (rec__algorithm__gap_vectors__cursor__node count_type)))))
-(define-fun us_split_fields_Node__projection ((a us_split_fields2)) count_type
-  (rec__algorithm__gap_vectors__cursor__node a))
-
-(declare-datatypes ()
-((us_split_fields__ref1
- (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
-(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref1)) us_split_fields2
-  (us_split_fields__content1 a))
-
-(declare-datatypes ()
-((us_rep1 (mk___rep1 (us_split_fields3 us_split_fields2)))))
-(define-fun us_rep___15__projection ((a us_rep1)) us_split_fields2 (us_split_fields3
-                                                                   a))
-
-(define-fun bool_eq1 ((a us_rep1)
-  (b us_rep1)) Bool (ite (= (to_rep
-                            (rec__algorithm__gap_vectors__cursor__node
-                            (us_split_fields3 a))) (to_rep
-                                                   (rec__algorithm__gap_vectors__cursor__node
-                                                   (us_split_fields3 b))))
-                    true false))
-
-(declare-const value__size1 Int)
-
-(declare-fun object__size1 (us_rep1) Int)
-
-(declare-const value__alignment1 Int)
-
-(declare-fun object__alignment1 (us_rep1) Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size1))
-
-;; object__size_axiom
-  (assert (forall ((a us_rep1)) (<= 0 (object__size1 a))))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment1))
-
-;; object__alignment_axiom
-  (assert (forall ((a us_rep1)) (<= 0 (object__alignment1 a))))
-
-(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
-
-(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
-
-(declare-const algorithm__gap_vectors__cursor__node__position Int)
-
-;; algorithm__gap_vectors__cursor__node__first__bit_axiom
-  (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
-
-;; algorithm__gap_vectors__cursor__node__last__bit_axiom
-  (assert
-  (< algorithm__gap_vectors__cursor__node__first__bit algorithm__gap_vectors__cursor__node__last__bit))
-
-;; algorithm__gap_vectors__cursor__node__position_axiom
-  (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
-
-(declare-fun user_eq2 (us_rep1 us_rep1) Bool)
-
-(declare-const dummy2 us_rep1)
-
-(declare-datatypes ()
-((cursor__ref (mk_cursor__ref (cursor__content us_rep1)))))
-(define-fun cursor__ref___projection ((a cursor__ref)) us_rep1 (cursor__content
-                                                               a))
-
-(define-fun default_initial_assumption ((temp___expr_466 us_rep1)
-  (temp___skip_top_level_467 Bool)) Bool (= (to_rep
-                                            (rec__algorithm__gap_vectors__cursor__node
-                                            (us_split_fields3
-                                            temp___expr_466))) 0))
-
-(declare-const no_element us_rep1)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-fun length (us_rep) Int)
 
 (declare-fun length__function_guard (Int us_rep) Bool)
@@ -282,43 +209,6 @@
      (dynamic_invariant result true false true true))) :pattern ((length
                                                                  container)) )))
 
-(declare-sort us_main_type1 0)
-
-(declare-fun us_main_eq1 (us_main_type1 us_main_type1) Bool)
-
-(declare-sort us_rep2 0)
-
-(declare-fun bool_eq2 (us_rep2 us_rep2) Bool)
-
-(declare-const value__size2 Int)
-
-(declare-fun object__size2 (us_rep2) Int)
-
-(declare-const value__alignment2 Int)
-
-(declare-fun object__alignment2 (us_rep2) Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size2))
-
-;; object__size_axiom
-  (assert (forall ((a us_rep2)) (<= 0 (object__size2 a))))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment2))
-
-;; object__alignment_axiom
-  (assert (forall ((a us_rep2)) (<= 0 (object__alignment2 a))))
-
-(declare-fun user_eq3 (us_rep2 us_rep2) Bool)
-
-(declare-const dummy3 us_rep2)
-
-(declare-datatypes ()
-((sequence__ref (mk_sequence__ref (sequence__content us_rep2)))))
-(define-fun sequence__ref___projection ((a sequence__ref)) us_rep2 (sequence__content
-                                                                   a))
-
 (declare-fun pow2 (Int) Int)
 
 (define-fun is_plus_infinity ((x Float32)) Bool (and (fp.isInfinite x)
@@ -332,10 +222,6 @@
 
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
 
 (declare-const max_int Int)
 
@@ -359,7 +245,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -368,7 +254,7 @@
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort float 0)
 
-(declare-fun user_eq4 (float float) Bool)
+(declare-fun user_eq2 (float float) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
 
@@ -376,7 +262,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
 
-(declare-const dummy4 float)
+(declare-const dummy2 float)
 
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
@@ -408,7 +294,7 @@
                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
                                          (fp.leq x (fp #b0 #b10000001 #b10010010000111111011011)))))
 
-(declare-fun user_eq5 (normalized2pi normalized2pi) Bool)
+(declare-fun user_eq3 (normalized2pi normalized2pi) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
 
@@ -416,7 +302,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
 
-(declare-const dummy5 normalized2pi)
+(declare-const dummy3 normalized2pi)
 
 (declare-datatypes ()
 ((normalized2pi__ref
@@ -445,46 +331,49 @@
                                                               (of_rep2 x))) )))
 
 (declare-datatypes ()
-((us_split_fields4
- (mk___split_fields2 (rec__spaces__angles__angle__theta normalized2pi)))))
-(declare-datatypes ()
-((us_split_fields__ref2
- (mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
-(define-fun us_split_fields__ref___projection ((a us_split_fields__ref2)) us_split_fields4
-  (us_split_fields__content2 a))
+((us_split_fields2
+ (mk___split_fields1 (rec__spaces__angles__angle__theta normalized2pi)))))
+(define-fun us_split_fields_Theta__projection ((a us_split_fields2)) normalized2pi
+  (rec__spaces__angles__angle__theta a))
 
 (declare-datatypes ()
-((us_rep3 (mk___rep2 (us_split_fields5 us_split_fields4)))))
-(define-fun us_rep___projection ((a us_rep3)) us_split_fields4 (us_split_fields5
+((us_split_fields__ref1
+ (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
+(define-fun us_split_fields__ref___projection ((a us_split_fields__ref1)) us_split_fields2
+  (us_split_fields__content1 a))
+
+(declare-datatypes ()
+((us_rep1 (mk___rep1 (us_split_fields3 us_split_fields2)))))
+(define-fun us_rep___projection ((a us_rep1)) us_split_fields2 (us_split_fields3
                                                                a))
 
-(define-fun bool_eq3 ((a us_rep3)
-  (b us_rep3)) Bool (ite (= (to_rep2
+(define-fun bool_eq1 ((a us_rep1)
+  (b us_rep1)) Bool (ite (= (to_rep2
                             (rec__spaces__angles__angle__theta
-                            (us_split_fields5 a))) (to_rep2
+                            (us_split_fields3 a))) (to_rep2
                                                    (rec__spaces__angles__angle__theta
-                                                   (us_split_fields5 b))))
+                                                   (us_split_fields3 b))))
                     true false))
 
-(declare-const value__size3 Int)
+(declare-const value__size1 Int)
 
-(declare-fun object__size3 (us_rep3) Int)
+(declare-fun object__size1 (us_rep1) Int)
 
-(declare-const value__alignment3 Int)
+(declare-const value__alignment1 Int)
 
-(declare-fun object__alignment3 (us_rep3) Int)
+(declare-fun object__alignment1 (us_rep1) Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size3))
+  (assert (<= 0 value__size1))
 
 ;; object__size_axiom
-  (assert (forall ((a us_rep3)) (<= 0 (object__size3 a))))
+  (assert (forall ((a us_rep1)) (<= 0 (object__size1 a))))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment3))
+  (assert (<= 0 value__alignment1))
 
 ;; object__alignment_axiom
-  (assert (forall ((a us_rep3)) (<= 0 (object__alignment3 a))))
+  (assert (forall ((a us_rep1)) (<= 0 (object__alignment1 a))))
 
 (declare-const spaces__angles__angle__theta__first__bit Int)
 
@@ -502,16 +391,23 @@
 ;; spaces__angles__angle__theta__position_axiom
   (assert (<= 0 spaces__angles__angle__theta__position))
 
-(declare-fun user_eq6 (us_rep3 us_rep3) Bool)
+(declare-fun user_eq4 (us_rep1 us_rep1) Bool)
 
-(declare-const dummy6 us_rep3)
+(declare-const dummy4 us_rep1)
 
 (declare-datatypes ()
-((angle__ref (mk_angle__ref (angle__content us_rep3)))))
-(define-fun angle__ref___projection ((a angle__ref)) us_rep3 (angle__content
+((angle__ref (mk_angle__ref (angle__content us_rep1)))))
+(define-fun angle__ref___projection ((a angle__ref)) us_rep1 (angle__content
                                                              a))
 
 (declare-sort idir_t 0)
+
+(declare-fun idir_tqtint (idir_t) Int)
+
+;; idir_t'axiom
+  (assert
+  (forall ((i idir_t))
+  (and (<= (- 1) (idir_tqtint i)) (<= (idir_tqtint i) 1))))
 
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
@@ -521,16 +417,16 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
 
-(declare-fun user_eq7 (idir_t idir_t) Bool)
+(declare-fun user_eq5 (idir_t idir_t) Bool)
 
-(declare-const dummy7 idir_t)
+(declare-const dummy5 idir_t)
 
 (declare-datatypes ()
 ((idir_t__ref (mk_idir_t__ref (idir_t__content idir_t)))))
 (define-fun idir_t__ref___projection ((a idir_t__ref)) idir_t (idir_t__content
                                                               a))
 
-(declare-fun to_rep3 (idir_t) Int)
+(define-fun to_rep3 ((x idir_t)) Int (idir_tqtint x))
 
 (declare-fun of_rep3 (Int) idir_t)
 
@@ -550,61 +446,64 @@
                                                               (of_rep3 x))) )))
 
 (declare-datatypes ()
-((us_split_fields6
- (mk___split_fields3
- (rec__gaps__gap__bearing us_rep3)(rec__gaps__gap__distance float)(rec__gaps__gap__idir idir_t)))))
-(define-fun us_split_fields_bearing__projection ((a us_split_fields6)) us_rep3
+((us_split_fields4
+ (mk___split_fields2
+ (rec__gaps__gap__bearing us_rep1)(rec__gaps__gap__distance float)(rec__gaps__gap__idir idir_t)))))
+(define-fun us_split_fields_bearing__projection ((a us_split_fields4)) us_rep1
   (rec__gaps__gap__bearing a))
 
-(define-fun us_split_fields_iDir__projection ((a us_split_fields6)) idir_t
+(define-fun us_split_fields_distance__projection ((a us_split_fields4)) float
+  (rec__gaps__gap__distance a))
+
+(define-fun us_split_fields_iDir__projection ((a us_split_fields4)) idir_t
   (rec__gaps__gap__idir a))
 
 (declare-datatypes ()
-((us_split_fields__ref3
- (mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
-(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref3)) us_split_fields6
-  (us_split_fields__content3 a))
+((us_split_fields__ref2
+ (mk___split_fields__ref2 (us_split_fields__content2 us_split_fields4)))))
+(define-fun us_split_fields__ref___6__projection ((a us_split_fields__ref2)) us_split_fields4
+  (us_split_fields__content2 a))
 
 (declare-datatypes ()
-((us_rep4 (mk___rep3 (us_split_fields7 us_split_fields6)))))
-(define-fun us_rep___8__projection ((a us_rep4)) us_split_fields6 (us_split_fields7
+((us_rep2 (mk___rep2 (us_split_fields5 us_split_fields4)))))
+(define-fun us_rep___8__projection ((a us_rep2)) us_split_fields4 (us_split_fields5
                                                                   a))
 
-(define-fun bool_eq4 ((a us_rep4)
-  (b us_rep4)) Bool (ite (and
+(define-fun bool_eq2 ((a us_rep2)
+  (b us_rep2)) Bool (ite (and
                          (and
-                         (= (bool_eq3
-                            (rec__gaps__gap__bearing (us_split_fields7 a))
-                            (rec__gaps__gap__bearing (us_split_fields7 b))) true)
+                         (= (bool_eq1
+                            (rec__gaps__gap__bearing (us_split_fields5 a))
+                            (rec__gaps__gap__bearing (us_split_fields5 b))) true)
                          (= (to_rep1
-                            (rec__gaps__gap__distance (us_split_fields7 a)))
+                            (rec__gaps__gap__distance (us_split_fields5 a)))
                          (to_rep1
-                         (rec__gaps__gap__distance (us_split_fields7 b)))))
+                         (rec__gaps__gap__distance (us_split_fields5 b)))))
                          (= (to_rep3
-                            (rec__gaps__gap__idir (us_split_fields7 a)))
+                            (rec__gaps__gap__idir (us_split_fields5 a)))
                          (to_rep3
-                         (rec__gaps__gap__idir (us_split_fields7 b)))))
+                         (rec__gaps__gap__idir (us_split_fields5 b)))))
                     true false))
 
-(declare-const value__size4 Int)
+(declare-const value__size2 Int)
 
-(declare-fun object__size4 (us_rep4) Int)
+(declare-fun object__size2 (us_rep2) Int)
 
-(declare-const value__alignment4 Int)
+(declare-const value__alignment2 Int)
 
-(declare-fun object__alignment4 (us_rep4) Int)
+(declare-fun object__alignment2 (us_rep2) Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size4))
+  (assert (<= 0 value__size2))
 
 ;; object__size_axiom
-  (assert (forall ((a us_rep4)) (<= 0 (object__size4 a))))
+  (assert (forall ((a us_rep2)) (<= 0 (object__size2 a))))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment4))
+  (assert (<= 0 value__alignment2))
 
 ;; object__alignment_axiom
-  (assert (forall ((a us_rep4)) (<= 0 (object__alignment4 a))))
+  (assert (forall ((a us_rep2)) (<= 0 (object__alignment2 a))))
 
 (declare-const gaps__gap__bearing__first__bit Int)
 
@@ -651,37 +550,149 @@
 ;; gaps__gap__idir__position_axiom
   (assert (<= 0 gaps__gap__idir__position))
 
+(declare-fun user_eq6 (us_rep2 us_rep2) Bool)
+
+(declare-const dummy6 us_rep2)
+
+(declare-datatypes () ((gap__ref (mk_gap__ref (gap__content us_rep2)))))
+(define-fun gap__ref___projection ((a gap__ref)) us_rep2 (gap__content a))
+
+(declare-datatypes ()
+((element_type__ref (mk_element_type__ref (element_type__content us_rep2)))))
+(define-fun element_type__ref___2__projection ((a element_type__ref)) us_rep2
+  (element_type__content a))
+
+(declare-sort us_main_type1 0)
+
+(declare-fun us_main_eq1 (us_main_type1 us_main_type1) Bool)
+
+(declare-sort us_rep3 0)
+
+(declare-fun bool_eq3 (us_rep3 us_rep3) Bool)
+
+(declare-const value__size3 Int)
+
+(declare-fun object__size3 (us_rep3) Int)
+
+(declare-const value__alignment3 Int)
+
+(declare-fun object__alignment3 (us_rep3) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size3))
+
+;; object__size_axiom
+  (assert (forall ((a us_rep3)) (<= 0 (object__size3 a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment3))
+
+;; object__alignment_axiom
+  (assert (forall ((a us_rep3)) (<= 0 (object__alignment3 a))))
+
+(declare-fun user_eq7 (us_rep3 us_rep3) Bool)
+
+(declare-const dummy7 us_rep3)
+
+(declare-datatypes ()
+((sequence__ref (mk_sequence__ref (sequence__content us_rep3)))))
+(define-fun sequence__ref___projection ((a sequence__ref)) us_rep3 (sequence__content
+                                                                   a))
+
+(declare-fun get (us_rep3 Int) us_rep2)
+
+(declare-fun get__function_guard (us_rep2 us_rep3 Int) Bool)
+
+(define-fun contains ((container us_rep3) (fst Int) (lst Int)
+  (item us_rep2)) Bool (ite (exists ((i Int))
+                            (and (and (<= fst i) (<= i lst))
+                            (= (bool_eq2 (get container i) item) true)))
+                       true false))
+
+(declare-fun contains__function_guard (Bool us_rep3 Int Int us_rep2) Bool)
+
+(declare-fun length1 (us_rep3) Int)
+
+(declare-fun length__function_guard1 (Int us_rep3) Bool)
+
+(define-fun last ((container us_rep3)) Int (+ 0 (length1 container)))
+
+(declare-fun last__function_guard (Int us_rep3) Bool)
+
+(declare-datatypes ()
+((us_split_fields6
+ (mk___split_fields3 (rec__algorithm__gap_vectors__cursor__node count_type)))))
+(define-fun us_split_fields_Node__projection ((a us_split_fields6)) count_type
+  (rec__algorithm__gap_vectors__cursor__node a))
+
+(declare-datatypes ()
+((us_split_fields__ref3
+ (mk___split_fields__ref3 (us_split_fields__content3 us_split_fields6)))))
+(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref3)) us_split_fields6
+  (us_split_fields__content3 a))
+
+(declare-datatypes ()
+((us_rep4 (mk___rep3 (us_split_fields7 us_split_fields6)))))
+(define-fun us_rep___15__projection ((a us_rep4)) us_split_fields6 (us_split_fields7
+                                                                   a))
+
+(define-fun bool_eq4 ((a us_rep4)
+  (b us_rep4)) Bool (ite (= (to_rep
+                            (rec__algorithm__gap_vectors__cursor__node
+                            (us_split_fields7 a))) (to_rep
+                                                   (rec__algorithm__gap_vectors__cursor__node
+                                                   (us_split_fields7 b))))
+                    true false))
+
+(declare-const value__size4 Int)
+
+(declare-fun object__size4 (us_rep4) Int)
+
+(declare-const value__alignment4 Int)
+
+(declare-fun object__alignment4 (us_rep4) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size4))
+
+;; object__size_axiom
+  (assert (forall ((a us_rep4)) (<= 0 (object__size4 a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment4))
+
+;; object__alignment_axiom
+  (assert (forall ((a us_rep4)) (<= 0 (object__alignment4 a))))
+
+(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
+
+(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
+
+(declare-const algorithm__gap_vectors__cursor__node__position Int)
+
+;; algorithm__gap_vectors__cursor__node__first__bit_axiom
+  (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
+
+;; algorithm__gap_vectors__cursor__node__last__bit_axiom
+  (assert
+  (< algorithm__gap_vectors__cursor__node__first__bit algorithm__gap_vectors__cursor__node__last__bit))
+
+;; algorithm__gap_vectors__cursor__node__position_axiom
+  (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
+
 (declare-fun user_eq8 (us_rep4 us_rep4) Bool)
 
 (declare-const dummy8 us_rep4)
 
-(declare-datatypes () ((gap__ref (mk_gap__ref (gap__content us_rep4)))))
-(define-fun gap__ref___projection ((a gap__ref)) us_rep4 (gap__content a))
+(declare-datatypes ()
+((cursor__ref (mk_cursor__ref (cursor__content us_rep4)))))
+(define-fun cursor__ref___projection ((a cursor__ref)) us_rep4 (cursor__content
+                                                               a))
 
 (declare-datatypes ()
-((element_type__ref (mk_element_type__ref (element_type__content us_rep4)))))
-(define-fun element_type__ref___2__projection ((a element_type__ref)) us_rep4
-  (element_type__content a))
-
-(declare-fun get (us_rep2 Int) us_rep4)
-
-(declare-fun get__function_guard (us_rep4 us_rep2 Int) Bool)
-
-(define-fun contains ((container us_rep2) (fst Int) (lst Int)
-  (item us_rep4)) Bool (ite (exists ((i Int))
-                            (and (and (<= fst i) (<= i lst))
-                            (= (bool_eq4 (get container i) item) true)))
-                       true false))
-
-(declare-fun contains__function_guard (Bool us_rep2 Int Int us_rep4) Bool)
-
-(declare-fun length1 (us_rep2) Int)
-
-(declare-fun length__function_guard1 (Int us_rep2) Bool)
-
-(define-fun last ((container us_rep2)) Int (+ 0 (length1 container)))
-
-(declare-fun last__function_guard (Int us_rep2) Bool)
+((key_type__ref (mk_key_type__ref (key_type__content us_rep4)))))
+(define-fun key_type__ref___projection ((a key_type__ref)) us_rep4 (key_type__content
+                                                                   a))
 
 (declare-sort us_main_type2 0)
 
@@ -718,16 +729,30 @@
 (declare-datatypes () ((map__ref (mk_map__ref (map__content us_rep5)))))
 (define-fun map__ref___projection ((a map__ref)) us_rep5 (map__content a))
 
-(declare-datatypes ()
-((key_type__ref (mk_key_type__ref (key_type__content us_rep1)))))
-(define-fun key_type__ref___projection ((a key_type__ref)) us_rep1 (key_type__content
-                                                                   a))
+(declare-fun get1 (us_rep5 us_rep4) Int)
 
-(declare-fun get1 (us_rep5 us_rep1) Int)
+(declare-fun get__function_guard1 (Int us_rep5 us_rep4) Bool)
 
-(declare-fun get__function_guard1 (Int us_rep5 us_rep1) Bool)
+(declare-fun has_key (us_rep5 us_rep4) Bool)
+
+(declare-fun has_key__function_guard (Bool us_rep5 us_rep4) Bool)
+
+(declare-fun witness (us_rep5 us_rep4) Int)
+
+(declare-fun witness__function_guard (Int us_rep5 us_rep4) Bool)
+
+(declare-fun w_get (us_rep5 Int) Int)
+
+(declare-fun w_get__function_guard (Int us_rep5 Int) Bool)
 
 (declare-sort element_type 0)
+
+(declare-fun element_typeqtint (element_type) Int)
+
+;; element_type'axiom
+  (assert
+  (forall ((i element_type))
+  (and (<= 1 (element_typeqtint i)) (<= (element_typeqtint i) 2147483647))))
 
 (define-fun in_range4 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
@@ -763,7 +788,7 @@
 
 (declare-fun is_empty__function_guard (Bool us_rep5) Bool)
 
-(define-fun default_initial_assumption1 ((temp___expr_529 us_rep5)
+(define-fun default_initial_assumption ((temp___expr_529 us_rep5)
   (temp___skip_top_level_530 Bool)) Bool (=>
                                          (not
                                          (= temp___skip_top_level_530 true))
@@ -771,68 +796,56 @@
                                          (= (is_empty temp___expr_529) true)
                                          (= (length2 temp___expr_529) 0))))
 
-(declare-fun has_key (us_rep5 us_rep1) Bool)
-
-(declare-fun has_key__function_guard (Bool us_rep5 us_rep1) Bool)
-
-(declare-fun witness (us_rep5 us_rep1) Int)
-
-(declare-fun witness__function_guard (Int us_rep5 us_rep1) Bool)
-
-(declare-fun w_get (us_rep5 Int) Int)
-
-(declare-fun w_get__function_guard (Int us_rep5 Int) Bool)
-
-(define-fun default_initial_assumption2 ((temp___expr_515 us_rep1)
+(define-fun default_initial_assumption1 ((temp___expr_515 us_rep4)
   (temp___skip_top_level_516 Bool)) Bool (= (to_rep
                                             (rec__algorithm__gap_vectors__cursor__node
-                                            (us_split_fields3
+                                            (us_split_fields7
                                             temp___expr_515))) 0))
 
 ;; get__post_axiom
   (assert
   (forall ((container us_rep5))
-  (forall ((key us_rep1))
+  (forall ((key us_rep4))
   (! (=> (= (has_key container key) true)
      (let ((result (get1 container key)))
      (and
      (=> (= (distinct 0 0) true)
      (and (= result (w_get container (witness container key)))
-     (forall ((k us_rep1))
+     (forall ((k us_rep4))
      (=> (= (has_key container k) true)
-     (= (= (bool_eq1 k key) true)
+     (= (= (bool_eq4 k key) true)
      (= (witness container key) (witness container k)))))))
      (dynamic_invariant1 result true false true true)))) :pattern ((get1
                                                                    container
                                                                    key)) ))))
 
-(declare-fun model__ (us_rep) us_rep2)
+(declare-fun model__ (us_rep) us_rep3)
 
-(declare-fun model____function_guard (us_rep2 us_rep) Bool)
+(declare-fun model____function_guard (us_rep3 us_rep) Bool)
 
-(define-fun oeq ((left us_rep2)
-  (right us_rep2)) Bool (and (= (length1 left) (length1 right)) (ite
+(define-fun oeq ((left us_rep3)
+  (right us_rep3)) Bool (and (= (length1 left) (length1 right)) (ite
                                                                 (forall
                                                                 ((n Int))
                                                                 (=>
                                                                 (and (<= 1 n)
                                                                 (<= n
                                                                 (last left)))
-                                                                (= (bool_eq4
+                                                                (= (bool_eq2
                                                                    (get left
                                                                    n)
                                                                    (get right
                                                                    n)) true)))
                                                                 true false)))
 
-(declare-fun oeq__function_guard (Bool us_rep2 us_rep2) Bool)
+(declare-fun oeq__function_guard (Bool us_rep3 us_rep3) Bool)
 
 ;; user_eq__def_axiom
   (assert
-  (forall ((a us_rep2) (b us_rep2))
-  (! (= (user_eq3 a b) (oeq a b)) :pattern ((user_eq3 a b)) )))
+  (forall ((a us_rep3) (b us_rep3))
+  (! (= (user_eq7 a b) (oeq a b)) :pattern ((user_eq7 a b)) )))
 
-(define-fun default_initial_assumption3 ((temp___expr_507 us_rep2)
+(define-fun default_initial_assumption2 ((temp___expr_507 us_rep3)
   (temp___skip_top_level_508 Bool)) Bool (=>
                                          (not
                                          (= temp___skip_top_level_508 true))
@@ -848,24 +861,34 @@
 
 (declare-fun positions__function_guard (us_rep5 us_rep) Bool)
 
+(declare-const no_element us_rep4)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 ;; positions__post_axiom
   (assert
   (forall ((container us_rep))
   (! (let ((result (positions container)))
      (and (not (= (has_key result no_element) true))
-     (forall ((i us_rep1))
+     (forall ((i us_rep4))
      (=> (= (has_key result i) true)
      (and
      (and (<= 1 (get1 result i)) (<= (get1 result i) (length container)))
-     (forall ((j us_rep1))
+     (forall ((j us_rep4))
      (=> (= (has_key result j) true)
-     (=> (= (get1 result i) (get1 result j)) (= (bool_eq1 i j) true))))))))) :pattern (
+     (=> (= (get1 result i) (get1 result j)) (= (bool_eq4 i j) true))))))))) :pattern (
   (positions container)) )))
 
 (define-fun has_element ((container us_rep)
-  (position us_rep1)) Bool (has_key (positions container) position))
+  (position us_rep4)) Bool (has_key (positions container) position))
 
-(declare-fun has_element__function_guard (Bool us_rep us_rep1) Bool)
+(declare-fun has_element__function_guard (Bool us_rep us_rep4) Bool)
+
+(define-fun default_initial_assumption3 ((temp___expr_466 us_rep4)
+  (temp___skip_top_level_467 Bool)) Bool (= (to_rep
+                                            (rec__algorithm__gap_vectors__cursor__node
+                                            (us_split_fields7
+                                            temp___expr_466))) 0))
 
 (declare-const container us_rep)
 
@@ -873,15 +896,15 @@
 
 (declare-datatypes ()
 ((element_type__ref2
- (mk_element_type__ref2 (element_type__content2 us_rep4)))))
-(define-fun element_type__ref___projection ((a element_type__ref2)) us_rep4
+ (mk_element_type__ref2 (element_type__content2 us_rep2)))))
+(define-fun element_type__ref___projection ((a element_type__ref2)) us_rep2
   (element_type__content2 a))
 
-(declare-const item us_rep4)
+(declare-const item us_rep2)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const position us_rep1)
+(declare-const position us_rep4)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -909,10 +932,23 @@
                                      (<= (- 1) 1)) (in_range3
                                      temp___expr_323)))
 
+(declare-const rliteral count_type)
+
+;; rliteral_axiom
+  (assert (= (count_typeqtint rliteral) 0))
+
 ;; no_element__def_axiom
-  (assert (= no_element (mk___rep1 (mk___split_fields1 (of_rep 0)))))
+  (assert (= no_element (mk___rep3 (mk___split_fields3 rliteral))))
 
 (declare-sort extended_index 0)
+
+(declare-fun extended_indexqtint (extended_index) Int)
+
+;; extended_index'axiom
+  (assert
+  (forall ((i extended_index))
+  (and (<= 0 (extended_indexqtint i))
+  (<= (extended_indexqtint i) 2147483647))))
 
 (define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -942,7 +978,7 @@
 
 ;; length__post_axiom
   (assert
-  (forall ((container1 us_rep2))
+  (forall ((container1 us_rep3))
   (! (let ((result (length1 container1)))
      (and (<= (+ 0 result) 2147483647) (dynamic_invariant result true false
      true true))) :pattern ((length1 container1)) )))
@@ -953,11 +989,11 @@
 ;; has_key__post_axiom
   (assert
   (forall ((container1 us_rep5))
-  (forall ((key us_rep1))
+  (forall ((key us_rep4))
   (! (=> (= (distinct 0 0) true)
      (=>
-     (exists ((k us_rep1))
-     (and (= (has_key container1 k) true) (= (bool_eq1 k key) true)))
+     (exists ((k us_rep4))
+     (and (= (has_key container1 k) true) (= (bool_eq4 k key) true)))
      (= (has_key container1 key) true))) :pattern ((has_key container1 key)) ))))
 
 ;; length__post_axiom
@@ -969,7 +1005,7 @@
   (assert
   (forall ((container1 us_rep5))
   (! (= (= (is_empty container1) true)
-     (forall ((key us_rep1)) (not (= (has_key container1 key) true)))) :pattern (
+     (forall ((key us_rep4)) (not (= (has_key container1 key) true)))) :pattern (
   (is_empty container1)) )))
 
 (declare-fun has_witness (us_rep5 Int) Bool)
@@ -982,7 +1018,7 @@
 ;; witness__post_axiom
   (assert
   (forall ((container1 us_rep5))
-  (forall ((key us_rep1))
+  (forall ((key us_rep4))
   (! (=> (= (has_key container1 key) true)
      (let ((result (witness container1 key)))
      (and (= (has_witness container1 result) true) (dynamic_invariant result
@@ -999,74 +1035,61 @@
                                                                   container1
                                                                   witness1)) ))))
 
-(declare-const o count_type)
+(declare-const o us_rep3)
 
-(declare-const o1 count_type)
+(declare-const o1 us_rep5)
 
-(declare-const temp___850 count_type)
-
-(declare-const o2 us_rep2)
-
-(declare-const o3 us_rep5)
-
-(declare-const o4 Int)
+(declare-const o2 Int)
 
 ;; H
-  (assert (= (to_rep o) 0))
-
-;; H
-  (assert (= o o1))
-
-;; H
-  (assert (= temp___850 o1))
-
-;; H
-  (assert (= (mk___rep1 (mk___split_fields1 temp___850)) no_element))
+  (assert (= (mk___rep3 (mk___split_fields3 rliteral)) no_element))
 
 ;; H
   (assert
   (or (= (has_key (positions container) position) true)
-  (= (bool_eq1 position no_element) true)))
+  (= (bool_eq4 position no_element) true)))
 
 ;; H
   (assert
-  (=> (= (bool_eq1 position no_element) true)
-  (and (= o4 (length container))
-  (and (in_range1 o4)
-  (<= o4 (to_rep
+  (=> (= (bool_eq4 position no_element) true)
+  (and (= o2 (length container))
+  (and (in_range1 o2)
+  (<= o2 (to_rep
          (rec__algorithm__gap_vectors__list__capacity
          (us_split_discrs1 container))))))))
 
 ;; H
   (assert
-  (=> (not (= (bool_eq1 position no_element) true))
-  (and (= o3 (positions container))
-  (and (not (= (has_key o3 no_element) true))
-  (forall ((i us_rep1))
-  (=> (= (has_key o3 i) true)
-  (and (and (<= 1 (get1 o3 i)) (<= (get1 o3 i) (length container)))
-  (forall ((j us_rep1))
-  (=> (= (has_key o3 j) true)
-  (=> (= (get1 o3 i) (get1 o3 j)) (= (bool_eq1 i j) true)))))))))))
+  (=> (not (= (bool_eq4 position no_element) true))
+  (and (= o1 (positions container))
+  (and (not (= (has_key o1 no_element) true))
+  (forall ((i us_rep4))
+  (=> (= (has_key o1 i) true)
+  (and (and (<= 1 (get1 o1 i)) (<= (get1 o1 i) (length container)))
+  (forall ((j us_rep4))
+  (=> (= (has_key o1 j) true)
+  (=> (= (get1 o1 i) (get1 o1 j)) (= (bool_eq4 i j) true)))))))))))
 
 ;; H
   (assert
-  (=> (not (= (bool_eq1 position no_element) true))
-  (and (= o4 (get1 o3 position))
-  (and (in_range4 o4)
+  (=> (not (= (bool_eq4 position no_element) true))
+  (and (= o2 (get1 o1 position))
+  (and (in_range4 o2)
   (=> (= (distinct 0 0) true)
-  (and (= o4 (w_get o3 (witness o3 position)))
-  (forall ((k us_rep1))
-  (=> (= (has_key o3 k) true)
-  (= (= (bool_eq1 k position) true) (= (witness o3 position) (witness o3 k)))))))))))
+  (and (= o2 (w_get o1 (witness o1 position)))
+  (forall ((k us_rep4))
+  (=> (= (has_key o1 k) true)
+  (= (= (bool_eq4 k position) true) (= (witness o1 position) (witness o1 k)))))))))))
 
 ;; H
-  (assert
-  (and (= o2 (model__ container)) (= (length1 o2) (length container))))
+  (assert (= o (model__ container)))
+
+;; H
+  (assert (= (length1 o) (length container)))
 
 (assert
 ;; WP_parameter_def
  ;; File "a-cfdlli.ads", line 1403, characters 0-0
-  (not (<= o4 (last o2))))
+  (not (<= o2 (last o))))
 (check-sat)
 (exit)

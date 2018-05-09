@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float64)))))
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= (- 2147483648) x)
                                     (<= x 2147483647)))
@@ -112,6 +115,8 @@
                                     (<= (- 2147483648) 2147483647)) (in_range
                                     temp___expr_18)))
 
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (declare-sort coordinate_type 0)
 
 (define-fun in_range1 ((x Float64)) Bool (and (fp.isFinite64 x)
@@ -134,14 +139,6 @@
  (mk_coordinate_type__ref (coordinate_type__content coordinate_type)))))
 (define-fun coordinate_type__ref___projection ((a coordinate_type__ref)) coordinate_type
   (coordinate_type__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_158 Float64)
-  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
-  (temp___do_toplevel_156 Bool)
-  (temp___do_typ_inv_157 Bool)) Bool (=>
-                                     (or (= temp___is_init_154 true)
-                                     (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
-                                     (in_range1 temp___expr_158)))
 
 (declare-fun to_rep (coordinate_type) Float64)
 
@@ -209,6 +206,15 @@
 ((us_split_fields
  (mk___split_fields
  (rec__shapes5__circle__center_x coordinate_type)(rec__shapes5__circle__center_y coordinate_type)(rec__shapes5__circle__radius radius_type)))))
+(define-fun us_split_fields_Center_X__projection ((a us_split_fields)) coordinate_type
+  (rec__shapes5__circle__center_x a))
+
+(define-fun us_split_fields_Center_Y__projection ((a us_split_fields)) coordinate_type
+  (rec__shapes5__circle__center_y a))
+
+(define-fun us_split_fields_Radius__projection ((a us_split_fields)) radius_type
+  (rec__shapes5__circle__radius a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -317,14 +323,20 @@
 (define-fun circle__ref___projection ((a circle__ref)) us_rep (circle__content
                                                               a))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-fun in_bounds (us_rep Int) Bool)
 
 (declare-fun in_bounds__function_guard (Bool us_rep Int) Bool)
 
 ;; in_bounds__post_axiom
   (assert true)
+
+(define-fun dynamic_invariant1 ((temp___expr_158 Float64)
+  (temp___is_init_154 Bool) (temp___skip_constant_155 Bool)
+  (temp___do_toplevel_156 Bool)
+  (temp___do_typ_inv_157 Bool)) Bool (=>
+                                     (or (= temp___is_init_154 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)) (fp #b0 #b10000000101 #b1001000000000000000000000000000000000000000000000000)))
+                                     (in_range1 temp___expr_158)))
 
 (declare-const x Float64)
 

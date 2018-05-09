@@ -1379,6 +1379,10 @@ axiom coerce_axiom :
   (forall x:t1 [to_rep(of_rep(x))]. (tqtisFinite(x) ->
   (to_rep(of_rep(x)) = x)))
 
+logic battery_threshold : t1
+
+logic attr__ATTRIBUTE_ADDRESS : int
+
 type time_slot
 
 logic rliteral : t
@@ -1534,18 +1538,20 @@ axiom bool_eq_rev :
   (to_rep((a[temp___idx_154])) = to_rep((b[add(sub(b__first, a__first),
   temp___idx_154)])))))))))
 
-logic attr__ATTRIBUTE_ADDRESS : int
-
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
 logic attr__ATTRIBUTE_ADDRESS3 : int
 
+logic attr__ATTRIBUTE_ADDRESS4 : int
+
 logic fliteral1 : t1
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 0.20000000298023223876953125))
+
+axiom battery_threshold__def_axiom : (battery_threshold = fliteral1)
 
 logic rliteral3 : t
 
@@ -1557,20 +1563,18 @@ goal WP_parameter_def :
   forall current_time:t. forall res:t. forall s:t. forall o:t.
   forall o1:battery_level_type. forall o2:t1. forall o3:t. forall result:t.
   forall res1:t. forall result1:t. forall s1:t. forall result2:bool.
-  forall result3:t. forall res2:t. (in_range2(current_time) -> ((({
+  forall result3:t. forall res2:t. (tqtisFinite(battery_threshold) ->
+  ((fliteral1 = battery_threshold) -> (in_range2(current_time) -> ((({
   t__content = result } = { t__content = res }) and (res1 = rliteral)) ->
   (in_range3(res1) -> ((({ t__content = result1 } = { t__content = s }) and
   (s1 = rliteral)) -> ((ule(rliteral, s1) and ule(s1, rliteral1)) ->
   (((((((ult(current_time, s1) and (o = add(sub(current_time, s1),
   rliteral2))) or ((not ult(current_time, s1)) and (o = sub(current_time,
   s1)))) and (o1 = (battery_level_at[o]))) and (o2 = to_rep(o1))) and
-  ((lt(o2, fliteral1) and (result2 = true)) or ((not lt(o2, fliteral1)) and
-  (result2 = false)))) and ((result2 = true) and (((o3 = add(res1,
-  rliteral3)) and in_range3(add(res1, rliteral3))) and ((res1 = result3) and
-  (res2 = o3))))) -> ((ule(rliteral3, res2) and ule(res2, rliteral2)) ->
-  (uge(current_time, sub(res2, rliteral3)) ->
-  (forall s2:t. ((((ult(current_time, sub(res2, rliteral3)) and
-  ule(add(sub(current_time, sub(res2, rliteral3)), rliteral2), s2)) or
-  ((not ult(current_time, sub(res2, rliteral3))) and ule(sub(current_time,
-  sub(res2, rliteral3)), s2))) and ule(s2, current_time)) ->
-  lt(to_rep((battery_level_at[s2])), fliteral1))))))))))))
+  ((lt(o2, battery_threshold) and (result2 = true)) or ((not lt(o2,
+  battery_threshold)) and (result2 = false)))) and ((result2 = true) and
+  (((o3 = add(res1, rliteral3)) and in_range3(add(res1, rliteral3))) and
+  ((res1 = result3) and (res2 = o3))))) -> ((ule(rliteral3, res2) and
+  ule(res2, rliteral2)) -> ((not uge(current_time, sub(res2, rliteral3))) ->
+  (forall s2:t. ((ule(rliteral, s2) and ule(s2, current_time)) ->
+  lt(to_rep((battery_level_at[s2])), battery_threshold))))))))))))))

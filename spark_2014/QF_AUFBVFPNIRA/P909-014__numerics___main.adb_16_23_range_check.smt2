@@ -75,13 +75,13 @@
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment))
 
-(define-fun dynamic_invariant ((temp___expr_586 Float32)
-  (temp___is_init_582 Bool) (temp___skip_constant_583 Bool)
-  (temp___do_toplevel_584 Bool)
-  (temp___do_typ_inv_585 Bool)) Bool (=>
-                                     (or (= temp___is_init_582 true)
+(define-fun dynamic_invariant ((temp___expr_579 Float32)
+  (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
+  (temp___do_toplevel_577 Bool)
+  (temp___do_typ_inv_578 Bool)) Bool (=>
+                                     (or (= temp___is_init_575 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_586)))
+                                     (fp.isFinite32 temp___expr_579)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 

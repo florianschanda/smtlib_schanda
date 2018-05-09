@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -116,14 +112,54 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
-(declare-sort t_rate 0)
+(declare-fun inv_sqrt (Float32) Float32)
+
+(declare-fun inv_sqrt__function_guard (Float32 Float32) Bool)
+
+;; inv_sqrt__post_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=>
+     (and (dynamic_invariant x true true true true)
+     (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x))
+     (let ((result (inv_sqrt x)))
+     (and
+     (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
+     (fp.lt result (fp #b0 #b11000010 #b01011010111100011101100)))
+     (dynamic_invariant result true false true true)))) :pattern ((inv_sqrt
+                                                                  x)) )))
+
+(declare-fun saturate (Float32 Float32 Float32) Float32)
+
+(declare-fun saturate__function_guard (Float32 Float32 Float32 Float32) Bool)
+
+;; saturate__post_axiom
+  (assert
+  (forall ((value Float32) (min_value Float32) (max_value Float32))
+  (! (=>
+     (and
+     (and (dynamic_invariant value true true true true) (dynamic_invariant
+     min_value true true true true)) (dynamic_invariant max_value true true
+     true true))
+     (let ((result (saturate value min_value max_value)))
+     (and
+     (ite (fp.lt value min_value) (fp.eq result min_value)
+     (ite (fp.lt max_value value) (fp.eq result max_value)
+     (fp.eq result value))) (dynamic_invariant result true false true true)))) :pattern (
+  (saturate value min_value max_value)) )))
+
+(declare-fun lift_away_from_zero (Float32) Float32)
+
+(declare-fun lift_away_from_zero__function_guard (Float32 Float32) Bool)
+
+(declare-sort t_acc 0)
 
 (define-fun in_range1 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
-                                         (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) x)
-                                         (fp.leq x (fp #b0 #b10001010 #b01110111000000000000000)))))
+                                         (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) x)
+                                         (fp.leq x (fp #b0 #b10000011 #b00000000000000000000000)))))
 
-(declare-fun user_eq1 (t_rate t_rate) Bool)
+(declare-fun user_eq1 (t_acc t_acc) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
 
@@ -131,29 +167,27 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
 
-(declare-const dummy1 t_rate)
+(declare-const dummy1 t_acc)
 
-(declare-datatypes ()
-((t_rate__ref (mk_t_rate__ref (t_rate__content t_rate)))))
-(define-fun t_rate__ref___projection ((a t_rate__ref)) t_rate (t_rate__content
-                                                              a))
+(declare-datatypes () ((t_acc__ref (mk_t_acc__ref (t_acc__content t_acc)))))
+(define-fun t_acc__ref___projection ((a t_acc__ref)) t_acc (t_acc__content a))
 
-(define-fun dynamic_invariant1 ((temp___expr_163 Float32)
-  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
-  (temp___do_toplevel_161 Bool)
-  (temp___do_typ_inv_162 Bool)) Bool (=>
-                                     (or (= temp___is_init_159 true)
-                                     (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) (fp #b0 #b10001010 #b01110111000000000000000)))
-                                     (in_range1 temp___expr_163)))
+(define-fun dynamic_invariant1 ((temp___expr_170 Float32)
+  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
+  (temp___do_toplevel_168 Bool)
+  (temp___do_typ_inv_169 Bool)) Bool (=>
+                                     (or (= temp___is_init_166 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
+                                     (in_range1 temp___expr_170)))
 
-(declare-sort t_acc 0)
+(declare-sort t_acc_lifted 0)
 
 (define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
                                          (and
                                          (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) x)
                                          (fp.leq x (fp #b0 #b10000011 #b00000000000000000000000)))))
 
-(declare-fun user_eq2 (t_acc t_acc) Bool)
+(declare-fun user_eq2 (t_acc_lifted t_acc_lifted) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
 
@@ -161,35 +195,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
 
-(declare-const dummy2 t_acc)
-
-(declare-datatypes () ((t_acc__ref (mk_t_acc__ref (t_acc__content t_acc)))))
-(define-fun t_acc__ref___projection ((a t_acc__ref)) t_acc (t_acc__content a))
-
-(define-fun dynamic_invariant2 ((temp___expr_170 Float32)
-  (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
-  (temp___do_toplevel_168 Bool)
-  (temp___do_typ_inv_169 Bool)) Bool (=>
-                                     (or (= temp___is_init_166 true)
-                                     (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
-                                     (in_range2 temp___expr_170)))
-
-(declare-sort t_acc_lifted 0)
-
-(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                         (and
-                                         (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) x)
-                                         (fp.leq x (fp #b0 #b10000011 #b00000000000000000000000)))))
-
-(declare-fun user_eq3 (t_acc_lifted t_acc_lifted) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float32)
-
-(declare-const dummy3 t_acc_lifted)
+(declare-const dummy2 t_acc_lifted)
 
 (declare-datatypes ()
 ((t_acc_lifted__ref
@@ -197,13 +203,56 @@
 (define-fun t_acc_lifted__ref___projection ((a t_acc_lifted__ref)) t_acc_lifted
   (t_acc_lifted__content a))
 
-(define-fun dynamic_invariant3 ((temp___expr_184 Float32)
+(define-fun dynamic_invariant2 ((temp___expr_184 Float32)
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
   (temp___do_toplevel_182 Bool)
   (temp___do_typ_inv_183 Bool)) Bool (=>
                                      (or (= temp___is_init_180 true)
                                      (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000)))
-                                     (in_range3 temp___expr_184)))
+                                     (in_range2 temp___expr_184)))
+
+;; lift_away_from_zero__post_axiom
+  (assert
+  (forall ((x Float32))
+  (! (=> (dynamic_invariant1 x true true true true)
+     (let ((result (lift_away_from_zero x)))
+     (and
+     (ite (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
+     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))
+     (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
+     (not (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))))
+     (dynamic_invariant2 result true false true true)))) :pattern ((lift_away_from_zero
+                                                                   x)) )))
+
+(declare-sort t_rate 0)
+
+(define-fun in_range3 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) x)
+                                         (fp.leq x (fp #b0 #b10001010 #b01110111000000000000000)))))
+
+(declare-fun user_eq3 (t_rate t_rate) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float32)
+
+(declare-const dummy3 t_rate)
+
+(declare-datatypes ()
+((t_rate__ref (mk_t_rate__ref (t_rate__content t_rate)))))
+(define-fun t_rate__ref___projection ((a t_rate__ref)) t_rate (t_rate__content
+                                                              a))
+
+(define-fun dynamic_invariant3 ((temp___expr_163 Float32)
+  (temp___is_init_159 Bool) (temp___skip_constant_160 Bool)
+  (temp___do_toplevel_161 Bool)
+  (temp___do_typ_inv_162 Bool)) Bool (=>
+                                     (or (= temp___is_init_159 true)
+                                     (fp.leq (fp.neg (fp #b0 #b10001010 #b01110111000000000000000)) (fp #b0 #b10001010 #b01110111000000000000000)))
+                                     (in_range3 temp___expr_163)))
 
 (declare-sort positive_float 0)
 
@@ -327,59 +376,6 @@
                                       (or (= temp___is_init_1546 true)
                                       (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (fp #b0 #b01111111 #b00000000000000000000000)))
                                       (in_range7 temp___expr_1550)))
-
-(declare-fun inv_sqrt (Float32) Float32)
-
-(declare-fun inv_sqrt__function_guard (Float32 Float32) Bool)
-
-;; inv_sqrt__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=>
-     (and (dynamic_invariant x true true true true)
-     (fp.leq (fp #b0 #b00000000 #b00000000000000000000001) x))
-     (let ((result (inv_sqrt x)))
-     (and
-     (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) result)
-     (fp.lt result (fp #b0 #b11000010 #b01011010111100011101100)))
-     (dynamic_invariant result true false true true)))) :pattern ((inv_sqrt
-                                                                  x)) )))
-
-(declare-fun saturate (Float32 Float32 Float32) Float32)
-
-(declare-fun saturate__function_guard (Float32 Float32 Float32 Float32) Bool)
-
-;; saturate__post_axiom
-  (assert
-  (forall ((value Float32) (min_value Float32) (max_value Float32))
-  (! (=>
-     (and
-     (and (dynamic_invariant value true true true true) (dynamic_invariant
-     min_value true true true true)) (dynamic_invariant max_value true true
-     true true))
-     (let ((result (saturate value min_value max_value)))
-     (and
-     (ite (fp.lt value min_value) (fp.eq result min_value)
-     (ite (fp.lt max_value value) (fp.eq result max_value)
-     (fp.eq result value))) (dynamic_invariant result true false true true)))) :pattern (
-  (saturate value min_value max_value)) )))
-
-(declare-fun lift_away_from_zero (Float32) Float32)
-
-(declare-fun lift_away_from_zero__function_guard (Float32 Float32) Bool)
-
-;; lift_away_from_zero__post_axiom
-  (assert
-  (forall ((x Float32))
-  (! (=> (dynamic_invariant2 x true true true true)
-     (let ((result (lift_away_from_zero x)))
-     (and
-     (ite (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-     (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000))
-     (=> (not (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000)))
-     (not (fp.eq result (fp #b0 #b00000000 #b00000000000000000000000)))))
-     (dynamic_invariant3 result true false true true)))) :pattern ((lift_away_from_zero
-                                                                   x)) )))
 
 (declare-const gx Float32)
 
@@ -808,22 +804,22 @@
 (declare-const rad_gx2 Float32)
 
 ;; H
-  (assert (in_range1 gx))
+  (assert (in_range3 gx))
 
 ;; H
-  (assert (in_range1 gy))
+  (assert (in_range3 gy))
 
 ;; H
-  (assert (in_range1 gz))
+  (assert (in_range3 gz))
 
 ;; H
-  (assert (in_range2 ax))
+  (assert (in_range1 ax))
 
 ;; H
-  (assert (in_range2 ay))
+  (assert (in_range1 ay))
 
 ;; H
-  (assert (in_range2 az))
+  (assert (in_range1 az))
 
 ;; H
   (assert (in_range5 dt))
@@ -862,37 +858,37 @@
   (assert (= gx c3b))
 
 ;; H
-  (assert (in_range1 c3b))
+  (assert (in_range3 c3b))
 
 ;; H
   (assert (= gy c4b))
 
 ;; H
-  (assert (in_range1 c4b))
+  (assert (in_range3 c4b))
 
 ;; H
   (assert (= gz c5b))
 
 ;; H
-  (assert (in_range1 c5b))
+  (assert (in_range3 c5b))
 
 ;; H
   (assert (= ax c6b))
 
 ;; H
-  (assert (in_range2 c6b))
+  (assert (in_range1 c6b))
 
 ;; H
   (assert (= ay c7b))
 
 ;; H
-  (assert (in_range2 c7b))
+  (assert (in_range1 c7b))
 
 ;; H
   (assert (= az c8b))
 
 ;; H
-  (assert (in_range2 c8b))
+  (assert (in_range1 c8b))
 
 ;; H
   (assert (= dt c9b))
@@ -910,19 +906,19 @@
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000))
-  (in_range2 norm_ax)))
+  (in_range1 norm_ax)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000))
-  (in_range2 norm_ay)))
+  (in_range1 norm_ay)))
 
 ;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b10000011 #b00000000000000000000000)) (fp #b0 #b10000011 #b00000000000000000000000))
-  (in_range2 norm_az)))
+  (in_range1 norm_az)))
 
 ;; H
   (assert (= result (mk_t__ref rad_gx)))

@@ -1112,22 +1112,28 @@ type fl__ref = { fl__content : fl
 
 function fl__ref___projection(a: fl__ref) : fl = (a).fl__content
 
-logic val1 : t
+logic fl_last_sqrt : t
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
-logic val2 : t
+logic val1 : t
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic val3 : t
+logic val2 : t
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
+
+logic val3 : t
+
+logic attr__ATTRIBUTE_ADDRESS3 : int
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 6703903964971298549787012499102923063739682910296196688861780721860882015036773488400937149083451713845015929093243025426876941405973284973216824503042048.0))
+
+axiom fl_last_sqrt__def_axiom : (fl_last_sqrt = fliteral1)
 
 logic fliteral2 : t
 
@@ -1140,9 +1146,10 @@ axiom fliteral_axiom3 : (tqtisFinite(fliteral3) and
   (tqtreal(fliteral3) = 0.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000014916681462400413486581930630925867674752943069200813788543036666412556770140236609872349780800855606723023206511672202906825456190450605320972329659184169382962521584637562754990408148532870525882893108730127829530828434521177014240063373646006445484595127398530700430674412116673033257292007225854867103693937314652998016306639783579157665371894836425781250000000000000000000000000000000000000000000000000000))
 
  (* File "spark-floating_point_arithmetic_lemmas.ads", line 96, characters 0-0 *)
-goal WP_parameter_def : ((tqtisFinite(val1) and (tqtisFinite(val2) and
-  (tqtisFinite(val3) and ((le(neg(fliteral1), val1) and le(val1,
-  fliteral1)) and ((le(neg(fliteral1), val2) and le(val2, fliteral1)) and
-  ((le(neg(fliteral2), val3) and le(val3, neg(fliteral3))) and le(val1,
-  val2))))))) -> le(div(NearestTiesToEven, val2, val3),
-  div(NearestTiesToEven, val1, val3)))
+goal WP_parameter_def : ((tqtisFinite(fl_last_sqrt) and
+  ((fliteral1 = fl_last_sqrt) and (tqtisFinite(val1) and
+  (tqtisFinite(val2) and (tqtisFinite(val3) and ((le(neg(fliteral1),
+  val1) and le(val1, fl_last_sqrt)) and ((le(neg(fliteral1), val2) and
+  le(val2, fl_last_sqrt)) and ((le(neg(fliteral2), val3) and le(val3,
+  neg(fliteral3))) and le(val1, val2))))))))) -> le(div(NearestTiesToEven,
+  val2, val3), div(NearestTiesToEven, val1, val3)))

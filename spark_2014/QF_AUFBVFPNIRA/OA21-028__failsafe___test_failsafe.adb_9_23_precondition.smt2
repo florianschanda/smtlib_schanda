@@ -82,6 +82,10 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
 (define-fun in_range1 ((x (_ BitVec 8))) Bool (and (bvule #x00 x)
                                               (bvule x #x31)))
 
@@ -95,10 +99,6 @@
                                      (bvule #x00 #x31)) (in_range1
                                      temp___expr_243)))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_236 Float32)
@@ -108,6 +108,14 @@
                                      (or (= temp___is_init_232 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_236)))
+
+(declare-const battery_threshold Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+;; battery_threshold__def_axiom
+  (assert
+  (= battery_threshold (fp #b0 #b01111100 #b10011001100110011001101)))
 
 (declare-const attr__ATTRIBUTE_MODULUS (_ BitVec 8))
 
@@ -128,7 +136,7 @@
 
 (declare-const j Int)
 
-(declare-const temp___323 (_ BitVec 8))
+(declare-const temp___325 (_ BitVec 8))
 
 (declare-const o Bool)
 
@@ -179,7 +187,7 @@
   (assert (= j1 1))
 
 ;; H
-  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___323 current_time)))
+  (assert (=> (and (<= 1 j1) (<= j1 49)) (= temp___325 current_time)))
 
 ;; H
   (assert

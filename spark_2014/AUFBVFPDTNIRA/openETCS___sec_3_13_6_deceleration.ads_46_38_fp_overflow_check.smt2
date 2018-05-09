@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -100,82 +96,7 @@
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
 
-(declare-sort speed_t 0)
-
-(declare-fun user_eq1 (speed_t speed_t) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
-
-(declare-const dummy1 speed_t)
-
-(declare-datatypes ()
-((speed_t__ref (mk_speed_t__ref (speed_t__content speed_t)))))
-(define-fun speed_t__ref___projection ((a speed_t__ref)) speed_t (speed_t__content
-                                                                 a))
-
-(define-fun dynamic_invariant ((temp___expr_174 Float32)
-  (temp___is_init_170 Bool) (temp___skip_constant_171 Bool)
-  (temp___do_toplevel_172 Bool)
-  (temp___do_typ_inv_173 Bool)) Bool (=>
-                                     (or (= temp___is_init_170 true)
-                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (fp.isFinite32 temp___expr_174)))
-
-(declare-sort deceleration_t 0)
-
-(define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
-                                        (and
-                                        (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                        (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
-
-(declare-fun user_eq2 (deceleration_t deceleration_t) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
-
-(declare-const dummy2 deceleration_t)
-
-(declare-datatypes ()
-((deceleration_t__ref
- (mk_deceleration_t__ref (deceleration_t__content deceleration_t)))))
-(define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t
-  (deceleration_t__content a))
-
-(declare-sort distance_t 0)
-
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq3 (distance_t distance_t) Bool)
-
-(declare-const dummy3 distance_t)
-
-(declare-datatypes ()
-((distance_t__ref (mk_distance_t__ref (distance_t__content distance_t)))))
-(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
-  (distance_t__content a))
-
-(define-fun dynamic_invariant1 ((temp___expr_202 Int)
-  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
-  (temp___do_toplevel_200 Bool)
-  (temp___do_typ_inv_201 Bool)) Bool (=>
-                                     (or (= temp___is_init_198 true)
-                                     (<= 0 2147483647)) (in_range1
-                                     temp___expr_202)))
-
-(define-fun dynamic_invariant2 ((temp___expr_60 Float32)
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
   (temp___do_toplevel_58 Bool)
   (temp___do_typ_inv_59 Bool)) Bool (=>
@@ -185,17 +106,25 @@
 
 (declare-sort num_delimiters_range 0)
 
-(define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
+(declare-fun num_delimiters_rangeqtint (num_delimiters_range) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE4 (Int) us_image)
+;; num_delimiters_range'axiom
+  (assert
+  (forall ((i num_delimiters_range))
+  (and (<= 0 (num_delimiters_rangeqtint i))
+  (<= (num_delimiters_rangeqtint i) 10))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+(define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
-(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Int) us_image)
 
-(declare-fun user_eq4 (num_delimiters_range num_delimiters_range) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-const dummy4 num_delimiters_range)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Int)
+
+(declare-fun user_eq1 (num_delimiters_range num_delimiters_range) Bool)
+
+(declare-const dummy1 num_delimiters_range)
 
 (declare-datatypes ()
 ((num_delimiters_range__ref
@@ -204,7 +133,8 @@
 (define-fun num_delimiters_range__ref___projection ((a num_delimiters_range__ref)) num_delimiters_range
   (num_delimiters_range__content a))
 
-(declare-fun to_rep (num_delimiters_range) Int)
+(define-fun to_rep ((x num_delimiters_range)) Int (num_delimiters_rangeqtint
+                                                  x))
 
 (declare-fun of_rep (Int) num_delimiters_range)
 
@@ -215,14 +145,14 @@
 
 ;; range_axiom
   (assert
-  (forall ((x num_delimiters_range)) (! (in_range2
+  (forall ((x num_delimiters_range)) (! (in_range
   (to_rep x)) :pattern ((to_rep x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range2 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
-                                                            (of_rep x))) )))
+  (! (=> (in_range x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
+                                                           (of_rep x))) )))
 
 (declare-fun to_rep1 (float) Float32)
 
@@ -246,17 +176,25 @@
 
 (declare-sort function_range 0)
 
-(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(declare-fun function_rangeqtint (function_range) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+;; function_range'axiom
+  (assert
+  (forall ((i function_range))
+  (and (<= 0 (function_rangeqtint i))
+  (<= (function_rangeqtint i) 2147483647))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Int) us_image)
 
-(declare-fun user_eq5 (function_range function_range) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-const dummy5 function_range)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Int)
+
+(declare-fun user_eq2 (function_range function_range) Bool)
+
+(declare-const dummy2 function_range)
 
 (declare-datatypes ()
 ((function_range__ref
@@ -264,7 +202,7 @@
 (define-fun function_range__ref___projection ((a function_range__ref)) function_range
   (function_range__content a))
 
-(declare-fun to_rep2 (function_range) Int)
+(define-fun to_rep2 ((x function_range)) Int (function_rangeqtint x))
 
 (declare-fun of_rep2 (Int) function_range)
 
@@ -275,13 +213,13 @@
 
 ;; range_axiom
   (assert
-  (forall ((x function_range)) (! (in_range3
+  (forall ((x function_range)) (! (in_range1
   (to_rep2 x)) :pattern ((to_rep2 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range3 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
+  (! (=> (in_range1 x) (= (to_rep2 (of_rep2 x)) x)) :pattern ((to_rep2
                                                               (of_rep2 x))) )))
 
 (declare-datatypes ()
@@ -290,6 +228,9 @@
  (rec__step_function__delimiter_entry__delimiter function_range)(rec__step_function__delimiter_entry__value float)))))
 (define-fun us_split_fields_Delimiter__projection ((a us_split_fields)) function_range
   (rec__step_function__delimiter_entry__delimiter a))
+
+(define-fun us_split_fields_Value__projection ((a us_split_fields)) float
+  (rec__step_function__delimiter_entry__value a))
 
 (declare-datatypes ()
 ((us_split_fields__ref
@@ -368,9 +309,9 @@
 ;; step_function__delimiter_entry__value__position_axiom
   (assert (<= 0 step_function__delimiter_entry__value__position))
 
-(declare-fun user_eq6 (us_rep us_rep) Bool)
+(declare-fun user_eq3 (us_rep us_rep) Bool)
 
-(declare-const dummy6 us_rep)
+(declare-const dummy3 us_rep)
 
 (declare-datatypes ()
 ((delimiter_entry__ref
@@ -426,7 +367,7 @@
   (= (bool_eq (select a temp___idx_154)
      (select b (+ (- b__first a__first) temp___idx_154))) true))))))))
 
-(declare-const dummy7 (Array Int us_rep))
+(declare-const dummy4 (Array Int us_rep))
 
 (declare-const value__size1 Int)
 
@@ -459,7 +400,7 @@
 ;; object__alignment_axiom
   (assert (forall ((a (Array Int us_rep))) (<= 0 (object__alignment1 a))))
 
-(declare-fun user_eq7 ((Array Int us_rep) (Array Int us_rep)) Bool)
+(declare-fun user_eq4 ((Array Int us_rep) (Array Int us_rep)) Bool)
 
 (declare-datatypes ()
 ((us_split_fields2
@@ -551,9 +492,9 @@
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
 
-(declare-fun user_eq8 (us_rep1 us_rep1) Bool)
+(declare-fun user_eq5 (us_rep1 us_rep1) Bool)
 
-(declare-const dummy8 us_rep1)
+(declare-const dummy5 us_rep1)
 
 (declare-datatypes ()
 ((step_function_t__ref
@@ -565,10 +506,6 @@
 
 (declare-fun get_value__function_guard (Float32 us_rep1 Int) Bool)
 
-(declare-const kdry_rst_model us_rep1)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-fun is_valid_kdry_rst (tuple0) Bool)
 
 (declare-fun is_valid_kdry_rst__function_guard (Bool tuple0) Bool)
@@ -577,20 +514,47 @@
 
 (declare-fun kdry_rst__function_guard (Float32 Float32) Bool)
 
+(declare-sort speed_t 0)
+
+(declare-fun user_eq6 (speed_t speed_t) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
+
+(declare-const dummy6 speed_t)
+
+(declare-datatypes ()
+((speed_t__ref (mk_speed_t__ref (speed_t__content speed_t)))))
+(define-fun speed_t__ref___projection ((a speed_t__ref)) speed_t (speed_t__content
+                                                                 a))
+
+(define-fun dynamic_invariant1 ((temp___expr_174 Float32)
+  (temp___is_init_170 Bool) (temp___skip_constant_171 Bool)
+  (temp___do_toplevel_172 Bool)
+  (temp___do_typ_inv_173 Bool)) Bool (=>
+                                     (or (= temp___is_init_170 true)
+                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (fp.isFinite32 temp___expr_174)))
+
+(declare-const kdry_rst_model us_rep1)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 ;; kdry_rst__post_axiom
   (assert
   (forall ((v Float32))
   (! (=>
-     (and (dynamic_invariant v true true true true)
+     (and (dynamic_invariant1 v true true true true)
      (= (is_valid_kdry_rst Tuple0) true))
      (let ((result (kdry_rst v)))
-     (and (fp.eq result (get_value kdry_rst_model (to_int1 RNA v)))
-     (dynamic_invariant2 result true false true true)))) :pattern ((kdry_rst
-                                                                   v)) )))
-
-(declare-const kwet_rst_model us_rep1)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+     (and
+     (fp.eq result (get_value kdry_rst_model
+                   (to_int (fp.to_real (fp.roundToIntegral RNA v)))))
+     (dynamic_invariant result true false true true)))) :pattern ((kdry_rst
+                                                                  v)) )))
 
 (declare-fun is_valid_kwet_rst (tuple0) Bool)
 
@@ -600,24 +564,22 @@
 
 (declare-fun kwet_rst__function_guard (Float32 Float32) Bool)
 
+(declare-const kwet_rst_model us_rep1)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
 ;; kwet_rst__post_axiom
   (assert
   (forall ((v Float32))
   (! (=>
-     (and (dynamic_invariant v true true true true)
+     (and (dynamic_invariant1 v true true true true)
      (= (is_valid_kwet_rst Tuple0) true))
      (let ((result (kwet_rst v)))
-     (and (fp.eq result (get_value kwet_rst_model (to_int1 RNA v)))
-     (dynamic_invariant2 result true false true true)))) :pattern ((kwet_rst
-                                                                   v)) )))
-
-(define-fun dynamic_invariant3 ((temp___expr_195 Float32)
-  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
-  (temp___do_toplevel_193 Bool)
-  (temp___do_typ_inv_194 Bool)) Bool (=>
-                                     (or (= temp___is_init_191 true)
-                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range temp___expr_195)))
+     (and
+     (fp.eq result (get_value kwet_rst_model
+                   (to_int (fp.to_real (fp.roundToIntegral RNA v)))))
+     (dynamic_invariant result true false true true)))) :pattern ((kwet_rst
+                                                                  v)) )))
 
 (declare-fun is_valid_speed (Float32) Bool)
 
@@ -627,13 +589,78 @@
 
 (declare-fun is_valid_deceleration_model__function_guard (Bool us_rep1) Bool)
 
-(declare-const a_brake_emergency_model us_rep1)
-
-(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
-
 (declare-fun a_brake_emergency (Float32 Int) Float32)
 
 (declare-fun a_brake_emergency__function_guard (Float32 Float32 Int) Bool)
+
+(declare-sort deceleration_t 0)
+
+(define-fun in_range2 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+
+(declare-fun user_eq7 (deceleration_t deceleration_t) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE4 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check4 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE4 (us_image) Float32)
+
+(declare-const dummy7 deceleration_t)
+
+(declare-datatypes ()
+((deceleration_t__ref
+ (mk_deceleration_t__ref (deceleration_t__content deceleration_t)))))
+(define-fun deceleration_t__ref___projection ((a deceleration_t__ref)) deceleration_t
+  (deceleration_t__content a))
+
+(define-fun dynamic_invariant2 ((temp___expr_195 Float32)
+  (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
+  (temp___do_toplevel_193 Bool)
+  (temp___do_typ_inv_194 Bool)) Bool (=>
+                                     (or (= temp___is_init_191 true)
+                                     (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                     (in_range2 temp___expr_195)))
+
+(declare-sort distance_t 0)
+
+(declare-fun distance_tqtint (distance_t) Int)
+
+;; distance_t'axiom
+  (assert
+  (forall ((i distance_t))
+  (and (<= 0 (distance_tqtint i)) (<= (distance_tqtint i) 2147483647))))
+
+(define-fun in_range3 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE5 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check5 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE5 (us_image) Int)
+
+(declare-fun user_eq8 (distance_t distance_t) Bool)
+
+(declare-const dummy8 distance_t)
+
+(declare-datatypes ()
+((distance_t__ref (mk_distance_t__ref (distance_t__content distance_t)))))
+(define-fun distance_t__ref___projection ((a distance_t__ref)) distance_t
+  (distance_t__content a))
+
+(define-fun dynamic_invariant3 ((temp___expr_202 Int)
+  (temp___is_init_198 Bool) (temp___skip_constant_199 Bool)
+  (temp___do_toplevel_200 Bool)
+  (temp___do_typ_inv_201 Bool)) Bool (=>
+                                     (or (= temp___is_init_198 true)
+                                     (<= 0 2147483647)) (in_range3
+                                     temp___expr_202)))
+
+(declare-const a_brake_emergency_model us_rep1)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 ;; a_brake_emergency__post_axiom
   (assert
@@ -641,22 +668,28 @@
   (forall ((d Int))
   (! (=>
      (and
-     (and (dynamic_invariant v true true true true) (dynamic_invariant1 d
+     (and (dynamic_invariant1 v true true true true) (dynamic_invariant3 d
      true true true true))
      (and (= (is_valid_deceleration_model a_brake_emergency_model) true)
      (= (is_valid_speed v) true)))
      (let ((result (a_brake_emergency v d)))
-     (and (fp.eq result (get_value a_brake_emergency_model (to_int1 RNA v)))
-     (dynamic_invariant3 result true false true true)))) :pattern ((a_brake_emergency
+     (and
+     (fp.eq result (get_value a_brake_emergency_model
+                   (to_int (fp.to_real (fp.roundToIntegral RNA v)))))
+     (dynamic_invariant2 result true false true true)))) :pattern ((a_brake_emergency
                                                                    v d)) ))))
 
-(declare-const v Float32)
+(declare-const m_nvavadh Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const d Int)
+(declare-const v Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const d Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (declare-sort speed_km_per_h_t 0)
 
@@ -684,6 +717,14 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_181)))
 
+(declare-const maximum_valid_speed_km_per_h Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS6 Int)
+
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
+
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
 (declare-fun is_valid_speed_km_per_h__function_guard (Bool Float32) Bool)
@@ -696,8 +737,8 @@
   (forall ((speed Float32))
   (! (= (= (is_valid_speed_km_per_h speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
-     (fp.leq speed (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
-  (is_valid_speed_km_per_h speed)) )))
+     (fp.leq speed maximum_valid_speed_km_per_h))) :pattern ((is_valid_speed_km_per_h
+                                                             speed)) )))
 
 (declare-fun m_per_s_from_km_per_h (Float32) Float32)
 
@@ -708,7 +749,7 @@
   (forall ((speed Float32))
   (! (=>
      (and (dynamic_invariant4 speed true true true true)
-     (= (is_valid_speed_km_per_h speed) true)) (dynamic_invariant
+     (= (is_valid_speed_km_per_h speed) true)) (dynamic_invariant1
      (m_per_s_from_km_per_h speed) true false true true)) :pattern ((m_per_s_from_km_per_h
                                                                     speed)) )))
 
@@ -727,8 +768,7 @@
   (forall ((speed Float32))
   (! (= (= (is_valid_speed speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
-     (fp.leq speed (m_per_s_from_km_per_h
-                   (fp #b0 #b10000111 #b11110100000000000000000))))) :pattern (
+     (fp.leq speed (m_per_s_from_km_per_h maximum_valid_speed_km_per_h)))) :pattern (
   (is_valid_speed speed)) )))
 
 (define-fun dynamic_invariant5 ((temp___expr_216 Int)
@@ -736,14 +776,14 @@
   (temp___do_toplevel_214 Bool)
   (temp___do_typ_inv_215 Bool)) Bool (=>
                                      (or (= temp___is_init_212 true)
-                                     (<= 0 10)) (in_range2 temp___expr_216)))
+                                     (<= 0 10)) (in_range temp___expr_216)))
 
 (define-fun dynamic_invariant6 ((temp___expr_223 Int)
   (temp___is_init_219 Bool) (temp___skip_constant_220 Bool)
   (temp___do_toplevel_221 Bool)
   (temp___do_typ_inv_222 Bool)) Bool (=>
                                      (or (= temp___is_init_219 true)
-                                     (<= 0 2147483647)) (in_range3
+                                     (<= 0 2147483647)) (in_range1
                                      temp___expr_223)))
 
 (declare-fun is_valid (us_rep1) Bool)
@@ -872,8 +912,11 @@
                    (select temp___287 (to_rep
                                       (rec__step_function__step_function_t__number_of_delimiters
                                       (us_split_fields3 sfun)))))))))))
-     (dynamic_invariant2 result true false true true)))) :pattern ((get_value
-                                                                   sfun x)) ))))
+     (dynamic_invariant result true false true true)))) :pattern ((get_value
+                                                                  sfun x)) ))))
+
+;; m_nvavadh__def_axiom
+  (assert (= m_nvavadh (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; is_valid_deceleration_model__post_axiom
   (assert true)
@@ -888,48 +931,58 @@
          (us_split_fields3 s))) 6))) :pattern ((is_valid_deceleration_model
                                                s)) )))
 
-(declare-fun temp___155 (us_rep us_rep) (Array Int us_rep))
+(declare-fun temp_____aggregate_def_155 (us_rep us_rep) (Array Int us_rep))
+
+(declare-const rliteral num_delimiters_range)
+
+;; rliteral_axiom
+  (assert (= (num_delimiters_rangeqtint rliteral) 0))
+
+(declare-const rliteral1 function_range)
+
+;; rliteral_axiom
+  (assert (= (function_rangeqtint rliteral1) 0))
 
 ;; a_brake_emergency_model__def_axiom
   (assert
   (= a_brake_emergency_model (mk___rep1
-                             (mk___split_fields1 (of_rep 0)
-                             (temp___155
+                             (mk___split_fields1 rliteral
+                             (temp_____aggregate_def_155
                              (mk___rep
-                             (mk___split_fields (of_rep2 0)
+                             (mk___split_fields rliteral1
                              (of_rep1
                              (fp #b0 #b01111111 #b00000000000000000000000))))
                              (mk___rep
-                             (mk___split_fields (of_rep2 0)
+                             (mk___split_fields rliteral1
                              (of_rep1
                              (fp #b0 #b00000000 #b00000000000000000000000)))))))))
 
-(declare-fun temp___160 (us_rep us_rep) (Array Int us_rep))
+(declare-fun temp_____aggregate_def_160 (us_rep us_rep) (Array Int us_rep))
 
 ;; kdry_rst_model__def_axiom
   (assert
   (= kdry_rst_model (mk___rep1
-                    (mk___split_fields1 (of_rep 0)
-                    (temp___160
+                    (mk___split_fields1 rliteral
+                    (temp_____aggregate_def_160
                     (mk___rep
-                    (mk___split_fields (of_rep2 0)
+                    (mk___split_fields rliteral1
                     (of_rep1 (fp #b0 #b01111111 #b00000000000000000000000))))
                     (mk___rep
-                    (mk___split_fields (of_rep2 0)
+                    (mk___split_fields rliteral1
                     (of_rep1 (fp #b0 #b00000000 #b00000000000000000000000)))))))))
 
-(declare-fun temp___165 (us_rep us_rep) (Array Int us_rep))
+(declare-fun temp_____aggregate_def_165 (us_rep us_rep) (Array Int us_rep))
 
 ;; kwet_rst_model__def_axiom
   (assert
   (= kwet_rst_model (mk___rep1
-                    (mk___split_fields1 (of_rep 0)
-                    (temp___165
+                    (mk___split_fields1 rliteral
+                    (temp_____aggregate_def_165
                     (mk___rep
-                    (mk___split_fields (of_rep2 0)
+                    (mk___split_fields rliteral1
                     (of_rep1 (fp #b0 #b01111111 #b00000000000000000000000))))
                     (mk___rep
-                    (mk___split_fields (of_rep2 0)
+                    (mk___split_fields rliteral1
                     (of_rep1 (fp #b0 #b00000000 #b00000000000000000000000)))))))))
 
 ;; is_valid_kdry_rst__post_axiom
@@ -957,7 +1010,7 @@
 ;; def_axiom
   (assert
   (forall ((temp___157 us_rep) (temp___158 us_rep))
-  (let ((temp___156 (temp___155 temp___157 temp___158)))
+  (let ((temp___156 (temp_____aggregate_def_155 temp___157 temp___158)))
   (forall ((temp___159 Int))
   (ite (= temp___159 0) (= (select temp___156 temp___159) temp___157)
   (= (select temp___156 temp___159) temp___158))))))
@@ -965,7 +1018,7 @@
 ;; def_axiom
   (assert
   (forall ((temp___162 us_rep) (temp___163 us_rep))
-  (let ((temp___161 (temp___160 temp___162 temp___163)))
+  (let ((temp___161 (temp_____aggregate_def_160 temp___162 temp___163)))
   (forall ((temp___164 Int))
   (ite (= temp___164 0) (= (select temp___161 temp___164) temp___162)
   (= (select temp___161 temp___164) temp___163))))))
@@ -973,7 +1026,7 @@
 ;; def_axiom
   (assert
   (forall ((temp___167 us_rep) (temp___168 us_rep))
-  (let ((temp___166 (temp___165 temp___167 temp___168)))
+  (let ((temp___166 (temp_____aggregate_def_165 temp___167 temp___168)))
   (forall ((temp___169 Int))
   (ite (= temp___169 0) (= (select temp___166 temp___169) temp___167)
   (= (select temp___166 temp___169) temp___168))))))
@@ -993,39 +1046,62 @@
 (declare-const o6 Float32)
 
 ;; H
+  (assert (fp.isFinite32 m_nvavadh))
+
+;; H
+  (assert (= (fp #b0 #b00000000 #b00000000000000000000000) m_nvavadh))
+
+;; H
   (assert (fp.isFinite32 v))
 
 ;; H
-  (assert (in_range1 d))
+  (assert (in_range3 d))
+
+;; H
+  (assert (= o6 (a_brake_emergency v d)))
+
+;; H
+  (assert (in_range2 o6))
 
 ;; H
   (assert
-  (and (= o6 (a_brake_emergency v d))
-  (and (in_range o6)
-  (fp.eq o6 (get_value a_brake_emergency_model (to_int1 RNA v))))))
+  (fp.eq o6 (get_value a_brake_emergency_model
+            (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
+
+;; H
+  (assert (= o (kwet_rst v)))
+
+;; H
+  (assert (fp.isFinite32 o))
 
 ;; H
   (assert
-  (and (= o (kwet_rst v))
-  (and (fp.isFinite32 o)
-  (fp.eq o (get_value kwet_rst_model (to_int1 RNA v))))))
+  (fp.eq o (get_value kwet_rst_model
+           (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
 
 ;; H
   (assert
   (= o1 (fp.sub RNE (fp #b0 #b01111111 #b00000000000000000000000) o)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite32 o1)))
+  (assert (= o2 o1))
+
+;; H
+  (assert (fp.isFinite32 o1))
+
+;; H
+  (assert (= o3 (fp.mul RNE m_nvavadh o2)))
+
+;; H
+  (assert (= o4 (kwet_rst v)))
+
+;; H
+  (assert (fp.isFinite32 o4))
 
 ;; H
   (assert
-  (= o3 (fp.mul RNE (fp #b0 #b00000000 #b00000000000000000000000) o2)))
-
-;; H
-  (assert
-  (and (= o4 (kwet_rst v))
-  (and (fp.isFinite32 o4)
-  (fp.eq o4 (get_value kwet_rst_model (to_int1 RNA v))))))
+  (fp.eq o4 (get_value kwet_rst_model
+            (to_int (fp.to_real (fp.roundToIntegral RNA v))))))
 
 ;; H
   (assert (= o5 (fp.add RNE o4 o3)))

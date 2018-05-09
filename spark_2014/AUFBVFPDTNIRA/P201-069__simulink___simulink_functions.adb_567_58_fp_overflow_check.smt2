@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -131,8 +127,10 @@
   (assert (fp.isFinite64 right))
 
 ;; H
-  (assert
-  (and (= o (fp.div RNE left right)) (fp.isFinite64 (fp.div RNE left right))))
+  (assert (= o (fp.div RNE left right)))
+
+;; H
+  (assert (fp.isFinite64 (fp.div RNE left right)))
 
 ;; H
   (assert (= o1 (fp.roundToIntegral RTZ o)))
@@ -142,7 +140,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 21270, characters 5-8
   (not (fp.isFinite64 o2)))
 (check-sat)
 (exit)

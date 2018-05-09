@@ -986,6 +986,6 @@ goal WP_parameter_def :
   (forall res:t. forall o:t. forall result:t. forall res1:t.
   (tqtisFinite(x) -> (tqtisFinite(y) -> ((le(neg(fliteral2), fliteral2) ->
   tqtisFinite(res)) -> (tqtisFinite(threshold) -> (le(fliteral3, x) ->
-  (lt(fliteral4, y) -> (lt(y, fliteral) -> (le(div(RNE, x, fliteral1), y) ->
+  (lt(fliteral4, y) -> (lt(y, fliteral) -> (le(div(RNE, x, threshold), y) ->
   ((((o = div(RNE, x, y)) and tqtisFinite(div(RNE, x, y))) and
-  ((result = res) and (res1 = o))) -> le(res1, fliteral1)))))))))))
+  ((result = res) and (res1 = o))) -> le(res1, threshold)))))))))))

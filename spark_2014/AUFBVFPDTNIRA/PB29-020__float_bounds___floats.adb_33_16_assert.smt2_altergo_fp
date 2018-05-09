@@ -2114,5 +2114,4 @@ goal WP_parameter_def :
   ((result10 = c4) and (c5 = o15))) -> ((le1(neg1(fliteral1),
   to_rep1((c5[1]))) and le1(to_rep1((c5[1])), fliteral1)) ->
   ((le1(neg1(fliteral1), to_rep1((c5[2]))) and le1(to_rep1((c5[2])),
-  fliteral1)) -> le1(neg1(fliteral1),
-  to_rep1((c5[3]))))))))))))))))))))))))))
+  fliteral1)) -> le1(to_rep1((c5[3])), fliteral1))))))))))))))))))))))))

@@ -106,7 +106,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P201-069__simulink/gnatprove/simulink_functions.mlw", line 21609, characters 5-8
   (not
   (or (fp.isZero ((_ to_fp 11 53) RNE f))
   (fp.isPositive ((_ to_fp 11 53) RNE f)))))

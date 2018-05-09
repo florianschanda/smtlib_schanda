@@ -288,6 +288,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "q.ads", line 11, characters 0-0
-  (not (fp.leq (fp.neg (fp #b0 #b10000011 #b01000000000000000000000)) x2)))
+  (not (fp.leq x2 (fp #b0 #b10000011 #b01000000000000000000000))))
 (check-sat)
 (exit)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -90,7 +86,7 @@
 ;; Power_0
   (assert
   (forall ((x Float32))
-  (=> (fp.isFinite32 x) (fp.eq (power x 0) (of_int RNE 1)))))
+  (=> (fp.isFinite32 x) (fp.eq (power x 0) ((_ to_fp 8 24) RNE (to_real 1))))))
 
 ;; Power_1
   (assert
@@ -111,21 +107,23 @@
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 1)) (fp.div RNE (of_int RNE 1) x))))))
+  (fp.eq (power x (- 1)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1)) x))))))
 
 ;; Power_neg2
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 2)))))))
+  (fp.eq (power x (- 2)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1))
+  (power x 2)))))))
 
 ;; Power_neg3
   (assert
   (forall ((x Float32))
   (=> (fp.isFinite32 x)
   (=> (not (fp.isZero x))
-  (fp.eq (power x (- 2)) (fp.div RNE (of_int RNE 1) (power x 3)))))))
+  (fp.eq (power x (- 2)) (fp.div RNE ((_ to_fp 8 24) RNE (to_real 1))
+  (power x 3)))))))
 
 (declare-sort float 0)
 
@@ -196,10 +194,6 @@
 
 (declare-const o4 Float32)
 
-(declare-const o5 Float32)
-
-(declare-const o6 Float32)
-
 ;; H
   (assert (in_range x))
 
@@ -207,19 +201,20 @@
   (assert (fp.isFinite32 y))
 
 ;; H
-  (assert (and (= o6 (fp.mul RNE x x)) (fp.isFinite32 (fp.mul RNE x x))))
+  (assert (fp.isFinite32 (fp.mul RNE x x)))
 
 ;; H
-  (assert
-  (and (= o3 (fp.mul RNE x (fp.mul RNE x x)))
-  (fp.isFinite32 (fp.mul RNE x (fp.mul RNE x x)))))
+  (assert (= o3 (fp.mul RNE x (fp.mul RNE x x))))
+
+;; H
+  (assert (fp.isFinite32 (fp.mul RNE x (fp.mul RNE x x))))
 
 ;; H
   (assert
   (= o4 (fp.mul RNE (fp #b0 #b10000001 #b11000000000000000000000) o3)))
 
 ;; H
-  (assert (and (= o5 o4) (fp.isFinite32 o4)))
+  (assert (fp.isFinite32 o4))
 
 ;; H
   (assert (=> (< 4 0) (not (= x ((_ to_fp 8 24) #x00000000)))))
@@ -228,7 +223,10 @@
   (assert (= o (power x 4)))
 
 ;; H
-  (assert (and (= o1 o) (fp.isFinite32 o)))
+  (assert (= o1 o))
+
+;; H
+  (assert (fp.isFinite32 o))
 
 ;; H
   (assert

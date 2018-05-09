@@ -973,7 +973,7 @@ logic fliteral1 : t
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
   (tqtreal(fliteral1) = 340282346638528859811704183484516925440.0))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/O325-024__abstract_state/gnatprove/stabilizer_pack.mlw", line 28269, characters 5-8 *)
 goal WP_parameter_def :
   (forall temperature:t. forall pressure:t. forall asl:t. forall asl_raw:t.
   forall asl_long:t. forall asl_err_deadband:t. forall asl_alpha:t.

@@ -52,6 +52,12 @@ function us_private__ref___projection(a: us_private__ref) : us_private =
 
 type positive
 
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
+
 predicate in_range(x: int) = ((1 <= x) and (x <= 2147483647))
 
 logic bool_eq : int, int -> bool
@@ -992,7 +998,20 @@ axiom coerce_axiom :
 type us_split_fields = { rec__untangle_tests__coordinate__x : float1;
 rec__untangle_tests__coordinate__y : float1;
 rec__untangle_tests__coordinate__z : float1;
-rec__untangle_tests__coordinate__w : float1 }
+rec__untangle_tests__coordinate__w : float1
+}
+
+function us_split_fields_X__projection(a: us_split_fields) : float1 =
+  (a).rec__untangle_tests__coordinate__x
+
+function us_split_fields_Y__projection(a: us_split_fields) : float1 =
+  (a).rec__untangle_tests__coordinate__y
+
+function us_split_fields_Z__projection(a: us_split_fields) : float1 =
+  (a).rec__untangle_tests__coordinate__z
+
+function us_split_fields_W__projection(a: us_split_fields) : float1 =
+  (a).rec__untangle_tests__coordinate__w
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1327,6 +1346,12 @@ function triangle__ref___projection(a: triangle__ref) : us_rep1 =
 
 type ttriangle_listD1
 
+logic ttriangle_listD1qtint : ttriangle_listD1 -> int
+
+axiom ttriangle_listD1qtaxiom :
+  (forall i:ttriangle_listD1. ((1 <= ttriangle_listD1qtint(i)) and
+  (ttriangle_listD1qtint(i) <= 100)))
+
 predicate in_range2(x: int) = ((1 <= x) and (x <= 100))
 
 logic bool_eq7 : int, int -> bool
@@ -1459,4 +1484,4 @@ goal WP_parameter_def :
   rec__untangle_tests__coordinate__y = o4;
   rec__untangle_tests__coordinate__z = o5;
   rec__untangle_tests__coordinate__w = o6 } } } } = (l[o1]))) ->
-  (1 <= a))))))
+  (a <= 100))))))

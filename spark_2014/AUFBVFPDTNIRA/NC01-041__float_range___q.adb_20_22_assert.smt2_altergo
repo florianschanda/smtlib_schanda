@@ -2325,4 +2325,4 @@ goal WP_parameter_def :
   fliteral4))) -> (((le(fliteral5, x1) and (((o = sub(RNE, x1,
   fliteral6)) and tqtisFinite(sub(RNE, x1, fliteral6))) and
   ((result1 = x1) and (x2 = o)))) or ((not le(fliteral5, x1)) and
-  (x2 = x1))) -> le(neg(fliteral6), x2)))))))
+  (x2 = x1))) -> le(x2, fliteral6)))))))

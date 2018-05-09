@@ -54,10 +54,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -80,7 +76,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -98,10 +94,6 @@
 
 (define-fun is_minus_zero1 ((x Float64)) Bool (and (fp.isZero x)
                                               (fp.isNegative x)))
-
-(declare-fun of_int1 (RoundingMode Int) Float64)
-
-(declare-fun to_int2 (RoundingMode Float64) Int)
 
 (declare-const max_int1 Int)
 
@@ -343,55 +335,55 @@
 
 (declare-const o7 (Array Int long_float))
 
-(declare-const result (Array Int long_float))
-
 (declare-const d1 (Array Int long_float))
-
-(declare-const result1 (Array Int long_float))
 
 (declare-const d2 (Array Int long_float))
 
-(declare-const result2 (Array Int long_float))
-
 (declare-const d3 (Array Int long_float))
-
-(declare-const result3 (Array Int long_float))
 
 (declare-const d4 (Array Int long_float))
 
-;; H
-  (assert
-  (forall ((i Int))
-  (=> (and (<= 1 i) (<= i 3))
-  (and
-  (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (to_rep
-                                                                 (select
-                                                                 a i)))
-  (fp.leq (to_rep (select a i)) (fp #b0 #b01111111 #b00000000000000000000000))))))
+(declare-const i Int)
 
 ;; H
   (assert
+  (forall ((i1 Int))
+  (=> (and (<= 1 i1) (<= i1 3))
   (and
   (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (to_rep
                                                                  (select
-                                                                 a 1)))
-  (fp.leq (to_rep (select a 1)) (fp #b0 #b01111111 #b00000000000000000000000))))
+                                                                 a i1)))
+  (fp.leq (to_rep (select a i1)) (fp #b0 #b01111111 #b00000000000000000000000))))))
 
 ;; H
   (assert
-  (and
   (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (to_rep
                                                                  (select
-                                                                 a 2)))
-  (fp.leq (to_rep (select a 2)) (fp #b0 #b01111111 #b00000000000000000000000))))
+                                                                 a 1))))
 
 ;; H
   (assert
-  (and
+  (fp.leq (to_rep (select a 1)) (fp #b0 #b01111111 #b00000000000000000000000)))
+
+;; H
+  (assert
   (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (to_rep
                                                                  (select
-                                                                 a 3)))
-  (fp.leq (to_rep (select a 3)) (fp #b0 #b01111111 #b00000000000000000000000))))
+                                                                 a 2))))
+
+;; H
+  (assert
+  (fp.leq (to_rep (select a 2)) (fp #b0 #b01111111 #b00000000000000000000000)))
+
+;; H
+  (assert
+  (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) (to_rep
+                                                                 (select
+                                                                 a 3))))
+
+;; H
+  (assert
+  (fp.leq (to_rep (select a 3)) (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
   (assert
@@ -399,9 +391,6 @@
 
 ;; H
   (assert (= o1 (store d 1 o)))
-
-;; H
-  (assert (= result d))
 
 ;; H
   (assert (= d1 o1))
@@ -414,9 +403,6 @@
   (assert (= o3 (store d1 2 o2)))
 
 ;; H
-  (assert (= result1 d1))
-
-;; H
   (assert (= d2 o3))
 
 ;; H
@@ -425,9 +411,6 @@
 
 ;; H
   (assert (= o5 (store d2 3 o4)))
-
-;; H
-  (assert (= result2 d2))
 
 ;; H
   (assert (= d3 o5))
@@ -440,40 +423,43 @@
   (assert (= o7 (store d3 4 o6)))
 
 ;; H
-  (assert (= result3 d3))
-
-;; H
   (assert (= d4 o7))
 
 ;; H
   (assert
-  (and
   (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  (to_rep1 (select d4 1)))
-  (fp.leq (to_rep1 (select d4 1)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+  (to_rep1 (select d4 1))))
 
 ;; H
   (assert
-  (and
-  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  (to_rep1 (select d4 2)))
-  (fp.leq (to_rep1 (select d4 2)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+  (fp.leq (to_rep1 (select d4 1)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
 ;; H
   (assert
-  (and
   (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  (to_rep1 (select d4 3)))
-  (fp.leq (to_rep1 (select d4 3)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+  (to_rep1 (select d4 2))))
 
 ;; H
   (assert
-  (and
-  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  (to_rep1 (select d4 4)))
-  (fp.leq (to_rep1 (select d4 4)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
+  (fp.leq (to_rep1 (select d4 2)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
-(declare-const i Int)
+;; H
+  (assert
+  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
+  (to_rep1 (select d4 3))))
+
+;; H
+  (assert
+  (fp.leq (to_rep1 (select d4 3)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
+
+;; H
+  (assert
+  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
+  (to_rep1 (select d4 4))))
+
+;; H
+  (assert
+  (fp.leq (to_rep1 (select d4 4)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
 
 ;; H
   (assert (<= 1 i))
@@ -485,7 +471,6 @@
 ;; WP_parameter_def
  ;; File "floats.ads", line 5, characters 0-0
   (not
-  (fp.leq (fp.neg (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))
-  (to_rep1 (select d4 i)))))
+  (fp.leq (to_rep1 (select d4 i)) (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000))))
 (check-sat)
 (exit)

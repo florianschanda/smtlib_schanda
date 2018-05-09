@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -136,59 +132,53 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const x Float32)
-
-(declare-const y Float32)
-
 (declare-const o Float32)
 
 (declare-const o1 Float32)
 
-(declare-const result Float32)
+(declare-const x Float32)
 
-(declare-const x1 Float32)
+(declare-const y Float32)
 
-(declare-const result1 Float32)
+;; H
+  (assert (= o (v (distinct 1 0))))
 
-(declare-const y1 Float32)
+;; H
+  (assert (fp.isFinite32 o))
 
 ;; H
   (assert
-  (and (= o (v (distinct 1 0)))
-  (and (fp.isFinite32 o)
   (= o (ite (= (distinct 1 0) true)
        (fp #b0 #b01111011 #b10011001100110011001101)
-       (fp.neg (fp #b0 #b01111011 #b10011001100110011001101)))))))
+       (fp.neg (fp #b0 #b01111011 #b10011001100110011001101)))))
 
 ;; H
-  (assert (= result x))
+  (assert (= x o))
 
 ;; H
-  (assert (= x1 o))
+  (assert (fp.isFinite32 x))
 
 ;; H
-  (assert (fp.isFinite32 x1))
+  (assert (= o1 (v (distinct 0 0))))
+
+;; H
+  (assert (fp.isFinite32 o1))
 
 ;; H
   (assert
-  (and (= o1 (v (distinct 0 0)))
-  (and (fp.isFinite32 o1)
   (= o1 (ite (= (distinct 0 0) true)
         (fp #b0 #b01111011 #b10011001100110011001101)
-        (fp.neg (fp #b0 #b01111011 #b10011001100110011001101)))))))
+        (fp.neg (fp #b0 #b01111011 #b10011001100110011001101)))))
 
 ;; H
-  (assert (= result1 y))
+  (assert (= y o1))
 
 ;; H
-  (assert (= y1 o1))
-
-;; H
-  (assert (fp.isFinite32 y1))
+  (assert (fp.isFinite32 y))
 
 (assert
 ;; WP_parameter_def
  ;; File "u.adb", line 7, characters 0-0
-  (not (fp.eq x1 (fp #b0 #b01111011 #b10011001100110011001101))))
+  (not (fp.eq x (fp #b0 #b01111011 #b10011001100110011001101))))
 (check-sat)
 (exit)

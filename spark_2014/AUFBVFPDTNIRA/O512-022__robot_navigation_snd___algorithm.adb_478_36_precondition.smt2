@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -114,6 +117,13 @@
                                                                  a))
 
 (declare-sort positive 0)
+
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
@@ -218,7 +228,7 @@
   (= (to_rep (select a temp___idx_91)) (to_rep
                                        (select b (+ (- b__first a__first) temp___idx_91)))))))))))
 
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -401,6 +411,9 @@
 (declare-datatypes ()
 ((us_split_fields
  (mk___split_fields (rec__spaces__angles__angle__theta normalized2pi)))))
+(define-fun us_split_fields_Theta__projection ((a us_split_fields)) normalized2pi
+  (rec__spaces__angles__angle__theta a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -493,6 +506,12 @@
 ((us_split_fields2
  (mk___split_fields1
  (rec__spaces__positions__position__x float)(rec__spaces__positions__position__y float)))))
+(define-fun us_split_fields_x__projection ((a us_split_fields2)) float
+  (rec__spaces__positions__position__x a))
+
+(define-fun us_split_fields_y__projection ((a us_split_fields2)) float
+  (rec__spaces__positions__position__y a))
+
 (declare-datatypes ()
 ((us_split_fields__ref1
  (mk___split_fields__ref1 (us_split_fields__content1 us_split_fields2)))))
@@ -579,10 +598,6 @@
 (define-fun position__ref___projection ((a position__ref)) us_rep1 (position__content
                                                                    a))
 
-(declare-const zero_position us_rep1)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-fun oeq (us_rep1 us_rep1) Bool)
 
 (declare-fun oeq__function_guard (Bool us_rep1 us_rep1) Bool)
@@ -591,7 +606,18 @@
 
 (declare-fun bearing__function_guard (us_rep us_rep1) Bool)
 
+(declare-const zero_position us_rep1)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (declare-sort idir_t 0)
+
+(declare-fun idir_tqtint (idir_t) Int)
+
+;; idir_t'axiom
+  (assert
+  (forall ((i idir_t))
+  (and (<= (- 1) (idir_tqtint i)) (<= (idir_tqtint i) 1))))
 
 (define-fun in_range5 ((x Int)) Bool (and (<= (- 1) x) (<= x 1)))
 
@@ -610,7 +636,7 @@
 (define-fun idir_t__ref___projection ((a idir_t__ref)) idir_t (idir_t__content
                                                               a))
 
-(declare-fun to_rep4 (idir_t) Int)
+(define-fun to_rep4 ((x idir_t)) Int (idir_tqtint x))
 
 (declare-fun of_rep4 (Int) idir_t)
 
@@ -635,6 +661,9 @@
  (rec__gaps__gap__bearing us_rep)(rec__gaps__gap__distance float)(rec__gaps__gap__idir idir_t)))))
 (define-fun us_split_fields_bearing__projection ((a us_split_fields4)) us_rep
   (rec__gaps__gap__bearing a))
+
+(define-fun us_split_fields_distance__projection ((a us_split_fields4)) float
+  (rec__gaps__gap__distance a))
 
 (define-fun us_split_fields_iDir__projection ((a us_split_fields4)) idir_t
   (rec__gaps__gap__idir a))
@@ -840,6 +869,13 @@
 
 (declare-sort count_type 0)
 
+(declare-fun count_typeqtint (count_type) Int)
+
+;; count_type'axiom
+  (assert
+  (forall ((i count_type))
+  (and (<= 0 (count_typeqtint i)) (<= (count_typeqtint i) 2147483647))))
+
 (define-fun in_range6 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
 (declare-fun attr__ATTRIBUTE_IMAGE7 (Int) us_image)
@@ -857,7 +893,7 @@
 (define-fun count_type__ref___projection ((a count_type__ref)) count_type
   (count_type__content a))
 
-(declare-fun to_rep5 (count_type) Int)
+(define-fun to_rep5 ((x count_type)) Int (count_typeqtint x))
 
 (declare-fun of_rep5 (Int) count_type)
 
@@ -877,96 +913,56 @@
   (! (=> (in_range6 x) (= (to_rep5 (of_rep5 x)) x)) :pattern ((to_rep5
                                                               (of_rep5 x))) )))
 
-(declare-sort option 0)
+(declare-sort us_main_type 0)
 
-(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
-
-(declare-fun user_eq12 (option option) Bool)
-
-(declare-const dummy12 option)
-
-(declare-datatypes ()
-((option__ref (mk_option__ref (option__content option)))))
-(define-fun option__ref___2__projection ((a option__ref)) option (option__content
-                                                                 a))
-
-(declare-fun to_rep6 (option) Int)
-
-(declare-fun of_rep6 (Int) option)
-
-;; inversion_axiom
-  (assert
-  (forall ((x option))
-  (! (= (of_rep6 (to_rep6 x)) x) :pattern ((to_rep6 x)) )))
-
-;; range_axiom
-  (assert
-  (forall ((x option)) (! (in_range7 (to_rep6 x)) :pattern ((to_rep6 x)) )))
-
-;; coerce_axiom
-  (assert
-  (forall ((x Int))
-  (! (=> (in_range7 x) (= (to_rep6 (of_rep6 x)) x)) :pattern ((to_rep6
-                                                              (of_rep6 x))) )))
+(declare-fun us_main_eq (us_main_type us_main_type) Bool)
 
 (declare-datatypes ()
 ((us_split_discrs
- (mk___split_discrs (rec__algorithm__valley_option__opt option)))))
-(define-fun us_split_discrs___2__projection ((a us_split_discrs)) option
-  (rec__algorithm__valley_option__opt a))
+ (mk___split_discrs (rec__algorithm__gap_vectors__list__capacity count_type)))))
+(define-fun us_split_discrs___3__projection ((a us_split_discrs)) count_type
+  (rec__algorithm__gap_vectors__list__capacity a))
 
 (declare-datatypes ()
 ((us_split_discrs__ref
  (mk___split_discrs__ref (us_split_discrs__content us_split_discrs)))))
-(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref)) us_split_discrs
+(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref)) us_split_discrs
   (us_split_discrs__content a))
 
 (declare-datatypes ()
 ((us_split_fields8
- (mk___split_fields4 (rec__algorithm__valley_option__value us_rep3)))))
-(define-fun us_split_fields_value__projection ((a us_split_fields8)) us_rep3
-  (rec__algorithm__valley_option__value a))
+ (mk___split_fields4 (rec__algorithm__gap_vectors__list us_main_type)))))
+(define-fun us_split_fields_List__projection ((a us_split_fields8)) us_main_type
+  (rec__algorithm__gap_vectors__list a))
 
 (declare-datatypes ()
 ((us_split_fields__ref4
  (mk___split_fields__ref4 (us_split_fields__content4 us_split_fields8)))))
-(define-fun us_split_fields__ref___8__projection ((a us_split_fields__ref4)) us_split_fields8
+(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref4)) us_split_fields8
   (us_split_fields__content4 a))
 
 (declare-datatypes ()
 ((us_rep4
  (mk___rep4
- (us_split_discrs1 us_split_discrs)(us_split_fields9 us_split_fields8)(attr__constrained Bool)))))
-(define-fun us_rep___10__projection ((a us_rep4)) us_split_discrs (us_split_discrs1
+ (us_split_discrs1 us_split_discrs)(us_split_fields9 us_split_fields8)))))
+(define-fun us_rep___13__projection ((a us_rep4)) us_split_discrs (us_split_discrs1
                                                                   a))
 
-(define-fun us_rep___11__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
+(define-fun us_rep___14__projection ((a us_rep4)) us_split_fields8 (us_split_fields9
                                                                    a))
-
-(define-fun us_rep___12__projection ((a us_rep4)) Bool (attr__constrained a))
-
-(define-fun algorithm__valley_option__value__pred ((a us_rep4)) Bool (=
-  (to_rep6 (rec__algorithm__valley_option__opt (us_split_discrs1 a))) 1))
 
 (define-fun bool_eq6 ((a us_rep4)
   (b us_rep4)) Bool (ite (and
-                         (= (to_rep6
-                            (rec__algorithm__valley_option__opt
-                            (us_split_discrs1 a))) (to_rep6
-                                                   (rec__algorithm__valley_option__opt
+                         (= (to_rep5
+                            (rec__algorithm__gap_vectors__list__capacity
+                            (us_split_discrs1 a))) (to_rep5
+                                                   (rec__algorithm__gap_vectors__list__capacity
                                                    (us_split_discrs1 b))))
-                         (=> (algorithm__valley_option__value__pred a)
-                         (= (bool_eq5
-                            (rec__algorithm__valley_option__value
+                         (= (us_main_eq
+                            (rec__algorithm__gap_vectors__list
                             (us_split_fields9 a))
-                            (rec__algorithm__valley_option__value
-                            (us_split_fields9 b))) true)))
+                            (rec__algorithm__gap_vectors__list
+                            (us_split_fields9 b))) true))
                     true false))
 
 (declare-const value__size5 Int)
@@ -989,131 +985,75 @@
 ;; object__alignment_axiom
   (assert (forall ((a us_rep4)) (<= 0 (object__alignment5 a))))
 
-(declare-const algorithm__valley_option__opt__first__bit Int)
+(declare-const algorithm__gap_vectors__list__capacity__first__bit Int)
 
-(declare-const algorithm__valley_option__opt__last__bit Int)
+(declare-const algorithm__gap_vectors__list__capacity__last__bit Int)
 
-(declare-const algorithm__valley_option__opt__position Int)
+(declare-const algorithm__gap_vectors__list__capacity__position Int)
 
-;; algorithm__valley_option__opt__first__bit_axiom
-  (assert (<= 0 algorithm__valley_option__opt__first__bit))
+;; algorithm__gap_vectors__list__capacity__first__bit_axiom
+  (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit))
 
-;; algorithm__valley_option__opt__last__bit_axiom
+;; algorithm__gap_vectors__list__capacity__last__bit_axiom
   (assert
-  (< algorithm__valley_option__opt__first__bit algorithm__valley_option__opt__last__bit))
+  (< algorithm__gap_vectors__list__capacity__first__bit algorithm__gap_vectors__list__capacity__last__bit))
 
-;; algorithm__valley_option__opt__position_axiom
-  (assert (<= 0 algorithm__valley_option__opt__position))
+;; algorithm__gap_vectors__list__capacity__position_axiom
+  (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
 
-(declare-const algorithm__valley_option__value__first__bit Int)
+(declare-fun user_eq12 (us_rep4 us_rep4) Bool)
 
-(declare-const algorithm__valley_option__value__last__bit Int)
+(declare-const dummy12 us_rep4)
 
-(declare-const algorithm__valley_option__value__position Int)
+(declare-datatypes () ((list__ref (mk_list__ref (list__content us_rep4)))))
+(define-fun list__ref___projection ((a list__ref)) us_rep4 (list__content a))
 
-;; algorithm__valley_option__value__first__bit_axiom
-  (assert (<= 0 algorithm__valley_option__value__first__bit))
+(declare-fun length1 (us_rep4) Int)
 
-;; algorithm__valley_option__value__last__bit_axiom
+(declare-fun length__function_guard (Int us_rep4) Bool)
+
+(define-fun dynamic_invariant2 ((temp___expr_365 Int)
+  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
+  (temp___do_toplevel_363 Bool)
+  (temp___do_typ_inv_364 Bool)) Bool (=>
+                                     (or (= temp___is_init_361 true)
+                                     (<= 0 2147483647)) (in_range6
+                                     temp___expr_365)))
+
+;; length__post_axiom
   (assert
-  (< algorithm__valley_option__value__first__bit algorithm__valley_option__value__last__bit))
-
-;; algorithm__valley_option__value__position_axiom
-  (assert (<= 0 algorithm__valley_option__value__position))
-
-(declare-fun user_eq13 (us_rep4 us_rep4) Bool)
-
-(declare-const dummy13 us_rep4)
-
-(declare-datatypes ()
-((valley_option__ref
- (mk_valley_option__ref (valley_option__content us_rep4)))))
-(define-fun valley_option__ref___projection ((a valley_option__ref)) us_rep4
-  (valley_option__content a))
-
-(declare-sort gap_id 0)
-
-(define-fun in_range8 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE9 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Int)
-
-(declare-fun user_eq14 (gap_id gap_id) Bool)
-
-(declare-const dummy14 gap_id)
-
-(declare-datatypes ()
-((gap_id__ref (mk_gap_id__ref (gap_id__content gap_id)))))
-(define-fun gap_id__ref___projection ((a gap_id__ref)) gap_id (gap_id__content
-                                                              a))
-
-(define-fun dynamic_invariant2 ((temp___expr_441 Int)
-  (temp___is_init_437 Bool) (temp___skip_constant_438 Bool)
-  (temp___do_toplevel_439 Bool)
-  (temp___do_typ_inv_440 Bool)) Bool (=>
-                                     (or (= temp___is_init_437 true)
-                                     (<= 1 1000)) (in_range8
-                                     temp___expr_441)))
-
-(declare-datatypes ()
-((element_type__ref (mk_element_type__ref (element_type__content us_rep2)))))
-(define-fun element_type__ref___projection ((a element_type__ref)) us_rep2
-  (element_type__content a))
-
-(declare-sort us_main_type 0)
-
-(declare-fun us_main_eq (us_main_type us_main_type) Bool)
-
-(declare-datatypes ()
-((us_split_discrs2
- (mk___split_discrs1
- (rec__algorithm__gap_vectors__list__capacity count_type)))))
-(define-fun us_split_discrs___3__projection ((a us_split_discrs2)) count_type
-  (rec__algorithm__gap_vectors__list__capacity a))
-
-(declare-datatypes ()
-((us_split_discrs__ref1
- (mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
-(define-fun us_split_discrs__ref___3__projection ((a us_split_discrs__ref1)) us_split_discrs2
-  (us_split_discrs__content1 a))
+  (forall ((container us_rep4))
+  (! (let ((result (length1 container)))
+     (and
+     (<= result (to_rep5
+                (rec__algorithm__gap_vectors__list__capacity
+                (us_split_discrs1 container))))
+     (dynamic_invariant2 result true false true true))) :pattern ((length1
+                                                                  container)) )))
 
 (declare-datatypes ()
 ((us_split_fields10
- (mk___split_fields5 (rec__algorithm__gap_vectors__list us_main_type)))))
-(define-fun us_split_fields_List__projection ((a us_split_fields10)) us_main_type
-  (rec__algorithm__gap_vectors__list a))
+ (mk___split_fields5 (rec__algorithm__gap_vectors__cursor__node count_type)))))
+(define-fun us_split_fields_Node__projection ((a us_split_fields10)) count_type
+  (rec__algorithm__gap_vectors__cursor__node a))
 
 (declare-datatypes ()
 ((us_split_fields__ref5
  (mk___split_fields__ref5 (us_split_fields__content5 us_split_fields10)))))
-(define-fun us_split_fields__ref___9__projection ((a us_split_fields__ref5)) us_split_fields10
+(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref5)) us_split_fields10
   (us_split_fields__content5 a))
 
 (declare-datatypes ()
-((us_rep5
- (mk___rep5
- (us_split_discrs3 us_split_discrs2)(us_split_fields11 us_split_fields10)))))
-(define-fun us_rep___13__projection ((a us_rep5)) us_split_discrs2 (us_split_discrs3
-                                                                   a))
-
-(define-fun us_rep___14__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
+((us_rep5 (mk___rep5 (us_split_fields11 us_split_fields10)))))
+(define-fun us_rep___15__projection ((a us_rep5)) us_split_fields10 (us_split_fields11
                                                                     a))
 
 (define-fun bool_eq7 ((a us_rep5)
-  (b us_rep5)) Bool (ite (and
-                         (= (to_rep5
-                            (rec__algorithm__gap_vectors__list__capacity
-                            (us_split_discrs3 a))) (to_rep5
-                                                   (rec__algorithm__gap_vectors__list__capacity
-                                                   (us_split_discrs3 b))))
-                         (= (us_main_eq
-                            (rec__algorithm__gap_vectors__list
-                            (us_split_fields11 a))
-                            (rec__algorithm__gap_vectors__list
-                            (us_split_fields11 b))) true))
+  (b us_rep5)) Bool (ite (= (to_rep5
+                            (rec__algorithm__gap_vectors__cursor__node
+                            (us_split_fields11 a))) (to_rep5
+                                                    (rec__algorithm__gap_vectors__cursor__node
+                                                    (us_split_fields11 b))))
                     true false))
 
 (declare-const value__size6 Int)
@@ -1136,53 +1076,43 @@
 ;; object__alignment_axiom
   (assert (forall ((a us_rep5)) (<= 0 (object__alignment6 a))))
 
-(declare-const algorithm__gap_vectors__list__capacity__first__bit Int)
+(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
 
-(declare-const algorithm__gap_vectors__list__capacity__last__bit Int)
+(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
 
-(declare-const algorithm__gap_vectors__list__capacity__position Int)
+(declare-const algorithm__gap_vectors__cursor__node__position Int)
 
-;; algorithm__gap_vectors__list__capacity__first__bit_axiom
-  (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit))
+;; algorithm__gap_vectors__cursor__node__first__bit_axiom
+  (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
 
-;; algorithm__gap_vectors__list__capacity__last__bit_axiom
+;; algorithm__gap_vectors__cursor__node__last__bit_axiom
   (assert
-  (< algorithm__gap_vectors__list__capacity__first__bit algorithm__gap_vectors__list__capacity__last__bit))
+  (< algorithm__gap_vectors__cursor__node__first__bit algorithm__gap_vectors__cursor__node__last__bit))
 
-;; algorithm__gap_vectors__list__capacity__position_axiom
-  (assert (<= 0 algorithm__gap_vectors__list__capacity__position))
+;; algorithm__gap_vectors__cursor__node__position_axiom
+  (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
 
-(declare-fun user_eq15 (us_rep5 us_rep5) Bool)
+(declare-fun user_eq13 (us_rep5 us_rep5) Bool)
 
-(declare-const dummy15 us_rep5)
-
-(declare-datatypes () ((list__ref (mk_list__ref (list__content us_rep5)))))
-(define-fun list__ref___projection ((a list__ref)) us_rep5 (list__content a))
+(declare-const dummy13 us_rep5)
 
 (declare-datatypes ()
-((us_split_fields12
- (mk___split_fields6 (rec__algorithm__gap_vectors__cursor__node count_type)))))
-(define-fun us_split_fields_Node__projection ((a us_split_fields12)) count_type
-  (rec__algorithm__gap_vectors__cursor__node a))
+((cursor__ref (mk_cursor__ref (cursor__content us_rep5)))))
+(define-fun cursor__ref___projection ((a cursor__ref)) us_rep5 (cursor__content
+                                                               a))
 
 (declare-datatypes ()
-((us_split_fields__ref6
- (mk___split_fields__ref6 (us_split_fields__content6 us_split_fields12)))))
-(define-fun us_split_fields__ref___10__projection ((a us_split_fields__ref6)) us_split_fields12
-  (us_split_fields__content6 a))
+((key_type__ref (mk_key_type__ref (key_type__content us_rep5)))))
+(define-fun key_type__ref___projection ((a key_type__ref)) us_rep5 (key_type__content
+                                                                   a))
 
-(declare-datatypes ()
-((us_rep6 (mk___rep6 (us_split_fields13 us_split_fields12)))))
-(define-fun us_rep___15__projection ((a us_rep6)) us_split_fields12 (us_split_fields13
-                                                                    a))
+(declare-sort us_main_type1 0)
 
-(define-fun bool_eq8 ((a us_rep6)
-  (b us_rep6)) Bool (ite (= (to_rep5
-                            (rec__algorithm__gap_vectors__cursor__node
-                            (us_split_fields13 a))) (to_rep5
-                                                    (rec__algorithm__gap_vectors__cursor__node
-                                                    (us_split_fields13 b))))
-                    true false))
+(declare-fun us_main_eq1 (us_main_type1 us_main_type1) Bool)
+
+(declare-sort us_rep6 0)
+
+(declare-fun bool_eq8 (us_rep6 us_rep6) Bool)
 
 (declare-const value__size7 Int)
 
@@ -1204,63 +1134,40 @@
 ;; object__alignment_axiom
   (assert (forall ((a us_rep6)) (<= 0 (object__alignment7 a))))
 
-(declare-const algorithm__gap_vectors__cursor__node__first__bit Int)
+(declare-fun user_eq14 (us_rep6 us_rep6) Bool)
 
-(declare-const algorithm__gap_vectors__cursor__node__last__bit Int)
+(declare-const dummy14 us_rep6)
 
-(declare-const algorithm__gap_vectors__cursor__node__position Int)
+(declare-datatypes () ((map__ref1 (mk_map__ref1 (map__content1 us_rep6)))))
+(define-fun map__ref___projection ((a map__ref1)) us_rep6 (map__content1 a))
 
-;; algorithm__gap_vectors__cursor__node__first__bit_axiom
-  (assert (<= 0 algorithm__gap_vectors__cursor__node__first__bit))
+(declare-fun has_key (us_rep6 us_rep5) Bool)
 
-;; algorithm__gap_vectors__cursor__node__last__bit_axiom
-  (assert
-  (< algorithm__gap_vectors__cursor__node__first__bit algorithm__gap_vectors__cursor__node__last__bit))
+(declare-fun has_key__function_guard (Bool us_rep6 us_rep5) Bool)
 
-;; algorithm__gap_vectors__cursor__node__position_axiom
-  (assert (<= 0 algorithm__gap_vectors__cursor__node__position))
+(declare-fun positions (us_rep4) us_rep6)
 
-(declare-fun user_eq16 (us_rep6 us_rep6) Bool)
+(declare-fun positions__function_guard (us_rep6 us_rep4) Bool)
 
-(declare-const dummy16 us_rep6)
+(define-fun has_element ((container us_rep4)
+  (position us_rep5)) Bool (has_key (positions container) position))
+
+(declare-fun has_element__function_guard (Bool us_rep4 us_rep5) Bool)
 
 (declare-datatypes ()
-((cursor__ref (mk_cursor__ref (cursor__content us_rep6)))))
-(define-fun cursor__ref___projection ((a cursor__ref)) us_rep6 (cursor__content
-                                                               a))
+((element_type__ref (mk_element_type__ref (element_type__content us_rep2)))))
+(define-fun element_type__ref___projection ((a element_type__ref)) us_rep2
+  (element_type__content a))
 
-(define-fun default_initial_assumption ((temp___expr_466 us_rep6)
-  (temp___skip_top_level_467 Bool)) Bool (= (to_rep5
-                                            (rec__algorithm__gap_vectors__cursor__node
-                                            (us_split_fields13
-                                            temp___expr_466))) 0))
+(declare-datatypes ()
+((element_type__ref1
+ (mk_element_type__ref1 (element_type__content1 us_rep2)))))
+(define-fun element_type__ref___2__projection ((a element_type__ref1)) us_rep2
+  (element_type__content1 a))
 
-(declare-fun length1 (us_rep5) Int)
+(declare-sort us_main_type2 0)
 
-(declare-fun length__function_guard (Int us_rep5) Bool)
-
-(define-fun dynamic_invariant3 ((temp___expr_365 Int)
-  (temp___is_init_361 Bool) (temp___skip_constant_362 Bool)
-  (temp___do_toplevel_363 Bool)
-  (temp___do_typ_inv_364 Bool)) Bool (=>
-                                     (or (= temp___is_init_361 true)
-                                     (<= 0 2147483647)) (in_range6
-                                     temp___expr_365)))
-
-;; length__post_axiom
-  (assert
-  (forall ((container us_rep5))
-  (! (let ((result (length1 container)))
-     (and
-     (<= result (to_rep5
-                (rec__algorithm__gap_vectors__list__capacity
-                (us_split_discrs3 container))))
-     (dynamic_invariant3 result true false true true))) :pattern ((length1
-                                                                  container)) )))
-
-(declare-sort us_main_type1 0)
-
-(declare-fun us_main_eq1 (us_main_type1 us_main_type1) Bool)
+(declare-fun us_main_eq2 (us_main_type2 us_main_type2) Bool)
 
 (declare-sort us_rep7 0)
 
@@ -1286,247 +1193,150 @@
 ;; object__alignment_axiom
   (assert (forall ((a us_rep7)) (<= 0 (object__alignment8 a))))
 
-(declare-fun user_eq17 (us_rep7 us_rep7) Bool)
+(declare-fun user_eq15 (us_rep7 us_rep7) Bool)
 
-(declare-const dummy17 us_rep7)
-
-(declare-datatypes () ((map__ref1 (mk_map__ref1 (map__content1 us_rep7)))))
-(define-fun map__ref___projection ((a map__ref1)) us_rep7 (map__content1 a))
+(declare-const dummy15 us_rep7)
 
 (declare-datatypes ()
-((key_type__ref (mk_key_type__ref (key_type__content us_rep6)))))
-(define-fun key_type__ref___projection ((a key_type__ref)) us_rep6 (key_type__content
+((sequence__ref (mk_sequence__ref (sequence__content us_rep7)))))
+(define-fun sequence__ref___projection ((a sequence__ref)) us_rep7 (sequence__content
                                                                    a))
 
-(declare-fun has_key (us_rep7 us_rep6) Bool)
+(declare-fun get (us_rep7 Int) us_rep2)
 
-(declare-fun has_key__function_guard (Bool us_rep7 us_rep6) Bool)
+(declare-fun get__function_guard (us_rep2 us_rep7 Int) Bool)
 
-(declare-fun positions (us_rep5) us_rep7)
+(declare-fun get1 (us_rep6 us_rep5) Int)
 
-(declare-fun positions__function_guard (us_rep7 us_rep5) Bool)
+(declare-fun get__function_guard1 (Int us_rep6 us_rep5) Bool)
 
-(define-fun has_element ((container us_rep5)
-  (position us_rep6)) Bool (has_key (positions container) position))
+(declare-fun model__ (us_rep4) us_rep7)
 
-(declare-fun has_element__function_guard (Bool us_rep5 us_rep6) Bool)
+(declare-fun model____function_guard (us_rep7 us_rep4) Bool)
 
-(declare-datatypes ()
-((element_type__ref1
- (mk_element_type__ref1 (element_type__content1 us_rep2)))))
-(define-fun element_type__ref___2__projection ((a element_type__ref1)) us_rep2
-  (element_type__content1 a))
-
-(declare-sort us_main_type2 0)
-
-(declare-fun us_main_eq2 (us_main_type2 us_main_type2) Bool)
-
-(declare-sort us_rep8 0)
-
-(declare-fun bool_eq10 (us_rep8 us_rep8) Bool)
-
-(declare-const value__size9 Int)
-
-(declare-fun object__size9 (us_rep8) Int)
-
-(declare-const value__alignment9 Int)
-
-(declare-fun object__alignment9 (us_rep8) Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size9))
-
-;; object__size_axiom
-  (assert (forall ((a us_rep8)) (<= 0 (object__size9 a))))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment9))
-
-;; object__alignment_axiom
-  (assert (forall ((a us_rep8)) (<= 0 (object__alignment9 a))))
-
-(declare-fun user_eq18 (us_rep8 us_rep8) Bool)
-
-(declare-const dummy18 us_rep8)
-
-(declare-datatypes ()
-((sequence__ref (mk_sequence__ref (sequence__content us_rep8)))))
-(define-fun sequence__ref___projection ((a sequence__ref)) us_rep8 (sequence__content
-                                                                   a))
-
-(declare-fun get (us_rep8 Int) us_rep2)
-
-(declare-fun get__function_guard (us_rep2 us_rep8 Int) Bool)
-
-(declare-fun get1 (us_rep7 us_rep6) Int)
-
-(declare-fun get__function_guard1 (Int us_rep7 us_rep6) Bool)
-
-(declare-fun model__ (us_rep5) us_rep8)
-
-(declare-fun model____function_guard (us_rep8 us_rep5) Bool)
-
-(define-fun element ((container us_rep5)
-  (position us_rep6)) us_rep2 (get (model__ container)
+(define-fun element ((container us_rep4)
+  (position us_rep5)) us_rep2 (get (model__ container)
                               (get1 (positions container) position)))
 
-(declare-fun element__function_guard (us_rep2 us_rep5 us_rep6) Bool)
+(declare-fun element__function_guard (us_rep2 us_rep4 us_rep5) Bool)
 
-(declare-const no_element us_rep6)
+(declare-fun last2 (us_rep4) us_rep5)
+
+(declare-fun last__function_guard (us_rep5 us_rep4) Bool)
+
+(define-fun default_initial_assumption ((temp___expr_466 us_rep5)
+  (temp___skip_top_level_467 Bool)) Bool (= (to_rep5
+                                            (rec__algorithm__gap_vectors__cursor__node
+                                            (us_split_fields11
+                                            temp___expr_466))) 0))
+
+(declare-const no_element us_rep5)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-fun last2 (us_rep5) us_rep6)
-
-(declare-fun last__function_guard (us_rep6 us_rep5) Bool)
-
 ;; last__post_axiom
   (assert
-  (forall ((container us_rep5))
+  (forall ((container us_rep4))
   (! (let ((result (last2 container)))
-     (ite (= (length1 container) 0) (= (bool_eq8 result no_element) true)
+     (ite (= (length1 container) 0) (= (bool_eq7 result no_element) true)
      (and (= (has_element container result) true)
      (= (get1 (positions container) result) (length1 container))))) :pattern (
   (last2 container)) )))
 
-(declare-fun first2 (us_rep5) us_rep6)
+(declare-fun first2 (us_rep4) us_rep5)
 
-(declare-fun first__function_guard (us_rep6 us_rep5) Bool)
+(declare-fun first__function_guard (us_rep5 us_rep4) Bool)
 
 ;; first__post_axiom
   (assert
-  (forall ((container us_rep5))
+  (forall ((container us_rep4))
   (! (let ((result (first2 container)))
-     (ite (= (length1 container) 0) (= (bool_eq8 result no_element) true)
+     (ite (= (length1 container) 0) (= (bool_eq7 result no_element) true)
      (and (= (has_element container result) true)
      (= (get1 (positions container) result) 1)))) :pattern ((first2
                                                             container)) )))
 
-(declare-fun next (us_rep5 us_rep6) us_rep6)
+(declare-fun next (us_rep4 us_rep5) us_rep5)
 
-(declare-fun next__function_guard (us_rep6 us_rep5 us_rep6) Bool)
+(declare-fun next__function_guard (us_rep5 us_rep4 us_rep5) Bool)
 
 ;; next__post_axiom
   (assert
-  (forall ((container us_rep5))
-  (forall ((position us_rep6))
+  (forall ((container us_rep4))
+  (forall ((position us_rep5))
   (! (=>
      (or (= (has_element container position) true)
-     (= (bool_eq8 position no_element) true))
+     (= (bool_eq7 position no_element) true))
      (let ((result (next container position)))
-     (ite (or (= (bool_eq8 position no_element) true)
+     (ite (or (= (bool_eq7 position no_element) true)
           (= (get1 (positions container) position) (length1 container)))
-     (= (bool_eq8 result no_element) true)
+     (= (bool_eq7 result no_element) true)
      (and (= (has_element container result) true)
      (= (get1 (positions container) result) (+ (get1 (positions container)
                                                position) 1)))))) :pattern (
   (next container position)) ))))
 
-(define-fun in_range9 ((rec__algorithm__gap_vectors__list__capacity1 Int)
-  (a us_rep5)) Bool (= rec__algorithm__gap_vectors__list__capacity1 (to_rep5
-                                                                    (rec__algorithm__gap_vectors__list__capacity
-                                                                    (us_split_discrs3
-                                                                    a)))))
-
-(declare-const value__size10 Int)
-
-(declare-fun object__size10 (us_rep5) Int)
-
-(declare-const value__alignment10 Int)
-
-(declare-fun object__alignment10 (us_rep5) Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size10))
-
-;; object__size_axiom
-  (assert (forall ((a us_rep5)) (<= 0 (object__size10 a))))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment10))
-
-;; object__alignment_axiom
-  (assert (forall ((a us_rep5)) (<= 0 (object__alignment10 a))))
-
-(declare-const algorithm__gap_vectors__list__capacity__first__bit1 Int)
-
-(declare-const algorithm__gap_vectors__list__capacity__last__bit1 Int)
-
-(declare-const algorithm__gap_vectors__list__capacity__position1 Int)
-
-;; algorithm__gap_vectors__list__capacity__first__bit_axiom
-  (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit1))
-
-;; algorithm__gap_vectors__list__capacity__last__bit_axiom
-  (assert
-  (< algorithm__gap_vectors__list__capacity__first__bit1 algorithm__gap_vectors__list__capacity__last__bit1))
-
-;; algorithm__gap_vectors__list__capacity__position_axiom
-  (assert (<= 0 algorithm__gap_vectors__list__capacity__position1))
-
-(declare-fun user_eq19 (us_rep5 us_rep5) Bool)
-
-(declare-const dummy19 us_rep5)
-
-(declare-datatypes ()
-((list__ref1 (mk_list__ref1 (list__content1 us_rep5)))))
-(define-fun list__ref___2__projection ((a list__ref1)) us_rep5 (list__content1
-                                                               a))
-
 (declare-sort natural 0)
 
-(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
+(declare-fun naturalqtint (natural) Int)
 
-(declare-fun attr__ATTRIBUTE_IMAGE10 (Int) us_image)
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
+(define-fun in_range7 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
-(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_IMAGE8 (Int) us_image)
 
-(declare-fun user_eq20 (natural natural) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check8 (us_image) Bool)
 
-(declare-const dummy20 natural)
+(declare-fun attr__ATTRIBUTE_VALUE8 (us_image) Int)
+
+(declare-fun user_eq16 (natural natural) Bool)
+
+(declare-const dummy16 natural)
 
 (declare-datatypes ()
 ((natural__ref (mk_natural__ref (natural__content natural)))))
 (define-fun natural__ref___projection ((a natural__ref)) natural (natural__content
                                                                  a))
 
-(declare-fun to_rep7 (natural) Int)
+(define-fun to_rep6 ((x natural)) Int (naturalqtint x))
 
-(declare-fun of_rep7 (Int) natural)
+(declare-fun of_rep6 (Int) natural)
 
 ;; inversion_axiom
   (assert
   (forall ((x natural))
-  (! (= (of_rep7 (to_rep7 x)) x) :pattern ((to_rep7 x)) )))
+  (! (= (of_rep6 (to_rep6 x)) x) :pattern ((to_rep6 x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x natural)) (! (in_range10 (to_rep7 x)) :pattern ((to_rep7 x)) )))
+  (forall ((x natural)) (! (in_range7 (to_rep6 x)) :pattern ((to_rep6 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range10 x) (= (to_rep7 (of_rep7 x)) x)) :pattern ((to_rep7
-                                                               (of_rep7 x))) )))
+  (! (=> (in_range7 x) (= (to_rep6 (of_rep6 x)) x)) :pattern ((to_rep6
+                                                              (of_rep6 x))) )))
 
 (declare-sort positive_float 0)
 
-(define-fun in_range11 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                          (and
-                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+(define-fun in_range8 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
 
-(declare-fun user_eq21 (positive_float positive_float) Bool)
+(declare-fun user_eq17 (positive_float positive_float) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE11 (Float32) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE9 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check9 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Float32)
+(declare-fun attr__ATTRIBUTE_VALUE9 (us_image) Float32)
 
-(declare-const dummy21 positive_float)
+(declare-const dummy17 positive_float)
 
 (declare-datatypes ()
 ((positive_float__ref
@@ -1534,42 +1344,42 @@
 (define-fun positive_float__ref___projection ((a positive_float__ref)) positive_float
   (positive_float__content a))
 
-(declare-fun to_rep8 (positive_float) Float32)
+(declare-fun to_rep7 (positive_float) Float32)
 
-(declare-fun of_rep8 (Float32) positive_float)
+(declare-fun of_rep7 (Float32) positive_float)
 
 ;; inversion_axiom
   (assert
   (forall ((x positive_float))
-  (! (= (of_rep8 (to_rep8 x)) x) :pattern ((to_rep8 x)) )))
+  (! (= (of_rep7 (to_rep7 x)) x) :pattern ((to_rep7 x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x positive_float)) (! (in_range11
-  (to_rep8 x)) :pattern ((to_rep8 x)) )))
+  (forall ((x positive_float)) (! (in_range8
+  (to_rep7 x)) :pattern ((to_rep7 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (in_range11 x) (= (to_rep8 (of_rep8 x)) x)) :pattern ((to_rep8
-                                                               (of_rep8 x))) )))
+  (! (=> (in_range8 x) (= (to_rep7 (of_rep7 x)) x)) :pattern ((to_rep7
+                                                              (of_rep7 x))) )))
 
 (declare-sort nonnegative_float 0)
 
-(define-fun in_range12 ((x Float32)) Bool (and (fp.isFinite32 x)
-                                          (and
-                                          (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-                                          (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
+(define-fun in_range9 ((x Float32)) Bool (and (fp.isFinite32 x)
+                                         (and
+                                         (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
+                                         (fp.leq x (fp #b0 #b11111110 #b11111111111111111111111)))))
 
-(declare-fun user_eq22 (nonnegative_float nonnegative_float) Bool)
+(declare-fun user_eq18 (nonnegative_float nonnegative_float) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE12 (Float32) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE10 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check10 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Float32)
+(declare-fun attr__ATTRIBUTE_VALUE10 (us_image) Float32)
 
-(declare-const dummy22 nonnegative_float)
+(declare-const dummy18 nonnegative_float)
 
 (declare-datatypes ()
 ((nonnegative_float__ref
@@ -1577,37 +1387,37 @@
 (define-fun nonnegative_float__ref___projection ((a nonnegative_float__ref)) nonnegative_float
   (nonnegative_float__content a))
 
-(declare-fun to_rep9 (nonnegative_float) Float32)
+(declare-fun to_rep8 (nonnegative_float) Float32)
 
-(declare-fun of_rep9 (Float32) nonnegative_float)
+(declare-fun of_rep8 (Float32) nonnegative_float)
 
 ;; inversion_axiom
   (assert
   (forall ((x nonnegative_float))
-  (! (= (of_rep9 (to_rep9 x)) x) :pattern ((to_rep9 x)) )))
+  (! (= (of_rep8 (to_rep8 x)) x) :pattern ((to_rep8 x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x nonnegative_float)) (! (in_range12
-  (to_rep9 x)) :pattern ((to_rep9 x)) )))
+  (forall ((x nonnegative_float)) (! (in_range9
+  (to_rep8 x)) :pattern ((to_rep8 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (in_range12 x) (= (to_rep9 (of_rep9 x)) x)) :pattern ((to_rep9
-                                                               (of_rep9 x))) )))
+  (! (=> (in_range9 x) (= (to_rep8 (of_rep8 x)) x)) :pattern ((to_rep8
+                                                              (of_rep8 x))) )))
 
 (declare-sort unbounded_float 0)
 
-(declare-fun user_eq23 (unbounded_float unbounded_float) Bool)
+(declare-fun user_eq19 (unbounded_float unbounded_float) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE13 (Float32) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE11 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check11 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Float32)
+(declare-fun attr__ATTRIBUTE_VALUE11 (us_image) Float32)
 
-(declare-const dummy23 unbounded_float)
+(declare-const dummy19 unbounded_float)
 
 (declare-datatypes ()
 ((unbounded_float__ref
@@ -1615,26 +1425,25 @@
 (define-fun unbounded_float__ref___projection ((a unbounded_float__ref)) unbounded_float
   (unbounded_float__content a))
 
-(declare-fun to_rep10 (unbounded_float) Float32)
+(declare-fun to_rep9 (unbounded_float) Float32)
 
-(declare-fun of_rep10 (Float32) unbounded_float)
+(declare-fun of_rep9 (Float32) unbounded_float)
 
 ;; inversion_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (= (of_rep10 (to_rep10 x)) x) :pattern ((to_rep10 x)) )))
+  (! (= (of_rep9 (to_rep9 x)) x) :pattern ((to_rep9 x)) )))
 
 ;; range_axiom
   (assert
   (forall ((x unbounded_float))
-  (! (fp.isFinite32 (to_rep10 x)) :pattern ((to_rep10 x)) )))
+  (! (fp.isFinite32 (to_rep9 x)) :pattern ((to_rep9 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Float32))
-  (! (=> (fp.isFinite32 x) (= (to_rep10 (of_rep10 x)) x)) :pattern ((to_rep10
-                                                                    (of_rep10
-                                                                    x))) )))
+  (! (=> (fp.isFinite32 x) (= (to_rep9 (of_rep9 x)) x)) :pattern ((to_rep9
+                                                                  (of_rep9 x))) )))
 
 (declare-datatypes ()
 ((map__ref2 (mk_map__ref2 (map__content2 (Array Int nonnegative_float))))))
@@ -1656,7 +1465,7 @@
   (! (= (select (slide1 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide1 a old_first new_first) i)) ))))))
 
-(define-fun bool_eq11 ((a (Array Int nonnegative_float)) (a__first Int)
+(define-fun bool_eq10 ((a (Array Int nonnegative_float)) (a__first Int)
   (a__last Int) (b (Array Int nonnegative_float)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
@@ -1667,7 +1476,7 @@
                            (=>
                            (and (<= a__first temp___idx_154)
                            (<= temp___idx_154 a__last))
-                           (= (to_rep9 (select a temp___idx_154)) (to_rep9
+                           (= (to_rep8 (select a temp___idx_154)) (to_rep8
                                                                   (select b (+ (- b__first a__first) temp___idx_154)))))))
                       true false))
 
@@ -1676,36 +1485,36 @@
   (forall ((a (Array Int nonnegative_float))
   (b (Array Int nonnegative_float)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq11 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq10 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_154 Int))
   (=> (and (<= a__first temp___idx_154) (<= temp___idx_154 a__last))
-  (= (to_rep9 (select a temp___idx_154)) (to_rep9
+  (= (to_rep8 (select a temp___idx_154)) (to_rep8
                                          (select b (+ (- b__first a__first) temp___idx_154)))))))))))
 
-(declare-const dummy24 (Array Int nonnegative_float))
+(declare-const dummy20 (Array Int nonnegative_float))
 
-(declare-const value__size11 Int)
+(declare-const value__size9 Int)
 
-(declare-fun object__size11 ((Array Int nonnegative_float)) Int)
+(declare-fun object__size9 ((Array Int nonnegative_float)) Int)
 
 (declare-const value__component__size1 Int)
 
 (declare-fun object__component__size1 ((Array Int nonnegative_float)) Int)
 
-(declare-const value__alignment11 Int)
+(declare-const value__alignment9 Int)
 
-(declare-fun object__alignment11 ((Array Int nonnegative_float)) Int)
+(declare-fun object__alignment9 ((Array Int nonnegative_float)) Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size11))
+  (assert (<= 0 value__size9))
 
 ;; object__size_axiom
   (assert
-  (forall ((a (Array Int nonnegative_float))) (<= 0 (object__size11 a))))
+  (forall ((a (Array Int nonnegative_float))) (<= 0 (object__size9 a))))
 
 ;; value__component__size_axiom
   (assert (<= 0 value__component__size1))
@@ -1716,135 +1525,141 @@
   (<= 0 (object__component__size1 a))))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment11))
+  (assert (<= 0 value__alignment9))
 
 ;; object__alignment_axiom
   (assert
-  (forall ((a (Array Int nonnegative_float))) (<= 0 (object__alignment11 a))))
+  (forall ((a (Array Int nonnegative_float))) (<= 0 (object__alignment9 a))))
 
-(declare-fun user_eq24 ((Array Int nonnegative_float)
+(declare-fun user_eq20 ((Array Int nonnegative_float)
   (Array Int nonnegative_float)) Bool)
 
-(declare-sort option1 0)
+(declare-sort option 0)
 
-(define-fun in_range13 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+(define-fun in_range10 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
 
-(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE12 (Int) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check12 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
+(declare-fun attr__ATTRIBUTE_VALUE12 (us_image) Int)
 
-(declare-fun user_eq25 (option1 option1) Bool)
+(declare-fun user_eq21 (option option) Bool)
 
-(declare-const dummy25 option1)
+(declare-const dummy21 option)
 
 (declare-datatypes ()
-((option__ref1 (mk_option__ref1 (option__content1 option1)))))
-(define-fun option__ref___projection ((a option__ref1)) option1 (option__content1
-                                                                a))
+((option__ref (mk_option__ref (option__content option)))))
+(define-fun option__ref___projection ((a option__ref)) option (option__content
+                                                              a))
 
-(declare-fun to_rep11 (option1) Int)
+(declare-fun to_rep10 (option) Int)
 
-(declare-fun of_rep11 (Int) option1)
+(declare-fun of_rep10 (Int) option)
 
 ;; inversion_axiom
   (assert
-  (forall ((x option1))
-  (! (= (of_rep11 (to_rep11 x)) x) :pattern ((to_rep11 x)) )))
+  (forall ((x option))
+  (! (= (of_rep10 (to_rep10 x)) x) :pattern ((to_rep10 x)) )))
 
 ;; range_axiom
   (assert
-  (forall ((x option1)) (! (in_range13
-  (to_rep11 x)) :pattern ((to_rep11 x)) )))
+  (forall ((x option)) (! (in_range10
+  (to_rep10 x)) :pattern ((to_rep10 x)) )))
 
 ;; coerce_axiom
   (assert
   (forall ((x Int))
-  (! (=> (in_range13 x) (= (to_rep11 (of_rep11 x)) x)) :pattern ((to_rep11
-                                                                 (of_rep11 x))) )))
+  (! (=> (in_range10 x) (= (to_rep10 (of_rep10 x)) x)) :pattern ((to_rep10
+                                                                 (of_rep10 x))) )))
 
 (declare-datatypes ()
-((us_split_discrs4
- (mk___split_discrs2 (rec__robot_iface__speed_option__opt option1)))))
-(define-fun us_split_discrs___projection ((a us_split_discrs4)) option1
+((us_split_discrs2
+ (mk___split_discrs1 (rec__robot_iface__speed_option__opt option)))))
+(define-fun us_split_discrs___projection ((a us_split_discrs2)) option
   (rec__robot_iface__speed_option__opt a))
 
 (declare-datatypes ()
-((us_split_discrs__ref2
- (mk___split_discrs__ref2 (us_split_discrs__content2 us_split_discrs4)))))
-(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref2)) us_split_discrs4
-  (us_split_discrs__content2 a))
+((us_split_discrs__ref1
+ (mk___split_discrs__ref1 (us_split_discrs__content1 us_split_discrs2)))))
+(define-fun us_split_discrs__ref___projection ((a us_split_discrs__ref1)) us_split_discrs2
+  (us_split_discrs__content1 a))
 
 (declare-datatypes ()
-((us_split_fields14
- (mk___split_fields7
+((us_split_fields12
+ (mk___split_fields6
  (rec__robot_iface__speed_option__modulus float)(rec__robot_iface__speed_option__angle float)))))
-(declare-datatypes ()
-((us_split_fields__ref7
- (mk___split_fields__ref7 (us_split_fields__content7 us_split_fields14)))))
-(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref7)) us_split_fields14
-  (us_split_fields__content7 a))
+(define-fun us_split_fields_modulus__projection ((a us_split_fields12)) float
+  (rec__robot_iface__speed_option__modulus a))
+
+(define-fun us_split_fields_angle__projection ((a us_split_fields12)) float
+  (rec__robot_iface__speed_option__angle a))
 
 (declare-datatypes ()
-((us_rep9
- (mk___rep7
- (us_split_discrs5 us_split_discrs4)(us_split_fields15 us_split_fields14)(attr__constrained1 Bool)))))
-(define-fun us_rep___4__projection ((a us_rep9)) us_split_discrs4 (us_split_discrs5
+((us_split_fields__ref6
+ (mk___split_fields__ref6 (us_split_fields__content6 us_split_fields12)))))
+(define-fun us_split_fields__ref___4__projection ((a us_split_fields__ref6)) us_split_fields12
+  (us_split_fields__content6 a))
+
+(declare-datatypes ()
+((us_rep8
+ (mk___rep6
+ (us_split_discrs3 us_split_discrs2)(us_split_fields13 us_split_fields12)(attr__constrained Bool)))))
+(define-fun us_rep___4__projection ((a us_rep8)) us_split_discrs2 (us_split_discrs3
                                                                   a))
 
-(define-fun us_rep___5__projection ((a us_rep9)) us_split_fields14 (us_split_fields15
+(define-fun us_rep___5__projection ((a us_rep8)) us_split_fields12 (us_split_fields13
                                                                    a))
 
-(define-fun us_rep___6__projection ((a us_rep9)) Bool (attr__constrained1 a))
+(define-fun us_rep___6__projection ((a us_rep8)) Bool (attr__constrained a))
 
-(define-fun robot_iface__speed_option__modulus__pred ((a us_rep9)) Bool (=
-  (to_rep11 (rec__robot_iface__speed_option__opt (us_split_discrs5 a))) 1))
+(define-fun robot_iface__speed_option__modulus__pred ((a us_rep8)) Bool (=
+  (to_rep10 (rec__robot_iface__speed_option__opt (us_split_discrs3 a))) 1))
 
-(define-fun robot_iface__speed_option__angle__pred ((a us_rep9)) Bool (=
-  (to_rep11 (rec__robot_iface__speed_option__opt (us_split_discrs5 a))) 1))
+(define-fun robot_iface__speed_option__angle__pred ((a us_rep8)) Bool (=
+  (to_rep10 (rec__robot_iface__speed_option__opt (us_split_discrs3 a))) 1))
 
-(define-fun bool_eq12 ((a us_rep9)
-  (b us_rep9)) Bool (ite (and
-                         (= (to_rep11
+(define-fun bool_eq11 ((a us_rep8)
+  (b us_rep8)) Bool (ite (and
+                         (= (to_rep10
                             (rec__robot_iface__speed_option__opt
-                            (us_split_discrs5 a))) (to_rep11
+                            (us_split_discrs3 a))) (to_rep10
                                                    (rec__robot_iface__speed_option__opt
-                                                   (us_split_discrs5 b))))
+                                                   (us_split_discrs3 b))))
                          (and
                          (=> (robot_iface__speed_option__modulus__pred a)
                          (= (to_rep2
                             (rec__robot_iface__speed_option__modulus
-                            (us_split_fields15 a))) (to_rep2
+                            (us_split_fields13 a))) (to_rep2
                                                     (rec__robot_iface__speed_option__modulus
-                                                    (us_split_fields15 b)))))
+                                                    (us_split_fields13 b)))))
                          (=> (robot_iface__speed_option__angle__pred a)
                          (= (to_rep2
                             (rec__robot_iface__speed_option__angle
-                            (us_split_fields15 a))) (to_rep2
+                            (us_split_fields13 a))) (to_rep2
                                                     (rec__robot_iface__speed_option__angle
-                                                    (us_split_fields15 b)))))))
+                                                    (us_split_fields13 b)))))))
                     true false))
 
-(declare-const value__size12 Int)
+(declare-const value__size10 Int)
 
-(declare-fun object__size12 (us_rep9) Int)
+(declare-fun object__size10 (us_rep8) Int)
 
-(declare-const value__alignment12 Int)
+(declare-const value__alignment10 Int)
 
-(declare-fun object__alignment12 (us_rep9) Int)
+(declare-fun object__alignment10 (us_rep8) Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size12))
+  (assert (<= 0 value__size10))
 
 ;; object__size_axiom
-  (assert (forall ((a us_rep9)) (<= 0 (object__size12 a))))
+  (assert (forall ((a us_rep8)) (<= 0 (object__size10 a))))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment12))
+  (assert (<= 0 value__alignment10))
 
 ;; object__alignment_axiom
-  (assert (forall ((a us_rep9)) (<= 0 (object__alignment12 a))))
+  (assert (forall ((a us_rep8)) (<= 0 (object__alignment10 a))))
 
 (declare-const robot_iface__speed_option__opt__first__bit Int)
 
@@ -1894,175 +1709,220 @@
 ;; robot_iface__speed_option__angle__position_axiom
   (assert (<= 0 robot_iface__speed_option__angle__position))
 
-(declare-fun user_eq26 (us_rep9 us_rep9) Bool)
+(declare-fun user_eq22 (us_rep8 us_rep8) Bool)
 
-(declare-const dummy26 us_rep9)
+(declare-const dummy22 us_rep8)
 
 (declare-datatypes ()
-((speed_option__ref (mk_speed_option__ref (speed_option__content us_rep9)))))
-(define-fun speed_option__ref___projection ((a speed_option__ref)) us_rep9
+((speed_option__ref (mk_speed_option__ref (speed_option__content us_rep8)))))
+(define-fun speed_option__ref___projection ((a speed_option__ref)) us_rep8
   (speed_option__content a))
 
 (declare-datatypes ()
-((us_split_fields16
- (mk___split_fields8
- (rec__robot_iface__proxy__robot_radius positive_float)(rec__robot_iface__proxy__min_gap_width positive_float)(rec__robot_iface__proxy__obstacle_avoid_dist positive_float)(rec__robot_iface__proxy__max_speed positive_float)(rec__robot_iface__proxy__max_turn_rate positive_float)(rec__robot_iface__proxy__goal_position_tol nonnegative_float)(rec__robot_iface__proxy__goal_angle_tol nonnegative_float)(rec__robot_iface__proxy__goalx float)(rec__robot_iface__proxy__goaly float)(rec__robot_iface__proxy__goala float)(rec__robot_iface__proxy__scan_count natural)(rec__robot_iface__proxy__scan_res positive_float)(rec__robot_iface__proxy__max_range positive_float)(rec__robot_iface__proxy__scans (Array Int nonnegative_float))(rec__robot_iface__proxy__x unbounded_float)(rec__robot_iface__proxy__y unbounded_float)(rec__robot_iface__proxy__yaw unbounded_float)(rec__robot_iface__proxy__speed us_rep9)(rec__robot_iface__proxy__goal_reached Bool)))))
-(define-fun us_split_fields_scan_Count__projection ((a us_split_fields16)) natural
+((us_split_fields14
+ (mk___split_fields7
+ (rec__robot_iface__proxy__robot_radius positive_float)(rec__robot_iface__proxy__min_gap_width positive_float)(rec__robot_iface__proxy__obstacle_avoid_dist positive_float)(rec__robot_iface__proxy__max_speed positive_float)(rec__robot_iface__proxy__max_turn_rate positive_float)(rec__robot_iface__proxy__goal_position_tol nonnegative_float)(rec__robot_iface__proxy__goal_angle_tol nonnegative_float)(rec__robot_iface__proxy__goalx float)(rec__robot_iface__proxy__goaly float)(rec__robot_iface__proxy__goala float)(rec__robot_iface__proxy__scan_count natural)(rec__robot_iface__proxy__scan_res positive_float)(rec__robot_iface__proxy__max_range positive_float)(rec__robot_iface__proxy__scans (Array Int nonnegative_float))(rec__robot_iface__proxy__x unbounded_float)(rec__robot_iface__proxy__y unbounded_float)(rec__robot_iface__proxy__yaw unbounded_float)(rec__robot_iface__proxy__speed us_rep8)(rec__robot_iface__proxy__goal_reached Bool)))))
+(define-fun us_split_fields_robot_radius__projection ((a us_split_fields14)) positive_float
+  (rec__robot_iface__proxy__robot_radius a))
+
+(define-fun us_split_fields_min_gap_width__projection ((a us_split_fields14)) positive_float
+  (rec__robot_iface__proxy__min_gap_width a))
+
+(define-fun us_split_fields_obstacle_avoid_dist__projection ((a us_split_fields14)) positive_float
+  (rec__robot_iface__proxy__obstacle_avoid_dist a))
+
+(define-fun us_split_fields_max_speed__projection ((a us_split_fields14)) positive_float
+  (rec__robot_iface__proxy__max_speed a))
+
+(define-fun us_split_fields_max_turn_rate__projection ((a us_split_fields14)) positive_float
+  (rec__robot_iface__proxy__max_turn_rate a))
+
+(define-fun us_split_fields_goal_position_tol__projection ((a us_split_fields14)) nonnegative_float
+  (rec__robot_iface__proxy__goal_position_tol a))
+
+(define-fun us_split_fields_goal_angle_tol__projection ((a us_split_fields14)) nonnegative_float
+  (rec__robot_iface__proxy__goal_angle_tol a))
+
+(define-fun us_split_fields_goalX__projection ((a us_split_fields14)) float
+  (rec__robot_iface__proxy__goalx a))
+
+(define-fun us_split_fields_goalY__projection ((a us_split_fields14)) float
+  (rec__robot_iface__proxy__goaly a))
+
+(define-fun us_split_fields_goalA__projection ((a us_split_fields14)) float
+  (rec__robot_iface__proxy__goala a))
+
+(define-fun us_split_fields_scan_Count__projection ((a us_split_fields14)) natural
   (rec__robot_iface__proxy__scan_count a))
 
-(define-fun us_split_fields_scans__projection ((a us_split_fields16)) (Array Int nonnegative_float)
+(define-fun us_split_fields_scan_Res__projection ((a us_split_fields14)) positive_float
+  (rec__robot_iface__proxy__scan_res a))
+
+(define-fun us_split_fields_max_Range__projection ((a us_split_fields14)) positive_float
+  (rec__robot_iface__proxy__max_range a))
+
+(define-fun us_split_fields_scans__projection ((a us_split_fields14)) (Array Int nonnegative_float)
   (rec__robot_iface__proxy__scans a))
 
-(define-fun us_split_fields_speed__projection ((a us_split_fields16)) us_rep9
+(define-fun us_split_fields_X__projection ((a us_split_fields14)) unbounded_float
+  (rec__robot_iface__proxy__x a))
+
+(define-fun us_split_fields_Y__projection ((a us_split_fields14)) unbounded_float
+  (rec__robot_iface__proxy__y a))
+
+(define-fun us_split_fields_Yaw__projection ((a us_split_fields14)) unbounded_float
+  (rec__robot_iface__proxy__yaw a))
+
+(define-fun us_split_fields_speed__projection ((a us_split_fields14)) us_rep8
   (rec__robot_iface__proxy__speed a))
 
-(define-fun us_split_fields_goal_reached__projection ((a us_split_fields16)) Bool
+(define-fun us_split_fields_goal_reached__projection ((a us_split_fields14)) Bool
   (rec__robot_iface__proxy__goal_reached a))
 
 (declare-datatypes ()
-((us_split_fields__ref8
- (mk___split_fields__ref8 (us_split_fields__content8 us_split_fields16)))))
-(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref8)) us_split_fields16
-  (us_split_fields__content8 a))
+((us_split_fields__ref7
+ (mk___split_fields__ref7 (us_split_fields__content7 us_split_fields14)))))
+(define-fun us_split_fields__ref___5__projection ((a us_split_fields__ref7)) us_split_fields14
+  (us_split_fields__content7 a))
 
 (declare-datatypes ()
-((us_rep10 (mk___rep8 (us_split_fields17 us_split_fields16)))))
-(define-fun us_rep___7__projection ((a us_rep10)) us_split_fields16 (us_split_fields17
-                                                                    a))
+((us_rep9 (mk___rep7 (us_split_fields15 us_split_fields14)))))
+(define-fun us_rep___7__projection ((a us_rep9)) us_split_fields14 (us_split_fields15
+                                                                   a))
 
-(define-fun bool_eq13 ((a us_rep10)
-  (b us_rep10)) Bool (ite (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (and
-                          (= (to_rep8
-                             (rec__robot_iface__proxy__robot_radius
-                             (us_split_fields17 a))) (to_rep8
-                                                     (rec__robot_iface__proxy__robot_radius
-                                                     (us_split_fields17 b))))
-                          (= (to_rep8
-                             (rec__robot_iface__proxy__min_gap_width
-                             (us_split_fields17 a))) (to_rep8
-                                                     (rec__robot_iface__proxy__min_gap_width
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep8
-                             (rec__robot_iface__proxy__obstacle_avoid_dist
-                             (us_split_fields17 a))) (to_rep8
-                                                     (rec__robot_iface__proxy__obstacle_avoid_dist
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep8
-                             (rec__robot_iface__proxy__max_speed
-                             (us_split_fields17 a))) (to_rep8
-                                                     (rec__robot_iface__proxy__max_speed
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep8
-                             (rec__robot_iface__proxy__max_turn_rate
-                             (us_split_fields17 a))) (to_rep8
-                                                     (rec__robot_iface__proxy__max_turn_rate
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep9
-                             (rec__robot_iface__proxy__goal_position_tol
-                             (us_split_fields17 a))) (to_rep9
-                                                     (rec__robot_iface__proxy__goal_position_tol
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep9
-                             (rec__robot_iface__proxy__goal_angle_tol
-                             (us_split_fields17 a))) (to_rep9
-                                                     (rec__robot_iface__proxy__goal_angle_tol
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep2
-                             (rec__robot_iface__proxy__goalx
-                             (us_split_fields17 a))) (to_rep2
-                                                     (rec__robot_iface__proxy__goalx
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep2
-                             (rec__robot_iface__proxy__goaly
-                             (us_split_fields17 a))) (to_rep2
-                                                     (rec__robot_iface__proxy__goaly
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep2
-                             (rec__robot_iface__proxy__goala
-                             (us_split_fields17 a))) (to_rep2
-                                                     (rec__robot_iface__proxy__goala
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep7
-                             (rec__robot_iface__proxy__scan_count
-                             (us_split_fields17 a))) (to_rep7
-                                                     (rec__robot_iface__proxy__scan_count
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep8
-                             (rec__robot_iface__proxy__scan_res
-                             (us_split_fields17 a))) (to_rep8
-                                                     (rec__robot_iface__proxy__scan_res
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep8
-                             (rec__robot_iface__proxy__max_range
-                             (us_split_fields17 a))) (to_rep8
-                                                     (rec__robot_iface__proxy__max_range
-                                                     (us_split_fields17 b)))))
-                          (= (bool_eq11
-                             (rec__robot_iface__proxy__scans
-                             (us_split_fields17 a)) 1 1000
-                             (rec__robot_iface__proxy__scans
-                             (us_split_fields17 b)) 1 1000) true))
-                          (= (to_rep10
-                             (rec__robot_iface__proxy__x
-                             (us_split_fields17 a))) (to_rep10
-                                                     (rec__robot_iface__proxy__x
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep10
-                             (rec__robot_iface__proxy__y
-                             (us_split_fields17 a))) (to_rep10
-                                                     (rec__robot_iface__proxy__y
-                                                     (us_split_fields17 b)))))
-                          (= (to_rep10
-                             (rec__robot_iface__proxy__yaw
-                             (us_split_fields17 a))) (to_rep10
-                                                     (rec__robot_iface__proxy__yaw
-                                                     (us_split_fields17 b)))))
-                          (= (bool_eq12
-                             (rec__robot_iface__proxy__speed
-                             (us_split_fields17 a))
-                             (rec__robot_iface__proxy__speed
-                             (us_split_fields17 b))) true))
-                          (= (rec__robot_iface__proxy__goal_reached
-                             (us_split_fields17 a)) (rec__robot_iface__proxy__goal_reached
-                                                    (us_split_fields17 b))))
-                     true false))
+(define-fun bool_eq12 ((a us_rep9)
+  (b us_rep9)) Bool (ite (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (and
+                         (= (to_rep7
+                            (rec__robot_iface__proxy__robot_radius
+                            (us_split_fields15 a))) (to_rep7
+                                                    (rec__robot_iface__proxy__robot_radius
+                                                    (us_split_fields15 b))))
+                         (= (to_rep7
+                            (rec__robot_iface__proxy__min_gap_width
+                            (us_split_fields15 a))) (to_rep7
+                                                    (rec__robot_iface__proxy__min_gap_width
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep7
+                            (rec__robot_iface__proxy__obstacle_avoid_dist
+                            (us_split_fields15 a))) (to_rep7
+                                                    (rec__robot_iface__proxy__obstacle_avoid_dist
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep7
+                            (rec__robot_iface__proxy__max_speed
+                            (us_split_fields15 a))) (to_rep7
+                                                    (rec__robot_iface__proxy__max_speed
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep7
+                            (rec__robot_iface__proxy__max_turn_rate
+                            (us_split_fields15 a))) (to_rep7
+                                                    (rec__robot_iface__proxy__max_turn_rate
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep8
+                            (rec__robot_iface__proxy__goal_position_tol
+                            (us_split_fields15 a))) (to_rep8
+                                                    (rec__robot_iface__proxy__goal_position_tol
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep8
+                            (rec__robot_iface__proxy__goal_angle_tol
+                            (us_split_fields15 a))) (to_rep8
+                                                    (rec__robot_iface__proxy__goal_angle_tol
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep2
+                            (rec__robot_iface__proxy__goalx
+                            (us_split_fields15 a))) (to_rep2
+                                                    (rec__robot_iface__proxy__goalx
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep2
+                            (rec__robot_iface__proxy__goaly
+                            (us_split_fields15 a))) (to_rep2
+                                                    (rec__robot_iface__proxy__goaly
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep2
+                            (rec__robot_iface__proxy__goala
+                            (us_split_fields15 a))) (to_rep2
+                                                    (rec__robot_iface__proxy__goala
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep6
+                            (rec__robot_iface__proxy__scan_count
+                            (us_split_fields15 a))) (to_rep6
+                                                    (rec__robot_iface__proxy__scan_count
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep7
+                            (rec__robot_iface__proxy__scan_res
+                            (us_split_fields15 a))) (to_rep7
+                                                    (rec__robot_iface__proxy__scan_res
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep7
+                            (rec__robot_iface__proxy__max_range
+                            (us_split_fields15 a))) (to_rep7
+                                                    (rec__robot_iface__proxy__max_range
+                                                    (us_split_fields15 b)))))
+                         (= (bool_eq10
+                            (rec__robot_iface__proxy__scans
+                            (us_split_fields15 a)) 1 1000
+                            (rec__robot_iface__proxy__scans
+                            (us_split_fields15 b)) 1 1000) true))
+                         (= (to_rep9
+                            (rec__robot_iface__proxy__x
+                            (us_split_fields15 a))) (to_rep9
+                                                    (rec__robot_iface__proxy__x
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep9
+                            (rec__robot_iface__proxy__y
+                            (us_split_fields15 a))) (to_rep9
+                                                    (rec__robot_iface__proxy__y
+                                                    (us_split_fields15 b)))))
+                         (= (to_rep9
+                            (rec__robot_iface__proxy__yaw
+                            (us_split_fields15 a))) (to_rep9
+                                                    (rec__robot_iface__proxy__yaw
+                                                    (us_split_fields15 b)))))
+                         (= (bool_eq11
+                            (rec__robot_iface__proxy__speed
+                            (us_split_fields15 a))
+                            (rec__robot_iface__proxy__speed
+                            (us_split_fields15 b))) true))
+                         (= (rec__robot_iface__proxy__goal_reached
+                            (us_split_fields15 a)) (rec__robot_iface__proxy__goal_reached
+                                                   (us_split_fields15 b))))
+                    true false))
 
-(declare-const value__size13 Int)
+(declare-const value__size11 Int)
 
-(declare-fun object__size13 (us_rep10) Int)
+(declare-fun object__size11 (us_rep9) Int)
 
-(declare-const value__alignment13 Int)
+(declare-const value__alignment11 Int)
 
-(declare-fun object__alignment13 (us_rep10) Int)
+(declare-fun object__alignment11 (us_rep9) Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size13))
+  (assert (<= 0 value__size11))
 
 ;; object__size_axiom
-  (assert (forall ((a us_rep10)) (<= 0 (object__size13 a))))
+  (assert (forall ((a us_rep9)) (<= 0 (object__size11 a))))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment13))
+  (assert (<= 0 value__alignment11))
 
 ;; object__alignment_axiom
-  (assert (forall ((a us_rep10)) (<= 0 (object__alignment13 a))))
+  (assert (forall ((a us_rep9)) (<= 0 (object__alignment11 a))))
 
 (declare-const robot_iface__proxy__robot_radius__first__bit Int)
 
@@ -2368,66 +2228,120 @@
 ;; robot_iface__proxy__goal_reached__position_axiom
   (assert (<= 0 robot_iface__proxy__goal_reached__position))
 
-(declare-fun user_eq27 (us_rep10 us_rep10) Bool)
+(declare-fun user_eq23 (us_rep9 us_rep9) Bool)
 
-(declare-const dummy27 us_rep10)
-
-(declare-datatypes ()
-((proxy__ref (mk_proxy__ref (proxy__content us_rep10)))))
-(define-fun proxy__ref___projection ((a proxy__ref)) us_rep10 (proxy__content
-                                                              a))
+(declare-const dummy23 us_rep9)
 
 (declare-datatypes ()
-((us_split_fields18
- (mk___split_fields9
+((proxy__ref (mk_proxy__ref (proxy__content us_rep9)))))
+(define-fun proxy__ref___projection ((a proxy__ref)) us_rep9 (proxy__content
+                                                             a))
+
+(define-fun in_range11 ((rec__algorithm__gap_vectors__list__capacity1 Int)
+  (a us_rep4)) Bool (= rec__algorithm__gap_vectors__list__capacity1 (to_rep5
+                                                                    (rec__algorithm__gap_vectors__list__capacity
+                                                                    (us_split_discrs1
+                                                                    a)))))
+
+(declare-const value__size12 Int)
+
+(declare-fun object__size12 (us_rep4) Int)
+
+(declare-const value__alignment12 Int)
+
+(declare-fun object__alignment12 (us_rep4) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size12))
+
+;; object__size_axiom
+  (assert (forall ((a us_rep4)) (<= 0 (object__size12 a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment12))
+
+;; object__alignment_axiom
+  (assert (forall ((a us_rep4)) (<= 0 (object__alignment12 a))))
+
+(declare-const algorithm__gap_vectors__list__capacity__first__bit1 Int)
+
+(declare-const algorithm__gap_vectors__list__capacity__last__bit1 Int)
+
+(declare-const algorithm__gap_vectors__list__capacity__position1 Int)
+
+;; algorithm__gap_vectors__list__capacity__first__bit_axiom
+  (assert (<= 0 algorithm__gap_vectors__list__capacity__first__bit1))
+
+;; algorithm__gap_vectors__list__capacity__last__bit_axiom
+  (assert
+  (< algorithm__gap_vectors__list__capacity__first__bit1 algorithm__gap_vectors__list__capacity__last__bit1))
+
+;; algorithm__gap_vectors__list__capacity__position_axiom
+  (assert (<= 0 algorithm__gap_vectors__list__capacity__position1))
+
+(declare-fun user_eq24 (us_rep4 us_rep4) Bool)
+
+(declare-const dummy24 us_rep4)
+
+(declare-datatypes ()
+((list__ref1 (mk_list__ref1 (list__content1 us_rep4)))))
+(define-fun list__ref___2__projection ((a list__ref1)) us_rep4 (list__content1
+                                                               a))
+
+(declare-datatypes ()
+((us_split_fields16
+ (mk___split_fields8
  (rec__algorithm__laser_scan_data__first nonnegative_float)(rec__algorithm__laser_scan_data__second us_rep)))))
-(define-fun us_split_fields_second__projection ((a us_split_fields18)) us_rep
+(define-fun us_split_fields_first__projection ((a us_split_fields16)) nonnegative_float
+  (rec__algorithm__laser_scan_data__first a))
+
+(define-fun us_split_fields_second__projection ((a us_split_fields16)) us_rep
   (rec__algorithm__laser_scan_data__second a))
 
 (declare-datatypes ()
-((us_split_fields__ref9
- (mk___split_fields__ref9 (us_split_fields__content9 us_split_fields18)))))
-(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref9)) us_split_fields18
-  (us_split_fields__content9 a))
+((us_split_fields__ref8
+ (mk___split_fields__ref8 (us_split_fields__content8 us_split_fields16)))))
+(define-fun us_split_fields__ref___11__projection ((a us_split_fields__ref8)) us_split_fields16
+  (us_split_fields__content8 a))
 
 (declare-datatypes ()
-((us_rep11 (mk___rep9 (us_split_fields19 us_split_fields18)))))
-(define-fun us_rep___16__projection ((a us_rep11)) us_split_fields18
-  (us_split_fields19 a))
+((us_rep10 (mk___rep8 (us_split_fields17 us_split_fields16)))))
+(define-fun us_rep___16__projection ((a us_rep10)) us_split_fields16
+  (us_split_fields17 a))
 
-(define-fun bool_eq14 ((a us_rep11)
-  (b us_rep11)) Bool (ite (and
-                          (= (to_rep9
+(define-fun bool_eq13 ((a us_rep10)
+  (b us_rep10)) Bool (ite (and
+                          (= (to_rep8
                              (rec__algorithm__laser_scan_data__first
-                             (us_split_fields19 a))) (to_rep9
+                             (us_split_fields17 a))) (to_rep8
                                                      (rec__algorithm__laser_scan_data__first
-                                                     (us_split_fields19 b))))
+                                                     (us_split_fields17 b))))
                           (= (bool_eq2
                              (rec__algorithm__laser_scan_data__second
-                             (us_split_fields19 a))
+                             (us_split_fields17 a))
                              (rec__algorithm__laser_scan_data__second
-                             (us_split_fields19 b))) true))
+                             (us_split_fields17 b))) true))
                      true false))
 
-(declare-const value__size14 Int)
+(declare-const value__size13 Int)
 
-(declare-fun object__size14 (us_rep11) Int)
+(declare-fun object__size13 (us_rep10) Int)
 
-(declare-const value__alignment14 Int)
+(declare-const value__alignment13 Int)
 
-(declare-fun object__alignment14 (us_rep11) Int)
+(declare-fun object__alignment13 (us_rep10) Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size14))
+  (assert (<= 0 value__size13))
 
 ;; object__size_axiom
-  (assert (forall ((a us_rep11)) (<= 0 (object__size14 a))))
+  (assert (forall ((a us_rep10)) (<= 0 (object__size13 a))))
 
 ;; value__alignment_axiom
-  (assert (<= 0 value__alignment14))
+  (assert (<= 0 value__alignment13))
 
 ;; object__alignment_axiom
-  (assert (forall ((a us_rep11)) (<= 0 (object__alignment14 a))))
+  (assert (forall ((a us_rep10)) (<= 0 (object__alignment13 a))))
 
 (declare-const algorithm__laser_scan_data__first__first__bit Int)
 
@@ -2461,37 +2375,37 @@
 ;; algorithm__laser_scan_data__second__position_axiom
   (assert (<= 0 algorithm__laser_scan_data__second__position))
 
-(declare-fun user_eq28 (us_rep11 us_rep11) Bool)
+(declare-fun user_eq25 (us_rep10 us_rep10) Bool)
 
-(declare-const dummy28 us_rep11)
+(declare-const dummy25 us_rep10)
 
 (declare-datatypes ()
 ((laser_scan_data__ref
- (mk_laser_scan_data__ref (laser_scan_data__content us_rep11)))))
-(define-fun laser_scan_data__ref___projection ((a laser_scan_data__ref)) us_rep11
+ (mk_laser_scan_data__ref (laser_scan_data__content us_rep10)))))
+(define-fun laser_scan_data__ref___projection ((a laser_scan_data__ref)) us_rep10
   (laser_scan_data__content a))
 
 (declare-datatypes ()
-((map__ref3 (mk_map__ref3 (map__content3 (Array Int us_rep11))))))
-(declare-fun slide2 ((Array Int us_rep11) Int Int) (Array Int us_rep11))
+((map__ref3 (mk_map__ref3 (map__content3 (Array Int us_rep10))))))
+(declare-fun slide2 ((Array Int us_rep10) Int Int) (Array Int us_rep10))
 
 ;; slide_eq
   (assert
-  (forall ((a (Array Int us_rep11)))
+  (forall ((a (Array Int us_rep10)))
   (forall ((first3 Int))
   (! (= (slide2 a first3 first3) a) :pattern ((slide2 a first3 first3)) ))))
 
 ;; slide_def
   (assert
-  (forall ((a (Array Int us_rep11)))
+  (forall ((a (Array Int us_rep10)))
   (forall ((old_first Int))
   (forall ((new_first Int))
   (forall ((i Int))
   (! (= (select (slide2 a old_first new_first) i) (select a (- i (- new_first old_first)))) :pattern ((select
   (slide2 a old_first new_first) i)) ))))))
 
-(define-fun bool_eq15 ((a (Array Int us_rep11)) (a__first Int) (a__last Int)
-  (b (Array Int us_rep11)) (b__first Int)
+(define-fun bool_eq14 ((a (Array Int us_rep10)) (a__first Int) (a__last Int)
+  (b (Array Int us_rep10)) (b__first Int)
   (b__last Int)) Bool (ite (and
                            (ite (<= a__first a__last)
                            (and (<= b__first b__last)
@@ -2501,137 +2415,140 @@
                            (=>
                            (and (<= a__first temp___idx_155)
                            (<= temp___idx_155 a__last))
-                           (= (bool_eq14 (select a temp___idx_155)
+                           (= (bool_eq13 (select a temp___idx_155)
                               (select b (+ (- b__first a__first) temp___idx_155))) true))))
                       true false))
 
 ;; bool_eq_rev
   (assert
-  (forall ((a (Array Int us_rep11)) (b (Array Int us_rep11)))
+  (forall ((a (Array Int us_rep10)) (b (Array Int us_rep10)))
   (forall ((a__first Int) (a__last Int) (b__first Int) (b__last Int))
-  (=> (= (bool_eq15 b b__first b__last a a__first a__last) true)
+  (=> (= (bool_eq14 b b__first b__last a a__first a__last) true)
   (and
   (ite (<= a__first a__last)
   (and (<= b__first b__last) (= (- a__last a__first) (- b__last b__first)))
   (< b__last b__first))
   (forall ((temp___idx_155 Int))
   (=> (and (<= a__first temp___idx_155) (<= temp___idx_155 a__last))
-  (= (bool_eq14 (select a temp___idx_155)
+  (= (bool_eq13 (select a temp___idx_155)
      (select b (+ (- b__first a__first) temp___idx_155))) true))))))))
 
-(declare-const dummy29 (Array Int us_rep11))
+(declare-const dummy26 (Array Int us_rep10))
 
-(declare-const value__size15 Int)
+(declare-const value__size14 Int)
 
-(declare-fun object__size15 ((Array Int us_rep11)) Int)
+(declare-fun object__size14 ((Array Int us_rep10)) Int)
 
 (declare-const value__component__size2 Int)
 
-(declare-fun object__component__size2 ((Array Int us_rep11)) Int)
+(declare-fun object__component__size2 ((Array Int us_rep10)) Int)
 
-(declare-const value__alignment15 Int)
+(declare-const value__alignment14 Int)
 
-(declare-fun object__alignment15 ((Array Int us_rep11)) Int)
+(declare-fun object__alignment14 ((Array Int us_rep10)) Int)
 
 ;; value__size_axiom
-  (assert (<= 0 value__size15))
+  (assert (<= 0 value__size14))
 
 ;; object__size_axiom
-  (assert (forall ((a (Array Int us_rep11))) (<= 0 (object__size15 a))))
+  (assert (forall ((a (Array Int us_rep10))) (<= 0 (object__size14 a))))
 
 ;; value__component__size_axiom
   (assert (<= 0 value__component__size2))
 
 ;; object__component__size_axiom
   (assert
-  (forall ((a (Array Int us_rep11))) (<= 0 (object__component__size2 a))))
+  (forall ((a (Array Int us_rep10))) (<= 0 (object__component__size2 a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment14))
+
+;; object__alignment_axiom
+  (assert (forall ((a (Array Int us_rep10))) (<= 0 (object__alignment14 a))))
+
+(declare-fun user_eq26 ((Array Int us_rep10) (Array Int us_rep10)) Bool)
+
+(declare-datatypes ()
+((us_split_fields18
+ (mk___split_fields9
+ (rec__algorithm__controller__robot us_rep9)(rec__algorithm__controller__laserscan (Array Int us_rep10))(rec__algorithm__controller__gapvec us_rep4)(rec__algorithm__controller__obsavoiddelta float)(rec__algorithm__controller__driveangle us_rep)))))
+(define-fun us_split_fields_robot__projection ((a us_split_fields18)) us_rep9
+  (rec__algorithm__controller__robot a))
+
+(define-fun us_split_fields_laserScan__projection ((a us_split_fields18)) (Array Int us_rep10)
+  (rec__algorithm__controller__laserscan a))
+
+(define-fun us_split_fields_gapVec__projection ((a us_split_fields18)) us_rep4
+  (rec__algorithm__controller__gapvec a))
+
+(define-fun us_split_fields_obsAvoidDelta__projection ((a us_split_fields18)) float
+  (rec__algorithm__controller__obsavoiddelta a))
+
+(define-fun us_split_fields_driveAngle__projection ((a us_split_fields18)) us_rep
+  (rec__algorithm__controller__driveangle a))
+
+(declare-datatypes ()
+((us_split_fields__ref9
+ (mk___split_fields__ref9 (us_split_fields__content9 us_split_fields18)))))
+(define-fun us_split_fields__ref___12__projection ((a us_split_fields__ref9)) us_split_fields18
+  (us_split_fields__content9 a))
+
+(declare-datatypes ()
+((us_rep11 (mk___rep9 (us_split_fields19 us_split_fields18)))))
+(define-fun us_rep___17__projection ((a us_rep11)) us_split_fields18
+  (us_split_fields19 a))
+
+(define-fun bool_eq15 ((a us_rep11)
+  (b us_rep11)) Bool (ite (and
+                          (and
+                          (and
+                          (and
+                          (= (bool_eq12
+                             (rec__algorithm__controller__robot
+                             (us_split_fields19 a))
+                             (rec__algorithm__controller__robot
+                             (us_split_fields19 b))) true)
+                          (= (bool_eq14
+                             (rec__algorithm__controller__laserscan
+                             (us_split_fields19 a)) 1 1000
+                             (rec__algorithm__controller__laserscan
+                             (us_split_fields19 b)) 1 1000) true))
+                          (= (bool_eq6
+                             (rec__algorithm__controller__gapvec
+                             (us_split_fields19 a))
+                             (rec__algorithm__controller__gapvec
+                             (us_split_fields19 b))) true))
+                          (= (to_rep2
+                             (rec__algorithm__controller__obsavoiddelta
+                             (us_split_fields19 a))) (to_rep2
+                                                     (rec__algorithm__controller__obsavoiddelta
+                                                     (us_split_fields19 b)))))
+                          (= (bool_eq2
+                             (rec__algorithm__controller__driveangle
+                             (us_split_fields19 a))
+                             (rec__algorithm__controller__driveangle
+                             (us_split_fields19 b))) true))
+                     true false))
+
+(declare-const value__size15 Int)
+
+(declare-fun object__size15 (us_rep11) Int)
+
+(declare-const value__alignment15 Int)
+
+(declare-fun object__alignment15 (us_rep11) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size15))
+
+;; object__size_axiom
+  (assert (forall ((a us_rep11)) (<= 0 (object__size15 a))))
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment15))
 
 ;; object__alignment_axiom
-  (assert (forall ((a (Array Int us_rep11))) (<= 0 (object__alignment15 a))))
-
-(declare-fun user_eq29 ((Array Int us_rep11) (Array Int us_rep11)) Bool)
-
-(declare-datatypes ()
-((us_split_fields20
- (mk___split_fields10
- (rec__algorithm__controller__robot us_rep10)(rec__algorithm__controller__laserscan (Array Int us_rep11))(rec__algorithm__controller__gapvec us_rep5)(rec__algorithm__controller__obsavoiddelta float)(rec__algorithm__controller__driveangle us_rep)))))
-(define-fun us_split_fields_robot__projection ((a us_split_fields20)) us_rep10
-  (rec__algorithm__controller__robot a))
-
-(define-fun us_split_fields_laserScan__projection ((a us_split_fields20)) (Array Int us_rep11)
-  (rec__algorithm__controller__laserscan a))
-
-(define-fun us_split_fields_gapVec__projection ((a us_split_fields20)) us_rep5
-  (rec__algorithm__controller__gapvec a))
-
-(define-fun us_split_fields_driveAngle__projection ((a us_split_fields20)) us_rep
-  (rec__algorithm__controller__driveangle a))
-
-(declare-datatypes ()
-((us_split_fields__ref10
- (mk___split_fields__ref10 (us_split_fields__content10 us_split_fields20)))))
-(define-fun us_split_fields__ref___12__projection ((a us_split_fields__ref10)) us_split_fields20
-  (us_split_fields__content10 a))
-
-(declare-datatypes ()
-((us_rep12 (mk___rep10 (us_split_fields21 us_split_fields20)))))
-(define-fun us_rep___17__projection ((a us_rep12)) us_split_fields20
-  (us_split_fields21 a))
-
-(define-fun bool_eq16 ((a us_rep12)
-  (b us_rep12)) Bool (ite (and
-                          (and
-                          (and
-                          (and
-                          (= (bool_eq13
-                             (rec__algorithm__controller__robot
-                             (us_split_fields21 a))
-                             (rec__algorithm__controller__robot
-                             (us_split_fields21 b))) true)
-                          (= (bool_eq15
-                             (rec__algorithm__controller__laserscan
-                             (us_split_fields21 a)) 1 1000
-                             (rec__algorithm__controller__laserscan
-                             (us_split_fields21 b)) 1 1000) true))
-                          (= (bool_eq7
-                             (rec__algorithm__controller__gapvec
-                             (us_split_fields21 a))
-                             (rec__algorithm__controller__gapvec
-                             (us_split_fields21 b))) true))
-                          (= (to_rep2
-                             (rec__algorithm__controller__obsavoiddelta
-                             (us_split_fields21 a))) (to_rep2
-                                                     (rec__algorithm__controller__obsavoiddelta
-                                                     (us_split_fields21 b)))))
-                          (= (bool_eq2
-                             (rec__algorithm__controller__driveangle
-                             (us_split_fields21 a))
-                             (rec__algorithm__controller__driveangle
-                             (us_split_fields21 b))) true))
-                     true false))
-
-(declare-const value__size16 Int)
-
-(declare-fun object__size16 (us_rep12) Int)
-
-(declare-const value__alignment16 Int)
-
-(declare-fun object__alignment16 (us_rep12) Int)
-
-;; value__size_axiom
-  (assert (<= 0 value__size16))
-
-;; object__size_axiom
-  (assert (forall ((a us_rep12)) (<= 0 (object__size16 a))))
-
-;; value__alignment_axiom
-  (assert (<= 0 value__alignment16))
-
-;; object__alignment_axiom
-  (assert (forall ((a us_rep12)) (<= 0 (object__alignment16 a))))
+  (assert (forall ((a us_rep11)) (<= 0 (object__alignment15 a))))
 
 (declare-const algorithm__controller__robot__first__bit Int)
 
@@ -2713,48 +2630,242 @@
 ;; algorithm__controller__driveangle__position_axiom
   (assert (<= 0 algorithm__controller__driveangle__position))
 
-(declare-fun user_eq30 (us_rep12 us_rep12) Bool)
+(declare-fun user_eq27 (us_rep11 us_rep11) Bool)
 
-(declare-const dummy30 us_rep12)
+(declare-const dummy27 us_rep11)
 
 (declare-datatypes ()
-((controller__ref (mk_controller__ref (controller__content us_rep12)))))
-(define-fun controller__ref___projection ((a controller__ref)) us_rep12
+((controller__ref (mk_controller__ref (controller__content us_rep11)))))
+(define-fun controller__ref___projection ((a controller__ref)) us_rep11
   (controller__content a))
+
+(declare-fun isrisinggapsafe (us_rep11 us_rep2) Bool)
+
+(declare-fun isrisinggapsafe__function_guard (Bool us_rep11 us_rep2) Bool)
+
+(declare-sort option1 0)
+
+(define-fun in_range12 ((x Int)) Bool (and (<= 0 x) (<= x 1)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE13 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check13 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE13 (us_image) Int)
+
+(declare-fun user_eq28 (option1 option1) Bool)
+
+(declare-const dummy28 option1)
+
+(declare-datatypes ()
+((option__ref1 (mk_option__ref1 (option__content1 option1)))))
+(define-fun option__ref___2__projection ((a option__ref1)) option1 (option__content1
+                                                                   a))
+
+(declare-fun to_rep11 (option1) Int)
+
+(declare-fun of_rep11 (Int) option1)
+
+;; inversion_axiom
+  (assert
+  (forall ((x option1))
+  (! (= (of_rep11 (to_rep11 x)) x) :pattern ((to_rep11 x)) )))
+
+;; range_axiom
+  (assert
+  (forall ((x option1)) (! (in_range12
+  (to_rep11 x)) :pattern ((to_rep11 x)) )))
+
+;; coerce_axiom
+  (assert
+  (forall ((x Int))
+  (! (=> (in_range12 x) (= (to_rep11 (of_rep11 x)) x)) :pattern ((to_rep11
+                                                                 (of_rep11 x))) )))
+
+(declare-datatypes ()
+((us_split_discrs4
+ (mk___split_discrs2 (rec__algorithm__valley_option__opt option1)))))
+(define-fun us_split_discrs___2__projection ((a us_split_discrs4)) option1
+  (rec__algorithm__valley_option__opt a))
+
+(declare-datatypes ()
+((us_split_discrs__ref2
+ (mk___split_discrs__ref2 (us_split_discrs__content2 us_split_discrs4)))))
+(define-fun us_split_discrs__ref___2__projection ((a us_split_discrs__ref2)) us_split_discrs4
+  (us_split_discrs__content2 a))
+
+(declare-datatypes ()
+((us_split_fields20
+ (mk___split_fields10 (rec__algorithm__valley_option__value us_rep3)))))
+(define-fun us_split_fields_value__projection ((a us_split_fields20)) us_rep3
+  (rec__algorithm__valley_option__value a))
+
+(declare-datatypes ()
+((us_split_fields__ref10
+ (mk___split_fields__ref10 (us_split_fields__content10 us_split_fields20)))))
+(define-fun us_split_fields__ref___8__projection ((a us_split_fields__ref10)) us_split_fields20
+  (us_split_fields__content10 a))
+
+(declare-datatypes ()
+((us_rep12
+ (mk___rep10
+ (us_split_discrs5 us_split_discrs4)(us_split_fields21 us_split_fields20)(attr__constrained1 Bool)))))
+(define-fun us_rep___10__projection ((a us_rep12)) us_split_discrs4 (us_split_discrs5
+                                                                    a))
+
+(define-fun us_rep___11__projection ((a us_rep12)) us_split_fields20
+  (us_split_fields21 a))
+
+(define-fun us_rep___12__projection ((a us_rep12)) Bool (attr__constrained1
+                                                        a))
+
+(define-fun algorithm__valley_option__value__pred ((a us_rep12)) Bool (=
+  (to_rep11 (rec__algorithm__valley_option__opt (us_split_discrs5 a))) 1))
+
+(define-fun bool_eq16 ((a us_rep12)
+  (b us_rep12)) Bool (ite (and
+                          (= (to_rep11
+                             (rec__algorithm__valley_option__opt
+                             (us_split_discrs5 a))) (to_rep11
+                                                    (rec__algorithm__valley_option__opt
+                                                    (us_split_discrs5 b))))
+                          (=> (algorithm__valley_option__value__pred a)
+                          (= (bool_eq5
+                             (rec__algorithm__valley_option__value
+                             (us_split_fields21 a))
+                             (rec__algorithm__valley_option__value
+                             (us_split_fields21 b))) true)))
+                     true false))
+
+(declare-const value__size16 Int)
+
+(declare-fun object__size16 (us_rep12) Int)
+
+(declare-const value__alignment16 Int)
+
+(declare-fun object__alignment16 (us_rep12) Int)
+
+;; value__size_axiom
+  (assert (<= 0 value__size16))
+
+;; object__size_axiom
+  (assert (forall ((a us_rep12)) (<= 0 (object__size16 a))))
+
+;; value__alignment_axiom
+  (assert (<= 0 value__alignment16))
+
+;; object__alignment_axiom
+  (assert (forall ((a us_rep12)) (<= 0 (object__alignment16 a))))
+
+(declare-const algorithm__valley_option__opt__first__bit Int)
+
+(declare-const algorithm__valley_option__opt__last__bit Int)
+
+(declare-const algorithm__valley_option__opt__position Int)
+
+;; algorithm__valley_option__opt__first__bit_axiom
+  (assert (<= 0 algorithm__valley_option__opt__first__bit))
+
+;; algorithm__valley_option__opt__last__bit_axiom
+  (assert
+  (< algorithm__valley_option__opt__first__bit algorithm__valley_option__opt__last__bit))
+
+;; algorithm__valley_option__opt__position_axiom
+  (assert (<= 0 algorithm__valley_option__opt__position))
+
+(declare-const algorithm__valley_option__value__first__bit Int)
+
+(declare-const algorithm__valley_option__value__last__bit Int)
+
+(declare-const algorithm__valley_option__value__position Int)
+
+;; algorithm__valley_option__value__first__bit_axiom
+  (assert (<= 0 algorithm__valley_option__value__first__bit))
+
+;; algorithm__valley_option__value__last__bit_axiom
+  (assert
+  (< algorithm__valley_option__value__first__bit algorithm__valley_option__value__last__bit))
+
+;; algorithm__valley_option__value__position_axiom
+  (assert (<= 0 algorithm__valley_option__value__position))
+
+(declare-fun user_eq29 (us_rep12 us_rep12) Bool)
+
+(declare-const dummy29 us_rep12)
+
+(declare-datatypes ()
+((valley_option__ref
+ (mk_valley_option__ref (valley_option__content us_rep12)))))
+(define-fun valley_option__ref___projection ((a valley_option__ref)) us_rep12
+  (valley_option__content a))
+
+(declare-sort gap_id 0)
+
+(declare-fun gap_idqtint (gap_id) Int)
+
+;; gap_id'axiom
+  (assert
+  (forall ((i gap_id))
+  (and (<= 1 (gap_idqtint i)) (<= (gap_idqtint i) 1000))))
+
+(define-fun in_range13 ((x Int)) Bool (and (<= 1 x) (<= x 1000)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE14 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check14 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE14 (us_image) Int)
+
+(declare-fun user_eq30 (gap_id gap_id) Bool)
+
+(declare-const dummy30 gap_id)
+
+(declare-datatypes ()
+((gap_id__ref (mk_gap_id__ref (gap_id__content gap_id)))))
+(define-fun gap_id__ref___projection ((a gap_id__ref)) gap_id (gap_id__content
+                                                              a))
+
+(define-fun dynamic_invariant3 ((temp___expr_441 Int)
+  (temp___is_init_437 Bool) (temp___skip_constant_438 Bool)
+  (temp___do_toplevel_439 Bool)
+  (temp___do_typ_inv_440 Bool)) Bool (=>
+                                     (or (= temp___is_init_437 true)
+                                     (<= 1 1000)) (in_range13
+                                     temp___expr_441)))
+
+(declare-fun is_empty (us_rep4) Bool)
+
+(declare-fun is_empty__function_guard (Bool us_rep4) Bool)
 
 (declare-const null_angle us_rep)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-fun is_empty (us_rep5) Bool)
-
-(declare-fun is_empty__function_guard (Bool us_rep5) Bool)
-
 (define-fun in_range14 ((rec__robot_iface__speed_option__opt1 Int)
-  (a us_rep9)) Bool (= rec__robot_iface__speed_option__opt1 (to_rep11
+  (a us_rep8)) Bool (= rec__robot_iface__speed_option__opt1 (to_rep10
                                                             (rec__robot_iface__speed_option__opt
-                                                            (us_split_discrs5
+                                                            (us_split_discrs3
                                                             a)))))
 
 (declare-const value__size17 Int)
 
-(declare-fun object__size17 (us_rep9) Int)
+(declare-fun object__size17 (us_rep8) Int)
 
 (declare-const value__alignment17 Int)
 
-(declare-fun object__alignment17 (us_rep9) Int)
+(declare-fun object__alignment17 (us_rep8) Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size17))
 
 ;; object__size_axiom
-  (assert (forall ((a us_rep9)) (<= 0 (object__size17 a))))
+  (assert (forall ((a us_rep8)) (<= 0 (object__size17 a))))
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment17))
 
 ;; object__alignment_axiom
-  (assert (forall ((a us_rep9)) (<= 0 (object__alignment17 a))))
+  (assert (forall ((a us_rep8)) (<= 0 (object__alignment17 a))))
 
 (declare-const robot_iface__speed_option__opt__first__bit1 Int)
 
@@ -2804,119 +2915,120 @@
 ;; robot_iface__speed_option__angle__position_axiom
   (assert (<= 0 robot_iface__speed_option__angle__position1))
 
-(declare-fun user_eq31 (us_rep9 us_rep9) Bool)
+(declare-fun user_eq31 (us_rep8 us_rep8) Bool)
 
-(declare-const dummy31 us_rep9)
+(declare-const dummy31 us_rep8)
 
 (declare-datatypes ()
-((t252s__ref (mk_t252s__ref (t252s__content us_rep9)))))
-(define-fun t252s__ref___projection ((a t252s__ref)) us_rep9 (t252s__content
+((t252s__ref (mk_t252s__ref (t252s__content us_rep8)))))
+(define-fun t252s__ref___projection ((a t252s__ref)) us_rep8 (t252s__content
                                                              a))
 
-(declare-fun temp___680 (Float32) (Array Int nonnegative_float))
+(declare-fun temp_____aggregate_def_680 (Float32) (Array Int nonnegative_float))
 
-(declare-fun temp___684 (us_rep11) (Array Int us_rep11))
+(declare-fun temp_____aggregate_def_684 (us_rep10) (Array Int us_rep10))
 
-(define-fun dynamic_invariant4 ((temp___expr_673 us_rep12)
+(define-fun dynamic_invariant4 ((temp___expr_673 us_rep11)
   (temp___is_init_669 Bool) (temp___skip_constant_670 Bool)
   (temp___do_toplevel_671 Bool)
   (temp___do_typ_inv_672 Bool)) Bool (and
-                                     (= (attr__constrained1
+                                     (= (attr__constrained
                                         (rec__robot_iface__proxy__speed
-                                        (us_split_fields17
+                                        (us_split_fields15
                                         (rec__algorithm__controller__robot
-                                        (us_split_fields21 temp___expr_673))))) false)
-                                     (in_range9 1000
+                                        (us_split_fields19 temp___expr_673))))) false)
+                                     (in_range11 1000
                                      (rec__algorithm__controller__gapvec
-                                     (us_split_fields21 temp___expr_673)))))
+                                     (us_split_fields19 temp___expr_673)))))
 
-(define-fun default_initial_assumption1 ((temp___expr_678 us_rep12)
+(declare-const rliteral natural)
+
+;; rliteral_axiom
+  (assert (= (naturalqtint rliteral) 0))
+
+(define-fun default_initial_assumption1 ((temp___expr_678 us_rep11)
   (temp___skip_top_level_679 Bool)) Bool (and
                                          (and
                                          (and
                                          (and
                                          (= (rec__algorithm__controller__robot
-                                            (us_split_fields21
-                                            temp___expr_678)) (mk___rep8
-                                                              (mk___split_fields8
-                                                              (of_rep8
+                                            (us_split_fields19
+                                            temp___expr_678)) (mk___rep7
+                                                              (mk___split_fields7
+                                                              (of_rep7
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (of_rep7
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (of_rep7
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (of_rep7
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (of_rep7
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep8
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep8
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep8
+                                                              (of_rep2
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep8
+                                                              (of_rep2
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (of_rep2
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              rliteral
+                                                              (of_rep7
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (of_rep7
+                                                              (fp #b0 #b00000000 #b00000000000000000000000))
+                                                              (temp_____aggregate_def_680
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep9
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (of_rep9
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep2
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep2
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep2
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep7 0)
-                                                              (of_rep8
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep8
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (temp___680
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep10
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep10
-                                                              (fp #b0 #b00000000 #b00000000000000000000000))
-                                                              (of_rep10
+                                                              (of_rep9
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               (let ((usq_
-                                                              (mk___rep7
-                                                              (mk___split_discrs2
-                                                              (of_rep11 0))
-                                                              (mk___split_fields7
+                                                              (mk___rep6
+                                                              (mk___split_discrs1
+                                                              (of_rep10 0))
+                                                              (mk___split_fields6
                                                               dummy4
                                                               dummy4) true)))
-                                                              (mk___rep7
-                                                              (us_split_discrs5
+                                                              (mk___rep6
+                                                              (us_split_discrs3
                                                               usq_)
-                                                              (us_split_fields15
+                                                              (us_split_fields13
                                                               usq_) false))
                                                               (distinct 0 0))))
                                          (= (rec__algorithm__controller__laserscan
-                                            (us_split_fields21
-                                            temp___expr_678)) (temp___684
-                                                              (mk___rep9
-                                                              (mk___split_fields9
-                                                              (of_rep9
+                                            (us_split_fields19
+                                            temp___expr_678)) (temp_____aggregate_def_684
+                                                              (mk___rep8
+                                                              (mk___split_fields8
+                                                              (of_rep8
                                                               (fp #b0 #b00000000 #b00000000000000000000000))
                                                               null_angle)))))
                                          (and
                                          (= (to_rep5
                                             (rec__algorithm__gap_vectors__list__capacity
-                                            (us_split_discrs3
+                                            (us_split_discrs1
                                             (rec__algorithm__controller__gapvec
-                                            (us_split_fields21
+                                            (us_split_fields19
                                             temp___expr_678))))) 1000)
                                          (= (is_empty
                                             (rec__algorithm__controller__gapvec
-                                            (us_split_fields21
+                                            (us_split_fields19
                                             temp___expr_678))) true)))
                                          (= (to_rep2
                                             (rec__algorithm__controller__obsavoiddelta
-                                            (us_split_fields21
+                                            (us_split_fields19
                                             temp___expr_678))) (fp #b0 #b00000000 #b00000000000000000000000)))
                                          (= (rec__algorithm__controller__driveangle
-                                            (us_split_fields21
+                                            (us_split_fields19
                                             temp___expr_678)) null_angle)))
 
-(declare-fun isrisinggapsafe (us_rep12 us_rep2) Bool)
-
-(declare-fun isrisinggapsafe__function_guard (Bool us_rep12 us_rep2) Bool)
-
-(declare-const this us_rep12)
+(declare-const this us_rep11)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
@@ -2931,8 +3043,8 @@
 (declare-datatypes ()
 ((us_split_discrs6
  (mk___split_discrs3
- (rec__algorithm__findbestvalley__gap_id_pair__opt option)))))
-(define-fun us_split_discrs___4__projection ((a us_split_discrs6)) option
+ (rec__algorithm__findbestvalley__gap_id_pair__opt option1)))))
+(define-fun us_split_discrs___4__projection ((a us_split_discrs6)) option1
   (rec__algorithm__findbestvalley__gap_id_pair__opt a))
 
 (declare-datatypes ()
@@ -2944,11 +3056,11 @@
 (declare-datatypes ()
 ((us_split_fields22
  (mk___split_fields11
- (rec__algorithm__findbestvalley__gap_id_pair__rising us_rep6)(rec__algorithm__findbestvalley__gap_id_pair__other us_rep6)))))
-(define-fun us_split_fields_rising__projection ((a us_split_fields22)) us_rep6
+ (rec__algorithm__findbestvalley__gap_id_pair__rising us_rep5)(rec__algorithm__findbestvalley__gap_id_pair__other us_rep5)))))
+(define-fun us_split_fields_rising__projection ((a us_split_fields22)) us_rep5
   (rec__algorithm__findbestvalley__gap_id_pair__rising a))
 
-(define-fun us_split_fields_other__projection ((a us_split_fields22)) us_rep6
+(define-fun us_split_fields_other__projection ((a us_split_fields22)) us_rep5
   (rec__algorithm__findbestvalley__gap_id_pair__other a))
 
 (declare-datatypes ()
@@ -2971,25 +3083,25 @@
                                                         a))
 
 (define-fun algorithm__findbestvalley__gap_id_pair__rising__pred ((a us_rep13)) Bool (=
-  (to_rep6
+  (to_rep11
   (rec__algorithm__findbestvalley__gap_id_pair__opt (us_split_discrs7 a))) 1))
 
 (define-fun algorithm__findbestvalley__gap_id_pair__other__pred ((a us_rep13)) Bool (=
-  (to_rep6
+  (to_rep11
   (rec__algorithm__findbestvalley__gap_id_pair__opt (us_split_discrs7 a))) 1))
 
 (define-fun bool_eq17 ((a us_rep13)
   (b us_rep13)) Bool (ite (and
-                          (= (to_rep6
+                          (= (to_rep11
                              (rec__algorithm__findbestvalley__gap_id_pair__opt
-                             (us_split_discrs7 a))) (to_rep6
+                             (us_split_discrs7 a))) (to_rep11
                                                     (rec__algorithm__findbestvalley__gap_id_pair__opt
                                                     (us_split_discrs7 b))))
                           (and
                           (=>
                           (algorithm__findbestvalley__gap_id_pair__rising__pred
                           a)
-                          (= (bool_eq8
+                          (= (bool_eq7
                              (rec__algorithm__findbestvalley__gap_id_pair__rising
                              (us_split_fields23 a))
                              (rec__algorithm__findbestvalley__gap_id_pair__rising
@@ -2997,7 +3109,7 @@
                           (=>
                           (algorithm__findbestvalley__gap_id_pair__other__pred
                           a)
-                          (= (bool_eq8
+                          (= (bool_eq7
                              (rec__algorithm__findbestvalley__gap_id_pair__other
                              (us_split_fields23 a))
                              (rec__algorithm__findbestvalley__gap_id_pair__other
@@ -3087,7 +3199,7 @@
                                             temp___expr_739) false)
                                          (and
                                          (and
-                                         (= (to_rep6
+                                         (= (to_rep11
                                             (rec__algorithm__findbestvalley__gap_id_pair__opt
                                             (us_split_discrs7
                                             temp___expr_739))) 0)
@@ -3096,7 +3208,7 @@
                                          temp___expr_739)
                                          (= (to_rep5
                                             (rec__algorithm__gap_vectors__cursor__node
-                                            (us_split_fields13
+                                            (us_split_fields11
                                             (rec__algorithm__findbestvalley__gap_id_pair__rising
                                             (us_split_fields23
                                             temp___expr_739))))) 0)))
@@ -3105,14 +3217,14 @@
                                          temp___expr_739)
                                          (= (to_rep5
                                             (rec__algorithm__gap_vectors__cursor__node
-                                            (us_split_fields13
+                                            (us_split_fields11
                                             (rec__algorithm__findbestvalley__gap_id_pair__other
                                             (us_split_fields23
                                             temp___expr_739))))) 0)))))
 
 (define-fun in_range15 ((rec__algorithm__findbestvalley__gap_id_pair__opt1 Int)
   (a us_rep13)) Bool (= rec__algorithm__findbestvalley__gap_id_pair__opt1
-  (to_rep6
+  (to_rep11
   (rec__algorithm__findbestvalley__gap_id_pair__opt (us_split_discrs7 a)))))
 
 (declare-const value__size19 Int)
@@ -3196,13 +3308,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS7 Int)
 
-(declare-const il us_rep6)
+(declare-const il us_rep5)
 
 (declare-const attr__ATTRIBUTE_ADDRESS8 Int)
 
 (define-fun in_range16 ((rec__algorithm__findbestvalley__gap_id_pair__opt1 Int)
   (a us_rep13)) Bool (= rec__algorithm__findbestvalley__gap_id_pair__opt1
-  (to_rep6
+  (to_rep11
   (rec__algorithm__findbestvalley__gap_id_pair__opt (us_split_discrs7 a)))))
 
 (declare-const value__size20 Int)
@@ -3286,7 +3398,7 @@
 
 (define-fun in_range17 ((rec__algorithm__findbestvalley__gap_id_pair__opt1 Int)
   (a us_rep13)) Bool (= rec__algorithm__findbestvalley__gap_id_pair__opt1
-  (to_rep6
+  (to_rep11
   (rec__algorithm__findbestvalley__gap_id_pair__opt (us_split_discrs7 a)))))
 
 (declare-const value__size21 Int)
@@ -3366,7 +3478,7 @@
 
 (define-fun in_range18 ((rec__algorithm__findbestvalley__gap_id_pair__opt1 Int)
   (a us_rep13)) Bool (= rec__algorithm__findbestvalley__gap_id_pair__opt1
-  (to_rep6
+  (to_rep11
   (rec__algorithm__findbestvalley__gap_id_pair__opt (us_split_discrs7 a)))))
 
 (declare-const value__size22 Int)
@@ -3446,7 +3558,7 @@
 
 (define-fun in_range19 ((rec__algorithm__findbestvalley__gap_id_pair__opt1 Int)
   (a us_rep13)) Bool (= rec__algorithm__findbestvalley__gap_id_pair__opt1
-  (to_rep6
+  (to_rep11
   (rec__algorithm__findbestvalley__gap_id_pair__opt (us_split_discrs7 a)))))
 
 (declare-const value__size23 Int)
@@ -3525,30 +3637,30 @@
 (define-fun t48b__ref___projection ((a t48b__ref)) us_rep13 (t48b__content a))
 
 (define-fun in_range20 ((rec__algorithm__valley_option__opt1 Int)
-  (a us_rep4)) Bool (= rec__algorithm__valley_option__opt1 (to_rep6
-                                                           (rec__algorithm__valley_option__opt
-                                                           (us_split_discrs1
-                                                           a)))))
+  (a us_rep12)) Bool (= rec__algorithm__valley_option__opt1 (to_rep11
+                                                            (rec__algorithm__valley_option__opt
+                                                            (us_split_discrs5
+                                                            a)))))
 
 (declare-const value__size24 Int)
 
-(declare-fun object__size24 (us_rep4) Int)
+(declare-fun object__size24 (us_rep12) Int)
 
 (declare-const value__alignment24 Int)
 
-(declare-fun object__alignment24 (us_rep4) Int)
+(declare-fun object__alignment24 (us_rep12) Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size24))
 
 ;; object__size_axiom
-  (assert (forall ((a us_rep4)) (<= 0 (object__size24 a))))
+  (assert (forall ((a us_rep12)) (<= 0 (object__size24 a))))
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment24))
 
 ;; object__alignment_axiom
-  (assert (forall ((a us_rep4)) (<= 0 (object__alignment24 a))))
+  (assert (forall ((a us_rep12)) (<= 0 (object__alignment24 a))))
 
 (declare-const algorithm__valley_option__opt__first__bit1 Int)
 
@@ -3582,38 +3694,38 @@
 ;; algorithm__valley_option__value__position_axiom
   (assert (<= 0 algorithm__valley_option__value__position1))
 
-(declare-fun user_eq38 (us_rep4 us_rep4) Bool)
+(declare-fun user_eq38 (us_rep12 us_rep12) Bool)
 
-(declare-const dummy38 us_rep4)
+(declare-const dummy38 us_rep12)
 
-(declare-datatypes () ((t61b__ref (mk_t61b__ref (t61b__content us_rep4)))))
-(define-fun t61b__ref___projection ((a t61b__ref)) us_rep4 (t61b__content a))
+(declare-datatypes () ((t61b__ref (mk_t61b__ref (t61b__content us_rep12)))))
+(define-fun t61b__ref___projection ((a t61b__ref)) us_rep12 (t61b__content a))
 
 (define-fun in_range21 ((rec__algorithm__valley_option__opt1 Int)
-  (a us_rep4)) Bool (= rec__algorithm__valley_option__opt1 (to_rep6
-                                                           (rec__algorithm__valley_option__opt
-                                                           (us_split_discrs1
-                                                           a)))))
+  (a us_rep12)) Bool (= rec__algorithm__valley_option__opt1 (to_rep11
+                                                            (rec__algorithm__valley_option__opt
+                                                            (us_split_discrs5
+                                                            a)))))
 
 (declare-const value__size25 Int)
 
-(declare-fun object__size25 (us_rep4) Int)
+(declare-fun object__size25 (us_rep12) Int)
 
 (declare-const value__alignment25 Int)
 
-(declare-fun object__alignment25 (us_rep4) Int)
+(declare-fun object__alignment25 (us_rep12) Int)
 
 ;; value__size_axiom
   (assert (<= 0 value__size25))
 
 ;; object__size_axiom
-  (assert (forall ((a us_rep4)) (<= 0 (object__size25 a))))
+  (assert (forall ((a us_rep12)) (<= 0 (object__size25 a))))
 
 ;; value__alignment_axiom
   (assert (<= 0 value__alignment25))
 
 ;; object__alignment_axiom
-  (assert (forall ((a us_rep4)) (<= 0 (object__alignment25 a))))
+  (assert (forall ((a us_rep12)) (<= 0 (object__alignment25 a))))
 
 (declare-const algorithm__valley_option__opt__first__bit2 Int)
 
@@ -3647,12 +3759,12 @@
 ;; algorithm__valley_option__value__position_axiom
   (assert (<= 0 algorithm__valley_option__value__position2))
 
-(declare-fun user_eq39 (us_rep4 us_rep4) Bool)
+(declare-fun user_eq39 (us_rep12 us_rep12) Bool)
 
-(declare-const dummy39 us_rep4)
+(declare-const dummy39 us_rep12)
 
-(declare-datatypes () ((t63b__ref (mk_t63b__ref (t63b__content us_rep4)))))
-(define-fun t63b__ref___projection ((a t63b__ref)) us_rep4 (t63b__content a))
+(declare-datatypes () ((t63b__ref (mk_t63b__ref (t63b__content us_rep12)))))
+(define-fun t63b__ref___projection ((a t63b__ref)) us_rep12 (t63b__content a))
 
 (declare-fun temp___String_Literal_908 (tuple0) (Array Int character))
 
@@ -4304,7 +4416,7 @@
   (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)
   (temp___do_typ_inv_38 Bool)) Bool (=>
                                     (or (= temp___is_init_35 true)
-                                    (<= 0 2147483647)) (in_range10
+                                    (<= 0 2147483647)) (in_range7
                                     temp___expr_39)))
 
 (define-fun dynamic_invariant6 ((temp___expr_46 Int) (temp___is_init_42 Bool)
@@ -4332,29 +4444,29 @@
   (temp___do_toplevel_412 Bool)
   (temp___do_typ_inv_413 Bool)) Bool (=>
                                      (or (= temp___is_init_410 true)
-                                     (<= 0 1)) (in_range7 temp___expr_414)))
+                                     (<= 0 1)) (in_range12 temp___expr_414)))
 
-(define-fun default_initial_assumption3 ((temp___expr_423 us_rep4)
+(define-fun default_initial_assumption3 ((temp___expr_423 us_rep12)
   (temp___skip_top_level_424 Bool)) Bool (and
-                                         (= (attr__constrained
+                                         (= (attr__constrained1
                                             temp___expr_423) false)
-                                         (= (to_rep6
+                                         (= (to_rep11
                                             (rec__algorithm__valley_option__opt
-                                            (us_split_discrs1
+                                            (us_split_discrs5
                                             temp___expr_423))) 0)))
 
-(define-fun dynamic_invariant10 ((temp___expr_640 us_rep5)
+(define-fun dynamic_invariant10 ((temp___expr_640 us_rep4)
   (temp___is_init_636 Bool) (temp___skip_constant_637 Bool)
   (temp___do_toplevel_638 Bool)
   (temp___do_typ_inv_639 Bool)) Bool (=>
                                      (not (= temp___skip_constant_637 true))
-                                     (in_range9 1000 temp___expr_640)))
+                                     (in_range11 1000 temp___expr_640)))
 
-(define-fun default_initial_assumption4 ((temp___expr_642 us_rep5)
+(define-fun default_initial_assumption4 ((temp___expr_642 us_rep4)
   (temp___skip_top_level_643 Bool)) Bool (and
                                          (= (to_rep5
                                             (rec__algorithm__gap_vectors__list__capacity
-                                            (us_split_discrs3
+                                            (us_split_discrs1
                                             temp___expr_642))) 1000)
                                          (=>
                                          (not
@@ -4363,44 +4475,44 @@
 
 ;; def_axiom
   (assert
-  (forall ((temp___686 us_rep11))
+  (forall ((temp___686 us_rep10))
   (forall ((temp___687 Int))
-  (= (select (temp___684 temp___686) temp___687) temp___686))))
+  (= (select (temp_____aggregate_def_684 temp___686) temp___687) temp___686))))
 
 (define-fun dynamic_invariant11 ((temp___expr_254 Int)
   (temp___is_init_250 Bool) (temp___skip_constant_251 Bool)
   (temp___do_toplevel_252 Bool)
   (temp___do_typ_inv_253 Bool)) Bool (=>
                                      (or (= temp___is_init_250 true)
-                                     (<= 0 1)) (in_range13 temp___expr_254)))
+                                     (<= 0 1)) (in_range10 temp___expr_254)))
 
-(define-fun default_initial_assumption5 ((temp___expr_263 us_rep9)
+(define-fun default_initial_assumption5 ((temp___expr_263 us_rep8)
   (temp___skip_top_level_264 Bool)) Bool (and
-                                         (= (attr__constrained1
+                                         (= (attr__constrained
                                             temp___expr_263) false)
-                                         (= (to_rep11
+                                         (= (to_rep10
                                             (rec__robot_iface__speed_option__opt
-                                            (us_split_discrs5
+                                            (us_split_discrs3
                                             temp___expr_263))) 0)))
 
-(define-fun dynamic_invariant12 ((temp___expr_272 us_rep10)
+(define-fun dynamic_invariant12 ((temp___expr_272 us_rep9)
   (temp___is_init_268 Bool) (temp___skip_constant_269 Bool)
   (temp___do_toplevel_270 Bool)
-  (temp___do_typ_inv_271 Bool)) Bool (= (attr__constrained1
+  (temp___do_typ_inv_271 Bool)) Bool (= (attr__constrained
                                         (rec__robot_iface__proxy__speed
-                                        (us_split_fields17 temp___expr_272))) false))
+                                        (us_split_fields15 temp___expr_272))) false))
 
-(define-fun default_initial_assumption6 ((temp___expr_275 us_rep10)
+(define-fun default_initial_assumption6 ((temp___expr_275 us_rep9)
   (temp___skip_top_level_276 Bool)) Bool (and
-                                         (= (attr__constrained1
+                                         (= (attr__constrained
                                             (rec__robot_iface__proxy__speed
-                                            (us_split_fields17
+                                            (us_split_fields15
                                             temp___expr_275))) false)
-                                         (= (to_rep11
+                                         (= (to_rep10
                                             (rec__robot_iface__speed_option__opt
-                                            (us_split_discrs5
+                                            (us_split_discrs3
                                             (rec__robot_iface__proxy__speed
-                                            (us_split_fields17
+                                            (us_split_fields15
                                             temp___expr_275))))) 0)))
 
 (define-fun dynamic_invariant13 ((temp___expr_163 Float32)
@@ -4409,7 +4521,7 @@
   (temp___do_typ_inv_162 Bool)) Bool (=>
                                      (or (= temp___is_init_159 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range11 temp___expr_163)))
+                                     (in_range8 temp___expr_163)))
 
 (define-fun dynamic_invariant14 ((temp___expr_170 Float32)
   (temp___is_init_166 Bool) (temp___skip_constant_167 Bool)
@@ -4417,7 +4529,7 @@
   (temp___do_typ_inv_169 Bool)) Bool (=>
                                      (or (= temp___is_init_166 true)
                                      (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                     (in_range12 temp___expr_170)))
+                                     (in_range9 temp___expr_170)))
 
 (define-fun dynamic_invariant15 ((temp___expr_184 Float32)
   (temp___is_init_180 Bool) (temp___skip_constant_181 Bool)
@@ -4456,19 +4568,24 @@
                                      (<= (- 1) 1)) (in_range5
                                      temp___expr_323)))
 
+(declare-const rliteral1 count_type)
+
+;; rliteral_axiom
+  (assert (= (count_typeqtint rliteral1) 0))
+
 ;; no_element__def_axiom
-  (assert (= no_element (mk___rep6 (mk___split_fields6 (of_rep5 0)))))
+  (assert (= no_element (mk___rep5 (mk___split_fields5 rliteral1))))
 
-(declare-fun length2 (us_rep8) Int)
+(declare-fun length2 (us_rep7) Int)
 
-(declare-fun length__function_guard1 (Int us_rep8) Bool)
+(declare-fun length__function_guard1 (Int us_rep7) Bool)
 
-(define-fun last3 ((container us_rep8)) Int (+ 0 (length2 container)))
+(define-fun last3 ((container us_rep7)) Int (+ 0 (length2 container)))
 
-(declare-fun last__function_guard1 (Int us_rep8) Bool)
+(declare-fun last__function_guard1 (Int us_rep7) Bool)
 
-(define-fun oeq1 ((left us_rep8)
-  (right us_rep8)) Bool (and (= (length2 left) (length2 right)) (ite
+(define-fun oeq1 ((left us_rep7)
+  (right us_rep7)) Bool (and (= (length2 left) (length2 right)) (ite
                                                                 (forall
                                                                 ((n Int))
                                                                 (=>
@@ -4482,14 +4599,14 @@
                                                                    n)) true)))
                                                                 true false)))
 
-(declare-fun oeq__function_guard1 (Bool us_rep8 us_rep8) Bool)
+(declare-fun oeq__function_guard1 (Bool us_rep7 us_rep7) Bool)
 
 ;; user_eq__def_axiom
   (assert
-  (forall ((a us_rep8) (b us_rep8))
-  (! (= (user_eq18 a b) (oeq1 a b)) :pattern ((user_eq18 a b)) )))
+  (forall ((a us_rep7) (b us_rep7))
+  (! (= (user_eq15 a b) (oeq1 a b)) :pattern ((user_eq15 a b)) )))
 
-(define-fun default_initial_assumption7 ((temp___expr_507 us_rep8)
+(define-fun default_initial_assumption7 ((temp___expr_507 us_rep7)
   (temp___skip_top_level_508 Bool)) Bool (=>
                                          (not
                                          (= temp___skip_top_level_508 true))
@@ -4497,19 +4614,19 @@
 
 ;; model____post_axiom
   (assert
-  (forall ((container us_rep5))
+  (forall ((container us_rep4))
   (! (= (length2 (model__ container)) (length1 container)) :pattern (
   (model__ container)) )))
 
-(declare-fun length3 (us_rep7) Int)
+(declare-fun length3 (us_rep6) Int)
 
-(declare-fun length__function_guard2 (Int us_rep7) Bool)
+(declare-fun length__function_guard2 (Int us_rep6) Bool)
 
-(declare-fun is_empty1 (us_rep7) Bool)
+(declare-fun is_empty1 (us_rep6) Bool)
 
-(declare-fun is_empty__function_guard1 (Bool us_rep7) Bool)
+(declare-fun is_empty__function_guard1 (Bool us_rep6) Bool)
 
-(define-fun default_initial_assumption8 ((temp___expr_529 us_rep7)
+(define-fun default_initial_assumption8 ((temp___expr_529 us_rep6)
   (temp___skip_top_level_530 Bool)) Bool (=>
                                          (not
                                          (= temp___skip_top_level_530 true))
@@ -4517,33 +4634,41 @@
                                          (= (is_empty1 temp___expr_529) true)
                                          (= (length3 temp___expr_529) 0))))
 
-(define-fun default_initial_assumption9 ((temp___expr_515 us_rep6)
+(define-fun default_initial_assumption9 ((temp___expr_515 us_rep5)
   (temp___skip_top_level_516 Bool)) Bool (= (to_rep5
                                             (rec__algorithm__gap_vectors__cursor__node
-                                            (us_split_fields13
+                                            (us_split_fields11
                                             temp___expr_515))) 0))
 
 ;; positions__post_axiom
   (assert
-  (forall ((container us_rep5))
+  (forall ((container us_rep4))
   (! (let ((result (positions container)))
      (and (not (= (has_key result no_element) true))
-     (forall ((i us_rep6))
+     (forall ((i us_rep5))
      (=> (= (has_key result i) true)
      (and
      (and (<= 1 (get1 result i)) (<= (get1 result i) (length1 container)))
-     (forall ((j us_rep6))
+     (forall ((j us_rep5))
      (=> (= (has_key result j) true)
-     (=> (= (get1 result i) (get1 result j)) (= (bool_eq8 i j) true))))))))) :pattern (
+     (=> (= (get1 result i) (get1 result j)) (= (bool_eq7 i j) true))))))))) :pattern (
   (positions container)) )))
 
 ;; is_empty__post_axiom
   (assert
-  (forall ((container us_rep5))
+  (forall ((container us_rep4))
   (! (= (= (is_empty container) true) (= (length1 container) 0)) :pattern (
   (is_empty container)) )))
 
 (declare-sort extended_index 0)
+
+(declare-fun extended_indexqtint (extended_index) Int)
+
+;; extended_index'axiom
+  (assert
+  (forall ((i extended_index))
+  (and (<= 0 (extended_indexqtint i))
+  (<= (extended_indexqtint i) 2147483647))))
 
 (define-fun in_range22 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -4573,9 +4698,9 @@
 
 ;; length__post_axiom
   (assert
-  (forall ((container us_rep8))
+  (forall ((container us_rep7))
   (! (let ((result (length2 container)))
-     (and (<= (+ 0 result) 2147483647) (dynamic_invariant3 result true false
+     (and (<= (+ 0 result) 2147483647) (dynamic_invariant2 result true false
      true true))) :pattern ((length2 container)) )))
 
 ;; get__post_axiom
@@ -4583,15 +4708,30 @@
 
 ;; has_key__post_axiom
   (assert
-  (forall ((container us_rep7))
-  (forall ((key us_rep6))
+  (forall ((container us_rep6))
+  (forall ((key us_rep5))
   (! (=> (= (distinct 0 0) true)
      (=>
-     (exists ((k us_rep6))
-     (and (= (has_key container k) true) (= (bool_eq8 k key) true)))
+     (exists ((k us_rep5))
+     (and (= (has_key container k) true) (= (bool_eq7 k key) true)))
      (= (has_key container key) true))) :pattern ((has_key container key)) ))))
 
+(declare-fun witness (us_rep6 us_rep5) Int)
+
+(declare-fun witness__function_guard (Int us_rep6 us_rep5) Bool)
+
+(declare-fun w_get (us_rep6 Int) Int)
+
+(declare-fun w_get__function_guard (Int us_rep6 Int) Bool)
+
 (declare-sort element_type 0)
+
+(declare-fun element_typeqtint (element_type) Int)
+
+;; element_type'axiom
+  (assert
+  (forall ((i element_type))
+  (and (<= 1 (element_typeqtint i)) (<= (element_typeqtint i) 2147483647))))
 
 (define-fun in_range23 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
@@ -4619,26 +4759,18 @@
                                      (<= 1 2147483647)) (in_range23
                                      temp___expr_521)))
 
-(declare-fun witness (us_rep7 us_rep6) Int)
-
-(declare-fun witness__function_guard (Int us_rep7 us_rep6) Bool)
-
-(declare-fun w_get (us_rep7 Int) Int)
-
-(declare-fun w_get__function_guard (Int us_rep7 Int) Bool)
-
 ;; get__post_axiom
   (assert
-  (forall ((container us_rep7))
-  (forall ((key us_rep6))
+  (forall ((container us_rep6))
+  (forall ((key us_rep5))
   (! (=> (= (has_key container key) true)
      (let ((result (get1 container key)))
      (and
      (=> (= (distinct 0 0) true)
      (and (= result (w_get container (witness container key)))
-     (forall ((k us_rep6))
+     (forall ((k us_rep5))
      (=> (= (has_key container k) true)
-     (= (= (bool_eq8 k key) true)
+     (= (= (bool_eq7 k key) true)
      (= (witness container key) (witness container k)))))))
      (dynamic_invariant19 result true false true true)))) :pattern ((get1
                                                                     container
@@ -4646,38 +4778,38 @@
 
 ;; length__post_axiom
   (assert
-  (forall ((container us_rep7)) (! (dynamic_invariant3 (length3 container)
+  (forall ((container us_rep6)) (! (dynamic_invariant2 (length3 container)
   true false true true) :pattern ((length3 container)) )))
 
 ;; is_empty__post_axiom
   (assert
-  (forall ((container us_rep7))
+  (forall ((container us_rep6))
   (! (= (= (is_empty1 container) true)
-     (forall ((key us_rep6)) (not (= (has_key container key) true)))) :pattern (
+     (forall ((key us_rep5)) (not (= (has_key container key) true)))) :pattern (
   (is_empty1 container)) )))
 
-(declare-fun has_witness (us_rep7 Int) Bool)
+(declare-fun has_witness (us_rep6 Int) Bool)
 
-(declare-fun has_witness__function_guard (Bool us_rep7 Int) Bool)
+(declare-fun has_witness__function_guard (Bool us_rep6 Int) Bool)
 
 ;; has_witness__post_axiom
   (assert true)
 
 ;; witness__post_axiom
   (assert
-  (forall ((container us_rep7))
-  (forall ((key us_rep6))
+  (forall ((container us_rep6))
+  (forall ((key us_rep5))
   (! (=> (= (has_key container key) true)
      (let ((result (witness container key)))
-     (and (= (has_witness container result) true) (dynamic_invariant3 result
+     (and (= (has_witness container result) true) (dynamic_invariant2 result
      true false true true)))) :pattern ((witness container key)) ))))
 
 ;; w_get__post_axiom
   (assert
-  (forall ((container us_rep7))
+  (forall ((container us_rep6))
   (forall ((witness1 Int))
   (! (=>
-     (and (dynamic_invariant3 witness1 true true true true)
+     (and (dynamic_invariant2 witness1 true true true true)
      (= (has_witness container witness1) true)) (dynamic_invariant19
      (w_get container witness1) true false true true)) :pattern ((w_get
                                                                  container
@@ -4688,15 +4820,7 @@
   (forall ((temp___682 Float32))
   (=> (dynamic_invariant14 temp___682 true true true true)
   (forall ((temp___683 Int))
-  (= (to_rep9 (select (temp___680 temp___682) temp___683)) temp___682)))))
-
-(declare-const best_valley_ids__split_fields count_type)
-
-(declare-const best_valley_ids__split_fields1 count_type)
-
-(declare-const best_valley_ids__split_discrs option)
-
-(declare-const ir__split_fields count_type)
+  (= (to_rep8 (select (temp_____aggregate_def_680 temp___682) temp___683)) temp___682)))))
 
 (declare-const o float)
 
@@ -4714,37 +4838,33 @@
 
 (declare-const algorithm__findbestvalley__existing_gap_id_LAST__assume Int)
 
-(declare-const o5 option)
+(declare-const o5 option1)
 
-(declare-const o6 us_split_discrs6)
+(declare-const algorithm__findbestvalley__ir__assume us_rep5)
 
-(declare-const algorithm__findbestvalley__best_valley_ids__assume us_rep13)
+(declare-const o6 us_rep5)
 
-(declare-const algorithm__findbestvalley__ir__assume us_rep6)
+(declare-const algorithm__findbestvalley__B_14__il__assume us_rep5)
 
-(declare-const o7 us_rep6)
+(declare-const o7 option1)
 
-(declare-const algorithm__findbestvalley__B_14__il__assume us_rep6)
-
-(declare-const o8 option)
-
-(declare-const o9 us_split_discrs6)
+(declare-const o8 us_split_discrs6)
 
 (declare-const algorithm__findbestvalley__B_14__candidate_valley_ids__assume us_rep13)
 
-(declare-const o10 us_rep2)
+(declare-const o9 us_rep2)
 
-(declare-const o11 us_split_fields4)
+(declare-const o10 us_split_fields4)
 
-(declare-const o12 idir_t)
+(declare-const o11 idir_t)
 
-(declare-const o13 Int)
+(declare-const o12 Int)
 
-(declare-const o14 us_rep2)
+(declare-const o13 us_rep2)
 
-(declare-const o15 option)
+(declare-const o14 option1)
 
-(declare-const o16 us_split_discrs6)
+(declare-const o15 us_split_discrs6)
 
 (declare-const temp___910 us_rep13)
 
@@ -4752,51 +4872,51 @@
 
 (declare-const temp___912 us_rep13)
 
-(declare-const o17 us_rep2)
+(declare-const o16 us_rep2)
 
-(declare-const o18 us_split_fields4)
+(declare-const o17 us_split_fields4)
 
-(declare-const o19 us_rep)
+(declare-const o18 us_rep)
 
-(declare-const o20 us_t)
+(declare-const o19 us_t)
 
-(declare-const o21 us_rep2)
+(declare-const o20 us_rep2)
 
-(declare-const o22 us_split_fields4)
+(declare-const o21 us_split_fields4)
 
-(declare-const o23 idir_t)
+(declare-const o22 idir_t)
 
-(declare-const o24 Int)
+(declare-const o23 Int)
+
+(declare-const o24 us_rep2)
 
 (declare-const o25 us_rep2)
 
-(declare-const o26 us_rep2)
+(declare-const o26 us_split_fields4)
 
-(declare-const o27 us_split_fields4)
+(declare-const o27 us_rep)
 
 (declare-const o28 us_rep)
 
-(declare-const o29 us_rep)
+(declare-const o29 Float32)
 
-(declare-const o30 Float32)
+(declare-const o30 us_rep2)
 
-(declare-const o31 us_rep2)
+(declare-const o31 us_split_fields4)
 
-(declare-const o32 us_split_fields4)
+(declare-const o32 us_rep)
 
 (declare-const o33 us_rep)
 
-(declare-const o34 us_rep)
+(declare-const o34 Float32)
 
 (declare-const o35 Float32)
 
 (declare-const o36 Float32)
 
-(declare-const o37 Float32)
+(declare-const o37 option1)
 
-(declare-const o38 option)
-
-(declare-const o39 us_split_discrs6)
+(declare-const o38 us_split_discrs6)
 
 (declare-const temp___918 us_rep13)
 
@@ -4804,9 +4924,9 @@
 
 (declare-const temp___920 us_rep13)
 
-(declare-const o40 option)
+(declare-const o39 option1)
 
-(declare-const o41 us_split_discrs6)
+(declare-const o40 us_split_discrs6)
 
 (declare-const temp___915 us_rep13)
 
@@ -4814,101 +4934,95 @@
 
 (declare-const temp___917 us_rep13)
 
-(declare-const o42 us_rep2)
+(declare-const o41 us_rep2)
 
-(declare-const o43 us_split_fields4)
+(declare-const o42 us_split_fields4)
 
-(declare-const o44 us_rep)
+(declare-const o43 us_rep)
 
-(declare-const o45 us_t)
+(declare-const o44 us_t)
 
-(declare-const o46 us_rep)
+(declare-const o45 us_rep)
 
-(declare-const o47 us_t)
+(declare-const o46 us_t)
 
-(declare-const o48 us_rep2)
+(declare-const o47 us_rep2)
 
-(declare-const o49 us_split_fields4)
+(declare-const o48 us_split_fields4)
 
-(declare-const o50 us_rep)
+(declare-const o49 us_rep)
 
-(declare-const o51 us_t)
+(declare-const o50 us_t)
 
-(declare-const o52 us_rep2)
+(declare-const o51 us_rep2)
 
-(declare-const o53 us_split_fields4)
+(declare-const o52 us_split_fields4)
+
+(declare-const o53 us_rep)
 
 (declare-const o54 us_rep)
 
-(declare-const o55 us_rep)
+(declare-const o55 Float32)
 
 (declare-const o56 Float32)
 
-(declare-const o57 Float32)
+(declare-const o57 us_image)
 
-(declare-const o58 us_image)
+(declare-const o58 us_t)
 
-(declare-const o59 us_t)
+(declare-const o59 us_rep2)
 
-(declare-const o60 us_rep2)
+(declare-const o60 us_split_fields4)
 
-(declare-const o61 us_split_fields4)
+(declare-const o61 us_rep)
 
-(declare-const o62 us_rep)
+(declare-const o62 us_t)
 
-(declare-const o63 us_t)
+(declare-const o63 us_rep2)
 
-(declare-const o64 us_rep2)
+(declare-const o64 us_split_fields4)
 
-(declare-const o65 us_split_fields4)
+(declare-const o65 us_rep)
 
 (declare-const o66 us_rep)
 
-(declare-const o67 us_rep)
+(declare-const o67 Float32)
 
 (declare-const o68 Float32)
 
-(declare-const o69 Float32)
+(declare-const o69 us_image)
 
-(declare-const o70 us_image)
+(declare-const o70 us_t)
 
-(declare-const o71 us_t)
+(declare-const ir__split_fields us_split_fields10)
 
-(declare-const o72 us_rep)
+(declare-const result Bool)
 
-(declare-const result us_split_fields__ref11)
+(declare-const best_valley_ids__split_fields us_split_fields22)
 
-(declare-const best_valley_ids__split_fields2 us_split_fields22)
+(declare-const best_valley_ids__split_discrs us_split_discrs6)
 
-(declare-const result1 us_split_discrs__ref3)
+(declare-const ir__split_fields1 us_split_fields10)
 
-(declare-const best_valley_ids__split_discrs1 us_split_discrs6)
-
-(declare-const result2 us_split_fields__ref6)
-
-(declare-const ir__split_fields1 us_split_fields12)
-
-(declare-const result3 Bool)
-
-(declare-const best_valley_ids__split_fields3 us_split_fields22)
-
-(declare-const best_valley_ids__split_discrs2 us_split_discrs6)
-
-(declare-const ir__split_fields2 us_split_fields12)
+(declare-const result1 Bool)
 
 (declare-const candidate_valley_ids__split_fields us_split_fields22)
 
 (declare-const candidate_valley_ids__split_discrs us_split_discrs6)
 
-(declare-const result4 Bool)
+(declare-const result2 Bool)
 
-(declare-const result5 us_split_fields__ref11)
+(declare-const result3 Bool)
+
+(declare-const result4 us_split_fields__ref11)
 
 (declare-const candidate_valley_ids__split_fields1 us_split_fields22)
 
-(declare-const result6 us_split_discrs__ref3)
+(declare-const result5 us_split_discrs__ref3)
 
 (declare-const candidate_valley_ids__split_discrs1 us_split_discrs6)
+
+(declare-const result6 Bool)
 
 (declare-const result7 Bool)
 
@@ -4922,39 +5036,25 @@
 
 (declare-const candidate_valley_ids__split_discrs2 us_split_discrs6)
 
-(declare-const result11 Bool)
-
-(declare-const result12 Bool)
-
-(declare-const result13 Bool)
-
-(declare-const result14 us_split_fields__ref11)
+(declare-const result11 us_split_fields__ref11)
 
 (declare-const candidate_valley_ids__split_fields3 us_split_fields22)
 
-(declare-const result15 us_split_discrs__ref3)
+(declare-const result12 us_split_discrs__ref3)
 
 (declare-const candidate_valley_ids__split_discrs3 us_split_discrs6)
 
-(declare-const result16 us_split_fields__ref11)
-
-(declare-const candidate_valley_ids__split_fields4 us_split_fields22)
-
-(declare-const result17 us_split_discrs__ref3)
-
-(declare-const candidate_valley_ids__split_discrs4 us_split_discrs6)
-
 ;; H
   (assert (= (to_rep2 o) (fp #b0 #b00000000 #b00000000000000000000000)))
+
+;; H
+  (assert (= o o3))
 
 ;; H
   (assert (= (to_rep2 o1) (fp #b0 #b00000000 #b00000000000000000000000)))
 
 ;; H
   (assert (= o1 o2))
-
-;; H
-  (assert (= o o3))
 
 ;; H
   (assert (= temp___944 o2))
@@ -4968,1108 +5068,1115 @@
 
 ;; H
   (assert
-  (and
-  (= (attr__constrained1
+  (= (attr__constrained
      (rec__robot_iface__proxy__speed
-     (us_split_fields17
-     (rec__algorithm__controller__robot (us_split_fields21 this))))) false)
+     (us_split_fields15
+     (rec__algorithm__controller__robot (us_split_fields19 this))))) false))
+
+;; H
+  (assert
   (= 1000 (to_rep5
           (rec__algorithm__gap_vectors__list__capacity
-          (us_split_discrs3
-          (rec__algorithm__controller__gapvec (us_split_fields21 this))))))))
+          (us_split_discrs1
+          (rec__algorithm__controller__gapvec (us_split_fields19 this)))))))
 
 ;; H
   (assert (not (= (oeq disttogoal zero_position) true)))
 
 ;; H
   (assert
-  (and
   (= o4 (length1
-        (rec__algorithm__controller__gapvec (us_split_fields21 this))))
-  (and (in_range6 o4)
-  (<= o4 (to_rep5
-         (rec__algorithm__gap_vectors__list__capacity
-         (us_split_discrs3
-         (rec__algorithm__controller__gapvec (us_split_fields21 this)))))))))
+        (rec__algorithm__controller__gapvec (us_split_fields19 this)))))
+
+;; H
+  (assert (in_range6 o4))
 
 ;; H
   (assert
-  (and (= algorithm__findbestvalley__existing_gap_id_LAST__assume o4)
-  (in_range8 o4)))
+  (<= o4 (to_rep5
+         (rec__algorithm__gap_vectors__list__capacity
+         (us_split_discrs1
+         (rec__algorithm__controller__gapvec (us_split_fields19 this)))))))
+
+;; H
+  (assert (= algorithm__findbestvalley__existing_gap_id_LAST__assume o4))
 
 ;; H
   (assert
   (= algorithm__findbestvalley__existing_gap_id_LAST__assume existing_gap_id_LAST))
 
 ;; H
-  (assert (in_range8 existing_gap_id_LAST))
+  (assert (in_range13 o4))
 
 ;; H
-  (assert (= (to_rep6 o5) 0))
+  (assert (in_range13 existing_gap_id_LAST))
 
 ;; H
-  (assert (= o6 (mk___split_discrs3 o5)))
-
-;; H
-  (assert
-  (= algorithm__findbestvalley__best_valley_ids__assume (mk___rep11 o6
-                                                        (mk___split_fields11
-                                                        dummy16 dummy16)
-                                                        true)))
-
-;; H
-  (assert
-  (= result (mk___split_fields__ref11
-            (mk___split_fields11
-            (mk___rep6 (mk___split_fields6 best_valley_ids__split_fields))
-            (mk___rep6 (mk___split_fields6 best_valley_ids__split_fields1))))))
-
-;; H
-  (assert
-  (= best_valley_ids__split_fields2 (us_split_fields23
-                                    algorithm__findbestvalley__best_valley_ids__assume)))
-
-;; H
-  (assert
-  (= result1 (mk___split_discrs__ref3
-             (mk___split_discrs3 best_valley_ids__split_discrs))))
-
-;; H
-  (assert
-  (= best_valley_ids__split_discrs1 (us_split_discrs7
-                                    algorithm__findbestvalley__best_valley_ids__assume)))
+  (assert (= (to_rep11 o5) 0))
 
 ;; H
   (assert (= best_valley_ids__attr__constrained false))
 
 ;; H
   (assert
-  (and
   (= algorithm__findbestvalley__ir__assume (first2
                                            (rec__algorithm__controller__gapvec
-                                           (us_split_fields21 this))))
-  (ite (= (= (length1
-             (rec__algorithm__controller__gapvec (us_split_fields21 this))) 0) true)
-  (= (bool_eq8 algorithm__findbestvalley__ir__assume no_element) true)
-  (and
+                                           (us_split_fields19 this)))))
+
+;; H
+  (assert
+  (=>
+  (= (= (length1
+        (rec__algorithm__controller__gapvec (us_split_fields19 this))) 0) true)
+  (= (bool_eq7 algorithm__findbestvalley__ir__assume no_element) true)))
+
+;; H
+  (assert
+  (=>
+  (not
+  (= (= (length1
+        (rec__algorithm__controller__gapvec (us_split_fields19 this))) 0) true))
   (= (has_key
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     algorithm__findbestvalley__ir__assume) true)
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     algorithm__findbestvalley__ir__assume) true)))
+
+;; H
+  (assert
+  (=>
+  (not
+  (= (= (length1
+        (rec__algorithm__controller__gapvec (us_split_fields19 this))) 0) true))
   (= (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     algorithm__findbestvalley__ir__assume) 1)))))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     algorithm__findbestvalley__ir__assume) 1)))
 
 ;; H
   (assert
-  (= result2 (mk___split_fields__ref6 (mk___split_fields6 ir__split_fields))))
-
-;; H
-  (assert
-  (= ir__split_fields1 (us_split_fields13
-                       algorithm__findbestvalley__ir__assume)))
+  (= ir__split_fields (us_split_fields11
+                      algorithm__findbestvalley__ir__assume)))
 
 ;; H
   (assert
   (= (to_rep5
      (rec__algorithm__gap_vectors__list__capacity
-     (us_split_discrs3
-     (rec__algorithm__controller__gapvec (us_split_fields21 this))))) 1000))
+     (us_split_discrs1
+     (rec__algorithm__controller__gapvec (us_split_fields19 this))))) 1000))
 
 ;; H
   (assert
-  (and
-  (= result3 (has_key
-             (positions
-             (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-             (mk___rep6 ir__split_fields1)))
-  (= (= result3 true)
-  (= (has_key
-     (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (mk___rep6 ir__split_fields1)) true))))
+  (= result (has_key
+            (positions
+            (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+            (mk___rep5 ir__split_fields))))
 
 ;; H
-  (assert (= result3 true))
+  (assert
+  (=> (= result true)
+  (= (has_key
+     (positions
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (mk___rep5 ir__split_fields)) true)))
+
+;; H
+  (assert
+  (=>
+  (= (has_key
+     (positions
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (mk___rep5 ir__split_fields)) true)
+  (= result true)))
+
+;; H
+  (assert (= result true))
 
 ;; H
   (assert
   (= (to_rep5
      (rec__algorithm__gap_vectors__list__capacity
-     (us_split_discrs3
-     (rec__algorithm__controller__gapvec (us_split_fields21 this))))) 1000))
+     (us_split_discrs1
+     (rec__algorithm__controller__gapvec (us_split_fields19 this))))) 1000))
 
 ;; H
   (assert
   (= (has_key
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (mk___rep6 ir__split_fields2)) true))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (mk___rep5 ir__split_fields1)) true))
 
 ;; H
   (assert
-  (and
-  (= o7 (last2 (rec__algorithm__controller__gapvec (us_split_fields21 this))))
-  (ite (= (= (length1
-             (rec__algorithm__controller__gapvec (us_split_fields21 this))) 0) true)
-  (= (bool_eq8 o7 no_element) true)
-  (and
+  (= o6 (last2 (rec__algorithm__controller__gapvec (us_split_fields19 this)))))
+
+;; H
+  (assert
+  (=>
+  (= (= (length1
+        (rec__algorithm__controller__gapvec (us_split_fields19 this))) 0) true)
+  (= (bool_eq7 o6 no_element) true)))
+
+;; H
+  (assert
+  (=>
+  (not
+  (= (= (length1
+        (rec__algorithm__controller__gapvec (us_split_fields19 this))) 0) true))
   (= (has_key
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this))) o7) true)
+     (rec__algorithm__controller__gapvec (us_split_fields19 this))) o6) true)))
+
+;; H
+  (assert
+  (=>
+  (not
+  (= (= (length1
+        (rec__algorithm__controller__gapvec (us_split_fields19 this))) 0) true))
   (= (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this))) o7)
-  (length1 (rec__algorithm__controller__gapvec (us_split_fields21 this))))))))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this))) o6)
+  (length1 (rec__algorithm__controller__gapvec (us_split_fields19 this))))))
 
 ;; H
-  (assert (= result4 (bool_eq8 (mk___rep6 ir__split_fields2) o7)))
+  (assert (= result1 (bool_eq7 (mk___rep5 ir__split_fields1) o6)))
 
 ;; H
   (assert
-  (=> (= result4 true)
+  (=> (= result1 true)
   (and
   (= algorithm__findbestvalley__B_14__il__assume (first2
                                                  (rec__algorithm__controller__gapvec
-                                                 (us_split_fields21 this))))
+                                                 (us_split_fields19 this))))
   (ite (= (= (length1
-             (rec__algorithm__controller__gapvec (us_split_fields21 this))) 0) true)
-  (= (bool_eq8 algorithm__findbestvalley__B_14__il__assume no_element) true)
+             (rec__algorithm__controller__gapvec (us_split_fields19 this))) 0) true)
+  (= (bool_eq7 algorithm__findbestvalley__B_14__il__assume no_element) true)
   (and
   (= (has_key
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      algorithm__findbestvalley__B_14__il__assume) true)
   (= (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      algorithm__findbestvalley__B_14__il__assume) 1))))))
 
 ;; H
   (assert
-  (=> (not (= result4 true))
+  (=> (not (= result1 true))
   (and
   (= algorithm__findbestvalley__B_14__il__assume (next
                                                  (rec__algorithm__controller__gapvec
-                                                 (us_split_fields21 this))
-                                                 (mk___rep6
-                                                 ir__split_fields2)))
-  (ite (= (ite (= (bool_eq8 (mk___rep6 ir__split_fields2) no_element) false) (=
+                                                 (us_split_fields19 this))
+                                                 (mk___rep5
+                                                 ir__split_fields1)))
+  (ite (= (ite (= (bool_eq7 (mk___rep5 ir__split_fields1) no_element) false) (=
           (get1
           (positions
-          (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-          (mk___rep6 ir__split_fields2)) (length1
+          (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+          (mk___rep5 ir__split_fields1)) (length1
                                          (rec__algorithm__controller__gapvec
-                                         (us_split_fields21 this)))) true) true)
-  (= (bool_eq8 algorithm__findbestvalley__B_14__il__assume no_element) true)
+                                         (us_split_fields19 this)))) true) true)
+  (= (bool_eq7 algorithm__findbestvalley__B_14__il__assume no_element) true)
   (and
   (= (has_key
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      algorithm__findbestvalley__B_14__il__assume) true)
   (= (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      algorithm__findbestvalley__B_14__il__assume) (+ (get1
                                                      (positions
                                                      (rec__algorithm__controller__gapvec
-                                                     (us_split_fields21 this)))
-                                                     (mk___rep6
-                                                     ir__split_fields2)) 1)))))))
+                                                     (us_split_fields19 this)))
+                                                     (mk___rep5
+                                                     ir__split_fields1)) 1)))))))
 
 ;; H
   (assert (= algorithm__findbestvalley__B_14__il__assume il))
 
 ;; H
-  (assert (= (to_rep6 o8) 0))
+  (assert (= (to_rep11 o7) 0))
 
 ;; H
-  (assert (= o9 (mk___split_discrs3 o8)))
+  (assert (= o8 (mk___split_discrs3 o7)))
 
 ;; H
   (assert
   (= algorithm__findbestvalley__B_14__candidate_valley_ids__assume (mk___rep11
-                                                                   o9
+                                                                   o8
                                                                    (mk___split_fields11
-                                                                   dummy16
-                                                                   dummy16)
+                                                                   dummy13
+                                                                   dummy13)
                                                                    true)))
 
 ;; H
   (assert
-  (= result5 (mk___split_fields__ref11 candidate_valley_ids__split_fields)))
+  (= candidate_valley_ids__split_fields (us_split_fields23
+                                        algorithm__findbestvalley__B_14__candidate_valley_ids__assume)))
 
 ;; H
   (assert
-  (= candidate_valley_ids__split_fields1 (us_split_fields23
-                                         algorithm__findbestvalley__B_14__candidate_valley_ids__assume)))
-
-;; H
-  (assert
-  (= result6 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs)))
-
-;; H
-  (assert
-  (= candidate_valley_ids__split_discrs1 (us_split_discrs7
-                                         algorithm__findbestvalley__B_14__candidate_valley_ids__assume)))
+  (= candidate_valley_ids__split_discrs (us_split_discrs7
+                                        algorithm__findbestvalley__B_14__candidate_valley_ids__assume)))
 
 ;; H
   (assert (= candidate_valley_ids__attr__constrained false))
 
 ;; H
   (assert
-  (and
-  (= o10 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
-         (mk___rep6 ir__split_fields2)))
-  (= (bool_eq4 o10
+  (= o9 (element
+        (rec__algorithm__controller__gapvec (us_split_fields19 this))
+        (mk___rep5 ir__split_fields1))))
+
+;; H
+  (assert
+  (= (bool_eq4 o9
      (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (mk___rep6 ir__split_fields2)))) true)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (mk___rep5 ir__split_fields1)))) true))
 
 ;; H
-  (assert (= o11 (us_split_fields5 o10)))
+  (assert (= o10 (us_split_fields5 o9)))
 
 ;; H
-  (assert (= o12 (rec__gaps__gap__idir o11)))
+  (assert (= o11 (rec__gaps__gap__idir o10)))
 
 ;; H
-  (assert (= o13 (to_rep4 o12)))
+  (assert (= o12 (to_rep4 o11)))
 
 ;; H
-  (assert (= result7 (ite (= o13 (- 1)) true false)))
+  (assert (= result2 (ite (= o12 (- 1)) true false)))
 
 ;; H
   (assert
-  (=> (= result7 true)
+  (=> (= result2 true)
   (and
-  (= o14 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
-         (mk___rep6 ir__split_fields2)))
-  (= (bool_eq4 o14
+  (= o13 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
+         (mk___rep5 ir__split_fields1)))
+  (= (bool_eq4 o13
      (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (mk___rep6 ir__split_fields2)))) true))))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (mk___rep5 ir__split_fields1)))) true))))
 
 ;; H
-  (assert (=> (= result7 true) (= result8 (isrisinggapsafe this o14))))
+  (assert (=> (= result2 true) (= result3 (isrisinggapsafe this o13))))
 
 ;; H
-  (assert (=> (= result7 true) (=> (= result8 true) (= (to_rep6 o15) 1))))
-
-;; H
-  (assert
-  (=> (= result7 true)
-  (=> (= result8 true) (= o16 (mk___split_discrs3 o15)))))
+  (assert (=> (= result2 true) (=> (= result3 true) (= (to_rep11 o14) 1))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (= result8 true)
-  (= temp___910 (mk___rep11 o16
-                (mk___split_fields11 (mk___rep6 ir__split_fields2) il) true)))))
+  (=> (= result2 true)
+  (=> (= result3 true) (= o15 (mk___split_discrs3 o14)))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (= result8 true)
+  (=> (= result2 true)
+  (=> (= result3 true)
+  (= temp___910 (mk___rep11 o15
+                (mk___split_fields11 (mk___rep5 ir__split_fields1) il) true)))))
+
+;; H
+  (assert
+  (=> (= result2 true)
+  (=> (= result3 true)
   (=> (= candidate_valley_ids__attr__constrained true)
   (= (rec__algorithm__findbestvalley__gap_id_pair__opt
      (us_split_discrs7 temp___910)) (rec__algorithm__findbestvalley__gap_id_pair__opt
-                                    candidate_valley_ids__split_discrs1))))))
+                                    candidate_valley_ids__split_discrs))))))
 
 ;; H
-  (assert (=> (= result7 true) (=> (= result8 true) (= usq_ temp___910))))
+  (assert (=> (= result2 true) (=> (= result3 true) (= usq_ temp___910))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (= result8 true)
+  (=> (= result2 true)
+  (=> (= result3 true)
   (= temp___912 (mk___rep11 (us_split_discrs7 usq_) (us_split_fields23 usq_)
                 candidate_valley_ids__attr__constrained)))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (= result8 true)
-  (= result9 (mk___split_fields__ref11 candidate_valley_ids__split_fields1)))))
+  (=> (= result2 true)
+  (=> (= result3 true)
+  (= result4 (mk___split_fields__ref11 candidate_valley_ids__split_fields)))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (= result8 true)
-  (= candidate_valley_ids__split_fields2 (us_split_fields23 temp___912)))))
+  (=> (= result2 true)
+  (=> (= result3 true)
+  (= candidate_valley_ids__split_fields1 (us_split_fields23 temp___912)))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (= result8 true)
-  (= result10 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs1)))))
+  (=> (= result2 true)
+  (=> (= result3 true)
+  (= result5 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs)))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (= result8 true)
-  (= candidate_valley_ids__split_discrs2 (us_split_discrs7 temp___912)))))
+  (=> (= result2 true)
+  (=> (= result3 true)
+  (= candidate_valley_ids__split_discrs1 (us_split_discrs7 temp___912)))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (not (= result8 true))
+  (=> (= result2 true)
+  (=> (not (= result3 true))
   (=> (= (distinct 0 0) true)
   (and
-  (= o17 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
-         (mk___rep6 ir__split_fields2)))
-  (= (bool_eq4 o17
+  (= o16 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
+         (mk___rep5 ir__split_fields1)))
+  (= (bool_eq4 o16
      (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (mk___rep6 ir__split_fields2)))) true))))))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (mk___rep5 ir__split_fields1)))) true))))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (not (= result8 true))
-  (=> (= (distinct 0 0) true) (= o18 (us_split_fields5 o17))))))
+  (=> (= result2 true)
+  (=> (not (= result3 true))
+  (=> (= (distinct 0 0) true) (= o17 (us_split_fields5 o16))))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (not (= result8 true))
-  (=> (= (distinct 0 0) true) (= o19 (rec__gaps__gap__bearing o18))))))
+  (=> (= result2 true)
+  (=> (not (= result3 true))
+  (=> (= (distinct 0 0) true) (= o18 (rec__gaps__gap__bearing o17))))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (not (= result8 true))
+  (=> (= result2 true)
+  (=> (not (= result3 true))
   (=> (= (distinct 0 0) true)
-  (and (= o20 (print o19)) (dynamic_invariant1 o20 true false true true))))))
+  (and (= o19 (print o18)) (dynamic_invariant1 o19 true false true true))))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (not (= result8 true))
-  (= candidate_valley_ids__split_discrs2 candidate_valley_ids__split_discrs1))))
+  (=> (= result2 true)
+  (=> (not (= result3 true))
+  (= candidate_valley_ids__split_discrs1 candidate_valley_ids__split_discrs))))
 
 ;; H
   (assert
-  (=> (= result7 true)
-  (=> (not (= result8 true))
-  (= candidate_valley_ids__split_fields2 candidate_valley_ids__split_fields1))))
+  (=> (= result2 true)
+  (=> (not (= result3 true))
+  (= candidate_valley_ids__split_fields1 candidate_valley_ids__split_fields))))
 
 ;; H
   (assert
-  (=> (not (= result7 true))
-  (= candidate_valley_ids__split_discrs2 candidate_valley_ids__split_discrs1)))
+  (=> (not (= result2 true))
+  (= candidate_valley_ids__split_discrs1 candidate_valley_ids__split_discrs)))
 
 ;; H
   (assert
-  (=> (not (= result7 true))
-  (= candidate_valley_ids__split_fields2 candidate_valley_ids__split_fields1)))
+  (=> (not (= result2 true))
+  (= candidate_valley_ids__split_fields1 candidate_valley_ids__split_fields)))
 
 ;; H
   (assert
+  (= o20 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
+         il)))
+
+;; H
+  (assert
+  (= (bool_eq4 o20
+     (get
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (get1
+     (positions
+     (rec__algorithm__controller__gapvec (us_split_fields19 this))) il))) true))
+
+;; H
+  (assert (= o21 (us_split_fields5 o20)))
+
+;; H
+  (assert (= o22 (rec__gaps__gap__idir o21)))
+
+;; H
+  (assert (= o23 (to_rep4 o22)))
+
+;; H
+  (assert (= result6 (ite (= o23 1) true false)))
+
+;; H
+  (assert
+  (=> (= result6 true)
   (and
-  (= o21 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
+  (= o24 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
          il))
-  (= (bool_eq4 o21
+  (= (bool_eq4 o24
      (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this))) il))) true)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this))) il))) true))))
 
 ;; H
-  (assert (= o22 (us_split_fields5 o21)))
-
-;; H
-  (assert (= o23 (rec__gaps__gap__idir o22)))
-
-;; H
-  (assert (= o24 (to_rep4 o23)))
-
-;; H
-  (assert (= result11 (ite (= o24 1) true false)))
+  (assert (=> (= result6 true) (= result7 (isrisinggapsafe this o24))))
 
 ;; H
   (assert
-  (=> (= result11 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
+  (=>
+  (= (to_rep11
+     (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs1)) 1)
+  (= o33 (bearing disttogoal))))))
+
+;; H
+  (assert
+  (=> (= result6 true)
+  (=> (= result7 true)
+  (=>
+  (= (to_rep11
+     (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs1)) 1)
+  (and
+  (= o30 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
+         (rec__algorithm__findbestvalley__gap_id_pair__rising
+         candidate_valley_ids__split_fields1)))
+  (= (bool_eq4 o30
+     (get
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (get1
+     (positions
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (rec__algorithm__findbestvalley__gap_id_pair__rising
+     candidate_valley_ids__split_fields1)))) true))))))
+
+;; H
+  (assert
+  (=> (= result6 true)
+  (=> (= result7 true)
+  (=>
+  (= (to_rep11
+     (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs1)) 1)
+  (= o31 (us_split_fields5 o30))))))
+
+;; H
+  (assert
+  (=> (= result6 true)
+  (=> (= result7 true)
+  (=>
+  (= (to_rep11
+     (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs1)) 1)
+  (= o32 (rec__gaps__gap__bearing o31))))))
+
+;; H
+  (assert
+  (=> (= result6 true)
+  (=> (= result7 true)
+  (=>
+  (= (to_rep11
+     (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs1)) 1)
+  (and (= o34 (aldiff o32 o33))
+  (and (fp.isFinite32 o34)
+  (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
+  o34) (fp.leq o34 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
+
+;; H
+  (assert
+  (=> (= result6 true)
+  (=> (= result7 true)
+  (=>
+  (= (to_rep11
+     (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs1)) 1)
+  (= o35 (fp.abs o34))))))
+
+;; H
+  (assert
+  (=> (= result6 true)
+  (=> (= result7 true)
+  (=>
+  (= (to_rep11
+     (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs1)) 1)
+  (= o28 (bearing disttogoal))))))
+
+;; H
+  (assert
+  (=> (= result6 true)
+  (=> (= result7 true)
+  (=>
+  (= (to_rep11
+     (rec__algorithm__findbestvalley__gap_id_pair__opt
+     candidate_valley_ids__split_discrs1)) 1)
   (and
   (= o25 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
          il))
   (= (bool_eq4 o25
      (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this))) il))) true))))
-
-;; H
-  (assert (=> (= result11 true) (= result12 (isrisinggapsafe this o25))))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this))) il))) true))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= o34 (bearing disttogoal))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (= o26 (us_split_fields5 o25))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (and
-  (= o31 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
-         (rec__algorithm__findbestvalley__gap_id_pair__rising
-         candidate_valley_ids__split_fields2)))
-  (= (bool_eq4 o31
-     (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (get1
-     (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (rec__algorithm__findbestvalley__gap_id_pair__rising
-     candidate_valley_ids__split_fields2)))) true))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (= o27 (rec__gaps__gap__bearing o26))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= o32 (us_split_fields5 o31))))))
-
-;; H
-  (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
-  (=>
-  (= (to_rep6
-     (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= o33 (rec__gaps__gap__bearing o32))))))
-
-;; H
-  (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
-  (=>
-  (= (to_rep6
-     (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (and (= o35 (aldiff o33 o34))
-  (and (fp.isFinite32 o35)
+     candidate_valley_ids__split_discrs1)) 1)
+  (and (= o29 (aldiff o27 o28))
+  (and (fp.isFinite32 o29)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
-  o35) (fp.leq o35 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
+  o29) (fp.leq o29 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= o36 (fp.abs o35))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (= o36 (fp.abs o29))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= o29 (bearing disttogoal))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (= result8 (ite (fp.lt o36 o35) true false))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (and
-  (= o26 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
-         il))
-  (= (bool_eq4 o26
-     (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (get1
-     (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this))) il))) true))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true) (= (to_rep11 o37) 1))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= o27 (us_split_fields5 o26))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true) (= o38 (mk___split_discrs3 o37)))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= o28 (rec__gaps__gap__bearing o27))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true)
+  (= temp___918 (mk___rep11 o38
+                (mk___split_fields11 il (mk___rep5 ir__split_fields1)) true)))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (and (= o30 (aldiff o28 o29))
-  (and (fp.isFinite32 o30)
-  (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
-  o30) (fp.leq o30 (fp #b0 #b10000000 #b10010010000111111011011)))))))))
-
-;; H
-  (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
-  (=>
-  (= (to_rep6
-     (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= o37 (fp.abs o30))))))
-
-;; H
-  (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
-  (=>
-  (= (to_rep6
-     (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (= result13 (ite (fp.lt o37 o36) true false))))))
-
-;; H
-  (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
-  (=>
-  (= (to_rep6
-     (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true) (= (to_rep6 o38) 1))))))
-
-;; H
-  (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
-  (=>
-  (= (to_rep6
-     (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true) (= o39 (mk___split_discrs3 o38)))))))
-
-;; H
-  (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
-  (=>
-  (= (to_rep6
-     (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true)
-  (= temp___918 (mk___rep11 o39
-                (mk___split_fields11 il (mk___rep6 ir__split_fields2)) true)))))))
-
-;; H
-  (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
-  (=>
-  (= (to_rep6
-     (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true)
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true)
   (=> (= candidate_valley_ids__attr__constrained true)
   (= (rec__algorithm__findbestvalley__gap_id_pair__opt
      (us_split_discrs7 temp___918)) (rec__algorithm__findbestvalley__gap_id_pair__opt
-                                    candidate_valley_ids__split_discrs2))))))))
+                                    candidate_valley_ids__split_discrs1))))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true) (= usq_1 temp___918))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true) (= usq_1 temp___918))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true)
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true)
   (= temp___920 (mk___rep11 (us_split_discrs7 usq_1)
                 (us_split_fields23 usq_1)
                 candidate_valley_ids__attr__constrained)))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true)
-  (= result14 (mk___split_fields__ref11 candidate_valley_ids__split_fields2)))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true)
+  (= result9 (mk___split_fields__ref11 candidate_valley_ids__split_fields1)))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true)
-  (= candidate_valley_ids__split_fields3 (us_split_fields23 temp___920)))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true)
+  (= candidate_valley_ids__split_fields2 (us_split_fields23 temp___920)))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true)
-  (= result15 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs2)))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true)
+  (= result10 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs1)))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (= result13 true)
-  (= candidate_valley_ids__split_discrs3 (us_split_discrs7 temp___920)))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (= result8 true)
+  (= candidate_valley_ids__split_discrs2 (us_split_discrs7 temp___920)))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (not (= result13 true))
-  (= candidate_valley_ids__split_discrs3 candidate_valley_ids__split_discrs2))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (not (= result8 true))
+  (= candidate_valley_ids__split_discrs2 candidate_valley_ids__split_discrs1))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1)
-  (=> (not (= result13 true))
-  (= candidate_valley_ids__split_fields3 candidate_valley_ids__split_fields2))))))
+     candidate_valley_ids__split_discrs1)) 1)
+  (=> (not (= result8 true))
+  (= candidate_valley_ids__split_fields2 candidate_valley_ids__split_fields1))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= (to_rep6 o40) 1)))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= (to_rep11 o39) 1)))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= o41 (mk___split_discrs3 o40))))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= o40 (mk___split_discrs3 o39))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= temp___915 (mk___rep11 o41
-                (mk___split_fields11 il (mk___rep6 ir__split_fields2)) true))))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= temp___915 (mk___rep11 o40
+                (mk___split_fields11 il (mk___rep5 ir__split_fields1)) true))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs1)) 1))
   (=> (= candidate_valley_ids__attr__constrained true)
   (= (rec__algorithm__findbestvalley__gap_id_pair__opt
      (us_split_discrs7 temp___915)) (rec__algorithm__findbestvalley__gap_id_pair__opt
-                                    candidate_valley_ids__split_discrs2)))))))
+                                    candidate_valley_ids__split_discrs1)))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs1)) 1))
   (= usq_2 temp___915)))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
+     candidate_valley_ids__split_discrs1)) 1))
   (= temp___917 (mk___rep11 (us_split_discrs7 usq_2)
                 (us_split_fields23 usq_2)
                 candidate_valley_ids__attr__constrained))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= result16 (mk___split_fields__ref11 candidate_valley_ids__split_fields2))))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= result11 (mk___split_fields__ref11 candidate_valley_ids__split_fields1))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= candidate_valley_ids__split_fields4 (us_split_fields23 temp___917))))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= candidate_valley_ids__split_fields3 (us_split_fields23 temp___917))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= result17 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs2))))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= result12 (mk___split_discrs__ref3 candidate_valley_ids__split_discrs1))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= candidate_valley_ids__split_discrs4 (us_split_discrs7 temp___917))))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= candidate_valley_ids__split_discrs3 (us_split_discrs7 temp___917))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= candidate_valley_ids__split_discrs3 candidate_valley_ids__split_discrs4)))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= candidate_valley_ids__split_discrs2 candidate_valley_ids__split_discrs3)))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (= result12 true)
+  (=> (= result6 true)
+  (=> (= result7 true)
   (=>
   (not
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs2)) 1))
-  (= candidate_valley_ids__split_fields3 candidate_valley_ids__split_fields4)))))
+     candidate_valley_ids__split_discrs1)) 1))
+  (= candidate_valley_ids__split_fields2 candidate_valley_ids__split_fields3)))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (not (= result12 true))
+  (=> (= result6 true)
+  (=> (not (= result7 true))
   (=> (= (distinct 0 0) true)
   (and
-  (= o42 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
+  (= o41 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
          il))
-  (= (bool_eq4 o42
+  (= (bool_eq4 o41
      (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this))) il))) true))))))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this))) il))) true))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (not (= result12 true))
-  (=> (= (distinct 0 0) true) (= o43 (us_split_fields5 o42))))))
+  (=> (= result6 true)
+  (=> (not (= result7 true))
+  (=> (= (distinct 0 0) true) (= o42 (us_split_fields5 o41))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (not (= result12 true))
-  (=> (= (distinct 0 0) true) (= o44 (rec__gaps__gap__bearing o43))))))
+  (=> (= result6 true)
+  (=> (not (= result7 true))
+  (=> (= (distinct 0 0) true) (= o43 (rec__gaps__gap__bearing o42))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (not (= result12 true))
+  (=> (= result6 true)
+  (=> (not (= result7 true))
   (=> (= (distinct 0 0) true)
-  (and (= o45 (print o44)) (dynamic_invariant1 o45 true false true true))))))
+  (and (= o44 (print o43)) (dynamic_invariant1 o44 true false true true))))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (not (= result12 true))
-  (= candidate_valley_ids__split_discrs3 candidate_valley_ids__split_discrs2))))
+  (=> (= result6 true)
+  (=> (not (= result7 true))
+  (= candidate_valley_ids__split_discrs2 candidate_valley_ids__split_discrs1))))
 
 ;; H
   (assert
-  (=> (= result11 true)
-  (=> (not (= result12 true))
-  (= candidate_valley_ids__split_fields3 candidate_valley_ids__split_fields2))))
+  (=> (= result6 true)
+  (=> (not (= result7 true))
+  (= candidate_valley_ids__split_fields2 candidate_valley_ids__split_fields1))))
 
 ;; H
   (assert
-  (=> (not (= result11 true))
-  (= candidate_valley_ids__split_discrs3 candidate_valley_ids__split_discrs2)))
+  (=> (not (= result6 true))
+  (= candidate_valley_ids__split_discrs2 candidate_valley_ids__split_discrs1)))
 
 ;; H
   (assert
-  (=> (not (= result11 true))
-  (= candidate_valley_ids__split_fields3 candidate_valley_ids__split_fields2)))
+  (=> (not (= result6 true))
+  (= candidate_valley_ids__split_fields2 candidate_valley_ids__split_fields1)))
 
 ;; H
   (assert
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     candidate_valley_ids__split_discrs3)) 1))
+     candidate_valley_ids__split_discrs2)) 1))
 
 ;; H
   (assert
-  (= (to_rep6
+  (= (to_rep11
      (rec__algorithm__findbestvalley__gap_id_pair__opt
-     best_valley_ids__split_discrs2)) 1))
+     best_valley_ids__split_discrs)) 1))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o46 (bearing disttogoal))))
-
-;; H
-  (assert
-  (=> (= (distinct 0 0) true)
-  (and (= o47 (print o46)) (dynamic_invariant1 o47 true false true true))))
+  (assert (=> (= (distinct 0 0) true) (= o45 (bearing disttogoal))))
 
 ;; H
   (assert
   (=> (= (distinct 0 0) true)
-  (and
-  (= o48 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
-         (rec__algorithm__findbestvalley__gap_id_pair__rising
-         candidate_valley_ids__split_fields3)))
-  (= (bool_eq4 o48
-     (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (get1
-     (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (rec__algorithm__findbestvalley__gap_id_pair__rising
-     candidate_valley_ids__split_fields3)))) true))))
-
-;; H
-  (assert (=> (= (distinct 0 0) true) (= o49 (us_split_fields5 o48))))
-
-;; H
-  (assert (=> (= (distinct 0 0) true) (= o50 (rec__gaps__gap__bearing o49))))
-
-;; H
-  (assert
-  (=> (= (distinct 0 0) true)
-  (and (= o51 (print o50)) (dynamic_invariant1 o51 true false true true))))
-
-;; H
-  (assert (=> (= (distinct 0 0) true) (= o55 (bearing disttogoal))))
+  (and (= o46 (print o45)) (dynamic_invariant1 o46 true false true true))))
 
 ;; H
   (assert
   (=> (= (distinct 0 0) true)
   (and
-  (= o52 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
+  (= o47 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
          (rec__algorithm__findbestvalley__gap_id_pair__rising
-         candidate_valley_ids__split_fields3)))
-  (= (bool_eq4 o52
+         candidate_valley_ids__split_fields2)))
+  (= (bool_eq4 o47
      (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (rec__algorithm__findbestvalley__gap_id_pair__rising
-     candidate_valley_ids__split_fields3)))) true))))
+     candidate_valley_ids__split_fields2)))) true))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o53 (us_split_fields5 o52))))
+  (assert (=> (= (distinct 0 0) true) (= o48 (us_split_fields5 o47))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o54 (rec__gaps__gap__bearing o53))))
+  (assert (=> (= (distinct 0 0) true) (= o49 (rec__gaps__gap__bearing o48))))
 
 ;; H
   (assert
   (=> (= (distinct 0 0) true)
-  (and (= o56 (aldiff o54 o55))
-  (and (fp.isFinite32 o56)
+  (and (= o50 (print o49)) (dynamic_invariant1 o50 true false true true))))
+
+;; H
+  (assert (=> (= (distinct 0 0) true) (= o54 (bearing disttogoal))))
+
+;; H
+  (assert
+  (=> (= (distinct 0 0) true)
+  (and
+  (= o51 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
+         (rec__algorithm__findbestvalley__gap_id_pair__rising
+         candidate_valley_ids__split_fields2)))
+  (= (bool_eq4 o51
+     (get
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (get1
+     (positions
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (rec__algorithm__findbestvalley__gap_id_pair__rising
+     candidate_valley_ids__split_fields2)))) true))))
+
+;; H
+  (assert (=> (= (distinct 0 0) true) (= o52 (us_split_fields5 o51))))
+
+;; H
+  (assert (=> (= (distinct 0 0) true) (= o53 (rec__gaps__gap__bearing o52))))
+
+;; H
+  (assert
+  (=> (= (distinct 0 0) true)
+  (and (= o55 (aldiff o53 o54))
+  (and (fp.isFinite32 o55)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
-  o56) (fp.leq o56 (fp #b0 #b10000000 #b10010010000111111011011)))))))
+  o55) (fp.leq o55 (fp #b0 #b10000000 #b10010010000111111011011)))))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o57 (fp.abs o56))))
+  (assert (=> (= (distinct 0 0) true) (= o56 (fp.abs o55))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o58 (attr__ATTRIBUTE_IMAGE4 o57))))
+  (assert (=> (= (distinct 0 0) true) (= o57 (attr__ATTRIBUTE_IMAGE4 o56))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o59 (to_string o58))))
-
-;; H
-  (assert
-  (=> (= (distinct 0 0) true)
-  (and
-  (= o60 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
-         (rec__algorithm__findbestvalley__gap_id_pair__rising
-         best_valley_ids__split_fields3)))
-  (= (bool_eq4 o60
-     (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (get1
-     (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
-     (rec__algorithm__findbestvalley__gap_id_pair__rising
-     best_valley_ids__split_fields3)))) true))))
-
-;; H
-  (assert (=> (= (distinct 0 0) true) (= o61 (us_split_fields5 o60))))
-
-;; H
-  (assert (=> (= (distinct 0 0) true) (= o62 (rec__gaps__gap__bearing o61))))
-
-;; H
-  (assert
-  (=> (= (distinct 0 0) true)
-  (and (= o63 (print o62)) (dynamic_invariant1 o63 true false true true))))
-
-;; H
-  (assert (=> (= (distinct 0 0) true) (= o67 (bearing disttogoal))))
+  (assert (=> (= (distinct 0 0) true) (= o58 (to_string o57))))
 
 ;; H
   (assert
   (=> (= (distinct 0 0) true)
   (and
-  (= o64 (element
-         (rec__algorithm__controller__gapvec (us_split_fields21 this))
+  (= o59 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
          (rec__algorithm__findbestvalley__gap_id_pair__rising
-         best_valley_ids__split_fields3)))
-  (= (bool_eq4 o64
+         best_valley_ids__split_fields)))
+  (= (bool_eq4 o59
      (get
-     (model__ (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (get1
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (rec__algorithm__findbestvalley__gap_id_pair__rising
-     best_valley_ids__split_fields3)))) true))))
+     best_valley_ids__split_fields)))) true))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o65 (us_split_fields5 o64))))
+  (assert (=> (= (distinct 0 0) true) (= o60 (us_split_fields5 o59))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o66 (rec__gaps__gap__bearing o65))))
+  (assert (=> (= (distinct 0 0) true) (= o61 (rec__gaps__gap__bearing o60))))
 
 ;; H
   (assert
   (=> (= (distinct 0 0) true)
-  (and (= o68 (aldiff o66 o67))
-  (and (fp.isFinite32 o68)
+  (and (= o62 (print o61)) (dynamic_invariant1 o62 true false true true))))
+
+;; H
+  (assert (=> (= (distinct 0 0) true) (= o66 (bearing disttogoal))))
+
+;; H
+  (assert
+  (=> (= (distinct 0 0) true)
+  (and
+  (= o63 (element
+         (rec__algorithm__controller__gapvec (us_split_fields19 this))
+         (rec__algorithm__findbestvalley__gap_id_pair__rising
+         best_valley_ids__split_fields)))
+  (= (bool_eq4 o63
+     (get
+     (model__ (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (get1
+     (positions
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
+     (rec__algorithm__findbestvalley__gap_id_pair__rising
+     best_valley_ids__split_fields)))) true))))
+
+;; H
+  (assert (=> (= (distinct 0 0) true) (= o64 (us_split_fields5 o63))))
+
+;; H
+  (assert (=> (= (distinct 0 0) true) (= o65 (rec__gaps__gap__bearing o64))))
+
+;; H
+  (assert
+  (=> (= (distinct 0 0) true)
+  (and (= o67 (aldiff o65 o66))
+  (and (fp.isFinite32 o67)
   (and (fp.lt (fp.neg (fp #b0 #b10000000 #b10010010000111111011011))
-  o68) (fp.leq o68 (fp #b0 #b10000000 #b10010010000111111011011)))))))
+  o67) (fp.leq o67 (fp #b0 #b10000000 #b10010010000111111011011)))))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o69 (fp.abs o68))))
+  (assert (=> (= (distinct 0 0) true) (= o68 (fp.abs o67))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o70 (attr__ATTRIBUTE_IMAGE4 o69))))
+  (assert (=> (= (distinct 0 0) true) (= o69 (attr__ATTRIBUTE_IMAGE4 o68))))
 
 ;; H
-  (assert (=> (= (distinct 0 0) true) (= o71 (to_string o70))))
-
-;; H
-  (assert (= o72 (bearing disttogoal)))
+  (assert (=> (= (distinct 0 0) true) (= o70 (to_string o69))))
 
 (assert
 ;; WP_parameter_def
@@ -6077,8 +6184,8 @@
   (not
   (= (has_key
      (positions
-     (rec__algorithm__controller__gapvec (us_split_fields21 this)))
+     (rec__algorithm__controller__gapvec (us_split_fields19 this)))
      (rec__algorithm__findbestvalley__gap_id_pair__rising
-     best_valley_ids__split_fields3)) true)))
+     best_valley_ids__split_fields)) true)))
 (check-sat)
 (exit)

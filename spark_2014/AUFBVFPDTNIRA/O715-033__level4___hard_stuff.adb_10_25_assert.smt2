@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -130,8 +126,6 @@
 
 (declare-const o2 Float32)
 
-(declare-const result Float32)
-
 (declare-const x1 Float32)
 
 ;; H
@@ -150,23 +144,26 @@
   (assert (fp.leq x (fp #b0 #b01111111 #b00000000000000000000000)))
 
 ;; H
-  (assert (and (= o (fp.mul RNE x x)) (fp.isFinite32 (fp.mul RNE x x))))
+  (assert (= o (fp.mul RNE x x)))
+
+;; H
+  (assert (fp.isFinite32 (fp.mul RNE x x)))
 
 ;; H
   (assert (= o1 (fp.sub RNE x o)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite32 o1)))
-
-;; H
-  (assert (= result x))
+  (assert (= o2 o1))
 
 ;; H
   (assert (= x1 o2))
 
+;; H
+  (assert (fp.isFinite32 o1))
+
 (assert
 ;; WP_parameter_def
  ;; File "hard_stuff.adb", line 1, characters 0-0
-  (not (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x1)))
+  (not (fp.leq x1 copy)))
 (check-sat)
 (exit)

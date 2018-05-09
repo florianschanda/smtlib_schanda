@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -135,23 +131,13 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const float_example__bounded_add__result Float64)
-
 (declare-const o Float64)
 
-(declare-const result Float64)
+(declare-const float_example__bounded_add__result Float64)
 
 (declare-const float_example__bounded_add__result1 Float64)
 
 (declare-const float_example__bounded_add__result2 Float64)
-
-(declare-const float_example__bounded_add__result3 Float64)
-
-(declare-const float_example__bounded_add__result4 Float64)
-
-(declare-const float_example__bounded_add__result5 Float64)
-
-(declare-const result1 Float64)
 
 ;; H
   (assert (fp.isFinite64 a))
@@ -161,43 +147,34 @@
 
 ;; H
   (assert
-  (and
-  (fp.lt a (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))
-  (fp.lt b (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000))))
+  (fp.lt a (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))
 
 ;; H
   (assert
-  (= float_example__bounded_add__result1 float_example__bounded_add__result2))
+  (fp.lt b (fp #b0 #b10000000001 #b0000000000000000000000000000000000000000000000000000)))
 
 ;; H
   (assert
-  (= float_example__bounded_add__result3 float_example__bounded_add__result1))
+  (= float_example__bounded_add__result float_example__bounded_add__result1))
 
 ;; H
-  (assert (and (= o (fp.add RNE a b)) (fp.isFinite64 (fp.add RNE a b))))
+  (assert (= o (fp.add RNE a b)))
 
 ;; H
-  (assert (= result float_example__bounded_add__result))
+  (assert (= float_example__bounded_add__result o))
 
 ;; H
-  (assert (= float_example__bounded_add__result1 o))
-
-;; H
-  (assert
-  (= (mk_t__ref float_example__bounded_add__result4) (mk_t__ref
-                                                     float_example__bounded_add__result2)))
+  (assert (fp.isFinite64 (fp.add RNE a b)))
 
 ;; H
   (assert
-  (= float_example__bounded_add__result5 float_example__bounded_add__result3))
-
-;; H
-  (assert (= result1 float_example__bounded_add__result4))
+  (= (mk_t__ref float_example__bounded_add__result2) (mk_t__ref
+                                                     float_example__bounded_add__result1)))
 
 (assert
 ;; WP_parameter_def
  ;; File "float_example.adb", line 5, characters 0-0
   (not
-  (fp.lt float_example__bounded_add__result4 (fp #b0 #b10000000001 #b1100000000000000000000000000000000000000000000000000))))
+  (fp.lt float_example__bounded_add__result2 (fp #b0 #b10000000001 #b1100000000000000000000000000000000000000000000000000))))
 (check-sat)
 (exit)

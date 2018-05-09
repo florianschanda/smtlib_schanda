@@ -245,6 +245,9 @@
 ;; H
   (assert (= v1 1))
 
+;; H
+  (assert (= v2 2))
+
 (assert
 ;; WP_parameter_def
  ;; File "untangle_tests.adb", line 44, characters 0-0

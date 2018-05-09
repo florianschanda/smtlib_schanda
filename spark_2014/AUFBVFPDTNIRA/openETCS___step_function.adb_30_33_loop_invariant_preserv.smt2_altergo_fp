@@ -1099,9 +1099,15 @@ axiom coerce_axiom :
   (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
   (to_rep(of_rep(x)) = x)))
 
-type tnum_delimiters_rangeB
+type num_delimiters_range
 
-predicate in_range2(x: int) = (((- 128) <= x) and (x <= 127))
+logic num_delimiters_rangeqtint : num_delimiters_range -> int
+
+axiom num_delimiters_rangeqtaxiom :
+  (forall i:num_delimiters_range. ((0 <= num_delimiters_rangeqtint(i)) and
+  (num_delimiters_rangeqtint(i) <= 10)))
+
+predicate in_range2(x: int) = ((0 <= x) and (x <= 10))
 
 logic bool_eq3 : int, int -> bool
 
@@ -1145,20 +1151,41 @@ logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE2 : us_image -> int
 
-logic user_eq1 : tnum_delimiters_rangeB, tnum_delimiters_rangeB -> bool
+logic user_eq1 : num_delimiters_range, num_delimiters_range -> bool
 
-logic dummy1 : tnum_delimiters_rangeB
+logic dummy1 : num_delimiters_range
 
-type tnum_delimiters_rangeB__ref = { tnum_delimiters_rangeB__content :
-tnum_delimiters_rangeB
+type num_delimiters_range__ref = { num_delimiters_range__content :
+num_delimiters_range
 }
 
-function tnum_delimiters_rangeB__ref___projection(a: tnum_delimiters_rangeB__ref) : tnum_delimiters_rangeB =
-  (a).tnum_delimiters_rangeB__content
+function num_delimiters_range__ref___projection(a: num_delimiters_range__ref) : num_delimiters_range =
+  (a).num_delimiters_range__content
 
-type num_delimiters_range
+function to_rep1(x: num_delimiters_range) : int =
+  num_delimiters_rangeqtint(x)
 
-predicate in_range3(x: int) = ((0 <= x) and (x <= 10))
+logic of_rep1 : int -> num_delimiters_range
+
+axiom inversion_axiom1 :
+  (forall x:num_delimiters_range [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
+
+axiom range_axiom1 :
+  (forall x:num_delimiters_range [to_rep1(x)]. in_range2(to_rep1(x)))
+
+axiom coerce_axiom1 :
+  (forall x:int [to_rep1(of_rep1(x))]. (in_range2(x) ->
+  (to_rep1(of_rep1(x)) = x)))
+
+type function_range
+
+logic function_rangeqtint : function_range -> int
+
+axiom function_rangeqtaxiom :
+  (forall i:function_range. ((0 <= function_rangeqtint(i)) and
+  (function_rangeqtint(i) <= 2147483647)))
+
+predicate in_range3(x: int) = ((0 <= x) and (x <= 2147483647))
 
 logic bool_eq5 : int, int -> bool
 
@@ -1172,50 +1199,9 @@ logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE3 : us_image -> int
 
-logic user_eq2 : num_delimiters_range, num_delimiters_range -> bool
+logic user_eq2 : function_range, function_range -> bool
 
-logic dummy2 : num_delimiters_range
-
-type num_delimiters_range__ref = { num_delimiters_range__content :
-num_delimiters_range
-}
-
-function num_delimiters_range__ref___projection(a: num_delimiters_range__ref) : num_delimiters_range =
-  (a).num_delimiters_range__content
-
-logic to_rep1 : num_delimiters_range -> int
-
-logic of_rep1 : int -> num_delimiters_range
-
-axiom inversion_axiom1 :
-  (forall x:num_delimiters_range [to_rep1(x)]. (of_rep1(to_rep1(x)) = x))
-
-axiom range_axiom1 :
-  (forall x:num_delimiters_range [to_rep1(x)]. in_range3(to_rep1(x)))
-
-axiom coerce_axiom1 :
-  (forall x:int [to_rep1(of_rep1(x))]. (in_range3(x) ->
-  (to_rep1(of_rep1(x)) = x)))
-
-type function_range
-
-predicate in_range4(x: int) = ((0 <= x) and (x <= 2147483647))
-
-logic bool_eq6 : int, int -> bool
-
-axiom bool_eq_def5 :
-  (forall x:int. forall y:int [bool_eq6(x, y)]. (((x = y) -> (bool_eq6(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq6(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE4 : us_image -> int
-
-logic user_eq3 : function_range, function_range -> bool
-
-logic dummy3 : function_range
+logic dummy2 : function_range
 
 type function_range__ref = { function_range__content : function_range
 }
@@ -1223,7 +1209,7 @@ type function_range__ref = { function_range__content : function_range
 function function_range__ref___projection(a: function_range__ref) : function_range =
   (a).function_range__content
 
-logic to_rep2 : function_range -> int
+function to_rep2(x: function_range) : int = function_rangeqtint(x)
 
 logic of_rep2 : int -> function_range
 
@@ -1231,10 +1217,10 @@ axiom inversion_axiom2 :
   (forall x:function_range [to_rep2(x)]. (of_rep2(to_rep2(x)) = x))
 
 axiom range_axiom2 :
-  (forall x:function_range [to_rep2(x)]. in_range4(to_rep2(x)))
+  (forall x:function_range [to_rep2(x)]. in_range3(to_rep2(x)))
 
 axiom coerce_axiom2 :
-  (forall x:int [to_rep2(of_rep2(x))]. (in_range4(x) ->
+  (forall x:int [to_rep2(of_rep2(x))]. (in_range3(x) ->
   (to_rep2(of_rep2(x)) = x)))
 
 type us_split_fields = { rec__step_function__delimiter_entry__delimiter :
@@ -1243,6 +1229,9 @@ function_range; rec__step_function__delimiter_entry__value : float1
 
 function us_split_fields_Delimiter__projection(a: us_split_fields) : function_range =
   (a).rec__step_function__delimiter_entry__delimiter
+
+function us_split_fields_Value__projection(a: us_split_fields) : float1 =
+  (a).rec__step_function__delimiter_entry__value
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1256,16 +1245,16 @@ type us_rep = { us_split_fields1 : us_split_fields
 function us_rep___projection(a: us_rep) : us_split_fields =
   (a).us_split_fields1
 
-logic bool_eq7 : us_rep, us_rep -> bool
+logic bool_eq6 : us_rep, us_rep -> bool
 
-axiom bool_eq_def6 :
-  (forall a:us_rep. forall b:us_rep [bool_eq7(a, b)].
+axiom bool_eq_def5 :
+  (forall a:us_rep. forall b:us_rep [bool_eq6(a, b)].
   ((((to_rep2(((a).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((b).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
   (to_rep(((a).us_split_fields1).rec__step_function__delimiter_entry__value) = to_rep(((b).us_split_fields1).rec__step_function__delimiter_entry__value))) ->
-  (bool_eq7(a, b) = true)) and
+  (bool_eq6(a, b) = true)) and
   ((not ((to_rep2(((a).us_split_fields1).rec__step_function__delimiter_entry__delimiter) = to_rep2(((b).us_split_fields1).rec__step_function__delimiter_entry__delimiter)) and
   (to_rep(((a).us_split_fields1).rec__step_function__delimiter_entry__value) = to_rep(((b).us_split_fields1).rec__step_function__delimiter_entry__value)))) ->
-  (bool_eq7(a, b) = false))))
+  (bool_eq6(a, b) = false))))
 
 logic value__size : int
 
@@ -1319,11 +1308,11 @@ axiom step_function__delimiter_entry__value__last__bit_axiom :
 axiom step_function__delimiter_entry__value__position_axiom :
   (0 <= step_function__delimiter_entry__value__position)
 
-logic user_eq4 : us_rep, us_rep -> bool
+logic user_eq3 : us_rep, us_rep -> bool
 
-logic dummy4 : function_range
+logic dummy3 : function_range
 
-logic dummy5 : float1
+logic dummy4 : float1
 
 type delimiter_entry__ref = { delimiter_entry__content : us_rep
 }
@@ -1347,41 +1336,41 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic bool_eq8 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
+logic bool_eq7 : (int,us_rep) farray, int, int, (int,us_rep) farray, int,
   int -> bool
 
-axiom bool_eq_def7 :
+axiom bool_eq_def6 :
   (forall a:(int,us_rep) farray. forall a__first:int. forall a__last:int.
   forall b:(int,us_rep) farray. forall b__first:int. forall b__last:int
-  [bool_eq8(a, a__first, a__last, b, b__first, b__last)].
+  [bool_eq7(a, a__first, a__last, b, b__first, b__last)].
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
   (forall temp___idx_154:int. ((((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) and (bool_eq7((a[temp___idx_154]),
+  (temp___idx_154 <= a__last)) and (bool_eq6((a[temp___idx_154]),
   (b[((b__first - a__first) + temp___idx_154)])) = true)) or
   (not ((a__first <= temp___idx_154) and (temp___idx_154 <= a__last)))))) ->
-  (bool_eq8(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (bool_eq7(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) -> (bool_eq7((a[temp___idx_154]),
-  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq8(a,
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
+  (b[((b__first - a__first) + temp___idx_154)])) = true))))) -> (bool_eq7(a,
   a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,us_rep) farray. forall b:(int,us_rep) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq8(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq7(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_154:int. (((a__first <= temp___idx_154) and
-  (temp___idx_154 <= a__last)) -> (bool_eq7((a[temp___idx_154]),
+  (temp___idx_154 <= a__last)) -> (bool_eq6((a[temp___idx_154]),
   (b[((b__first - a__first) + temp___idx_154)])) = true)))))))
 
-logic dummy6 : (int,us_rep) farray
+logic dummy5 : (int,us_rep) farray
 
 logic value__size1 : int
 
@@ -1410,7 +1399,7 @@ axiom value__alignment_axiom1 : (0 <= value__alignment1)
 axiom object__alignment_axiom1 :
   (forall a:(int,us_rep) farray. (0 <= object__alignment1(a)))
 
-logic user_eq5 : (int,us_rep) farray, (int,us_rep) farray -> bool
+logic user_eq4 : (int,us_rep) farray, (int,us_rep) farray -> bool
 
 type us_split_fields2 = {
 rec__step_function__step_function_t__number_of_delimiters :
@@ -1436,18 +1425,18 @@ type us_rep1 = { us_split_fields3 : us_split_fields2
 function us_rep___2__projection(a: us_rep1) : us_split_fields2 =
   (a).us_split_fields3
 
-logic bool_eq9 : us_rep1, us_rep1 -> bool
+logic bool_eq8 : us_rep1, us_rep1 -> bool
 
-axiom bool_eq_def8 :
-  (forall a:us_rep1. forall b:us_rep1 [bool_eq9(a, b)].
+axiom bool_eq_def7 :
+  (forall a:us_rep1. forall b:us_rep1 [bool_eq8(a, b)].
   ((((to_rep1(((a).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters) = to_rep1(((b).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters)) and
-  (bool_eq8(((a).us_split_fields3).rec__step_function__step_function_t__step,
+  (bool_eq7(((a).us_split_fields3).rec__step_function__step_function_t__step,
   0, 10, ((b).us_split_fields3).rec__step_function__step_function_t__step, 0,
-  10) = true)) -> (bool_eq9(a, b) = true)) and
+  10) = true)) -> (bool_eq8(a, b) = true)) and
   ((not ((to_rep1(((a).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters) = to_rep1(((b).us_split_fields3).rec__step_function__step_function_t__number_of_delimiters)) and
-  (bool_eq8(((a).us_split_fields3).rec__step_function__step_function_t__step,
+  (bool_eq7(((a).us_split_fields3).rec__step_function__step_function_t__step,
   0, 10, ((b).us_split_fields3).rec__step_function__step_function_t__step, 0,
-  10) = true))) -> (bool_eq9(a, b) = false))))
+  10) = true))) -> (bool_eq8(a, b) = false))))
 
 logic value__size2 : int
 
@@ -1503,11 +1492,11 @@ axiom step_function__step_function_t__step__last__bit_axiom :
 axiom step_function__step_function_t__step__position_axiom :
   (0 <= step_function__step_function_t__step__position)
 
-logic user_eq6 : us_rep1, us_rep1 -> bool
+logic user_eq5 : us_rep1, us_rep1 -> bool
 
-logic dummy7 : num_delimiters_range
+logic dummy6 : num_delimiters_range
 
-logic dummy8 : (int,us_rep) farray
+logic dummy7 : (int,us_rep) farray
 
 type step_function_t__ref = { step_function_t__content : us_rep1
 }
@@ -1533,6 +1522,40 @@ axiom is_valid__def_axiom :
   (forall i:int. (((0 <= i) and (i <= (to_rep1(sfun) - 1))) ->
   (to_rep2((((sfun1[i])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <  to_rep2((((sfun1[(i + 1)])).us_split_fields1).rec__step_function__delimiter_entry__delimiter)))))))
 
+type tnum_delimiters_rangeB
+
+logic tnum_delimiters_rangeBqtint : tnum_delimiters_rangeB -> int
+
+axiom tnum_delimiters_rangeBqtaxiom :
+  (forall i:tnum_delimiters_rangeB.
+  (((- 128) <= tnum_delimiters_rangeBqtint(i)) and
+  (tnum_delimiters_rangeBqtint(i) <= 127)))
+
+predicate in_range4(x: int) = (((- 128) <= x) and (x <= 127))
+
+logic bool_eq9 : int, int -> bool
+
+axiom bool_eq_def8 :
+  (forall x:int. forall y:int [bool_eq9(x, y)]. (((x = y) -> (bool_eq9(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq9(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE4 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check4 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE4 : us_image -> int
+
+logic user_eq6 : tnum_delimiters_rangeB, tnum_delimiters_rangeB -> bool
+
+logic dummy8 : tnum_delimiters_rangeB
+
+type tnum_delimiters_rangeB__ref = { tnum_delimiters_rangeB__content :
+tnum_delimiters_rangeB
+}
+
+function tnum_delimiters_rangeB__ref___projection(a: tnum_delimiters_rangeB__ref) : tnum_delimiters_rangeB =
+  (a).tnum_delimiters_rangeB__content
+
 logic sfun : num_delimiters_range
 
 logic sfun1 : (int,us_rep) farray
@@ -1543,7 +1566,8 @@ logic x : int
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic to_rep3 : tnum_delimiters_rangeB -> int
+function to_rep3(x1: tnum_delimiters_rangeB) : int =
+  tnum_delimiters_rangeBqtint(x1)
 
 logic of_rep3 : int -> tnum_delimiters_rangeB
 
@@ -1552,10 +1576,10 @@ axiom inversion_axiom3 :
   (of_rep3(to_rep3(x1)) = x1))
 
 axiom range_axiom3 :
-  (forall x1:tnum_delimiters_rangeB [to_rep3(x1)]. in_range2(to_rep3(x1)))
+  (forall x1:tnum_delimiters_rangeB [to_rep3(x1)]. in_range4(to_rep3(x1)))
 
 axiom coerce_axiom3 :
-  (forall x1:int [to_rep3(of_rep3(x1))]. (in_range2(x1) ->
+  (forall x1:int [to_rep3(of_rep3(x1))]. (in_range4(x1) ->
   (to_rep3(of_rep3(x1)) = x1)))
 
 predicate dynamic_property(first_int: int, last_int: int, x1: int) =
@@ -1586,15 +1610,15 @@ function t3b__ref___projection(a: t3b__ref) : tnum_delimiters_rangeB =
 
 logic attr__ATTRIBUTE_ADDRESS2 : int
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/openETCS/gnatprove/step_function.mlw", line 5912, characters 5-8 *)
 goal WP_parameter_def :
-  (forall i:int. forall temp___268:int. forall o:int.
+  (forall i:int. forall temp___270:int. forall o:int.
   forall o1:function_range. forall o2:float1. forall o3:function_range.
   forall o4:float1. forall o5:function_range. forall o6:int. forall o7:bool.
   forall result:int. forall i1:int. forall i2:int.
   forall step_function__get_value__result:t. forall result1:bool.
   forall step_function__get_value__result1:t. forall result2:int.
-  forall i3:int. (in_range4(x) -> ((is_valid({ us_split_fields3 = {
+  forall i3:int. (in_range3(x) -> ((is_valid({ us_split_fields3 = {
   rec__step_function__step_function_t__number_of_delimiters = sfun;
   rec__step_function__step_function_t__step = sfun1 } }) = true) -> ((({
   int__content = result } = { int__content = i }) and (i1 = 0)) ->
@@ -1603,8 +1627,8 @@ goal WP_parameter_def :
    (to_rep2((((sfun1[j])).us_split_fields1).rec__step_function__delimiter_entry__delimiter) <= x))) ->
   (((((0 <= (to_rep1(sfun) - 1)) -> dynamic_property(0, (to_rep1(sfun) - 1),
   i2)) and ((0 <= i2) and (i2 <= (to_rep1(sfun) - 1)))) and
-  (((((((((((temp___268 = (i2 + 1)) and in_range2((i2 + 1))) and
-  (((0 <= temp___268) and (temp___268 <= 10)) and (o = temp___268))) and ({
+  (((((((((((temp___270 = (i2 + 1)) and in_range4((i2 + 1))) and
+  (((0 <= temp___270) and (temp___270 <= 10)) and (o = temp___270))) and ({
   us_split_fields1 = { rec__step_function__delimiter_entry__delimiter = o1;
   rec__step_function__delimiter_entry__value = o2 } } = (sfun1[o]))) and
   ((o1 = o3) and (o2 = o4))) and (o5 = o3)) and (o6 = to_rep2(o5))) and

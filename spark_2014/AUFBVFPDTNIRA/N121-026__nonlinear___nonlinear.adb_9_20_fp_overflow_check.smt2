@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -140,23 +136,27 @@
   (fp.isFinite32 result__)))
 
 ;; H
-  (assert
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x)
-  (fp.leq x (fp #b0 #b10000110 #b01101000000000000000000))))
+  (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) x))
 
 ;; H
-  (assert
-  (and (fp.leq (fp.neg (fp #b0 #b10000110 #b01101000000000000000000))
-  y) (fp.leq y (fp #b0 #b00000000 #b00000000000000000000000))))
+  (assert (fp.leq x (fp #b0 #b10000110 #b01101000000000000000000)))
 
 ;; H
-  (assert
-  (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) z)
-  (fp.leq z (fp #b0 #b01111111 #b00000000000000000000000))))
+  (assert (fp.leq (fp.neg (fp #b0 #b10000110 #b01101000000000000000000))
+  y))
+
+;; H
+  (assert (fp.leq y (fp #b0 #b00000000 #b00000000000000000000000)))
+
+;; H
+  (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) z))
+
+;; H
+  (assert (fp.leq z (fp #b0 #b01111111 #b00000000000000000000000)))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/N121-026__nonlinear/gnatprove/nonlinear.mlw", line 2098, characters 5-8
   (not (fp.isFinite32 (fp.add RNE x y))))
 (check-sat)
 (exit)

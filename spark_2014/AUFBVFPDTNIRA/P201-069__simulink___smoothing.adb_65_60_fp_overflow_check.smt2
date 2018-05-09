@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -136,23 +132,9 @@
 
 (declare-const abs_delta_out1 Float64)
 
-(declare-const compare_to_zero_out1 Bool)
-
 (declare-const smoother_value_out1 Float64)
 
 (declare-const abs_new_delta_out1 Float64)
-
-(declare-const o Float64)
-
-(declare-const o1 Float64)
-
-(declare-const result Float64)
-
-(declare-const abs_delta_out11 Float64)
-
-(declare-const result1 Bool)
-
-(declare-const compare_to_zero_out11 Bool)
 
 ;; H
   (assert (fp.isFinite64 new_value))
@@ -171,14 +153,18 @@
 
 ;; H
   (assert
-  (and
   (fp.lt (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)
-  smoothing_factor)
-  (and
+  smoothing_factor))
+
+;; H
+  (assert
   (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  new_value)
+  new_value))
+
+;; H
+  (assert
   (fp.leq (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)
-  prior_value))))
+  prior_value))
 
 ;; H
   (assert
@@ -199,26 +185,7 @@
   (fp.isFinite64 abs_new_delta_out1)))
 
 ;; H
-  (assert
-  (and (= o (fp.sub RNE new_value prior_value))
-  (fp.isFinite64 (fp.sub RNE new_value prior_value))))
-
-;; H
-  (assert (= o1 (fp.abs o)))
-
-;; H
-  (assert (= result abs_delta_out1))
-
-;; H
-  (assert (= abs_delta_out11 o1))
-
-;; H
-  (assert (= result1 compare_to_zero_out1))
-
-;; H
-  (assert
-  (= compare_to_zero_out11 (ite (fp.eq abs_delta_out11 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000))
-                           true false)))
+  (assert (fp.isFinite64 (fp.sub RNE new_value prior_value)))
 
 ;; H
   (assert

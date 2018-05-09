@@ -131,7 +131,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA21-002__floatdiv/gnatprove/basic_contracts.mlw", line 2649, characters 5-8
   (not
   (fp.isFinite32 (fp.div RNE ((_ to_fp 8 24) RNE (to_real numerator)) ((_ to_fp 8 24) RNE (to_real
   denominator))))))

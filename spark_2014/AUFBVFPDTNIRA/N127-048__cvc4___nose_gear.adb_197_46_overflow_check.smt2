@@ -38,8 +38,6 @@
 (define-fun us_private__ref___projection ((a us_private__ref)) us_private
   (us_private__content a))
 
-(declare-fun nth ((_ BitVec 16) Int) Bool)
-
 (declare-fun lsr ((_ BitVec 16) Int) (_ BitVec 16))
 
 (declare-fun asr ((_ BitVec 16) Int) (_ BitVec 16))
@@ -57,70 +55,6 @@
                                             (- (- 65536 (bv2nat x)))))
 
 (define-fun uint_in_range ((i Int)) Bool (and (<= 0 i) (<= i 65535)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvlshr x n) (lsr x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvashr x n) (asr x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvshl x n) (lsl x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvshl v (bvurem n (_ bv16 16))) (bvlshr v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
-  (rotate_left1 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 16)) (n (_ BitVec 16)))
-  (= (bvor (bvlshr v (bvurem n (_ bv16 16))) (bvshl v (bvsub (_ bv16 16) (bvurem n (_ bv16 16)))))
-  (rotate_right1 v (bv2nat n)))))
-
-(declare-fun nth_bv ((_ BitVec 16) (_ BitVec 16)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 16)) (i (_ BitVec 16)))
-  (= (= (nth_bv x i) true) (not (= (bvand (bvlshr x i) #x0001) #x0000)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 16)) (i (_ BitVec 16)))
-  (= (nth x (bv2nat i)) (nth_bv x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 16)) (i Int))
-  (=> (and (<= 0 i) (< i 65536)) (= (nth_bv x ((_ int2bv 16) i)) (nth x i)))))
-
-(declare-fun eq_sub_bv ((_ BitVec 16) (_ BitVec 16) (_ BitVec 16)
-  (_ BitVec 16)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 16)) (b (_ BitVec 16)) (i (_ BitVec 16))
-  (n (_ BitVec 16)))
-  (let ((mask (bvshl (bvsub (bvshl #x0001 n) #x0001) i)))
-  (= (eq_sub_bv a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub ((a (_ BitVec 16)) (b (_ BitVec 16)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth a j) (nth b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 16)) (b (_ BitVec 16)) (i (_ BitVec 16))
-  (n (_ BitVec 16)))
-  (= (eq_sub a b (bv2nat i) (bv2nat n)) (eq_sub_bv a b i n))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content (_ BitVec 16))))))
 (declare-fun power ((_ BitVec 16) Int) (_ BitVec 16))
@@ -142,10 +76,6 @@
 
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
-
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int2 (RoundingMode Float64) Int)
 
 (declare-const max_int Int)
 
@@ -169,13 +99,11 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
-
-(declare-fun nth1 ((_ BitVec 8) Int) Bool)
 
 (declare-fun lsr1 ((_ BitVec 8) Int) (_ BitVec 8))
 
@@ -187,76 +115,10 @@
 
 (declare-fun rotate_left2 ((_ BitVec 8) Int) (_ BitVec 8))
 
-(define-fun to_int3 ((x (_ BitVec 8))) Int (ite (bvsge x (_ bv0 8))
+(define-fun to_int2 ((x (_ BitVec 8))) Int (ite (bvsge x (_ bv0 8))
                                            (bv2nat x) (- (- 256 (bv2nat x)))))
 
 (define-fun uint_in_range1 ((i Int)) Bool (and (<= 0 i) (<= i 255)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvlshr x n) (lsr1 x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvashr x n) (asr1 x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvshl x n) (lsl1 x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvshl v (bvurem n (_ bv8 8))) (bvlshr v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
-  (rotate_left2 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 8)) (n (_ BitVec 8)))
-  (= (bvor (bvlshr v (bvurem n (_ bv8 8))) (bvshl v (bvsub (_ bv8 8) (bvurem n (_ bv8 8)))))
-  (rotate_right2 v (bv2nat n)))))
-
-(declare-fun nth_bv1 ((_ BitVec 8) (_ BitVec 8)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 8)) (i (_ BitVec 8)))
-  (= (= (nth_bv1 x i) true) (not (= (bvand (bvlshr x i) #x01) #x00)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 8)) (i (_ BitVec 8)))
-  (= (nth1 x (bv2nat i)) (nth_bv1 x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 8)) (i Int))
-  (=> (and (<= 0 i) (< i 256)) (= (nth_bv1 x ((_ int2bv 8) i)) (nth1 x i)))))
-
-(declare-fun eq_sub_bv1 ((_ BitVec 8) (_ BitVec 8) (_ BitVec 8)
-  (_ BitVec 8)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 8)) (b (_ BitVec 8)) (i (_ BitVec 8))
-  (n (_ BitVec 8)))
-  (let ((mask (bvshl (bvsub (bvshl #x01 n) #x01) i)))
-  (= (eq_sub_bv1 a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub1 ((a (_ BitVec 8)) (b (_ BitVec 8)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth1 a j) (nth1 b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 8)) (b (_ BitVec 8)) (i (_ BitVec 8))
-  (n (_ BitVec 8)))
-  (= (eq_sub1 a b (bv2nat i) (bv2nat n)) (eq_sub_bv1 a b i n))))
-
-(declare-fun nth2 ((_ BitVec 32) Int) Bool)
 
 (declare-fun lsr2 ((_ BitVec 32) Int) (_ BitVec 32))
 
@@ -268,79 +130,11 @@
 
 (declare-fun rotate_left3 ((_ BitVec 32) Int) (_ BitVec 32))
 
-(define-fun to_int4 ((x (_ BitVec 32))) Int (ite (bvsge x (_ bv0 32))
+(define-fun to_int3 ((x (_ BitVec 32))) Int (ite (bvsge x (_ bv0 32))
                                             (bv2nat x)
                                             (- (- 4294967296 (bv2nat x)))))
 
 (define-fun uint_in_range2 ((i Int)) Bool (and (<= 0 i) (<= i 4294967295)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvlshr x n) (lsr2 x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvashr x n) (asr2 x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvshl x n) (lsl2 x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvshl v (bvurem n (_ bv32 32))) (bvlshr v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
-  (rotate_left3 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 32)) (n (_ BitVec 32)))
-  (= (bvor (bvlshr v (bvurem n (_ bv32 32))) (bvshl v (bvsub (_ bv32 32) (bvurem n (_ bv32 32)))))
-  (rotate_right3 v (bv2nat n)))))
-
-(declare-fun nth_bv2 ((_ BitVec 32) (_ BitVec 32)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 32)) (i (_ BitVec 32)))
-  (= (= (nth_bv2 x i) true)
-  (not (= (bvand (bvlshr x i) #x00000001) #x00000000)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 32)) (i (_ BitVec 32)))
-  (= (nth2 x (bv2nat i)) (nth_bv2 x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 32)) (i Int))
-  (=> (and (<= 0 i) (< i 4294967296))
-  (= (nth_bv2 x ((_ int2bv 32) i)) (nth2 x i)))))
-
-(declare-fun eq_sub_bv2 ((_ BitVec 32) (_ BitVec 32) (_ BitVec 32)
-  (_ BitVec 32)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 32)) (b (_ BitVec 32)) (i (_ BitVec 32))
-  (n (_ BitVec 32)))
-  (let ((mask (bvshl (bvsub (bvshl #x00000001 n) #x00000001) i)))
-  (= (eq_sub_bv2 a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub2 ((a (_ BitVec 32)) (b (_ BitVec 32)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth2 a j) (nth2 b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 32)) (b (_ BitVec 32)) (i (_ BitVec 32))
-  (n (_ BitVec 32)))
-  (= (eq_sub2 a b (bv2nat i) (bv2nat n)) (eq_sub_bv2 a b i n))))
-
-(declare-fun nth3 ((_ BitVec 64) Int) Bool)
 
 (declare-fun lsr3 ((_ BitVec 64) Int) (_ BitVec 64))
 
@@ -352,78 +146,12 @@
 
 (declare-fun rotate_left4 ((_ BitVec 64) Int) (_ BitVec 64))
 
-(define-fun to_int5 ((x (_ BitVec 64))) Int (ite (bvsge x (_ bv0 64))
+(define-fun to_int4 ((x (_ BitVec 64))) Int (ite (bvsge x (_ bv0 64))
                                             (bv2nat x)
                                             (- (- 18446744073709551616 (bv2nat x)))))
 
 (define-fun uint_in_range3 ((i Int)) Bool (and (<= 0 i)
                                           (<= i 18446744073709551615)))
-
-;; lsr_bv_is_lsr
-  (assert
-  (forall ((x (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvlshr x n) (lsr3 x (bv2nat n)))))
-
-;; asr_bv_is_asr
-  (assert
-  (forall ((x (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvashr x n) (asr3 x (bv2nat n)))))
-
-;; lsl_bv_is_lsl
-  (assert
-  (forall ((x (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvshl x n) (lsl3 x (bv2nat n)))))
-
-;; rotate_left_bv_is_rotate_left
-  (assert
-  (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvshl v (bvurem n (_ bv64 64))) (bvlshr v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
-  (rotate_left4 v (bv2nat n)))))
-
-;; rotate_right_bv_is_rotate_right
-  (assert
-  (forall ((v (_ BitVec 64)) (n (_ BitVec 64)))
-  (= (bvor (bvlshr v (bvurem n (_ bv64 64))) (bvshl v (bvsub (_ bv64 64) (bvurem n (_ bv64 64)))))
-  (rotate_right4 v (bv2nat n)))))
-
-(declare-fun nth_bv3 ((_ BitVec 64) (_ BitVec 64)) Bool)
-
-;; nth_bv_def
-  (assert
-  (forall ((x (_ BitVec 64)) (i (_ BitVec 64)))
-  (= (= (nth_bv3 x i) true)
-  (not (= (bvand (bvlshr x i) #x0000000000000001) #x0000000000000000)))))
-
-;; Nth_bv_is_nth
-  (assert
-  (forall ((x (_ BitVec 64)) (i (_ BitVec 64)))
-  (= (nth3 x (bv2nat i)) (nth_bv3 x i))))
-
-;; Nth_bv_is_nth2
-  (assert
-  (forall ((x (_ BitVec 64)) (i Int))
-  (=> (and (<= 0 i) (< i 18446744073709551616))
-  (= (nth_bv3 x ((_ int2bv 64) i)) (nth3 x i)))))
-
-(declare-fun eq_sub_bv3 ((_ BitVec 64) (_ BitVec 64) (_ BitVec 64)
-  (_ BitVec 64)) Bool)
-
-;; eq_sub_bv_def
-  (assert
-  (forall ((a (_ BitVec 64)) (b (_ BitVec 64)) (i (_ BitVec 64))
-  (n (_ BitVec 64)))
-  (let ((mask (bvshl (bvsub (bvshl #x0000000000000001 n) #x0000000000000001) i)))
-  (= (eq_sub_bv3 a b i n) (= (bvand b mask) (bvand a mask))))))
-
-(define-fun eq_sub3 ((a (_ BitVec 64)) (b (_ BitVec 64)) (i Int)
-  (n Int)) Bool (forall ((j Int))
-                (=> (and (<= i j) (< j (+ i n))) (= (nth3 a j) (nth3 b j)))))
-
-;; eq_sub_equiv
-  (assert
-  (forall ((a (_ BitVec 64)) (b (_ BitVec 64)) (i (_ BitVec 64))
-  (n (_ BitVec 64)))
-  (= (eq_sub3 a b (bv2nat i) (bv2nat n)) (eq_sub_bv3 a b i n))))
 
 (declare-datatypes () ((t__ref1 (mk_t__ref1 (t__content1 Float64)))))
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
@@ -459,7 +187,19 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)) (fp #b0 #b11111111110 #b1111111111111111111111111111111111111111111111111111)))
                                     (fp.isFinite64 temp___expr_67)))
 
+(declare-const validity_period Float64)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (declare-sort tinteger_32B 0)
+
+(declare-fun tinteger_32Bqtint (tinteger_32B) Int)
+
+;; tinteger_32B'axiom
+  (assert
+  (forall ((i tinteger_32B))
+  (and (<= (- 2147483648) (tinteger_32Bqtint i))
+  (<= (tinteger_32Bqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -481,6 +221,14 @@
   (tinteger_32B__content a))
 
 (declare-sort integer_32 0)
+
+(declare-fun integer_32qtint (integer_32) Int)
+
+;; integer_32'axiom
+  (assert
+  (forall ((i integer_32))
+  (and (<= (- 2147483648) (integer_32qtint i))
+  (<= (integer_32qtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -531,23 +279,21 @@
   (temp___is_init_189 Bool) (temp___skip_constant_190 Bool)
   (temp___do_toplevel_191 Bool) (temp___do_typ_inv_192 Bool)) Bool true)
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const ngrotations (_ BitVec 16))
-
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
-(declare-const ngclicktime (_ BitVec 16))
+(declare-const ngrotations (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
 
-(declare-const millisecs (_ BitVec 16))
+(declare-const ngclicktime (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
+
+(declare-const millisecs (_ BitVec 16))
 
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
 
@@ -647,6 +393,12 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS54 Int)
 
+(declare-const attr__ATTRIBUTE_ADDRESS55 Int)
+
+;; validity_period__def_axiom
+  (assert
+  (= validity_period (fp #b0 #b10000001010 #b0111011100000000000000000000000000000000000000000000)))
+
 (declare-const estimatedgroundvelocity Float64)
 
 (declare-const old_ngclicktime_memory (_ BitVec 16))
@@ -654,10 +406,6 @@
 (declare-const old_ngrotations_memory (_ BitVec 16))
 
 (declare-const old_estimatedgroundvelocity_memory Float64)
-
-(declare-const old_ngclicktime_out1 (_ BitVec 16))
-
-(declare-const old_ngrotations_out1 (_ BitVec 16))
 
 (declare-const old_estimatedgroundvelocity_out1 Float64)
 
@@ -667,21 +415,11 @@
 
 (declare-const max_uint16_2_out1 Int)
 
-(declare-const millisecs_out1 (_ BitVec 16))
-
-(declare-const ngclicktime_out1 (_ BitVec 16))
-
-(declare-const ngrotations_out1 (_ BitVec 16))
-
 (declare-const wheel_circunference_out1 Float64)
 
 (declare-const ms_in_hour_out1 Float64)
 
 (declare-const ms_in_our1_out1 Float64)
-
-(declare-const update_period_os_interrupt_out1 (_ BitVec 16))
-
-(declare-const validity_period_out1 (_ BitVec 16))
 
 (declare-const to_int32_left_out1 Int)
 
@@ -739,101 +477,53 @@
 
 (declare-const o Int)
 
-(declare-const result t__ref)
+(declare-const old_ngclicktime_out1 (_ BitVec 16))
 
-(declare-const old_ngclicktime_out11 (_ BitVec 16))
+(declare-const old_ngrotations_out1 (_ BitVec 16))
 
-(declare-const result1 t__ref)
+(declare-const millisecs_out1 (_ BitVec 16))
 
-(declare-const old_ngrotations_out11 (_ BitVec 16))
+(declare-const ngclicktime_out1 (_ BitVec 16))
 
-(declare-const result2 t__ref1)
+(declare-const ngrotations_out1 (_ BitVec 16))
 
-(declare-const old_estimatedgroundvelocity_out11 Float64)
+(declare-const update_period_os_interrupt_out1 (_ BitVec 16))
 
-(declare-const result3 int__ref)
-
-(declare-const max_uint16_out11 Int)
-
-(declare-const result4 int__ref)
-
-(declare-const max_uint16_1_out11 Int)
-
-(declare-const result5 int__ref)
-
-(declare-const max_uint16_2_out11 Int)
-
-(declare-const result6 t__ref)
-
-(declare-const millisecs_out11 (_ BitVec 16))
-
-(declare-const result7 t__ref)
-
-(declare-const ngclicktime_out11 (_ BitVec 16))
-
-(declare-const result8 t__ref)
-
-(declare-const ngrotations_out11 (_ BitVec 16))
-
-(declare-const result9 t__ref1)
-
-(declare-const wheel_circunference_out11 Float64)
-
-(declare-const result10 t__ref1)
-
-(declare-const ms_in_hour_out11 Float64)
-
-(declare-const result11 t__ref1)
-
-(declare-const ms_in_our1_out11 Float64)
-
-(declare-const result12 t__ref)
-
-(declare-const update_period_os_interrupt_out11 (_ BitVec 16))
-
-(declare-const result13 t__ref)
-
-(declare-const validity_period_out11 (_ BitVec 16))
-
-(declare-const result14 int__ref)
+(declare-const validity_period_out1 (_ BitVec 16))
 
 (declare-const to_int32_left_out11 Int)
 
-(declare-const result15 int__ref)
-
 (declare-const to_int32_left_1_out11 Int)
-
-(declare-const result16 int__ref)
 
 (declare-const to_int32_left_2_out11 Int)
 
-(declare-const result17 int__ref)
-
 (declare-const to_int32_right_out11 Int)
-
-(declare-const result18 int__ref)
 
 (declare-const to_int32_right_1_out11 Int)
 
-(declare-const result19 int__ref)
-
 (declare-const to_int32_right_2_out11 Int)
-
-(declare-const result20 int__ref)
 
 (declare-const data_type_conversion1_out11 Int)
 
-(declare-const result21 int__ref)
-
 (declare-const data_type_conversion_out11 Int)
-
-(declare-const result22 t__ref)
 
 (declare-const sum1_2_out11 (_ BitVec 16))
 
-(declare-const result23 int__ref)
-
 (declare-const sum1_out11 Int)
+
+;; H
+  (assert (fp.isFinite64 validity_period))
+
+;; H
+  (assert
+  (= (fp #b0 #b10000001010 #b0111011100000000000000000000000000000000000000000000)
+  validity_period))
+
+;; H
+  (assert (= old_ngclicktime_out1 old_ngclicktime_memory))
+
+;; H
+  (assert (= old_ngrotations_out1 old_ngrotations_memory))
 
 ;; H
   (assert (fp.isFinite64 old_estimatedgroundvelocity_memory))
@@ -998,173 +688,72 @@
   (fp.isFinite64 (t__content1 old_output_if_new_invalid_out1))))
 
 ;; H
-  (assert (= result (mk_t__ref old_ngclicktime_out1)))
+  (assert (= millisecs_out1 millisecs))
 
 ;; H
-  (assert (= old_ngclicktime_out11 old_ngclicktime_memory))
+  (assert (= ngclicktime_out1 ngclicktime))
 
 ;; H
-  (assert (= result1 (mk_t__ref old_ngrotations_out1)))
+  (assert (= ngrotations_out1 ngrotations))
 
 ;; H
-  (assert (= old_ngrotations_out11 old_ngrotations_memory))
+  (assert (= update_period_os_interrupt_out1 #x01F4))
 
 ;; H
-  (assert (= result2 (mk_t__ref1 old_estimatedgroundvelocity_out1)))
+  (assert (= validity_period_out1 #x0BB8))
 
 ;; H
-  (assert
-  (= old_estimatedgroundvelocity_out11 old_estimatedgroundvelocity_memory))
+  (assert (= to_int32_left_out11 (bv2nat ngrotations_out1)))
 
 ;; H
-  (assert (= result3 (mk_int__ref max_uint16_out1)))
-
-;; H
-  (assert (= max_uint16_out11 65535))
-
-;; H
-  (assert (= result4 (mk_int__ref max_uint16_1_out1)))
-
-;; H
-  (assert (= max_uint16_1_out11 65535))
-
-;; H
-  (assert (= result5 (mk_int__ref max_uint16_2_out1)))
-
-;; H
-  (assert (= max_uint16_2_out11 65535))
-
-;; H
-  (assert (= result6 (mk_t__ref millisecs_out1)))
-
-;; H
-  (assert (= millisecs_out11 millisecs))
-
-;; H
-  (assert (= result7 (mk_t__ref ngclicktime_out1)))
-
-;; H
-  (assert (= ngclicktime_out11 ngclicktime))
-
-;; H
-  (assert (= result8 (mk_t__ref ngrotations_out1)))
-
-;; H
-  (assert (= ngrotations_out11 ngrotations))
-
-;; H
-  (assert (= result9 (mk_t__ref1 wheel_circunference_out1)))
-
-;; H
-  (assert
-  (= wheel_circunference_out11 (fp #b0 #b01111110101 #b1100101111110111010111000011100111011111000101100101)))
-
-;; H
-  (assert (= result10 (mk_t__ref1 ms_in_hour_out1)))
-
-;; H
-  (assert
-  (= ms_in_hour_out11 (fp #b0 #b10000010100 #b1011011101110100000000000000000000000000000000000000)))
-
-;; H
-  (assert (= result11 (mk_t__ref1 ms_in_our1_out1)))
-
-;; H
-  (assert
-  (= ms_in_our1_out11 (fp #b0 #b01111111111 #b0000000000000000000000000000000000000000000000000000)))
-
-;; H
-  (assert (= result12 (mk_t__ref update_period_os_interrupt_out1)))
-
-;; H
-  (assert (= update_period_os_interrupt_out11 #x01F4))
-
-;; H
-  (assert (= result13 (mk_t__ref validity_period_out1)))
-
-;; H
-  (assert (= validity_period_out11 #x0BB8))
-
-;; H
-  (assert (= result14 (mk_int__ref to_int32_left_out1)))
-
-;; H
-  (assert (= to_int32_left_out11 (bv2nat ngrotations_out11)))
-
-;; H
-  (assert (= result15 (mk_int__ref to_int32_left_1_out1)))
-
-;; H
-  (assert (= to_int32_left_1_out11 (bv2nat ngclicktime_out11)))
-
-;; H
-  (assert (= result16 to_int32_left_2_out1))
+  (assert (= to_int32_left_1_out11 (bv2nat ngclicktime_out1)))
 
 ;; H
   (assert
   (= (let ((subject to_int32_left_2_out1)) to_int32_left_2_out11) (bv2nat
-  millisecs_out11)))
-
-;; H
-  (assert (= result17 to_int32_right_out1))
+  millisecs_out1)))
 
 ;; H
   (assert
   (= (let ((subject to_int32_right_out1)) to_int32_right_out11) (bv2nat
-  old_ngrotations_out11)))
-
-;; H
-  (assert (= result18 to_int32_right_1_out1))
+  old_ngrotations_out1)))
 
 ;; H
   (assert
   (= (let ((subject to_int32_right_1_out1)) to_int32_right_1_out11) (bv2nat
-  old_ngclicktime_out11)))
-
-;; H
-  (assert (= result19 to_int32_right_2_out1))
+  old_ngclicktime_out1)))
 
 ;; H
   (assert
   (= (let ((subject to_int32_right_2_out1)) to_int32_right_2_out11) (bv2nat
-  old_ngclicktime_out11)))
-
-;; H
-  (assert (= result20 data_type_conversion1_out1))
+  old_ngclicktime_out1)))
 
 ;; H
   (assert
   (= (let ((subject data_type_conversion1_out1)) data_type_conversion1_out11) (bv2nat
-  millisecs_out11)))
-
-;; H
-  (assert (= result21 data_type_conversion_out1))
+  millisecs_out1)))
 
 ;; H
   (assert
   (= (let ((subject data_type_conversion_out1)) data_type_conversion_out11) (bv2nat
-  old_ngclicktime_out11)))
-
-;; H
-  (assert (= result22 sum1_2_out1))
+  old_ngclicktime_out1)))
 
 ;; H
   (assert
-  (= (let ((subject sum1_2_out1)) sum1_2_out11) (bvsub validity_period_out11
-  update_period_os_interrupt_out11)))
+  (= (let ((subject sum1_2_out1)) sum1_2_out11) (bvsub validity_period_out1
+  update_period_os_interrupt_out1)))
 
 ;; H
   (assert
-  (and
   (= o (- (let ((subject to_int32_right_out1)) to_int32_right_out11)
-  to_int32_left_out11)) (in_range1
-  (- (let ((subject to_int32_right_out1)) to_int32_right_out11) to_int32_left_out11))))
-
-;; H
-  (assert (= result23 sum1_out1))
+  to_int32_left_out11)))
 
 ;; H
   (assert (= (let ((subject sum1_out1)) sum1_out11) o))
+
+;; H
+  (assert (in_range1
+  (- (let ((subject to_int32_right_out1)) to_int32_right_out11) to_int32_left_out11)))
 
 (assert
 ;; WP_parameter_def

@@ -117,21 +117,21 @@
 
 (declare-const dummy Float32)
 
-(declare-const temp___584 Float32)
+(declare-const temp___577 Float32)
 
-(declare-const temp___583 Float32)
+(declare-const temp___576 Float32)
 
 (declare-const o Float32)
 
-(declare-const temp___588 Float32)
+(declare-const temp___581 Float32)
 
-(declare-const temp___587 Float32)
+(declare-const temp___580 Float32)
 
 (declare-const o1 Float32)
 
-(declare-const temp___592 Float32)
+(declare-const temp___585 Float32)
 
-(declare-const temp___591 Float32)
+(declare-const temp___584 Float32)
 
 (declare-const o2 Float32)
 
@@ -275,6 +275,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "test_trigo.adb", line 5, characters 0-0
-  (not (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) f2)))
+  (not (fp.leq f2 (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

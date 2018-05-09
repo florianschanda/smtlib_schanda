@@ -897,6 +897,10 @@ axiom one_of_int : (fliteral = of_int(RNA, 1))
 type t__ref = { t__content : t
 }
 
+logic convert : t -> t
+
+logic convert__function_guard : t, t -> prop
+
 type t1
 
 logic fliteral1 : t
@@ -954,10 +958,6 @@ type t2__ref = { t2__content : t2
 
 function t2__ref___projection(a: t2__ref) : t2 = (a).t2__content
 
-logic convert : t -> t
-
-logic convert__function_guard : t, t -> prop
-
 axiom convert__post_axiom :
   (forall x:t [convert(x)]. ((in_range1(x) and (in_range2(x) and
   (le(neg(fliteral), x) and le(x, fliteral)))) -> (in_range2(convert(x)) and
@@ -978,4 +978,4 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
  (* File "floatround.adb", line 7, characters 0-0 *)
 goal WP_parameter_def :
   (forall x1:t. forall result:t. forall x11:t. (((result = x1) and
-  (x11 = fliteral2)) -> (in_range1(x11) -> in_range2(x11))))
+  (x11 = fliteral2)) -> (in_range1(x11) -> le(neg(fliteral), x11))))

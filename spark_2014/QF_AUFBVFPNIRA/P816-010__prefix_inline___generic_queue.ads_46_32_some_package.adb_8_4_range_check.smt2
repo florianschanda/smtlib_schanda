@@ -227,14 +227,21 @@
   (assert
   (<= 0 some_package__float_buffer__buffer_tag__num_overflows__position))
 
-(define-fun in_range4 ((x Int)) Bool (or (= x 0) (= x 1)))
+(define-fun in_range4 ((x Int)) Bool (and (<= 0 x) (<= x 256)))
 
-(define-fun in_range5 ((x Int)) Bool (and (<= 0 x) (<= x 256)))
+(define-fun dynamic_invariant ((temp___expr_260 Int)
+  (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
+  (temp___do_toplevel_258 Bool)
+  (temp___do_typ_inv_259 Bool)) Bool (=>
+                                     (or (= temp___is_init_256 true)
+                                     (<= 0 256)) (in_range4 temp___expr_260)))
+
+(define-fun in_range5 ((x Int)) Bool (or (= x 0) (= x 1)))
 
 (define-fun dynamic_property ((range_first Int) (range_last Int) (low Int)
   (high Int)) Bool (and (in_range low)
                    (and (in_range high)
-                   (=> (<= low high) (and (in_range5 low) (in_range5 high))))))
+                   (=> (<= low high) (and (in_range4 low) (in_range4 high))))))
 
 (declare-const value__size2 Int)
 
@@ -256,13 +263,6 @@
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
-
-(define-fun dynamic_invariant ((temp___expr_260 Int)
-  (temp___is_init_256 Bool) (temp___skip_constant_257 Bool)
-  (temp___do_toplevel_258 Bool)
-  (temp___do_typ_inv_259 Bool)) Bool (=>
-                                     (or (= temp___is_init_256 true)
-                                     (<= 0 256)) (in_range5 temp___expr_260)))
 
 (define-fun dynamic_invariant1 ((temp___expr_39 Int) (temp___is_init_35 Bool)
   (temp___skip_constant_36 Bool) (temp___do_toplevel_37 Bool)

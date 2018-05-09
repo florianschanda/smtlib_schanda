@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -107,6 +103,10 @@
 
 (declare-datatypes () ((float__ref (mk_float__ref (float__content float)))))
 (define-fun float__ref___projection ((a float__ref)) float (float__content a))
+
+(declare-fun m_per_s_from_km_per_h (Float32) Float32)
+
+(declare-fun m_per_s_from_km_per_h__function_guard (Float32 Float32) Bool)
 
 (declare-sort speed_t 0)
 
@@ -161,6 +161,14 @@
 
 (declare-sort tdistance_tB 0)
 
+(declare-fun tdistance_tBqtint (tdistance_tB) Int)
+
+;; tdistance_tB'axiom
+  (assert
+  (forall ((i tdistance_tB))
+  (and (<= (- 2147483648) (tdistance_tBqtint i))
+  (<= (tdistance_tBqtint i) 2147483647))))
+
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
@@ -181,6 +189,13 @@
   (tdistance_tB__content a))
 
 (declare-sort distance_t 0)
+
+(declare-fun distance_tqtint (distance_t) Int)
+
+;; distance_t'axiom
+  (assert
+  (forall ((i distance_t))
+  (and (<= 0 (distance_tqtint i)) (<= (distance_tqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -207,31 +222,39 @@
                                      (<= 0 2147483647)) (in_range2
                                      temp___expr_203)))
 
-(declare-fun m_per_s_from_km_per_h (Float32) Float32)
-
-(declare-fun m_per_s_from_km_per_h__function_guard (Float32 Float32) Bool)
-
-(declare-const maximum_valid_speed Float32)
+(declare-const maximum_valid_speed_km_per_h Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const initial_speed Float32)
+(declare-const maximum_valid_speed Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
-(declare-const final_speed Float32)
+(declare-const minimum_valid_acceleration Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
-(declare-const acceleration Float32)
+(declare-const initial_speed Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
+(declare-const final_speed Float32)
+
 (declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const acceleration Float32)
 
 (declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
+(declare-const minimum_valid_speed Float32)
+
 (declare-const attr__ATTRIBUTE_ADDRESS6 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS7 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS8 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS9 Int)
 
 (define-fun dynamic_invariant3 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -241,10 +264,17 @@
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
 
+;; minimum_valid_speed__def_axiom
+  (assert
+  (= minimum_valid_speed (fp #b0 #b01111011 #b10011001100110011001101)))
+
 ;; maximum_valid_speed__def_axiom
   (assert
-  (= maximum_valid_speed (m_per_s_from_km_per_h
-                         (fp #b0 #b10000111 #b11110100000000000000000))))
+  (= maximum_valid_speed (m_per_s_from_km_per_h maximum_valid_speed_km_per_h)))
+
+;; minimum_valid_acceleration__def_axiom
+  (assert
+  (= minimum_valid_acceleration (fp.neg (fp #b0 #b10000010 #b01000000000000000000000))))
 
 (declare-sort speed_km_per_h_t 0)
 
@@ -272,6 +302,10 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_182)))
 
+;; maximum_valid_speed_km_per_h__def_axiom
+  (assert
+  (= maximum_valid_speed_km_per_h (fp #b0 #b10000111 #b11110100000000000000000)))
+
 (declare-fun is_valid_speed_km_per_h (Float32) Bool)
 
 (declare-fun is_valid_speed_km_per_h__function_guard (Bool Float32) Bool)
@@ -284,8 +318,8 @@
   (forall ((speed Float32))
   (! (= (= (is_valid_speed_km_per_h speed) true)
      (and (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) speed)
-     (fp.leq speed (fp #b0 #b10000111 #b11110100000000000000000)))) :pattern (
-  (is_valid_speed_km_per_h speed)) )))
+     (fp.leq speed maximum_valid_speed_km_per_h))) :pattern ((is_valid_speed_km_per_h
+                                                             speed)) )))
 
 ;; m_per_s_from_km_per_h__post_axiom
   (assert
@@ -303,33 +337,38 @@
      (= (m_per_s_from_km_per_h speed) (fp.div RNE (fp.mul RNE speed (fp #b0 #b10001000 #b11110100000000000000000)) (fp #b0 #b10001010 #b11000010000000000000000)))) :pattern (
   (m_per_s_from_km_per_h speed)) )))
 
-(declare-const speed Float32)
-
 (declare-const delta_speed Float32)
+
+(declare-const speed Float32)
 
 (declare-const distance Int)
 
-(declare-const result Float32)
-
 (declare-const speed1 Float32)
-
-(declare-const result1 Int)
-
-(declare-const distance1 Int)
-
-(declare-const speed2 Float32)
 
 (declare-const delta_speed1 Float32)
 
-(declare-const distance2 Int)
+(declare-const distance1 Int)
+
+;; H
+  (assert (fp.isFinite32 minimum_valid_speed))
+
+;; H
+  (assert
+  (= (fp #b0 #b01111011 #b10011001100110011001101) minimum_valid_speed))
 
 ;; H
   (assert (fp.isFinite32 maximum_valid_speed))
 
 ;; H
   (assert
-  (= (m_per_s_from_km_per_h (fp #b0 #b10000111 #b11110100000000000000000))
-  maximum_valid_speed))
+  (= (m_per_s_from_km_per_h maximum_valid_speed_km_per_h) maximum_valid_speed))
+
+;; H
+  (assert (fp.isFinite32 minimum_valid_acceleration))
+
+;; H
+  (assert
+  (= (fp.neg (fp #b0 #b10000010 #b01000000000000000000000)) minimum_valid_acceleration))
 
 ;; H
   (assert (fp.isFinite32 initial_speed))
@@ -342,25 +381,28 @@
 
 ;; H
   (assert
-  (and
-  (and
-  (and
-  (and
-  (and (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) initial_speed)
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) final_speed))
-  (fp.leq initial_speed maximum_valid_speed))
-  (fp.lt final_speed initial_speed))
-  (fp.lt acceleration (fp #b0 #b00000000 #b00000000000000000000000)))
-  (fp.leq (fp.neg (fp #b0 #b10000010 #b01000000000000000000000)) acceleration)))
+  (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) initial_speed))
 
 ;; H
-  (assert (= result speed))
+  (assert (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) final_speed))
 
 ;; H
-  (assert (= speed1 initial_speed))
+  (assert (fp.leq initial_speed maximum_valid_speed))
 
 ;; H
-  (assert (fp.isFinite32 speed1))
+  (assert (fp.lt final_speed initial_speed))
+
+;; H
+  (assert (fp.lt acceleration (fp #b0 #b00000000 #b00000000000000000000000)))
+
+;; H
+  (assert (fp.leq minimum_valid_acceleration acceleration))
+
+;; H
+  (assert (= speed initial_speed))
+
+;; H
+  (assert (fp.isFinite32 speed))
 
 ;; H
   (assert
@@ -369,65 +411,72 @@
   (fp.isFinite32 delta_speed)))
 
 ;; H
-  (assert (= result1 distance))
+  (assert (= distance 0))
 
 ;; H
-  (assert (= distance1 0))
+  (assert (in_range2 distance))
 
 ;; H
-  (assert (in_range2 distance1))
+  (assert (fp.lt final_speed speed))
+
+;; H
+  (assert (fp.lt minimum_valid_speed speed))
+
+;; H
+  (assert (fp.leq minimum_valid_acceleration acceleration))
+
+;; H
+  (assert (fp.lt acceleration (fp #b0 #b00000000 #b00000000000000000000000)))
+
+;; H
+  (assert (fp.lt minimum_valid_speed speed1))
+
+;; H
+  (assert (fp.leq speed1 initial_speed))
+
+;; H
+  (assert
+  (=>
+  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
+  (fp.isFinite32 delta_speed1)))
+
+;; H
+  (assert (=> (<= 0 2147483647) (in_range2 distance1)))
+
+;; H
+  (assert
+  (=>
+  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
+  (fp.isFinite32 speed1)))
 
 ;; H
   (assert (fp.lt final_speed speed1))
 
 ;; H
-  (assert (fp.lt (fp #b0 #b01111011 #b10011001100110011001101) speed1))
+  (assert (fp.lt minimum_valid_speed speed1))
 
 ;; H
   (assert
-  (and
-  (fp.leq (fp.neg (fp #b0 #b10000010 #b01000000000000000000000)) acceleration)
-  (fp.lt acceleration (fp #b0 #b00000000 #b00000000000000000000000))))
-
-;; H
-  (assert
-  (and (fp.lt (fp #b0 #b01111011 #b10011001100110011001101) speed2)
-  (fp.leq speed2 initial_speed)))
-
-;; H
-  (assert
-  (and
-  (and
-  (and
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 delta_speed1)) (=> (<= 0 2147483647) (in_range2 distance2)))
-  (=>
-  (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 speed2)))
-  (and (fp.lt final_speed speed2)
-  (fp.lt (fp #b0 #b01111011 #b10011001100110011001101) speed2))))
-
-;; H
-  (assert
-  (and
   (fp.lt (fp #b0 #b00000000 #b00000000000000000000000) (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000)
-  speed2))
-  (fp.lt (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) speed2) (fp #b0 #b10000010 #b01000000000000000000000))))
+  speed1)))
+
+;; H
+  (assert
+  (fp.lt (fp.div RNE (fp #b0 #b01111111 #b00000000000000000000000) speed1) (fp #b0 #b10000010 #b01000000000000000000000)))
 
 ;; H
   (assert
   (fp.leq (fp.neg (fp #b0 #b10000101 #b10010000000000000000000)) (fp.div RNE
-  acceleration speed2)))
+  acceleration speed1)))
 
 ;; H
   (assert
   (fp.leq (fp.neg (fp #b0 #b10000111 #b11110100000000000000000)) (fp.mul RNE (fp.div RNE
-  acceleration speed2) (fp #b0 #b10000001 #b01000000000000000000000))))
+  acceleration speed1) (fp #b0 #b10000001 #b01000000000000000000000))))
 
 (assert
 ;; WP_parameter_def
  ;; File "units.ads", line 27, characters 0-0
-  (not (not (fp.isZero speed2))))
+  (not (not (fp.isZero speed1))))
 (check-sat)
 (exit)

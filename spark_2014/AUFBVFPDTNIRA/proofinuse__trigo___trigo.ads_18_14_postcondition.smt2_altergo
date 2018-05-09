@@ -1032,7 +1032,7 @@ logic fliteral5 : t
 axiom fliteral_axiom5 : (tqtisFinite(fliteral5) and
   (tqtreal(fliteral5) = 0.000003000000106112565845251083374023437500))
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/proofinuse__trigo/gnatprove/trigo.mlw", line 5296, characters 5-8 *)
 goal WP_parameter_def :
   (forall trigo__sin__result:t. forall o:t. forall result:t.
   forall trigo__sin__result1:t. forall trigo__sin__result2:t.

@@ -50,14 +50,15 @@
 
 (define-fun in_range ((x Int)) Bool (or (= x 0) (= x 1)))
 
-(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
+(define-fun dynamic_invariant ((temp___expr_60 Float32)
+  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
+  (temp___do_toplevel_58 Bool)
+  (temp___do_typ_inv_59 Bool)) Bool (=>
+                                    (or (= temp___is_init_56 true)
+                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
+                                    (fp.isFinite32 temp___expr_60)))
 
-(define-fun dynamic_invariant ((temp___expr_159 Int)
-  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
-  (temp___do_toplevel_157 Bool)
-  (temp___do_typ_inv_158 Bool)) Bool (=>
-                                     (or (= temp___is_init_155 true)
-                                     (<= 0 10)) (in_range1 temp___expr_159)))
+(define-fun in_range1 ((x Int)) Bool (and (<= 0 x) (<= x 10)))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -163,21 +164,20 @@
 ;; step_function__step_function_t__step__position_axiom
   (assert (<= 0 step_function__step_function_t__step__position))
 
-(define-fun dynamic_invariant1 ((temp___expr_60 Float32)
-  (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
-  (temp___do_toplevel_58 Bool)
-  (temp___do_typ_inv_59 Bool)) Bool (=>
-                                    (or (= temp___is_init_56 true)
-                                    (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
-                                    (fp.isFinite32 temp___expr_60)))
-
-(define-fun dynamic_invariant2 ((temp___expr_166 Int)
+(define-fun dynamic_invariant1 ((temp___expr_166 Int)
   (temp___is_init_162 Bool) (temp___skip_constant_163 Bool)
   (temp___do_toplevel_164 Bool)
   (temp___do_typ_inv_165 Bool)) Bool (=>
                                      (or (= temp___is_init_162 true)
                                      (<= 0 2147483647)) (in_range2
                                      temp___expr_166)))
+
+(define-fun dynamic_invariant2 ((temp___expr_159 Int)
+  (temp___is_init_155 Bool) (temp___skip_constant_156 Bool)
+  (temp___do_toplevel_157 Bool)
+  (temp___do_typ_inv_158 Bool)) Bool (=>
+                                     (or (= temp___is_init_155 true)
+                                     (<= 0 10)) (in_range1 temp___expr_159)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
@@ -475,6 +475,6 @@
 (assert
 ;; WP_parameter_def
  ;; File "step_function.ads", line 89, characters 0-0
-  (not (<= 0 (- im2 1))))
+  (not (<= (- im2 1) 10)))
 (check-sat)
 (exit)

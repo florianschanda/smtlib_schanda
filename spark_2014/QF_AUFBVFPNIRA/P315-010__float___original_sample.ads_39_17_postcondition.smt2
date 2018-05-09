@@ -266,11 +266,11 @@
   (assert (= time3 time1))
 
 ;; H
-  (assert (< 0 nb_of_fp))
+  (assert (not (< 0 nb_of_fp)))
 
 (assert
 ;; WP_parameter_def
  ;; File "original_sample.ads", line 15, characters 0-0
-  (not (fp.leq time time2)))
+  (not true))
 (check-sat)
 (exit)

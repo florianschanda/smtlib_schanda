@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -86,6 +82,13 @@
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
 (declare-sort natural 0)
+
+(declare-fun naturalqtint (natural) Int)
+
+;; natural'axiom
+  (assert
+  (forall ((i natural))
+  (and (<= 0 (naturalqtint i)) (<= (naturalqtint i) 2147483647))))
 
 (define-fun in_range ((x Int)) Bool (and (<= 0 x) (<= x 2147483647)))
 
@@ -112,6 +115,13 @@
                                     temp___expr_39)))
 
 (declare-sort positive 0)
+
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
@@ -177,16 +187,14 @@
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
 
 ;; num__def_axiom
-  (assert (= num (of_int RNE numerator)))
+  (assert (= num ((_ to_fp 8 24) RNE (to_real numerator))))
 
 ;; den__def_axiom
   (assert (= den (fp #b0 #b00000000 #b00000000000000000000001)))
 
-(declare-const basic_contracts__average__result Float32)
-
 (declare-const o Float32)
 
-(declare-const result Float32)
+(declare-const basic_contracts__average__result Float32)
 
 (declare-const basic_contracts__average__result1 Float32)
 
@@ -194,20 +202,8 @@
 
 (declare-const basic_contracts__average__result3 Float32)
 
-(declare-const basic_contracts__average__result4 Float32)
-
-(declare-const basic_contracts__average__result5 Float32)
-
-(declare-const result1 Float32)
-
 ;; H
-  (assert (in_range numerator))
-
-;; H
-  (assert (in_range1 denominator))
-
-;; H
-  (assert (= (of_int RNE numerator) num))
+  (assert (= ((_ to_fp 8 24) RNE (to_real numerator)) num))
 
 ;; H
   (assert (fp.isFinite32 num))
@@ -216,44 +212,40 @@
   (assert (fp.isFinite32 den))
 
 ;; H
-  (assert
-  (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) (fp #b0 #b00000000 #b00000000000000000000001)))
+  (assert (fp.lt (fp #b0 #b01111111 #b00000000000000000000000) den))
 
 ;; H
   (assert
-  (= basic_contracts__average__result1 basic_contracts__average__result2))
+  (= basic_contracts__average__result basic_contracts__average__result1))
 
 ;; H
   (assert
-  (= basic_contracts__average__result3 basic_contracts__average__result1))
+  (= basic_contracts__average__result2 basic_contracts__average__result))
+
+;; H
+  (assert (= o (fp.div RNE num den)))
+
+;; H
+  (assert (fp.isFinite32 (fp.div RNE num den)))
+
+;; H
+  (assert (= basic_contracts__average__result o))
 
 ;; H
   (assert
-  (and (= o (fp.div RNE num (fp #b0 #b00000000 #b00000000000000000000001)))
-  (fp.isFinite32 (fp.div RNE num (fp #b0 #b00000000 #b00000000000000000000001)))))
+  (= (mk_t__ref basic_contracts__average__result3) (mk_t__ref
+                                                   basic_contracts__average__result1)))
 
 ;; H
-  (assert (= result basic_contracts__average__result))
+  (assert (in_range numerator))
 
 ;; H
-  (assert (= basic_contracts__average__result1 o))
-
-;; H
-  (assert
-  (= (mk_t__ref basic_contracts__average__result4) (mk_t__ref
-                                                   basic_contracts__average__result2)))
-
-;; H
-  (assert
-  (= basic_contracts__average__result5 basic_contracts__average__result3))
-
-;; H
-  (assert (= result1 basic_contracts__average__result4))
+  (assert (in_range1 denominator))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/PA20-061__flow_variable_constant/gnatprove/basic_contracts.mlw", line 2141, characters 5-8
   (not
-  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) basic_contracts__average__result4)))
+  (fp.leq (fp #b0 #b00000000 #b00000000000000000000000) basic_contracts__average__result3)))
 (check-sat)
 (exit)

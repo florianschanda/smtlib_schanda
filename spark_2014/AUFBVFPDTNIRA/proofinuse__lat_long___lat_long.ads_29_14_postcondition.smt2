@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,16 +74,24 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
-(declare-sort tfloat_with_approxB 0)
+(declare-fun sin1 (Float32) Float32)
 
-(declare-fun user_eq (tfloat_with_approxB tfloat_with_approxB) Bool)
+(declare-fun sin__function_guard (Float32 Float32) Bool)
+
+(declare-fun cos1 (Float32) Float32)
+
+(declare-fun cos__function_guard (Float32 Float32) Bool)
+
+(declare-sort float_with_approx 0)
+
+(declare-fun user_eq (float_with_approx float_with_approx) Bool)
 
 (declare-fun attr__ATTRIBUTE_IMAGE (Float32) us_image)
 
@@ -95,26 +99,7 @@
 
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Float32)
 
-(declare-const dummy tfloat_with_approxB)
-
-(declare-datatypes ()
-((tfloat_with_approxB__ref
- (mk_tfloat_with_approxB__ref
- (tfloat_with_approxB__content tfloat_with_approxB)))))
-(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
-  (tfloat_with_approxB__content a))
-
-(declare-sort float_with_approx 0)
-
-(declare-fun user_eq1 (float_with_approx float_with_approx) Bool)
-
-(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
-
-(declare-const dummy1 float_with_approx)
+(declare-const dummy float_with_approx)
 
 (declare-datatypes ()
 ((float_with_approx__ref
@@ -129,14 +114,6 @@
                                      (or (= temp___is_init_161 true)
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_165)))
-
-(declare-fun sin1 (Float32) Float32)
-
-(declare-fun sin__function_guard (Float32 Float32) Bool)
-
-(declare-fun cos1 (Float32) Float32)
-
-(declare-fun cos__function_guard (Float32 Float32) Bool)
 
 ;; cos__post_axiom
   (assert
@@ -156,7 +133,7 @@
   (! (=> (dynamic_invariant x true true true true) (= (cos1 x) (sin1 x))) :pattern (
   (cos1 x)) )))
 
-(declare-fun sqrt1 (Float32) Float32)
+(declare-fun sqrt2 (Float32) Float32)
 
 (declare-fun sqrt__function_guard (Float32 Float32) Bool)
 
@@ -164,13 +141,13 @@
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true true) (dynamic_invariant
-     (sqrt1 x) true false true true)) :pattern ((sqrt1 x)) )))
+     (sqrt2 x) true false true true)) :pattern ((sqrt2 x)) )))
 
 ;; sqrt__def_axiom
   (assert
   (forall ((x Float32))
   (! (=> (dynamic_invariant x true true true true)
-     (= (sqrt1 x) (fp.sqrt RNE x))) :pattern ((sqrt1 x)) )))
+     (= (sqrt2 x) (fp.sqrt RNE x))) :pattern ((sqrt2 x)) )))
 
 (declare-sort latitude 0)
 
@@ -179,15 +156,15 @@
                                         (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
                                         (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))))
 
-(declare-fun user_eq2 (latitude latitude) Bool)
+(declare-fun user_eq1 (latitude latitude) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE1 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check1 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
+(declare-fun attr__ATTRIBUTE_VALUE1 (us_image) Float32)
 
-(declare-const dummy2 latitude)
+(declare-const dummy1 latitude)
 
 (declare-datatypes ()
 ((latitude__ref (mk_latitude__ref (latitude__content latitude)))))
@@ -220,15 +197,15 @@
                                          (fp.leq (fp.neg (fp #b0 #b10000110 #b01100111111111111111111)) x)
                                          (fp.leq x (fp #b0 #b10000110 #b01101000000000000000000)))))
 
-(declare-fun user_eq3 (longitude longitude) Bool)
+(declare-fun user_eq2 (longitude longitude) Bool)
 
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
+(declare-fun attr__ATTRIBUTE_IMAGE2 (Float32) us_image)
 
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check2 (us_image) Bool)
 
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
+(declare-fun attr__ATTRIBUTE_VALUE2 (us_image) Float32)
 
-(declare-const dummy3 longitude)
+(declare-const dummy2 longitude)
 
 (declare-datatypes ()
 ((longitude__ref (mk_longitude__ref (longitude__content longitude)))))
@@ -259,6 +236,12 @@
 ((us_split_fields
  (mk___split_fields
  (rec__lat_long__coordinates__lat latitude)(rec__lat_long__coordinates__long longitude)))))
+(define-fun us_split_fields_Lat__projection ((a us_split_fields)) latitude
+  (rec__lat_long__coordinates__lat a))
+
+(define-fun us_split_fields_Long__projection ((a us_split_fields)) longitude
+  (rec__lat_long__coordinates__long a))
+
 (declare-datatypes ()
 ((us_split_fields__ref
  (mk___split_fields__ref (us_split_fields__content us_split_fields)))))
@@ -336,22 +319,14 @@
 ;; lat_long__coordinates__long__position_axiom
   (assert (<= 0 lat_long__coordinates__long__position))
 
-(declare-fun user_eq4 (us_rep us_rep) Bool)
+(declare-fun user_eq3 (us_rep us_rep) Bool)
 
-(declare-const dummy4 us_rep)
+(declare-const dummy3 us_rep)
 
 (declare-datatypes ()
 ((coordinates__ref (mk_coordinates__ref (coordinates__content us_rep)))))
 (define-fun coordinates__ref___projection ((a coordinates__ref)) us_rep
   (coordinates__content a))
-
-(declare-const source us_rep)
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-const destination us_rep)
-
-(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
 
 (declare-fun delta_lat_in_meters (us_rep us_rep) Float32)
 
@@ -362,23 +337,31 @@
 
 (declare-fun olt__function_guard (Bool Float32 Float32) Bool)
 
+(declare-const r Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
+(declare-const conv_deg_to_rad Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
 ;; delta_lat_in_meters__post_axiom
   (assert
-  (forall ((source1 us_rep) (destination1 us_rep))
-  (! (let ((result (delta_lat_in_meters source1 destination1)))
+  (forall ((source us_rep) (destination us_rep))
+  (! (let ((result (delta_lat_in_meters source destination)))
      (and
      (= (olt (fp.abs result) (fp #b0 #b10010111 #b00110001001111000100110)) true)
      (dynamic_invariant result true false true true))) :pattern ((delta_lat_in_meters
-                                                                 source1
-                                                                 destination1)) )))
+                                                                 source
+                                                                 destination)) )))
 
 ;; delta_lat_in_meters__def_axiom
   (assert
-  (forall ((source1 us_rep) (destination1 us_rep))
-  (! (= (delta_lat_in_meters source1 destination1) (fp.mul RNE (fp.mul RNE (fp.sub RNE
-  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 destination1)))
-  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101))) :pattern (
-  (delta_lat_in_meters source1 destination1)) )))
+  (forall ((source us_rep) (destination us_rep))
+  (! (= (delta_lat_in_meters source destination) (fp.mul RNE (fp.mul RNE (fp.sub RNE
+  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 destination)))
+  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source))))
+  r) conv_deg_to_rad)) :pattern ((delta_lat_in_meters source destination)) )))
 
 (declare-fun delta_long_in_meters (us_rep us_rep) Float32)
 
@@ -387,28 +370,54 @@
 
 ;; delta_long_in_meters__post_axiom
   (assert
-  (forall ((source1 us_rep) (destination1 us_rep))
-  (! (let ((result (delta_long_in_meters source1 destination1)))
+  (forall ((source us_rep) (destination us_rep))
+  (! (let ((result (delta_long_in_meters source destination)))
      (and
      (= (olt (fp.abs result) (fp #b0 #b10011000 #b00110001001111000100110)) true)
      (dynamic_invariant result true false true true))) :pattern ((delta_long_in_meters
-                                                                 source1
-                                                                 destination1)) )))
+                                                                 source
+                                                                 destination)) )))
 
 ;; delta_long_in_meters__def_axiom
   (assert
-  (forall ((source1 us_rep) (destination1 us_rep))
-  (! (= (delta_long_in_meters source1 destination1) (fp.div RNE (fp.mul RNE (fp.sub RNE
-  (to_rep1
-  (rec__lat_long__coordinates__long (us_split_fields1 destination1)))
-  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source1)))) (fp #b0 #b10010101 #b10000100101000110101001))
-  (cos1
-  (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source1)))))) :pattern (
-  (delta_long_in_meters source1 destination1)) )))
+  (forall ((source us_rep) (destination us_rep))
+  (! (= (delta_long_in_meters source destination) (fp.div RNE (fp.mul RNE (fp.sub RNE
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 destination)))
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source))))
+  r) (cos1
+     (to_rep (rec__lat_long__coordinates__lat (us_split_fields1 source)))))) :pattern (
+  (delta_long_in_meters source destination)) )))
+
+(declare-sort tfloat_with_approxB 0)
+
+(declare-fun user_eq4 (tfloat_with_approxB tfloat_with_approxB) Bool)
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Float32) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Float32)
+
+(declare-const dummy4 tfloat_with_approxB)
+
+(declare-datatypes ()
+((tfloat_with_approxB__ref
+ (mk_tfloat_with_approxB__ref
+ (tfloat_with_approxB__content tfloat_with_approxB)))))
+(define-fun tfloat_with_approxB__ref___projection ((a tfloat_with_approxB__ref)) tfloat_with_approxB
+  (tfloat_with_approxB__content a))
+
+(declare-const source us_rep)
 
 (declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
+(declare-const destination us_rep)
+
 (declare-const attr__ATTRIBUTE_ADDRESS3 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS4 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS5 Int)
 
 (declare-sort float 0)
 
@@ -442,6 +451,12 @@
   (! (= (= (olt left right) true)
      (fp.lt left (fp.add RNE right (fp #b0 #b01101110 #b01001111100010110101100)))) :pattern (
   (olt left right)) )))
+
+;; r__def_axiom
+  (assert (= r (fp #b0 #b10010101 #b10000100101000110101001)))
+
+;; conv_deg_to_rad__def_axiom
+  (assert (= conv_deg_to_rad (fp #b0 #b01111001 #b00011101111101000110101)))
 
 (define-fun dynamic_invariant2 ((temp___expr_172 Float32)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
@@ -526,6 +541,18 @@
 (declare-const result3 Float32)
 
 ;; H
+  (assert (fp.isFinite32 r))
+
+;; H
+  (assert (= (fp #b0 #b10010101 #b10000100101000110101001) r))
+
+;; H
+  (assert (fp.isFinite32 conv_deg_to_rad))
+
+;; H
+  (assert (= (fp #b0 #b01111001 #b00011101111101000110101) conv_deg_to_rad))
+
+;; H
   (assert
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
@@ -548,7 +575,8 @@
                                                     destination))) (to_rep
                                                                    (rec__lat_long__coordinates__lat
                                                                    (us_split_fields1
-                                                                   source)))) (fp #b0 #b10010101 #b10000100101000110101001)) (fp #b0 #b01111001 #b00011101111101000110101))))
+                                                                   source))))
+  r) conv_deg_to_rad)))
 
 ;; H
   (assert
@@ -574,8 +602,8 @@
   (= o1 (fp.div RNE (fp.mul RNE (fp.sub RNE (to_rep1
                                             (rec__lat_long__coordinates__long
                                             (us_split_fields1 destination)))
-  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source)))) (fp #b0 #b10010101 #b10000100101000110101001))
-  o)))
+  (to_rep1 (rec__lat_long__coordinates__long (us_split_fields1 source))))
+  r) o)))
 
 ;; H
   (assert (and (= o2 o1) (fp.isFinite32 o1)))
@@ -610,7 +638,7 @@
 
 ;; H
   (assert
-  (and (= o7 (sqrt1 o6)) (and (fp.isFinite32 o7) (= o7 (fp.sqrt RNE o6)))))
+  (and (= o7 (sqrt2 o6)) (and (fp.isFinite32 o7) (= o7 (fp.sqrt RNE o6)))))
 
 ;; H
   (assert (= (mk_t__ref result2) (mk_t__ref lat_long__distance__result)))
@@ -645,7 +673,7 @@
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 6, characters 0-0
   (not
-  (fp.eq lat_long__distance__result4 (sqrt1
+  (fp.eq lat_long__distance__result4 (sqrt2
                                      (fp.add RNE (fp.mul RNE (delta_lat_in_meters
                                                              source
                                                              destination)

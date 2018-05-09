@@ -93,13 +93,13 @@
 (define-fun in_range3 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
 
-(define-fun dynamic_invariant2 ((temp___expr_579 Int)
-  (temp___is_init_575 Bool) (temp___skip_constant_576 Bool)
-  (temp___do_toplevel_577 Bool)
-  (temp___do_typ_inv_578 Bool)) Bool (=>
-                                     (or (= temp___is_init_575 true)
+(define-fun dynamic_invariant2 ((temp___expr_572 Int)
+  (temp___is_init_568 Bool) (temp___skip_constant_569 Bool)
+  (temp___do_toplevel_570 Bool)
+  (temp___do_typ_inv_571 Bool)) Bool (=>
+                                     (or (= temp___is_init_568 true)
                                      (<= (- 2147483648) 2147483647))
-                                     (in_range3 temp___expr_579)))
+                                     (in_range3 temp___expr_572)))
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 

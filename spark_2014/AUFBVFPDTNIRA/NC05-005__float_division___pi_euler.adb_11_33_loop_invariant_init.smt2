@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float64)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float64)
-
-(declare-fun to_int1 (RoundingMode Float64) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float64)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -114,6 +117,13 @@
                                                                  a))
 
 (declare-sort positive 0)
+
+(declare-fun positiveqtint (positive) Int)
+
+;; positive'axiom
+  (assert
+  (forall ((i positive))
+  (and (<= 1 (positiveqtint i)) (<= (positiveqtint i) 2147483647))))
 
 (define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 2147483647)))
 
@@ -183,15 +193,7 @@
 
 (declare-const erreur Float64)
 
-(declare-const result Float64)
-
-(declare-const pi2 Float64)
-
-(declare-const result1 Int)
-
 (declare-const index1 Int)
-
-(declare-const result2 Float64)
 
 (declare-const erreur1 Float64)
 
@@ -211,20 +213,7 @@
   (fp.isFinite64 erreur)))
 
 ;; H
-  (assert (= result pi1))
-
-;; H
-  (assert
-  (= pi2 (fp #b0 #b00000000000 #b0000000000000000000000000000000000000000000000000000)))
-
-;; H
-  (assert (= result1 index))
-
-;; H
   (assert (= index1 1))
-
-;; H
-  (assert (= result2 erreur))
 
 ;; H
   (assert
@@ -237,7 +226,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/NC05-005__float_division/gnatprove/pi_euler.mlw", line 2106, characters 5-8
   (not (<= 1 index1)))
 (check-sat)
 (exit)

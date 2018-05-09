@@ -979,4 +979,8 @@ logic x : t
 logic attr__ATTRIBUTE_ADDRESS : int
 
  (* File "generic_interval_tests.adb", line 34, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> tqtisFinite(mul(RNE, x, abs1(x))))
+goal WP_parameter_def :
+  (forall o:t. forall o1:bool. (tqtisFinite(x) -> ((((o = mul(RNE, x,
+  abs1(x))) and tqtisFinite(mul(RNE, x, abs1(x)))) and ((le(o, fliteral) and
+  (o1 = true)) or ((not le(o, fliteral)) and (o1 = false)))) ->
+  tqtisFinite(mul(RNE, x, abs1(x))))))

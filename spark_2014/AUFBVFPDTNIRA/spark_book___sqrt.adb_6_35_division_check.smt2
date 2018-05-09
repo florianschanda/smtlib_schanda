@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -136,11 +132,9 @@
 
 (declare-const o3 Float32)
 
-(declare-const result Float32)
-
 (declare-const approx1 Float32)
 
-(declare-const result1 Bool)
+(declare-const result Bool)
 
 (declare-const approx2 Float32)
 
@@ -157,43 +151,46 @@
   (fp.isFinite32 approx)))
 
 ;; H
-  (assert (= result approx))
-
-;; H
   (assert
   (= approx1 (fp.div RNE x (fp #b0 #b10000000 #b00000000000000000000000))))
 
 ;; H
-  (assert
-  (and (= o (fp.mul RNE approx1 approx1))
-  (fp.isFinite32 (fp.mul RNE approx1 approx1))))
+  (assert (= o (fp.mul RNE approx1 approx1)))
+
+;; H
+  (assert (fp.isFinite32 (fp.mul RNE approx1 approx1)))
 
 ;; H
   (assert (= o1 (fp.sub RNE x o)))
 
 ;; H
-  (assert (and (= o2 o1) (fp.isFinite32 o1)))
+  (assert (= o2 o1))
+
+;; H
+  (assert (fp.isFinite32 o1))
 
 ;; H
   (assert (= o3 (fp.abs o2)))
 
 ;; H
-  (assert (= result1 (ite (fp.lt tolerance o3) true false)))
+  (assert (= result (ite (fp.lt tolerance o3) true false)))
 
 ;; H
-  (assert (= result1 true))
+  (assert (= result true))
 
 ;; H
   (assert
-  (and
   (=>
   (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111))
-  (fp.isFinite32 approx2))
-  (fp.lt tolerance (fp.abs (fp.sub RNE x (fp.mul RNE approx2 approx2))))))
+  (fp.isFinite32 approx2)))
+
+;; H
+  (assert
+  (fp.lt tolerance (fp.abs (fp.sub RNE x (fp.mul RNE approx2 approx2)))))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/spark_book/Chapter-02/build/gnatprove/sqrt.mlw", line 2104, characters 5-8
   (not (not (fp.isZero approx2))))
 (check-sat)
 (exit)

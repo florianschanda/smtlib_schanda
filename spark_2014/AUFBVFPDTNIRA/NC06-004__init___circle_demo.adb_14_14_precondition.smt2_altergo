@@ -901,6 +901,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range1(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq1 : int, int -> bool
@@ -956,6 +962,12 @@ function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
 type positive
+
+logic positiveqtint : positive -> int
+
+axiom positiveqtaxiom :
+  (forall i:positive. ((1 <= positiveqtint(i)) and
+  (positiveqtint(i) <= 2147483647)))
 
 predicate in_range2(x: int) = ((1 <= x) and (x <= 2147483647))
 
@@ -1070,7 +1082,7 @@ axiom bool_eq_rev :
   (temp___idx_91 <= a__last)) ->
   (to_rep((a[temp___idx_91])) = to_rep((b[((b__first - a__first) + temp___idx_91)])))))))))
 
-logic to_rep1 : integer -> int
+function to_rep1(x: integer) : int = integerqtint(x)
 
 logic of_rep1 : int -> integer
 
@@ -1264,7 +1276,17 @@ axiom coerce_axiom3 :
 
 type us_split_fields = { rec__shapes5__circle__center_x : coordinate_type;
 rec__shapes5__circle__center_y : coordinate_type;
-rec__shapes5__circle__radius : radius_type }
+rec__shapes5__circle__radius : radius_type
+}
+
+function us_split_fields_Center_X__projection(a: us_split_fields) : coordinate_type =
+  (a).rec__shapes5__circle__center_x
+
+function us_split_fields_Center_Y__projection(a: us_split_fields) : coordinate_type =
+  (a).rec__shapes5__circle__center_y
+
+function us_split_fields_Radius__projection(a: us_split_fields) : radius_type =
+  (a).rec__shapes5__circle__radius
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1400,79 +1422,79 @@ axiom inside_circle__post_axiom : true
 
 logic attr__ATTRIBUTE_ADDRESS1 : int
 
-logic temp___String_Literal_602 : unit -> (int,character) farray
+logic temp___String_Literal_595 : unit -> (int,character) farray
 
-axiom temp___String_Literal_602__def_axiom :
-  (((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_602(void)[1])) = 84) and
-  (to_rep((temp___String_Literal_602(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_602(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_602(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_602(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_602(void)[6])) = 114)) and
-  (to_rep((temp___String_Literal_602(void)[7])) = 105)) and
-  (to_rep((temp___String_Literal_602(void)[8])) = 103)) and
-  (to_rep((temp___String_Literal_602(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_602(void)[10])) = 110)) and
-  (to_rep((temp___String_Literal_602(void)[11])) = 32)) and
-  (to_rep((temp___String_Literal_602(void)[12])) = 105)) and
-  (to_rep((temp___String_Literal_602(void)[13])) = 115)) and
-  (to_rep((temp___String_Literal_602(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_602(void)[15])) = 110)) and
-  (to_rep((temp___String_Literal_602(void)[16])) = 111)) and
-  (to_rep((temp___String_Literal_602(void)[17])) = 116)) and
-  (to_rep((temp___String_Literal_602(void)[18])) = 32)) and
-  (to_rep((temp___String_Literal_602(void)[19])) = 105)) and
-  (to_rep((temp___String_Literal_602(void)[20])) = 110)) and
-  (to_rep((temp___String_Literal_602(void)[21])) = 115)) and
-  (to_rep((temp___String_Literal_602(void)[22])) = 105)) and
-  (to_rep((temp___String_Literal_602(void)[23])) = 100)) and
-  (to_rep((temp___String_Literal_602(void)[24])) = 101)) and
-  (to_rep((temp___String_Literal_602(void)[25])) = 32)) and
-  (to_rep((temp___String_Literal_602(void)[26])) = 116)) and
-  (to_rep((temp___String_Literal_602(void)[27])) = 104)) and
-  (to_rep((temp___String_Literal_602(void)[28])) = 101)) and
-  (to_rep((temp___String_Literal_602(void)[29])) = 32)) and
-  (to_rep((temp___String_Literal_602(void)[30])) = 99)) and
-  (to_rep((temp___String_Literal_602(void)[31])) = 105)) and
-  (to_rep((temp___String_Literal_602(void)[32])) = 114)) and
-  (to_rep((temp___String_Literal_602(void)[33])) = 99)) and
-  (to_rep((temp___String_Literal_602(void)[34])) = 108)) and
-  (to_rep((temp___String_Literal_602(void)[35])) = 101))
+axiom temp___String_Literal_595__def_axiom :
+  (((((((((((((((((((((((((((((((((((to_rep((temp___String_Literal_595(void)[1])) = 84) and
+  (to_rep((temp___String_Literal_595(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_595(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_595(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_595(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_595(void)[6])) = 114)) and
+  (to_rep((temp___String_Literal_595(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_595(void)[8])) = 103)) and
+  (to_rep((temp___String_Literal_595(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_595(void)[10])) = 110)) and
+  (to_rep((temp___String_Literal_595(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_595(void)[12])) = 105)) and
+  (to_rep((temp___String_Literal_595(void)[13])) = 115)) and
+  (to_rep((temp___String_Literal_595(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_595(void)[15])) = 110)) and
+  (to_rep((temp___String_Literal_595(void)[16])) = 111)) and
+  (to_rep((temp___String_Literal_595(void)[17])) = 116)) and
+  (to_rep((temp___String_Literal_595(void)[18])) = 32)) and
+  (to_rep((temp___String_Literal_595(void)[19])) = 105)) and
+  (to_rep((temp___String_Literal_595(void)[20])) = 110)) and
+  (to_rep((temp___String_Literal_595(void)[21])) = 115)) and
+  (to_rep((temp___String_Literal_595(void)[22])) = 105)) and
+  (to_rep((temp___String_Literal_595(void)[23])) = 100)) and
+  (to_rep((temp___String_Literal_595(void)[24])) = 101)) and
+  (to_rep((temp___String_Literal_595(void)[25])) = 32)) and
+  (to_rep((temp___String_Literal_595(void)[26])) = 116)) and
+  (to_rep((temp___String_Literal_595(void)[27])) = 104)) and
+  (to_rep((temp___String_Literal_595(void)[28])) = 101)) and
+  (to_rep((temp___String_Literal_595(void)[29])) = 32)) and
+  (to_rep((temp___String_Literal_595(void)[30])) = 99)) and
+  (to_rep((temp___String_Literal_595(void)[31])) = 105)) and
+  (to_rep((temp___String_Literal_595(void)[32])) = 114)) and
+  (to_rep((temp___String_Literal_595(void)[33])) = 99)) and
+  (to_rep((temp___String_Literal_595(void)[34])) = 108)) and
+  (to_rep((temp___String_Literal_595(void)[35])) = 101))
 
-logic temp___String_Literal_603 : unit -> (int,character) farray
+logic temp___String_Literal_596 : unit -> (int,character) farray
 
-axiom temp___String_Literal_603__def_axiom :
-  (((((((((((((((((((((((((((((((to_rep((temp___String_Literal_603(void)[1])) = 84) and
-  (to_rep((temp___String_Literal_603(void)[2])) = 104)) and
-  (to_rep((temp___String_Literal_603(void)[3])) = 101)) and
-  (to_rep((temp___String_Literal_603(void)[4])) = 32)) and
-  (to_rep((temp___String_Literal_603(void)[5])) = 111)) and
-  (to_rep((temp___String_Literal_603(void)[6])) = 114)) and
-  (to_rep((temp___String_Literal_603(void)[7])) = 105)) and
-  (to_rep((temp___String_Literal_603(void)[8])) = 103)) and
-  (to_rep((temp___String_Literal_603(void)[9])) = 105)) and
-  (to_rep((temp___String_Literal_603(void)[10])) = 110)) and
-  (to_rep((temp___String_Literal_603(void)[11])) = 32)) and
-  (to_rep((temp___String_Literal_603(void)[12])) = 105)) and
-  (to_rep((temp___String_Literal_603(void)[13])) = 115)) and
-  (to_rep((temp___String_Literal_603(void)[14])) = 32)) and
-  (to_rep((temp___String_Literal_603(void)[15])) = 105)) and
-  (to_rep((temp___String_Literal_603(void)[16])) = 110)) and
-  (to_rep((temp___String_Literal_603(void)[17])) = 115)) and
-  (to_rep((temp___String_Literal_603(void)[18])) = 105)) and
-  (to_rep((temp___String_Literal_603(void)[19])) = 100)) and
-  (to_rep((temp___String_Literal_603(void)[20])) = 101)) and
-  (to_rep((temp___String_Literal_603(void)[21])) = 32)) and
-  (to_rep((temp___String_Literal_603(void)[22])) = 116)) and
-  (to_rep((temp___String_Literal_603(void)[23])) = 104)) and
-  (to_rep((temp___String_Literal_603(void)[24])) = 101)) and
-  (to_rep((temp___String_Literal_603(void)[25])) = 32)) and
-  (to_rep((temp___String_Literal_603(void)[26])) = 99)) and
-  (to_rep((temp___String_Literal_603(void)[27])) = 105)) and
-  (to_rep((temp___String_Literal_603(void)[28])) = 114)) and
-  (to_rep((temp___String_Literal_603(void)[29])) = 99)) and
-  (to_rep((temp___String_Literal_603(void)[30])) = 108)) and
-  (to_rep((temp___String_Literal_603(void)[31])) = 101))
+axiom temp___String_Literal_596__def_axiom :
+  (((((((((((((((((((((((((((((((to_rep((temp___String_Literal_596(void)[1])) = 84) and
+  (to_rep((temp___String_Literal_596(void)[2])) = 104)) and
+  (to_rep((temp___String_Literal_596(void)[3])) = 101)) and
+  (to_rep((temp___String_Literal_596(void)[4])) = 32)) and
+  (to_rep((temp___String_Literal_596(void)[5])) = 111)) and
+  (to_rep((temp___String_Literal_596(void)[6])) = 114)) and
+  (to_rep((temp___String_Literal_596(void)[7])) = 105)) and
+  (to_rep((temp___String_Literal_596(void)[8])) = 103)) and
+  (to_rep((temp___String_Literal_596(void)[9])) = 105)) and
+  (to_rep((temp___String_Literal_596(void)[10])) = 110)) and
+  (to_rep((temp___String_Literal_596(void)[11])) = 32)) and
+  (to_rep((temp___String_Literal_596(void)[12])) = 105)) and
+  (to_rep((temp___String_Literal_596(void)[13])) = 115)) and
+  (to_rep((temp___String_Literal_596(void)[14])) = 32)) and
+  (to_rep((temp___String_Literal_596(void)[15])) = 105)) and
+  (to_rep((temp___String_Literal_596(void)[16])) = 110)) and
+  (to_rep((temp___String_Literal_596(void)[17])) = 115)) and
+  (to_rep((temp___String_Literal_596(void)[18])) = 105)) and
+  (to_rep((temp___String_Literal_596(void)[19])) = 100)) and
+  (to_rep((temp___String_Literal_596(void)[20])) = 101)) and
+  (to_rep((temp___String_Literal_596(void)[21])) = 32)) and
+  (to_rep((temp___String_Literal_596(void)[22])) = 116)) and
+  (to_rep((temp___String_Literal_596(void)[23])) = 104)) and
+  (to_rep((temp___String_Literal_596(void)[24])) = 101)) and
+  (to_rep((temp___String_Literal_596(void)[25])) = 32)) and
+  (to_rep((temp___String_Literal_596(void)[26])) = 99)) and
+  (to_rep((temp___String_Literal_596(void)[27])) = 105)) and
+  (to_rep((temp___String_Literal_596(void)[28])) = 114)) and
+  (to_rep((temp___String_Literal_596(void)[29])) = 99)) and
+  (to_rep((temp___String_Literal_596(void)[30])) = 108)) and
+  (to_rep((temp___String_Literal_596(void)[31])) = 101))
 
 axiom in_bounds__post_axiom : true
 
@@ -1486,26 +1508,26 @@ goal WP_parameter_def :
   (forall wild_man:int. forall my_circle__split_fields:coordinate_type.
   forall my_circle__split_fields1:coordinate_type.
   forall my_circle__split_fields2:radius_type.
-  forall temp___601:coordinate_type. forall temp___6011:coordinate_type.
-  forall temp___6012:radius_type. forall result:coordinate_type.
+  forall temp___594:coordinate_type. forall temp___5941:coordinate_type.
+  forall temp___5942:radius_type. forall result:coordinate_type.
   forall result1:coordinate_type. forall result2:radius_type.
   forall my_circle__split_fields3:coordinate_type.
   forall my_circle__split_fields4:coordinate_type.
   forall my_circle__split_fields5:radius_type. forall result3:int.
   forall wild_man1:int. (in_range1(wild_man) -> (((({ us_split_fields1 = {
-  rec__shapes5__circle__center_x = temp___601;
-  rec__shapes5__circle__center_y = temp___6011;
-  rec__shapes5__circle__radius = temp___6012 } } = make_circle(fliteral2,
+  rec__shapes5__circle__center_x = temp___594;
+  rec__shapes5__circle__center_y = temp___5941;
+  rec__shapes5__circle__radius = temp___5942 } } = make_circle(fliteral2,
   fliteral2, fliteral4, wild_man)) and (in_bounds({ us_split_fields1 = {
-  rec__shapes5__circle__center_x = temp___601;
-  rec__shapes5__circle__center_y = temp___6011;
-  rec__shapes5__circle__radius = temp___6012 } }, wild_man) = true)) and
+  rec__shapes5__circle__center_x = temp___594;
+  rec__shapes5__circle__center_y = temp___5941;
+  rec__shapes5__circle__radius = temp___5942 } }, wild_man) = true)) and
   (((result = my_circle__split_fields) and
   ((result1 = my_circle__split_fields1) and
   (result2 = my_circle__split_fields2))) and
-  ((temp___601 = my_circle__split_fields3) and
-  ((temp___6011 = my_circle__split_fields4) and
-  (temp___6012 = my_circle__split_fields5))))) -> (((result3 = wild_man) and
+  ((temp___594 = my_circle__split_fields3) and
+  ((temp___5941 = my_circle__split_fields4) and
+  (temp___5942 = my_circle__split_fields5))))) -> (((result3 = wild_man) and
   (wild_man1 = (- 1))) -> (in_bounds({ us_split_fields1 = {
   rec__shapes5__circle__center_x = my_circle__split_fields3;
   rec__shapes5__circle__center_y = my_circle__split_fields4;

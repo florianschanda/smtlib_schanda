@@ -1601,4 +1601,4 @@ goal WP_parameter_def :
   (eq(roundToIntegral(RTN, z1), x1) -> (eq(roundToIntegral(RTN, t3), x1) ->
   (eq(roundToIntegral(RTP, x1), x1) -> (eq(roundToIntegral(RTP, y1), y1) ->
   (eq(roundToIntegral(RTP, z1), y1) -> (eq(roundToIntegral(RTP, t3), y1) ->
-  le(x1, z1))))))))))))))))))))
+  le(z1, y1))))))))))))))))))))

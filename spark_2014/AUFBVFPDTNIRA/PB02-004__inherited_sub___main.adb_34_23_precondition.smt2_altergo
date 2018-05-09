@@ -966,6 +966,12 @@ type t__ref = { t__content : t
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq3 : int, int -> bool
@@ -990,7 +996,7 @@ type integer__ref = { integer__content : integer
 function integer__ref___projection(a: integer__ref) : integer =
   (a).integer__content
 
-logic to_rep1 : integer -> int
+function to_rep1(x: integer) : int = integerqtint(x)
 
 logic of_rep1 : int -> integer
 
@@ -1096,6 +1102,9 @@ float1
 
 function us_split_fields_X__projection(a: us_split_fields) : integer =
   (a).rec__rec__my_rec__x
+
+function us_split_fields_Y__projection(a: us_split_fields) : float1 =
+  (a).rec__rec__my_rec__y
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1409,6 +1418,14 @@ type sub_rec__ref = { sub_rec__content : us_rep1
 function sub_rec__ref___projection(a: sub_rec__ref) : us_rep1 =
   (a).sub_rec__content
 
+logic build_rec : int -> us_rep1
+
+logic build_rec__function_guard : us_rep1, int -> prop
+
+axiom build_rec__post_axiom :
+  (forall a:int [build_rec(a)]. (in_range(a) ->
+  (to_rep(((build_rec(a)).us_split_discrs3).rec__rec__sub_rec__z) = to_rep3(((((build_rec(a)).us_split_fields3).rec__rec__sub_rec__plop).us_split_discrs1).rec__rec__my_rec__e))))
+
 predicate in_range5(rec__rec__my_rec__e1: int, a: us_rep) =
   (rec__rec__my_rec__e1 = to_rep3(((a).us_split_discrs1).rec__rec__my_rec__e))
 
@@ -1613,7 +1630,22 @@ type sub_rec_ok__ref = { sub_rec_ok__content : us_rep2
 function sub_rec_ok__ref___projection(a: sub_rec_ok__ref) : us_rep2 =
   (a).sub_rec_ok__content
 
+logic build_rec_ok : int -> us_rep2
+
+logic build_rec_ok__function_guard : us_rep2, int -> prop
+
+axiom build_rec_ok__post_axiom :
+  (forall a:int [build_rec_ok(a)]. (in_range(a) ->
+  (rec__sub_rec_ok__plop__pred(build_rec_ok(a)) ->
+  (to_rep(((build_rec_ok(a)).us_split_discrs5).rec__rec__sub_rec_ok__z) = to_rep3(((((build_rec_ok(a)).us_split_fields5).rec__rec__sub_rec_ok__plop).us_split_discrs1).rec__rec__my_rec__e)))))
+
 type natural
+
+logic naturalqtint : natural -> int
+
+axiom naturalqtaxiom :
+  (forall i:natural. ((0 <= naturalqtint(i)) and
+  (naturalqtint(i) <= 2147483647)))
 
 predicate in_range6(x: int) = ((0 <= x) and (x <= 2147483647))
 
@@ -1639,7 +1671,7 @@ type natural__ref = { natural__content : natural
 function natural__ref___projection(a: natural__ref) : natural =
   (a).natural__content
 
-logic to_rep4 : natural -> int
+function to_rep4(x: natural) : int = naturalqtint(x)
 
 logic of_rep4 : int -> natural
 
@@ -1937,23 +1969,6 @@ type sub_arr__ref = { sub_arr__content : us_rep3
 
 function sub_arr__ref___projection(a: sub_arr__ref) : us_rep3 =
   (a).sub_arr__content
-
-logic build_rec : int -> us_rep1
-
-logic build_rec__function_guard : us_rep1, int -> prop
-
-axiom build_rec__post_axiom :
-  (forall a:int [build_rec(a)]. (in_range(a) ->
-  (to_rep(((build_rec(a)).us_split_discrs3).rec__rec__sub_rec__z) = to_rep3(((((build_rec(a)).us_split_fields3).rec__rec__sub_rec__plop).us_split_discrs1).rec__rec__my_rec__e))))
-
-logic build_rec_ok : int -> us_rep2
-
-logic build_rec_ok__function_guard : us_rep2, int -> prop
-
-axiom build_rec_ok__post_axiom :
-  (forall a:int [build_rec_ok(a)]. (in_range(a) ->
-  (rec__sub_rec_ok__plop__pred(build_rec_ok(a)) ->
-  (to_rep(((build_rec_ok(a)).us_split_discrs5).rec__rec__sub_rec_ok__z) = to_rep3(((((build_rec_ok(a)).us_split_fields5).rec__rec__sub_rec_ok__plop).us_split_discrs1).rec__rec__my_rec__e)))))
 
 logic build_arr : int, int -> us_rep3
 

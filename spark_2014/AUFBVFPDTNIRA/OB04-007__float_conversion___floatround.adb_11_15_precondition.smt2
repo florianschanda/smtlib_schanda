@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,13 +74,17 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
                  (and (fp.isNegative x) (< r 0.0))))
 
 (declare-datatypes () ((t__ref (mk_t__ref (t__content Float32)))))
+(declare-fun convert (Float32) Float32)
+
+(declare-fun convert__function_guard (Float32 Float32) Bool)
+
 (declare-sort t1 0)
 
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
@@ -151,10 +151,6 @@
                                                           (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) temp___211)
                                                           (fp.leq temp___211 (fp #b0 #b01111111 #b00000000000000000000000))))
 
-(declare-fun convert (Float32) Float32)
-
-(declare-fun convert__function_guard (Float32 Float32) Bool)
-
 ;; convert__post_axiom
   (assert
   (forall ((x Float32))
@@ -178,22 +174,15 @@
 
 (declare-const x1 Float32)
 
-(declare-const result Float32)
-
-(declare-const x11 Float32)
+;; H
+  (assert (= x1 (fp #b0 #b01111110 #b00000000000000000000000)))
 
 ;; H
-  (assert (= result x1))
-
-;; H
-  (assert (= x11 (fp #b0 #b01111110 #b00000000000000000000000)))
-
-;; H
-  (assert (in_range x11))
+  (assert (in_range x1))
 
 (assert
 ;; WP_parameter_def
  ;; File "floatround.adb", line 7, characters 0-0
-  (not (in_range1 x11)))
+  (not (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000)) x1)))
 (check-sat)
 (exit)

@@ -1065,6 +1065,12 @@ logic attr__ATTRIBUTE_VALUE : us_image -> bool
 
 type integer
 
+logic integerqtint : integer -> int
+
+axiom integerqtaxiom :
+  (forall i:integer. (((- 2147483648) <= integerqtint(i)) and
+  (integerqtint(i) <= 2147483647)))
+
 predicate in_range2(x: int) = (((- 2147483648) <= x) and (x <= 2147483647))
 
 logic bool_eq2 : int, int -> bool
@@ -1155,32 +1161,6 @@ axiom coerce_axiom :
   (forall x:t [to_rep(of_rep(x))]. (tqtisFinite(x) ->
   (to_rep(of_rep(x)) = x)))
 
-type index_type
-
-predicate in_range3(x: int) = ((1 <= x) and (x <= 10))
-
-logic bool_eq5 : int, int -> bool
-
-axiom bool_eq_def4 :
-  (forall x:int. forall y:int [bool_eq5(x, y)]. (((x = y) -> (bool_eq5(x,
-  y) = true)) and ((not (x = y)) -> (bool_eq5(x, y) = false))))
-
-logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> int
-
-logic user_eq2 : index_type, index_type -> bool
-
-logic dummy2 : index_type
-
-type index_type__ref = { index_type__content : index_type
-}
-
-function index_type__ref___projection(a: index_type__ref) : index_type =
-  (a).index_type__content
-
 type map__ref = { map__content : (int,float1) farray
 }
 
@@ -1197,13 +1177,13 @@ axiom slide_def :
   (forall i:int [(slide(a, old_first, new_first)[i])]. ((slide(a, old_first,
   new_first)[i]) = (a[(i - (new_first - old_first))]))))))
 
-logic bool_eq6 : (int,float1) farray, int, int, (int,float1) farray, int,
+logic bool_eq5 : (int,float1) farray, int, int, (int,float1) farray, int,
   int -> bool
 
-axiom bool_eq_def5 :
+axiom bool_eq_def4 :
   (forall a:(int,float1) farray. forall a__first:int. forall a__last:int.
   forall b:(int,float1) farray. forall b__first:int. forall b__last:int
-  [bool_eq6(a, a__first, a__last, b, b__first, b__last)].
+  [bool_eq5(a, a__first, a__last, b, b__first, b__last)].
   ((((((a__first <= a__last) and ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) or
   ((not (a__first <= a__last)) and (b__last <  b__first))) and
@@ -1211,19 +1191,19 @@ axiom bool_eq_def5 :
   (temp___idx_155 <= a__last)) and
   (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))) or
   (not ((a__first <= temp___idx_155) and (temp___idx_155 <= a__last)))))) ->
-  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = true)) and
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = true)) and
   ((not ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
   (forall temp___idx_155:int. (((a__first <= temp___idx_155) and
   (temp___idx_155 <= a__last)) ->
   (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)]))))))) ->
-  (bool_eq6(a, a__first, a__last, b, b__first, b__last) = false))))
+  (bool_eq5(a, a__first, a__last, b, b__first, b__last) = false))))
 
 axiom bool_eq_rev :
   (forall a:(int,float1) farray. forall b:(int,float1) farray.
   (forall a__first:int. forall a__last:int. forall b__first:int.
-  forall b__last:int. ((bool_eq6(b, b__first, b__last, a, a__first,
+  forall b__last:int. ((bool_eq5(b, b__first, b__last, a, a__first,
   a__last) = true) -> ((((a__first <= a__last) -> ((b__first <= b__last) and
   ((a__last - a__first) = (b__last - b__first)))) and
   ((not (a__first <= a__last)) -> (b__last <  b__first))) and
@@ -1231,11 +1211,7 @@ axiom bool_eq_rev :
   (temp___idx_155 <= a__last)) ->
   (to_rep((a[temp___idx_155])) = to_rep((b[((b__first - a__first) + temp___idx_155)])))))))))
 
-logic arr : (int,float1) farray
-
-logic attr__ATTRIBUTE_ADDRESS : int
-
-logic to_rep1 : integer -> int
+function to_rep1(x: integer) : int = integerqtint(x)
 
 logic of_rep1 : int -> integer
 
@@ -1310,21 +1286,56 @@ axiom value__alignment_axiom : (0 <= value__alignment)
 axiom object__alignment_axiom :
   (forall a:(int,float1) farray. (0 <= object__alignment(a)))
 
-function bool_eq7(x: us_t, y: us_t) : bool = bool_eq6((x).elts,
+function bool_eq6(x: us_t, y: us_t) : bool = bool_eq5((x).elts,
   to_rep1(first((x).rt)), to_rep1(last((x).rt)), (y).elts,
   to_rep1(first((y).rt)), to_rep1(last((y).rt)))
 
-logic user_eq3 : us_t, us_t -> bool
+logic user_eq2 : us_t, us_t -> bool
 
-logic dummy3 : (int,float1) farray
+logic dummy2 : (int,float1) farray
 
-logic dummy4 : t1
+logic dummy3 : t1
 
-type arr_float_unconstrained__ref = { arr_float_unconstrained__content : us_t
+type a__ref = { a__content : us_t
 }
 
-function arr_float_unconstrained__ref___projection(a: arr_float_unconstrained__ref) : us_t =
-  (a).arr_float_unconstrained__content
+function a__ref___2__projection(a: a__ref) : us_t = (a).a__content
+
+type index_type
+
+logic index_typeqtint : index_type -> int
+
+axiom index_typeqtaxiom :
+  (forall i:index_type. ((1 <= index_typeqtint(i)) and
+  (index_typeqtint(i) <= 10)))
+
+predicate in_range3(x: int) = ((1 <= x) and (x <= 10))
+
+logic bool_eq7 : int, int -> bool
+
+axiom bool_eq_def5 :
+  (forall x:int. forall y:int [bool_eq7(x, y)]. (((x = y) -> (bool_eq7(x,
+  y) = true)) and ((not (x = y)) -> (bool_eq7(x, y) = false))))
+
+logic attr__ATTRIBUTE_IMAGE3 : int -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> int
+
+logic user_eq3 : index_type, index_type -> bool
+
+logic dummy4 : index_type
+
+type index_type__ref = { index_type__content : index_type
+}
+
+function index_type__ref___projection(a: index_type__ref) : index_type =
+  (a).index_type__content
+
+logic arr : (int,float1) farray
+
+logic attr__ATTRIBUTE_ADDRESS : int
 
 type t2
 
@@ -1388,7 +1399,7 @@ axiom value__alignment_axiom1 : (0 <= value__alignment1)
 axiom object__alignment_axiom1 :
   (forall a:(int,float1) farray. (0 <= object__alignment1(a)))
 
-function bool_eq8(x: us_t1, y: us_t1) : bool = bool_eq6((x).elts1,
+function bool_eq8(x: us_t1, y: us_t1) : bool = bool_eq5((x).elts1,
   to_rep1(first2((x).rt1)), to_rep1(last2((x).rt1)), (y).elts1,
   to_rep1(first2((y).rt1)), to_rep1(last2((y).rt1)))
 
@@ -1398,17 +1409,19 @@ logic dummy5 : (int,float1) farray
 
 logic dummy6 : t2
 
-type a__ref = { a__content : us_t1
+type arr_float_unconstrained__ref = { arr_float_unconstrained__content :
+us_t1
 }
 
-function a__ref___2__projection(a: a__ref) : us_t1 = (a).a__content
+function arr_float_unconstrained__ref___projection(a: arr_float_unconstrained__ref) : us_t1 =
+  (a).arr_float_unconstrained__content
 
- (* File "system.ads", line 1, characters 0-0 *)
+ (* File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P405-006__coq_lemma_library/proof/sessions/spark-test_array_lemmas/../../../obj/gnatprove/spark-test_array_lemmas.mlw", line 5042, characters 5-8 *)
 goal WP_parameter_def :
-  (forall temp___283:(int,float1) farray. forall temp___2831:t1.
+  (forall temp___283:(int,float1) farray. forall temp___2831:t2.
   ((forall i:int. (((2 <= i) and (i <= 10)) -> lt(to_rep((arr[(i - 1)])),
    to_rep((arr[i]))))) ->
-  ((dynamic_property((- 2147483648), 2147483647, 1, 10) and
-  ((arr = temp___283) and (mk(1, 10) = temp___2831))) ->
-  dynamic_property1((- 2147483648), 2147483647, to_rep1(first(temp___2831)),
-  to_rep1(last(temp___2831))))))
+  ((dynamic_property1((- 2147483648), 2147483647, 1, 10) and
+  ((arr = temp___283) and (mk1(1, 10) = temp___2831))) ->
+  dynamic_property((- 2147483648), 2147483647, to_rep1(first2(temp___2831)),
+  to_rep1(last2(temp___2831))))))

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -94,6 +90,13 @@
 (declare-fun attr__ATTRIBUTE_VALUE (us_image) Bool)
 
 (declare-sort integer 0)
+
+(declare-fun integerqtint (integer) Int)
+
+;; integer'axiom
+  (assert
+  (forall ((i integer))
+  (and (<= (- 2147483648) (integerqtint i)) (<= (integerqtint i) 2147483647))))
 
 (define-fun in_range1 ((x Int)) Bool (and (<= (- 2147483648) x)
                                      (<= x 2147483647)))
@@ -146,25 +149,6 @@
   (! (=> (fp.isFinite32 x) (= (to_rep (of_rep x)) x)) :pattern ((to_rep
                                                                 (of_rep x))) )))
 
-(declare-sort index_type 0)
-
-(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
-
-(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
-
-(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
-
-(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
-
-(declare-fun user_eq2 (index_type index_type) Bool)
-
-(declare-const dummy2 index_type)
-
-(declare-datatypes ()
-((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
-(define-fun index_type__ref___projection ((a index_type__ref)) index_type
-  (index_type__content a))
-
 (declare-datatypes ()
 ((map__ref (mk_map__ref (map__content (Array Int float))))))
 (declare-fun slide ((Array Int float) Int Int) (Array Int float))
@@ -213,11 +197,7 @@
   (= (to_rep (select a temp___idx_155)) (to_rep
                                         (select b (+ (- b__first a__first) temp___idx_155)))))))))))
 
-(declare-const arr (Array Int float))
-
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
-(declare-fun to_rep1 (integer) Int)
+(define-fun to_rep1 ((x integer)) Int (integerqtint x))
 
 (declare-fun of_rep1 (Int) integer)
 
@@ -306,15 +286,42 @@
                  (to_rep1 (last (rt x))) (elts y) (to_rep1 (first (rt y)))
                  (to_rep1 (last (rt y)))))
 
-(declare-fun user_eq3 (us_t us_t) Bool)
+(declare-fun user_eq2 (us_t us_t) Bool)
 
-(declare-const dummy3 us_t)
+(declare-const dummy2 us_t)
+
+(declare-datatypes () ((a__ref (mk_a__ref (a__content us_t)))))
+(define-fun a__ref___2__projection ((a a__ref)) us_t (a__content a))
+
+(declare-sort index_type 0)
+
+(declare-fun index_typeqtint (index_type) Int)
+
+;; index_type'axiom
+  (assert
+  (forall ((i index_type))
+  (and (<= 1 (index_typeqtint i)) (<= (index_typeqtint i) 10))))
+
+(define-fun in_range2 ((x Int)) Bool (and (<= 1 x) (<= x 10)))
+
+(declare-fun attr__ATTRIBUTE_IMAGE3 (Int) us_image)
+
+(declare-fun attr__ATTRIBUTE_VALUE__pre_check3 (us_image) Bool)
+
+(declare-fun attr__ATTRIBUTE_VALUE3 (us_image) Int)
+
+(declare-fun user_eq3 (index_type index_type) Bool)
+
+(declare-const dummy3 index_type)
 
 (declare-datatypes ()
-((arr_float_unconstrained__ref
- (mk_arr_float_unconstrained__ref (arr_float_unconstrained__content us_t)))))
-(define-fun arr_float_unconstrained__ref___projection ((a arr_float_unconstrained__ref)) us_t
-  (arr_float_unconstrained__content a))
+((index_type__ref (mk_index_type__ref (index_type__content index_type)))))
+(define-fun index_type__ref___projection ((a index_type__ref)) index_type
+  (index_type__content a))
+
+(declare-const arr (Array Int float))
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
 
 (declare-sort t1 0)
 
@@ -390,8 +397,11 @@
 
 (declare-const dummy4 us_t1)
 
-(declare-datatypes () ((a__ref (mk_a__ref (a__content us_t1)))))
-(define-fun a__ref___2__projection ((a a__ref)) us_t1 (a__content a))
+(declare-datatypes ()
+((arr_float_unconstrained__ref
+ (mk_arr_float_unconstrained__ref (arr_float_unconstrained__content us_t1)))))
+(define-fun arr_float_unconstrained__ref___projection ((a arr_float_unconstrained__ref)) us_t1
+  (arr_float_unconstrained__content a))
 
 (define-fun dynamic_invariant ((temp___expr_18 Int) (temp___is_init_14 Bool)
   (temp___skip_constant_15 Bool) (temp___do_toplevel_16 Bool)
@@ -415,76 +425,76 @@
                                      (or (= temp___is_init_156 true)
                                      (<= 1 10)) (in_range2 temp___expr_160)))
 
-(define-fun dynamic_invariant3 ((temp___expr_195 us_t)
+(define-fun dynamic_invariant3 ((temp___expr_195 us_t1)
   (temp___is_init_191 Bool) (temp___skip_constant_192 Bool)
   (temp___do_toplevel_193 Bool)
   (temp___do_typ_inv_194 Bool)) Bool (=>
                                      (not (= temp___skip_constant_192 true))
-                                     (dynamic_property (- 2147483648)
-                                     2147483647 (first1 temp___expr_195)
-                                     (last1 temp___expr_195))))
+                                     (dynamic_property1 (- 2147483648)
+                                     2147483647 (first3 temp___expr_195)
+                                     (last3 temp___expr_195))))
 
-(define-fun dynamic_invariant4 ((temp___expr_248 us_t1)
+(define-fun dynamic_invariant4 ((temp___expr_248 us_t)
   (temp___is_init_244 Bool) (temp___skip_constant_245 Bool)
   (temp___do_toplevel_246 Bool)
   (temp___do_typ_inv_247 Bool)) Bool (=>
                                      (not (= temp___skip_constant_245 true))
-                                     (dynamic_property1 (- 2147483648)
-                                     2147483647 (first3 temp___expr_248)
-                                     (last3 temp___expr_248))))
+                                     (dynamic_property (- 2147483648)
+                                     2147483647 (first1 temp___expr_248)
+                                     (last1 temp___expr_248))))
 
 (declare-const temp___283 (Array Int float))
 
-(declare-const temp___2831 t)
+(declare-const temp___2831 t1)
 
 (declare-const o (Array Int float))
 
-(declare-const o1 t1)
+(declare-const o1 t)
+
+(declare-const i Int)
+
+(declare-const j Int)
 
 ;; H
-  (assert
-  (forall ((i Int))
-  (=> (and (<= 2 i) (<= i 10))
-  (fp.lt (to_rep (select arr (- i 1))) (to_rep (select arr i))))))
-
-;; H
-  (assert (dynamic_property (- 2147483648) 2147483647 1 10))
+  (assert (dynamic_property1 (- 2147483648) 2147483647 1 10))
 
 ;; H
   (assert (= arr temp___283))
 
 ;; H
-  (assert (= (mk 1 10) temp___2831))
+  (assert (= (mk1 1 10) temp___2831))
 
 ;; H
-  (assert (dynamic_property1 (- 2147483648) 2147483647
-  (to_rep1 (first temp___2831)) (to_rep1 (last temp___2831))))
+  (assert (dynamic_property (- 2147483648) 2147483647
+  (to_rep1 (first2 temp___2831)) (to_rep1 (last2 temp___2831))))
 
 ;; H
   (assert (= temp___283 o))
 
 ;; H
   (assert
-  (= (mk1 (to_rep1 (first temp___2831)) (to_rep1 (last temp___2831)))
+  (= (mk (to_rep1 (first2 temp___2831)) (to_rep1 (last2 temp___2831)))
   o1))
 
 ;; H
   (assert
-  (forall ((i Int))
-  (=> (and (<= (to_rep1 (first2 o1)) i) (<= i (to_rep1 (last2 o1))))
-  (forall ((j Int))
-  (=> (and (<= (to_rep1 (first2 o1)) j) (<= j (to_rep1 (last2 o1))))
-  (=> (< i j) (fp.lt (to_rep (select o i)) (to_rep (select o j)))))))))
+  (forall ((i1 Int))
+  (=> (and (<= (to_rep1 (first o1)) i1) (<= i1 (to_rep1 (last o1))))
+  (forall ((j1 Int))
+  (=> (and (<= (to_rep1 (first o1)) j1) (<= j1 (to_rep1 (last o1))))
+  (=> (< i1 j1) (fp.lt (to_rep (select o i1)) (to_rep (select o j1)))))))))
 
-(declare-const i Int)
+;; H
+  (assert
+  (forall ((i1 Int))
+  (=> (and (<= 2 i1) (<= i1 10))
+  (fp.lt (to_rep (select arr (- i1 1))) (to_rep (select arr i1))))))
 
 ;; H
   (assert (<= 1 i))
 
 ;; H
   (assert (<= i 10))
-
-(declare-const j Int)
 
 ;; H
   (assert (<= 1 j))
@@ -497,7 +507,7 @@
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/P405-006__coq_lemma_library/proof/sessions/spark-test_array_lemmas/../../../obj/gnatprove/spark-test_array_lemmas.mlw", line 5042, characters 5-8
   (not (fp.lt (to_rep (select arr i)) (to_rep (select arr j)))))
 (check-sat)
 (exit)

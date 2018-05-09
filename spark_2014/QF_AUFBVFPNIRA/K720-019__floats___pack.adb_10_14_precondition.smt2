@@ -110,6 +110,7 @@
 (assert
 ;; WP_parameter_def
  ;; File "pack.ads", line 17, characters 0-0
-  (not (fp.lt o (fp #b0 #b01111111 #b00000000000000000000000))))
+  (not
+  (fp.lt (fp #b0 #b01111101 #b00110011001100110011010) (fp #b0 #b01111111 #b00000000000000000000000))))
 (check-sat)
 (exit)

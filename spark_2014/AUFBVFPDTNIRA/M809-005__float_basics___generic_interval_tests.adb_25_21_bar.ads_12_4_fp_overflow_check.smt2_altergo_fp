@@ -1117,5 +1117,9 @@ logic x : t
 logic attr__ATTRIBUTE_ADDRESS : int
 
  (* File "generic_interval_tests.adb", line 18, characters 0-0 *)
-goal WP_parameter_def : (tqtisFinite(x) -> tqtisFinite(mul(NearestTiesToEven,
-  x, x)))
+goal WP_parameter_def :
+  (forall o:t. forall o1:bool. (tqtisFinite(x) ->
+  ((((o = mul(NearestTiesToEven, x, x)) and
+  tqtisFinite(mul(NearestTiesToEven, x, x))) and ((le(o, fliteral) and
+  (o1 = true)) or ((not le(o, fliteral)) and (o1 = false)))) ->
+  tqtisFinite(mul(NearestTiesToEven, x, x)))))

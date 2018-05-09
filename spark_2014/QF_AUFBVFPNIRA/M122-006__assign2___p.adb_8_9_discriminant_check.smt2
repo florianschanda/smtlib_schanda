@@ -258,11 +258,11 @@
   (assert (= true temp___172))
 
 ;; H
-  (assert (= x__attr__constrained true))
+  (assert (not (= x__attr__constrained true)))
 
 (assert
 ;; WP_parameter_def
  ;; File "p.ads", line 3, characters 0-0
-  (not false))
+  (not true))
 (check-sat)
 (exit)

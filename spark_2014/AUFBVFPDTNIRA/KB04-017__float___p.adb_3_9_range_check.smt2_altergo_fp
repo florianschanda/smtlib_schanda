@@ -1167,4 +1167,4 @@ goal WP_parameter_def :
   ((((p__t_LAST__assume = id(fliteral)) and
   (tqtisFinite(p__t_LAST__assume) and (p__t_LAST__assume = fliteral))) and
   (p__t_LAST__assume = t_LAST)) -> (tqtisFinite(t_LAST) -> (le(t_FIRST,
-  t_LAST) -> le(neg(fliteral2), t_FIRST)))))))
+  t_LAST) -> le(t_LAST, fliteral2)))))))

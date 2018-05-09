@@ -942,7 +942,17 @@ logic attr__ATTRIBUTE_ADDRESS1 : int
 
 type us_split_fields = { rec__foo__double_tests__test_record_1__rec__a : ft;
 rec__foo__double_tests__test_record_1__rec__b : ft;
-rec__foo__double_tests__test_record_1__rec__c : ft }
+rec__foo__double_tests__test_record_1__rec__c : ft
+}
+
+function us_split_fields_A__2__projection(a: us_split_fields) : ft =
+  (a).rec__foo__double_tests__test_record_1__rec__a
+
+function us_split_fields_B__2__projection(a: us_split_fields) : ft =
+  (a).rec__foo__double_tests__test_record_1__rec__b
+
+function us_split_fields_C__2__projection(a: us_split_fields) : ft =
+  (a).rec__foo__double_tests__test_record_1__rec__c
 
 type us_split_fields__ref = { us_split_fields__content : us_split_fields
 }
@@ -1068,10 +1078,10 @@ axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
 goal WP_parameter_def :
   (forall y:t. forall r__split_fields:ft. forall r__split_fields1:ft.
   forall r__split_fields2:ft. forall o:ft. forall o1:ft. forall o2:ft.
-  forall o3:ft. forall o4:ft. forall o5:ft. forall temp___263:ft.
-  forall temp___2631:ft. forall temp___2632:ft. forall o6:ft. forall o7:ft.
-  forall o8:ft. forall o9:ft. forall temp___265:ft. forall temp___2651:ft.
-  forall temp___2652:ft. forall result:ft. forall result1:ft.
+  forall o3:ft. forall o4:ft. forall o5:ft. forall temp___269:ft.
+  forall temp___2691:ft. forall temp___2692:ft. forall o6:ft. forall o7:ft.
+  forall o8:ft. forall o9:ft. forall temp___271:ft. forall temp___2711:ft.
+  forall temp___2712:ft. forall result:ft. forall result1:ft.
   forall result2:ft. forall r__split_fields3:ft. forall r__split_fields4:ft.
   forall r__split_fields5:ft. forall result3:ft. forall result4:ft.
   forall result5:ft. forall r__split_fields6:ft. forall r__split_fields7:ft.
@@ -1082,18 +1092,18 @@ goal WP_parameter_def :
   ((tqtisFinite(x) and ((le(neg(fliteral1), fliteral1) -> tqtisFinite(y)) and
   ((((((to_rep(o) = fliteral) and ((to_rep(o1) = x) and
   ((to_rep(o2) = fliteral2) and ((o2 = o3) and ((o1 = o4) and
-  (o = o5)))))) and ((temp___263 = o3) and ((temp___2631 = o4) and
-  (temp___2632 = o5)))) and (((result = r__split_fields) and
+  (o = o5)))))) and ((temp___269 = o3) and ((temp___2691 = o4) and
+  (temp___2692 = o5)))) and (((result = r__split_fields) and
   ((result1 = r__split_fields1) and (result2 = r__split_fields2))) and
-  ((temp___263 = r__split_fields3) and ((temp___2631 = r__split_fields4) and
-  (temp___2632 = r__split_fields5))))) and
+  ((temp___269 = r__split_fields3) and ((temp___2691 = r__split_fields4) and
+  (temp___2692 = r__split_fields5))))) and
   (((((to_rep(o6) = to_rep(r__split_fields4)) and ((o6 = o7) and
   ((r__split_fields4 = o8) and (r__split_fields5 = o9)))) and
-  ((temp___265 = o7) and ((temp___2651 = o8) and (temp___2652 = o9)))) and
+  ((temp___271 = o7) and ((temp___2711 = o8) and (temp___2712 = o9)))) and
   (((result3 = r__split_fields3) and ((result4 = r__split_fields4) and
-  (result5 = r__split_fields5))) and ((temp___265 = r__split_fields6) and
-  ((temp___2651 = r__split_fields7) and
-  (temp___2652 = r__split_fields8))))) and ((result6 = y) and
+  (result5 = r__split_fields5))) and ((temp___271 = r__split_fields6) and
+  ((temp___2711 = r__split_fields7) and
+  (temp___2712 = r__split_fields8))))) and ((result6 = y) and
   (y1 = to_rep(r__split_fields6))))) and
   ((((r__split_fields9 = r__split_fields6) and
   ((r__split_fields10 = r__split_fields7) and

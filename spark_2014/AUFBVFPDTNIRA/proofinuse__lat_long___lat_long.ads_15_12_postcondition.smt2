@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -164,70 +160,9 @@
 
 (declare-const attr__ATTRIBUTE_ADDRESS Int)
 
-(declare-const lat_long__cos__result Float32)
-
-(declare-const o Float32)
-
-(declare-const result Float32)
-
-(declare-const lat_long__cos__result1 Float32)
-
-(declare-const lat_long__cos__result2 Float32)
-
-(declare-const lat_long__cos__result3 Float32)
-
-(declare-const lat_long__cos__result4 Float32)
-
-(declare-const lat_long__cos__result5 Float32)
-
-(declare-const result1 Float32)
-
-;; H
-  (assert (fp.isFinite32 x))
-
-;; H
-  (assert (= lat_long__cos__result1 lat_long__cos__result2))
-
-;; H
-  (assert (= lat_long__cos__result3 lat_long__cos__result1))
-
-;; H
-  (assert
-  (and (= o (sin1 x))
-  (and (fp.isFinite32 o)
-  (and
-  (and (fp.leq (fp.neg (fp #b0 #b01111111 #b00000000000000000000000))
-  o) (fp.leq o (fp #b0 #b01111111 #b00000000000000000000000)))
-  (=> (fp.eq x (fp #b0 #b00000000 #b00000000000000000000000))
-  (fp.eq o (fp #b0 #b00000000 #b00000000000000000000000)))))))
-
-;; H
-  (assert (= result lat_long__cos__result))
-
-;; H
-  (assert (= lat_long__cos__result1 o))
-
-;; H
-  (assert
-  (= (mk_t__ref lat_long__cos__result4) (mk_t__ref lat_long__cos__result2)))
-
-;; H
-  (assert (= lat_long__cos__result5 lat_long__cos__result3))
-
-;; H
-  (assert (= result1 lat_long__cos__result4))
-
-;; H
-  (assert (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000))
-  x))
-
-;; H
-  (assert (fp.leq x (fp #b0 #b10000101 #b00101100000000000000000)))
-
 (assert
 ;; WP_parameter_def
  ;; File "lat_long.ads", line 6, characters 0-0
-  (not
-  (fp.leq (fp #b0 #b01111011 #b10011001100110011001101) lat_long__cos__result4)))
+  (not true))
 (check-sat)
 (exit)

@@ -52,10 +52,6 @@
 (define-fun is_minus_zero ((x Float32)) Bool (and (fp.isZero x)
                                              (fp.isNegative x)))
 
-(declare-fun of_int (RoundingMode Int) Float32)
-
-(declare-fun to_int1 (RoundingMode Float32) Int)
-
 (declare-const max_int Int)
 
 (define-fun in_int_range ((i Int)) Bool (and (<= (- max_int) i)
@@ -78,7 +74,7 @@
 
 (define-fun sqr ((x Real)) Real (* x x))
 
-(declare-fun sqrt (Real) Real)
+(declare-fun sqrt1 (Real) Real)
 
 (define-fun same_sign_real ((x Float32)
   (r Real)) Bool (or (and (fp.isPositive x) (< 0.0 r))
@@ -128,76 +124,48 @@
 
 (declare-const t Float32)
 
-(declare-const result Float32)
-
-(declare-const c1 Float32)
-
-(declare-const result1 Float32)
-
-(declare-const f1 Float32)
-
-(declare-const result2 Float32)
-
-(declare-const r1 Float32)
-
-(declare-const result3 Float32)
-
-(declare-const t1 Float32)
-
 ;; H
   (assert (fp.isFinite32 x))
 
 ;; H
-  (assert (= result c))
+  (assert (= c (fp.roundToIntegral RTP x)))
 
 ;; H
-  (assert (= c1 (fp.roundToIntegral RTP x)))
+  (assert (fp.isFinite32 c))
 
 ;; H
-  (assert (fp.isFinite32 c1))
+  (assert (= f (fp.roundToIntegral RTN x)))
 
 ;; H
-  (assert (= result1 f))
+  (assert (fp.isFinite32 f))
 
 ;; H
-  (assert (= f1 (fp.roundToIntegral RTN x)))
+  (assert (= r (fp.roundToIntegral RNA x)))
 
 ;; H
-  (assert (fp.isFinite32 f1))
+  (assert (fp.isFinite32 r))
 
 ;; H
-  (assert (= result2 r))
+  (assert (= t (fp.roundToIntegral RTZ x)))
 
 ;; H
-  (assert (= r1 (fp.roundToIntegral RNA x)))
+  (assert (fp.isFinite32 t))
 
 ;; H
-  (assert (fp.isFinite32 r1))
-
-;; H
-  (assert (= result3 t))
-
-;; H
-  (assert (= t1 (fp.roundToIntegral RTZ x)))
-
-;; H
-  (assert (fp.isFinite32 t1))
-
-;; H
-  (assert (fp.leq x c1))
+  (assert (fp.leq x c))
 
 ;; H
   (assert
-  (fp.lt (fp.sub RNE c1 (fp #b0 #b01111111 #b00000000000000000000000))
+  (fp.lt (fp.sub RNE c (fp #b0 #b01111111 #b00000000000000000000000))
   x))
 
 ;; H
-  (assert (fp.leq f1 x))
+  (assert (fp.leq f x))
 
 (assert
 ;; WP_parameter_def
- ;; File "system.ads", line 1, characters 0-0
+ ;; File "/home/florian/adacore/spark2014/testsuite/gnatprove/tests/L402-021__float/gnatprove/p.mlw", line 2117, characters 5-8
   (not
-  (fp.isFinite32 (fp.add RNE f1 (fp #b0 #b01111111 #b00000000000000000000000)))))
+  (fp.isFinite32 (fp.add RNE f (fp #b0 #b01111111 #b00000000000000000000000)))))
 (check-sat)
 (exit)

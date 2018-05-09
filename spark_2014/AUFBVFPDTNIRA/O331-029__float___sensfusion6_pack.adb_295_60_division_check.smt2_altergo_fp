@@ -1058,12 +1058,16 @@ type float__ref = { float__content : float1
 
 function float__ref___projection(a: float__ref) : float1 = (a).float__content
 
-type t_degrees
+logic atan_2 : t, t -> t
+
+logic atan_2__function_guard : t, t, t -> prop
+
+type t_radians
 
 logic fliteral1 : t
 
 axiom fliteral_axiom1 : (tqtisFinite(fliteral1) and
-  (tqtreal(fliteral1) = 360.0))
+  (tqtreal(fliteral1) = 6.283185482025146484375))
 
 predicate in_range1(x: t) = (tqtisFinite(x) and (le(neg(fliteral1), x) and
   le(x, fliteral1)))
@@ -1074,7 +1078,7 @@ axiom bool_eq_def2 :
   (forall x:t. forall y:t [bool_eq2(x, y)]. ((eq(x, y) -> (bool_eq2(x,
   y) = true)) and ((not eq(x, y)) -> (bool_eq2(x, y) = false))))
 
-logic user_eq1 : t_degrees, t_degrees -> bool
+logic user_eq1 : t_radians, t_radians -> bool
 
 logic attr__ATTRIBUTE_IMAGE1 : t -> us_image
 
@@ -1082,66 +1086,7 @@ logic attr__ATTRIBUTE_VALUE__pre_check1 : us_image -> prop
 
 logic attr__ATTRIBUTE_VALUE1 : us_image -> t
 
-logic dummy1 : t_degrees
-
-type t_degrees__ref = { t_degrees__content : t_degrees
-}
-
-function t_degrees__ref___projection(a: t_degrees__ref) : t_degrees =
-  (a).t_degrees__content
-
-type t_quaternion
-
-predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral), x) and
-  le(x, fliteral)))
-
-logic bool_eq3 : t, t -> bool
-
-axiom bool_eq_def3 :
-  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
-
-logic user_eq2 : t_quaternion, t_quaternion -> bool
-
-logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE2 : us_image -> t
-
-logic dummy2 : t_quaternion
-
-type t_quaternion__ref = { t_quaternion__content : t_quaternion
-}
-
-function t_quaternion__ref___projection(a: t_quaternion__ref) : t_quaternion =
-  (a).t_quaternion__content
-
-type t_radians
-
-logic fliteral2 : t
-
-axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
-  (tqtreal(fliteral2) = 6.283185482025146484375))
-
-predicate in_range3(x: t) = (tqtisFinite(x) and (le(neg(fliteral2), x) and
-  le(x, fliteral2)))
-
-logic bool_eq4 : t, t -> bool
-
-axiom bool_eq_def4 :
-  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
-  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
-
-logic user_eq3 : t_radians, t_radians -> bool
-
-logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
-
-logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
-
-logic attr__ATTRIBUTE_VALUE3 : us_image -> t
-
-logic dummy3 : t_radians
+logic dummy1 : t_radians
 
 type t_radians__ref = { t_radians__content : t_radians
 }
@@ -1149,20 +1094,16 @@ type t_radians__ref = { t_radians__content : t_radians
 function t_radians__ref___projection(a: t_radians__ref) : t_radians =
   (a).t_radians__content
 
-logic atan_2 : t, t -> t
-
-logic atan_2__function_guard : t, t, t -> prop
-
 axiom atan_2__post_axiom :
   (forall x:t. forall y:t [atan_2(x, y)]. ((tqtisFinite(x) and
-  tqtisFinite(y)) -> in_range3(atan_2(x, y))))
+  tqtisFinite(y)) -> in_range1(atan_2(x, y))))
 
 logic asin : t -> t
 
 logic asin__function_guard : t, t -> prop
 
 axiom asin__post_axiom :
-  (forall x:t [asin(x)]. (tqtisFinite(x) -> in_range3(asin(x))))
+  (forall x:t [asin(x)]. (tqtisFinite(x) -> in_range1(asin(x))))
 
 logic saturate : t, t, t -> t
 
@@ -1177,6 +1118,65 @@ axiom saturate__post_axiom :
   min_value, max_value), max_value)) and ((not lt(max_value, value)) ->
   eq(saturate(value, min_value, max_value), value))))) and
   tqtisFinite(saturate(value, min_value, max_value)))))
+
+type t_degrees
+
+logic fliteral2 : t
+
+axiom fliteral_axiom2 : (tqtisFinite(fliteral2) and
+  (tqtreal(fliteral2) = 360.0))
+
+predicate in_range2(x: t) = (tqtisFinite(x) and (le(neg(fliteral2), x) and
+  le(x, fliteral2)))
+
+logic bool_eq3 : t, t -> bool
+
+axiom bool_eq_def3 :
+  (forall x:t. forall y:t [bool_eq3(x, y)]. ((eq(x, y) -> (bool_eq3(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq3(x, y) = false))))
+
+logic user_eq2 : t_degrees, t_degrees -> bool
+
+logic attr__ATTRIBUTE_IMAGE2 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check2 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE2 : us_image -> t
+
+logic dummy2 : t_degrees
+
+type t_degrees__ref = { t_degrees__content : t_degrees
+}
+
+function t_degrees__ref___projection(a: t_degrees__ref) : t_degrees =
+  (a).t_degrees__content
+
+type t_quaternion
+
+predicate in_range3(x: t) = (tqtisFinite(x) and (le(neg(fliteral), x) and
+  le(x, fliteral)))
+
+logic bool_eq4 : t, t -> bool
+
+axiom bool_eq_def4 :
+  (forall x:t. forall y:t [bool_eq4(x, y)]. ((eq(x, y) -> (bool_eq4(x,
+  y) = true)) and ((not eq(x, y)) -> (bool_eq4(x, y) = false))))
+
+logic user_eq3 : t_quaternion, t_quaternion -> bool
+
+logic attr__ATTRIBUTE_IMAGE3 : t -> us_image
+
+logic attr__ATTRIBUTE_VALUE__pre_check3 : us_image -> prop
+
+logic attr__ATTRIBUTE_VALUE3 : us_image -> t
+
+logic dummy3 : t_quaternion
+
+type t_quaternion__ref = { t_quaternion__content : t_quaternion
+}
+
+function t_quaternion__ref___projection(a: t_quaternion__ref) : t_quaternion =
+  (a).t_quaternion__content
 
 logic attr__ATTRIBUTE_ADDRESS : int
 
@@ -1228,10 +1228,10 @@ goal WP_parameter_def :
   forall result1:t. forall grav_y1:t. forall result2:t. forall grav_z1:t.
   forall result3:t. forall grav_x2:t. forall result4:t.
   forall euler_yaw_actual1:t. forall result5:t. forall euler_pitch_actual1:t.
-  ((le(neg(fliteral1), fliteral1) -> in_range1(euler_roll_actual)) ->
-  ((le(neg(fliteral1), fliteral1) -> in_range1(euler_pitch_actual)) ->
-  ((le(neg(fliteral1), fliteral1) -> in_range1(euler_yaw_actual)) ->
-  (in_range2(q0) -> (in_range2(q1) -> (in_range2(q2) -> (in_range2(q3) ->
+  ((le(neg(fliteral2), fliteral2) -> in_range2(euler_roll_actual)) ->
+  ((le(neg(fliteral2), fliteral2) -> in_range2(euler_pitch_actual)) ->
+  ((le(neg(fliteral2), fliteral2) -> in_range2(euler_yaw_actual)) ->
+  (in_range3(q0) -> (in_range3(q1) -> (in_range3(q2) -> (in_range3(q3) ->
   ((le(neg(fliteral3), fliteral3) -> tqtisFinite(grav_x)) ->
   ((le(neg(fliteral3), fliteral3) -> tqtisFinite(grav_y)) ->
   ((le(neg(fliteral3), fliteral3) -> tqtisFinite(grav_z)) ->
@@ -1254,13 +1254,13 @@ goal WP_parameter_def :
   sub(NearestTiesToEven, sub(NearestTiesToEven, add(NearestTiesToEven,
   mul(NearestTiesToEven, q0, q0), mul(NearestTiesToEven, q1, q1)),
   mul(NearestTiesToEven, q2, q2)), mul(NearestTiesToEven, q3, q3)))) and
-  in_range3(o1)) and (o2 = mul(NearestTiesToEven, o1, fliteral5))) and
+  in_range1(o1)) and (o2 = mul(NearestTiesToEven, o1, fliteral5))) and
   (o3 = div(NearestTiesToEven, o2, fliteral6))) and
   ((result4 = euler_yaw_actual) and (euler_yaw_actual1 = o3))) ->
-  ((((((o4 = asin(grav_x2)) and in_range3(o4)) and
+  ((((((o4 = asin(grav_x2)) and in_range1(o4)) and
   (o5 = mul(NearestTiesToEven, o4, fliteral5))) and
   (o6 = div(NearestTiesToEven, o5, fliteral6))) and
   ((result5 = euler_pitch_actual) and (euler_pitch_actual1 = o6))) ->
-  ((((o7 = atan_2(grav_y1, grav_z1)) and in_range3(o7)) and
+  ((((o7 = atan_2(grav_y1, grav_z1)) and in_range1(o7)) and
   (o8 = mul(NearestTiesToEven, o7, fliteral5))) ->
   (not is_zero(fliteral6))))))))))))))))))))

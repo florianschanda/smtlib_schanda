@@ -995,4 +995,4 @@ goal WP_parameter_def :
   ((x4 = copy) -> (tqtisFinite(copy) -> ((le(fliteral3, x4) and le(x4,
   fliteral)) -> ((((((o3 = mul(RNE, x4, x4)) and tqtisFinite(mul(RNE, x4,
   x4))) and (o4 = sub(RNE, x4, o3))) and ((o5 = o4) and tqtisFinite(o4))) and
-  ((result4 = x4) and (x5 = o5))) -> le(fliteral3, x5)))))))))))
+  ((result4 = x4) and (x5 = o5))) -> le(x5, copy)))))))))))

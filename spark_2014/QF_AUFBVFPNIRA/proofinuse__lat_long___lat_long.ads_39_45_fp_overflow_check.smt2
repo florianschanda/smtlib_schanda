@@ -56,6 +56,10 @@
                                      (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                      (fp.isFinite32 temp___expr_165)))
 
+(declare-const r Float32)
+
+(declare-const attr__ATTRIBUTE_ADDRESS Int)
+
 (define-fun in_range ((x Float32)) Bool (and (fp.isFinite32 x)
                                         (and
                                         (fp.leq (fp.neg (fp #b0 #b10000101 #b00101100000000000000000)) x)
@@ -108,9 +112,9 @@
 ;; lat_long__coordinates__long__position_axiom
   (assert (<= 0 lat_long__coordinates__long__position))
 
-(declare-const attr__ATTRIBUTE_ADDRESS Int)
-
 (declare-const attr__ATTRIBUTE_ADDRESS1 Int)
+
+(declare-const attr__ATTRIBUTE_ADDRESS2 Int)
 
 (define-fun dynamic_invariant1 ((temp___expr_60 Float32)
   (temp___is_init_56 Bool) (temp___skip_constant_57 Bool)
@@ -119,6 +123,9 @@
                                     (or (= temp___is_init_56 true)
                                     (fp.leq (fp.neg (fp #b0 #b11111110 #b11111111111111111111111)) (fp #b0 #b11111110 #b11111111111111111111111)))
                                     (fp.isFinite32 temp___expr_60)))
+
+;; r__def_axiom
+  (assert (= r (fp #b0 #b10010101 #b10000100101000110101001)))
 
 (define-fun dynamic_invariant2 ((temp___expr_172 Float32)
   (temp___is_init_168 Bool) (temp___skip_constant_169 Bool)
@@ -155,6 +162,12 @@
 (declare-const lat_long__delta_long_in_meters__result4 Float32)
 
 (declare-const lat_long__delta_long_in_meters__result5 Float32)
+
+;; H
+  (assert (fp.isFinite32 r))
+
+;; H
+  (assert (= (fp #b0 #b10010101 #b10000100101000110101001) r))
 
 (assert
 ;; WP_parameter_def
