@@ -120,9 +120,11 @@ def main():
                        actual_bin))
 
     print "Preparing results tarball"
+    if os.path.isfile("results.tar.gz"):
+        os.unlink("results.tar.gz")
     if os.path.isfile("results.tar.xz"):
         os.unlink("results.tar.xz")
-    os.system("tar cfJ results.tar.xz results")
+    os.system("tar cfz results.tar.gz results")
 
 if __name__ == "__main__":
     main()
