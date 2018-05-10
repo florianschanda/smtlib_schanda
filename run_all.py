@@ -88,7 +88,7 @@ def main():
         # NoCBQI run for CVC4
         invocations.append(("oldfp", "cvc4_2018_01_27"))
         # invocations.append(("nocbqi", "cvc4_2018_01_27"))
-        invocations.append(("approx", "cvc4_2018_01_27"))
+        # invocations.append(("approx", "cvc4_2018_01_27"))
 
         invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
