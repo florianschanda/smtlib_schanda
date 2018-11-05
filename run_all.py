@@ -4,6 +4,7 @@
 ##                            smtlib_schanda                                ##
 ##                                                                          ##
 ##              Copyright (C) 2017, Altran UK Limited                       ##
+##              Copyright (C) 2018, Florian Schanda
 ##                                                                          ##
 ##  This file is part of smtlib_schanda.                                    ##
 ##                                                                          ##
@@ -29,10 +30,9 @@ import os
 
 PATH = os.environ["PATH"].split(os.pathsep)
 
-# We skip the very first build (04-07) now since it doesn't support 2.6
-# style datatypes. We also don't include debug builds.
+# We don't include debug builds.
 CVC4_VERSIONS       = [x
-                       for x in sorted(glob("cvc4_*"))[1:]
+                       for x in sorted(glob("cvc4_*"))
                        if "_debug" not in x]
 
 MATHSAT_VERSION     = sorted(glob("mathsat_*"))[-1]
@@ -51,7 +51,7 @@ GOSAT_VERSION       = sorted(glob("gosat_*"))[-1]
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("suite",
-                    choices=["all", "cbmc", "fast", "industrial"])
+                    choices=["all"])
     ap.add_argument("--force",
                     action="store_true",
                     default=False)
@@ -68,18 +68,6 @@ def main():
         bm_suites = ["all"]
         cvc4_used_versions = CVC4_VERSIONS
         all_provers = True
-    elif options.suite == "cbmc":
-        bm_suites = ["cbmc"]
-        cvc4_used_versions = CVC4_VERSIONS
-        all_provers = True
-    elif options.suite == "industrial":
-        bm_suites = ["industrial"]
-        cvc4_used_versions = CVC4_VERSIONS
-        all_provers = True
-    elif options.suite == "fast":
-        bm_suites = ["schanda", "spark", "industrial"]
-        cvc4_used_versions = CVC4_VERSIONS[-3:]
-        all_provers = False
     else:
         assert False
 
@@ -88,13 +76,13 @@ def main():
     if all_provers:
         # We pick a random (but consistent) version for the OldFP and
         # NoCBQI run for CVC4
-        invocations.append(("oldfp", "cvc4_2018_01_27"))
+        # invocations.append(("oldfp", "cvc4_2018_01_27"))
         # invocations.append(("nocbqi", "cvc4_2018_01_27"))
         # invocations.append(("approx", "cvc4_2018_01_27"))
 
         invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
-        invocations.append(("colibri", "colibri"))
+        # invocations.append(("colibri", "colibri"))
         invocations.append(("mathsat", MATHSAT_VERSION))
         invocations.append(("mathsat_acdl", MATHSAT_VERSION))
 
