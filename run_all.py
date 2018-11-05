@@ -35,6 +35,8 @@ CVC4_VERSIONS       = [x
                        for x in sorted(glob("cvc4_*"))[1:]
                        if "_debug" not in x]
 
+MATHSAT_VERSION     = sorted(glob("mathsat_*"))[-1]
+
 Z3_VERSION          = sorted(glob("z3_201*"))[-1]
 Z3_SF_VERSION       = sorted(glob("z3_smallfloats_201*"))[-1]
 
@@ -93,8 +95,8 @@ def main():
         invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
         invocations.append(("colibri", "colibri"))
-        invocations.append(("mathsat", "mathsat"))
-        invocations.append(("mathsat_acdl", "mathsat"))
+        invocations.append(("mathsat", MATHSAT_VERSION))
+        invocations.append(("mathsat_acdl", MATHSAT_VERSION))
 
         invocations.append(("z3_smallfloats", Z3_SF_VERSION))
         invocations.append(("gosat", GOSAT_VERSION))
