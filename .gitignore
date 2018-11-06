@@ -10,6 +10,8 @@ util/limiter
 # Canned solver binaries
 *_201?_*_*
 altergo_*
+mathsat_*
+colibri_*/
 
 # Reports
 fp_progress*.*
