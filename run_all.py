@@ -4,7 +4,7 @@
 ##                            smtlib_schanda                                ##
 ##                                                                          ##
 ##              Copyright (C) 2017, Altran UK Limited                       ##
-##              Copyright (C) 2018, Florian Schanda
+##              Copyright (C) 2018, Florian Schanda                         ##
 ##                                                                          ##
 ##  This file is part of smtlib_schanda.                                    ##
 ##                                                                          ##
@@ -51,7 +51,7 @@ GOSAT_VERSION       = sorted(glob("gosat_*"))[-1]
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("suite",
-                    choices=["all"])
+                    choices=["all", "tacas"])
     ap.add_argument("--force",
                     action="store_true",
                     default=False)
@@ -68,6 +68,10 @@ def main():
         bm_suites = ["all"]
         cvc4_used_versions = CVC4_VERSIONS
         all_provers = True
+    elif options.suite == "tacas":
+        bm_suites = ["tacas"]
+        cvc4_used_versions = CVC4_VERSIONS
+        all_provers = True
     else:
         assert False
 
@@ -82,7 +86,7 @@ def main():
 
         invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
-        # invocations.append(("colibri", "colibri"))
+        invocations.append(("colibri", "colibri_1947/bin/colibri"))
         invocations.append(("mathsat", MATHSAT_VERSION))
         invocations.append(("mathsat_acdl", MATHSAT_VERSION))
 

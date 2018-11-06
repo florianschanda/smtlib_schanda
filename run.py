@@ -185,6 +185,7 @@ def main():
     ap.add_argument("--suite",
                     default="fp",
                     choices=["all",
+                             "tacas",
                              "qf_fp", "fp", "industrial", "spark",
                              "schanda",
                              "griggio",
@@ -232,16 +233,17 @@ def main():
         bench_dirs.append("crafted/QF_FPLRA")
         bench_dirs.append("random")
         # bench_dirs.append("random_ext")
-    if options.suite in ("all", "qf_fp", "fp", "xsat_paper", "griggio"):
+    if options.suite in ("all", "qf_fp", "fp", "xsat_paper", "griggio", "tacas"):
         bench_dirs.append("griggio")
     if options.suite in ("all", "qf_fp", "fp"):
         bench_dirs.append("wintersteiger")
+    if options.suite in ("all", "qf_fp", "fp"):
         bench_dirs.append("nyxbrain")
     if options.suite in ("all", "qf_fp", "fp", "spark"):
         bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
     if options.suite in ("all", "fp", "spark"):
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
-    if options.suite in ("all", "fp"):
+    if options.suite in ("all", "fp", "tacas"):
         bench_dirs.append("heizmann")
     if options.suite in ("all", "fp", "industrial"):
         for d in os.listdir("."):
@@ -249,7 +251,7 @@ def main():
                 bench_dirs.append(d)
     if options.suite in ("all", "spark_all"):
         bench_dirs.append("spark_2014_all")
-    if options.suite in ("all", "cbmc", "qf_fp", "fp"):
+    if options.suite in ("all", "cbmc", "qf_fp", "fp", "tacas"):
         bench_dirs.append("cbmc/rosa")
         bench_dirs.append("cbmc/sv-comp")
         bench_dirs.append("cbmc/cp2017")
