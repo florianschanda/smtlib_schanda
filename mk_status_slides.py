@@ -882,7 +882,7 @@ def main():
         fd.write("  5/.style={ZColor5},\n")
         fd.write("  6/.style={ZColor6},\n")
         fd.write("  7/.style={ZColor1b},\n")
-        fd.write("  8/.style={Zcolor2b},\n")
+        fd.write("  8/.style={ZColor2b},\n")
         fd.write("  default style/.style={black}\n")
         fd.write("}\n")
         fd.write("\\author{Florian Schanda}\n")

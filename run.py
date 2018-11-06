@@ -185,7 +185,7 @@ def main():
     ap.add_argument("--suite",
                     default="fp",
                     choices=["all",
-                             "tacas",
+                             "tacas", "tacas_full",
                              "qf_fp", "fp", "industrial", "spark",
                              "schanda",
                              "griggio",
@@ -227,31 +227,31 @@ def main():
             the_prover = Prover(p, options.prover_bin)
 
     bench_dirs = []
-    if options.suite in ("all", "schanda", "qf_fp", "fp"):
+    if options.suite in ("all", "tacas_full", "schanda", "qf_fp", "fp"):
         bench_dirs.append("crafted/QF_FP")
         bench_dirs.append("crafted/QF_FPBV")
         bench_dirs.append("crafted/QF_FPLRA")
         bench_dirs.append("random")
         # bench_dirs.append("random_ext")
-    if options.suite in ("all", "qf_fp", "fp", "xsat_paper", "griggio", "tacas"):
+    if options.suite in ("all", "tacas_full", "qf_fp", "fp", "xsat_paper", "griggio", "tacas"):
         bench_dirs.append("griggio")
-    if options.suite in ("all", "qf_fp", "fp"):
+    if options.suite in ("all", "tacas_full", "qf_fp", "fp"):
         bench_dirs.append("wintersteiger")
-    if options.suite in ("all", "qf_fp", "fp"):
+    if options.suite in ("all", "tacas_full", "qf_fp", "fp"):
         bench_dirs.append("nyxbrain")
-    if options.suite in ("all", "qf_fp", "fp", "spark"):
+    if options.suite in ("all", "tacas_full", "qf_fp", "fp", "spark"):
         bench_dirs.append("spark_2014/QF_AUFBVFPNIRA")
-    if options.suite in ("all", "fp", "spark"):
+    if options.suite in ("all", "tacas_full", "fp", "spark"):
         bench_dirs.append("spark_2014/AUFBVFPDTNIRA")
-    if options.suite in ("all", "fp", "tacas"):
+    if options.suite in ("all", "tacas_full", "fp", "tacas"):
         bench_dirs.append("heizmann")
-    if options.suite in ("all", "fp", "industrial"):
+    if options.suite in ("all", "tacas_full", "fp", "industrial"):
         for d in os.listdir("."):
             if d.startswith("industrial_") and os.path.isdir(d):
                 bench_dirs.append(d)
     if options.suite in ("all", "spark_all"):
         bench_dirs.append("spark_2014_all")
-    if options.suite in ("all", "cbmc", "qf_fp", "fp", "tacas"):
+    if options.suite in ("all", "tacas_full", "cbmc", "qf_fp", "fp", "tacas"):
         bench_dirs.append("cbmc/rosa")
         bench_dirs.append("cbmc/sv-comp")
         bench_dirs.append("cbmc/cp2017")
