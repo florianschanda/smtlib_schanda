@@ -4,6 +4,7 @@
 ##                            smtlib_schanda                                ##
 ##                                                                          ##
 ##              Copyright (C) 2017-2018, Altran UK Limited                  ##
+##              Copyright (C) 2018,      Florian Schanda                    ##
 ##                                                                          ##
 ##  This file is part of smtlib_schanda.                                    ##
 ##                                                                          ##
@@ -227,7 +228,7 @@ def mk_progress_slides(fd):
         for b in bench:
             if min(points) <= b[1] <= max(points) and b[1] > 0:
                 fd.write("\\node")
-                fd.write("[anchor=west,text width=1.75cm,fill=Altran1!10,")
+                fd.write("[anchor=west,text width=1.75cm,fill=blue!10,")
                 fd.write("rounded corners] at ")
                 fd.write("(visualization cs: x=%.3f,y=%.3f) {\\fontsize{5}{5}\\selectfont %s};\n" %
                          (float(len(data) - 1) + 0.1,
@@ -818,7 +819,7 @@ def mk_cactus_slides(fd):
             if solver == "vbs":
                 atr.append("style={dashed}")
             fd.write("  %s={%s},\n" % (h(solver), ",".join(atr)))
-        fd.write("  style sheet=altran\n")
+        fd.write("  style sheet=zen\n")
         fd.write("]\n")
 
         for solver, points in datasets:
@@ -849,19 +850,39 @@ def main():
 
     with open("fp_progress.tex", "w") as fd:
         fd.write("\\documentclass{beamer}\n")
-        fd.write("\\input{altran-beamer}\n")
         fd.write("\\usepackage{tikz}\n")
         fd.write("\\usepackage{changepage}\n")
+        fd.write("\\definecolor{ZColor1}{RGB}{97,201,168}\n")
+        fd.write("\\definecolor{ZColor1a}{RGB}{244,226,95}\n")
+        fd.write("\\definecolor{ZColor1b}{RGB}{179,158,84}\n")
+        fd.write("\\definecolor{ZColor1c}{RGB}{106,91,40}\n")
+        fd.write("\\definecolor{ZColor2}{RGB}{245,191,81}\n")
+        fd.write("\\definecolor{ZColor2a}{RGB}{97,157,188}\n")
+        fd.write("\\definecolor{ZColor2b}{RGB}{108,192,213}\n")
+        fd.write("\\definecolor{ZColor2c}{RGB}{145,207,206}\n")
+        fd.write("\\definecolor{ZColor3}{RGB}{0,60,90}\n")
+        fd.write("\\definecolor{ZColor3a}{RGB}{103,138,119}\n")
+        fd.write("\\definecolor{ZColor3b}{RGB}{51,119,101}\n")
+        fd.write("\\definecolor{ZColor3c}{RGB}{39,77,74}\n")
+        fd.write("\\definecolor{ZColor4}{RGB}{129,31,129}\n")
+        fd.write("\\definecolor{ZColor5}{RGB}{242,146,125}\n")
+        fd.write("\\definecolor{ZColor6}{RGB}{226,85,83}\n")
+        fd.write("\\definecolor{ZGray1}{RGB}{25,25,25}\n")
+        fd.write("\\definecolor{ZGray2}{RGB}{55,55,55}\n")
+        fd.write("\\definecolor{ZGray3}{RGB}{125,125,125}\n")
+        fd.write("\\definecolor{ZGray4}{RGB}{204,207,205}\n")
+        fd.write("\\definecolor{ZGray5}{RGB}{229,231,229}\n")
+        fd.write("\\definecolor{ZGray6}{RGB}{244,245,244}\n")
         fd.write("\\usetikzlibrary{datavisualization}\n")
-        fd.write("\\pgfdvdeclarestylesheet{altran}{\n")
-        fd.write("  1/.style={Altran1},\n")
-        fd.write("  2/.style={Altran4},\n")
-        fd.write("  3/.style={Altran6},\n")
-        fd.write("  4/.style={Altran7},\n")
-        fd.write("  5/.style={Altran8},\n")
-        fd.write("  6/.style={Altran12},\n")
-        fd.write("  7/.style={Altran5},\n")
-        fd.write("  8/.style={Altran10},\n")
+        fd.write("\\pgfdvdeclarestylesheet{zen}{\n")
+        fd.write("  1/.style={ZColor1},\n")
+        fd.write("  2/.style={ZColor2},\n")
+        fd.write("  3/.style={ZColor3},\n")
+        fd.write("  4/.style={ZColor4},\n")
+        fd.write("  5/.style={ZColor5},\n")
+        fd.write("  6/.style={ZColor6},\n")
+        fd.write("  7/.style={ZColor1b},\n")
+        fd.write("  8/.style={Zcolor2b},\n")
         fd.write("  default style/.style={black}\n")
         fd.write("}\n")
         fd.write("\\author{Florian Schanda}\n")

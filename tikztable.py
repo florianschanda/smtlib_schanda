@@ -32,7 +32,7 @@ class TikzTable(object):
     def __init__(self, title, columns,
                  noncomp=[],
                  col_fmt_fn=None,
-                 col_rule="Altran2",
+                 col_rule="ZColor2",
                  fmt_good=None,
                  fmt_bad=None,
                  fmt_ncomp=None,
@@ -42,11 +42,11 @@ class TikzTable(object):
 
         self.col_rule  = col_rule
         if fmt_good is None:
-            self.fmt_good = lambda x: "{\\color{AnSecondaryGreen}%s}" % x
+            self.fmt_good = lambda x: "{\\color{ZColor1}%s}" % x
         else:
             self.fmt_good = fmt_good
         if fmt_bad is None:
-            self.fmt_bad = lambda x: "{\\color{AnSecondaryRed}%s}" % x
+            self.fmt_bad = lambda x: "{\\color{ZColor6}%s}" % x
         else:
             self.fmt_bad = fmt_bad
         if fmt_ncomp is None:
