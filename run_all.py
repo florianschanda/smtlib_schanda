@@ -43,10 +43,12 @@ Z3_SF_VERSION       = sorted(glob("z3_smallfloats_201*"))[-1]
 ALT_ERGO_VERSION    = sorted(glob("altergo_spark_*"))[-1]
 
 # TODO: Make use of the smt2 facility of alt-ergo
-ALT_ERGO_FP_VERSION = "altergo_2_2_0"
+ALT_ERGO_FP_VERSION = sorted(glob("altergo_2*"))[-1]
 ALT_ERGO_FP_AXIOMS  = sorted(glob("altergo_fp_*.why"))[-1]
 
 GOSAT_VERSION       = sorted(glob("gosat_*"))[-1]
+
+COLIBRI_VERSION     = sorted(glob("colibri_*"))[-1] + "/bin/colibri"
 
 def main():
     ap = argparse.ArgumentParser()
@@ -86,7 +88,7 @@ def main():
 
         invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
-        invocations.append(("colibri", "colibri_1981/bin/colibri"))
+        invocations.append(("colibri", COLIBRI_VERSION))
         invocations.append(("mathsat", MATHSAT_VERSION))
         invocations.append(("mathsat_acdl", MATHSAT_VERSION))
 
