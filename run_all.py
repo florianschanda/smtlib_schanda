@@ -86,7 +86,7 @@ def main():
 
         invocations.append(("altergo", ALT_ERGO_VERSION))
         invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
-        invocations.append(("colibri", "colibri_1947/bin/colibri"))
+        invocations.append(("colibri", "colibri_1981/bin/colibri"))
         invocations.append(("mathsat", MATHSAT_VERSION))
         invocations.append(("mathsat_acdl", MATHSAT_VERSION))
 
