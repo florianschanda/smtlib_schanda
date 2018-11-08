@@ -248,9 +248,9 @@ def mk_progress_slides(fd):
     for cat in COMPARISON_CATS:
         fd.write("\\begin{frame}[fragile]{FP progress in CVC4}")
         fd.write("{%s over time (average of averages)}\n" % cat.capitalize())
-        mk_plot(cat, ("AnSecondaryGreen"
+        mk_plot(cat, ("ZColorGreen"
                       if cat == "solved"
-                      else "AnSecondaryRed"))
+                      else "ZColorRed"))
         fd.write("\\end{frame}\n\n")
 
         if cat == "solved":
@@ -258,7 +258,7 @@ def mk_progress_slides(fd):
                 if group.startswith("industrial_") or group.startswith("spark_2014"):
                     fd.write("\\begin{frame}[fragile]{FP progress in CVC4}")
                     fd.write("{VCs solved on %s}\n" % mk_bench_name(group))
-                    mk_plot(cat, "AnSecondaryGreen", group=group)
+                    mk_plot(cat, "ZColorGreen", group=group)
                     fd.write("\\end{frame}\n\n")
 
 def mk_csf_slides(fd):
@@ -447,11 +447,11 @@ def mk_csf_slides(fd):
 
         for i, cat in enumerate(slide_cats):
             if percent[cat] == 100.0:
-                col = "AnSecondaryGreen"
+                col = "ZColorGreen"
             elif percent[cat] > 90.0:
-                col = "AnSecondaryYellow"
+                col = "ZColorYellow"
             else:
-                col = "AnSecondaryRed"
+                col = "ZColorRed"
 
             fd.write("\\draw[fill=%s] %s -- %s -- %s -- %s -- cycle;\n" %
                      (col,
@@ -873,6 +873,9 @@ def main():
         fd.write("\\definecolor{ZGray4}{RGB}{204,207,205}\n")
         fd.write("\\definecolor{ZGray5}{RGB}{229,231,229}\n")
         fd.write("\\definecolor{ZGray6}{RGB}{244,245,244}\n")
+        fd.write("\\colorlet{ZColorGreen}{ZColor1}\n")
+        fd.write("\\colorlet{ZColorYellow}{ZColor2}\n")
+        fd.write("\\colorlet{ZColorRed}{ZColor6}\n")
         fd.write("\\usetikzlibrary{datavisualization}\n")
         fd.write("\\pgfdvdeclarestylesheet{zen}{\n")
         fd.write("  1/.style={ZColor1},\n")
@@ -885,6 +888,15 @@ def main():
         fd.write("  8/.style={ZColor2b},\n")
         fd.write("  default style/.style={black}\n")
         fd.write("}\n")
+        fd.write("\\setbeamertemplate{navigation symbols}{}\n")
+        fd.write("\\useinnertheme{circles}\n")
+        fd.write("\\usecolortheme[named=ZColor1]{structure}\n")
+        fd.write("\\setbeamercolor{palette secondary}{fg=ZColor1a}\n")
+        fd.write("\\setbeamercolor{palette tertiary}{fg=ZColor1b}\n")
+        fd.write("\\setbeamercolor{palette quaternary}{fg=ZColor1c}\n")
+        fd.write("\\setbeamercolor{frametitle}{fg=ZGray1}\n")
+        fd.write("\\setbeamercolor{framesubtitle}{fg=ZGray2}\n")
+
         fd.write("\\author{Florian Schanda}\n")
         fd.write("\\title{CVC4 IEEE-754 implementation}\n")
         fd.write("\\subtitle{Current status and benchmarks}\n")

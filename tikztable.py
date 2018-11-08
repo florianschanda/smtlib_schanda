@@ -42,15 +42,15 @@ class TikzTable(object):
 
         self.col_rule  = col_rule
         if fmt_good is None:
-            self.fmt_good = lambda x: "{\\color{ZColor1}%s}" % x
+            self.fmt_good = lambda x: "{\\color{ZColorGreen}%s}" % x
         else:
             self.fmt_good = fmt_good
         if fmt_bad is None:
-            self.fmt_bad = lambda x: "{\\color{ZColor6}%s}" % x
+            self.fmt_bad = lambda x: "{\\color{ZColorRed}%s}" % x
         else:
             self.fmt_bad = fmt_bad
         if fmt_ncomp is None:
-            self.fmt_ncomp = lambda x: "{\\color{black!33}%s}" % x
+            self.fmt_ncomp = lambda x: "{\\color{ZGray3}%s}" % x
         else:
             self.fmt_ncomp = fmt_ncomp
         self.cat_title = title
