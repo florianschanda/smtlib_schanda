@@ -30,25 +30,34 @@ import os
 
 PATH = os.environ["PATH"].split(os.pathsep)
 
+def find_latest(pattern):
+    candidates = sorted(glob(pattern))
+    if len(candidates) > 0:
+        return candidates[-1]
+    else:
+        return None
+
 # We don't include debug builds.
 CVC4_VERSIONS       = [x
                        for x in sorted(glob("cvc4_*"))
                        if "_debug" not in x]
 
-MATHSAT_VERSION     = sorted(glob("mathsat_*"))[-1]
+MATHSAT_VERSION     = find_latest("mathsat_*")
 
-Z3_VERSION          = sorted(glob("z3_[2r]*"))[-1]
-Z3_SF_VERSION       = sorted(glob("z3_smallfloats_*"))[-1]
+Z3_VERSION          = find_latest("z3_[2r]*")
+Z3_SF_VERSION       = find_latest("z3_smallfloats_*")
 
-ALT_ERGO_VERSION    = sorted(glob("altergo_spark_*"))[-1]
+ALT_ERGO_VERSION    = find_latest("altergo_spark_*")
 
 # TODO: Make use of the smt2 facility of alt-ergo
-ALT_ERGO_FP_VERSION = sorted(glob("altergo_2*"))[-1]
-ALT_ERGO_FP_AXIOMS  = sorted(glob("altergo_fp_*.why"))[-1]
+ALT_ERGO_FP_VERSION = find_latest("altergo_2*")
+ALT_ERGO_FP_AXIOMS  = find_latest("altergo_fp_*.why")
 
-GOSAT_VERSION       = sorted(glob("gosat_*"))[-1]
+GOSAT_VERSION       = find_latest("gosat_*")
 
-COLIBRI_VERSION     = sorted(glob("colibri_*"))[-1] + "/bin/colibri"
+COLIBRI_VERSION     = find_latest("colibri_*")
+if COLIBRI_VERSION is not None:
+    COLIBRI_VERSION += "/bin/colibri"
 
 def main():
     ap = argparse.ArgumentParser()
@@ -102,6 +111,8 @@ def main():
     os.system("make -C util")
 
     for kind, binary in invocations:
+        if binary is None:
+            continue
         for suite in bm_suites:
             if os.path.exists(binary):
                 actual_bin = "./" + binary
