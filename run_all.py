@@ -37,8 +37,8 @@ CVC4_VERSIONS       = [x
 
 MATHSAT_VERSION     = sorted(glob("mathsat_*"))[-1]
 
-Z3_VERSION          = sorted(glob("z3_201*"))[-1]
-Z3_SF_VERSION       = sorted(glob("z3_smallfloats_201*"))[-1]
+Z3_VERSION          = sorted(glob("z3_[2r]*"))[-1]
+Z3_SF_VERSION       = sorted(glob("z3_smallfloats_*"))[-1]
 
 ALT_ERGO_VERSION    = sorted(glob("altergo_spark_*"))[-1]
 
