@@ -12,6 +12,8 @@ util/limiter
 altergo_*
 mathsat_*
 colibri_*/
+z3_release_*
+smtcomp2015_main.txt
 
 # Reports
 fp_progress*.*

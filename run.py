@@ -128,7 +128,8 @@ def main():
                                ["-in", "-smt2"],
                                use_logic=False))
     provers.append(Prover_Kind("mathsat",
-                               ["-input=smt2"],
+                               ["-input=smt2",
+                                "-config=smtcomp2015_main.txt"],
                                use_dialect="mathsat"))
     provers.append(Prover_Kind("mathsat_acdl",
                                ["-input=smt2",

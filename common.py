@@ -105,13 +105,16 @@ class Benchmark(object):
         self.logic     = None
         self.expected  = "unknown"
         self.data      = None
+
         if timeout_override is None:
             self.limit_time = 60
         else:
             self.limit_time = timeout_override
-        # Around 2.5 GiB which is enough to run 48 benchmarks in
-        # parallel on a 48 core box with 128G of RAM
-        self.limit_memory = 2500
+
+        # Around 3.5 GiB is just enough for Colibri r2073 to do something
+        # meaningful. Previously 2.5 GiB was reasonable.
+        self.limit_memory = 3500
+
         if dialect is not None and os.path.exists(self.benchmark + "_" +
                                                   dialect):
             self.dialect = dialect
