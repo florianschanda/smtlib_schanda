@@ -100,18 +100,34 @@ for additional detail.
 ## Benchmarks copied from SMTLIB
 
 ### wintersteiger
-These are Cristoph's FP benchmarks, downloaded on 2017-07-05 from SMTLIB
-and filed here for convenience.
+These are Cristoph's FP benchmarks, downloaded on 2017-07-05 from
+SMTLIB and filed here for convenience.
 
 ### griggio
-These are Alberto's FP benchmarks, downloaded on 2017-07-05 from SMTLIB and
-filed here for convenience.
+These are Alberto's FP benchmarks, downloaded on 2019-05-14 from
+SMTLIB and filed here for convenience.
 
 ### heizmann
-These are Matthias Heizmann's Ultimate Automizer benchmarks (in a variety
-of logics), downloaded on 2017-07-22 from SMTLIB and filed here for
-convenience.
+These are Matthias Heizmann's Ultimate Automizer benchmarks (in a
+variety of logics), downloaded on 2019-05-14 from SMTLIB and filed
+here for convenience.
 
+### klee
+Benchmarks from KLEE, downloaded on 2019-05-14 from SMTLIB and filed
+here for convenience.
+
+### ramalho_esbmc
+Benchmarks from ESBMC, downloaded on 2019-05-14 from SMTLIB and filed
+here for convenience.
+
+### gudemann
+Benchmarks from Matthias Güdemann, downloaded on 2019-05-14 from
+SMTLIB and filed here for convenience.
+
+### preiner
+Benchmarks from Mathias Preiner for the paper "Invertibility
+Conditions for Floating-Point Formulas" downloaded on 2019-05-14 from
+SMTLIB and filed here for convenience.
 
 # Scripts
 
