@@ -22,7 +22,7 @@
                           ((_ to_fp_unsigned 11 53)
                             roundNearestTiesToEven
                             |c::main::main::1::x@1!0&0#0|))))))
-  (or (not (=> true a!1)))))
+  (not (=> true a!1))))
 
 (check-sat)
 (exit)

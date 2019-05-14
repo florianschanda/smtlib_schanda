@@ -248,7 +248,7 @@
                 (fp.lt |c::main::main::1::IN@1!0&0#0|
                        (fp #b0 #x7e #b10011001100110011001101)))))
 (let ((a!2 (=> (and a!1 (not (not |goto_symex::guard@0!0&0#1|))) false)))
-  (or (not (=> (and true a!1) (=> |execution_statet::guard_exec@0!0| a!2)))))))
+  (not (=> (and true a!1) (=> |execution_statet::guard_exec@0!0| a!2))))))
 
 (check-sat)
 (exit)

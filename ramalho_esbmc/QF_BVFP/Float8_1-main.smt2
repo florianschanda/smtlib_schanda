@@ -30,7 +30,7 @@
                     (not (= |c::main::$tmp::return_value_isfinite$1@1!0&0#1|
                             #x00000000)))
                a!1)))
-  (or (not a!2)))))
+  (not a!2))))
 
 (check-sat)
 (exit)

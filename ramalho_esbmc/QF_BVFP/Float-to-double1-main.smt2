@@ -176,7 +176,7 @@
 (assert (let ((a!1 (=> true
                (=> |execution_statet::__guard_exec@0!0|
                    (=> (not |c::main::$tmp::tmp$14@1!0&0#1|) false)))))
-  (or (not a!1))))
+  (not a!1)))
 
 (check-sat)
 (exit)

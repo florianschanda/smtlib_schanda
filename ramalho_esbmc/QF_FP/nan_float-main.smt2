@@ -2,7 +2,7 @@
 (set-logic QF_BVFP)
 (set-info :source |ESBMC floating-point test cases contributed by Mikhail Ramalho.|)
 (set-info :category "crafted")
-(set-info :status unknown)
+(set-info :status sat)
 
 (declare-fun |c::main::$tmp::return_value_nondet_float$1@1!0&0#1|
              ()
@@ -17,7 +17,7 @@
                     (=> |execution_statet::guard_exec@0!0|
                         (fp.eq |c::main::main::1::x@1!0&0#1|
                                |c::main::main::1::x@1!0&0#1|))))))
-  (or a!1)))
+  a!1))
 
 (check-sat)
 (exit)

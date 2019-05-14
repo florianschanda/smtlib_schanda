@@ -27,7 +27,7 @@
 (assert (let ((a!1 (=> true
                (=> |execution_statet::__guard_exec@0!0|
                    (=> (not |c::test::$tmp::tmp$2@1!0&0#1|) false)))))
-  (or (not a!1))))
+  (not a!1)))
 
 (check-sat)
 (exit)

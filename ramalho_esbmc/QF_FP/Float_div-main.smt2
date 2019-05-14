@@ -2,7 +2,7 @@
 (set-logic QF_BVFP)
 (set-info :source |ESBMC floating-point test cases contributed by Mikhail Ramalho.|)
 (set-info :category "crafted")
-(set-info :status unknown)
+(set-info :status unsat)
 
 (declare-fun |c::main::main::1::x@1!0&0#1| () (_ FloatingPoint 8 24))
 (declare-fun |c::main::main::1::x1@1!0&0#1| () (_ FloatingPoint 8 24))

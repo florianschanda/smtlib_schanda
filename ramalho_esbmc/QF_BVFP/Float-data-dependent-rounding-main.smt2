@@ -2,7 +2,7 @@
 (set-logic QF_BVFP)
 (set-info :source |ESBMC floating-point test cases contributed by Mikhail Ramalho.|)
 (set-info :category "crafted")
-(set-info :status unknown)
+(set-info :status unsat)
 
 (declare-fun |c::__ESBMC_rounding_mode&0#1| () (_ BitVec 32))
 (declare-fun |c::main::$tmp::tmp$1@1!0&0#1| () Bool)
@@ -239,7 +239,7 @@
                false)))
 (let ((a!4 (=> (and true (not a!1) (=> (not a!1) (not a!2)))
                (=> |execution_statet::__guard_exec@0!0| a!3))))
-  (or (not a!4))))))
+  (not a!4)))))
 
 (check-sat)
 (exit)

@@ -30,7 +30,7 @@
                     (=> (bvsge |c::argc'&0#0| #x00000001)
                         (bvsle |c::argc'&0#0| #x7ffffffe)))
                a!1)))
-  (or (not a!2)))))
+  (not a!2))))
 
 (check-sat)
 (exit)

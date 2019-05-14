@@ -40,7 +40,7 @@
 (assert (let ((a!1 (=> true
                (=> |execution_statet::__guard_exec@0!0|
                    (fp.eq |c::d&0#4| (fp #b0 #b10000000000 #x0000000000000))))))
-  (or (not a!1))))
+  (not a!1)))
 
 (check-sat)
 (exit)

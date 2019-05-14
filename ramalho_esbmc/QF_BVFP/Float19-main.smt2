@@ -72,7 +72,7 @@
 (assert (let ((a!1 (=> (and (not (not |goto_symex::guard@0!0&0#1|))
                     (not |c::f00::$tmp::tmp$6@1!0&0#1|))
                false)))
-  (or (not (=> true (=> |execution_statet::__guard_exec@0!0| a!1))))))
+  (not (=> true (=> |execution_statet::__guard_exec@0!0| a!1)))))
 
 (check-sat)
 (exit)
