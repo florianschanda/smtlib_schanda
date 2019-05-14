@@ -30,7 +30,7 @@ Checking for People Who Love Automata. CAV 2013:36-52
 |)
 (set-info :license "https://creativecommons.org/licenses/by/4.0/")
 (set-info :category "industrial")
-(set-info :status unknown)
+(set-info :status sat)
 (declare-fun |c_old(~yn)| () (_ FloatingPoint 11 53))
 (declare-fun c_~yn () (_ FloatingPoint 11 53))
 (declare-fun c_~ui () (_ FloatingPoint 11 53))

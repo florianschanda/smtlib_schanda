@@ -30,7 +30,7 @@ Checking for People Who Love Automata. CAV 2013:36-52
 |)
 (set-info :license "https://creativecommons.org/licenses/by/4.0/")
 (set-info :category "industrial")
-(set-info :status unknown)
+(set-info :status unsat)
 (declare-fun |main_#t~nondet1_3| () (_ BitVec 8))
 (declare-fun |main_#t~nondet0_3| () (_ BitVec 8))
 (declare-fun main_~x~7_4 () (_ BitVec 8))
