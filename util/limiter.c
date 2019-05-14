@@ -198,11 +198,11 @@ int main(int argc, char **argv)
       if (utime > (float)time_limit) {
         running = 0;
         fprintf(stderr,
-                "limiter::timeout %.1f s %u MiB\n", utime, vsize_hwm);
+                "limiter::timeout %.1f s %lu MiB\n", utime, vsize_hwm);
       } else if (vsize_hwm > mem_limit) {
         running = 0;
         fprintf(stderr,
-                "limiter::oom %.1f s %u MiB\n", utime, vsize_hwm);
+                "limiter::oom %.1f s %lu MiB\n", utime, vsize_hwm);
       }
 
       /* Check if the process has terminated */
@@ -215,7 +215,7 @@ int main(int argc, char **argv)
           // most precise results possible.
           get_stats(filename, &utime, &vsize, &vsize_hwm);
           fprintf(stderr,
-                  "limiter::ok %.3f s %u MiB\n", utime, vsize_hwm);
+                  "limiter::ok %.3f s %lu MiB\n", utime, vsize_hwm);
           break;
         }
       } else {
