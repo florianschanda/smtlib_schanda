@@ -59,7 +59,8 @@ def mk_bench_name(cat):
         "cbmc"           : "{\\sc cbmc}",
         "spark_2014"     : "{\\sc Spark~FP}",
         "spark_2014_qf"  : "{\\sc Spark~FP~(QF)}",
-        "spark_2014_all" : "{\sc Spark~ALL}",
+        "spark_2014_all" : "{\\sc Spark~ALL}",
+        "ramalho_esbmc"  : "{\\sc esbmc}",
     }
     if cat in mapping:
         return mapping[cat]

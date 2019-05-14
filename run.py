@@ -257,6 +257,9 @@ def main():
         bench_dirs.append("cbmc/sv-comp")
         bench_dirs.append("cbmc/cp2017")
         bench_dirs.append("cbmc/onera-examples")
+    if options.suite in ("all"):
+        bench_dirs.append("klee")
+        bench_dirs.append("ramalho_esbmc")
     if options.suite == "debug":
         bench_dirs.append("industrial_1")
 
