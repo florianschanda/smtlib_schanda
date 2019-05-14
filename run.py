@@ -260,6 +260,8 @@ def main():
     if options.suite in ("all"):
         bench_dirs.append("klee")
         bench_dirs.append("ramalho_esbmc")
+        bench_dirs.append("gudemann")
+        bench_dirs.append("preiner")
     if options.suite == "debug":
         bench_dirs.append("industrial_1")
 
