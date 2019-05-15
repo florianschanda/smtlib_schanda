@@ -144,7 +144,7 @@ class Benchmark(object):
 class Prover_Kind(object):
     def __init__(self, name, base_cmd,
                  use_logic=True,
-                 use_temp=False,
+                 use_temp=True,
                  use_dialect=None,
                  strict_dialect=False,
                  only_logic=None):
