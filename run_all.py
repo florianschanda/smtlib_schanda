@@ -63,6 +63,11 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("suite",
                     choices=["all", "tacas"])
+    ap.add_argument("--essential",
+                    action="store_true",
+                    default=False,
+                    help=("Only run main competitor solvers (Z3, "
+                          "MathSAT, Colibri)"))
     ap.add_argument("--force",
                     action="store_true",
                     default=False)
@@ -95,17 +100,19 @@ def main():
         # invocations.append(("nocbqi", "cvc4_2018_01_27"))
         # invocations.append(("approx", "cvc4_2018_01_27"))
 
-        invocations.append(("altergo", ALT_ERGO_VERSION))
-        invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
+        if not options.essential:
+            invocations.append(("altergo", ALT_ERGO_VERSION))
+            invocations.append(("altergo-fp", ALT_ERGO_FP_VERSION))
         invocations.append(("colibri", COLIBRI_VERSION))
         invocations.append(("mathsat", MATHSAT_VERSION))
         invocations.append(("mathsat_acdl", MATHSAT_VERSION))
 
-        invocations.append(("z3_smallfloats", Z3_SF_VERSION))
-        invocations.append(("gosat", GOSAT_VERSION))
-        invocations.append(("sonolar", "sonolar_2014_12_04"))
-        invocations.append(("cbmc", "cbmc_wrapper.sh"))
-        invocations.append(("cbmc_refine", "cbmc_wrapper.sh"))
+        if not options.essential:
+            invocations.append(("z3_smallfloats", Z3_SF_VERSION))
+            invocations.append(("gosat", GOSAT_VERSION))
+            invocations.append(("sonolar", "sonolar_2014_12_04"))
+            invocations.append(("cbmc", "cbmc_wrapper.sh"))
+            invocations.append(("cbmc_refine", "cbmc_wrapper.sh"))
 
     print "Compiling utilities..."
     os.system("make -C util")
