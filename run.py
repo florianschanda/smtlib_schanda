@@ -98,13 +98,11 @@ def main():
     provers = []
     provers.append(Prover_Kind("cvc4",
                                ["--lang=smt2",
-                                "--fp-exp",
                                 "--no-cond-rewrite-quant",
                                 "--check-models"]))
     # Same as CVC4, but using --no-cbqi
     provers.append(Prover_Kind("nocbqi",
                                ["--lang=smt2",
-                                "--fp-exp",
                                 "--no-cbqi",
                                 "--no-cond-rewrite-quant",
                                 "--check-models"]))

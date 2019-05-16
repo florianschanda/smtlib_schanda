@@ -25,6 +25,7 @@
 
 from copy import copy, deepcopy
 
+import re
 import os
 import subprocess
 import tempfile
@@ -164,6 +165,18 @@ class Prover(object):
         self.dialect   = kind.dialect
         self.strict    = kind.strict
         self.logics    = kind.only_logic
+
+        # Some options for CVC4 are not available for all
+        # versions. This hackery deals with that.
+        if kind.name == "cvc4":
+            print binary
+            bin_date_match = re.search("(\d\d\d\d)_(\d\d)_(\d\d)", binary)
+            assert bin_date_match is not None
+            version = datetime.date(int(bin_date_match.group(1)),
+                                    int(bin_date_match.group(2)),
+                                    int(bin_date_match.group(3)))
+            if version >= datetime.date(2019, 1, 1):
+                self.cmd.append("--fp-exp")
 
     # Returns a tuple (status, comment, time)
     def get_status(self, benchmark):
