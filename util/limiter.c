@@ -31,7 +31,7 @@
    https://github.com/pshved/timeout, which I tried to use as well) but the
    overhead tends to be large.
 
-   Hence, this helper program monitors /proc/<pid/stat and terminates the
+   Hence, this helper program monitors /proc/<pid>/stat and terminates the
    program if either user time or virtual memory usage hits a limit.
 */
 
@@ -170,7 +170,7 @@ int main(int argc, char **argv)
     int      cycle     = 0;
 
     while(running) {
-      /* Many solvers quickly return, it would add a lot of overhead ot
+      /* Many solvers quickly return, it would add a lot of overhead to
          sleep for 1 second on the first cycle. Consider 200k benchmarks, a
          guaranteed 1s time would mean a run would take at least 55 hours.
 
@@ -178,7 +178,7 @@ int main(int argc, char **argv)
          then each 0.1 second up to the two seconds; and from then onwards
          each second.
       */
-      if (cycle  < 50) {
+      if (cycle < 50) {
         cycle += 1;
         usleep(1000000 / 100);
       } else if (cycle < 65) {
