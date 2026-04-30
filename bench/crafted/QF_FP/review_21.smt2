@@ -1,6 +1,6 @@
 (set-info :smt-lib-version 2.6)
 (set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
-(set-logic QF_FP)
+(set-logic QF_FPLRA)
 (set-info :source |Reviewing of some industrial code by Florian Schanda|)
 (set-info :category crafted)
 (set-info :status unsat) ;; machine checked for x1 = x2 = 4096

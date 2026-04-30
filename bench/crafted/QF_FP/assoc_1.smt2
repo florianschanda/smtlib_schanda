@@ -13,9 +13,9 @@
 ;; x + y + z can be 0 or 1 depending on order of evaluation
 
 (assert (fp.eq (fp.add rm x (fp.add rm y z))
-               ((_ to_fp 8 24) RNE 0)))
+               ((_ to_fp 8 24) RNE 0.0)))
 (assert (fp.eq (fp.add rm (fp.add rm x y) z)
-               ((_ to_fp 8 24) RNE 1)))
+               ((_ to_fp 8 24) RNE 1.0)))
 
 (check-sat)
 (exit)
