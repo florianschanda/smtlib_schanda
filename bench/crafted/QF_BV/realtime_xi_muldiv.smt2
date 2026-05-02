@@ -2,7 +2,6 @@
 (set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
 (set-logic QF_BV)
 (set-option :produce-models true)
-(set-option :incremental true)
 (set-info :source |Overflow checking benchmarks by Florian Schanda|)
 (set-info :category crafted)
 

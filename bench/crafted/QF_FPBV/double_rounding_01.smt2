@@ -12,7 +12,7 @@
 (declare-const x Float32)
 (assert (fp.leq ((_ to_fp 8 24) RNE (- 128.0))
                 x
-                ((_ to_fp 8 24) RNE 127)))
+                ((_ to_fp 8 24) RNE 127.0)))
 
 (define-const y Float32 (fp.roundToIntegral RNE x))
 
