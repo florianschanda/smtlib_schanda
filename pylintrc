@@ -1,0 +1,12 @@
+[MAIN]
+reports=no
+output-format=colorized
+score=no
+disable=
+	missing-module-docstring,
+	missing-function-docstring,
+	missing-class-docstring,
+	consider-using-f-string,
+	too-many-instance-attributes,
+	too-few-public-methods
+class-rgx=[A-Z]([a-z]*|[A-Z]*)(_([A-Z][a-z]+)|[A-Z]+|[0-9]+)*

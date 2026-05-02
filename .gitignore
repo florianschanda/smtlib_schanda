@@ -1,30 +1,14 @@
-# Python things
-*.pyc
+# EMACS
+*~
 
-# Temp
-spark_2014_all/ALL/*
+# Python
+__pycache__
 
-# Utilities
+# Local installs and working directory
+.install
+.temp
 util/limiter
 
-# Canned solver binaries
-*_201?_*_*
-altergo_*
-mathsat_*
-colibri_*/
-z3_release_*
-smtcomp2015_main.txt
-
-# Reports
-fp_progress*.*
-report_*.txt
-fishy.txt
-
-# Results
-data_*.p
-benchmarks.p
-results*.tar.xz
-
-industrial_2*
-
-stats_*.tex
+# Artefacts
+results*.json
+manifest.json
