@@ -16,7 +16,7 @@
 # along with smtlib_schanda. If not, see
 # <https://www.gnu.org/licenses/>.
 
-import os.path
+import os
 import zipfile
 
 

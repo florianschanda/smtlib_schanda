@@ -1,0 +1,12 @@
+{
+    "name" : "CVC4",
+    "bin"  : "cvc4",
+    "options" : ["--lang=smt2",
+		 "--no-cond-rewrite-quant",
+		 "--check-models"],
+    "versions" : {
+	"1.8": {
+	    "url" : "https://github.com/CVC4/CVC4-archived/releases/download/1.8/cvc4-1.8-x86_64-linux-opt"
+	}
+    }
+}

@@ -19,6 +19,7 @@
 import os
 import subprocess
 import json
+import shutil
 
 from enum import Enum, auto
 
@@ -79,10 +80,17 @@ class Solver_Config:
         for version, vdata in self.versions.items():
             os.makedirs(".install", exist_ok = True)
             ext = os.path.splitext(vdata["url"])[1]
-            local_file = os.path.join(".install",
-                                      "%s-%s%s" % (self.name,
-                                                   version,
-                                                   ext))
+            match ext:
+                case ".zip":
+                    local_file = os.path.join(".install",
+                                              "%s-%s%s" % (self.name,
+                                                           version,
+                                                           ext))
+                case _:
+                    local_file = os.path.join(".install",
+                                              "%s-%s" % (self.name,
+                                                         version))
+
             local_install = os.path.join(".install", self.name, version)
 
             if not os.path.isfile(local_file):
@@ -98,7 +106,12 @@ class Solver_Config:
                     case ".zip":
                         unzip(local_file, local_install, self.strip_components)
                     case _:
-                        print("error: don't know how to unpack %s" % ext)
+                        shutil.copyfile(local_file,
+                                        os.path.join(local_install,
+                                                     self.bin_path))
+                        os.chmod(os.path.join(local_install,
+                                              self.bin_path),
+                                 0o755)
 
             local_bin = os.path.join(local_install, self.bin_path)
             if not os.path.isfile(local_bin):
