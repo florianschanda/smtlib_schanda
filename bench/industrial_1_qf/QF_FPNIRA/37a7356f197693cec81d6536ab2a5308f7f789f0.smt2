@@ -1,4 +1,4 @@
-(set-info :smt-lib-version 2.5)
+(set-info :smt-lib-version 2.6)
 (set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
 (set-logic QF_FPNIRA)
 (set-info :source |Benchmarks generated from industrial code by Florian Schanda using SPARK 2014 and an SMTLIB Obfuscation Script|)
