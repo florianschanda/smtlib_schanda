@@ -1,4 +1,4 @@
-(set-logic ALL_SUPPORTED)
+(set-logic ALL)
 (set-info :status sat)
 (define-fun f () Float32 (fp (_ bv1 1) (_ bv43 8) (_ bv0 23)))
 (define-fun ref () Float32 (fp (_ bv0 1) (_ bv43 8) (_ bv0 23)))
