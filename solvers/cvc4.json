@@ -2,7 +2,7 @@
     "name" : "CVC4",
     "bin"  : "cvc4",
     "options" : ["--lang=smt2",
-		 "--no-cond-rewrite-quant",
+		 "--fp-exp",
 		 "--check-models"],
     "versions" : {
 	"1.8": {

@@ -179,7 +179,8 @@ class SMTLIB_Benchmark:
                   "UFFPDTNIRA" |
                   "ALL_SUPPORTED" |
                   "AUFBVFPDTNIRA" |
-                  "ABVFP"
+                  "ABVFP" |
+                  "ALL"
                   ):
                 self.logic = Logic.ALL
 
@@ -198,7 +199,8 @@ class SMTLIB_Benchmark:
                   "QF_ABVFP" |
                   "QF_UFFPLIA" |
                   "QF_BVFPLRA" |
-                  "QF_FPBVLIA"
+                  "QF_FPBVLIA" |
+                  "QF_ALL"
                   ):
                 self.logic = Logic.QF_ALL
 
@@ -406,6 +408,8 @@ def survery_benchmarks():
     for group in os.scandir("bench"):
         if group.is_dir():
             if group.name in ("dnns", "spark_2014", "spark_2014_all"):
+                continue
+            if group.name == "random_ext":
                 continue
             benchmarks += load_benchmark_group(group.name)
     return benchmarks
