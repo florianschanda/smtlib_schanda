@@ -1,1 +1,1 @@
-dnncbmc/network5_assert_true.c --function network5_assert_true
+cbmc/dnns/network5_assert_true.c --function network5_assert_true

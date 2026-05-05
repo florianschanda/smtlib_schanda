@@ -1,1 +1,1 @@
-dnncbmc/network8_assert_true.c --function network8_assert_true
+cbmc/dnns/network8_assert_true.c --function network8_assert_true
