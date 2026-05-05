@@ -18,10 +18,12 @@
 
 import argparse
 import os
+import subprocess
 
+from lib.solvers import Solver_Config
 
-def process(filename):
-    cmd = [".install/CVC4/1.8/cvc4",
+def process(cvc4, cvc5, filename):
+    cmd = [cvc4.binary("1.8"),
            "--output-lang=smtlib2.6",
            "--dump=raw-benchmark",
            "--preprocess-only",
@@ -29,12 +31,21 @@ def process(filename):
            "--no-ext-rew-prep",
            "--dump-to=processed.smt2"]
     cmd.append(filename)
+
     print("Translating %s" % filename)
-    os.system(" ".join(cmd))
-    print("Post-processing %s" % filename)
+    p = subprocess.run(cmd,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.STDOUT,
+                       encoding="UTF-8",
+                       check=True)
+    assert p.stdout.strip() in ("unsat", "sat", "unknown")
+    assert os.path.isfile("processed.smt2")
+
+    print("> Post-processing...")
     with open("processed.smt2", "r", encoding="UTF-8") as fd:
         tmp = fd.readlines()
     os.unlink("processed.smt2")
+
     with open(filename, "w", encoding="UTF-8") as fd:
         fd.write(";; This file has been translated by CVC4 from an earlier\n")
         fd.write(";; version of SMTLIB to 2.6 using the script\n")
@@ -50,15 +61,25 @@ def process(filename):
             else:
                 fd.write(line)
 
+    print("> Checking...")
+    cmd = cvc5.command_line("1.3.3", filename)
+    cmd.append("--parse-only")
+    p = subprocess.run(cmd,
+                       check=True,
+                       encoding="UTF-8")
+
 
 def main():
+    cvc4 = Solver_Config("solvers/cvc4.json")
+    cvc5 = Solver_Config("solvers/cvc5.json")
+
     ap = argparse.ArgumentParser()
     ap.add_argument("benchmark_dir")
 
     options = ap.parse_args()
 
     if os.path.isfile(options.benchmark_dir):
-        process(options.benchmark_dir)
+        process(cvc4, cvc5, options.benchmark_dir)
         return
 
     if not os.path.isdir(options.benchmark_dir):
@@ -67,7 +88,7 @@ def main():
     for path, _, files in os.walk(options.benchmark_dir):
         for f in files:
             if f.endswith(".smt2"):
-                process(os.path.join(path, f))
+                process(cvc4, cvc5, os.path.join(path, f))
 
 
 if __name__ == "__main__":

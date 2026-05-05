@@ -402,7 +402,7 @@ def survery_benchmarks():
     benchmarks = []
     for group in os.scandir("bench"):
         if group.is_dir():
-            if group.name in ("dnns", ):
+            if group.name in ("dnns", "spark_2014", "spark_2014_all"):
                 continue
             benchmarks += load_benchmark_group(group.name)
     return benchmarks

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CBMC_BIN=$(basename $(ls ../cbmc_2* | sort | tail -1))
+CBMC_BIN=cbmc
 
 # for F in $(find demo -type f -name "*.c"); do
 #     CFILE=$(echo $F | sed -e "s|./|cbmc/|")
@@ -15,6 +15,6 @@ for F in $(find sv-comp cp2017 ariadne -type f -name "*.smt2_cbmc"); do
     echo "*** Processing" $F
     CBMC_ARGS=$(cat $F)
     DST=$(echo $F | sed -e "s/.smt2_cbmc/.smt2/")
-    (cd .. && ./${CBMC_BIN} ${CBMC_ARGS} --smt2 --fpa --outfile cbmc/${DST} > /dev/null)
-    ../sort_spark_benchmarks.py --file=${DST}
+    (cd .. && ${CBMC_BIN} ${CBMC_ARGS} --smt2 --fpa --outfile cbmc/${DST} > /dev/null)
+    # ../../attic/sort_spark_benchmarks.py --file=${DST}
 done
