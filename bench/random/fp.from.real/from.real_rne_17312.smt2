@@ -1,5 +1,5 @@
 (set-info :smt-lib-version 2.6)
-(set-logic QF_FP)
+(set-logic QF_FPLRA)
 (set-option :produce-models true)
 (set-info :source |Random FP created by PyMPF|)
 (set-info :license |https://www.gnu.org/licenses/gpl-3.0.html|)
