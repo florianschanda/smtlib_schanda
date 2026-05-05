@@ -70,6 +70,7 @@ class Logic(Enum):
     QF_FPLRA = auto()
     QF_FPLIA = auto()
     QF_UFFP = auto()
+    QF_AUFBVFP = auto()
 
     FP = auto()
     FPBV = auto()
@@ -215,6 +216,8 @@ class SMTLIB_Benchmark:
                 self.logic = Logic.QF_FPBV
             case "QF_FPBVLRA":
                 self.logic = Logic.QF_FPBVLRA
+            case "QF_AUFBVFP":
+                self.logic = Logic.QF_AUFBVFP
 
             case "FP":
                 self.logic = Logic.FP
