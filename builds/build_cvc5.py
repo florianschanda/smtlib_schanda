@@ -72,7 +72,7 @@ def main():
     ap.add_argument("--cvc5", default="main")
     ap.add_argument("--symfpu", default="experimental")
     ap.add_argument("--build", default="production")
-    ap.add_argument("--mpfr", action="store_false", default=True)
+    ap.add_argument("--mpfr", action="store_true", default=False)
 
     options = ap.parse_args()
 
