@@ -183,6 +183,9 @@ class SMTLIB_Benchmark:
                   "ALL_SUPPORTED" |
                   "AUFBVFPDTNIRA" |
                   "ABVFP" |
+                  "FPLRA" |
+                  "BVFPLRA" |
+                  "ABVFPLRA" |
                   "ALL"
                   ):
                 self.logic = Logic.ALL
@@ -203,7 +206,8 @@ class SMTLIB_Benchmark:
                   "QF_UFFPLIA" |
                   "QF_BVFPLRA" |
                   "QF_FPBVLIA" |
-                  "QF_ALL"
+                  "QF_ALL" |
+                  "QF_ABVFPLRA"
                   ):
                 self.logic = Logic.QF_ALL
 
