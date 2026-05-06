@@ -22,6 +22,7 @@ import subprocess
 
 from lib.solvers import Solver_Config
 
+
 def process(cvc4, cvc5, filename):
     cmd = [cvc4.binary("1.8"),
            "--output-lang=smtlib2.6",

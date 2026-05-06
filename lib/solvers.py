@@ -33,20 +33,55 @@ class Solver_Response(Enum):
 
 
 class Solver_Verdict(Enum):
+    NOT_RUN        = auto()
+    # No results available at all
+
     UNSUPPORTED    = auto()
+    # Attempted to run, but logic is not supported
+
     INTERNAL_ERROR = auto()
+    # Error inside benchmarking scripts - should never happen
+
     TIMEOUT        = auto()
+    # Limiter killed process due to time-out
+
     OOM            = auto()
+    # Limited killed process due to memory allocation
+
     SAT            = auto()
+    # Solved problem (sat)
+
     UNSAT          = auto()
+    # Solved problem (unsat)
+
     UNKNOWN        = auto()
+    # Could not solve problem for whatever reason (likely quantifiers)
+
     ERROR          = auto()
+    # Solver returned an error
+
+    UNSOUND        = auto()
+    # Solver returned the wrong answer
 
 
 class Solver_Logic_Change(Enum):
     NONE     = auto()
     STRIP    = auto()
     SIMPLIFY = auto()
+
+
+class Solver_Id:
+    def __init__(self, config, version):
+        assert isinstance(config, Solver_Config)
+        assert version in config.versions
+        self.config  = config
+        self.version = version
+
+    def uid(self):
+        return self.config.name + "." + self.version
+
+    def result_file_name(self):
+        return "results.%s.json" % self.uid()
 
 
 class Solver_Config:

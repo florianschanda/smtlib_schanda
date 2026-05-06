@@ -20,10 +20,12 @@ import sys
 import argparse
 import json
 
-from lib.solvers import Solver_Config
+from lib.solvers import (Solver_Config, Solver_Id)
 from lib.benchmarks import (survery_benchmarks,
                             load_benchmarks,
-                            run_benchmarks)
+                            run_benchmarks,
+                            serialise_results,
+                            load_results)
 
 
 def main():
@@ -31,6 +33,7 @@ def main():
     subp = ap.add_subparsers(required=True,
                              dest="mode")
 
+    # pylint: disable=unused-variable
     ap_manifest = subp.add_parser("manifest")
 
     ap_run = subp.add_parser("run")
@@ -45,7 +48,17 @@ def main():
     ap_install = subp.add_parser("install")
     ap_install.add_argument("solver")
 
+    ap_analysis = subp.add_parser("analysis")
+    ap_analysis.add_argument("solver")
+    ap_analysis.add_argument("version")
+    # pylint: enable=unused-variable
+
     options = ap.parse_args()
+
+    match options.mode:
+        case "run" | "analysis":
+            solver    = Solver_Config(options.solver)
+            solver_id = Solver_Id(solver, options.version)
 
     match options.mode:
         case "manifest":
@@ -62,39 +75,15 @@ def main():
             solver.install_all()
 
         case "run":
-            solver = Solver_Config(options.solver)
-            if options.version == "latest":
-                solver_version = list(sorted(solver.versions))[-1]
-            elif options.version not in solver.versions:
-                ap.error("valid version for %s: %s" %
-                         (solver.name, ", ".join(solver.versions)))
-                return 1
-            else:
-                solver_version = options.version
-
             benchmarks = load_benchmarks(options.group)
-            results = run_benchmarks(solver,
-                                     solver_version,
+            results = run_benchmarks(solver_id,
                                      benchmarks,
                                      options.threads)
-            with open("results.%s.%s.json" %
-                      (solver.name, solver_version),
-                      "w",
-                      encoding="UTF-8") as fd:
-                result_json = {}
-                for result in results:
-                    if result.group not in result_json:
-                        result_json[result.group] = {}
-                    result_json[result.group][result.name] = {
-                        "kind" : result.kind.name
-                    }
-                    if result.message is not None:
-                        result_json[result.group][result.name]["message"] =\
-                            result.message
-                json.dump(result_json,
-                          fd,
-                          indent    = 2,
-                          sort_keys = True)
+            serialise_results(results, solver_id)
+
+        case "analysis":
+            benchmarks = load_benchmarks()
+            load_results(benchmarks, solver_id)
 
     return 0
 

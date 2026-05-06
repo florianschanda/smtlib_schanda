@@ -8,5 +8,8 @@ disable=
 	missing-class-docstring,
 	consider-using-f-string,
 	too-many-instance-attributes,
-	too-few-public-methods
+	too-few-public-methods,
+	too-many-branches,
+	too-many-locals,
+	too-many-return-statements
 class-rgx=[A-Z]([a-z]*|[A-Z]*)(_([A-Z][a-z]+)|[A-Z]+|[0-9]+)*

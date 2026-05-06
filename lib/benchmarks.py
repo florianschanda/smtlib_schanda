@@ -25,10 +25,10 @@ import json
 
 from enum import Enum, auto
 
-from lib.solvers import (Solver_Config,
-                         Solver_Verdict,
+from lib.solvers import (Solver_Verdict,
                          Solver_Response,
-                         Solver_Logic_Change)
+                         Solver_Logic_Change,
+                         Solver_Id)
 
 
 class Dialect(Enum):
@@ -91,6 +91,8 @@ class SMTLIB_Benchmark:
         self.files           = {}    # dialect -> filename
         self.logic           = None
         self.expected_answer = Expectation.UNKNOWN
+        self.verdicts        = {}
+        self.errors          = {}
 
     def to_json(self):
         return {"group"  : self.group,
@@ -101,14 +103,14 @@ class SMTLIB_Benchmark:
                 "expect" : self.expected_answer.name}
 
     @classmethod
-    def from_json(cls, json):
-        assert isinstance(json, dict)
-        bench = SMTLIB_Benchmark(json["group"],
-                                 json["name"])
+    def from_json(cls, json_obj):
+        assert isinstance(json_obj, dict)
+        bench = SMTLIB_Benchmark(json_obj["group"],
+                                 json_obj["name"])
         bench.files = {Dialect[dialect]: file_name
-                       for dialect, file_name in json["files"].items()}
-        bench.logic = Logic[json["logic"]]
-        bench.expected_answer = Expectation[json["expect"]]
+                       for dialect, file_name in json_obj["files"].items()}
+        bench.logic = Logic[json_obj["logic"]]
+        bench.expected_answer = Expectation[json_obj["expect"]]
         return bench
 
     @classmethod
@@ -126,11 +128,12 @@ class SMTLIB_Benchmark:
             for raw_line in fd:
                 if raw_line.startswith(";"):
                     continue
-                elif "set-logic" in raw_line:
+                if "set-logic" in raw_line:
                     m = re.match(r"^\(set-logic\s+(.+)\)",
                                  raw_line.strip())
                     if m is None:
-                        print("%s: error: cannot parse set-logic:" % file_name)
+                        print("%s: error: cannot parse set-logic:" %
+                              file_name)
                         print("| %s" % raw_line.strip())
                     else:
                         found_logic = True
@@ -254,11 +257,12 @@ class SMTLIB_Benchmark:
                     print("%s/%s: error: unknown dialect %s" %
                           (self.group, self.name, ext))
 
-    def execute(self, solver, version, time_limit, memory_limit):
-        assert isinstance(solver, Solver_Config)
-        assert version in solver.versions
+    def execute(self, solver_id, time_limit, memory_limit):
+        assert isinstance(solver_id, Solver_Id)
         assert isinstance(time_limit, int) and time_limit >= 1
         assert isinstance(memory_limit, int) and memory_limit >= 1
+
+        solver = solver_id.solver
 
         # Find appropriate benchmark for this solver
         dialect = Dialect.SMTLIB2
@@ -268,7 +272,9 @@ class SMTLIB_Benchmark:
             if solver.require_dialect in self.files:
                 dialect = solver.require_dialect
             else:
-                return Result(self.group, self.name, Solver_Verdict.UNSUPPORTED)
+                return Result(self.group,
+                              self.name,
+                              Solver_Verdict.UNSUPPORTED)
 
         # Prepare benchmark (removing meta-data)
         lines = []
@@ -298,8 +304,10 @@ class SMTLIB_Benchmark:
                         lines.append(raw_line.rstrip())
 
         with tempfile.TemporaryDirectory(dir=".temp") as tdir:
-            bench_file = os.path.join(tdir,
-                                      os.path.basename(self.files[dialect]))
+            match dialect:
+                case _:
+                    bench_file = os.path.join(tdir, "bench.smt2")
+
             with open(bench_file, "w", encoding="UTF-8") as fd:
                 fd.write("\n".join(lines))
                 fd.write("\n")
@@ -307,7 +315,7 @@ class SMTLIB_Benchmark:
             cmd = ["util/limiter",
                    "-t", str(time_limit),
                    "-m", str(memory_limit),
-                   "--"] + solver.command_line(version, bench_file)
+                   "--"] + solver.command_line(solver_id.version, bench_file)
 
             p = subprocess.run(cmd,
                                stdout   = subprocess.PIPE,
@@ -378,7 +386,7 @@ class SMTLIB_Benchmark:
 def load_benchmark_group(group):
     assert os.path.isdir(os.path.join("bench", group))
     benchmarks = []
-    for path, dirs, files in os.walk(os.path.join("bench", group)):
+    for path, _, files in os.walk(os.path.join("bench", group)):
         roots = {}
         for file_name in files:
             root = os.path.splitext(os.path.join(path, file_name))[0]
@@ -437,16 +445,14 @@ class Result:
 
 
 class Work_Package:
-    def __init__(self, solver, version, benchmark):
-        self.solver       = solver
-        self.version      = version
+    def __init__(self, solver_id, benchmark):
+        self.solver_id    = solver_id
         self.benchmark    = benchmark
         self.time_limit   = 1
         self.memory_limit = 1024
 
     def execute(self):
-        return self.benchmark.execute(solver       = self.solver,
-                                      version      = self.version,
+        return self.benchmark.execute(solver_id    = self.solver_id,
                                       time_limit   = self.time_limit,
                                       memory_limit = self.memory_limit)
 
@@ -456,13 +462,12 @@ def execute_work_package(wp):
     return wp.execute()
 
 
-def run_benchmarks(solver, version, benchmarks, threads=1):
-    assert isinstance(solver, Solver_Config)
-    assert version in solver.versions
+def run_benchmarks(solver_id, benchmarks, threads=1):
+    assert isinstance(solver_id, Solver_Id)
     assert isinstance(benchmarks, list)
     assert isinstance(threads, int) and threads >= 1
 
-    work_packages = [Work_Package(solver, version, benchmark)
+    work_packages = [Work_Package(solver_id, benchmark)
                      for benchmark in benchmarks]
     results = []
 
@@ -494,3 +499,130 @@ def run_benchmarks(solver, version, benchmarks, threads=1):
                                                        len(work_packages)))
 
     return results
+
+
+def serialise_results(results, solver_id):
+    assert isinstance(results, list)
+    assert all(isinstance(item, Result) for item in results)
+    assert isinstance(solver_id, Solver_Id)
+
+    result_json = {}
+    for result in results:
+        if result.group not in result_json:
+            result_json[result.group] = {}
+        result_json[result.group][result.name] = {
+            "kind" : result.kind.name
+        }
+        if result.message is not None:
+            result_json[result.group][result.name]["message"] =\
+                result.message
+
+    with open(solver_id.result_file_name(), "w", encoding="UTF-8") as fd:
+        json.dump(result_json,
+                  fd,
+                  indent    = 2,
+                  sort_keys = True)
+
+
+def load_results(manifest, solver_id):
+    assert isinstance(manifest, list)
+    assert all(isinstance(bench, SMTLIB_Benchmark) for bench in manifest)
+    assert isinstance(solver_id, Solver_Id)
+
+    uid = solver_id.uid()
+
+    with open(solver_id.result_file_name(), "r", encoding="UTF-8") as fd:
+        result_json = json.load(fd)
+
+    missing = 0
+    errors  = 0
+    unsound = 0
+    for bench in manifest:
+        bench.errors[uid]   = []
+        bench.verdicts[uid] = Solver_Verdict.NOT_RUN
+        if bench.group not in result_json:
+            missing += 1
+            continue
+        if bench.name not in result_json[bench.group]:
+            missing += 1
+
+        data = result_json[bench.group][bench.name]
+        bench.verdicts[uid] = Solver_Verdict[data["kind"]]
+        if bench.verdicts[uid] == Solver_Verdict.ERROR:
+            errors += 1
+        elif bench.expected_answer == Expectation.SAT and \
+             bench.verdicts[uid] == Solver_Verdict.UNSAT:
+            unsound += 1
+            bench.verdicts[uid] = Solver_Verdict.UNSOUND
+            bench.errors[uid].append("unsound unsat result")
+        elif bench.expected_answer == Expectation.UNSAT and \
+             bench.verdicts[uid] == Solver_Verdict.SAT:
+            unsound += 1
+            bench.verdicts[uid] = Solver_Verdict.UNSOUND
+            bench.errors[uid].append("unsound sat result")
+        if "message" in data:
+            bench.errors[uid].append(data["message"])
+
+    for bench in manifest:
+        for message in bench.errors[uid]:
+            print("%s/%s: error: %s" % (bench.group,
+                                        bench.name,
+                                        message))
+
+    print("=" * 40)
+    print("Missing results : %u" % missing)
+    print("Errors          : %u" % errors)
+    print("Unsound results : %u" % unsound)
+
+    print("=" * 40)
+    group_results = {}
+    global_results = {
+        "count"    : 0,
+        "verdicts" : {verdict : 0
+                      for verdict in Solver_Verdict}
+    }
+    for bench in manifest:
+        if bench.group not in group_results:
+            group_results[bench.group] = {
+                "count"    : 0,
+                "verdicts" : {verdict : 0
+                              for verdict in Solver_Verdict}
+            }
+        results = group_results[bench.group]
+        results["count"] += 1
+        global_results["count"] += 1
+        results["verdicts"][bench.verdicts[uid]] += 1
+        global_results["verdicts"][bench.verdicts[uid]] += 1
+
+    def fmt(name, count, total):
+        print("   %-10s : %-8u (% 6.1f%%)" %
+              (name,
+               count,
+               float(count) / float(total) * 100.0))
+
+    def show_group(name, results):
+        print("Benchmarks in %s" % name)
+        fmt("Unsound",
+            results["verdicts"][Solver_Verdict.UNSOUND],
+            results["count"])
+        fmt("Solved",
+            results["verdicts"][Solver_Verdict.SAT] +
+            results["verdicts"][Solver_Verdict.UNSAT],
+            results["count"])
+        fmt("Unknown",
+            results["verdicts"][Solver_Verdict.UNKNOWN],
+            results["count"])
+        fmt("Resources",
+            results["verdicts"][Solver_Verdict.TIMEOUT] +
+            results["verdicts"][Solver_Verdict.OOM],
+            results["count"])
+        fmt("Errors",
+            results["verdicts"][Solver_Verdict.NOT_RUN] +
+            results["verdicts"][Solver_Verdict.UNSUPPORTED] +
+            results["verdicts"][Solver_Verdict.INTERNAL_ERROR] +
+            results["verdicts"][Solver_Verdict.ERROR],
+            results["count"])
+
+    for group in sorted(group_results):
+        show_group(group, group_results[group])
+    show_group("overall", global_results)
