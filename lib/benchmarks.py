@@ -415,7 +415,7 @@ def survery_benchmarks():
     benchmarks = []
     for group in os.scandir("bench"):
         if group.is_dir():
-            if group.name in ("dnns", "spark_2014", "spark_2014_all"):
+            if group.name in ("spark_2014", "spark_2014_all"):
                 continue
             if group.name == "random_ext":
                 continue
