@@ -262,7 +262,7 @@ class SMTLIB_Benchmark:
         assert isinstance(time_limit, int) and time_limit >= 1
         assert isinstance(memory_limit, int) and memory_limit >= 1
 
-        solver = solver_id.solver
+        solver = solver_id.config
 
         # Find appropriate benchmark for this solver
         dialect = Dialect.SMTLIB2
@@ -550,13 +550,13 @@ def load_results(manifest, solver_id):
         bench.verdicts[uid] = Solver_Verdict[data["kind"]]
         if bench.verdicts[uid] == Solver_Verdict.ERROR:
             errors += 1
-        elif bench.expected_answer == Expectation.SAT and \
-             bench.verdicts[uid] == Solver_Verdict.UNSAT:
+        elif (bench.expected_answer == Expectation.SAT and
+              bench.verdicts[uid] == Solver_Verdict.UNSAT):
             unsound += 1
             bench.verdicts[uid] = Solver_Verdict.UNSOUND
             bench.errors[uid].append("unsound unsat result")
-        elif bench.expected_answer == Expectation.UNSAT and \
-             bench.verdicts[uid] == Solver_Verdict.SAT:
+        elif (bench.expected_answer == Expectation.UNSAT and
+              bench.verdicts[uid] == Solver_Verdict.SAT):
             unsound += 1
             bench.verdicts[uid] = Solver_Verdict.UNSOUND
             bench.errors[uid].append("unsound sat result")
@@ -626,3 +626,8 @@ def load_results(manifest, solver_id):
     for group in sorted(group_results):
         show_group(group, group_results[group])
     show_group("overall", global_results)
+
+    print("=" * 40)
+    for bench in manifest:
+        if bench.verdicts[uid] == Solver_Verdict.UNSOUND:
+            print("%s/%s: unsound result" % (bench.group, bench.name))

@@ -11,5 +11,6 @@ disable=
 	too-few-public-methods,
 	too-many-branches,
 	too-many-locals,
-	too-many-return-statements
+	too-many-return-statements,
+	too-many-statements
 class-rgx=[A-Z]([a-z]*|[A-Z]*)(_([A-Z][a-z]+)|[A-Z]+|[0-9]+)*
