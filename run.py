@@ -42,6 +42,8 @@ def main():
     ap_run = subp.add_parser("run")
     ap_run.add_argument("solver")
     ap_run.add_argument("version")
+    ap_run.add_argument("--config",
+                        default=None)
     ap_run.add_argument("--group",
                         default=None)
     ap_run.add_argument("--threads",
@@ -53,13 +55,20 @@ def main():
     ap_analysis = subp.add_parser("analysis")
     ap_analysis.add_argument("solver")
     ap_analysis.add_argument("version")
+    ap_analysis.add_argument("--config",
+                             default=None)
     # pylint: enable=unused-variable
 
     options = ap.parse_args()
 
     match options.mode:
         case "run" | "analysis":
-            solver = find_solver(solvers, options.solver, options.version)
+            solver = find_solver(solvers,
+                                 options.solver,
+                                 options.version,
+                                 options.config)
+            if solver is None:
+                ap.error("could not find specified solver")
 
     match options.mode:
         case "manifest":

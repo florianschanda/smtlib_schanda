@@ -97,11 +97,13 @@ class Base_Solver(metaclass=ABCMeta):
 class Installable_Solver(Base_Solver):
     BINARY = ""
     ZIP    = ".zip"
+    TAR_GZ = ".tar.gz"
 
     def __init__(self, binary, name, version, kind, strip_components=0):
         super().__init__(binary, name, version)
         assert kind in (Installable_Solver.BINARY,
-                        Installable_Solver.ZIP)
+                        Installable_Solver.ZIP,
+                        Installable_Solver.TAR_GZ)
         assert isinstance(strip_components, int) and strip_components >= 0
         self.kind         = kind
         self.archive_file = os.path.join(".install",
@@ -112,7 +114,7 @@ class Installable_Solver(Base_Solver):
             case Installable_Solver.BINARY:
                 self.strip_components = None
                 assert strip_components == 0
-            case Installable_Solver.ZIP:
+            case Installable_Solver.ZIP | Installable_Solver.TAR_GZ:
                 self.strip_components = strip_components
 
     @abstractmethod
@@ -135,6 +137,15 @@ class Installable_Solver(Base_Solver):
                 unzip(zip_file         = self.archive_file,
                       target_dir       = install_dir,
                       strip_components = self.strip_components)
+            case Installable_Solver.TAR_GZ:
+                cmd = ["tar", "xfz"]
+                cmd.append(os.path.abspath(self.archive_file))
+                if self.strip_components:
+                    cmd.append("--strip-components=%u" % self.strip_components)
+                subprocess.run(cmd,
+                               encoding = "UTF-8",
+                               check    = True,
+                               cwd      = install_dir)
             case Installable_Solver.BINARY:
                 shutil.copyfile(self.archive_file,
                                 os.path.join(install_dir, self.binary_path))
@@ -142,31 +153,40 @@ class Installable_Solver(Base_Solver):
                          0o755)
 
 
-class GH_Released_Solver(Installable_Solver):
-    def __init__(self,
-                 binary, name, version, kind, strip,
-                 gh_project, gh_tag, gh_file):
+class Downloadable_Solver(Installable_Solver):
+    def __init__(self, binary, name, version, kind, strip, url):
         super().__init__(binary, name, version, kind, strip)
-        assert isinstance(gh_project, str)
-        assert isinstance(gh_tag, str)
-        assert isinstance(gh_file, str)
-        self.gh_project = gh_project
-        self.gh_tag     = gh_tag
-        self.gh_file    = gh_file
+        assert isinstance(url, str)
+        self.url = url
 
     def obtain_archive(self):
         self.ensure_install_dir()
         if os.path.isfile(self.archive_file):
             return
-        url = "https://github.com/%s/releases/download/%s/%s" % \
-            (self.gh_project, self.gh_tag, self.gh_file)
-        print("Downloading %s" % url)
+        print("Downloading %s" % self.url)
         subprocess.run(["wget",
                         "-q",
                         "-O", self.archive_file,
-                        url],
+                        self.url],
                        check    = True,
                        encoding = "UTF-8")
+
+
+class GH_Released_Solver(Downloadable_Solver):
+    def __init__(self,
+                 binary, name, version, kind, strip,
+                 gh_project, gh_tag, gh_file):
+        assert isinstance(gh_project, str)
+        assert isinstance(gh_tag, str)
+        assert isinstance(gh_file, str)
+        super().__init__(
+            binary  = binary,
+            name    = name,
+            version = version,
+            kind    = kind,
+            strip   = strip,
+            url     = ("https://github.com/%s/releases/download/%s/%s"
+                       % (gh_project, gh_tag, gh_file)))
 
 
 class CVC4_Official_Release(GH_Released_Solver):
@@ -184,6 +204,20 @@ class CVC4_Official_Release(GH_Released_Solver):
                         "--check-models"]
 
 
+class MathSAT_Official_Release(Downloadable_Solver):
+    BASE_URL = "https://mathsat.fbk.eu/release/mathsat-%s-linux-x86_64.tar.gz"
+    def __init__(self, version):
+        super().__init__(
+            binary     = "bin/mathsat",
+            name       = "MathSAT",
+            version    = version,
+            kind       = Installable_Solver.TAR_GZ,
+            strip      = 1,
+            url        = MathSAT_Official_Release.BASE_URL % version)
+        self.dialect_preferred = Dialect.MATHSAT
+        self.options = ["-input=smt2"]
+
+
 class CVC5_Official_Release(GH_Released_Solver):
     def __init__(self, version):
         super().__init__(binary     = "bin/cvc5",
@@ -196,6 +230,36 @@ class CVC5_Official_Release(GH_Released_Solver):
                          gh_file    = "cvc5-Linux-x86_64-static-gpl.zip")
         self.options = ["--fp-exp",
                         "--check-models"]
+
+
+class CVC5_Local_Build(Base_Solver):
+    def __init__(self, cvc5_version, symfpu_version, mpfr):
+        assert isinstance(cvc5_version, str)
+        assert isinstance(symfpu_version, str)
+        assert isinstance(mpfr, bool)
+        super().__init__(binary  = "cvc5",
+                         name    = "CVC5",
+                         version = "%s_%s" % (cvc5_version, symfpu_version),
+                         config  = "mpfr" if mpfr else "no-mpfr")
+        self.options = ["--fp-exp",
+                        "--check-models"]
+
+    def install(self):
+        install_dir = self.get_install_dir()
+        build = os.path.join("builds",
+                             "cvc5_%s_%s_production" % (self.version,
+                                                        self.config))
+
+        if not os.path.isfile(build):
+            print("Could not find built binary for %s" % build)
+            return
+
+        print("Installing %s" % self.uid())
+        os.makedirs(install_dir, exist_ok = True)
+        shutil.copyfile(build,
+                        os.path.join(install_dir, self.binary_path))
+        os.chmod(os.path.join(install_dir, self.binary_path),
+                 0o755)
 
 
 class BitWuzla_Official_Release(GH_Released_Solver):
@@ -229,11 +293,14 @@ def build_solver_library():
     solvers.append(CVC4_Official_Release("1.8"))
 
     solvers.append(CVC5_Official_Release("1.3.3"))
+    solvers.append(CVC5_Local_Build("main", "experimental", False))
 
     solvers.append(BitWuzla_Official_Release("0.8.1"))
     solvers.append(BitWuzla_Official_Release("0.9.0"))
 
     solvers.append(Z3_Official_Release("4.16.0"))
+
+    solvers.append(MathSAT_Official_Release("5.6.16"))
 
     return solvers
 
@@ -256,5 +323,6 @@ def find_solver(solvers, name, version, config=None):
             continue
         if solver.config.lower() != config.lower():
             continue
+        return solver
 
     return None
