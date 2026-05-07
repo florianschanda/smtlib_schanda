@@ -20,7 +20,8 @@ import sys
 import argparse
 import json
 
-from lib.solvers import (Solver_Config, Solver_Id)
+from lib.solvers import (build_solver_library,
+                         find_solver)
 from lib.benchmarks import (survery_benchmarks,
                             load_benchmarks,
                             run_benchmarks,
@@ -29,6 +30,8 @@ from lib.benchmarks import (survery_benchmarks,
 
 
 def main():
+    solvers = build_solver_library()
+
     ap = argparse.ArgumentParser()
     subp = ap.add_subparsers(required=True,
                              dest="mode")
@@ -45,8 +48,7 @@ def main():
                         type=int,
                         default=8)
 
-    ap_install = subp.add_parser("install")
-    ap_install.add_argument("solver")
+    ap_install = subp.add_parser("install_all")
 
     ap_analysis = subp.add_parser("analysis")
     ap_analysis.add_argument("solver")
@@ -57,8 +59,7 @@ def main():
 
     match options.mode:
         case "run" | "analysis":
-            solver    = Solver_Config(options.solver)
-            solver_id = Solver_Id(solver, options.version)
+            solver = find_solver(solvers, options.solver, options.version)
 
     match options.mode:
         case "manifest":
@@ -70,20 +71,20 @@ def main():
                           sort_keys = True,
                           indent = 2)
 
-        case "install":
-            solver = Solver_Config(options.solver)
-            solver.install_all()
+        case "install_all":
+            for solver in solvers:
+                solver.install()
 
         case "run":
             benchmarks = load_benchmarks(options.group)
-            results = run_benchmarks(solver_id,
+            results = run_benchmarks(solver,
                                      benchmarks,
                                      options.threads)
-            serialise_results(results, solver_id)
+            serialise_results(results, solver)
 
         case "analysis":
             benchmarks = load_benchmarks()
-            load_results(benchmarks, solver_id)
+            load_results(benchmarks, solver)
 
     return 0
 

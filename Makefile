@@ -1,14 +1,15 @@
 PYTHON_TARGETS=lib *.py
 THREADS=16
+RUN_CMD=run --threads=$(THREADS)
 
 .PHONY: style lint results
 
-all: style lint
+all: lint
 
 style:
 	@python3 -m pycodestyle $(PYTHON_TARGETS)
 
-lint:
+lint: style
 	@python3 -m pylint $(PYTHON_TARGETS)
 
 manifest.json:
@@ -22,13 +23,13 @@ results: \
 	results.BitWuzla.0.9.0.json
 
 results.CVC4.%.json: manifest.json
-	@python3 -m run run solvers/cvc4.json $* --threads=$(THREADS)
+	@python3 -m run $(RUN_CMD) cvc4 $*
 
 results.CVC5.%.json: manifest.json
-	@python3 -m run run solvers/cvc5.json $* --threads=$(THREADS)
+	@python3 -m run $(RUN_CMD) cvc5 $*
 
 results.Z3.%.json: manifest.json
-	@python3 -m run run solvers/z3.json $* --threads=$(THREADS)
+	@python3 -m run $(RUN_CMD) z3 $*
 
 results.BitWuzla.%.json: manifest.json
-	@python3 -m run run solvers/bitwuzla.json $* --threads=$(THREADS)
+	@python3 -m run $(RUN_CMD) bitwuzla $*

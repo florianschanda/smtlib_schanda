@@ -25,33 +25,12 @@ import json
 
 from enum import Enum, auto
 
-from lib.solvers import (Solver_Verdict,
-                         Solver_Response,
-                         Solver_Logic_Change,
-                         Solver_Id)
-
-
-class Dialect(Enum):
-    SMTLIB2 = auto()
-    # The default
-
-    MATHSAT = auto()
-    # Mathsat did not not support operator chaining, some VCs are
-    # re-encoded without that
-
-    SPARK_LEGACY_FP = auto()
-    # SMTLIB2, but using the old real-based axiomatisation from Why3
-    # before we introduced proper float handling in SPARK
-
-    ALTERGO = auto()
-    # The alt-ergo dialect
-
-    ALTERGO_FP = auto()
-    # A variant, using their FP encoding
-
-    CBMC = auto()
-    # A version of the benchmark in C, so that CBMC can reason about
-    # it
+from lib.enums import (Expectation,
+                       Dialect,
+                       Solver_Verdict,
+                       Solver_Response,
+                       Solver_Logic_Change)
+from lib.solvers import Base_Solver
 
 
 class Logic(Enum):
@@ -74,12 +53,6 @@ class Logic(Enum):
 
     FP = auto()
     FPBV = auto()
-
-
-class Expectation(Enum):
-    UNKNOWN = auto()
-    SAT     = auto()
-    UNSAT   = auto()
 
 
 class SMTLIB_Benchmark:
@@ -261,24 +234,19 @@ class SMTLIB_Benchmark:
                     print("%s/%s: error: unknown dialect %s" %
                           (self.group, self.name, ext))
 
-    def execute(self, solver_id, time_limit, memory_limit):
-        assert isinstance(solver_id, Solver_Id)
+    def execute(self, solver, time_limit, memory_limit):
+        assert isinstance(solver, Base_Solver)
         assert isinstance(time_limit, int) and time_limit >= 1
         assert isinstance(memory_limit, int) and memory_limit >= 1
 
-        solver = solver_id.config
-
         # Find appropriate benchmark for this solver
-        dialect = Dialect.SMTLIB2
-        if solver.prefer_dialect in self.files:
-            dialect = solver.prefer_dialect
-        elif solver.require_dialect is not None:
-            if solver.require_dialect in self.files:
-                dialect = solver.require_dialect
-            else:
-                return Result(self.group,
-                              self.name,
-                              Solver_Verdict.UNSUPPORTED)
+        dialect = solver.dialect_required
+        if solver.dialect_preferred in self.files:
+            dialect = solver.dialect_preferred
+        elif solver.dialect_required not in self.files:
+            return Result(self.group,
+                          self.name,
+                          Solver_Verdict.UNSUPPORTED)
 
         # Prepare benchmark (removing meta-data)
         lines = []
@@ -319,7 +287,7 @@ class SMTLIB_Benchmark:
             cmd = ["util/limiter",
                    "-t", str(time_limit),
                    "-m", str(memory_limit),
-                   "--"] + solver.command_line(solver_id.version, bench_file)
+                   "--"] + solver.command_line(bench_file)
 
             p = subprocess.run(cmd,
                                stdout   = subprocess.PIPE,
@@ -449,14 +417,14 @@ class Result:
 
 
 class Work_Package:
-    def __init__(self, solver_id, benchmark):
-        self.solver_id    = solver_id
+    def __init__(self, solver, benchmark):
+        self.solver       = solver
         self.benchmark    = benchmark
         self.time_limit   = 1
         self.memory_limit = 1024
 
     def execute(self):
-        return self.benchmark.execute(solver_id    = self.solver_id,
+        return self.benchmark.execute(solver       = self.solver,
                                       time_limit   = self.time_limit,
                                       memory_limit = self.memory_limit)
 
@@ -466,12 +434,12 @@ def execute_work_package(wp):
     return wp.execute()
 
 
-def run_benchmarks(solver_id, benchmarks, threads=1):
-    assert isinstance(solver_id, Solver_Id)
+def run_benchmarks(solver, benchmarks, threads=1):
+    assert isinstance(solver, Base_Solver)
     assert isinstance(benchmarks, list)
     assert isinstance(threads, int) and threads >= 1
 
-    work_packages = [Work_Package(solver_id, benchmark)
+    work_packages = [Work_Package(solver, benchmark)
                      for benchmark in benchmarks]
     results = []
 
@@ -505,10 +473,10 @@ def run_benchmarks(solver_id, benchmarks, threads=1):
     return results
 
 
-def serialise_results(results, solver_id):
+def serialise_results(results, solver):
     assert isinstance(results, list)
     assert all(isinstance(item, Result) for item in results)
-    assert isinstance(solver_id, Solver_Id)
+    assert isinstance(solver, Base_Solver)
 
     result_json = {}
     for result in results:
@@ -521,21 +489,21 @@ def serialise_results(results, solver_id):
             result_json[result.group][result.name]["message"] =\
                 result.message
 
-    with open(solver_id.result_file_name(), "w", encoding="UTF-8") as fd:
+    with open(solver.result_file_name(), "w", encoding="UTF-8") as fd:
         json.dump(result_json,
                   fd,
                   indent    = 2,
                   sort_keys = True)
 
 
-def load_results(manifest, solver_id):
+def load_results(manifest, solver):
     assert isinstance(manifest, list)
     assert all(isinstance(bench, SMTLIB_Benchmark) for bench in manifest)
-    assert isinstance(solver_id, Solver_Id)
+    assert isinstance(solver, Base_Solver)
 
-    uid = solver_id.uid()
+    uid = solver.uid()
 
-    with open(solver_id.result_file_name(), "r", encoding="UTF-8") as fd:
+    with open(solver.result_file_name(), "r", encoding="UTF-8") as fd:
         result_json = json.load(fd)
 
     missing = 0
