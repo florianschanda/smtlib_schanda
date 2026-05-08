@@ -159,6 +159,8 @@ class SMTLIB_Benchmark:
                   "FPLRA" |
                   "BVFPLRA" |
                   "ABVFPLRA" |
+                  "AUFBVFP" |
+                  "UFBVFP" |
                   "ALL"
                   ):
                 self.logic = Logic.ALL
