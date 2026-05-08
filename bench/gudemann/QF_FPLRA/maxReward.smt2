@@ -14,11 +14,11 @@ Target Solver: z3
 ; --- literal constants ---
 (define-fun s_2 () Bool false)
 (define-fun s_1 () Bool true)
-(define-fun s8 () (_ FloatingPoint 11 53) ((_ to_fp 11 53) roundNearestTiesToEven (/ 1.0 1.0)))
-(define-fun s10 () (_ FloatingPoint 11 53) ((_ to_fp 11 53) roundNearestTiesToEven (/ 45000000000000000.0 1.0)))
+(define-fun s8 () (_ FloatingPoint 11 53) ((_ to_fp 11 53) roundNearestTiesToEven (/ 1 1)))
+(define-fun s10 () (_ FloatingPoint 11 53) ((_ to_fp 11 53) roundNearestTiesToEven (/ 45000000000000000 1)))
 (define-fun s12 () (_ FloatingPoint 11 53) (_ +zero 11 53))
-(define-fun s15 () (_ FloatingPoint 11 53) ((_ to_fp 11 53) roundNearestTiesToEven (/ 1000.0 1.0)))
-(define-fun s26 () (_ FloatingPoint 11 53) ((_ to_fp 11 53) roundNearestTiesToEven (/ 1152921504606847.0 1152921504606846976.0)))
+(define-fun s15 () (_ FloatingPoint 11 53) ((_ to_fp 11 53) roundNearestTiesToEven (/ 1000 1)))
+(define-fun s26 () (_ FloatingPoint 11 53) ((_ to_fp 11 53) roundNearestTiesToEven (/ 1152921504606847 1152921504606846976)))
 ; --- skolem constants ---
 (declare-fun s0 () (_ FloatingPoint 11 53))
 (declare-fun s1 () (_ FloatingPoint 11 53))
