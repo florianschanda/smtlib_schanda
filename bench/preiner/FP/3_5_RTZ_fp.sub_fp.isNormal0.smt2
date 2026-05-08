@@ -34,5 +34,6 @@ Publications: "Invertibility Conditions for Floating-Point Formulas" by M. Brain
  )
 )
 
+(set-info :status unknown)
 (check-sat)
 (exit)
