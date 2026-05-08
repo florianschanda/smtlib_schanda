@@ -215,7 +215,9 @@ class MathSAT_Official_Release(Downloadable_Solver):
             strip      = 1,
             url        = MathSAT_Official_Release.BASE_URL % version)
         self.dialect_preferred = Dialect.MATHSAT
-        self.options = ["-input=smt2"]
+        self.options = ["-input=smt2",
+                        "-theory.fp.to_bv_overflow_mode=1",
+                        "-theory.fp.minmax_zero_mode=4"]
 
 
 class CVC5_Official_Release(GH_Released_Solver):
