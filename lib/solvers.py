@@ -206,6 +206,7 @@ class CVC4_Official_Release(GH_Released_Solver):
 
 class MathSAT_Official_Release(Downloadable_Solver):
     BASE_URL = "https://mathsat.fbk.eu/release/mathsat-%s-linux-x86_64.tar.gz"
+
     def __init__(self, version):
         super().__init__(
             binary     = "bin/mathsat",
