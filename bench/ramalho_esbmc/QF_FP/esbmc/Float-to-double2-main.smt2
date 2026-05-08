@@ -1,0 +1,26 @@
+(set-info :smt-lib-version 2.6)
+(set-logic QF_FP)
+(set-info :source |ESBMC floating-point test cases contributed by Mikhail Ramalho.|)
+(set-info :category "crafted")
+(set-info :status unsat)
+
+(declare-fun |c::main::main::1::f@1!0&0#1| () (_ FloatingPoint 8 24))
+(declare-fun |c::main::main::1::d@1!0&0#1| () (_ FloatingPoint 11 53))
+(declare-fun |c::main::main::1::fp@1!0&0#1| () (_ FloatingPoint 11 53))
+(declare-fun |c::main::$tmp::tmp$1@1!0&0#1| () Bool)
+(declare-fun |execution_statet::guard_exec@0!0| () Bool)
+(assert (= (fp.neg (fp #b0 #x00 #b10000000000000000000000))
+   |c::main::main::1::f@1!0&0#1|))
+(assert (= (fp.neg (fp #b0 #b01110000000 #x0000000000000))
+   |c::main::main::1::d@1!0&0#1|))
+(assert (= ((_ to_fp 11 53) roundNearestTiesToEven |c::main::main::1::f@1!0&0#1|)
+   |c::main::main::1::fp@1!0&0#1|))
+(assert (= (fp.eq |c::main::main::1::d@1!0&0#1| |c::main::main::1::fp@1!0&0#1|)
+   |c::main::$tmp::tmp$1@1!0&0#1|))
+(assert (let ((a!1 (=> true
+               (=> |execution_statet::guard_exec@0!0|
+                   (=> (not |c::main::$tmp::tmp$1@1!0&0#1|) false)))))
+  (not a!1)))
+
+(check-sat)
+(exit)
