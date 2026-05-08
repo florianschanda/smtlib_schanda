@@ -1,4 +1,4 @@
-PYTHON_TARGETS=lib *.py
+PYTHON_TARGETS=lib fptg *.py
 THREADS=16
 RUN_CMD=run --threads=$(THREADS)
 
