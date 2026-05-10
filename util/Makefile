@@ -1,9 +1,12 @@
 BASE_FLAGS=-std=c11 -Wall -pedantic -O2
 CORRECTNESS_FLAGS=-frounding-math -fsignaling-nans -ffp-contract=off -mfma -mno-fma4
 
+SOFTFLOAT=SoftFloat-3e/build/Linux-x86_64-GCC/softfloat.a
+
 all: limiter \
 	native_x87_oracle_32 \
-	native_sse_oracle_32
+	native_sse_oracle_32 \
+	softfloat_oracle_32
 
 limiter: limiter.c
 	$(CC) $(BASE_FLAGS) limiter.c -o limiter
@@ -21,3 +24,14 @@ native_x87_oracle_32: native.c
 		-DWIDTH=32 \
 		native.c -o $@ \
 		-lm
+
+softfloat_oracle_32: softfloat.c $(SOFTFLOAT)
+	$(CC) $(BASE_FLAGS) \
+		-DWIDTH=32 \
+		-ISoftFloat-3e/source/include \
+		softfloat.c -o $@ \
+		-LSoftFloat-3e/build/Linux-x86_64-GCC \
+		-lm -l:softfloat.a
+
+$(SOFTFLOAT):
+	make -C SoftFloat-3e/build/Linux-x86_64-GCC -j16

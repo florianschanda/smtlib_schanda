@@ -22,7 +22,10 @@ import subprocess
 import mpf.floats
 from mpf.floats import MPF
 
+import gmpy2
+
 from fptg.enums import Rounding, Implementation, Float_Operation, Validation
+from fptg.mpfr import mpf_to_mpfr, mpfr_to_mpf
 
 
 class Unspecified(Exception):
@@ -122,7 +125,8 @@ class Context:
 
     def call_native(self, impl, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert impl in (Implementation.NATIVE_SSE,
-                        Implementation.NATIVE_X87)
+                        Implementation.NATIVE_X87,
+                        Implementation.SOFTFLOAT)
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
         assert isinstance(arg1, MPF)
@@ -130,12 +134,13 @@ class Context:
         assert isinstance(arg3, MPF) or arg3 is None
 
         cmd = []
-        cmd_name = "native_"
         match impl:
             case Implementation.NATIVE_SSE:
-                cmd_name += "sse"
+                cmd_name = "native_sse"
             case Implementation.NATIVE_X87:
-                cmd_name += "x87"
+                cmd_name = "native_x87"
+            case Implementation.SOFTFLOAT:
+                cmd_name = "softfloat"
         cmd_name += "_oracle_"
         match arg1.w, arg1.p:
             case 8, 24:
@@ -186,6 +191,55 @@ class Context:
                 self.signal_not_supported(op, impl)
                 return None
 
+    def call_mpfr(self, op, rm=None, arg1=None, arg2=None, arg3=None):
+        assert isinstance(op, Float_Operation)
+        assert isinstance(rm, Rounding) or rm is None
+        assert isinstance(arg1, MPF)
+        assert isinstance(arg2, MPF) or arg2 is None
+        assert isinstance(arg3, MPF) or arg3 is None
+
+        # Create MPFR context. Because they are fr*nch we have to
+        # calculate their emin and emax. They kindly point out that
+        # it's different but they did not bother explaining how to get
+        # from the rest of the world to their world.
+        assert arg1.emax + 1 > 0
+        assert arg1.emin - arg1.p + 2 < 0
+        ctx = gmpy2.context(gmpy2.ieee(32),
+                            precision = arg1.p,
+                            emax      = arg1.emax + 1,
+                            emin      = arg1.emin - arg1.p + 2)
+
+        match rm:
+            case Rounding.NEAREST_EVEN:
+                ctx.round = gmpy2.RoundToNearest
+            case Rounding.NEAREST_AWAY:
+                # You might be tempted to assume RM_RNA is
+                # RoundAwayZero, but this is not correct. That
+                # rounding mode is really the inverse of RoundToZero,
+                # i.e. it always does this and not just at
+                # half-points.
+                self.signal_not_supported(op, Implementation.MPFR)
+                return None
+            case Rounding.TOWARDS_NEGATIVE:
+                ctx.round = gmpy2.RoundDown
+            case Rounding.TOWARDS_POSITIVE:
+                ctx.round = gmpy2.RoundUp
+            case Rounding.TOWARDS_ZERO:
+                ctx.round = gmpy2.RoundToZero
+            case None:
+                pass
+
+        with gmpy2.local_context(ctx):
+            match op:
+                case Float_Operation.ADD:
+                    result = mpf_to_mpfr(arg1) + mpf_to_mpfr(arg2)
+                case _:
+                    assert False
+
+            rv = mpfr_to_mpf(result)
+            self.signal_validation(op, Implementation.MPFR)
+            return rv
+
     def perform(self, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
@@ -206,13 +260,21 @@ class Context:
                                              arg2 = arg2,
                                              arg3 = arg3)
                 case (Implementation.NATIVE_SSE |
-                      Implementation.NATIVE_X87):
+                      Implementation.NATIVE_X87 |
+                      Implementation.SOFTFLOAT):
                     result = self.call_native(impl = impl,
                                               op   = op,
                                               rm   = rm,
                                               arg1 = arg1,
                                               arg2 = arg2,
                                               arg3 = arg3)
+                case Implementation.MPFR:
+                    result = self.call_mpfr(op   = op,
+                                            rm   = rm,
+                                            arg1 = arg1,
+                                            arg2 = arg2,
+                                            arg3 = arg3)
+
             if result is not None:
                 results[impl] = result
 

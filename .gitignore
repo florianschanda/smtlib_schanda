@@ -8,10 +8,11 @@ __pycache__
 .install
 .temp
 util/limiter
-util/native_sse_oracle_32
-util/native_x87_oracle_32
+util/*_oracle_*
 
 # Artefacts
 analysis*.txt
 results*.json
 manifest.json
+*.o
+*.a
