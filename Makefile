@@ -22,7 +22,8 @@ results: \
 	results.Z3--4.16.0.json \
 	results.BitWuzla--0.8.1.json \
 	results.BitWuzla--0.9.0.json \
-	results.MathSAT--5.6.16.json
+	results.MathSAT--5.6.16.json \
+	results.MathSAT--5.6.17pre1.json
 
 results.CVC4--%.json: manifest.json
 	@python3 -m run $(RUN_CMD) cvc4 $*

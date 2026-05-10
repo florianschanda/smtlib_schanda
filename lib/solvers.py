@@ -304,6 +304,7 @@ def build_solver_library():
     solvers.append(Z3_Official_Release("4.16.0"))
 
     solvers.append(MathSAT_Official_Release("5.6.16"))
+    solvers.append(MathSAT_Official_Release("5.6.17pre1"))
 
     return solvers
 
