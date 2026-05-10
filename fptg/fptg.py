@@ -19,10 +19,52 @@
 import sys
 import argparse
 
+import mpf.floats
+import mpf.rationals
+
+from fptg.enums import Float_Operation, Rounding
+from fptg.floats import Context
+
 
 def main():
     ap = argparse.ArgumentParser()
     options = ap.parse_args()
+
+    ctx = Context()
+
+    a = mpf.floats.MPF(8, 24)
+    a.from_rational(mpf.floats.RM_RNE,
+                    mpf.rationals.Rational(2))
+
+    b = mpf.floats.MPF(8, 24)
+    b.from_rational(mpf.floats.RM_RNE,
+                    mpf.rationals.Rational(5))
+
+    c = ctx.perform(op   = Float_Operation.ADD,
+                    rm   = Rounding.NEAREST_EVEN,
+                    arg1 = a,
+                    arg2 = b)
+
+    print(c.to_rational().to_decimal_string())
+    print("\n".join(ctx.info_list()))
+
+    ctx = Context()
+
+    a = mpf.floats.MPF(11, 53)
+    a.from_rational(mpf.floats.RM_RNE,
+                    mpf.rationals.Rational(2))
+
+    b = mpf.floats.MPF(11, 53)
+    b.from_rational(mpf.floats.RM_RNE,
+                    mpf.rationals.Rational(5))
+
+    c = ctx.perform(op   = Float_Operation.ADD,
+                    rm   = Rounding.NEAREST_EVEN,
+                    arg1 = a,
+                    arg2 = b)
+
+    print(c.to_rational().to_decimal_string())
+    print("\n".join(ctx.info_list()))
 
     return 0
 

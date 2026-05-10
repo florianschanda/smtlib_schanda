@@ -1,4 +1,23 @@
-all: limiter
+BASE_FLAGS=-std=c11 -Wall -pedantic -O2
+CORRECTNESS_FLAGS=-frounding-math -fsignaling-nans -ffp-contract=off -mfma -mno-fma4
+
+all: limiter \
+	native_x87_oracle_32 \
+	native_sse_oracle_32
 
 limiter: limiter.c
-	$(CC) -std=c11 -Wall -pedantic limiter.c -o limiter
+	$(CC) $(BASE_FLAGS) limiter.c -o limiter
+
+native_sse_oracle_32: native.c
+	$(CC) $(BASE_FLAGS) $(CORRECTNESS_FLAGS) \
+		-msse2 -mfpmath=sse \
+		-DWIDTH=32 \
+		native.c -o $@ \
+		-lm
+
+native_x87_oracle_32: native.c
+	$(CC) $(BASE_FLAGS) $(CORRECTNESS_FLAGS) \
+		-mfpmath=387 \
+		-DWIDTH=32 \
+		native.c -o $@ \
+		-lm
