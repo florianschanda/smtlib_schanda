@@ -2,15 +2,18 @@ PYTHON_TARGETS=lib fptg *.py
 THREADS=16
 RUN_CMD=run --threads=$(THREADS)
 
-.PHONY: style lint results
+.PHONY: style lint results sanity
 
-all: lint
+all: lint sanity
 
 style:
 	@python3 -m pycodestyle $(PYTHON_TARGETS)
 
 lint: style
 	@python3 -m pylint $(PYTHON_TARGETS)
+
+sanity:
+	@python3 -m fptg.random
 
 manifest.json:
 	@python3 -m run manifest
