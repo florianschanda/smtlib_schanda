@@ -21,20 +21,27 @@ from enum import Enum, auto
 
 
 class Float_Test_Vector(Enum):
-    ZERO                   = auto()    # 0
-    SMALLEST_SUBNORMAL     = auto()
-    RANDOM_SUBNORMAL       = auto()
-    LARGEST_SUBNORMAL      = auto()
-    SMALLEST_NORMAL        = auto()
-    RANDOM_NORMAL_LT_ONE   = auto()    # ] smallest_normal .. 1 [
-    ONE                    = auto()    # 1
-    RANDOM_NORMAL_LT_TWO   = auto()    # ] 1 .. 2 [
-    RANDOM_NORMAL_GE_TWO   = auto()    # [ 2 .. int_boundary [
-    INT_BOUNDARY           = auto()    # e.g. 2 ** 24
-    RANDOM_INTEGRAL_GT_TWO = auto()    # [ 3 .. int_boundary [ (integral)
-    RANDOM_GT_INT_BOUNDARY = auto()    # ] 2 ** 24 .. INF [
-    INFINITY               = auto()
-    NAN                    = auto()
+    ZERO                    = auto()    # 0
+    SMALLEST_SUBNORMAL      = auto()
+    RANDOM_SUBNORMAL        = auto()
+    LARGEST_SUBNORMAL       = auto()
+    SMALLEST_NORMAL         = auto()
+    RANDOM_NORMAL_LT_ONE    = auto()    # ] smallest_normal .. 1 [
+    ONE                     = auto()    # 1
+    RANDOM_NORMAL_LT_TWO    = auto()    # ] 1 .. 2 [
+    RANDOM_NORMAL_GE_TWO    = auto()    # [ 2 .. int_boundary [
+    INT_BOUNDARY            = auto()    # e.g. 2 ** 24
+    RANDOM_INTEGRAL_GT_TWO  = auto()    # [ 3 .. int_boundary [ (integral)
+    RANDOM_GT_INT_BOUNDARY  = auto()    # ] 2 ** 24 .. INF [
+    LARGEST_NORMAL          = auto()    # nextdown(INF)
+    INFINITY                = auto()
+    NAN                     = auto()
+    SQRT_LARGEST_NORMAL     = auto()
+    SQRT_SMALLEST_NORMAL    = auto()
+    SQRT_SMALLEST_SUBNORMAL = auto()
+    RCP_LARGEST_NORMAL      = auto()
+    RCP_SMALLEST_NORMAL     = auto()
+    RCP_SMALLEST_SUBNORMAL  = auto()
 
 
 class Format_Test_Vector(Enum):
