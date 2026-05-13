@@ -16,42 +16,76 @@
 # along with smtlib_schanda. If not, see
 # <https://www.gnu.org/licenses/>.
 
-from copy import copy
-from hashlib import sha1
-
 from mpf.floats import MPF, RM_RNE, fp_sqrt
-from mpf.rationals import Rational, q_pow2
+from mpf.rationals import Rational
 
-from fptg.random import RNG
-from fptg.enums import Float_Test_Vector
+from fptg.floats import Format, int_boundary
+from fptg.random import Random_Hierarchy
+from fptg.enums import (Float_Test_Vector,
+                        FLOAT_TEST_VECTOR_WITH_ITERATIONS,
+                        Format_Test_Vector,
+                        FORMAT_TEST_VECTOR_WITH_ITERATIONS)
 
 
-class Random_Hierarchy:
-    def __init__(self, base=None):
-        assert isinstance(base, Random_Hierarchy) or base is None
-        if base is None:
-            self.parts = []
-            self.hf    = sha1()
-        else:
-            self.parts = copy(base.parts)
-            self.hf    = base.hf.copy()
+class Format_Vector:
+    FIXED_FORMATS = {
+        Format_Test_Vector.FLOAT8              : ( 3,   5),
+        Format_Test_Vector.FLOAT16             : ( 5,  11),
+        Format_Test_Vector.FLOAT32             : ( 8,  24),
+        Format_Test_Vector.FLOAT64             : (11,  53),
+        Format_Test_Vector.FLOAT128            : (15, 113),
+        Format_Test_Vector.X87_EXTENDED_DOUBLE : (15,  79),
+        Format_Test_Vector.BFLOAT16            : ( 8,   8),
+        Format_Test_Vector.TENSORFLOAT32       : ( 8,  11),
+        Format_Test_Vector.AMD_FP24            : ( 7,  17),
+        Format_Test_Vector.PIXAR_PXR24         : ( 8,  16),
+        Format_Test_Vector.FLOAT_2_2           : ( 2,   2),
+    }
+    FIXED_FORMATS_SET = frozenset(FIXED_FORMATS.values())
 
-    def extend(self, s):
-        assert isinstance(s, str) and "|" not in s
-        new = Random_Hierarchy(self)
-        new.parts.append(s)
-        if len(new.parts) >= 2:
-            new.hf.update(b'|')
-        new.hf.update(s.encode("UTF-8"))
-        return new
+    def __init__(self, kind, iteration):
+        assert isinstance(kind, Format_Test_Vector)
+        assert isinstance(iteration, int) and iteration >= 1
+        self.kind      = kind
+        self.iteration = iteration
 
-    def rng(self):
-        assert self.hf.digest_size == 20
-        digest = self.hf.digest()
-        seed   = []
-        for offset in (0, 4, 8, 12, 16):
-            seed.append(int(digest[offset:offset+4].hex(), 16))
-        return RNG(*seed)
+    def tag(self):
+        tag = self.kind.name
+        if self.iteration > 1:
+            tag += "(%u)" % self.iteration
+        return tag
+
+    def mk_format(self, base_rh):
+        assert isinstance(base_rh, Random_Hierarchy)
+
+        rng = base_rh.extend(self.tag()).rng()
+        eb  = None
+        sb  = None
+
+        match self.kind:
+            case Format_Test_Vector.FLOAT_RANDOM_EB_EQ_SB:
+                while True:
+                    eb = rng.random_int(3, 18)
+                    sb = eb
+                    if (eb, sb) not in Format_Vector.FIXED_FORMATS_SET:
+                        break
+
+            case Format_Test_Vector.FLOAT_RANDOM_EB_LT_SB:
+                while True:
+                    eb = rng.random_int(2, 18)
+                    sb = rng.random_int(eb + 1, 255)
+                    if (eb, sb) not in Format_Vector.FIXED_FORMATS_SET:
+                        break
+
+            case Format_Test_Vector.FLOAT_RANDOM_EB_GT_SB:
+                eb = rng.random_int(3, 18)
+                sb = rng.random_int(2, eb - 1)
+                assert (eb, sb) not in Format_Vector.FIXED_FORMATS_SET
+
+            case _:
+                eb, sb = Format_Vector.FIXED_FORMATS[self.kind]
+
+        return Format(eb, sb)
 
 
 class Float_Vector:
@@ -70,14 +104,13 @@ class Float_Vector:
             tag += "(%u)" % self.iteration
         return tag
 
-    def mk_float(self, base_rh, eb, sb):
+    def mk_float(self, base_rh, fmt):
         assert isinstance(base_rh, Random_Hierarchy)
-        assert isinstance(eb, int) and eb >= 2
-        assert isinstance(sb, int) and sb >= 2
+        assert isinstance(fmt, Format)
 
         rng = base_rh.extend(self.tag()).rng()
 
-        rv = MPF(eb, sb)
+        rv = MPF(fmt.eb, fmt.sb)
 
         match self.kind:
             case Float_Test_Vector.ZERO:
@@ -128,7 +161,7 @@ class Float_Vector:
             case Float_Test_Vector.INT_BOUNDARY:
                 rv.pack(0, 2 ** rv.w - 2, 2 ** rv.t - 1)
                 max_q = rv.to_rational()
-                boundary_q = q_pow2(eb)
+                boundary_q = Rational(int_boundary(rv))
                 if max_q >= boundary_q:
                     rv.from_rational(RM_RNE, boundary_q)
                     assert rv.to_rational() == boundary_q
@@ -136,15 +169,18 @@ class Float_Vector:
                     return None
             case Float_Test_Vector.RANDOM_INTEGRAL_GT_TWO:
                 min_int = 3
-                max_int = 2 ** eb - 1
+                max_int = int_boundary(rv) - 1
                 if min_int <= max_int:
                     rnd_int = Rational(rng.random_int(min_int, max_int))
                     rv.from_rational(RM_RNE, rnd_int)
-                    assert rv.to_rational() == rnd_int
+                    assert rv.to_rational() == rnd_int, \
+                        "%s: cannot represent %s [-> %s]" % (fmt,
+                                                             rnd_int,
+                                                             rv.to_rational())
                 else:
                     return None
             case Float_Test_Vector.RANDOM_GT_INT_BOUNDARY:
-                boundary_q = q_pow2(eb)
+                boundary_q = Rational(int_boundary(rv))
                 rv.from_rational(RM_RNE, boundary_q)
                 if not rv.isFinite():
                     return None
@@ -187,44 +223,146 @@ class Float_Vector:
         return rv
 
 
-def mk_float_vectors(base_rh, eb, sb, iterations):
-    assert isinstance(base_rh, Random_Hierarchy)
-    assert isinstance(eb, int) and eb >= 2
-    assert isinstance(sb, int) and sb >= 2
+def mk_float_vectors(iterations, full_spectrum):
     assert isinstance(iterations, int) and iterations >= 1
+    assert isinstance(full_spectrum, bool)
 
-    bitvectors = set()
-    rv         = []
-    for kind in Float_Test_Vector:
-        for sign in (False, True):
-            if kind in (Float_Test_Vector.ZERO,
-                        Float_Test_Vector.SMALLEST_SUBNORMAL,
-                        Float_Test_Vector.LARGEST_SUBNORMAL,
-                        Float_Test_Vector.SMALLEST_NORMAL,
-                        Float_Test_Vector.LARGEST_NORMAL,
-                        Float_Test_Vector.ONE,
-                        Float_Test_Vector.INT_BOUNDARY,
-                        Float_Test_Vector.INFINITY):
-                required_iterations = 1
-            else:
+    if full_spectrum:
+        kind_pool = list(Float_Test_Vector)
+        sign_pool = [False, True]
+    else:
+        kind_pool = [Float_Test_Vector.ZERO,
+                     Float_Test_Vector.RANDOM_NORMAL_GE_TWO,
+                     Float_Test_Vector.REFERENCE]
+        sign_pool = [False]
+
+    rv = []
+    for kind in kind_pool:
+        for sign in sign_pool:
+            if kind in FLOAT_TEST_VECTOR_WITH_ITERATIONS:
                 required_iterations = iterations
-            for iteration in range(1, required_iterations + 1):
+            else:
+                required_iterations = 1
+            for iteration in range(required_iterations):
                 vec = Float_Vector(kind        = kind,
                                    is_negative = sign,
-                                   iteration   = iteration)
-                flt = vec.mk_float(base_rh, eb, sb)
-                if flt is None or flt.bv in bitvectors:
-                    continue
-                bitvectors.add(flt.bv)
-                rv.append((vec, flt))
+                                   iteration   = iteration + 1)
+                rv.append(vec)
+
     return rv
+
+
+def mk_format_vectors(iterations, full_spectrum):
+    assert isinstance(iterations, int) and iterations >= 1
+    assert isinstance(full_spectrum, bool)
+
+    if full_spectrum:
+        kinds_pool = list(Format_Test_Vector)
+    else:
+        kinds_pool = [Format_Test_Vector.FLOAT32,
+                      Format_Test_Vector.FLOAT_RANDOM_EB_LT_SB]
+
+    rv = []
+    for kind in kinds_pool:
+        if kind in FORMAT_TEST_VECTOR_WITH_ITERATIONS:
+            required_iterations = iterations
+        else:
+            required_iterations = 1
+        for iteration in range(required_iterations):
+            vec = Format_Vector(kind      = kind,
+                                iteration = iteration + 1)
+            rv.append(vec)
+    return rv
+
+
+def mk_interleaved_fp_vectors(base_rh,
+                              fp_inputs,
+                              fmt_iterations,
+                              input_iterations,
+                              full_spectrum):
+    assert isinstance(base_rh, Random_Hierarchy)
+    assert isinstance(fp_inputs, int) and 1 <= fp_inputs <= 3
+    assert isinstance(fmt_iterations, int) and fmt_iterations >= 1
+    assert isinstance(input_iterations, int) and input_iterations >= 1
+    assert isinstance(full_spectrum, bool)
+
+    def build_base(n):
+        assert 1 <= n <= 3
+        if n == 1:
+            for vec in mk_float_vectors(input_iterations, full_spectrum):
+                yield [vec]
+        else:
+            for base in build_base(n - 1):
+                for vec in mk_float_vectors(input_iterations, full_spectrum):
+                    yield base + [vec]
+
+    rh_arg = [base_rh.extend("arg1"),
+              base_rh.extend("arg2"),
+              base_rh.extend("arg3")]
+
+    bitvectors = set()
+
+    for args in build_base(fp_inputs):
+        # This makes the random formats be different for each set of
+        # float arguments. Picking one random format and fully testing
+        # it is not what we want, the point of random formats is that
+        # we want to broadly test them.
+        rh_fmt = base_rh.extend("fmt_for_" +
+                                ".".join(vec.tag() for vec in args))
+
+        for fmt_vec in mk_format_vectors(fmt_iterations, full_spectrum):
+            fmt   = fmt_vec.mk_format(rh_fmt)
+            flt   = []
+            valid = True
+            for n_arg in range(fp_inputs):
+                if args[n_arg].kind == Float_Test_Vector.REFERENCE:
+                    if (n_arg == 0 or
+                        (args[n_arg - 1].kind not in
+                         FLOAT_TEST_VECTOR_WITH_ITERATIONS and
+                         args[n_arg - 1].kind != Float_Test_Vector.REFERENCE)):
+                        valid = False
+                    flt_arg = None
+                else:
+                    flt_arg = args[n_arg].mk_float(rh_arg[n_arg], fmt)
+                    if flt_arg is None:
+                        valid = False
+                flt.append(flt_arg)
+            if not valid:
+                continue
+            uid = tuple([(fmt.eb, fmt.sb)] +
+                        [arg.bv if arg is not None else None
+                         for arg in flt])
+            if uid in bitvectors:
+                continue
+            bitvectors.add(uid)
+            yield {"fmt" : (fmt_vec, fmt),
+                   "arg" : [(args[n_arg], flt[n_arg])
+                            for n_arg in range(fp_inputs)]}
 
 
 def sanity_test():
     rh = Random_Hierarchy()
 
-    for vec, flt in mk_float_vectors(rh, 3, 8, 1):
-        print("%-20s %s" % (flt.to_python_string(), vec.tag()))
+    for x in mk_format_vectors(1, False):
+        print(x.tag())
+
+    print()
+    for x in mk_float_vectors(1, False):
+        print(x.tag())
+
+    print()
+    count = 0
+    for vector in mk_interleaved_fp_vectors(base_rh = rh,
+                                            fp_inputs = 3,
+                                            fmt_iterations = 1,
+                                            input_iterations = 1,
+                                            full_spectrum = False):
+        count += 1
+        print(vector["fmt"][1],
+              vector["arg"][0][0].tag(),
+              vector["arg"][1][0].tag(),
+              vector["arg"][2][0].tag())
+    print("total = %u" % count)
 
 
 if __name__ == "__main__":

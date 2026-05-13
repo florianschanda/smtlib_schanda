@@ -31,7 +31,9 @@ A: The python RNG is not thread-safe. Furthemore, wrapping it with
    https://github.com/AdaCore/spark2014/tree/master/testsuite/gnatprove/tests/random
 """
 
+from hashlib import sha1
 from math import ceil, log2
+from copy import copy
 
 
 class RNG:
@@ -203,6 +205,34 @@ class RNG:
 
     def random_bool(self):
         return self.random_int32(0, 1) == 1
+
+
+class Random_Hierarchy:
+    def __init__(self, base=None):
+        assert isinstance(base, Random_Hierarchy) or base is None
+        if base is None:
+            self.parts = []
+            self.hf    = sha1()
+        else:
+            self.parts = copy(base.parts)
+            self.hf    = base.hf.copy()
+
+    def extend(self, s):
+        assert isinstance(s, str) and "|" not in s
+        new = Random_Hierarchy(self)
+        new.parts.append(s)
+        if len(new.parts) >= 2:
+            new.hf.update(b'|')
+        new.hf.update(s.encode("UTF-8"))
+        return new
+
+    def rng(self):
+        assert self.hf.digest_size == 20
+        digest = self.hf.digest()
+        seed   = []
+        for offset in (0, 4, 8, 12, 16):
+            seed.append(int(digest[offset:offset + 4].hex(), 16))
+        return RNG(*seed)
 
 
 def sanity_test():

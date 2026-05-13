@@ -43,6 +43,16 @@ class Float_Test_Vector(Enum):
     RCP_SMALLEST_NORMAL     = auto()
     RCP_SMALLEST_SUBNORMAL  = auto()
 
+    REFERENCE               = auto()
+    # special value that allows us to place code to refer to other
+    # parameters
+
+
+FLOAT_TEST_VECTOR_WITH_ITERATIONS = \
+    frozenset([kind
+               for kind in Float_Test_Vector
+               if "RANDOM" in kind.name])
+
 
 class Format_Test_Vector(Enum):
     # IEEE-754 formats
@@ -59,12 +69,19 @@ class Format_Test_Vector(Enum):
     PIXAR_PXR24         = auto()    # 8, 16
 
     # Special formats
-    FLOAT_2_2           = auto()    # 2, 2 (pathological worst case)
+    FLOAT8     = auto()    # 3, 5 (plausible ieee looking format)
+    FLOAT_2_2  = auto()    # 2, 2 (pathological worst case)
 
     # Random formats
     FLOAT_RANDOM_EB_EQ_SB = auto()    # eb = sb
     FLOAT_RANDOM_EB_LT_SB = auto()    # eb < sb
     FLOAT_RANDOM_EB_GT_SB = auto()    # eb > sb
+
+
+FORMAT_TEST_VECTOR_WITH_ITERATIONS = \
+    frozenset([kind
+               for kind in Format_Test_Vector
+               if "RANDOM" in kind.name])
 
 
 class Float_Operation(Enum):

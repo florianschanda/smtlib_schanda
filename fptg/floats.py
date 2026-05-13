@@ -28,6 +28,18 @@ from fptg.enums import Rounding, Implementation, Float_Operation, Validation
 from fptg.mpfr import mpf_to_mpfr, mpfr_to_mpf
 
 
+def int_boundary(fmt):
+    """Calculates the largest integer for which (and all preceding
+       integers) have a precise representation. After this integer the
+       distance between one float and the next is > 1.
+    """
+    assert isinstance(fmt, MPF)
+    if fmt.p <= fmt.emax:
+        return 2 ** fmt.p
+    else:
+        return 2 ** (fmt.emax + 1) - 1
+
+
 class Unspecified(Exception):
     pass
 
@@ -57,6 +69,18 @@ class Validation_Error(Exception):
         self.arg1   = arg1
         self.arg2   = arg2
         self.arg3   = arg3
+
+
+class Format:
+    def __init__(self, eb, sb):
+        assert isinstance(eb, int) and eb >= 2
+        assert isinstance(sb, int) and sb >= 2
+        self.eb = eb
+        self.sb = sb
+
+    def __str__(self):
+        return "FloatingPoint(%u, %u)" % (self.eb,
+                                          self.sb)
 
 
 class Context:
