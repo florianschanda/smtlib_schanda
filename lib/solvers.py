@@ -98,12 +98,14 @@ class Installable_Solver(Base_Solver):
     BINARY = ""
     ZIP    = ".zip"
     TAR_GZ = ".tar.gz"
+    TAR_BZ = ".tar.bz"
 
     def __init__(self, binary, name, version, kind, strip_components=0):
         super().__init__(binary, name, version)
         assert kind in (Installable_Solver.BINARY,
                         Installable_Solver.ZIP,
-                        Installable_Solver.TAR_GZ)
+                        Installable_Solver.TAR_GZ,
+                        Installable_Solver.TAR_BZ)
         assert isinstance(strip_components, int) and strip_components >= 0
         self.kind         = kind
         self.archive_file = os.path.join(".install",
@@ -114,7 +116,9 @@ class Installable_Solver(Base_Solver):
             case Installable_Solver.BINARY:
                 self.strip_components = None
                 assert strip_components == 0
-            case Installable_Solver.ZIP | Installable_Solver.TAR_GZ:
+            case (Installable_Solver.ZIP |
+                  Installable_Solver.TAR_GZ |
+                  Installable_Solver.TAR_BZ):
                 self.strip_components = strip_components
 
     @abstractmethod
@@ -139,6 +143,15 @@ class Installable_Solver(Base_Solver):
                       strip_components = self.strip_components)
             case Installable_Solver.TAR_GZ:
                 cmd = ["tar", "xfz"]
+                cmd.append(os.path.abspath(self.archive_file))
+                if self.strip_components:
+                    cmd.append("--strip-components=%u" % self.strip_components)
+                subprocess.run(cmd,
+                               encoding = "UTF-8",
+                               check    = True,
+                               cwd      = install_dir)
+            case Installable_Solver.TAR_BZ:
+                cmd = ["tar", "xfj"]
                 cmd.append(os.path.abspath(self.archive_file))
                 if self.strip_components:
                     cmd.append("--strip-components=%u" % self.strip_components)
@@ -219,6 +232,34 @@ class MathSAT_Official_Release(Downloadable_Solver):
         self.options = ["-input=smt2",
                         "-theory.fp.to_bv_overflow_mode=1",
                         "-theory.fp.minmax_zero_mode=4"]
+
+
+class Colibri_1_Official_Release(Downloadable_Solver):
+    BASE_URL = ("https://git.frama-c.com/pub/colibri/-/"
+                "releases/%s/downloads/bundle-v7")
+
+    def __init__(self, version):
+        super().__init__(
+            binary     = "colibri",
+            name       = "Colibri_1",
+            version    = version,
+            kind       = Installable_Solver.TAR_BZ,
+            strip      = 1,
+            url        = Colibri_1_Official_Release.BASE_URL % version)
+
+
+class Colibri_2_Official_Release(Downloadable_Solver):
+    BASE_URL = ("https://git.frama-c.com/pub/colibrics/-/"
+                "jobs/artifacts/%s/raw/bin/colibri2?job=generate-static")
+
+    def __init__(self, version):
+        super().__init__(
+            binary     = "colibri",
+            name       = "Colibri_2",
+            version    = version,
+            kind       = Installable_Solver.BINARY,
+            strip      = 0,
+            url        = Colibri_2_Official_Release.BASE_URL % version)
 
 
 class CVC5_Official_Release(GH_Released_Solver):
@@ -305,6 +346,12 @@ def build_solver_library():
 
     solvers.append(MathSAT_Official_Release("5.6.16"))
     solvers.append(MathSAT_Official_Release("5.6.17pre1"))
+    solvers.append(MathSAT_Official_Release("5.6.17pre2"))
+    solvers.append(MathSAT_Official_Release("5.6.17pre3"))
+
+    solvers.append(Colibri_1_Official_Release("2026.04"))
+
+    solvers.append(Colibri_2_Official_Release("0.5"))
 
     return solvers
 

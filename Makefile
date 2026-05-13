@@ -26,7 +26,11 @@ results: \
 	results.BitWuzla--0.8.1.json \
 	results.BitWuzla--0.9.0.json \
 	results.MathSAT--5.6.16.json \
-	results.MathSAT--5.6.17pre1.json
+	results.MathSAT--5.6.17pre1.json \
+	results.MathSAT--5.6.17pre2.json \
+	results.MathSAT--5.6.17pre3.json \
+	results.Colibri_1--2026.04.json \
+	results.Colibri_2--0.5.json
 
 results.CVC4--%.json: manifest.json
 	@python3 -m run $(RUN_CMD) cvc4 $*
@@ -51,3 +55,11 @@ results.BitWuzla--%.json: manifest.json
 results.MathSAT--%.json: manifest.json
 	@python3 -m run $(RUN_CMD) mathsat $*
 	@python3 -m run analysis mathsat $* > $(subst results,analysis,$(basename $@)).txt
+
+results.Colibri_1--%.json: manifest.json
+	@python3 -m run $(RUN_CMD) colibri_1 $*
+	@python3 -m run analysis colibri_1 $* > $(subst results,analysis,$(basename $@)).txt
+
+results.Colibri_2--%.json: manifest.json
+	@python3 -m run $(RUN_CMD) colibri_2 $*
+	@python3 -m run analysis colibri_2 $* > $(subst results,analysis,$(basename $@)).txt
