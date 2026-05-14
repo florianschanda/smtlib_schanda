@@ -16,6 +16,9 @@
 # along with smtlib_schanda. If not, see
 # <https://www.gnu.org/licenses/>.
 
+import os
+import json
+
 from mpf.floats import MPF, RM_RNE, fp_sqrt
 from mpf.rationals import Rational
 
@@ -54,6 +57,16 @@ class Format_Vector:
         if self.iteration > 1:
             tag += "(%u)" % self.iteration
         return tag
+
+    def to_json(self):
+        return {"kind"      : self.kind.name,
+                "iteration" : self.iteration}
+
+    @classmethod
+    def from_json(cls, data):
+        assert isinstance(data, dict)
+        return Format_Vector(Format_Test_Vector[data["kind"]],
+                             data["iteration"])
 
     def mk_format(self, base_rh):
         assert isinstance(base_rh, Random_Hierarchy)
@@ -96,6 +109,18 @@ class Float_Vector:
         self.kind        = kind
         self.is_negative = is_negative
         self.iteration   = iteration
+
+    def to_json(self):
+        return {"kind"      : self.kind.name,
+                "negative"  : self.is_negative,
+                "iteration" : self.iteration}
+
+    @classmethod
+    def from_json(cls, data):
+        assert isinstance(data, dict)
+        return Float_Vector(Float_Test_Vector[data["kind"]],
+                            data["negative"],
+                            data["iteration"])
 
     def tag(self):
         tag = "-" if self.is_negative else "+"
@@ -335,9 +360,40 @@ def mk_interleaved_fp_vectors(base_rh,
             if uid in bitvectors:
                 continue
             bitvectors.add(uid)
-            yield {"fmt" : (fmt_vec, fmt),
-                   "arg" : [(args[n_arg], flt[n_arg])
-                            for n_arg in range(fp_inputs)]}
+            yield {
+                "fmt" : {"vec" : fmt_vec.to_json(),
+                         "eb"  : fmt.eb,
+                         "sb"  : fmt.sb},
+                "arg" : [{"vec" : args[n_arg].to_json(),
+                          "bv"  : (None
+                                   if flt[n_arg] is None
+                                   else flt[n_arg].bv)}
+                         for n_arg in range(fp_inputs)]
+            }
+
+def load_vectors(file_name):
+    assert os.path.isfile(file_name)
+    rv = []
+    with open(file_name, "r", encoding="UTF-8") as fd:
+        for vector in json.load(fd):
+            item = {
+                "fmt" : {
+                    "vec" : Format_Vector.from_json(vector["fmt"]["vec"]),
+                    "fmt" : Format(vector["fmt"]["eb"],
+                                   vector["fmt"]["sb"])
+                },
+                "arg" : [
+                    {"vec" : Float_Vector.from_json(vector["arg"][n]["vec"]),
+                     "flt" : (MPF(vector["fmt"]["eb"],
+                                  vector["fmt"]["sb"],
+                                  vector["arg"][n]["bv"])
+                              if vector["arg"][n]["bv"] is not None
+                              else None)}
+                    for n in range(len(vector["arg"]))
+                ]
+            }
+            rv.append(item)
+    return rv
 
 
 def sanity_test():

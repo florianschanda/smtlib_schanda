@@ -40,6 +40,51 @@ def int_boundary(fmt):
         return 2 ** (fmt.emax + 1) - 1
 
 
+def total_order(value):
+    assert isinstance(value, MPF)
+    S, E, T = value.unpack()
+
+    max_bv = 2 ** (value.k - 1) - 1
+    bv     = E << value.t | T
+    if S == 1:
+        return max_bv - bv
+    else:
+        return max_bv + 1 + bv
+
+
+def from_total_order(to, fmt):
+    assert isinstance(to, int)
+    assert isinstance(fmt, MPF)
+    max_bv = 2 ** (fmt.k - 1) - 1
+    rv = fmt.new_mpf()
+    if to <= max_bv:
+        rv.bv = max_bv - to | (max_bv + 1)
+    else:
+        rv.bv = to - 1 - max_bv
+    assert total_order(rv) == to
+    return rv
+
+
+def total_order_finite_range(fmt):
+    assert isinstance(fmt, MPF)
+    x = fmt.new_mpf()
+    x.pack(1, 2 ** fmt.w - 2, 2 ** fmt.t - 1)
+    to_min = total_order(x)
+    x.pack(0, 2 ** fmt.w - 2, 2 ** fmt.t - 1)
+    to_max = total_order(x)
+    return to_min, to_max
+
+
+def total_order_infinite_range(fmt):
+    assert isinstance(fmt, MPF)
+    x = fmt.new_mpf()
+    x.pack(1, 2 ** fmt.w - 1, 0)
+    to_min = total_order(x)
+    x.pack(0, 2 ** fmt.w - 1, 0)
+    to_max = total_order(x)
+    return to_min, to_max
+
+
 class Unspecified(Exception):
     pass
 
@@ -81,6 +126,19 @@ class Format:
     def __str__(self):
         return "FloatingPoint(%u, %u)" % (self.eb,
                                           self.sb)
+
+    def smtlib_sort(self):
+        match self.eb, self.sb:
+            case 5, 11:
+                return "Float16"
+            case 8, 24:
+                return "Float32"
+            case 11, 53:
+                return "Float64"
+            case 15, 113:
+                return "Float128"
+            case _:
+                return "(_ FloatingPoint %u %u)" % (self.eb, self.sb)
 
 
 class Context:
@@ -227,7 +285,8 @@ class Context:
         # it's different but they did not bother explaining how to get
         # from the rest of the world to their world.
         assert arg1.emax + 1 > 0
-        assert arg1.emin - arg1.p + 2 < 0
+        assert arg1.emin - arg1.p + 2 <= 0, \
+            "it is %i" % (arg1.emin - arg1.p + 2)
         ctx = gmpy2.context(gmpy2.ieee(32),
                             precision = arg1.p,
                             emax      = arg1.emax + 1,

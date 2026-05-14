@@ -120,6 +120,59 @@ class Float_Operation(Enum):
     FP_TO_SBV         = auto()
     FP_TO_REAL        = auto()
 
+    def is_rounded(self):
+        return self in (Float_Operation.ADD,
+                        Float_Operation.SUB,
+                        Float_Operation.MUL,
+                        Float_Operation.DIV,
+                        Float_Operation.FMA,
+                        Float_Operation.SQRT,
+                        Float_Operation.ROUND_TO_INTEGRAL,
+                        Float_Operation.FP_TO_FP,
+                        Float_Operation.REAL_TO_FP,
+                        Float_Operation.SBV_TO_FP,
+                        Float_Operation.UBV_TO_FP,
+                        Float_Operation.FP_TO_UBV,
+                        Float_Operation.FP_TO_SBV)
+
+    def arity(self):
+        if self in (Float_Operation.ABS,
+                    Float_Operation.NEG,
+                    Float_Operation.SQRT,
+                    Float_Operation.ROUND_TO_INTEGRAL,
+                    Float_Operation.IS_NORMAL,
+                    Float_Operation.IS_SUBNORMAL,
+                    Float_Operation.IS_ZERO,
+                    Float_Operation.IS_INFINITE,
+                    Float_Operation.IS_NAN,
+                    Float_Operation.IS_NEGATIVE,
+                    Float_Operation.IS_POSITIVE,
+                    Float_Operation.IEEE_TO_FP,
+                    Float_Operation.FP_TO_FP,
+                    Float_Operation.REAL_TO_FP,
+                    Float_Operation.SBV_TO_FP,
+                    Float_Operation.UBV_TO_FP,
+                    Float_Operation.FP_TO_UBV,
+                    Float_Operation.FP_TO_SBV,
+                    Float_Operation.FP_TO_REAL):
+            return 1
+        elif self in (Float_Operation.ADD,
+                      Float_Operation.SUB,
+                      Float_Operation.MUL,
+                      Float_Operation.DIV,
+                      Float_Operation.REM,
+                      Float_Operation.MIN,
+                      Float_Operation.MAX,
+                      Float_Operation.LEQ,
+                      Float_Operation.LT,
+                      Float_Operation.GEQ,
+                      Float_Operation.GT,
+                      Float_Operation.EQ):
+            return 2
+        else:
+            assert self == Float_Operation.FMA
+            return 3
+
 
 class Implementation(Enum):
     PYMPF      = auto()
@@ -141,3 +194,16 @@ class Rounding(Enum):
     TOWARDS_NEGATIVE = auto()
     TOWARDS_POSITIVE = auto()
     TOWARDS_ZERO     = auto()
+
+    def to_smtlib(self):
+        match self:
+            case Rounding.NEAREST_EVEN:
+                return "RNE"
+            case Rounding.NEAREST_AWAY:
+                return "RNA"
+            case Rounding.TOWARDS_NEGATIVE:
+                return "RTN"
+            case Rounding.TOWARDS_POSITIVE:
+                return "RTP"
+            case Rounding.TOWARDS_ZERO:
+                return "RTZ"
