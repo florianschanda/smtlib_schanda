@@ -181,8 +181,8 @@ class Test_Generator(metaclass=ABCMeta):
                     self.fd.write("(assert (fp.isInfinite %s))\n" %
                                   name)
                 else:
-                    assert value.isNan()
-                    self.fd.write("(assert (fp.isNan %s))\n" %
+                    assert value.isNaN()
+                    self.fd.write("(assert (fp.isNaN %s))\n" %
                                   name)
             case _:
                 assert False
@@ -409,9 +409,23 @@ def main():
 
         case "generate":
             vectors = load_vectors(os.path.join("vectors",
-                                                "2_fp_to_fp.reduced.json"))
-            for vec in vectors:
-                generate(vec)
+                                                "2_fp_to_fp.json"))
+
+            progress = None
+            results = 0
+            with multiprocessing.Pool() as pool:
+                for result in pool.imap_unordered(generate, vectors, 5):
+                    results += 1
+                    new_progress = "%.1f" % (float(results * 100) /
+                                             float(len(vectors)))
+                    if new_progress != progress:
+                        progress = new_progress
+                        print("%s%% complete [%u / %u]" % (progress,
+                                                           results,
+                                                           len(vectors)))
+
+
+
 
 
 
