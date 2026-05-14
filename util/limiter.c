@@ -41,6 +41,7 @@
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/resource.h>
 
 #include <assert.h>
 #include <ctype.h>
@@ -155,6 +156,8 @@ int main(int argc, char **argv)
   int child_id = fork();
   if (child_id == 0) {
     /* This is the child, which just executes the given command. */
+    const struct rlimit limit = {0, 0};
+    setrlimit(RLIMIT_CORE, &limit);
     execvp(argv[optind], arguments);
     assert(0);
 
