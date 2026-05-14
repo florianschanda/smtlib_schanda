@@ -371,6 +371,41 @@ def generate(vec):
     tg.generate(Dialect.SMTLIB2)
 
 
+def build_fp_vectors(rh, arity):
+    assert isinstance(rh, Random_Hierarchy)
+    assert isinstance(arity, int) and 1 <= arity <= 3
+
+    match arity:
+        case 1:
+            fmt_iterations   = 5
+            input_iterations = 5
+        case 2:
+            fmt_iterations   = 2
+            input_iterations = 2
+        case 3:
+            fmt_iterations   = 1
+            input_iterations = 1
+
+    for full in (False, True):
+        name = os.path.join("vectors",
+                            "%u_fp%s.json" % (arity,
+                                              "" if full else ".reduced"))
+        if os.path.isfile(name):
+            return
+
+        print("Building [%s]" % name)
+
+        vectors = list(mk_interleaved_fp_vectors(
+            base_rh          = rh,
+            fp_inputs        = arity,
+            fmt_iterations   = fmt_iterations,
+            input_iterations = input_iterations,
+            full_spectrum    = full))
+
+        with open(name, "w", encoding="UTF-8") as fd:
+            json.dump(vectors, fd, indent=2, sort_keys=True)
+
+
 def main():
     # Some of the rationals get really big...
     sys.set_int_max_str_digits(0)
@@ -391,30 +426,12 @@ def main():
         case "build_vectors":
             os.makedirs("vectors", exist_ok=True)
             rh = Random_Hierarchy()
-
-            vectors = list(mk_interleaved_fp_vectors(base_rh          = rh,
-                                                     fp_inputs        = 2,
-                                                     fmt_iterations   = 2,
-                                                     input_iterations = 2,
-                                                     full_spectrum    = False))
-            with open(os.path.join("vectors", "2_fp_to_fp.reduced.json"),
-                      "w",
-                      encoding="UTF-8") as fd:
-                json.dump(vectors, fd, indent=2, sort_keys=True)
-
-            vectors = list(mk_interleaved_fp_vectors(base_rh          = rh,
-                                                     fp_inputs        = 2,
-                                                     fmt_iterations   = 2,
-                                                     input_iterations = 2,
-                                                     full_spectrum    = True))
-            with open(os.path.join("vectors", "2_fp_to_fp.json"),
-                      "w",
-                      encoding="UTF-8") as fd:
-                json.dump(vectors, fd, indent=2, sort_keys=True)
+            build_fp_vectors(rh, 1)
+            build_fp_vectors(rh, 2)
 
         case "generate":
             vectors = load_vectors(os.path.join("vectors",
-                                                "2_fp_to_fp.json"))
+                                                "2_fp.json"))
 
             progress = None
             results = 0
