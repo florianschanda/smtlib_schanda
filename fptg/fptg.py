@@ -250,9 +250,14 @@ class Simple_Test(Test_Generator):
         self.op = op
 
     def dir_name(self):
-        return os.path.join("fptg",
-                            self.op.name.lower(),
-                            self.vector["fmt"]["vec"].kind.name.lower())
+        fmt_name = self.vector["fmt"]["vec"].kind.name.lower()
+        if fmt_name == "float32":
+            return os.path.join("fptg_f32",
+                                self.op.name.lower())
+        else:
+            return os.path.join("fptg_other",
+                                self.op.name.lower(),
+                                fmt_name)
 
     def bench_name(self):
         hf = sha1()
