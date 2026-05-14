@@ -337,7 +337,7 @@ def build_solver_library():
     solvers.append(CVC4_Official_Release("1.8"))
 
     solvers.append(CVC5_Official_Release("1.3.3"))
-    solvers.append(CVC5_Local_Build("main", "experimental", False))
+    solvers.append(CVC5_Local_Build("main", "40bdec", False))
 
     solvers.append(BitWuzla_Official_Release("0.8.1"))
     solvers.append(BitWuzla_Official_Release("0.9.0"))

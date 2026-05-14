@@ -423,7 +423,7 @@ class Work_Package:
         self.solver       = solver
         self.benchmark    = benchmark
         self.time_limit   = 1
-        self.memory_limit = 1024
+        self.memory_limit = 1024 * 5
 
     def execute(self):
         return self.benchmark.execute(solver       = self.solver,

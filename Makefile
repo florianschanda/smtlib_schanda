@@ -1,8 +1,8 @@
 PYTHON_TARGETS=lib fptg *.py
-THREADS=16
-RUN_CMD=run --threads=$(THREADS)
+THREADS=12
+RUN_CMD=run --threads=$(THREADS) --group=fptg
 
-.PHONY: style lint results sanity
+.PHONY: style lint results sanity install
 
 all: lint sanity
 
@@ -18,10 +18,13 @@ sanity:
 manifest.json:
 	@python3 -m run manifest
 
-results: \
+install:
+	@python3 -m run install_all
+
+results: install\
 	results.CVC4--1.8.json \
 	results.CVC5--1.3.3.json \
-	results.CVC5--main_experimental--no-mpfr.json \
+	results.CVC5--main_40bdec--no-mpfr.json \
 	results.Z3--4.16.0.json \
 	results.BitWuzla--0.8.1.json \
 	results.BitWuzla--0.9.0.json \

@@ -47,6 +47,12 @@ def clean_checkout(cvc5_version, symfpu_version):
                    check    = True)
 
     subprocess.run(["git",
+                    "fetch",
+                    "--all"],
+                   cwd      = os.path.abspath(os.path.join("deps", "symfpu")),
+                   encoding = "UTF-8",
+                   check    = True)
+    subprocess.run(["git",
                     "reset",
                     "--hard",
                     "HEAD"],

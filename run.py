@@ -48,7 +48,7 @@ def main():
                         default=None)
     ap_run.add_argument("--threads",
                         type=int,
-                        default=8)
+                        default=16)
 
     ap_install = subp.add_parser("install_all")
 
