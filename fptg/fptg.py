@@ -184,6 +184,12 @@ class Test_Generator(metaclass=ABCMeta):
                     assert value.isNaN()
                     self.fd.write("(assert (fp.isNaN %s))\n" %
                                   name)
+                if fmt.eb <= 8 and fmt.sb <= 24:
+                    # Writing out the string can get too extreme for
+                    # large formats, so we just do it for anything up
+                    # to a float32
+                    self.fd.write("; %s = %s\n" % (name,
+                                                   value.to_python_string()))
             case _:
                 assert False
 
