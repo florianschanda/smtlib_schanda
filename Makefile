@@ -1,6 +1,6 @@
 PYTHON_TARGETS=lib fptg *.py
-THREADS=12
-RUN_CMD=run --threads=$(THREADS) --group=fptg
+THREADS=16
+RUN_CMD=run --threads=$(THREADS) --group=fptg_f32 --group=fptg_other_small
 
 .PHONY: style lint results sanity install
 
@@ -24,13 +24,12 @@ install:
 results: install\
 	results.CVC4--1.8.json \
 	results.CVC5--1.3.3.json \
-	results.CVC5--main_40bdec--no-mpfr.json \
+	results.CVC5--main_symfpu-1.1.0-dual-license--no-mpfr.json \
+	results.CVC5--main_symfpu-1.2.0-dual-license--no-mpfr.json \
 	results.Z3--4.16.0.json \
 	results.BitWuzla--0.8.1.json \
 	results.BitWuzla--0.9.0.json \
 	results.MathSAT--5.6.16.json \
-	results.MathSAT--5.6.17pre1.json \
-	results.MathSAT--5.6.17pre2.json \
 	results.MathSAT--5.6.17pre3.json \
 	results.Colibri_1--2026.04.json \
 	results.Colibri_2--0.5.json
