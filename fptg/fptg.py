@@ -223,10 +223,21 @@ class Test_Generator(metaclass=ABCMeta):
         match self.dialect:
             case Dialect.SMTLIB2:
                 self.fd.write("(declare-const rm RoundingMode)\n")
-                for mode in Rounding:
-                    if mode not in modes:
-                        self.fd.write("(assert (not (= rm %s)))\n" %
-                                      mode.to_smtlib())
+                # The first rule of funny float benchmarks is to not
+                # talk about RNA.
+                if Rounding.NEAREST_AWAY in modes:
+                    for mode in Rounding:
+                        if mode not in modes:
+                            self.fd.write("(assert (not (= rm %s)))\n" %
+                                          mode.to_smtlib())
+                elif len(modes) > 1:
+                    self.fd.write("(assert (or %s))\n"
+                                  % " ".join("(= rm %s)" % rm.to_smtlib()
+                                             for rm in modes))
+                else:
+                    self.fd.write("(assert (= rm %s))\n" %
+                                  modes[0].to_smtlib())
+
             case _:
                 assert False
 
