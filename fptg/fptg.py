@@ -25,6 +25,8 @@ from hashlib import sha1
 import multiprocessing
 
 from mpf.floats import MPF
+from mpf.rationals import Rational, q_pow2
+from mpf.bitvector import BitVector
 
 from lib.enums import Dialect, Expectation
 from fptg.vectors import (mk_interleaved_fp_vectors,
@@ -34,6 +36,7 @@ from fptg.random import Random_Hierarchy
 from fptg.enums import Float_Operation, Rounding
 from fptg.floats import (Context,
                          Format,
+                         Unspecified,
                          total_order,
                          from_total_order,
                          total_order_finite_range,
@@ -59,6 +62,9 @@ class Test_Generator(metaclass=ABCMeta):
     def bench_name(self):
         pass
 
+    def setup_rng(self):
+        self.rng = Random_Hierarchy().extend(self.bench_name()).rng()
+
     def create_file(self, dialect, logic, status, variant=None):
         assert isinstance(dialect, Dialect)
         assert isinstance(logic, str)
@@ -81,7 +87,6 @@ class Test_Generator(metaclass=ABCMeta):
                                  core_name)
         self.dialect = dialect
         self.fd = open(file_name, "w", encoding="UTF-8")
-        self.rng = Random_Hierarchy().extend(self.bench_name()).rng()
 
         if dialect == Dialect.CBMC:
             with open(file_name.replace(".c", ".smt2_cbmc"),
@@ -141,6 +146,20 @@ class Test_Generator(metaclass=ABCMeta):
                     self.fd.write("(assert (= %s %s))\n" % (name, ref))
             case _:
                 assert False
+
+    def define_bv_const(self, name, value):
+        assert isinstance(name, str)
+        assert isinstance(value, BitVector)
+
+        match self.dialect:
+            case Dialect.SMTLIB2:
+                self.fd.write("(declare-const %s %s)\n" %
+                              (name, value.smtlib_sort()))
+                self.fd.write("(assert (= %s %s))\n" % (name,
+                                                      value.smtlib_literal()))
+            case _:
+                assert False
+
 
     def define_float_const(self, fmt, name, value):
         assert isinstance(fmt, Format)
@@ -208,10 +227,10 @@ class Test_Generator(metaclass=ABCMeta):
                 assert False
 
     def compute_result(self, fmt, name, args):
-        assert isinstance(fmt, Format)
+        assert isinstance(fmt, (Format, BitVector)), str(fmt)
         assert isinstance(name, str)
         assert isinstance(args, list)
-        assert all(isinstance(arg, str) for arg in args)
+        assert all(isinstance(arg, (str, int)) for arg in args)
 
         match self.dialect:
             case Dialect.SMTLIB2:
@@ -221,6 +240,10 @@ class Test_Generator(metaclass=ABCMeta):
                 match self.op:
                     case Float_Operation.ADD:
                         self.fd.write("fp.add")
+                    case Float_Operation.FP_TO_UBV:
+                        self.fd.write("(_ fp.to_ubv %u)" % fmt.width)
+                    case Float_Operation.FP_TO_SBV:
+                        self.fd.write("(_ fp.to_sbv %u)" % fmt.width)
                     case _:
                         assert False
                 if self.op.is_rounded():
@@ -256,12 +279,17 @@ class Simple_Test(Test_Generator):
         self.op = op
 
     def dir_name(self):
+        fmt = self.vector["fmt"]["fmt"]
         fmt_name = self.vector["fmt"]["vec"].kind.name.lower()
         if fmt_name == "float32":
             return os.path.join("fptg_f32",
                                 self.op.name.lower())
+        elif fmt.eb <= 8 and fmt.sb <= 24:
+            return os.path.join("fptg_other_small",
+                                self.op.name.lower(),
+                                fmt_name)
         else:
-            return os.path.join("fptg_other",
+            return os.path.join("fptg_other_large",
                                 self.op.name.lower(),
                                 fmt_name)
 
@@ -313,6 +341,7 @@ class Simple_Test(Test_Generator):
             variant_id += 1
             for expectation in (Expectation.UNSAT, Expectation.SAT):
                 variant = "%u_%s" % (variant_id, expectation.name.lower())
+                self.setup_rng()
                 self.create_file(dialect, "QF_FP", expectation, variant)
                 self.comment("Format: %s" %
                              self.vector["fmt"]["vec"].kind.name)
@@ -362,17 +391,145 @@ class Simple_Test(Test_Generator):
 
                 self.close_file()
 
+    def generate_fp_to_bv(self, dialect):
+        assert isinstance(dialect, Dialect)
+        assert self.op in (Float_Operation.FP_TO_UBV,
+                           Float_Operation.FP_TO_SBV)
+        assert len(self.vector["arg"]) == 1
+        assert self.op.arity() == 1
+
+        flt = self.vector["arg"][0]["flt"]
+
+        self.setup_rng()
+
+        bv_widths = {1}
+        bv_widths.add(self.rng.random_int(2, 7))
+        bv_widths.add(8)
+        bv_widths.add(self.rng.random_int(9, 31))
+        bv_widths.add(32)
+        bv_widths.add(self.rng.random_int(33, 63))
+        bv_widths.add(64)
+
+        if flt.isFinite():
+            flt_q = abs(flt.to_rational())
+            low = Rational(1)
+            hi  = Rational(2)
+            n   = 0
+            while hi < flt_q:
+                low  = hi
+                hi   = hi * Rational(2)
+                n   += 1
+            assert low == q_pow2(n)
+            if n > 0:
+                bv_widths.add(n)
+
+        for target_width in sorted(bv_widths):
+            context     = Context()
+            results     = {}
+            unspecified = []
+            for rm in Rounding:
+                try:
+                    ref = context.perform(op   = self.op,
+                                          rm   = rm,
+                                          arg1 = flt,
+                                          arg2 = target_width)
+                    bv = ref.to_unsigned_int()
+                    if bv in results:
+                        results[bv].append(rm)
+                    else:
+                        results[bv] = [rm]
+                except Unspecified:
+                    unspecified.append(rm)
+            worklist = []
+            for ref_bv, modes in sorted(results.items()):
+                bv = BitVector(target_width)
+                bv.from_unsigned_int(ref_bv)
+                worklist.append((False, bv, modes))
+            if unspecified:
+                bv = BitVector(target_width)
+                bv.from_unsigned_int(self.rng.random_int(0, bv.max_unsigned))
+                worklist.append((True, bv, unspecified))
+
+            variant_id = 0
+            for unspecified, ref_bv, rounding_modes in worklist:
+                for expectation in (Expectation.UNSAT, Expectation.SAT):
+                    variant_id += 1
+                    if unspecified:
+                        if expectation == Expectation.UNSAT:
+                            variant = "%u_%u_%s" % (target_width,
+                                                    variant_id,
+                                                    "unspec_1")
+                        else:
+                            variant = "%u_%u_%s" % (target_width,
+                                                    variant_id,
+                                                    "unspec_2")
+                        actual_expect = Expectation.SAT
+                    else:
+                        variant = "%u_%u_%s" % (target_width,
+                                                variant_id,
+                                                expectation.name.lower())
+                        actual_expect = expectation
+
+                    self.setup_rng()
+                    self.create_file(dialect, "QF_BVFP", actual_expect, variant)
+                    self.comment("Format: %s" %
+                                 self.vector["fmt"]["vec"].kind.name)
+                    self.comment("Target: bv%u" % target_width)
+                    for n in range(self.op.arity()):
+                        self.comment("Arg%u: %s" %
+                                     (n + 1,
+                                      self.vector["arg"][n]["vec"].tag()))
+
+                    self.new_line()
+                    for info in context.info_list():
+                        self.comment(info)
+
+                    self.new_line()
+                    self.set_rm(rounding_modes)
+
+                    self.new_line()
+                    self.define_float_const(
+                        fmt   = self.vector["fmt"]["fmt"],
+                        name  = "arg",
+                        value = flt)
+
+                    self.new_line()
+                    self.compute_result(fmt  = BitVector(target_width),
+                                        name = "result",
+                                        args = ["arg"])
+
+                    self.new_line()
+                    self.define_bv_const(
+                        name  = "expect",
+                        value = ref_bv)
+
+                    self.new_line()
+                    self.emit_vc(actual = "expect",
+                                 result = "result",
+                                 status = expectation)
+                    if unspecified:
+                        self.comment("this benchmark exploits unspecified "
+                                     "behaviour")
+
+                    self.close_file()
+
+
+
 
     def generate(self, dialect):
         assert isinstance(dialect, Dialect)
 
-        # For simple tests we just apply the operation (and optionally
-        # rounding modes)
-        if self.op.is_rounded():
+        if self.op in (Float_Operation.FP_TO_UBV,
+                       Float_Operation.FP_TO_SBV):
+            self.generate_fp_to_bv(dialect)
+        elif self.op.is_rounded():
+            # For simple tests we just apply the operation (and
+            # optionally rounding modes)
             self.generate_rounded(dialect)
 
+
 def generate(vec):
-    tg = Simple_Test(op     = Float_Operation.ADD,
+    tg = Simple_Test(op     = vec["op"],
                      vector = vec)
     tg.generate(Dialect.SMTLIB2)
 
@@ -423,10 +580,9 @@ def main():
     ap_vectors = subp.add_parser("build_vectors")
 
     ap_generate = subp.add_parser("generate")
-
+    ap_generate.add_argument("operation")
 
     options = ap.parse_args()
-
 
     match options.mode:
         case "build_vectors":
@@ -436,11 +592,21 @@ def main():
             build_fp_vectors(rh, 2)
 
         case "generate":
-            vectors = load_vectors(os.path.join("vectors",
-                                                "2_fp.json"))
+            try:
+                op = Float_Operation[options.operation.upper()]
+            except KeyError:
+                ap.error("unknown operation")
+
+            if op.has_float_input():
+                vectors = load_vectors(os.path.join("vectors",
+                                                    "%u_fp.json" % op.arity()),
+                                       op)
+            else:
+                assert False
+            print("Loaded %u vectors for test generation." % len(vectors))
 
             progress = None
-            results = 0
+            results  = 0
             with multiprocessing.Pool() as pool:
                 for result in pool.imap_unordered(generate, vectors, 5):
                     results += 1

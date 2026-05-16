@@ -179,7 +179,7 @@ class Context:
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
         assert isinstance(arg1, MPF)
-        assert isinstance(arg2, MPF) or arg2 is None
+        assert isinstance(arg2, (MPF, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
         match rm:
@@ -196,14 +196,30 @@ class Context:
             case None:
                 pass
 
-        match op:
-            case Float_Operation.ADD:
-                mpf_val = mpf.floats.fp_add(mpf_rm, arg1, arg2)
-            case _:
-                assert False
+        unspecified = False
+        try:
+            match op:
+                case Float_Operation.ADD:
+                    val = mpf.floats.fp_add(mpf_rm, arg1, arg2)
+                case Float_Operation.FP_TO_UBV:
+                    val = mpf.floats.fp_to_ubv(arg1, mpf_rm, arg2)
+                case Float_Operation.FP_TO_SBV:
+                    val = mpf.floats.fp_to_sbv(arg1, mpf_rm, arg2)
+                case _:
+                    assert False
+        except mpf.floats.Unspecified:
+            val     = None
+            unspecified = True
 
         self.signal_validation(op, Implementation.PYMPF)
-        return mpf_val
+
+        if unspecified:
+            # Unspecified results never have independent evaluation as
+            # PyMPF is the implementation that explicitly flags this.
+            self.redundancy = False
+            raise Unspecified
+        else:
+            return val
 
     def call_native(self, impl, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert impl in (Implementation.NATIVE_SSE,
@@ -212,7 +228,7 @@ class Context:
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
         assert isinstance(arg1, MPF)
-        assert isinstance(arg2, MPF) or arg2 is None
+        assert isinstance(arg2, (MPF, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
         cmd = []
@@ -235,6 +251,9 @@ class Context:
         match op:
             case Float_Operation.ADD:
                 cmd.append("fp.add")
+            case _:
+                self.signal_not_supported(op, impl)
+                return None
 
         match rm:
             case Rounding.NEAREST_EVEN:
@@ -277,7 +296,7 @@ class Context:
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
         assert isinstance(arg1, MPF)
-        assert isinstance(arg2, MPF) or arg2 is None
+        assert isinstance(arg2, (MPF, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
         # Create MPFR context. Because they are fr*nch we have to
@@ -317,7 +336,8 @@ class Context:
                 case Float_Operation.ADD:
                     result = mpf_to_mpfr(arg1) + mpf_to_mpfr(arg2)
                 case _:
-                    assert False
+                    self.signal_not_supported(op, Implementation.MPFR)
+                    return None
 
             rv = mpfr_to_mpf(result)
             self.signal_validation(op, Implementation.MPFR)
@@ -327,10 +347,10 @@ class Context:
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
         assert isinstance(arg1, MPF)
-        assert isinstance(arg2, MPF) or arg2 is None
+        assert isinstance(arg2, (MPF, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
         for arg in (arg2, arg3):
-            if arg is not None:
+            if isinstance(arg, MPF):
                 assert arg1.compatible(arg)
 
         results = {}

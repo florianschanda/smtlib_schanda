@@ -120,6 +120,12 @@ class Float_Operation(Enum):
     FP_TO_SBV         = auto()
     FP_TO_REAL        = auto()
 
+    def has_float_input(self):
+        return self not in (Float_Operation.IEEE_TO_FP,
+                            Float_Operation.REAL_TO_FP,
+                            Float_Operation.SBV_TO_FP,
+                            Float_Operation.UBV_TO_FP)
+
     def is_rounded(self):
         return self in (Float_Operation.ADD,
                         Float_Operation.SUB,
@@ -207,3 +213,6 @@ class Rounding(Enum):
                 return "RTP"
             case Rounding.TOWARDS_ZERO:
                 return "RTZ"
+
+    def __lt__(self, other):
+        return self.value < other.value

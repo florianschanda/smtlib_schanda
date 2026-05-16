@@ -24,7 +24,8 @@ from mpf.rationals import Rational
 
 from fptg.floats import Format, int_boundary
 from fptg.random import Random_Hierarchy
-from fptg.enums import (Float_Test_Vector,
+from fptg.enums import (Float_Operation,
+                        Float_Test_Vector,
                         FLOAT_TEST_VECTOR_WITH_ITERATIONS,
                         Format_Test_Vector,
                         FORMAT_TEST_VECTOR_WITH_ITERATIONS)
@@ -371,12 +372,15 @@ def mk_interleaved_fp_vectors(base_rh,
                          for n_arg in range(fp_inputs)]
             }
 
-def load_vectors(file_name):
+def load_vectors(file_name, op):
     assert os.path.isfile(file_name)
+    assert isinstance(op, Float_Operation)
+
     rv = []
     with open(file_name, "r", encoding="UTF-8") as fd:
         for vector in json.load(fd):
             item = {
+                "op" : op,
                 "fmt" : {
                     "vec" : Format_Vector.from_json(vector["fmt"]["vec"]),
                     "fmt" : Format(vector["fmt"]["eb"],
