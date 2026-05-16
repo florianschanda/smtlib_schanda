@@ -19,3 +19,4 @@ disable=
 	duplicate-code
 class-rgx=[A-Z]([a-z]*|[A-Z]*)(_([A-Z][a-z]+)|[A-Z]+|[0-9]+)*
 ignored-modules=gmpy2
+good-names=_,S,E,T

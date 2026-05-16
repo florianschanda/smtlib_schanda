@@ -372,6 +372,7 @@ def mk_interleaved_fp_vectors(base_rh,
                          for n_arg in range(fp_inputs)]
             }
 
+
 def load_vectors(file_name, op):
     assert os.path.isfile(file_name)
     assert isinstance(op, Float_Operation)

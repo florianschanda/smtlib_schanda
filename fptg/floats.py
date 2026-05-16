@@ -218,8 +218,8 @@ class Context:
             # PyMPF is the implementation that explicitly flags this.
             self.redundancy = False
             raise Unspecified
-        else:
-            return val
+
+        return val
 
     def call_native(self, impl, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert impl in (Implementation.NATIVE_SSE,

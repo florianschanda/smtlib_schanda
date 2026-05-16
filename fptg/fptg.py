@@ -39,12 +39,14 @@ from fptg.floats import (Context,
                          Unspecified,
                          total_order,
                          from_total_order,
-                         total_order_finite_range,
                          total_order_infinite_range)
 
 
 class Test_Generator(metaclass=ABCMeta):
-    def __init__(self, vector):
+    def __init__(self, op, vector):
+        assert isinstance(op, Float_Operation)
+        assert isinstance(vector, dict)
+        self.op      = op
         self.vector  = vector
         self.fd      = None
         self.dialect = None
@@ -86,7 +88,9 @@ class Test_Generator(metaclass=ABCMeta):
                                  dir_name,
                                  core_name)
         self.dialect = dialect
+        # pylint: disable=consider-using-with
         self.fd = open(file_name, "w", encoding="UTF-8")
+        # pylint: enable=consider-using-with
 
         if dialect == Dialect.CBMC:
             with open(file_name.replace(".c", ".smt2_cbmc"),
@@ -141,7 +145,8 @@ class Test_Generator(metaclass=ABCMeta):
                 self.fd.write("(declare-const %s %s)\n" %
                               (name, fmt.smtlib_sort()))
                 if negate:
-                    self.fd.write("(assert (= %s (fp.neg %s)))\n" % (name, ref))
+                    self.fd.write("(assert (= %s (fp.neg %s)))\n" %
+                                  (name, ref))
                 else:
                     self.fd.write("(assert (= %s %s))\n" % (name, ref))
             case _:
@@ -155,11 +160,10 @@ class Test_Generator(metaclass=ABCMeta):
             case Dialect.SMTLIB2:
                 self.fd.write("(declare-const %s %s)\n" %
                               (name, value.smtlib_sort()))
-                self.fd.write("(assert (= %s %s))\n" % (name,
-                                                      value.smtlib_literal()))
+                self.fd.write("(assert (= %s %s))\n" %
+                              (name, value.smtlib_literal()))
             case _:
                 assert False
-
 
     def define_float_const(self, fmt, name, value):
         assert isinstance(fmt, Format)
@@ -221,8 +225,8 @@ class Test_Generator(metaclass=ABCMeta):
                 self.fd.write("(declare-const rm RoundingMode)\n")
                 for mode in Rounding:
                     if mode not in modes:
-                        self.fd.write("(assert (not (= rm %s)))\n"
-                                 % mode.to_smtlib())
+                        self.fd.write("(assert (not (= rm %s)))\n" %
+                                      mode.to_smtlib())
             case _:
                 assert False
 
@@ -273,11 +277,6 @@ class Test_Generator(metaclass=ABCMeta):
 
 
 class Simple_Test(Test_Generator):
-    def __init__(self, op, vector):
-        assert isinstance(op, Float_Operation)
-        super().__init__(vector)
-        self.op = op
-
     def dir_name(self):
         fmt = self.vector["fmt"]["fmt"]
         fmt_name = self.vector["fmt"]["vec"].kind.name.lower()
@@ -471,7 +470,10 @@ class Simple_Test(Test_Generator):
                         actual_expect = expectation
 
                     self.setup_rng()
-                    self.create_file(dialect, "QF_BVFP", actual_expect, variant)
+                    self.create_file(dialect,
+                                     "QF_BVFP",
+                                     actual_expect,
+                                     variant)
                     self.comment("Format: %s" %
                                  self.vector["fmt"]["vec"].kind.name)
                     self.comment("Target: bv%u" % target_width)
@@ -512,9 +514,6 @@ class Simple_Test(Test_Generator):
                                      "behaviour")
 
                     self.close_file()
-
-
-
 
     def generate(self, dialect):
         assert isinstance(dialect, Dialect)
@@ -573,6 +572,7 @@ def main():
     # Some of the rationals get really big...
     sys.set_int_max_str_digits(0)
 
+    # pylint: disable=unused-variable
     ap = argparse.ArgumentParser()
     subp = ap.add_subparsers(required=True,
                              dest="mode")
@@ -581,6 +581,7 @@ def main():
 
     ap_generate = subp.add_parser("generate")
     ap_generate.add_argument("operation")
+    # pylint: enable=unused-variable
 
     options = ap.parse_args()
 
@@ -608,7 +609,7 @@ def main():
             progress = None
             results  = 0
             with multiprocessing.Pool() as pool:
-                for result in pool.imap_unordered(generate, vectors, 5):
+                for _ in pool.imap_unordered(generate, vectors, 5):
                     results += 1
                     new_progress = "%.1f" % (float(results * 100) /
                                              float(len(vectors)))
@@ -617,11 +618,6 @@ def main():
                         print("%s%% complete [%u / %u]" % (progress,
                                                            results,
                                                            len(vectors)))
-
-
-
-
-
 
     return 0
 
