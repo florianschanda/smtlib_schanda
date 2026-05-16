@@ -397,12 +397,15 @@ def survery_benchmarks():
     return benchmarks
 
 
-def load_benchmarks(groups=None):
+def load_benchmarks(groups=None, name_filter=None):
     assert isinstance(groups, list) or groups is None
     with open("manifest.json", "r", encoding="UTF-8") as fd:
         benchmarks = [SMTLIB_Benchmark.from_json(bench)
                       for bench in json.load(fd)
-                      if groups is None or bench["group"] in groups]
+                      if groups is None or
+                      bench["group"] in groups
+                      if name_filter is None or
+                      name_filter in bench["name"]]
     return benchmarks
 
 
@@ -519,6 +522,7 @@ def load_results(manifest, solver):
             continue
         if bench.name not in result_json[bench.group]:
             missing += 1
+            continue
 
         data = result_json[bench.group][bench.name]
         bench.verdicts[uid] = Solver_Verdict[data["kind"]]
@@ -575,6 +579,8 @@ def load_results(manifest, solver):
                float(count) / float(total) * 100.0))
 
     def show_group(name, results):
+        if results["verdicts"][Solver_Verdict.NOT_RUN] == results["count"]:
+            return False
         print("Benchmarks in %s" % name)
         fmt("Unsound",
             results["verdicts"][Solver_Verdict.UNSOUND],
@@ -598,10 +604,13 @@ def load_results(manifest, solver):
         fmt("Not Run",
             results["verdicts"][Solver_Verdict.NOT_RUN],
             results["count"])
+        return True
 
+    show_overall = True
     for group in sorted(group_results):
-        show_group(group, group_results[group])
-    show_group("overall", global_results)
+        show_overall &= show_group(group, group_results[group])
+    if show_overall:
+        show_group("overall", global_results)
 
     print("=" * 40)
     for bench in manifest:

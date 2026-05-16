@@ -49,6 +49,7 @@ def main():
     ap_run.add_argument("--threads",
                         type=int,
                         default=16)
+    ap_run.add_argument("--filter-name", default=None)
 
     ap_install = subp.add_parser("install_all")
 
@@ -85,7 +86,7 @@ def main():
                 solver.install()
 
         case "run":
-            benchmarks = load_benchmarks(options.group)
+            benchmarks = load_benchmarks(options.group, options.filter_name)
             results = run_benchmarks(solver,
                                      benchmarks,
                                      options.threads)
