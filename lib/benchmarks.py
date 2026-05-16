@@ -397,12 +397,12 @@ def survery_benchmarks():
     return benchmarks
 
 
-def load_benchmarks(group=None):
-    assert isinstance(group, str) or group is None
+def load_benchmarks(groups=None):
+    assert isinstance(groups, list) or groups is None
     with open("manifest.json", "r", encoding="UTF-8") as fd:
         benchmarks = [SMTLIB_Benchmark.from_json(bench)
                       for bench in json.load(fd)
-                      if bench["group"] == group or group is None]
+                      if groups is None or bench["group"] in groups]
     return benchmarks
 
 
@@ -591,10 +591,12 @@ def load_results(manifest, solver):
             results["verdicts"][Solver_Verdict.OOM],
             results["count"])
         fmt("Errors",
-            results["verdicts"][Solver_Verdict.NOT_RUN] +
             results["verdicts"][Solver_Verdict.UNSUPPORTED] +
             results["verdicts"][Solver_Verdict.INTERNAL_ERROR] +
             results["verdicts"][Solver_Verdict.ERROR],
+            results["count"])
+        fmt("Not Run",
+            results["verdicts"][Solver_Verdict.NOT_RUN],
             results["count"])
 
     for group in sorted(group_results):

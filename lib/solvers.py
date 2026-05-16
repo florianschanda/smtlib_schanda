@@ -277,22 +277,25 @@ class CVC5_Official_Release(GH_Released_Solver):
 
 
 class CVC5_Local_Build(Base_Solver):
-    def __init__(self, cvc5_version, symfpu_version, mpfr):
+    def __init__(self, cvc5_version, symfpu_version, mpfr, build):
         assert isinstance(cvc5_version, str)
         assert isinstance(symfpu_version, str)
         assert isinstance(mpfr, bool)
+        assert isinstance(build, str)
         super().__init__(binary  = "cvc5",
                          name    = "CVC5",
                          version = "%s_%s" % (cvc5_version, symfpu_version),
                          config  = "mpfr" if mpfr else "no-mpfr")
+        self.build = build
         self.options = ["--fp-exp",
                         "--check-models"]
 
     def install(self):
         install_dir = self.get_install_dir()
         build = os.path.join("builds",
-                             "cvc5_%s_%s_production" % (self.version,
-                                                        self.config))
+                             "cvc5_%s_%s_%s" % (self.version,
+                                                self.config,
+                                                self.build))
 
         if not os.path.isfile(build):
             print("Could not find built binary for %s" % build)
@@ -337,7 +340,14 @@ def build_solver_library():
     solvers.append(CVC4_Official_Release("1.8"))
 
     solvers.append(CVC5_Official_Release("1.3.3"))
-    solvers.append(CVC5_Local_Build("main", "40bdec", False))
+    solvers.append(CVC5_Local_Build("main",
+                                    "symfpu-1.1.0-dual-license",
+                                    False,
+                                    "debug"))
+    solvers.append(CVC5_Local_Build("main",
+                                    "symfpu-1.2.0-dual-license",
+                                    False,
+                                    "debug"))
 
     solvers.append(BitWuzla_Official_Release("0.8.1"))
     solvers.append(BitWuzla_Official_Release("0.9.0"))

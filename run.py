@@ -45,7 +45,7 @@ def main():
     ap_run.add_argument("--config",
                         default=None)
     ap_run.add_argument("--group",
-                        default=None)
+                        default=[], action="append")
     ap_run.add_argument("--threads",
                         type=int,
                         default=16)
