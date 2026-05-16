@@ -22,6 +22,7 @@
 (declare-const arg1 Float32)
 (assert (fp.isPositive arg1))
 (assert (fp.isInfinite arg1))
+; arg1 = Infinity
 
 (declare-const arg2 Float32)
 (assert (fp.leq (fp #b1 #b11101001 #b01110001010001100010111)
@@ -30,6 +31,7 @@
 (assert (fp.leq (fp #b1 #b10010100 #b00001001011100110110100)
                 arg2
                 (fp #b0 #b11111010 #b00111010101100011001011)))
+; arg2 = -2174573.0
 
 (declare-const result Float32)
 (assert (= result (fp.add rm arg1 arg2)))
@@ -37,6 +39,7 @@
 (declare-const expect Float32)
 (assert (fp.isPositive expect))
 (assert (fp.isInfinite expect))
+; expect = Infinity
 
 (assert (= expect result))
 

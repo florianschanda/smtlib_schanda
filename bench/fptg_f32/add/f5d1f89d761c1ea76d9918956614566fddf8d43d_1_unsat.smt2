@@ -21,6 +21,7 @@
 
 (declare-const arg1 Float32)
 (assert (fp.isNaN arg1))
+; arg1 = NaN
 
 (declare-const arg2 Float32)
 (assert (fp.leq (fp #b1 #b01010101 #b00000010101011011001100)
@@ -29,12 +30,14 @@
 (assert (fp.leq (fp #b0 #b00000000 #b00100010100110010110010)
                 arg2
                 (fp #b0 #b10100111 #b11100010010011001000111)))
+; arg2 = 0.0000000000000000000000000000000000000015887165287344040548914947201366092541744718555547322501664891385869150808307637134930700995028018951416015625
 
 (declare-const result Float32)
 (assert (= result (fp.add rm arg1 arg2)))
 
 (declare-const expect Float32)
 (assert (fp.isNaN expect))
+; expect = NaN
 
 (assert (not (= expect result)))
 

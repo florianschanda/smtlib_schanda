@@ -26,6 +26,7 @@
 (assert (fp.leq (fp #b0 #b10100010 #b10011110101000110011100)
                 arg1
                 (fp #b0 #b10101110 #b00101010011011011101010)))
+; arg1 = 55651713024.0
 
 (declare-const arg2 Float32)
 (assert (fp.leq (fp #b1 #b10101001 #b11111100000101011111101)
@@ -34,6 +35,7 @@
 (assert (fp.leq (fp #b1 #b10100101 #b00010011010001111001010)
                 arg2
                 (fp #b1 #b01110000 #b11001001001100110011000)))
+; arg2 = -295579222016.0
 
 (declare-const result Float32)
 (assert (= result (fp.add rm arg1 arg2)))
@@ -45,6 +47,7 @@
 (assert (fp.leq (fp #b1 #b10100100 #b10111110111001100101101)
                 expect
                 (fp #b0 #b10101000 #b01101100001001101011111)))
+; expect = -239927508992.0
 
 (assert (not (= expect result)))
 
