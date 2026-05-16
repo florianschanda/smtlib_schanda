@@ -18,10 +18,7 @@
 ;   * SOFTFLOAT: NONE
 
 (declare-const rm RoundingMode)
-(assert (not (= rm RNE)))
-(assert (not (= rm RNA)))
-(assert (not (= rm RTN)))
-(assert (not (= rm RTZ)))
+(assert (= rm RTP))
 
 (declare-const arg1 (_ FloatingPoint 18 142))
 (assert (fp.leq (fp #b1 #b001111101010000110 #b010010100100100100011110000011011111000001001011001100001001111000010001100011001101111011011011011111010110111011111100110111111100100110101)
