@@ -97,8 +97,8 @@ class Error(Exception):
 
 class Validation_Error(Exception):
     def __init__(self,
-                 impl_a, impl_b,
-                 op, rm=None, arg1=None, arg2=None, arg3=None):
+                 impl_a, impl_b, op,
+                 rm=None, arg1=None, arg2=None, arg3=None):
         assert isinstance(impl_a, Implementation)
         assert isinstance(impl_b, Implementation)
         assert impl_a != impl_b

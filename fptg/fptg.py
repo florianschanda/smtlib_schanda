@@ -37,6 +37,7 @@ from fptg.enums import Float_Operation, Rounding
 from fptg.floats import (Context,
                          Format,
                          Unspecified,
+                         Validation_Error,
                          total_order,
                          from_total_order,
                          total_order_infinite_range)
@@ -553,7 +554,25 @@ class Simple_Test(Test_Generator):
 def generate(vec):
     tg = Simple_Test(op     = vec["op"],
                      vector = vec)
-    tg.generate(Dialect.SMTLIB2)
+
+    try:
+        tg.generate(Dialect.SMTLIB2)
+        return True
+    except Validation_Error as err:
+        print("critical error in validation")
+        print("> implementations: %s & %s" % (err.impl_a.name,
+                                              err.impl_b.name))
+        print("> operation      : %s" % err.op.name)
+        if err.rm:
+            print("> rounding mode  : %s" % err.rm.name)
+        if err.arg1:
+            print("> argument 1     : %s" % err.arg1.smtlib_literal())
+        if err.arg2:
+            print("> argument 2     : %s" % err.arg2.smtlib_literal())
+        if err.arg3:
+            print("> argument 3     : %s" % err.arg3.smtlib_literal())
+
+        return False
 
 
 def build_fp_vectors(rh, arity):
@@ -632,7 +651,9 @@ def main():
             progress = None
             results  = 0
             with multiprocessing.Pool() as pool:
-                for _ in pool.imap_unordered(generate, vectors, 5):
+                for success in pool.imap_unordered(generate, vectors, 5):
+                    if not success:
+                        break
                     results += 1
                     new_progress = "%.1f" % (float(results * 100) /
                                              float(len(vectors)))
