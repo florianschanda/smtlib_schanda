@@ -25,8 +25,8 @@ from lib.solvers import (build_solver_library,
 from lib.benchmarks import (survery_benchmarks,
                             load_benchmarks,
                             run_benchmarks,
-                            serialise_results,
-                            load_results)
+                            serialise_results)
+from lib.analysis import analyse_single, analyse_global
 
 
 def main():
@@ -58,6 +58,8 @@ def main():
     ap_analysis.add_argument("version")
     ap_analysis.add_argument("--config",
                              default=None)
+
+    ap_global_analysis = subp.add_parser("global_analysis")
     # pylint: enable=unused-variable
 
     options = ap.parse_args()
@@ -94,7 +96,11 @@ def main():
 
         case "analysis":
             benchmarks = load_benchmarks()
-            load_results(benchmarks, solver)
+            analyse_single(benchmarks, solver)
+
+        case "global_analysis":
+            benchmarks = load_benchmarks()
+            analyse_global(benchmarks, solvers)
 
     return 0
 
