@@ -201,6 +201,8 @@ class Context:
             match op:
                 case Float_Operation.ADD:
                     val = mpf.floats.fp_add(mpf_rm, arg1, arg2)
+                case Float_Operation.MUL:
+                    val = mpf.floats.fp_mul(mpf_rm, arg1, arg2)
                 case Float_Operation.FP_TO_UBV:
                     val = mpf.floats.fp_to_ubv(arg1, mpf_rm, arg2)
                 case Float_Operation.FP_TO_SBV:
@@ -257,6 +259,8 @@ class Context:
         match op:
             case Float_Operation.ADD:
                 cmd.append("fp.add")
+            case Float_Operation.MUL:
+                cmd.append("fp.mul")
             case _:
                 self.signal_not_supported(op, impl)
                 return None
@@ -341,6 +345,8 @@ class Context:
             match op:
                 case Float_Operation.ADD:
                     result = mpf_to_mpfr(arg1) + mpf_to_mpfr(arg2)
+                case Float_Operation.MUL:
+                    result = mpf_to_mpfr(arg1) * mpf_to_mpfr(arg2)
                 case _:
                     self.signal_not_supported(op, Implementation.MPFR)
                     return None

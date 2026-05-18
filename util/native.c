@@ -52,7 +52,7 @@ int main(int argc, char **argv)
   fp_operation op;
   fp_rounding rm = RM_UNSPECIFIED;
   int requires_rm = 1;
-  int arity;
+  int arity = 2;
   int arg_id;
   fp arg[3] = {0, 0, 0};
   fp result;
@@ -65,7 +65,8 @@ int main(int argc, char **argv)
   arg_id = 1;
   if (strcmp(argv[arg_id], "fp.add") == 0) {
     op = ADD;
-    arity = 2;
+  } else if (strcmp(argv[arg_id], "fp.mul") == 0) {
+    op = MUL;
   } else {
     printf("unknown op: %s\n", argv[1]);
     return 1;
@@ -126,6 +127,10 @@ int main(int argc, char **argv)
   case ADD:
     set_rm(rm);
     result = arg[0] + arg[1];
+    break;
+  case MUL:
+    set_rm(rm);
+    result = arg[0] * arg[1];
     break;
   default:
     printf("internal logic error\n");

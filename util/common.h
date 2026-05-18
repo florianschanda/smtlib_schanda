@@ -2,7 +2,8 @@
 #define __COMMON_H__
 
 typedef enum {
-  ADD
+  ADD,
+  MUL
 } fp_operation;
 
 typedef enum {

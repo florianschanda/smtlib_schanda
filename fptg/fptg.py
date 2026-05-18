@@ -268,6 +268,8 @@ class Test_Generator(metaclass=ABCMeta):
                 match self.op:
                     case Float_Operation.ADD:
                         self.fd.write("fp.add")
+                    case Float_Operation.MUL:
+                        self.fd.write("fp.mul")
                     case Float_Operation.FP_TO_UBV:
                         self.fd.write("(_ fp.to_ubv %u)" % fmt.width)
                     case Float_Operation.FP_TO_SBV:
