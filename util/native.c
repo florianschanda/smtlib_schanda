@@ -49,95 +49,26 @@ void set_rm(fp_rounding rm)
 
 int main(int argc, char **argv)
 {
-  fp_operation op;
-  fp_rounding rm = RM_UNSPECIFIED;
-  int requires_rm = 1;
-  int arity = 2;
-  int arg_id;
-  fp arg[3] = {0, 0, 0};
+  work_package wp;
   fp result;
+  bv result_bv;
 
-  if (argc <= 1) {
-    printf("usage: op ...\n");
-    return 1;
-  }
+  parse_args(argc, argv, &wp);
 
-  arg_id = 1;
-  if (strcmp(argv[arg_id], "fp.add") == 0) {
-    op = ADD;
-  } else if (strcmp(argv[arg_id], "fp.mul") == 0) {
-    op = MUL;
-  } else {
-    printf("unknown op: %s\n", argv[1]);
-    return 1;
-  }
-
-  if (argc <= 1 + requires_rm + arity) {
-    printf("usage: %s", argv[1]);
-    if (requires_rm) {
-      printf(" rm");
-    }
-    for (int i=0; i<arity; ++i) {
-      printf(" bv%u", WIDTH);
-    }
-    printf("\n");
-    return 1;
-  }
-
-  if (requires_rm) {
-    arg_id += 1;
-    if (strcmp(argv[arg_id], "rne") == 0) {
-      rm = RNE;
-    } else if (strcmp(argv[arg_id], "rna") == 0) {
-      rm = RNA;
-    } else if (strcmp(argv[arg_id], "rtp") == 0) {
-      rm = RTP;
-    } else if (strcmp(argv[arg_id], "rtn") == 0) {
-      rm = RTN;
-    } else if (strcmp(argv[arg_id], "rtz") == 0) {
-      rm = RTZ;
-    } else {
-      printf("unknown rounding mode: %s\n", argv[arg_id]);
-      return 1;
-    }
-  }
-
-  for (int a=0; a<arity; ++a) {
-    arg_id += 1;
-    errno = 0;
-    unsigned long long tmp = strtoull(argv[arg_id], NULL, 16);
-    if (errno == EINVAL) {
-      printf("invalid value in bitvector argument %u\n", a + 1);
-      return 1;
-    } else if (errno == ERANGE) {
-      printf("bitvector %u out of ull range\n", a + 1);
-      return 1;
-    } else if (WIDTH == 32 && tmp > 0xffffffff) {
-      printf("bitvector %u out of 32-bit range\n", a + 1);
-      return 1;
-    } else if (WIDTH == 64 && tmp > 0xffffffffffffffff) {
-      printf("bitvector %u out of 64-bit range\n", a + 1);
-      return 1;
-    }
-    bv tmp_bv = (bv)tmp;
-    memcpy(&arg[a], &tmp_bv, WIDTH / 8);
-  }
-
-  switch (op) {
+  switch (wp.op) {
   case ADD:
-    set_rm(rm);
-    result = arg[0] + arg[1];
+    set_rm(wp.rm);
+    result = wp.arg[0] + wp.arg[1];
     break;
   case MUL:
-    set_rm(rm);
-    result = arg[0] * arg[1];
+    set_rm(wp.rm);
+    result = wp.arg[0] * wp.arg[1];
     break;
   default:
     printf("internal logic error\n");
     return 1;
   }
 
-  bv result_bv;
   memcpy(&result_bv, &result, WIDTH / 8);
   printf("%llx\n", (unsigned long long)result_bv);
   return 0;
