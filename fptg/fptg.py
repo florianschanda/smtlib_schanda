@@ -160,8 +160,20 @@ class Test_Generator(metaclass=ABCMeta):
             case Dialect.SMTLIB2:
                 self.fd.write("(declare-const %s %s)\n" %
                               (name, value.smtlib_sort()))
-                self.fd.write("(assert (= %s %s))\n" %
-                              (name, value.smtlib_literal()))
+                lower = value.to_unsigned_int() - 1
+                upper = value.to_unsigned_int() + 1
+                bv    = BitVector(value.width)
+                if lower >= 0:
+                    # not (x <= value - 1)
+                    bv.from_unsigned_int(lower)
+                    self.fd.write("(assert (not (bvule %s %s)))\n" %
+                                  (name, bv.smtlib_literal()))
+                if upper <= value.max_unsigned:
+                    # not (x >= value + 1)
+                    # not (value + 1 <= x)
+                    bv.from_unsigned_int(upper)
+                    self.fd.write("(assert (not (bvule %s %s)))\n" %
+                                  (bv.smtlib_literal(), name))
             case _:
                 assert False
 
