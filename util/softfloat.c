@@ -57,17 +57,48 @@ int main(int argc, char **argv)
   parse_args(argc, argv, &wp);
 
   switch (wp.op) {
+  case ABS:
+    return 2;
+  case NEG:
+    return 2;
   case ADD:
     set_rm(wp.rm);
     result = op(add)(wp.arg[0], wp.arg[1]);
+    break;
+  case SUB:
+    set_rm(wp.rm);
+    result = op(sub)(wp.arg[0], wp.arg[1]);
     break;
   case MUL:
     set_rm(wp.rm);
     result = op(mul)(wp.arg[0], wp.arg[1]);
     break;
+  case DIV:
+    set_rm(wp.rm);
+    result = op(div)(wp.arg[0], wp.arg[1]);
+    break;
+  case FMA:
+    set_rm(wp.rm);
+    result = op(mulAdd)(wp.arg[0], wp.arg[1], wp.arg[2]);
+    break;
+  case SQRT:
+    set_rm(wp.rm);
+    result = op(sqrt)(wp.arg[0]);
+    break;
+  case REM:
+    result = op(rem)(wp.arg[0], wp.arg[1]);
+    break;
+  case ROUND_TO_INTEGRAL:
+    set_rm(wp.rm);
+    result = op(roundToInt)(wp.arg[0], softfloat_roundingMode, 0);
+    break;
+  case MIN:
+    return 2;
+  case MAX:
+    return 2;
   default:
-    printf("internal logic error\n");
-    return 1;
+    printf("currently unsupported \n");
+    return 2;
   }
 
   memcpy(&result_bv, &result, WIDTH / 8);

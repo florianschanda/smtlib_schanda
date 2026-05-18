@@ -270,6 +270,8 @@ class Test_Generator(metaclass=ABCMeta):
                         self.fd.write("fp.add")
                     case Float_Operation.MUL:
                         self.fd.write("fp.mul")
+                    case Float_Operation.ROUND_TO_INTEGRAL:
+                        self.fd.write("fp.roundToIntegral")
                     case Float_Operation.FP_TO_UBV:
                         self.fd.write("(_ fp.to_ubv %u)" % fmt.width)
                     case Float_Operation.FP_TO_SBV:

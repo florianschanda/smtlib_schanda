@@ -21,6 +21,7 @@ import subprocess
 
 import mpf.floats
 from mpf.floats import MPF
+from mpf.bitvector import BitVector
 
 import gmpy2
 
@@ -178,8 +179,8 @@ class Context:
     def call_pympf(self, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
-        assert isinstance(arg1, MPF)
-        assert isinstance(arg2, (MPF, int)) or arg2 is None
+        assert isinstance(arg1, (MPF, BitVector))
+        assert isinstance(arg2, (MPF, int, Format)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
         match rm:
@@ -199,10 +200,54 @@ class Context:
         unspecified = False
         try:
             match op:
+                case Float_Operation.ABS:
+                    val = abs(arg1)
+                case Float_Operation.NEG:
+                    val = -arg1
                 case Float_Operation.ADD:
                     val = mpf.floats.fp_add(mpf_rm, arg1, arg2)
+                case Float_Operation.SUB:
+                    val = mpf.floats.fp_sub(mpf_rm, arg1, arg2)
                 case Float_Operation.MUL:
                     val = mpf.floats.fp_mul(mpf_rm, arg1, arg2)
+                case Float_Operation.DIV:
+                    val = mpf.floats.fp_div(mpf_rm, arg1, arg2)
+                case Float_Operation.FMA:
+                    val = mpf.floats.fp_fma(mpf_rm, arg1, arg2, arg3)
+                case Float_Operation.SQRT:
+                    val = mpf.floats.fp_sqrt(mpf_rm, arg1)
+                case Float_Operation.REM:
+                    val = mpf.floats.fp_rem(arg1, arg2)
+                case Float_Operation.ROUND_TO_INTEGRAL:
+                    val = mpf.floats.fp_roundToIntegral(mpf_rm, arg1)
+                case Float_Operation.MIN:
+                    val = mpf.floats.fp_min(arg1, arg2)
+                case Float_Operation.MAX:
+                    val = mpf.floats.fp_max(arg1, arg2)
+                case Float_Operation.LEQ:
+                    val = arg1 <= arg2
+                case Float_Operation.LT:
+                    val = arg1 < arg2
+                case Float_Operation.GEQ:
+                    val = arg1 >= arg2
+                case Float_Operation.GT:
+                    val = arg1 > arg2
+                case Float_Operation.EQ:
+                    val = arg1 == arg2
+                case Float_Operation.IS_NORMAL:
+                    val = arg1.isNormal()
+                case Float_Operation.IS_SUBNORMAL:
+                    val = arg1.isSubnormal()
+                case Float_Operation.IS_ZERO:
+                    val = arg1.isZero()
+                case Float_Operation.IS_INFINITE:
+                    val = arg1.isInfinite()
+                case Float_Operation.IS_NAN:
+                    val = arg1.isNaN()
+                case Float_Operation.IS_NEGATIVE:
+                    val = arg1.isNegative()
+                case Float_Operation.IS_POSITIVE:
+                    val = arg1.isPositive()
                 case Float_Operation.FP_TO_UBV:
                     val = mpf.floats.fp_to_ubv(arg1, mpf_rm, arg2)
                 case Float_Operation.FP_TO_SBV:
@@ -256,14 +301,7 @@ class Context:
                 self.signal_not_supported(op, impl)
                 return None
 
-        match op:
-            case Float_Operation.ADD:
-                cmd.append("fp.add")
-            case Float_Operation.MUL:
-                cmd.append("fp.mul")
-            case _:
-                self.signal_not_supported(op, impl)
-                return None
+        cmd.append(op.name.lower())
 
         match rm:
             case Rounding.NEAREST_EVEN:
@@ -330,8 +368,11 @@ class Context:
                 # rounding mode is really the inverse of RoundToZero,
                 # i.e. it always does this and not just at
                 # half-points.
-                self.signal_not_supported(op, Implementation.MPFR)
-                return None
+                if op == Float_Operation.ROUND_TO_INTEGRAL:
+                    ctx.round = gmpy2.RoundAwayZero
+                else:
+                    self.signal_not_supported(op, Implementation.MPFR)
+                    return None
             case Rounding.TOWARDS_NEGATIVE:
                 ctx.round = gmpy2.RoundDown
             case Rounding.TOWARDS_POSITIVE:
@@ -343,10 +384,36 @@ class Context:
 
         with gmpy2.local_context(ctx):
             match op:
+                case Float_Operation.ABS:
+                    result = abs(mpf_to_mpfr(arg1))
+                case Float_Operation.NEG:
+                    result = -mpf_to_mpfr(arg1)
                 case Float_Operation.ADD:
                     result = mpf_to_mpfr(arg1) + mpf_to_mpfr(arg2)
+                case Float_Operation.SUB:
+                    result = mpf_to_mpfr(arg1) - mpf_to_mpfr(arg2)
                 case Float_Operation.MUL:
                     result = mpf_to_mpfr(arg1) * mpf_to_mpfr(arg2)
+                case Float_Operation.DIV:
+                    result = mpf_to_mpfr(arg1) / mpf_to_mpfr(arg2)
+                case Float_Operation.FMA:
+                    result = gmpy2.fma(mpf_to_mpfr(arg1),
+                                       mpf_to_mpfr(arg2),
+                                       mpf_to_mpfr(arg3))
+                case Float_Operation.SQRT:
+                    result = gmpy2.sqrt(mpf_to_mpfr(arg1))
+                case Float_Operation.REM:
+                    result = gmpy2.remainder(mpf_to_mpfr(arg1),
+                                             mpf_to_mpfr(arg2))
+                case Float_Operation.ROUND_TO_INTEGRAL:
+                    if rm == Rounding.NEAREST_AWAY:
+                        result = gmpy2.rint_round(mpf_to_mpfr(arg1))
+                    else:
+                        result = gmpy2.rint(mpf_to_mpfr(arg1))
+                case Float_Operation.MIN:
+                    result = gmpy2.minnum(mpf_to_mpfr(arg1), mpf_to_mpfr(arg2))
+                case Float_Operation.MAX:
+                    result = gmpy2.maxnum(mpf_to_mpfr(arg1), mpf_to_mpfr(arg2))
                 case _:
                     self.signal_not_supported(op, Implementation.MPFR)
                     return None

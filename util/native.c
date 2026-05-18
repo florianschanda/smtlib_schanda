@@ -4,13 +4,16 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <fenv.h>
+#include <math.h>
 
 #if (WIDTH == 32)
 typedef float fp;
 typedef uint32_t bv;
+#define op(name) name##f
 #elif (WIDTH == 64)
 typedef double fp;
 typedef uint64_t bv;
+#define op(name) name
 #else
 #error "no float width specified"
 #endif
@@ -56,17 +59,56 @@ int main(int argc, char **argv)
   parse_args(argc, argv, &wp);
 
   switch (wp.op) {
+  case ABS:
+    result = op(fabs)(wp.arg[0]);
+    break;
+  case NEG:
+    result = -wp.arg[0];
+    break;
   case ADD:
     set_rm(wp.rm);
     result = wp.arg[0] + wp.arg[1];
+    break;
+  case SUB:
+    set_rm(wp.rm);
+    result = wp.arg[0] - wp.arg[1];
     break;
   case MUL:
     set_rm(wp.rm);
     result = wp.arg[0] * wp.arg[1];
     break;
+  case DIV:
+    set_rm(wp.rm);
+    result = wp.arg[0] / wp.arg[1];
+    break;
+  case FMA:
+    set_rm(wp.rm);
+    result = op(fma)(wp.arg[0], wp.arg[1], wp.arg[2]);
+    break;
+  case SQRT:
+    set_rm(wp.rm);
+    result = op(sqrt)(wp.arg[0]);
+    break;
+  case REM:
+    result = op(remainder)(wp.arg[0], wp.arg[1]);
+    break;
+  case ROUND_TO_INTEGRAL:
+    if (wp.rm == RNA) {
+      result = op(round)(wp.arg[0]);
+    } else {
+      set_rm(wp.rm);
+      result = op(nearbyint)(wp.arg[0]);
+    }
+    break;
+  case MIN:
+    result = op(fmin)(wp.arg[0], wp.arg[1]);
+    break;
+  case MAX:
+    result = op(fmax)(wp.arg[0], wp.arg[1]);
+    break;
   default:
-    printf("internal logic error\n");
-    return 1;
+    printf("currently unsupported \n");
+    return 2;
   }
 
   memcpy(&result_bv, &result, WIDTH / 8);
