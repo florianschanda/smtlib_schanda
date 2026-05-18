@@ -6,7 +6,11 @@
 
 #include <softfloat.h>
 
-#if (WIDTH == 32)
+#if (WIDTH == 16)
+typedef float16_t fp;
+typedef uint16_t bv;
+#define op(name) f16_##name
+#elif (WIDTH == 32)
 typedef float32_t fp;
 typedef uint32_t bv;
 #define op(name) f32_##name
@@ -18,18 +22,7 @@ typedef uint64_t bv;
 #error "no float width specified"
 #endif
 
-typedef enum {
-  ADD
-} fp_operation;
-
-typedef enum {
-  RNE,
-  RNA,
-  RTP,
-  RTN,
-  RTZ,
-  RM_UNSPECIFIED
-} fp_rounding;
+#include "common.h"
 
 void set_rm(fp_rounding rm)
 {
