@@ -9,13 +9,13 @@
 ; Arg1: -RANDOM_SUBNORMAL(2)
 ; Arg2: +SMALLEST_NORMAL
 
-; Redundancy: False
+; Redundancy: True
 ; Validation for: ADD
 ;   * PYMPF: FULL
-;   * NATIVE_SSE: NONE
-;   * NATIVE_X87: NONE
+;   * NATIVE_SSE: PARTIAL
+;   * NATIVE_X87: PARTIAL
 ;   * MPFR: PARTIAL
-;   * SOFTFLOAT: NONE
+;   * SOFTFLOAT: FULL
 
 (declare-const rm RoundingMode)
 

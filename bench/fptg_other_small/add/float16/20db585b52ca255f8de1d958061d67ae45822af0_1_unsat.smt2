@@ -9,13 +9,13 @@
 ; Arg1: -LARGEST_SUBNORMAL
 ; Arg2: +RANDOM_GT_INT_BOUNDARY
 
-; Redundancy: False
+; Redundancy: True
 ; Validation for: ADD
 ;   * PYMPF: FULL
 ;   * NATIVE_SSE: NONE
 ;   * NATIVE_X87: NONE
 ;   * MPFR: PARTIAL
-;   * SOFTFLOAT: NONE
+;   * SOFTFLOAT: FULL
 
 (declare-const rm RoundingMode)
 (assert (or (= rm RTN) (= rm RTZ)))

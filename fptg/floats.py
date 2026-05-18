@@ -240,9 +240,15 @@ class Context:
             case Implementation.SOFTFLOAT:
                 cmd_name = "softfloat"
         cmd_name += "_oracle_"
-        match arg1.w, arg1.p:
-            case 8, 24:
+        match arg1.w, arg1.p, impl:
+            case 5, 11, Implementation.SOFTFLOAT:
+                cmd_name += "16"
+                cmd.append(os.path.join("util", cmd_name))
+            case 8, 24, _:
                 cmd_name += "32"
+                cmd.append(os.path.join("util", cmd_name))
+            case 11, 53, _:
+                cmd_name += "64"
                 cmd.append(os.path.join("util", cmd_name))
             case _:
                 self.signal_not_supported(op, impl)

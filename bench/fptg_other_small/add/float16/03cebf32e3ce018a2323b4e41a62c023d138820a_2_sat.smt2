@@ -9,13 +9,13 @@
 ; Arg1: -ONE
 ; Arg2: -INT_BOUNDARY
 
-; Redundancy: False
+; Redundancy: True
 ; Validation for: ADD
 ;   * PYMPF: FULL
 ;   * NATIVE_SSE: NONE
 ;   * NATIVE_X87: NONE
 ;   * MPFR: PARTIAL
-;   * SOFTFLOAT: NONE
+;   * SOFTFLOAT: FULL
 
 (declare-const rm RoundingMode)
 (assert (not (= rm RNE)))
