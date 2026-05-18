@@ -31,7 +31,8 @@
 (assert (= result ((_ fp.to_sbv 35) rm arg)))
 
 (declare-const expect (_ BitVec 35))
-(assert (= expect #b11111111111111111111111111111111101))
+(assert (not (bvule expect #b11111111111111111111111111111111100)))
+(assert (not (bvule #b11111111111111111111111111111111110 expect)))
 
 (assert (= expect result))
 

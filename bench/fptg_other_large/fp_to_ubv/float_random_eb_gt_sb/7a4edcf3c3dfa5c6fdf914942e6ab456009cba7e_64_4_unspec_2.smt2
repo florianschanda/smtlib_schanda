@@ -32,7 +32,8 @@
 (assert (= result ((_ fp.to_ubv 64) rm arg)))
 
 (declare-const expect (_ BitVec 64))
-(assert (= expect #b0000110101100000101001001100110101010110110100100000000011101110))
+(assert (not (bvule expect #b0000110101100000101001001100110101010110110100100000000011101101)))
+(assert (not (bvule #b0000110101100000101001001100110101010110110100100000000011101111 expect)))
 
 (assert (= expect result))
 ; this benchmark exploits unspecified behaviour
