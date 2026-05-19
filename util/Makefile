@@ -32,6 +32,7 @@ native_sse_oracle_64: native.c common.h
 native_x87_oracle_32: native.c common.h
 	$(CC) $(BASE_FLAGS) $(CORRECTNESS_FLAGS) \
 		-mfpmath=387 \
+		-mpc32 \
 		-DWIDTH=32 \
 		native.c -o $@ \
 		-lm
@@ -39,6 +40,7 @@ native_x87_oracle_32: native.c common.h
 native_x87_oracle_64: native.c common.h
 	$(CC) $(BASE_FLAGS) $(CORRECTNESS_FLAGS) \
 		-mfpmath=387 \
+		-mpc64 \
 		-DWIDTH=64 \
 		native.c -o $@ \
 		-lm
