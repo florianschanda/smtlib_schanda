@@ -266,16 +266,72 @@ class Test_Generator(metaclass=ABCMeta):
                               (name, fmt.smtlib_sort()))
                 self.fd.write("(assert (= %s (" % name)
                 match self.op:
+                    case Float_Operation.ABS:
+                        self.fd.write("fp.abs")
+                    case Float_Operation.NEG:
+                        self.fd.write("fp.neg")
                     case Float_Operation.ADD:
                         self.fd.write("fp.add")
+                    case Float_Operation.SUB:
+                        self.fd.write("fp.sub")
                     case Float_Operation.MUL:
                         self.fd.write("fp.mul")
+                    case Float_Operation.DIV:
+                        self.fd.write("fp.div")
+                    case Float_Operation.FMA:
+                        self.fd.write("fp.fma")
+                    case Float_Operation.SQRT:
+                        self.fd.write("fp.sqrt")
+                    case Float_Operation.REM:
+                        self.fd.write("fp.rem")
                     case Float_Operation.ROUND_TO_INTEGRAL:
                         self.fd.write("fp.roundToIntegral")
+                    case Float_Operation.MIN:
+                        self.fd.write("fp.min")
+                    case Float_Operation.MAX:
+                        self.fd.write("fp.max")
+                    case Float_Operation.LEQ:
+                        self.fd.write("fp.leq")
+                    case Float_Operation.LT:
+                        self.fd.write("fp.lt")
+                    case Float_Operation.GEQ:
+                        self.fd.write("fp.geq")
+                    case Float_Operation.GT:
+                        self.fd.write("fp.gt")
+                    case Float_Operation.EQ:
+                        self.fd.write("fp.eq")
+                    case Float_Operation.IS_NORMAL:
+                        self.fd.write("fp.isNormal")
+                    case Float_Operation.IS_SUBNORMAL:
+                        self.fd.write("fp.isSubnormal")
+                    case Float_Operation.IS_ZERO:
+                        self.fd.write("fp.isZero")
+                    case Float_Operation.IS_INFINITE:
+                        self.fd.write("fp.isInfinite")
+                    case Float_Operation.IS_NAN:
+                        self.fd.write("fp.isNaN")
+                    case Float_Operation.IS_POSITIVE:
+                        self.fd.write("fp.isPositive")
+                    case Float_Operation.IS_NEGATIVE:
+                        self.fd.write("fp.isNegative")
+                    case Float_Operation.IEEE_TO_FP:
+                        self.fd.write("(_ to_fp %u %u)" % (fmt.eb, fmt.sb))
+                    case Float_Operation.FP_TO_FP:
+                        # TODO: how to signal target format
+                        assert False
+                    case Float_Operation.REAL_TO_FP:
+                        self.fd.write("(_ to_fp %u %u)" % (fmt.eb, fmt.sb))
+                    case Float_Operation.SBV_TO_FP:
+                        self.fd.write("(_ to_fp %u %u)" % (fmt.eb, fmt.sb))
+                    case Float_Operation.UBV_TO_FP:
+                        self.fd.write("(_ to_fp_unsigned %u %u)" %
+                                      (fmt.eb, fmt.sb))
                     case Float_Operation.FP_TO_UBV:
                         self.fd.write("(_ fp.to_ubv %u)" % fmt.width)
                     case Float_Operation.FP_TO_SBV:
                         self.fd.write("(_ fp.to_sbv %u)" % fmt.width)
+                    case Float_Operation.FP_TO_REAL:
+                        self.fd.write("fp.to_real")
                     case _:
                         assert False
                 if self.op.is_rounded():
