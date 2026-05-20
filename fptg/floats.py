@@ -311,6 +311,21 @@ class Context:
                 self.signal_not_supported(op, impl)
                 return None
 
+        if op not in (Float_Operation.ABS,
+                      Float_Operation.NEG,
+                      Float_Operation.ADD,
+                      Float_Operation.SUB,
+                      Float_Operation.MUL,
+                      Float_Operation.DIV,
+                      Float_Operation.FMA,
+                      Float_Operation.SQRT,
+                      Float_Operation.REM,
+                      Float_Operation.ROUND_TO_INTEGRAL,
+                      Float_Operation.MIN,
+                      Float_Operation.MAX):
+            self.signal_not_supported(op, impl)
+            return None
+
         cmd.append(op.name.lower())
 
         match rm:
