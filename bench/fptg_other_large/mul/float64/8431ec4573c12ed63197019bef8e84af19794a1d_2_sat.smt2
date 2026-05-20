@@ -13,7 +13,7 @@
 ; Validation for: MUL
 ;   * PYMPF: FULL
 ;   * NATIVE_SSE: PARTIAL
-;   * NATIVE_X87: PARTIAL
+;   * NATIVE_X87: NONE
 ;   * MPFR: PARTIAL
 ;   * SOFTFLOAT: FULL
 

@@ -19,16 +19,16 @@
 
 (declare-const rm RoundingMode)
 
-(declare-const arg1 (_ FloatingPoint 15 79))
+(declare-const arg1 (_ FloatingPoint 15 64))
 (assert (fp.isNaN arg1))
 
-(declare-const arg2 (_ FloatingPoint 15 79))
+(declare-const arg2 (_ FloatingPoint 15 64))
 (assert (fp.isNaN arg2))
 
-(declare-const result (_ FloatingPoint 15 79))
+(declare-const result (_ FloatingPoint 15 64))
 (assert (= result (fp.sub rm arg1 arg2)))
 
-(declare-const expect (_ FloatingPoint 15 79))
+(declare-const expect (_ FloatingPoint 15 64))
 (assert (fp.isNaN expect))
 
 (assert (= expect result))

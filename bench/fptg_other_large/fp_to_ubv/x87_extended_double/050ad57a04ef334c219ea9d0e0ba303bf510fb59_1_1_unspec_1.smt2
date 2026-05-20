@@ -15,7 +15,7 @@
 
 (declare-const rm RoundingMode)
 
-(declare-const arg (_ FloatingPoint 15 79))
+(declare-const arg (_ FloatingPoint 15 64))
 (assert (fp.isPositive arg))
 (assert (fp.isInfinite arg))
 

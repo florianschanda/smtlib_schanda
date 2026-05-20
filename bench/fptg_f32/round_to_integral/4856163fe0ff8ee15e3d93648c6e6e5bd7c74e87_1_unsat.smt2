@@ -12,7 +12,7 @@
 ; Validation for: ROUND_TO_INTEGRAL
 ;   * PYMPF: FULL
 ;   * NATIVE_SSE: FULL
-;   * NATIVE_X87: FULL
+;   * NATIVE_X87: NONE
 ;   * MPFR: FULL
 ;   * SOFTFLOAT: FULL
 

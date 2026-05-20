@@ -18,14 +18,14 @@
 
 (declare-const rm RoundingMode)
 
-(declare-const arg1 (_ FloatingPoint 15 79))
+(declare-const arg1 (_ FloatingPoint 15 64))
 (assert (fp.isPositive arg1))
 (assert (fp.isInfinite arg1))
 
-(declare-const result (_ FloatingPoint 15 79))
+(declare-const result (_ FloatingPoint 15 64))
 (assert (= result (fp.roundToIntegral rm arg1)))
 
-(declare-const expect (_ FloatingPoint 15 79))
+(declare-const expect (_ FloatingPoint 15 64))
 (assert (fp.isPositive expect))
 (assert (fp.isInfinite expect))
 
