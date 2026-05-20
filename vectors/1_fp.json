@@ -92,7 +92,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -602,7 +602,7 @@
   {
     "arg": [
       {
-        "bv": 9903520314283042199192993792,
+        "bv": 302231454903657293676544,
         "vec": {
           "iteration": 1,
           "kind": "ZERO",
@@ -612,7 +612,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -1132,7 +1132,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -1642,7 +1642,7 @@
   {
     "arg": [
       {
-        "bv": 9903520314283042199192993793,
+        "bv": 302231454903657293676545,
         "vec": {
           "iteration": 1,
           "kind": "SMALLEST_SUBNORMAL",
@@ -1652,7 +1652,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -2162,7 +2162,7 @@
   {
     "arg": [
       {
-        "bv": 264252961884609758813974,
+        "bv": 8064360409076225551,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_SUBNORMAL",
@@ -2172,7 +2172,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -2622,7 +2622,7 @@
   {
     "arg": [
       {
-        "bv": 122224680803436217502654,
+        "bv": 3730001245222052538,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_SUBNORMAL",
@@ -2632,7 +2632,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -3122,7 +3122,7 @@
   {
     "arg": [
       {
-        "bv": 37013692165684371933972,
+        "bv": 1129568242360973266,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_SUBNORMAL",
@@ -3132,7 +3132,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -3582,7 +3582,7 @@
   {
     "arg": [
       {
-        "bv": 66759397078225894106076,
+        "bv": 2037335115912655461,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_SUBNORMAL",
@@ -3592,7 +3592,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -4042,7 +4042,7 @@
   {
     "arg": [
       {
-        "bv": 87354307109119297010045,
+        "bv": 2665841891757791048,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_SUBNORMAL",
@@ -4052,7 +4052,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -4502,7 +4502,7 @@
   {
     "arg": [
       {
-        "bv": 9903752497357893600511500758,
+        "bv": 302238540568783374039052,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_SUBNORMAL",
@@ -4512,7 +4512,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -4962,7 +4962,7 @@
   {
     "arg": [
       {
-        "bv": 9903546481327848144338447698,
+        "bv": 302232253458491459482989,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_SUBNORMAL",
@@ -4972,7 +4972,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -5442,7 +5442,7 @@
   {
     "arg": [
       {
-        "bv": 9903708364173136831567750503,
+        "bv": 302237193730869654283688,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_SUBNORMAL",
@@ -5452,7 +5452,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -5922,7 +5922,7 @@
   {
     "arg": [
       {
-        "bv": 9903640748845823722416132364,
+        "bv": 302235130274835929028814,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_SUBNORMAL",
@@ -5932,7 +5932,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -6422,7 +6422,7 @@
   {
     "arg": [
       {
-        "bv": 9903548374375342702224657974,
+        "bv": 302232311229716268988791,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_SUBNORMAL",
@@ -6432,7 +6432,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -6902,7 +6902,7 @@
   {
     "arg": [
       {
-        "bv": 302231454903657293676543,
+        "bv": 9223372036854775807,
         "vec": {
           "iteration": 1,
           "kind": "LARGEST_SUBNORMAL",
@@ -6912,7 +6912,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -7382,7 +7382,7 @@
   {
     "arg": [
       {
-        "bv": 9903822545737945856486670335,
+        "bv": 302240678275694148452351,
         "vec": {
           "iteration": 1,
           "kind": "LARGEST_SUBNORMAL",
@@ -7392,7 +7392,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -7862,7 +7862,7 @@
   {
     "arg": [
       {
-        "bv": 302231454903657293676544,
+        "bv": 9223372036854775808,
         "vec": {
           "iteration": 1,
           "kind": "SMALLEST_NORMAL",
@@ -7872,7 +7872,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -8382,7 +8382,7 @@
   {
     "arg": [
       {
-        "bv": 9903822545737945856486670336,
+        "bv": 302240678275694148452352,
         "vec": {
           "iteration": 1,
           "kind": "SMALLEST_NORMAL",
@@ -8392,7 +8392,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -8882,7 +8882,7 @@
   {
     "arg": [
       {
-        "bv": 1335618157361276519268462301,
+        "bv": 40759831462441300029149,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -8892,7 +8892,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -9382,7 +9382,7 @@
   {
     "arg": [
       {
-        "bv": 3196509066105888683210376449,
+        "bv": 97549715152157247407361,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -9392,7 +9392,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -9842,7 +9842,7 @@
   {
     "arg": [
       {
-        "bv": 1401658698198973458547992553,
+        "bv": 42775228826872969324521,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -9852,7 +9852,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -10322,7 +10322,7 @@
   {
     "arg": [
       {
-        "bv": 958185893193480810505038968,
+        "bv": 29241512853804956370778,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -10332,7 +10332,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -10802,7 +10802,7 @@
   {
     "arg": [
       {
-        "bv": 1851415829951864243780528001,
+        "bv": 56500727232417732044673,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -10812,7 +10812,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -11282,7 +11282,7 @@
   {
     "arg": [
       {
-        "bv": 10526219808245599434413363243,
+        "bv": 321234735359057599926315,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -11292,7 +11292,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -11762,7 +11762,7 @@
   {
     "arg": [
       {
-        "bv": 13243075463178069792317013901,
+        "bv": 404146590062807305676169,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -11772,7 +11772,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -12242,7 +12242,7 @@
   {
     "arg": [
       {
-        "bv": 11792522447943608324940691084,
+        "bv": 359879225095935312656012,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -12252,7 +12252,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -12742,7 +12742,7 @@
   {
     "arg": [
       {
-        "bv": 11303242774275830985837635162,
+        "bv": 344947594429804412413530,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -12752,7 +12752,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -13202,7 +13202,7 @@
   {
     "arg": [
       {
-        "bv": 11493021928199866968813783457,
+        "bv": 350739194586177580829089,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_NORMAL_LT_ONE",
@@ -13212,7 +13212,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -13682,7 +13682,7 @@
   {
     "arg": [
       {
-        "bv": 4951457925686617442302820352,
+        "bv": 151106504079791792062464,
         "vec": {
           "iteration": 1,
           "kind": "ONE",
@@ -13692,7 +13692,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -14182,7 +14182,7 @@
   {
     "arg": [
       {
-        "bv": 14854978239969659641495814144,
+        "bv": 453337958983449085739008,
         "vec": {
           "iteration": 1,
           "kind": "ONE",
@@ -14192,7 +14192,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -14682,7 +14682,7 @@
   {
     "arg": [
       {
-        "bv": 4951760023327376638976062482,
+        "bv": 151115723368145039029266,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -14692,7 +14692,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -15182,7 +15182,7 @@
   {
     "arg": [
       {
-        "bv": 4951520844147246490296022901,
+        "bv": 151108424198829543795117,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -15192,7 +15192,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -15682,7 +15682,7 @@
   {
     "arg": [
       {
-        "bv": 4951696138919566729186867015,
+        "bv": 151113773770738730776391,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -15692,7 +15692,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -16142,7 +16142,7 @@
   {
     "arg": [
       {
-        "bv": 4951536607411291244676097463,
+        "bv": 151108905255471534564791,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -16152,7 +16152,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -16622,7 +16622,7 @@
   {
     "arg": [
       {
-        "bv": 4951533175748393014729334693,
+        "bv": 151108800529430939164581,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -16632,7 +16632,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -17082,7 +17082,7 @@
   {
     "arg": [
       {
-        "bv": 14855194056846804403025707224,
+        "bv": 453344545191858044551384,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -17092,7 +17092,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -17602,7 +17602,7 @@
   {
     "arg": [
       {
-        "bv": 14855159268226665578506864796,
+        "bv": 453343483527425097025692,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -17612,7 +17612,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -18082,7 +18082,7 @@
   {
     "arg": [
       {
-        "bv": 14855007553932893982051806421,
+        "bv": 453338853574612243115221,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -18092,7 +18092,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -18542,7 +18542,7 @@
   {
     "arg": [
       {
-        "bv": 14855057473378407925053834234,
+        "bv": 453340376995190671557626,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -18552,7 +18552,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -19002,7 +19002,7 @@
   {
     "arg": [
       {
-        "bv": 14855202283849266988511929557,
+        "bv": 453344796260048431075578,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_NORMAL_LT_TWO",
@@ -19012,7 +19012,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -19462,7 +19462,7 @@
   {
     "arg": [
       {
-        "bv": 6175893883426833656447441516,
+        "bv": 188473324079188038837120,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -19472,7 +19472,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -19962,7 +19962,7 @@
   {
     "arg": [
       {
-        "bv": 8053950152810955105306414545,
+        "bv": 245787053003264010784209,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -19972,7 +19972,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -20442,7 +20442,7 @@
   {
     "arg": [
       {
-        "bv": 9334957655016743643444812003,
+        "bv": 284880299530540272326883,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -20452,7 +20452,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -20922,7 +20922,7 @@
   {
     "arg": [
       {
-        "bv": 8130848723251634018344065523,
+        "bv": 248133811134388245191155,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -20932,7 +20932,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -21382,7 +21382,7 @@
   {
     "arg": [
       {
-        "bv": 8845983123557597345569443771,
+        "bv": 269957981065600504932502,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -21392,7 +21392,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -21862,7 +21862,7 @@
   {
     "arg": [
       {
-        "bv": 16668689183944135563104308990,
+        "bv": 508688024412357652703713,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -21872,7 +21872,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -22342,7 +22342,7 @@
   {
     "arg": [
       {
-        "bv": 16388687663926119204851984298,
+        "bv": 500143056150089087068074,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -22352,7 +22352,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -22822,7 +22822,7 @@
   {
     "arg": [
       {
-        "bv": 15061512616471785875476942904,
+        "bv": 459640887953850887326032,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -22832,7 +22832,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -23322,7 +23322,7 @@
   {
     "arg": [
       {
-        "bv": 18570340558317934625017631329,
+        "bv": 566721818796323688485473,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -23332,7 +23332,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -23782,7 +23782,7 @@
   {
     "arg": [
       {
-        "bv": 17356841838568542961719160391,
+        "bv": 529688776811784148004423,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_NORMAL_GE_TWO",
@@ -23792,7 +23792,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -24282,7 +24282,7 @@
   {
     "arg": [
       {
-        "bv": 4975334210624006368503267328,
+        "bv": 151696799890150497714176,
         "vec": {
           "iteration": 1,
           "kind": "INT_BOUNDARY",
@@ -24292,7 +24292,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -24782,7 +24782,7 @@
   {
     "arg": [
       {
-        "bv": 14878854524907048567696261120,
+        "bv": 453928254793807791390720,
         "vec": {
           "iteration": 1,
           "kind": "INT_BOUNDARY",
@@ -24792,7 +24792,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -25302,7 +25302,7 @@
   {
     "arg": [
       {
-        "bv": 4975036937405882481680159610,
+        "bv": 151687727831491931832126,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -25312,7 +25312,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -25762,7 +25762,7 @@
   {
     "arg": [
       {
-        "bv": 4975243028570889972335929818,
+        "bv": 151694017234720920194426,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -25772,7 +25772,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -26262,7 +26262,7 @@
   {
     "arg": [
       {
-        "bv": 4975073973215473944817757494,
+        "bv": 151688858074704561932760,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -26272,7 +26272,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -26722,7 +26722,7 @@
   {
     "arg": [
       {
-        "bv": 4975169179796109886658266933,
+        "bv": 151691763548967133400065,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -26732,7 +26732,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -27162,7 +27162,7 @@
   {
     "arg": [
       {
-        "bv": 4974491434336560639473833260,
+        "bv": 151671080398956475221828,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -27172,7 +27172,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -27622,7 +27622,7 @@
   {
     "arg": [
       {
-        "bv": 14878632944207632768696080864,
+        "bv": 453921492687502377602876,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -27632,7 +27632,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -28082,7 +28082,7 @@
   {
     "arg": [
       {
-        "bv": 14876070546746731050046754816,
+        "bv": 453843294522802007773184,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -28092,7 +28092,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -28522,7 +28522,7 @@
   {
     "arg": [
       {
-        "bv": 14878119577024026036229078752,
+        "bv": 453905825964369847925544,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -28532,7 +28532,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -28982,7 +28982,7 @@
   {
     "arg": [
       {
-        "bv": 14877615716612839741852736848,
+        "bv": 453890449364907375562992,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -28992,7 +28992,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -29462,7 +29462,7 @@
   {
     "arg": [
       {
-        "bv": 14878698664804926726493712536,
+        "bv": 453923498320964717623556,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_INTEGRAL_GT_TWO",
@@ -29472,7 +29472,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -29942,7 +29942,7 @@
   {
     "arg": [
       {
-        "bv": 5594947149649259941569232520,
+        "bv": 170467535583561713352328,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -29952,7 +29952,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -30402,7 +30402,7 @@
   {
     "arg": [
       {
-        "bv": 8239327194623310637794165035,
+        "bv": 251029259617695497421099,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -30412,7 +30412,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -30882,7 +30882,7 @@
   {
     "arg": [
       {
-        "bv": 6034546832965760161225749725,
+        "bv": 183744702682345446257885,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -30892,7 +30892,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -31322,7 +31322,7 @@
   {
     "arg": [
       {
-        "bv": 5208603541939314570988642047,
+        "bv": 158815614932731924799231,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -31332,7 +31332,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -31802,7 +31802,7 @@
   {
     "arg": [
       {
-        "bv": 8401302515892153349018925937,
+        "bv": 256110704719392200637297,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -31812,7 +31812,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -32262,7 +32262,7 @@
   {
     "arg": [
       {
-        "bv": 19294971424581663096667322267,
+        "bv": 588697447288760627345307,
         "vec": {
           "iteration": 1,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -32272,7 +32272,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -32722,7 +32722,7 @@
   {
     "arg": [
       {
-        "bv": 16156321493153738265662423754,
+        "bv": 492775102218830216869800,
         "vec": {
           "iteration": 2,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -32732,7 +32732,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -33182,7 +33182,7 @@
   {
     "arg": [
       {
-        "bv": 18190200896906578134929667473,
+        "bv": 554844175819685925811601,
         "vec": {
           "iteration": 3,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -33192,7 +33192,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -33642,7 +33642,7 @@
   {
     "arg": [
       {
-        "bv": 16853352696808331095926602669,
+        "bv": 514046806431922039126957,
         "vec": {
           "iteration": 4,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -33652,7 +33652,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -34102,7 +34102,7 @@
   {
     "arg": [
       {
-        "bv": 19758555357624728146291828057,
+        "bv": 602568205021791490712921,
         "vec": {
           "iteration": 5,
           "kind": "RANDOM_GT_INT_BOUNDARY",
@@ -34112,7 +34112,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -34542,7 +34542,7 @@
   {
     "arg": [
       {
-        "bv": 9903218082828138541899317247,
+        "bv": 302222231531620438900735,
         "vec": {
           "iteration": 1,
           "kind": "LARGEST_NORMAL",
@@ -34552,7 +34552,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -35022,7 +35022,7 @@
   {
     "arg": [
       {
-        "bv": 19806738397111180741092311039,
+        "bv": 604453686435277732577279,
         "vec": {
           "iteration": 1,
           "kind": "LARGEST_NORMAL",
@@ -35032,7 +35032,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -35522,7 +35522,7 @@
   {
     "arg": [
       {
-        "bv": 9903218082828138541899317248,
+        "bv": 302222231531620438900736,
         "vec": {
           "iteration": 1,
           "kind": "INFINITY",
@@ -35532,7 +35532,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -35982,7 +35982,7 @@
   {
     "arg": [
       {
-        "bv": 19806738397111180741092311040,
+        "bv": 604453686435277732577280,
         "vec": {
           "iteration": 1,
           "kind": "INFINITY",
@@ -35992,7 +35992,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -36462,7 +36462,7 @@
   {
     "arg": [
       {
-        "bv": 9903512356937299043284390492,
+        "bv": 302231212064736909279921,
         "vec": {
           "iteration": 1,
           "kind": "NAN",
@@ -36472,7 +36472,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -36962,7 +36962,7 @@
   {
     "arg": [
       {
-        "bv": 19806741662698440120747723234,
+        "bv": 604453786093092044700555,
         "vec": {
           "iteration": 1,
           "kind": "NAN",
@@ -36972,7 +36972,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -37462,7 +37462,7 @@
   {
     "arg": [
       {
-        "bv": 7427338004257377992101068799,
+        "bv": 226664367805706115481599,
         "vec": {
           "iteration": 1,
           "kind": "SQRT_LARGEST_NORMAL",
@@ -37472,7 +37472,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -37922,7 +37922,7 @@
   {
     "arg": [
       {
-        "bv": 17330858318540420191294062591,
+        "bv": 528895822709363409158143,
         "vec": {
           "iteration": 1,
           "kind": "SQRT_LARGEST_NORMAL",
@@ -37932,7 +37932,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -38402,7 +38402,7 @@
   {
     "arg": [
       {
-        "bv": 2475880078570760549798248448,
+        "bv": 75557863725914323419136,
         "vec": {
           "iteration": 1,
           "kind": "SQRT_SMALLEST_NORMAL",
@@ -38412,7 +38412,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -38862,7 +38862,7 @@
   {
     "arg": [
       {
-        "bv": 12379400392853802748991242240,
+        "bv": 377789318629571617095680,
         "vec": {
           "iteration": 1,
           "kind": "SQRT_SMALLEST_NORMAL",
@@ -38872,7 +38872,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -39362,7 +39362,7 @@
   {
     "arg": [
       {
-        "bv": 2464093051829517915344863232,
+        "bv": 75266536266523448599684,
         "vec": {
           "iteration": 1,
           "kind": "SQRT_SMALLEST_SUBNORMAL",
@@ -39372,7 +39372,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -39862,7 +39862,7 @@
   {
     "arg": [
       {
-        "bv": 12367613366112560114537857024,
+        "bv": 377497991170180742276228,
         "vec": {
           "iteration": 1,
           "kind": "SQRT_SMALLEST_SUBNORMAL",
@@ -39872,7 +39872,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -40322,7 +40322,7 @@
   {
     "arg": [
       {
-        "bv": 75557863725914323419136,
+        "bv": 2305843009213693952,
         "vec": {
           "iteration": 1,
           "kind": "RCP_LARGEST_NORMAL",
@@ -40332,7 +40332,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -40782,7 +40782,7 @@
   {
     "arg": [
       {
-        "bv": 9903595872146768113516412928,
+        "bv": 302233760746666507370496,
         "vec": {
           "iteration": 1,
           "kind": "RCP_LARGEST_NORMAL",
@@ -40792,7 +40792,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -41222,7 +41222,7 @@
   {
     "arg": [
       {
-        "bv": 9902613619918331227311964160,
+        "bv": 302203784787546729349120,
         "vec": {
           "iteration": 1,
           "kind": "RCP_SMALLEST_NORMAL",
@@ -41232,7 +41232,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"
@@ -41702,7 +41702,7 @@
   {
     "arg": [
       {
-        "bv": 19806133934201373426504957952,
+        "bv": 604435239691204023025664,
         "vec": {
           "iteration": 1,
           "kind": "RCP_SMALLEST_NORMAL",
@@ -41712,7 +41712,7 @@
     ],
     "fmt": {
       "eb": 15,
-      "sb": 79,
+      "sb": 64,
       "vec": {
         "iteration": 1,
         "kind": "X87_EXTENDED_DOUBLE"

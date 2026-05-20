@@ -38,7 +38,7 @@ class Format_Vector:
         Format_Test_Vector.FLOAT32             : ( 8,  24),
         Format_Test_Vector.FLOAT64             : (11,  53),
         Format_Test_Vector.FLOAT128            : (15, 113),
-        Format_Test_Vector.X87_EXTENDED_DOUBLE : (15,  79),
+        Format_Test_Vector.X87_EXTENDED_DOUBLE : (15,  64),
         Format_Test_Vector.BFLOAT16            : ( 8,   8),
         Format_Test_Vector.TENSORFLOAT32       : ( 8,  11),
         Format_Test_Vector.AMD_FP24            : ( 7,  17),
