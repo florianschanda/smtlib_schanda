@@ -291,12 +291,22 @@ class Context:
             case 5, 11, Implementation.SOFTFLOAT:
                 cmd_name += "16"
                 cmd.append(os.path.join("util", cmd_name))
-            case 8, 24, _:
+                width = 2
+            case 8, 24, (Implementation.SOFTFLOAT |
+                         Implementation.NATIVE_SSE):
                 cmd_name += "32"
                 cmd.append(os.path.join("util", cmd_name))
-            case 11, 53, _:
+                width = 4
+            case 11, 53, (Implementation.SOFTFLOAT |
+                          Implementation.NATIVE_SSE):
                 cmd_name += "64"
                 cmd.append(os.path.join("util", cmd_name))
+                width = 8
+            # disabled until we can parse the non-hidden bit bv
+            # case 15, 64, Implementation.NATIVE_X87:
+            #     cmd_name += "80"
+            #     cmd.append(os.path.join("util", cmd_name))
+            #     width = 16
             case _:
                 self.signal_not_supported(op, impl)
                 return None
@@ -317,11 +327,11 @@ class Context:
             case None:
                 pass
 
-        cmd.append("%x" % arg1.bv)
+        cmd.append("%0*x" % (width*2, arg1.bv))
         if arg2 is not None:
-            cmd.append("%x" % arg2.bv)
+            cmd.append("%0*x" % (width*2, arg2.bv))
         if arg3 is not None:
-            cmd.append("%x" % arg2.bv)
+            cmd.append("%0*x" % (width*2, arg2.bv))
 
         p = subprocess.run(cmd,
                            stdout   = subprocess.PIPE,

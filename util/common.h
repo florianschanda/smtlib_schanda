@@ -4,6 +4,9 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
+_Static_assert(sizeof(bv) == sizeof(fp),
+	       "size mismatch between bv and float type");
+
 typedef enum {
   ABS,
   NEG,
@@ -58,6 +61,48 @@ typedef struct {
   int arity;
   int requires_rm;
 } work_package;
+
+uint8_t parse_digit(char c)
+{
+  if (c >= '0' && c <= '9') {
+    return c - '0';
+  } else if (c >= 'a' && c <= 'f') {
+    return c - 'a' + 10;
+  } else {
+    printf("invalid hex digit %c\n", c);
+    exit(1);
+  }
+}
+
+fp parse_hexfloat(char *s)
+{
+  bv float_bv;
+  fp result;
+
+  if (strlen(s) != sizeof(bv) * 2) {
+    printf("incorrect input argument length\n");
+    exit(1);
+  }
+
+  for (int i=0; i<sizeof(bv); ++i) {
+    float_bv[sizeof(bv)-1-i] =
+      (parse_digit(s[i*2]) << 4) + parse_digit(s[i*2 + 1]);
+  }
+
+  memcpy(&result, &float_bv, sizeof(bv));
+
+  return result;
+}
+
+void print_float_bv(fp value)
+{
+  bv result_bv;
+  memcpy(&result_bv, &value, sizeof(bv));
+  for (int i=0; i<sizeof(bv); ++i) {
+    printf("%02x", result_bv[sizeof(bv) - 1 - i]);
+  }
+  printf("\n");
+}
 
 void parse_args(int argc, char **argv, work_package *wp)
 {
@@ -222,26 +267,7 @@ void parse_args(int argc, char **argv, work_package *wp)
   /* Parse float inputs (as bit-vectors) */
   for (int a=0; a<wp->arity; ++a) {
     arg_id += 1;
-    errno = 0;
-    unsigned long long tmp = strtoull(argv[arg_id], NULL, 16);
-    if (errno == EINVAL) {
-      printf("invalid value in bitvector argument %u\n", a + 1);
-      exit(1);
-    } else if (errno == ERANGE) {
-      printf("bitvector %u out of ull range\n", a + 1);
-      exit(1);
-    } else if (WIDTH == 16 && tmp > 0xffff) {
-      printf("bitvector %u out of 16-bit range\n", a + 1);
-      exit(1);
-    } else if (WIDTH == 32 && tmp > 0xffffffff) {
-      printf("bitvector %u out of 32-bit range\n", a + 1);
-      exit(1);
-    } else if (WIDTH == 64 && tmp > 0xffffffffffffffff) {
-      printf("bitvector %u out of 64-bit range\n", a + 1);
-      exit(1);
-    }
-    bv tmp_bv = (bv)tmp;
-    memcpy(&wp->arg[a], &tmp_bv, WIDTH / 8);
+    wp->arg[a] = parse_hexfloat(argv[arg_id]);
   }
 }
 

@@ -8,12 +8,16 @@
 
 #if (WIDTH == 32)
 typedef float fp;
-typedef uint32_t bv;
+typedef uint8_t bv[4];
 #define op(name) name##f
 #elif (WIDTH == 64)
 typedef double fp;
-typedef uint64_t bv;
+typedef uint8_t bv[8];
 #define op(name) name
+#elif (WIDTH == 80)
+typedef long double fp;
+typedef uint8_t bv[16];
+#define op(name) name##l
 #else
 #error "no float width specified"
 #endif
@@ -54,7 +58,6 @@ int main(int argc, char **argv)
 {
   work_package wp;
   fp result;
-  bv result_bv;
 
   parse_args(argc, argv, &wp);
 
@@ -111,7 +114,6 @@ int main(int argc, char **argv)
     return 2;
   }
 
-  memcpy(&result_bv, &result, WIDTH / 8);
-  printf("%llx\n", (unsigned long long)result_bv);
+  print_float_bv(result);
   return 0;
 }
