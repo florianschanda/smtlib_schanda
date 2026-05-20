@@ -340,6 +340,7 @@ def build_solver_library():
     solvers.append(CVC4_Official_Release("1.8"))
 
     solvers.append(CVC5_Official_Release("1.3.3"))
+    solvers.append(CVC5_Official_Release("1.3.4"))
     solvers.append(CVC5_Local_Build("main",
                                     "symfpu-1.1.0-dual-license",
                                     False,
