@@ -693,6 +693,7 @@ def main():
             rh = Random_Hierarchy()
             build_fp_vectors(rh, 1)
             build_fp_vectors(rh, 2)
+            build_fp_vectors(rh, 3)
 
         case "generate":
             try:

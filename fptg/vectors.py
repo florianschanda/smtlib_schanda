@@ -249,12 +249,27 @@ class Float_Vector:
         return rv
 
 
-def mk_float_vectors(iterations, full_spectrum):
+def mk_float_vectors(iterations, fma, full_spectrum):
     assert isinstance(iterations, int) and iterations >= 1
+    assert isinstance(fma, bool)
     assert isinstance(full_spectrum, bool)
 
     if full_spectrum:
-        kind_pool = list(Float_Test_Vector)
+        if fma:
+            kind_pool = [Float_Test_Vector.ZERO,
+                         Float_Test_Vector.RANDOM_SUBNORMAL,
+                         Float_Test_Vector.RANDOM_NORMAL_LT_ONE,
+                         Float_Test_Vector.RANDOM_NORMAL_GE_TWO,
+                         Float_Test_Vector.INT_BOUNDARY,
+                         Float_Test_Vector.LARGEST_NORMAL,
+                         Float_Test_Vector.INFINITY,
+                         Float_Test_Vector.NAN,
+                         Float_Test_Vector.RCP_LARGEST_NORMAL,
+                         Float_Test_Vector.RCP_SMALLEST_NORMAL,
+                         Float_Test_Vector.RCP_SMALLEST_SUBNORMAL,
+                         Float_Test_Vector.REFERENCE]
+        else:
+            kind_pool = list(Float_Test_Vector)
         sign_pool = [False, True]
     else:
         kind_pool = [Float_Test_Vector.ZERO,
@@ -278,12 +293,20 @@ def mk_float_vectors(iterations, full_spectrum):
     return rv
 
 
-def mk_format_vectors(iterations, full_spectrum):
+def mk_format_vectors(iterations, fma, full_spectrum):
     assert isinstance(iterations, int) and iterations >= 1
+    assert isinstance(fma, bool)
     assert isinstance(full_spectrum, bool)
 
     if full_spectrum:
-        kinds_pool = list(Format_Test_Vector)
+        if fma:
+            kinds_pool = [Format_Test_Vector.FLOAT32,
+                          Format_Test_Vector.FLOAT_2_2,
+                          Format_Test_Vector.FLOAT_RANDOM_EB_LT_SB,
+                          Format_Test_Vector.FLOAT_RANDOM_EB_EQ_SB,
+                          Format_Test_Vector.FLOAT_RANDOM_EB_GT_SB]
+        else:
+            kinds_pool = list(Format_Test_Vector)
     else:
         kinds_pool = [Format_Test_Vector.FLOAT32,
                       Format_Test_Vector.FLOAT_RANDOM_EB_LT_SB]
@@ -315,11 +338,15 @@ def mk_interleaved_fp_vectors(base_rh,
     def build_base(n):
         assert 1 <= n <= 3
         if n == 1:
-            for vec in mk_float_vectors(input_iterations, full_spectrum):
+            for vec in mk_float_vectors(input_iterations,
+                                        fp_inputs == 3,
+                                        full_spectrum):
                 yield [vec]
         else:
             for base in build_base(n - 1):
-                for vec in mk_float_vectors(input_iterations, full_spectrum):
+                for vec in mk_float_vectors(input_iterations,
+                                            fp_inputs == 3,
+                                            full_spectrum):
                     yield base + [vec]
 
     rh_arg = [base_rh.extend("arg1"),
@@ -336,7 +363,9 @@ def mk_interleaved_fp_vectors(base_rh,
         rh_fmt = base_rh.extend("fmt_for_" +
                                 ".".join(vec.tag() for vec in args))
 
-        for fmt_vec in mk_format_vectors(fmt_iterations, full_spectrum):
+        for fmt_vec in mk_format_vectors(iterations    = fmt_iterations,
+                                         fma           = fp_inputs == 3,
+                                         full_spectrum = full_spectrum):
             fmt   = fmt_vec.mk_format(rh_fmt)
             flt   = []
             valid = True
@@ -399,32 +428,3 @@ def load_vectors(file_name, op):
             }
             rv.append(item)
     return rv
-
-
-def sanity_test():
-    rh = Random_Hierarchy()
-
-    for x in mk_format_vectors(1, False):
-        print(x.tag())
-
-    print()
-    for x in mk_float_vectors(1, False):
-        print(x.tag())
-
-    print()
-    count = 0
-    for vector in mk_interleaved_fp_vectors(base_rh = rh,
-                                            fp_inputs = 3,
-                                            fmt_iterations = 1,
-                                            input_iterations = 1,
-                                            full_spectrum = False):
-        count += 1
-        print(vector["fmt"][1],
-              vector["arg"][0][0].tag(),
-              vector["arg"][1][0].tag(),
-              vector["arg"][2][0].tag())
-    print("total = %u" % count)
-
-
-if __name__ == "__main__":
-    sanity_test()
