@@ -346,7 +346,7 @@ class Context:
         if arg2 is not None:
             cmd.append("%0*x" % (width*2, arg2.bv))
         if arg3 is not None:
-            cmd.append("%0*x" % (width*2, arg2.bv))
+            cmd.append("%0*x" % (width*2, arg3.bv))
 
         p = subprocess.run(cmd,
                            stdout   = subprocess.PIPE,
