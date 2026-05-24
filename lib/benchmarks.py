@@ -399,13 +399,15 @@ def survery_benchmarks():
 
 def load_benchmarks(groups=None, name_filter=None):
     assert isinstance(groups, list) or groups is None
+    if groups == []:
+        groups = None
     with open("manifest.json", "r", encoding="UTF-8") as fd:
         benchmarks = [SMTLIB_Benchmark.from_json(bench)
                       for bench in json.load(fd)
-                      if groups is None or
-                      bench["group"] in groups
-                      if name_filter is None or
-                      name_filter in bench["name"]]
+                      if ((groups is None or
+                           bench["group"] in groups) and
+                          (name_filter is None or
+                           name_filter in bench["name"]))]
     return benchmarks
 
 
