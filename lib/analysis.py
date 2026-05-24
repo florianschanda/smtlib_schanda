@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 #
 # This file is part of smtlib_schanda.
@@ -130,8 +131,10 @@ def load_results(manifest, solver, with_analysis):
         fmt("Unknown",
             results["verdicts"][Solver_Verdict.UNKNOWN],
             results["count"])
-        fmt("Resources",
-            results["verdicts"][Solver_Verdict.TIMEOUT] +
+        fmt("Timeout",
+            results["verdicts"][Solver_Verdict.TIMEOUT],
+            results["count"])
+        fmt("OOM",
             results["verdicts"][Solver_Verdict.OOM],
             results["count"])
         fmt("Errors",
