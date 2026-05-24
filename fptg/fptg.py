@@ -386,6 +386,7 @@ class Simple_Test(Test_Generator):
 
     def generate_rounded(self, dialect):
         assert isinstance(dialect, Dialect)
+        assert self.op.is_rounded()
 
         # Assemble actuals
         args = [None] * 3
@@ -473,6 +474,97 @@ class Simple_Test(Test_Generator):
                              status = expectation)
 
                 self.close_file()
+
+    def generate_non_rounded(self, dialect):
+        assert isinstance(dialect, Dialect)
+        assert not self.op.is_rounded()
+
+        # Assemble actuals
+        args = [None] * 3
+        assert len(self.vector["arg"]) == self.op.arity()
+        for n in range(self.op.arity()):
+            if self.vector["arg"][n]["vec"].kind == \
+               Float_Test_Vector.REFERENCE:
+                assert n > 0
+                args[n] = args[n - 1].new_mpf()
+                if self.vector["arg"][n]["vec"].is_negative:
+                    S, E, T = args[n].unpack()
+                    args[n].pack(1 - S, E, T)
+            else:
+                args[n] = self.vector["arg"][n]["flt"]
+
+        # Compute result
+        context = Context()
+        try:
+            ref_result = context.perform(op   = self.op,
+                                         arg1 = args[0],
+                                         arg2 = args[1],
+                                         arg3 = args[2])
+        except Unspecified:
+            # min/max on zero is unspecified
+            assert args[0].isZero() and \
+                args[1].isZero() and \
+                ((args[0].isPositive() and args[1].isNegative()) or
+                 (args[0].isNegative() and args[1].isPositive()))
+            ref_result = None
+
+        variant_id = 0
+        for expectation in (Expectation.UNSAT, Expectation.SAT):
+            variant_id += 1
+            self.setup_rng()
+            if ref_result is None:
+                variant = "sat_%u" % variant_id
+                self.create_file(dialect, "QF_FP", Expectation.SAT, variant)
+                ref_result = args[self.rng.random_int(0, 1)]
+            else:
+                variant = "%s_%u" % (expectation.name.lower(),
+                                     variant_id)
+                self.create_file(dialect, "QF_FP", expectation, variant)
+
+            self.comment("Format: %s" %
+                         self.vector["fmt"]["vec"].kind.name)
+            for n in range(self.op.arity()):
+                self.comment("Arg%u: %s" %
+                             (n + 1,
+                              self.vector["arg"][n]["vec"].tag()))
+
+            self.new_line()
+            for info in context.info_list():
+                self.comment(info)
+
+            for n in range(self.op.arity()):
+                self.new_line()
+                if self.vector["arg"][n]["vec"].kind == \
+                   Float_Test_Vector.REFERENCE:
+                    self.define_ref_const(
+                        fmt    = self.vector["fmt"]["fmt"],
+                        name   = "arg%u" % (n + 1),
+                        ref    = "arg%u" % n,
+                    negate = self.vector["arg"][n]["vec"].is_negative)
+                else:
+                    self.define_float_const(
+                        fmt   = self.vector["fmt"]["fmt"],
+                        name  = "arg%u" % (n + 1),
+                        value = self.vector["arg"][n]["flt"])
+
+            self.new_line()
+            self.compute_result(fmt  = self.vector["fmt"]["fmt"],
+                                name = "result",
+                                args = ["arg%u" % (n + 1)
+                                        for n in range(self.op.arity())])
+
+            self.new_line()
+            self.define_float_const(
+                fmt   = self.vector["fmt"]["fmt"],
+                name  = "expect",
+                value = ref_result)
+
+            self.new_line()
+            self.emit_vc(actual = "expect",
+                         result = "result",
+                         status = expectation)
+
+            self.close_file()
 
     def generate_fp_to_bv(self, dialect):
         assert isinstance(dialect, Dialect)
@@ -609,6 +701,8 @@ class Simple_Test(Test_Generator):
             # For simple tests we just apply the operation (and
             # optionally rounding modes)
             self.generate_rounded(dialect)
+        else:
+            self.generate_non_rounded(dialect)
 
 
 def generate(vec):
@@ -627,10 +721,16 @@ def generate(vec):
             print("> rounding mode  : %s" % err.rm.name)
         if err.arg1:
             print("> argument 1     : %s" % err.arg1.smtlib_literal())
+            print("> argument 1     : %0*x" % (err.arg1.k // 4,
+                                               err.arg1.bv))
         if err.arg2:
             print("> argument 2     : %s" % err.arg2.smtlib_literal())
+            print("> argument 2     : %0*x" % (err.arg2.k // 4,
+                                               err.arg2.bv))
         if err.arg3:
             print("> argument 3     : %s" % err.arg3.smtlib_literal())
+            print("> argument 3     : %0*x" % (err.arg3.k // 4,
+                                               err.arg3.bv))
 
         return False
 
@@ -702,9 +802,10 @@ def main():
                 ap.error("unknown operation")
 
             if op.has_float_input():
-                vectors = load_vectors(os.path.join("vectors",
-                                                    "%u_fp.json" % op.arity()),
-                                       op)
+                vectors = load_vectors(
+                    os.path.join("vectors",
+                                 "%u_fp.json" % op.arity()),
+                    op)
             else:
                 assert False
             print("Loaded %u vectors for test generation." % len(vectors))

@@ -86,6 +86,12 @@ def total_order_infinite_range(fmt):
     return to_min, to_max
 
 
+def is_signalling_nan(value):
+    assert isinstance(value, MPF)
+    _, E, T = value.unpack()
+    return E == 2 ** value.w - 1 and T & (2 ** (value.t - 1))
+
+
 class Unspecified(Exception):
     pass
 
@@ -325,6 +331,15 @@ class Context:
                       Float_Operation.MAX):
             self.signal_not_supported(op, impl)
             return None
+
+        if op in (Float_Operation.MIN, Float_Operation.MAX):
+            for arg in (arg1, arg2, arg3):
+                if arg is not None and arg.isNaN():
+                    # fmaxf man page says "If one argument is a NaN,
+                    # the other argument is returned." This is not
+                    # what happens in real life.
+                    self.signal_not_supported(op, impl)
+                    return None
 
         cmd.append(op.name.lower())
 
