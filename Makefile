@@ -1,6 +1,10 @@
 PYTHON_TARGETS=lib fptg *.py
-THREADS=16
-RUN_CMD=run --threads=$(THREADS) --group=fptg_f32 --group=fptg_other_small
+THREADS=12
+GROUPS=--group=fptg_f32 --group=fptg_other_small --group=fptg_other_large
+# GROUPS=--group=fptg_f32
+# GROUPS=--group=fptg_other_small
+# GROUPS=
+RUN_CMD=run --threads=$(THREADS) $(GROUPS) --filter-name=rem
 
 .PHONY: style lint results sanity install
 
@@ -21,18 +25,19 @@ manifest.json:
 install:
 	@python3 -m run install_all
 
-results: install\
-	results.CVC4--1.8.json \
-	results.CVC5--1.3.3.json \
-	results.CVC5--main_symfpu-1.1.0-dual-license--no-mpfr.json \
-	results.CVC5--main_symfpu-1.2.0-dual-license--no-mpfr.json \
-	results.Z3--4.16.0.json \
-	results.BitWuzla--0.8.1.json \
-	results.BitWuzla--0.9.0.json \
-	results.MathSAT--5.6.16.json \
-	results.MathSAT--5.6.17pre3.json \
-	results.Colibri_1--2026.04.json \
+clean:
+	rm -f analysis.*.txt
+	rm -f *.json
+
+results: core_results \
+	results.CVC5--1.3.4.json \
 	results.Colibri_2--0.5.json
+
+core_results: install \
+	results.CVC5--main_symfpu-1.2.0-dual-license--no-mpfr.json \
+	results.CVC5--main_symfpu-1.2.0-dual-license--mpfr.json \
+	results.Z3--4.16.0.json \
+	results.MathSAT--5.6.17pre4.json
 
 results.CVC4--%.json: manifest.json
 	@python3 -m run $(RUN_CMD) cvc4 $*
@@ -41,6 +46,10 @@ results.CVC4--%.json: manifest.json
 results.CVC5--%.json: manifest.json
 	@python3 -m run $(RUN_CMD) cvc5 $*
 	@python3 -m run analysis cvc5 $* > $(subst results,analysis,$(basename $@)).txt
+
+results.CVC5--%--mpfr.json: manifest.json
+	@python3 -m run $(RUN_CMD) cvc5 $* --config=mpfr
+	@python3 -m run analysis cvc5 $* --config=mpfr > $(subst results,analysis,$(basename $@)).txt
 
 results.CVC5--%--no-mpfr.json: manifest.json
 	@python3 -m run $(RUN_CMD) cvc5 $* --config=no-mpfr
