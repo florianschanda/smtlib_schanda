@@ -352,6 +352,7 @@ def build_solver_library():
 
     solvers.append(BitWuzla_Official_Release("0.8.1"))
     solvers.append(BitWuzla_Official_Release("0.9.0"))
+    solvers.append(BitWuzla_Official_Release("0.9.1"))
 
     solvers.append(Z3_Official_Release("4.16.0"))
 
@@ -359,6 +360,7 @@ def build_solver_library():
     solvers.append(MathSAT_Official_Release("5.6.17pre1"))
     solvers.append(MathSAT_Official_Release("5.6.17pre2"))
     solvers.append(MathSAT_Official_Release("5.6.17pre3"))
+    solvers.append(MathSAT_Official_Release("5.6.17pre4"))
 
     solvers.append(Colibri_1_Official_Release("2026.04"))
 
