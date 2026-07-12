@@ -148,6 +148,17 @@ class Format:
                 return "(_ FloatingPoint %u %u)" % (self.eb, self.sb)
 
 
+class Real:
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        return "Real"
+
+    def smtlib_sort(self):
+        return "Real"
+
+
 class Context:
     def __init__(self):
         self.validation = {}
@@ -258,6 +269,8 @@ class Context:
                     val = mpf.floats.fp_to_ubv(arg1, mpf_rm, arg2)
                 case Float_Operation.FP_TO_SBV:
                     val = mpf.floats.fp_to_sbv(arg1, mpf_rm, arg2)
+                case Float_Operation.FP_TO_REAL:
+                    val = arg1.to_rational()
                 case _:
                     assert False
         except mpf.floats.Unspecified:
