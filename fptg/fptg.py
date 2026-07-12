@@ -540,7 +540,7 @@ class Simple_Test(Test_Generator):
                         fmt    = self.vector["fmt"]["fmt"],
                         name   = "arg%u" % (n + 1),
                         ref    = "arg%u" % n,
-                    negate = self.vector["arg"][n]["vec"].is_negative)
+                        negate = self.vector["arg"][n]["vec"].is_negative)
                 else:
                     self.define_float_const(
                         fmt   = self.vector["fmt"]["fmt"],
