@@ -719,13 +719,8 @@ class Simple_Test(Test_Generator):
         assert self.op.arity() == 1
 
         flt = self.vector["arg"][0]["flt"]
-        context = Context()
         if flt.isFinite():
             unspecified = False
-
-            ref = context.perform(op   = self.op,
-                                  rm   = None,
-                                  arg1 = flt)
 
             flt_up = fp_nextUp(flt)
             if flt_up.isInfinite():
@@ -741,7 +736,6 @@ class Simple_Test(Test_Generator):
 
         else:
             unspecified = True
-            ref         = None
             bound_up    = flt.inf_boundary()
             bound_down  = -flt.inf_boundary()
 
@@ -767,10 +761,6 @@ class Simple_Test(Test_Generator):
                 self.comment("Arg%u: %s" %
                              (n + 1,
                               self.vector["arg"][n]["vec"].tag()))
-
-            self.new_line()
-            for info in context.info_list():
-                self.comment(info)
 
             self.new_line()
             self.define_float_const(
