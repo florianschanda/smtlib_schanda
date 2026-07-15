@@ -271,6 +271,11 @@ class Context:
                     val = mpf.floats.fp_to_sbv(arg1, mpf_rm, arg2)
                 case Float_Operation.FP_TO_REAL:
                     val = arg1.to_rational()
+                case Float_Operation.FP_TO_FP:
+                    val = mpf.floats.fp_from_float(eb = arg2.eb,
+                                                   sb = arg2.sb,
+                                                   rm = mpf_rm,
+                                                   op = arg1)
                 case _:
                     assert False
         except mpf.floats.Unspecified:
@@ -294,7 +299,7 @@ class Context:
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
         assert isinstance(arg1, MPF)
-        assert isinstance(arg2, (MPF, int)) or arg2 is None
+        assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
         cmd = []
@@ -397,7 +402,7 @@ class Context:
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
         assert isinstance(arg1, MPF)
-        assert isinstance(arg2, (MPF, int)) or arg2 is None
+        assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
         # Create MPFR context. Because they are fr*nch we have to
@@ -479,7 +484,7 @@ class Context:
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
         assert isinstance(arg1, MPF)
-        assert isinstance(arg2, (MPF, int)) or arg2 is None
+        assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
         for arg in (arg2, arg3):
             if isinstance(arg, MPF):

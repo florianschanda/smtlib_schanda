@@ -30,6 +30,7 @@ from mpf.bitvector import BitVector
 
 from lib.enums import Dialect, Expectation
 from fptg.vectors import (mk_interleaved_fp_vectors,
+                          mk_format_vectors,
                           load_vectors,
                           Float_Test_Vector)
 from fptg.random import Random_Hierarchy
@@ -52,6 +53,7 @@ class Test_Generator(metaclass=ABCMeta):
         self.vector  = vector
         self.fd      = None
         self.dialect = None
+        self.rh      = None
         self.rng     = None
 
     @abstractmethod
@@ -67,7 +69,8 @@ class Test_Generator(metaclass=ABCMeta):
         pass
 
     def setup_rng(self):
-        self.rng = Random_Hierarchy().extend(self.bench_name()).rng()
+        self.rh  = Random_Hierarchy().extend(self.bench_name())
+        self.rng = self.rh.rng()
 
     def create_file(self, dialect, logic, status, variant=None):
         assert isinstance(dialect, Dialect)
@@ -279,7 +282,7 @@ class Test_Generator(metaclass=ABCMeta):
         assert isinstance(fmt, (Format, BitVector, Real)), str(fmt)
         assert isinstance(name, str)
         assert isinstance(args, list)
-        assert all(isinstance(arg, (str, int)) for arg in args)
+        assert all(isinstance(arg, (str, int, Format)) for arg in args)
 
         match self.dialect:
             case Dialect.SMTLIB2:
@@ -338,8 +341,8 @@ class Test_Generator(metaclass=ABCMeta):
                     case Float_Operation.IEEE_TO_FP:
                         self.fd.write("(_ to_fp %u %u)" % (fmt.eb, fmt.sb))
                     case Float_Operation.FP_TO_FP:
-                        # TODO: how to signal target format
-                        assert False
+                        self.fd.write("(_ to_fp %u %u)" % (fmt.eb,
+                                                           fmt.sb))
                     case Float_Operation.REAL_TO_FP:
                         self.fd.write("(_ to_fp %u %u)" % (fmt.eb, fmt.sb))
                     case Float_Operation.SBV_TO_FP:
@@ -383,6 +386,9 @@ class Test_Generator(metaclass=ABCMeta):
 
 class Simple_Test(Test_Generator):
     def dir_name(self):
+        if self.op is Float_Operation.FP_TO_FP:
+            return "fptg_conversion"
+
         fmt = self.vector["fmt"]["fmt"]
         fmt_name = self.vector["fmt"]["vec"].kind.name.lower()
         if fmt_name == "float32":
@@ -788,6 +794,86 @@ class Simple_Test(Test_Generator):
 
             self.close_file()
 
+    def generate_fp_to_fp(self, dialect):
+        assert isinstance(dialect, Dialect)
+        assert self.op is Float_Operation.FP_TO_FP
+        assert len(self.vector["arg"]) == 1
+        assert self.op.arity() == 1
+
+        self.setup_rng()
+        arg1 = self.vector["arg"][0]["flt"]
+        target_fmts = [(vec,
+                        vec.mk_format(self.rh.extend("target_fmt")))
+                       for vec in mk_format_vectors(iterations    = 3,
+                                                    fma           = False,
+                                                    full_spectrum = True)]
+
+        for target_tag, target_fmt in target_fmts:
+            context = Context()
+            results = {}
+            for rm in Rounding:
+                ref = context.perform(op   = self.op,
+                                      rm   = rm,
+                                      arg1 = arg1,
+                                      arg2 = target_fmt)
+                if ref.bv in results:
+                    results[ref.bv].append(rm)
+                else:
+                    results[ref.bv] = [rm]
+            assert len(results) in (1, 2)
+
+            for bv, rounding_modes in sorted(results.items()):
+                ref_result = MPF(target_fmt.eb,
+                                 target_fmt.sb,
+                                 bv)
+                for expectation in (Expectation.UNSAT, Expectation.SAT):
+                    variant = "%s_to_%s_%s" % (self.vector["fmt"]["vec"].tag(),
+                                               target_tag.tag(),
+                                               expectation.name.lower())
+                    self.setup_rng()
+
+                    self.create_file(dialect,
+                                     "QF_FP",
+                                     expectation,
+                                     variant)
+                    self.comment("Format from: %s" %
+                                 self.vector["fmt"]["vec"].kind.name)
+                    self.comment("Format to: %s" %
+                                 target_tag.kind.name)
+                    for n in range(self.op.arity()):
+                        self.comment("Arg%u: %s" %
+                                     (n + 1,
+                                      self.vector["arg"][n]["vec"].tag()))
+
+                    self.new_line()
+                    self.set_rm(rounding_modes)
+
+                    self.new_line()
+                    self.define_float_const(
+                        fmt   = self.vector["fmt"]["fmt"],
+                        name  = "arg%u" % (n + 1),
+                        value = self.vector["arg"][n]["flt"])
+
+                    self.new_line()
+                    self.compute_result(
+                        fmt  = target_fmt,
+                        name = "result",
+                        args = ["arg%u" % (n + 1)
+                                for n in range(self.op.arity())])
+
+                    self.new_line()
+                    self.define_float_const(
+                        fmt   = target_fmt,
+                        name  = "expect",
+                        value = ref_result)
+
+                    self.new_line()
+                    self.emit_vc(actual = "expect",
+                                 result = "result",
+                                 status = expectation)
+
+                    self.close_file()
+
     def generate(self, dialect):
         assert isinstance(dialect, Dialect)
 
@@ -796,6 +882,8 @@ class Simple_Test(Test_Generator):
             self.generate_fp_to_bv(dialect)
         elif self.op is Float_Operation.FP_TO_REAL:
             self.generate_fp_to_real(dialect)
+        elif self.op is Float_Operation.FP_TO_FP:
+            self.generate_fp_to_fp(dialect)
         elif self.op.is_rounded():
             # For simple tests we just apply the operation (and
             # optionally rounding modes)

@@ -15,6 +15,7 @@ disable=
 	too-many-statements,
 	too-many-arguments,
 	too-many-positional-arguments,
+	too-many-lines,
 	no-else-return,
 	duplicate-code
 class-rgx=[A-Z]([a-z]*|[A-Z]*)(_([A-Z][a-z]+)|[A-Z]+|[0-9]+)*
