@@ -25,7 +25,7 @@ from hashlib import sha1
 import multiprocessing
 
 from mpf.floats import MPF, fp_nextDown, fp_nextUp
-from mpf.rationals import Rational, q_pow2
+from mpf.rationals import Rational, q_pow2, q_round_rna
 from mpf.bitvector import BitVector
 
 from lib.enums import Dialect, Expectation
@@ -43,7 +43,10 @@ from fptg.floats import (Context,
                          Validation_Error,
                          total_order,
                          from_total_order,
-                         total_order_infinite_range)
+                         total_order_infinite_range,
+                         int_boundary)
+from fptg.math import (minimal_ubv,
+                       minimal_sbv)
 
 
 class Test_Generator(metaclass=ABCMeta):
@@ -69,8 +72,11 @@ class Test_Generator(metaclass=ABCMeta):
     def bench_name(self):
         pass
 
-    def setup_rng(self):
+    def setup_rng(self, extra_instance=None):
+        assert isinstance(extra_instance, str) or extra_instance is None
         self.rh  = Random_Hierarchy().extend(self.bench_name())
+        if extra_instance:
+            self.rh = self.rh.extend(extra_instance)
         self.rng = self.rh.rng()
 
     def create_file(self, dialect, logic, status, variant=None):
@@ -875,22 +881,149 @@ class Simple_Test(Test_Generator):
 
                     self.close_file()
 
+    def generate_bv_to_fp(self, dialect):
+        assert isinstance(dialect, Dialect)
+        assert self.op in (Float_Operation.UBV_TO_FP,
+                           Float_Operation.SBV_TO_FP)
+        assert len(self.vector["arg"]) == 0
+        assert self.op.arity() == 1
+
+        fmt = self.vector["fmt"]["fmt"]
+        flt = MPF(fmt.eb, fmt.sb)
+        max_reasonable = q_round_rna(flt.inf_boundary() *
+                                     Rational(3)).to_python_int()
+
+        self.setup_rng()
+
+        values = {0, 1, 2, 3}
+        for offset in (-2, -1, 0, 1, 2):
+            # Add numbers surrounding the consecutive integer barrier
+            values.add(int_boundary(flt) + offset)
+
+            # Add numbers sourrounding rounding to infinity
+            q = flt.inf_boundary() + Rational(offset)
+            values.add(q_round_rna(q).to_python_int())
+
+            # Add various powers of two
+            for n in (8, 16, 32, 64, 128, 256, 512, 1024):
+                for signed in (-1, 0):
+                    values.add(2 ** (n + signed) + offset)
+
+        # Add a few random numbers below and above the int boundary
+        low  = 4
+        high = int_boundary(flt)
+        if low < high:
+            for _ in range(5):
+                values.add(self.rng.random_int(low, high))
+        low  = int_boundary(flt) + 1
+        high = max_reasonable // 3
+        if low < high:
+            for _ in range(5):
+                values.add(self.rng.random_int(low, high))
+
+        # Assemble actual bitvectors to convert
+        input_bitvectors = []
+        for number in sorted(values):
+            if number > max_reasonable:
+                continue
+
+            if self.op is Float_Operation.UBV_TO_FP:
+                size = minimal_ubv(number)
+            else:
+                size = minimal_sbv(number)
+
+            bv = BitVector(size)
+            bv.from_unsigned_int(number)
+            input_bitvectors.append((number, bv))
+
+            if self.op == Float_Operation.SBV_TO_FP and number > 0:
+                bv = BitVector(size)
+                bv.from_signed_int(-number)
+                input_bitvectors.append((-number, bv))
+
+        # Generate tests
+        for input_nr, input_bv in input_bitvectors:
+            # Compute result
+            context = Context()
+            results = {}
+            for rm in Rounding:
+                ref = context.perform(op   = self.op,
+                                      rm   = rm,
+                                      arg1 = input_bv,
+                                      arg2 = fmt)
+                if ref.bv in results:
+                    results[ref.bv].append(rm)
+                else:
+                    results[ref.bv] = [rm]
+            assert len(results) in (1, 2)
+
+            hf = sha1()
+            hf.update(str(input_nr).encode("UTF-8"))
+            number_hash = hf.hexdigest()
+
+            variant_id = 0
+            for bv, rounding_modes in sorted(results.items()):
+                ref_result = MPF(fmt.eb, fmt.sb, bv)
+                variant_id += 1
+                for expectation in (Expectation.UNSAT, Expectation.SAT):
+                    variant = "%s_%u_%s" % (number_hash,
+                                            variant_id,
+                                            expectation.name.lower())
+                    self.setup_rng(str(input_nr))
+                    self.create_file(dialect, "QF_BVFP", expectation, variant)
+                    self.comment("Format: %s" %
+                                 self.vector["fmt"]["vec"].kind.name)
+                    self.comment("Arg1: %s" % input_nr)
+
+                    self.new_line()
+                    for info in context.info_list():
+                        self.comment(info)
+
+                    self.new_line()
+                    self.set_rm(rounding_modes)
+
+                    self.new_line()
+                    self.define_bv_const(
+                        name  = "arg1",
+                        value = input_bv)
+
+                    self.new_line()
+                    self.compute_result(fmt  = fmt,
+                                        name = "result",
+                                        args = ["arg1"])
+
+                    self.new_line()
+                    self.define_float_const(
+                        fmt   = fmt,
+                        name  = "expect",
+                        value = ref_result)
+
+                    self.new_line()
+                    self.emit_vc(actual = "expect",
+                                 result = "result",
+                                 status = expectation)
+
+                    self.close_file()
+
     def generate(self, dialect):
         assert isinstance(dialect, Dialect)
 
-        if self.op in (Float_Operation.FP_TO_UBV,
-                       Float_Operation.FP_TO_SBV):
-            self.generate_fp_to_bv(dialect)
-        elif self.op is Float_Operation.FP_TO_REAL:
-            self.generate_fp_to_real(dialect)
-        elif self.op is Float_Operation.FP_TO_FP:
-            self.generate_fp_to_fp(dialect)
-        elif self.op.is_rounded():
-            # For simple tests we just apply the operation (and
-            # optionally rounding modes)
-            self.generate_rounded(dialect)
-        else:
-            self.generate_non_rounded(dialect)
+        match self.op:
+            case Float_Operation.FP_TO_UBV | Float_Operation.FP_TO_SBV:
+                self.generate_fp_to_bv(dialect)
+            case Float_Operation.FP_TO_REAL:
+                self.generate_fp_to_real(dialect)
+            case Float_Operation.FP_TO_FP:
+                self.generate_fp_to_fp(dialect)
+            case Float_Operation.UBV_TO_FP | Float_Operation.SBV_TO_FP:
+                self.generate_bv_to_fp(dialect)
+            case _:
+                if self.op.is_rounded():
+                    # For simple tests we just apply the operation (and
+                    # optionally rounding modes)
+                    self.generate_rounded(dialect)
+                else:
+                    self.generate_non_rounded(dialect)
 
 
 def generate(vec):
@@ -1016,7 +1149,8 @@ def main():
                                  "%u_fp.json" % op.arity()),
                     op)
             else:
-                vectors = load_vectors(os.path.join("vectors", "fmt.json"))
+                vectors = load_vectors(os.path.join("vectors", "fmt.json"),
+                                       op)
             print("Loaded %u vectors for test generation." % len(vectors))
 
             progress = None

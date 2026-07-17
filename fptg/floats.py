@@ -276,10 +276,20 @@ class Context:
                                                    sb = arg2.sb,
                                                    rm = mpf_rm,
                                                    op = arg1)
+                case Float_Operation.UBV_TO_FP:
+                    val = mpf.floats.fp_from_ubv(eb = arg2.eb,
+                                                 sb = arg2.sb,
+                                                 rm = mpf_rm,
+                                                 op = arg1)
+                case Float_Operation.SBV_TO_FP:
+                    val = mpf.floats.fp_from_sbv(eb = arg2.eb,
+                                                 sb = arg2.sb,
+                                                 rm = mpf_rm,
+                                                 op = arg1)
                 case _:
                     assert False
         except mpf.floats.Unspecified:
-            val     = None
+            val         = None
             unspecified = True
 
         self.signal_validation(op, Implementation.PYMPF)
@@ -298,9 +308,13 @@ class Context:
                         Implementation.SOFTFLOAT)
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
-        assert isinstance(arg1, MPF)
+        assert isinstance(arg1, (MPF, BitVector))
         assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
+
+        if not op.has_float_input():
+            self.signal_not_supported(op, impl)
+            return None
 
         cmd = []
         match impl:
@@ -401,7 +415,7 @@ class Context:
     def call_mpfr(self, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
-        assert isinstance(arg1, MPF)
+        assert isinstance(arg1, (MPF, BitVector))
         assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
@@ -409,13 +423,14 @@ class Context:
         # calculate their emin and emax. They kindly point out that
         # it's different but they did not bother explaining how to get
         # from the rest of the world to their world.
-        assert arg1.emax + 1 > 0
-        assert arg1.emin - arg1.p + 2 <= 0, \
-            "it is %i" % (arg1.emin - arg1.p + 2)
+        dst_fmt = arg1 if isinstance(arg1, MPF) else MPF(arg2.eb, arg2.sb)
+        assert dst_fmt.emax + 1 > 0
+        assert dst_fmt.emin - dst_fmt.p + 2 <= 0, \
+            "it is %i" % (dst_fmt.emin - dst_fmt.p + 2)
         ctx = gmpy2.context(gmpy2.ieee(32),
-                            precision = arg1.p,
-                            emax      = arg1.emax + 1,
-                            emin      = arg1.emin - arg1.p + 2)
+                            precision = dst_fmt.p,
+                            emax      = dst_fmt.emax + 1,
+                            emin      = dst_fmt.emin - dst_fmt.p + 2)
 
         match rm:
             case Rounding.NEAREST_EVEN:
@@ -472,6 +487,10 @@ class Context:
                     result = gmpy2.minnum(mpf_to_mpfr(arg1), mpf_to_mpfr(arg2))
                 case Float_Operation.MAX:
                     result = gmpy2.maxnum(mpf_to_mpfr(arg1), mpf_to_mpfr(arg2))
+                case Float_Operation.UBV_TO_FP:
+                    result = gmpy2.mpfr(arg1.to_unsigned_int())
+                case Float_Operation.SBV_TO_FP:
+                    result = gmpy2.mpfr(arg1.to_signed_int())
                 case _:
                     self.signal_not_supported(op, Implementation.MPFR)
                     return None
@@ -483,7 +502,7 @@ class Context:
     def perform(self, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
-        assert isinstance(arg1, MPF)
+        assert isinstance(arg1, (MPF, BitVector))
         assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
         for arg in (arg2, arg3):
