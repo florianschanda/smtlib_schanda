@@ -8,13 +8,14 @@
 ./fptg.py generate div
 ./fptg.py generate fma
 ./fptg.py generate fp_to_fp
+./fptg.py generate fp_to_real
 ./fptg.py generate fp_to_sbv
 ./fptg.py generate fp_to_ubv
-./fptg.py generate fp_to_real
 ./fptg.py generate ieee_to_fp
 ./fptg.py generate max
 ./fptg.py generate min
 ./fptg.py generate mul
+./fptg.py generate real_to_fp
 ./fptg.py generate rem
 ./fptg.py generate round_to_integral
 ./fptg.py generate sbv_to_fp

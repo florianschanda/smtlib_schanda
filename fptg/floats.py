@@ -20,8 +20,9 @@ import os.path
 import subprocess
 
 import mpf.floats
-from mpf.floats import MPF
+from mpf.floats import MPF, fp_nextUp, fp_nextDown
 from mpf.bitvector import BitVector
+from mpf.rationals import Rational
 
 import gmpy2
 
@@ -90,6 +91,32 @@ def is_signalling_nan(value):
     assert isinstance(value, MPF)
     _, E, T = value.unpack()
     return E == 2 ** value.w - 1 and T & (2 ** (value.t - 1))
+
+
+def real_bounds(value):
+    assert isinstance(value, MPF)
+
+    if value.isFinite():
+        unspecified = False
+
+        flt_up = fp_nextUp(value)
+        if flt_up.isInfinite():
+            bound_up = value.inf_boundary()
+        else:
+            bound_up = flt_up.to_rational()
+
+        flt_down = fp_nextDown(value)
+        if flt_down.isInfinite():
+            bound_down = -value.inf_boundary()
+        else:
+            bound_down = flt_down.to_rational()
+
+    else:
+        unspecified = True
+        bound_up    = value.inf_boundary()
+        bound_down  = -value.inf_boundary()
+
+    return unspecified, bound_down, bound_up
 
 
 class Unspecified(Exception):
@@ -196,7 +223,7 @@ class Context:
     def call_pympf(self, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
-        assert isinstance(arg1, (MPF, BitVector))
+        assert isinstance(arg1, (MPF, BitVector, Rational))
         assert isinstance(arg2, (MPF, int, Format)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
@@ -286,6 +313,9 @@ class Context:
                                                  sb = arg2.sb,
                                                  rm = mpf_rm,
                                                  op = arg1)
+                case Float_Operation.REAL_TO_FP:
+                    val = MPF(arg2.eb, arg2.sb)
+                    val.from_rational(mpf_rm, arg1)
                 case _:
                     assert False
         except mpf.floats.Unspecified:
@@ -308,7 +338,7 @@ class Context:
                         Implementation.SOFTFLOAT)
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
-        assert isinstance(arg1, (MPF, BitVector))
+        assert isinstance(arg1, (MPF, BitVector, Rational))
         assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
@@ -415,7 +445,7 @@ class Context:
     def call_mpfr(self, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
-        assert isinstance(arg1, (MPF, BitVector))
+        assert isinstance(arg1, (MPF, BitVector, Rational))
         assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
 
@@ -491,6 +521,8 @@ class Context:
                     result = gmpy2.mpfr(arg1.to_unsigned_int())
                 case Float_Operation.SBV_TO_FP:
                     result = gmpy2.mpfr(arg1.to_signed_int())
+                case Float_Operation.REAL_TO_FP:
+                    result = gmpy2.mpfr(gmpy2.qdiv(arg1.a, arg1.b))
                 case _:
                     self.signal_not_supported(op, Implementation.MPFR)
                     return None
@@ -502,7 +534,7 @@ class Context:
     def perform(self, op, rm=None, arg1=None, arg2=None, arg3=None):
         assert isinstance(op, Float_Operation)
         assert isinstance(rm, Rounding) or rm is None
-        assert isinstance(arg1, (MPF, BitVector))
+        assert isinstance(arg1, (MPF, BitVector, Rational))
         assert isinstance(arg2, (MPF, Format, int)) or arg2 is None
         assert isinstance(arg3, MPF) or arg3 is None
         for arg in (arg2, arg3):

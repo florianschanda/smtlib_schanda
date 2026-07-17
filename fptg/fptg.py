@@ -24,7 +24,7 @@ from abc import ABCMeta, abstractmethod
 from hashlib import sha1
 import multiprocessing
 
-from mpf.floats import MPF, fp_nextDown, fp_nextUp
+from mpf.floats import MPF
 from mpf.rationals import Rational, q_pow2, q_round_rna
 from mpf.bitvector import BitVector
 
@@ -35,7 +35,7 @@ from fptg.vectors import (mk_interleaved_fp_vectors,
                           load_vectors,
                           Float_Test_Vector)
 from fptg.random import Random_Hierarchy
-from fptg.enums import Float_Operation, Rounding
+from fptg.enums import Float_Operation, Rounding, Implementation
 from fptg.floats import (Context,
                          Format,
                          Real,
@@ -44,7 +44,8 @@ from fptg.floats import (Context,
                          total_order,
                          from_total_order,
                          total_order_infinite_range,
-                         int_boundary)
+                         int_boundary,
+                         real_bounds)
 from fptg.math import (minimal_ubv,
                        minimal_sbv)
 
@@ -257,6 +258,21 @@ class Test_Generator(metaclass=ABCMeta):
                     self.fd.write("(assert (< %s\n" % low.to_smtlib())
                     self.fd.write("           %s\n" % name)
                     self.fd.write("           %s))\n" % high.to_smtlib())
+            case _:
+                assert False
+
+    def define_real_const(self, name, value):
+        assert isinstance(name, str)
+        assert isinstance(value, Rational) or value is None
+
+        match self.dialect:
+            case Dialect.SMTLIB2:
+                self.fd.write("(declare-const %s Real)\n" % name)
+                if value is not None:
+                    self.fd.write("(assert (<= %s %s))\n" %
+                                  (name, value.to_smtlib()))
+                    self.fd.write("(assert (<= %s %s))\n" %
+                                  (value.to_smtlib(), name))
             case _:
                 assert False
 
@@ -732,25 +748,7 @@ class Simple_Test(Test_Generator):
         assert self.op.arity() == 1
 
         flt = self.vector["arg"][0]["flt"]
-        if flt.isFinite():
-            unspecified = False
-
-            flt_up = fp_nextUp(flt)
-            if flt_up.isInfinite():
-                bound_up = flt.inf_boundary()
-            else:
-                bound_up = flt_up.to_rational()
-
-            flt_down = fp_nextDown(flt)
-            if flt_down.isInfinite():
-                bound_down = -flt.inf_boundary()
-            else:
-                bound_down = flt_down.to_rational()
-
-        else:
-            unspecified = True
-            bound_up    = flt.inf_boundary()
-            bound_down  = -flt.inf_boundary()
+        unspecified, bound_down, bound_up = real_bounds(flt)
 
         variant_id = 0
         for expectation in (Expectation.UNSAT, Expectation.SAT):
@@ -800,6 +798,97 @@ class Simple_Test(Test_Generator):
                          status = Expectation.SAT)
 
             self.close_file()
+
+    def generate_real_to_fp(self, dialect):
+        assert isinstance(dialect, Dialect)
+        assert self.op is Float_Operation.REAL_TO_FP
+        assert len(self.vector["arg"]) == 1
+        assert self.op.arity() == 1
+
+        result_tag = self.vector["arg"][0]["vec"].tag()
+        result_flt = self.vector["arg"][0]["flt"]
+        if result_flt.isNaN():
+            input_real = None
+        elif result_flt.isInfinite():
+            if result_flt.isPositive():
+                input_real = result_flt.inf_boundary()
+            else:
+                input_real = -result_flt.inf_boundary()
+        else:
+            input_real = result_flt.to_rational()
+
+        context = Context()
+        if input_real is not None:
+            results = {}
+            for rm in Rounding:
+                ref = context.perform(op   = self.op,
+                                      rm   = rm,
+                                      arg1 = input_real,
+                                      arg2 = self.vector["fmt"]["fmt"])
+                if ref.bv in results:
+                    results[ref.bv].append(rm)
+                else:
+                    results[ref.bv] = [rm]
+            assert len(results) in (1, 2)
+        else:
+            context.signal_validation(self.op, Implementation.PYMPF)
+            results = {result_flt.bv : list(Rounding)}
+
+        variant_id = 0
+        for bv, rounding_modes in sorted(results.items()):
+            ref_result = MPF(self.vector["fmt"]["fmt"].eb,
+                             self.vector["fmt"]["fmt"].sb,
+                             bv)
+            variant_id += 1
+            for expectation in (Expectation.UNSAT, Expectation.SAT):
+                if input_real is None:
+                    actual_expectation = (Expectation.SAT
+                                          if expectation is Expectation.UNSAT
+                                          else Expectation.UNSAT)
+                    variant            = actual_expectation.name.lower()
+                else:
+                    actual_expectation = expectation
+                    variant            = expectation.name.lower()
+
+                self.setup_rng()
+
+                self.create_file(dialect,
+                                 "QF_FPLRA",
+                                 actual_expectation,
+                                 variant)
+                self.comment("Format: %s" %
+                             self.vector["fmt"]["vec"].kind.name)
+                self.comment("Target class: %s" % result_tag)
+
+                self.new_line()
+                for info in context.info_list():
+                    self.comment(info)
+
+                self.new_line()
+                self.set_rm(rounding_modes)
+
+                self.new_line()
+                self.define_real_const(name  = "arg1",
+                                       value = input_real)
+
+                self.new_line()
+                self.compute_result(fmt  = self.vector["fmt"]["fmt"],
+                                    name = "result",
+                                    args = ["arg%u" % (n + 1)
+                                            for n in range(self.op.arity())])
+
+                self.new_line()
+                self.define_float_const(
+                    fmt   = self.vector["fmt"]["fmt"],
+                    name  = "expect",
+                    value = ref_result)
+
+                self.new_line()
+                self.emit_vc(actual = "expect",
+                             result = "result",
+                             status = expectation)
+
+                self.close_file()
 
     def generate_fp_to_fp(self, dialect):
         assert isinstance(dialect, Dialect)
@@ -1059,6 +1148,8 @@ class Simple_Test(Test_Generator):
                 self.generate_fp_to_bv(dialect)
             case Float_Operation.FP_TO_REAL:
                 self.generate_fp_to_real(dialect)
+            case Float_Operation.REAL_TO_FP:
+                self.generate_real_to_fp(dialect)
             case Float_Operation.FP_TO_FP:
                 self.generate_fp_to_fp(dialect)
             case Float_Operation.UBV_TO_FP | Float_Operation.SBV_TO_FP:
