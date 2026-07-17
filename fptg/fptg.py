@@ -1005,6 +1005,52 @@ class Simple_Test(Test_Generator):
 
                     self.close_file()
 
+    def generate_ieee_to_fp(self, dialect):
+        assert isinstance(dialect, Dialect)
+        assert self.op is Float_Operation.IEEE_TO_FP
+
+        self.setup_rng()
+
+        flt = self.vector["arg"][0]["flt"]
+        input_bv  = BitVector(flt.k)
+        input_bv.from_unsigned_int(flt.bv)
+
+        for expectation in (Expectation.UNSAT, Expectation.SAT):
+            variant = "%s" % expectation.name.lower()
+
+            self.create_file(dialect, "QF_BVFP", expectation, variant)
+
+            self.comment("Format: %s" %
+                         self.vector["fmt"]["vec"].kind.name)
+            for n in range(self.op.arity()):
+                self.comment("Arg%u: %s" %
+                             (n + 1,
+                              self.vector["arg"][n]["vec"].tag()))
+
+            self.new_line()
+            self.define_bv_const(
+                name  = "arg1",
+                value = input_bv)
+
+            self.new_line()
+            self.compute_result(fmt  = self.vector["fmt"]["fmt"],
+                                name = "result",
+                                args = ["arg%u" % (n + 1)
+                                        for n in range(self.op.arity())])
+
+            self.new_line()
+            self.define_float_const(
+                fmt   = self.vector["fmt"]["fmt"],
+                name  = "expect",
+                value = flt)
+
+            self.new_line()
+            self.emit_vc(actual = "expect",
+                         result = "result",
+                         status = expectation)
+
+            self.close_file()
+
     def generate(self, dialect):
         assert isinstance(dialect, Dialect)
 
@@ -1017,6 +1063,8 @@ class Simple_Test(Test_Generator):
                 self.generate_fp_to_fp(dialect)
             case Float_Operation.UBV_TO_FP | Float_Operation.SBV_TO_FP:
                 self.generate_bv_to_fp(dialect)
+            case Float_Operation.IEEE_TO_FP:
+                self.generate_ieee_to_fp(dialect)
             case _:
                 if self.op.is_rounded():
                     # For simple tests we just apply the operation (and
@@ -1143,14 +1191,15 @@ def main():
             except KeyError:
                 ap.error("unknown operation")
 
-            if op.has_float_input():
-                vectors = load_vectors(
-                    os.path.join("vectors",
-                                 "%u_fp.json" % op.arity()),
-                    op)
-            else:
-                vectors = load_vectors(os.path.join("vectors", "fmt.json"),
-                                       op)
+            match op:
+                case Float_Operation.SBV_TO_FP | Float_Operation.UBV_TO_FP:
+                    vectors = load_vectors(os.path.join("vectors", "fmt.json"),
+                                           op)
+                case _:
+                    vectors = load_vectors(
+                        os.path.join("vectors",
+                                     "%u_fp.json" % op.arity()),
+                        op)
             print("Loaded %u vectors for test generation." % len(vectors))
 
             progress = None
