@@ -30,6 +30,7 @@ from mpf.bitvector import BitVector
 
 from lib.enums import Dialect, Expectation
 from fptg.vectors import (mk_interleaved_fp_vectors,
+                          mk_arity_0_vectors,
                           mk_format_vectors,
                           load_vectors,
                           Float_Test_Vector)
@@ -957,6 +958,26 @@ def build_fp_vectors(rh, arity):
             json.dump(vectors, fd, indent=2, sort_keys=True)
 
 
+def build_fmt_vectors(rh):
+    assert isinstance(rh, Random_Hierarchy)
+
+    for full in (False, True):
+        name = os.path.join("vectors",
+                            "fmt%s.json" % ("" if full else ".reduced"))
+        if os.path.isfile(name):
+            return
+
+        print("Building [%s]" % name)
+
+        vectors = list(mk_arity_0_vectors(
+            base_rh          = rh,
+            fmt_iterations   = 6,
+            full_spectrum    = full))
+
+        with open(name, "w", encoding="UTF-8") as fd:
+            json.dump(vectors, fd, indent=2, sort_keys=True)
+
+
 def main():
     # Some of the rationals get really big...
     sys.set_int_max_str_digits(0)
@@ -978,6 +999,7 @@ def main():
         case "build_vectors":
             os.makedirs("vectors", exist_ok=True)
             rh = Random_Hierarchy()
+            build_fmt_vectors(rh)
             build_fp_vectors(rh, 1)
             build_fp_vectors(rh, 2)
             build_fp_vectors(rh, 3)
@@ -994,7 +1016,7 @@ def main():
                                  "%u_fp.json" % op.arity()),
                     op)
             else:
-                assert False
+                vectors = load_vectors(os.path.join("vectors", "fmt.json"))
             print("Loaded %u vectors for test generation." % len(vectors))
 
             progress = None

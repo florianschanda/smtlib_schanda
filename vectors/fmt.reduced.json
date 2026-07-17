@@ -1,0 +1,79 @@
+[
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 8,
+      "sb": 24,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT32"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 9,
+      "sb": 203,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 14,
+      "sb": 84,
+      "vec": {
+        "iteration": 2,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 10,
+      "sb": 106,
+      "vec": {
+        "iteration": 3,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 5,
+      "sb": 87,
+      "vec": {
+        "iteration": 4,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 5,
+      "sb": 56,
+      "vec": {
+        "iteration": 5,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 8,
+      "sb": 12,
+      "vec": {
+        "iteration": 6,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  }
+]

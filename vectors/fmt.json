@@ -1,0 +1,321 @@
+[
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 5,
+      "sb": 11,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT16"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 8,
+      "sb": 24,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT32"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 11,
+      "sb": 53,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT64"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 15,
+      "sb": 113,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT128"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 15,
+      "sb": 64,
+      "vec": {
+        "iteration": 1,
+        "kind": "X87_EXTENDED_DOUBLE"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 8,
+      "sb": 8,
+      "vec": {
+        "iteration": 1,
+        "kind": "BFLOAT16"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 8,
+      "sb": 11,
+      "vec": {
+        "iteration": 1,
+        "kind": "TENSORFLOAT32"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 7,
+      "sb": 17,
+      "vec": {
+        "iteration": 1,
+        "kind": "AMD_FP24"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 8,
+      "sb": 16,
+      "vec": {
+        "iteration": 1,
+        "kind": "PIXAR_PXR24"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 3,
+      "sb": 5,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT8"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 2,
+      "sb": 2,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT_2_2"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 10,
+      "sb": 10,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT_RANDOM_EB_EQ_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 11,
+      "sb": 11,
+      "vec": {
+        "iteration": 2,
+        "kind": "FLOAT_RANDOM_EB_EQ_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 14,
+      "sb": 14,
+      "vec": {
+        "iteration": 3,
+        "kind": "FLOAT_RANDOM_EB_EQ_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 4,
+      "sb": 4,
+      "vec": {
+        "iteration": 4,
+        "kind": "FLOAT_RANDOM_EB_EQ_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 17,
+      "sb": 17,
+      "vec": {
+        "iteration": 5,
+        "kind": "FLOAT_RANDOM_EB_EQ_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 18,
+      "sb": 18,
+      "vec": {
+        "iteration": 6,
+        "kind": "FLOAT_RANDOM_EB_EQ_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 9,
+      "sb": 203,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 14,
+      "sb": 84,
+      "vec": {
+        "iteration": 2,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 10,
+      "sb": 106,
+      "vec": {
+        "iteration": 3,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 5,
+      "sb": 87,
+      "vec": {
+        "iteration": 4,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 5,
+      "sb": 56,
+      "vec": {
+        "iteration": 5,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 8,
+      "sb": 12,
+      "vec": {
+        "iteration": 6,
+        "kind": "FLOAT_RANDOM_EB_LT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 17,
+      "sb": 14,
+      "vec": {
+        "iteration": 1,
+        "kind": "FLOAT_RANDOM_EB_GT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 11,
+      "sb": 10,
+      "vec": {
+        "iteration": 2,
+        "kind": "FLOAT_RANDOM_EB_GT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 16,
+      "sb": 15,
+      "vec": {
+        "iteration": 3,
+        "kind": "FLOAT_RANDOM_EB_GT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 18,
+      "sb": 12,
+      "vec": {
+        "iteration": 4,
+        "kind": "FLOAT_RANDOM_EB_GT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 13,
+      "sb": 8,
+      "vec": {
+        "iteration": 5,
+        "kind": "FLOAT_RANDOM_EB_GT_SB"
+      }
+    }
+  },
+  {
+    "arg": [],
+    "fmt": {
+      "eb": 6,
+      "sb": 5,
+      "vec": {
+        "iteration": 6,
+        "kind": "FLOAT_RANDOM_EB_GT_SB"
+      }
+    }
+  }
+]

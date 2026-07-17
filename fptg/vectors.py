@@ -402,6 +402,33 @@ def mk_interleaved_fp_vectors(base_rh,
             }
 
 
+def mk_arity_0_vectors(base_rh,
+                       fmt_iterations,
+                       full_spectrum):
+    assert isinstance(base_rh, Random_Hierarchy)
+    assert isinstance(fmt_iterations, int) and fmt_iterations >= 1
+    assert isinstance(full_spectrum, bool)
+
+    fmts = set()
+    for fmt_vec in mk_format_vectors(iterations    = fmt_iterations,
+                                     fma           = False,
+                                     full_spectrum = full_spectrum):
+        n = 0
+        while True:
+            n += 1
+            fmt = fmt_vec.mk_format(base_rh.extend("attempt_%u" % n))
+            if (fmt.eb, fmt.sb) not in fmts:
+                break
+        fmts.add((fmt.eb, fmt.sb))
+
+        yield {
+            "fmt" : {"vec" : fmt_vec.to_json(),
+                     "eb"  : fmt.eb,
+                     "sb"  : fmt.sb},
+            "arg" : []
+        }
+
+
 def load_vectors(file_name, op):
     assert os.path.isfile(file_name)
     assert isinstance(op, Float_Operation)
